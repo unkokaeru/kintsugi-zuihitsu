@@ -47,17 +47,17 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/omoikane.md",
+                "file": "clear/project/hachiman/hachiman.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "omoikane"
+              "title": "hachiman"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -183,11 +183,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "146cc906715c4ddd",
+  "active": "da15462216217f28",
   "lastOpenFiles": [
     "kintsugi zuihitsu.md",
-    "temp index.md",
+    "index.md",
+    "clear/project/hachiman/hachiman.md",
     "clear/project/omoikane/omoikane.md",
+    "temp index.md",
     "Dockerfile",
     "New Text Document.txt",
     "New folder",
@@ -200,7 +202,6 @@
     "cloudy/project/yatagarasu/yatagarasu.md",
     "clear/project/susanoo/susanoo.md",
     "clear/project/inari/inari.md",
-    "clear/project/hachiman/hachiman.md",
     "clear/project/doosojin/doosojin.md",
     "clear/library/japanese/japanese.md",
     "clear/library/geopolitcs/geopolitcs.md",
