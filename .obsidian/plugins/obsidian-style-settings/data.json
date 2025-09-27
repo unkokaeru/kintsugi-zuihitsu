@@ -1,0 +1,8 @@
+{
+  "typomagical-images@@ss-image-caption": true,
+  "typomagical-text@@body-ligatures": true,
+  "typomagical-text@@callout-quote-style": true,
+  "typomagical-text@@alignment": "align-justified",
+  "typomagical-colour@@theme-variant": "obsidian",
+  "typomagical-text@@callout-style": "callout-default"
+}

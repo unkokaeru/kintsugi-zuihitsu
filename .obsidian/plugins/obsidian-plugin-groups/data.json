@@ -1,0 +1,231 @@
+{
+  "groups": [
+    {
+      "loadAtStartup": false,
+      "disableOnStartup": false,
+      "delay": 0,
+      "id": "pghelperplugins",
+      "name": "Hidden Helpers",
+      "plugins": [
+        {
+          "id": "dataview",
+          "name": "Dataview"
+        },
+        {
+          "id": "text-extractor",
+          "name": "Text Extractor"
+        }
+      ],
+      "groupIds": [],
+      "generateCommands": false
+    },
+    {
+      "loadAtStartup": false,
+      "disableOnStartup": false,
+      "delay": 0,
+      "id": "pgexportpluginsduplicate",
+      "name": "Modifications",
+      "plugins": [
+        {
+          "id": "better-export-pdf",
+          "name": "Better Export PDF"
+        },
+        {
+          "id": "obsidian-pandoc",
+          "name": "Pandoc Plugin"
+        },
+        {
+          "id": "templater-obsidian",
+          "name": "Templater"
+        },
+        {
+          "id": "obsidian-regex-replace",
+          "name": "Regex Find/Replace"
+        },
+        {
+          "id": "obsidian-plugin-update-tracker",
+          "name": "Plugin Update Tracker"
+        }
+      ],
+      "groupIds": [],
+      "generateCommands": false
+    },
+    {
+      "loadAtStartup": false,
+      "disableOnStartup": false,
+      "delay": 0,
+      "id": "pgeaseofuse",
+      "name": "Quality of Life",
+      "plugins": [
+        {
+          "id": "math-in-callout",
+          "name": "Better Math in Callouts & Blockquotes"
+        },
+        {
+          "id": "callout-suggestions",
+          "name": "Callout Suggestions"
+        },
+        {
+          "id": "emoji-shortcodes",
+          "name": "Emoji Shortcodes"
+        },
+        {
+          "id": "obsidian-latex-suite",
+          "name": "Latex Suite"
+        },
+        {
+          "id": "omnisearch",
+          "name": "Omnisearch"
+        },
+        {
+          "id": "obsidian-paste-image-rename",
+          "name": "Paste image rename"
+        },
+        {
+          "id": "janitor",
+          "name": "Janitor"
+        },
+        {
+          "id": "folder-notes",
+          "name": "Folder notes"
+        },
+        {
+          "id": "obsidian-linter",
+          "name": "Linter"
+        },
+        {
+          "id": "perplexity-converter",
+          "name": "Perplexity Converter"
+        }
+      ],
+      "groupIds": [],
+      "generateCommands": false
+    },
+    {
+      "loadAtStartup": false,
+      "disableOnStartup": false,
+      "delay": 0,
+      "id": "pginterface",
+      "name": "Interface",
+      "plugins": [
+        {
+          "id": "callout-manager",
+          "name": "Callout Manager"
+        },
+        {
+          "id": "obsidian-hider",
+          "name": "Hider"
+        },
+        {
+          "id": "obsidian-list-callouts",
+          "name": "List Callouts"
+        },
+        {
+          "id": "novel-word-count",
+          "name": "Novel word count"
+        },
+        {
+          "id": "checkbox-sounds",
+          "name": "Checkbox Sounds"
+        },
+        {
+          "id": "obsidian-checkbox3states-plugin",
+          "name": "Checkbox 3 states"
+        },
+        {
+          "id": "obsidian-style-settings",
+          "name": "Style Settings"
+        },
+        {
+          "id": "spoiler-block-obsidian",
+          "name": "Spoiler Block"
+        }
+      ],
+      "groupIds": [
+        "pgcheckboxchanges"
+      ],
+      "generateCommands": false
+    },
+    {
+      "loadAtStartup": false,
+      "disableOnStartup": false,
+      "delay": 0,
+      "id": "pgfeatures",
+      "name": "Features",
+      "plugins": [
+        {
+          "id": "obsidian-charts",
+          "name": "Charts"
+        },
+        {
+          "id": "chess-study",
+          "name": "Chess Study"
+        },
+        {
+          "id": "obsidian-chessboard",
+          "name": "Chessboard Viewer"
+        },
+        {
+          "id": "obsidian-day-planner",
+          "name": "Day Planner"
+        },
+        {
+          "id": "obsidian-excalidraw-plugin",
+          "name": "Excalidraw"
+        },
+        {
+          "id": "github-copilot",
+          "name": "GitHub Copilot"
+        },
+        {
+          "id": "obsidian-meta-bind-plugin",
+          "name": "Meta Bind"
+        },
+        {
+          "id": "obsidian-functionplot",
+          "name": "Obsidian Functionplot"
+        },
+        {
+          "id": "size-history",
+          "name": "Size History"
+        },
+        {
+          "id": "obsidian-spaced-repetition",
+          "name": "Spaced Repetition"
+        },
+        {
+          "id": "obsidian-wakatime",
+          "name": "WakaTime"
+        },
+        {
+          "id": "quartz-syncer",
+          "name": "Quartz Syncer"
+        }
+      ],
+      "groupIds": [],
+      "generateCommands": false
+    },
+    {
+      "loadAtStartup": true,
+      "disableOnStartup": false,
+      "delay": 0,
+      "id": "pgallplugins",
+      "name": "All Plugins",
+      "plugins": [],
+      "groupIds": [
+        "pgfeatures",
+        "pghelperplugins",
+        "pginterface",
+        "pgexportpluginsduplicate",
+        "pgeaseofuse"
+      ],
+      "generateCommands": false
+    }
+  ],
+  "generateCommands": true,
+  "showNoticeOnGroupLoad": "none",
+  "devLogs": false,
+  "devices": [],
+  "doLoadSynchronously": true,
+  "showStatusbarIcon": "None"
+}

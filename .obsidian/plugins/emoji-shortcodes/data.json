@@ -1,0 +1,18 @@
+{
+  "immediateReplace": true,
+  "suggester": true,
+  "historyPriority": true,
+  "historyLimit": 100,
+  "history": [
+    ":sunrise:",
+    ":slightly_frowning_face:",
+    ":100:",
+    ":sparkles:",
+    ":star:",
+    ":classical_building:",
+    ":clipboard:",
+    ":cherry_blossom:",
+    ":briefcase:",
+    ":airplane:"
+  ]
+}

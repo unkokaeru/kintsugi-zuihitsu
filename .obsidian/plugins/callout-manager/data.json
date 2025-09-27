@@ -1,0 +1,22 @@
+{
+  "callouts": {
+    "custom": [
+      "cost"
+    ],
+    "settings": {
+      "cost": [
+        {
+          "changes": {
+            "icon": "lucide-badge-pound-sterling",
+            "color": "227, 107, 167"
+          }
+        }
+      ]
+    }
+  },
+  "calloutDetection": {
+    "obsidian": true,
+    "theme": true,
+    "snippet": true
+  }
+}

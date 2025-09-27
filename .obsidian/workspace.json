@@ -1,0 +1,234 @@
+{
+  "main": {
+    "id": "c508fa06ed68a68c",
+    "type": "split",
+    "children": [
+      {
+        "id": "73656ff55924ab69",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d5e22a0c19b2de75",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "kintsugi zuihitsu.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "kintsugi zuihitsu"
+            }
+          },
+          {
+            "id": "da15462216217f28",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "temp index.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "temp index"
+            }
+          },
+          {
+            "id": "146cc906715c4ddd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/omoikane.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "omoikane"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "9bd59258d457593c",
+    "type": "split",
+    "children": [
+      {
+        "id": "3cd6914bfb7c8db1",
+        "type": "tabs",
+        "dimension": 32.113821138211385,
+        "children": [
+          {
+            "id": "73aa0072fc241b41",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "graph",
+              "state": {},
+              "pinned": true,
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      },
+      {
+        "id": "094f3d7dce62a5f7",
+        "type": "tabs",
+        "dimension": 67.88617886178862,
+        "children": [
+          {
+            "id": "01979b291b095c37",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "b91c281c8050caa8",
+    "type": "split",
+    "children": [
+      {
+        "id": "309b10de64022ade",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "faa7f536c65eba58",
+            "type": "leaf",
+            "state": {
+              "type": "planner-timeline",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Timeline"
+            }
+          },
+          {
+            "id": "8ce44f015bb7a3eb",
+            "type": "leaf",
+            "state": {
+              "type": "SCRYBBLE_VIEW",
+              "state": {},
+              "icon": "lucide-ghost",
+              "title": "SCRYBBLE_VIEW"
+            }
+          },
+          {
+            "id": "17f6f60a8fda52c8",
+            "type": "leaf",
+            "state": {
+              "type": "github-copilot-chat-view",
+              "state": {},
+              "icon": "bot-message-square",
+              "title": "Copilot Chat"
+            }
+          },
+          {
+            "id": "afcad0befa459ca7",
+            "type": "leaf",
+            "state": {
+              "type": "folder-overview-view",
+              "state": {},
+              "icon": "lucide-ghost",
+              "title": "folder-overview-view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 360.5,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "bases:Create new base": false,
+      "command-palette:Open command palette": false,
+      "omnisearch:Omnisearch": false,
+      "workspaces:Manage workspace layouts": false,
+      "obsidian-day-planner:Open Multi-Day View": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "obsidian-spaced-repetition:Review flashcards": false,
+      "size-history:Vault size history": false,
+      "callout-manager:Insert Callout": false,
+      "templater-obsidian:Templater": false,
+      "graph:Open graph view": false,
+      "obsidian-day-planner:Open Timeline": false,
+      "obsidian42-brat:BRAT": false,
+      "quartz-syncer:Quartz Syncer publication center": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "146cc906715c4ddd",
+  "lastOpenFiles": [
+    "cloudy/cloudy.md",
+    "temp index.md",
+    "clear/project/omoikane/omoikane.md",
+    "clear/project/kuebiko/kuebiko.md",
+    "cloudy/library/library.md",
+    "cloudy/project/daikokuten/daikokuten.md",
+    "kintsugi zuihitsu.md",
+    "cloudy/project/kagaseo/kagaseo.md",
+    "cloudy/project/project.md",
+    "cloudy/project/yatagarasu/yatagarasu.md",
+    "clear/project/susanoo/susanoo.md",
+    "clear/project/inari/inari.md",
+    "clear/project/hachiman/hachiman.md",
+    "clear/project/doosojin/doosojin.md",
+    "clear/library/japanese/japanese.md",
+    "clear/library/geopolitcs/geopolitcs.md",
+    "clear/library/chess/chess.md",
+    "clear/library/cooking/cooking.md",
+    "clear/library/cooking/equipment",
+    "clear/library/cooking/flavour profile",
+    "clear/library/cooking/ingredient",
+    "clear/library/cooking/technique",
+    "clear/library/cooking/recipe/lemon bars.md",
+    "clear/library/cooking/recipe",
+    "clear/library/chess/checkmate pattern",
+    "clear/library/chess/game analysis",
+    "clear/library/chess/endgame",
+    "clear/project/susanoo/rippo/rippo.md",
+    "clear/project/susanoo/puro/puro.md",
+    "clear/project/susanoo/ongaku/ongaku.md",
+    "clear/project/susanoo/koto/koto.md",
+    "clear/project/susanoo/kagi/kagi.md",
+    "clear/project/project.md",
+    "attached/remarkable notes/Quick sheets.pdf",
+    "clear/library/lockpicking",
+    "image-4.png",
+    "image-3.png",
+    "image-2.png",
+    "image.png",
+    "image-1.png",
+    "Toyota Commemorative Museum of Industry and Technology.png",
+    "Kawaguchiko.png",
+    "Fushimi Inari-taisha.png",
+    "cloudy/project/kagaseo/LSA Research Sources.png",
+    "Nara Park (jschlatt).png"
+  ]
+}

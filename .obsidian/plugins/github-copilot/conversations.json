@@ -1,0 +1,16 @@
+{
+  "conversations": [
+    {
+      "id": "1758968529054",
+      "title": "New Conversation",
+      "messages": [],
+      "createdAt": 1758968529054,
+      "updatedAt": 1758968529054,
+      "model": {
+        "label": "Claude 3.7 Sonnet Thinking",
+        "value": "claude-3.7-sonnet-thought"
+      }
+    }
+  ],
+  "activeConversationId": "1758968529054"
+}

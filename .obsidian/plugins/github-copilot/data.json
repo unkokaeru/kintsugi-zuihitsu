@@ -1,0 +1,38 @@
+{
+  "nodePath": "\"C:\\Program Files\\nodejs\\node.exe\"",
+  "nodePathUpdatedToNode20": false,
+  "enabled": false,
+  "hotkeys": {
+    "accept": "Tab",
+    "cancel": "Escape",
+    "request": "Cmd-Shift-/",
+    "partial": "Cmd-Shift-.",
+    "next": "Cmd-Shift-ArrowDown",
+    "disable": "Cmd-Shift-ArrowRight"
+  },
+  "suggestionDelay": 500,
+  "debug": false,
+  "onlyOnHotkey": false,
+  "onlyInCodeBlock": false,
+  "exclude": [],
+  "deviceSpecificSettings": [
+    "nodePath"
+  ],
+  "useDeviceSpecificSettings": false,
+  "proxy": "",
+  "chatSettings": {
+    "deviceCode": null,
+    "pat": null,
+    "accessToken": {
+      "token": null,
+      "expiresAt": 0
+    },
+    "selectedModel": {
+      "label": "Claude 3.7 Sonnet Thinking",
+      "value": "claude-3.7-sonnet-thought"
+    }
+  },
+  "systemPrompt": "You are GitHub Copilot, an AI assistant. You are helping the user with their tasks in Obsidian.",
+  "invertEnterSendBehavior": false,
+  "extraCACerts": ""
+}
