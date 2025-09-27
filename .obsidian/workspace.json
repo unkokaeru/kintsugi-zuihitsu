@@ -56,7 +56,8 @@
               "title": "omoikane"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -182,8 +183,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d5e22a0c19b2de75",
+  "active": "146cc906715c4ddd",
   "lastOpenFiles": [
+    "kintsugi zuihitsu.md",
     "temp index.md",
     "clear/project/omoikane/omoikane.md",
     "Dockerfile",
@@ -193,7 +195,6 @@
     "clear/project/kuebiko/kuebiko.md",
     "cloudy/library/library.md",
     "cloudy/project/daikokuten/daikokuten.md",
-    "kintsugi zuihitsu.md",
     "cloudy/project/kagaseo/kagaseo.md",
     "cloudy/project/project.md",
     "cloudy/project/yatagarasu/yatagarasu.md",

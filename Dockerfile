@@ -9,12 +9,17 @@ RUN apk add --no-cache git
 RUN git clone https://github.com/jackyzha0/quartz.git .
 RUN npm ci
 
-# Copy vault content to Quartz content directory
-COPY --exclude=.git --exclude=.github --exclude=Dockerfile --exclude=README.md . content/
+# Copy entire repository content to Quartz content directory
+# excluding git and CI files
+COPY . temp_content/
 
-# Copy custom Quartz configuration if exists
-# COPY quartz.config.ts .
-# COPY custom.scss static/styles/
+# Move content while excluding unnecessary files
+RUN mkdir -p content && \
+    cd temp_content && \
+    find . -name "*.md" -exec cp --parents {} ../content/ \; && \
+    if [ -d "attached" ]; then cp -r attached ../content/; fi && \
+    cd .. && \
+    rm -rf temp_content
 
 # Build the site
 RUN npx quartz build
