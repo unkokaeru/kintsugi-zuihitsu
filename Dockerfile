@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:22-alpine
 
 WORKDIR /app
 
@@ -9,17 +9,31 @@ RUN apk add --no-cache git
 RUN git clone https://github.com/jackyzha0/quartz.git .
 RUN npm ci
 
-# Copy entire repository content to Quartz content directory
-# excluding git and CI files
-COPY . temp_content/
+# Copy entire repository content excluding unwanted files
+COPY . temp_vault/
 
-# Move content while excluding unnecessary files
+# Process and move content to Quartz content directory
 RUN mkdir -p content && \
-    cd temp_content && \
-    find . -name "*.md" -exec cp --parents {} ../content/ \; && \
-    if [ -d "attached" ]; then cp -r attached ../content/; fi && \
+    cd temp_vault && \
+    # Copy all markdown files preserving directory structure
+    find . -name "*.md" -not -path "./.git/*" -not -path "./.github/*" -not -path "./.obsidian/*" | \
+    while read file; do \
+        mkdir -p "$(dirname "../content/$file")" && \
+        cp "$file" "../content/$file"; \
+    done && \
+    # Copy attached folder if it exists
+    if [ -d "attached" ]; then \
+        cp -r attached ../content/; \
+    fi && \
+    # Copy any other asset folders you might have
+    if [ -d "images" ]; then \
+        cp -r images ../content/; \
+    fi && \
     cd .. && \
-    rm -rf temp_content
+    rm -rf temp_vault
+
+# Copy custom Quartz configuration if it exists in your repo
+# COPY quartz.config.ts . 
 
 # Build the site
 RUN npx quartz build
