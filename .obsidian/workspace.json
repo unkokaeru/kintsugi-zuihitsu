@@ -56,8 +56,7 @@
               "title": "omoikane"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -183,10 +182,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "146cc906715c4ddd",
+  "active": "d5e22a0c19b2de75",
   "lastOpenFiles": [
     "temp index.md",
     "clear/project/omoikane/omoikane.md",
+    "Dockerfile",
+    "New Text Document.txt",
+    "New folder",
     "cloudy/cloudy.md",
     "clear/project/kuebiko/kuebiko.md",
     "cloudy/library/library.md",
@@ -211,15 +213,12 @@
     "clear/library/cooking/recipe",
     "clear/library/chess/checkmate pattern",
     "clear/library/chess/game analysis",
-    "clear/library/chess/endgame",
     "clear/project/susanoo/rippo/rippo.md",
     "clear/project/susanoo/puro/puro.md",
     "clear/project/susanoo/ongaku/ongaku.md",
     "clear/project/susanoo/koto/koto.md",
     "clear/project/susanoo/kagi/kagi.md",
     "clear/project/project.md",
-    "attached/remarkable notes/Quick sheets.pdf",
-    "clear/library/lockpicking",
     "image-4.png",
     "image-3.png",
     "image-2.png",

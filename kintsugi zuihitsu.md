@@ -34,5 +34,3 @@ allowDragAndDrop: true
 ```
 
 *"Following the brush wherever curiosity leads, mending each broken understanding with golden connections."*
-
-> [!important] Make this the primary vault in Obsidian Sync once complete!

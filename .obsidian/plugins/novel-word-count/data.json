@@ -1256,6 +1256,33 @@
         "nonWhitespaceCharacterCount": 426,
         "newlineCount": 6
       }
+    },
+    "Dockerfile": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 67,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.22333333333333333,
+      "characterCount": 591,
+      "nonWhitespaceCharacterCount": 482,
+      "newlineCount": 25,
+      "readingTimeInMinutes": 0.2528301886792453,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1758980616876,
+      "modifiedDate": 1758980624762,
+      "sizeInBytes": 591,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
+      }
     }
   }
 }
