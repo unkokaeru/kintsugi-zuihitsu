@@ -2,14 +2,13 @@ FROM node:22-bullseye
 
 WORKDIR /app
 
-# Install git
 RUN apt-get update && apt-get install -y git
 
-# Clone Quartz
+# Clone Quartz and build dependencies
 RUN git clone https://github.com/jackyzha0/quartz.git .
 RUN npm ci
 
-# Copy your vault content (adjust as needed for your structure)
+# Vault content copy (adjust to match your repo structure as before)
 COPY . temp_vault/
 RUN mkdir -p content && \
     cd temp_vault && \
@@ -22,8 +21,13 @@ RUN mkdir -p content && \
     cd .. && \
     rm -rf temp_vault
 
-# Build the site
+# Build the static site with Quartz
 RUN npx quartz build
 
+# Install 'serve' to host the files
+RUN npm install -g serve
+
 EXPOSE 8080
-CMD ["npx", "quartz", "serve", "--port", "8080", "--host", "0.0.0.0"]
+
+# Use 'serve' to host the output static files
+CMD ["serve", "public", "-l", "8080"]
