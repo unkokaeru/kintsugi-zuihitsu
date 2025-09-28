@@ -1,9 +1,0 @@
-.git
-.github
-.obsidian
-node_modules
-Dockerfile
-.dockerignore
-README.md
-*.tmp
-.DS_Store

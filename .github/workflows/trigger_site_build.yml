@@ -1,0 +1,20 @@
+name: Trigger Site Build
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**.md'
+      - 'attached/**'
+
+jobs:
+  trigger-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Quartz build
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.QUARTZ_TRIGGER_TOKEN }}
+          repository: ${{ github.repository_owner }}/kintsugi-zuihitsu-quartz
+          event-type: notes-updated
+          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
