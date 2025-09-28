@@ -1203,24 +1203,24 @@
         "newlineCount": 6
       }
     },
-    "clear/project/omoikane/mth2006 methods of mathematical physics/mth2006 methods of mathematical physics.md": {
+    "clear/project/omoikane/mth3006/mth3006.md": {
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 81,
+      "wordCount": 79,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.27,
-      "characterCount": 733,
-      "nonWhitespaceCharacterCount": 604,
+      "pageCount": 0.2633333333333333,
+      "characterCount": 716,
+      "nonWhitespaceCharacterCount": 589,
       "newlineCount": 42,
-      "readingTimeInMinutes": 0.30566037735849055,
+      "readingTimeInMinutes": 0.2981132075471698,
       "linkCount": 0,
       "embedCount": 0,
       "aliases": null,
       "createdDate": 1759088230919,
-      "modifiedDate": 1759089148098,
-      "sizeInBytes": 745,
+      "modifiedDate": 1759089415082,
+      "sizeInBytes": 728,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,

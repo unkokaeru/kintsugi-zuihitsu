@@ -1,5 +1,5 @@
 {
-  "ignoredLints": "{\"context_hashes\":[13981488716061606798,10742418384205467680,13380007995460600002,8976736309092817452]}",
+  "ignoredLints": "{\"context_hashes\":[13981488716061606798,8976736309092817452,10742418384205467680,13380007995460600002]}",
   "useWebWorker": true,
   "lintSettings": {
     "ACoupleMore": null,
@@ -435,6 +435,7 @@
     "Daikokuten",
     "microplane",
     "WaniKani",
+    "MTH3006",
     "LO3",
     "Amatsu",
     "Templater",
