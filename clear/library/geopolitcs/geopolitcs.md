@@ -17,4 +17,4 @@ News analysis from sources like The Economist and Financial Times, combined with
 - **Economic relationships** - trade patterns, monetary policy, development trends
 - **Power structures** - military capabilities, diplomatic influence, soft power
 
-The systematic analysis required shares methodological approaches with the strategic thinking developed through [[Chess|chess study]] and applied in [[Hachiman|migration planning]].
+The systematic analysis required shares methodological approaches with the strategic thinking developed through [[chess|chess study]] and applied in [[hachiman|migration planning]].

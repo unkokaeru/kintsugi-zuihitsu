@@ -17,4 +17,4 @@ Structured approach using **WaniKani** for kanji and vocabulary acquisition, **A
 - **Cultural context** - social customs, historical background, aesthetic principles
 - **Reading materials** - annotated texts with comprehension notes
 
-The systematic memorisation techniques developed here inform the spaced repetition approaches used in [[Omoikane|academic mathematics]] and other learning domains.
+The systematic memorisation techniques developed here inform the spaced repetition approaches used in [[omoikane|academic mathematics]] and other learning domains.

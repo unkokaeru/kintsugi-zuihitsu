@@ -23,8 +23,24 @@
               "icon": "lucide-file",
               "title": "kintsugi zuihitsu"
             }
+          },
+          {
+            "id": "8be3b07da1c0b484",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/library/japanese/japanese.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "japanese"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -150,10 +166,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d5e22a0c19b2de75",
+  "active": "8be3b07da1c0b484",
   "lastOpenFiles": [
-    "temp index.md",
+    "clear/library/cooking/cooking.md",
+    "clear/library/cooking/recipe/lemon bars.md",
+    "clear/library/geopolitcs/geopolitcs.md",
+    "clear/library/chess/chess.md",
+    "clear/library/library.md",
+    "clear/clear.md",
     "kintsugi zuihitsu.md",
+    "temp index.md",
     "clear/project/hachiman/hachiman.md",
     "quartz/CUSTOMIZATION.md",
     "quartz/content/kintsugi zuihitsu.md",
@@ -184,12 +206,6 @@
     "quartz/docs/plugins/Latex.md",
     "quartz/docs/plugins/index.md",
     "quartz/docs/plugins/HardLineBreaks.md",
-    "quartz/docs/plugins/GitHubFlavoredMarkdown.md",
-    "quartz/docs/plugins/Frontmatter.md",
-    "quartz/docs/plugins/FolderPage.md",
-    "quartz/docs/plugins/Favicon.md",
-    "quartz/docs/plugins/ExplicitPublish.md",
-    "quartz/docs/plugins/Description.md",
     "quartz/docs/images/social-image-preview-light.png",
     "quartz/docs/images/social-image-preview-dark.png",
     "quartz/docs/images/quartz-layout-tablet.png",
