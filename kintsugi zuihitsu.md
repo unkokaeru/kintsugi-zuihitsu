@@ -11,28 +11,6 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ---
 
-```folder-overview
-id: 242a4d48-3852-49da-84ec-b712952618cf
-folderPath: ""
-title: "{{folderName}} overview"
-showTitle: true
-depth: 4
-includeTypes:
-  - folder
-style: list
-disableFileTag: false
-sortBy: name
-sortByAsc: true
-showEmptyFolders: false
-onlyIncludeSubfolders: false
-storeFolderCondition: true
-showFolderNotes: false
-disableCollapseIcon: true
-alwaysCollapse: false
-autoSync: true
-allowDragAndDrop: true
-```
-
 *"Following the brush wherever curiosity leads, mending each broken understanding with golden connections."*
 
 ---
