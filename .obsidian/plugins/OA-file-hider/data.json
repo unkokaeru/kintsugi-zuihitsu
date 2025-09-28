@@ -1,6 +1,7 @@
 {
   "hidden": true,
   "hiddenList": [
-    "Dockerfile"
+    "Dockerfile",
+    "quartz"
   ]
 }
