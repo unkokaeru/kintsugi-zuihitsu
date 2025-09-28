@@ -11,7 +11,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ---
 
-*"Following the brush wherever curiosity leads, mending each broken understanding with golden connections."*
+"Following the brush wherever curiosity leads, mending each broken understanding with golden connections."*
 
 ---
 
