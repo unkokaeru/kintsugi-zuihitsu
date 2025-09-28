@@ -57,7 +57,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -180,11 +180,14 @@
       "obsidian-day-planner:Open Timeline": false,
       "obsidian42-brat:BRAT": false,
       "quartz-syncer:Quartz Syncer publication center": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-git:Open Git source control": false,
+      "hide-folders:Show hidden folders": false
     }
   },
-  "active": "da15462216217f28",
+  "active": "146cc906715c4ddd",
   "lastOpenFiles": [
+    "temp index.md",
+    "quartz/docs",
     "quartz/tsconfig.json",
     "quartz/quartz/i18n/locales/zh-TW.ts",
     "quartz/quartz/static/giscus/light.css",
@@ -194,8 +197,6 @@
     "quartz/quartz/i18n/locales/uk-UA.ts",
     "quartz/quartz/i18n/locales/tr-TR.ts",
     "quartz/quartz/i18n/locales/th-TH.ts",
-    "quartz/quartz/i18n/locales/ru-RU.ts",
-    "quartz/quartz/i18n/locales/ro-RO.ts",
     "quartz/quartz/static/og-image.png",
     "quartz/quartz/static/icon.png",
     "quartz/docs/tags/plugin.md",
