@@ -1,43 +1,41 @@
 # MTH2006: Methods of Mathematical Physics
 
-Module coordinator: Martin Greenall (<mgreenall@lincoln.ac.uk>).
+> [!quote] Martin Greenall
+> …
 
-| Course Components | Weighting | Score |
-| :---------------: | :-------: | :---: |
-|   In-Class Test   |    60%    |  TBD  |
-|  Portfolio Test   |    40%    |  TBD  |
+## Course Components
 
+- **Coursework** (60%): in-class test.
+- **Portfolio** (40%): portfolio test.
 
----
 ## Learning Outcomes
 
-- [ ] **LO1**: Apply a set of methods to solve equations from mathematical physics.  
+- [ ] **LO1**: Apply a set of methods to solve equations from mathematical physics.
 - [ ] **LO2**: Critically analyse applied problems by choosing and applying appropriate methods of mathematical physics.
 - [ ] **LO3**: Formulate the main equations of mathematical physics.
 
----
-## Revision
-
-[[{{ module.info.name.long }} Cheat Sheets]]
-[[{{ module.info.name.long }} Practice Tests]]
-[[{{ module.info.name.long }} Flashcards]]
-
----
 ## Notes
 
-### Priming (*before lecture*)
+### 1. Fourier Transforms
 
-{% for lecture_number, lecture_content in module.lectures.items() %}- [[{{ module.info.name.long }} Pre-Lecture {{ lecture_number }}]]: {% for topic in lecture_content.topics %}{{ topic }}, {% endfor %}.{% endfor %}
+- Monday 29th September pre-lecture
 
----
-### Questioning (*during lecture*)
+### 2. Laplace Transforms
 
-{% for lecture_number, lecture_content in module.lectures.items() %}- [[{{ module.info.name.long }} Lecture {{ lecture_number }}]]: {% for topic in lecture_content.topics %}{{ topic }}, {% endfor %}.{% endfor %}
+…
 
----
-### Refining (*after lecture*)
+### 3. Partial Differential Equations
 
-{% for topic, subtopics in module.notes.items() %}#### {{ topic }}
-{% for subtopic, notes in subtopics.items() %}##### {{ subtopic }}
-{% for note_name, note in notes.items() %}- [[{{ note_name }}]]: {{ note.summary }}
-{% endfor %}{% endfor %}{% endfor %}
+…
+
+### 4. Green's Functions for Ordinary Differential Equations
+
+…
+
+### 5. Calculus of Variations
+
+…
+
+### 6. Integral Equations
+
+…
