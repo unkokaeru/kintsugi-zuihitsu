@@ -51,4 +51,4 @@ Develop original practice problems that require instructor-level understanding, 
 
 Create ultra-concise reference materials before exams, then comprehensive notes after completion.
 
-The systematic synthesis approach connects to pattern recognition skills developed through [[Chess|chess study]] and the structured learning methods used in [[Japanese|language acquisition]].
+The systematic synthesis approach connects to pattern recognition skills developed through [[chess|chess study]] and the structured learning methods used in [[japanese|language acquisition]].
