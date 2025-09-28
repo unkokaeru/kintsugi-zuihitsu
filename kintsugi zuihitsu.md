@@ -34,3 +34,20 @@ allowDragAndDrop: true
 ```
 
 *"Following the brush wherever curiosity leads, mending each broken understanding with golden connections."*
+
+---
+
+temp bits:
+
+- Omoikane.
+	 - Templater (plugin) templates.
+	 - Spaced Repetition (plugin) flashcards.
+	 - Custom Callouts (plugin).
+ - Chess.
+	 - Chess Study (plugin) game reviews.
+	 - Chessboard Viewer (plugin) position study.
+ - Languages.
+	 - Spaced Repetition (plugin) flashcards.
+	 - WaniKani?
+ - Politics.
+	 - "Geopolitical affairs" - news, etc. - use LLMs for quizzes on information (could be used in other areas of my life, too) to ensure understanding.
