@@ -474,33 +474,6 @@
         "newlineCount": 55
       }
     },
-    "clear/project/omoikane/Top 20 Project Recommendations.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 2466,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 8.22,
-      "characterCount": 21514,
-      "nonWhitespaceCharacterCount": 18701,
-      "newlineCount": 259,
-      "readingTimeInMinutes": 9.30566037735849,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1749561881039,
-      "modifiedDate": 1749561887723,
-      "sizeInBytes": 21556,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 8.22,
-        "wordCount": 2466,
-        "characterCount": 21514,
-        "nonWhitespaceCharacterCount": 18701,
-        "newlineCount": 259
-      }
-    },
     "clear/project/kuebiko/kuebiko.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -1228,6 +1201,33 @@
         "characterCount": 484,
         "nonWhitespaceCharacterCount": 430,
         "newlineCount": 6
+      }
+    },
+    "clear/project/omoikane/mth2006 methods of mathematical physics/mth2006 methods of mathematical physics.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 139,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.4633333333333333,
+      "characterCount": 1688,
+      "nonWhitespaceCharacterCount": 1436,
+      "newlineCount": 52,
+      "readingTimeInMinutes": 0.5245283018867924,
+      "linkCount": 6,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1759088230919,
+      "modifiedDate": 1759088430251,
+      "sizeInBytes": 1688,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
       }
     }
   }
