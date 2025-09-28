@@ -7,7 +7,7 @@
 
 This vault embodies both concepts: **kintsugi** in how it transforms scattered thoughts and broken learning attempts into a unified golden network of knowledge, and **zuihitsu** in its organic, wandering structure that follows curiosity rather than rigid categorization.
 
-The structure separates [[Clear|transparent knowledge]] that can be shared publicly from [[Cloudy|protected development]] requiring privacy, while maintaining natural connections between all areas of exploration.
+The structure separates [[clear|transparent knowledge]] that can be shared publicly from [[cloudy|protected development]] requiring privacy, while maintaining natural connections between all areas of exploration.
 
 ---
 
