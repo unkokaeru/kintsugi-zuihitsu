@@ -37,7 +37,6 @@ allowDragAndDrop: true
 
 ---
 
-
 - Omoikane.
 	 - Templater (plugin) templates.
 	 - Spaced Repetition (plugin) flashcards.
