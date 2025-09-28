@@ -13,7 +13,6 @@
   },
   "spellcheck": false,
   "userIgnoreFilters": [
-    "quartz/",
-    "Dockerfile"
+    "quartz/"
   ]
 }
