@@ -1,1 +1,53 @@
+# OS / Editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+
+# Node/Quartz build artifacts
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+/public/            # Built static output (Quartz)
+*.local
+*.env               # Secret config/env files, if any
+
+# Typescript/Javascript junk
+*.tsbuildinfo
+
+# Obsidian/Markdown junk
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache/
+.obsidian/plugins/**/node_modules/
+.excalidraw/
+
+# Chrome/VSCode etc. backups
+*~
+*.bak
+*.tmp
+*.vscode/
+
+# For backup/restore plugin in Obsidian
+.obsidian/backup/
+
+# By default, ignore common large/binary assets from vault publishing (edit as needed)
+.sass-cache/
+.quartz-build/      # If you ever have a custom build dir
+
+# Common system and root-level dependencies
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Ignore hidden files
 /cloudy/
+*.old
+
+# Ignore output folders for other static site generators/experiments
+/_site/
+_site/
+dist/
+build/
