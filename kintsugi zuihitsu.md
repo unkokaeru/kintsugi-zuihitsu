@@ -37,8 +37,6 @@ allowDragAndDrop: true
 
 ---
 
-temp bits:
-
 - Omoikane.
 	 - Templater (plugin) templates.
 	 - Spaced Repetition (plugin) flashcards.
