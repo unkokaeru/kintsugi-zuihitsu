@@ -9,11 +9,10 @@
     "flashcardCardOrder": "DueFirstRandom",
     "flashcardDeckOrder": "PrevDeckComplete_Sequential",
     "convertHighlightsToClozes": true,
-    "convertBoldTextToClozes": true,
+    "convertBoldTextToClozes": false,
     "convertCurlyBracketsToClozes": false,
     "clozePatterns": [
-      "==[123;;]answer[;;hint]==",
-      "**[123;;]answer[;;hint]**"
+      "==[123;;]answer[;;hint]=="
     ],
     "singleLineCardSeparator": "::",
     "singleLineReversedCardSeparator": ":::",
@@ -26,7 +25,8 @@
       "#review"
     ],
     "noteFoldersToIgnore": [
-      "**/*.excalidraw.md"
+      "**/*.excalidraw.md",
+      "cloudy/"
     ],
     "openRandomNote": false,
     "autoNextNote": false,
