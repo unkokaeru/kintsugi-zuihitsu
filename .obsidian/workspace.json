@@ -46,6 +46,21 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "clear/project/omoikane/mth3006/mth3006.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "mth3006"
+            }
+          },
+          {
+            "id": "2843b129ec657576",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "clear/project/omoikane/mth3006/mth3006 lecture 1.md",
                 "mode": "source",
                 "source": false,
@@ -86,7 +101,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       },
       {
         "id": "3940fbbc55d2249c",
@@ -217,14 +232,23 @@
               "icon": "settings",
               "title": "Folder Overview settings"
             }
+          },
+          {
+            "id": "f27dcefe924a6050",
+            "type": "leaf",
+            "state": {
+              "type": "incomplete-files-view",
+              "state": {},
+              "icon": "cross",
+              "title": "Incomplete files"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 360.5,
-    "collapsed": true
+    "width": 360.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -245,17 +269,17 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "1764880180a441fd",
+  "active": "e7478951baf2afef",
   "lastOpenFiles": [
     "clear/project/omoikane/mth3006/mth3006.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 1.md",
-    "clear/project/omoikane/mth3006/mth3006 pre-lecture 1.md",
     "clear/project/omoikane/omoikane.md",
+    "attached/remarkable notes/Lectures/Year 3/mth3006/mth3006 lectures.pdf",
+    "clear/project/omoikane/mth3006/mth3006 pre-lecture 1.md",
     "clear/project/omoikane/mth3006/Fourier transform.md",
     "attached/files/mth3006 original notes 1.pdf",
     "clear/project/omoikane/mth3006/Fourier's inversion theorem.md",
     "clear/project/omoikane/mth3006/Fourier series.md",
-    "attached/remarkable notes/Lectures/Year 3/mth3006/mth3006 lectures.pdf",
     "attached/remarkable notes/Lectures/Year 3/mth3007/mth3007 lectures.pdf",
     "attached/remarkable notes/Lectures/Year 3/mth3007/mth3007 lectures.md",
     "attached/remarkable notes/Lectures/Year 3/mth3007",
@@ -282,7 +306,6 @@
     "clear/project/inari/inari.md",
     "clear/project/hachiman/hachiman.md",
     "clear/project/doosojin/doosojin.md",
-    "clear/library/japanese/japanese.md",
     "quartz/quartz/static/og-image.png",
     "quartz/quartz/static/icon.png",
     "quartz/docs/images/social-image-preview-light.png",

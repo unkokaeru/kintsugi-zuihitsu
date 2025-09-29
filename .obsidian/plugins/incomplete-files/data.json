@@ -1,0 +1,26 @@
+{
+  "EMPTY_CONTENT_HEADING": true,
+  "INCOMPLETE_SYNTAX": true,
+  "ignoreFoldersString": "",
+  "incompleteFiles": [
+    {
+      "hash": "8eda02097a5f822d42021dd78a2757847fd1dcb93e0f8122c7c99174d93e4aa3",
+      "path": "cloudy/project/kagaseo/Lone Star Analysis UK - Business Overview from Proposal Summaries.md",
+      "lastChecked": "2025-06-23T17:39:05.021Z",
+      "tags": [],
+      "issues": [
+        {
+          "type": "EMPTY_CONTENT_HEADING",
+          "title": "H2 Sectors and Use Cases is empty",
+          "heading": {
+            "depth": 2,
+            "text": "Sectors and Use Cases"
+          }
+        }
+      ],
+      "basename": "Lone Star Analysis UK - Business Overview from Proposal Summaries"
+    }
+  ],
+  "completeProperty": "",
+  "analyseFileWhenEditing": false
+}

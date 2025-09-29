@@ -18,6 +18,14 @@ In the context of academic mathematics work, Omoikane embodies the systematic me
 	- [[First order ODEs]] (by separation of variables or as homogeneous equations)
 	- [[Second order ODEs]] (by homogeneous equations with constant coefficients)
 - [[Partial and total derivatives]]
+- [[mth3006 post-lecture 1]] using [[mth3006 lecture 1]]
+
+```dataview
+let r = Object.entries(dv.app.metadataCache.unresolvedLinks)
+  .filter(([k, v]) => Object.keys(v).length)
+  .flatMap(([k, v]) => Object.keys(v).map(x => dv.fileLink(x)));
+dv.list([…new Set(r)]);
+```
 
 ---
 
