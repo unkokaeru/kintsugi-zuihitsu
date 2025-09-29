@@ -8,7 +8,7 @@ $$
 
 Some books use different definitions for a Fourier transform - as long as they multiply to give the same ==pre-factor== as ==[[Fourier's inversion theorem]]==, ==$\frac{1}{2\pi}$==, then it's fine.
 
-You find the Fourier transform just by ==substituting your function into the formula and simplifying==, often ==reducing the limits of integration== by ==the definition of the function==, too. This then defines ==the level of frequency for the function== across its values.
+You find the Fourier transform just by ==substituting your function into the formula and simplifying==, often ==reducing the limits of integration== by ==the definition of the function==, too, and even using the ==exponential definitions of trigonometric functions==. This then defines ==the level of frequency for the function== across its values.
 
 ---
 
