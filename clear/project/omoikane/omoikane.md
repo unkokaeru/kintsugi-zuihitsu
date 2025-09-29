@@ -9,26 +9,6 @@ In the context of academic mathematics work, Omoikane embodies the systematic me
 
 ---
 
-# To-Do List (overall)
-
-- [[Partial fractions]] (including a quadratic factor in the denominator)
-- [[Integration by parts]]
-- [[Laws of logarithms]] and [[Laws of exponentials]]
-- [[Ordinary differential equations (ODEs)]]
-	- [[First order ODEs]] (by separation of variables or as homogeneous equations)
-	- [[Second order ODEs]] (by homogeneous equations with constant coefficients)
-- [[Partial and total derivatives]]
-- [[mth3006 post-lecture 1]] using [[mth3006 lecture 1]]
-
-```dataview
-let r = Object.entries(dv.app.metadataCache.unresolvedLinks)
-  .filter(([k, v]) => Object.keys(v).length)
-  .flatMap(([k, v]) => Object.keys(v).map(x => dv.fileLink(x)));
-dv.list([…new Set(r)]);
-```
-
----
-
 # University Notes
 
 ## Year Three

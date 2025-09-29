@@ -3,3 +3,7 @@
 ## How is the Fourier Transform Derived?
 
 …
+
+---
+
+![[mth3006 lectures.pdf]]

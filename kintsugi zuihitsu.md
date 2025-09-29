@@ -15,15 +15,16 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ---
 
-- Omoikane.
-	 - Templater (plugin) templates.
-	 - Spaced Repetition (plugin) flashcards.
-	 - Custom Callouts (plugin).
- - Chess.
-	 - Chess Study (plugin) game reviews.
-	 - Chessboard Viewer (plugin) position study.
- - Languages.
-	 - Spaced Repetition (plugin) flashcards.
-	 - WaniKani?
- - Politics.
-	 - "Geopolitical affairs" - news, etc. - use LLMs for quizzes on information (could be used in other areas of my life, too) to ensure understanding.
+```dataviewjs
+const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
+const res = {};
+for (let page in unresolvedLinksMap) {
+  const unresolved = Object.keys(unresolvedLinksMap[page]);
+  if (unresolved.length === 0) continue;
+  for (let link of unresolved) {
+    if (!res[link]) res[link] = {link, usages: []};
+    res[link].usages.push(dv.fileLink(page));
+  }
+}
+dv.table(["Unresolved Link", "Contained in"], Object.values(res).map(l => [dv.fileLink(l.link), l.usages]));
+```
