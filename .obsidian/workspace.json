@@ -195,8 +195,8 @@
             "state": {
               "type": "SCRYBBLE_VIEW",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "SCRYBBLE_VIEW"
+              "icon": "pencil-line",
+              "title": "Scrybble"
             }
           },
           {
@@ -215,16 +215,16 @@
             "state": {
               "type": "folder-overview-view",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "folder-overview-view"
+              "icon": "settings",
+              "title": "Folder Overview settings"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 360.5,
-    "collapsed": true
+    "width": 360.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -245,11 +245,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ec6ae99f5c3c3ca8",
+  "active": "8ce44f015bb7a3eb",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3006/mth3006 pre-lecture 1.md",
     "attached/files/mth3006 original notes 1.pdf",
     "clear/project/omoikane/mth3006/mth3006.md",
-    "clear/project/omoikane/mth3006/mth3006 pre-lecture 1.md",
     "clear/project/omoikane/mth3007/mth3007 pre-lecture 1.md",
     "clear/project/omoikane/mth3007/mth3007.md",
     "clear/project/omoikane/mth3007/mth3007 lecture 1.md",
