@@ -1,9 +1,5 @@
 # Mth3006 Pre-lecture 1
 
-- [[mth3006 original notes 1.pdf]]
-
----
-
 - To revise/re-write notes on:
 	- Partial fractions (including a quadratic factor in the denominator)
 	- Integration by parts
