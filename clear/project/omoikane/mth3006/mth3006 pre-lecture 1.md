@@ -9,3 +9,4 @@
 - Partial and total derivatives
 - [[Fourier series]]
 - [[Fourier transform]]
+- [[Fourier's inversion theorem]]
