@@ -1,7 +1,5 @@
 # Mth3007 Lecture 1
 
-iusdhgiusdhg
-
 ```python
 import micropip
 await micropip.install("matplotlib")
@@ -130,4 +128,3 @@ print(linear_regression(x_values, y_values))
 ```python
 plot_data(x_values, y_values, *linear_regression(x_values, y_values))
 ```
-
