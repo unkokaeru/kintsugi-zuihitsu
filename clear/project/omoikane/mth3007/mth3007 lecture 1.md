@@ -1,16 +1,23 @@
 # Mth3007 Lecture 1
 
+## How Can We Derive the Formula for Least Squares Regression?
+
+…
+
+## How Do We Program Least Squares Regression?
+
+First, we've gotta handle the dependencies using a package manager - here we use `micropip`.
+
 ```python
 import micropip
 await micropip.install("matplotlib")
 await micropip.install("numpy")
-```
 
-```python
-"""A simple implementation of linear regression using the least squares method."""
 import matplotlib.pyplot as plt
 import numpy as np
 ```
+
+Then, to solve some of the earlier warm-up questions we devise a function to sum the squares of a given list of floats - a useful helper function later, too.
 
 ```python
 def sum_of_squares(values: list[float]) -> float:
@@ -29,6 +36,8 @@ def sum_of_squares(values: list[float]) -> float:
     """
     return sum(x ** 2 for x in values)
 ```
+
+The main linear regression stuff is then done here, implementing the logic derived during the lecture - formulae repeated in the notes of the function.
 
 ```python
 def linear_regression(x_values: list[float], y_values: list[float]) -> tuple[float, float]:
@@ -72,6 +81,8 @@ def linear_regression(x_values: list[float], y_values: list[float]) -> tuple[flo
     return slope, intercept
 ```
 
+To test our linear regression stuff, we can plot all the pairs of coordinates and the line of best fit we calculated (using the slope and intercept returned from the function). This was outside of the scope of the lecture, but I had some extra time.
+
 ```python
 def plot_data(x_values: list[float], y_values: list[float], slope: float, intercept: float) -> None:
     """
@@ -103,6 +114,8 @@ def plot_data(x_values: list[float], y_values: list[float], slope: float, interc
     plt.show()
 ```
 
+Now that all of our functions are set up, time to input the data we were given in the lecture!
+
 ```python
 coordinate_pairs: list[tuple[float, float]] = [
     (0.526993994, 3.477982975),
@@ -121,10 +134,20 @@ x_values: list[float] = [x for x, _ in coordinate_pairs]
 y_values: list[float] = [y for _, y in coordinate_pairs]
 ```
 
+Let's just double check the actual values first, so we can cross-reference against manual working, or just a calculator.
+
 ```python
 print(linear_regression(x_values, y_values))
 ```
 
+Finally, the plot…
+
 ```python
 plot_data(x_values, y_values, *linear_regression(x_values, y_values))
 ```
+
+Looks good!
+
+---
+
+![[mth3007 lectures.pdf]]
