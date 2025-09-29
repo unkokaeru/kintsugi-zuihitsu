@@ -8,3 +8,4 @@
 	- Second order (by homogeneous equations with constant coefficients)
 - Partial and total derivatives
 - [[Fourier series]]
+- [[Fourier transform]]
