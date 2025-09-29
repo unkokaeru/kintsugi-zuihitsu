@@ -14,4 +14,4 @@ You find the Fourier transform just by ==substituting your function into the for
 
 ## Example One
 
-Calculate the Fourier transform of $f(t)=\begin{cases}\end{cases}$
+Calculate the Fourier transform of $f(t)=\begin{cases}1 & -1\lt t \lt 1 \\ 0 & |t|\geq {1}\end{cases}$::$\sqrt{ \frac{2}{\pi} } \frac{\sin(\omega)}{\omega}$
