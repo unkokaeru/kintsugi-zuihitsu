@@ -19,23 +19,6 @@
         }
       ],
       "basename": "Lone Star Analysis UK - Business Overview from Proposal Summaries"
-    },
-    {
-      "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "path": "clear/project/omoikane/mth3007/Least squares regression.md",
-      "lastChecked": "2025-09-29T19:32:07.955Z",
-      "tags": [],
-      "issues": [
-        {
-          "type": "EMPTY_CONTENT_HEADING",
-          "title": "H1 Least Squares Regression is empty",
-          "heading": {
-            "depth": 1,
-            "text": "Least Squares Regression"
-          }
-        }
-      ],
-      "basename": "Least squares regression"
     }
   ],
   "completeProperty": "",
