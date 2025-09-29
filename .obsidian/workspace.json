@@ -70,25 +70,7 @@
             }
           }
         ],
-        "currentTab": 3
-      },
-      {
-        "id": "a4f0a595caab4b8c",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "5c47e15afab1d186",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/mth3006 original notes 1.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "mth3006 original notes 1"
-            }
-          }
-        ]
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -215,12 +197,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "13086cd211f42d16",
+  "active": "e45f729135e54bbc",
   "lastOpenFiles": [
-    "attached/files/mth3006 original notes 1.pdf",
     "clear/project/omoikane/mth3006/mth3006 pre-lecture 1.md",
     "clear/project/omoikane/mth3006/mth3006.md",
     "clear/project/omoikane/omoikane.md",
+    "attached/files/mth3006 original notes 1.pdf",
     "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3006",
     "clear/project/project.md",
