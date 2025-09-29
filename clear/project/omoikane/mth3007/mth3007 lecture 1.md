@@ -3,17 +3,15 @@
 iusdhgiusdhg
 
 ```python
+import micropip
 await micropip.install("matplotlib")
+await micropip.install("numpy")
 ```
 
 ```python
 """A simple implementation of linear regression using the least squares method."""
-import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
-
-# Use non-interactive backend to avoid Tkinter dependency
-matplotlib.use('Agg')
 ```
 
 ```python
@@ -103,8 +101,33 @@ def plot_data(x_values: list[float], y_values: list[float], slope: float, interc
     plt.title('Linear Regression Fit')
     plt.legend()
 
-    # Save the plot instead of showing it (since we're using Agg backend)
-    plt.savefig('linear_regression_plot.png', dpi=300, bbox_inches='tight')
-    plt.close()  # Close the figure to free memory
-    print("Plot saved as 'linear_regression_plot.png'")
+    # Show the plot
+    plt.show()
 ```
+
+```python
+coordinate_pairs: list[tuple[float, float]] = [
+    (0.526993994, 3.477982975),
+    (0.691126852, 4.197925374),
+    (0.745407955, 4.127080815),
+    (0.669344512, 3.365719179),
+    (0.518168748, 3.387060084),
+    (0.291558862, 1.829099436),
+    (0.010870453, 0.658137249),
+    (0.71818573, 4.023164612),
+    (0.897190954, 5.074088869),
+    (0.476789102, 2.752890033),
+]
+
+x_values: list[float] = [x for x, _ in coordinate_pairs]
+y_values: list[float] = [y for _, y in coordinate_pairs]
+```
+
+```python
+print(linear_regression(x_values, y_values))
+```
+
+```python
+plot_data(x_values, y_values, *linear_regression(x_values, y_values))
+```
+
