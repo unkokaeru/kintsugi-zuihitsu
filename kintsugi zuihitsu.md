@@ -8,8 +8,6 @@ This vault embodies both concepts: **kintsugi** in how it transforms scattered t
 
 The structure separates [[clear|transparent knowledge]] that can be shared publicly from [[cloudy|protected development]] requiring privacy, while maintaining natural connections between all areas of exploration.
 
----
-
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
 const res = {};
