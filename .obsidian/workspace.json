@@ -55,7 +55,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -185,10 +185,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "06bf297c160c1b68",
+  "active": "a26566fec3e0f1c9",
   "lastOpenFiles": [
-    "kintsugi zuihitsu.md",
     "cloudy/project/yatagarasu/yatagarasu.md",
+    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3006/mth3006 weekly problems 1.md",
     "clear/project/hachiman/hachiman.md",
     "clear/project/inari/inari.md",
