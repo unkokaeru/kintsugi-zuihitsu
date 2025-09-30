@@ -7,3 +7,7 @@
 ## How Do You Derive the Fourier Sine Transform and Its Inverse?
 
 …
+
+## How Do You Calculate Integrals Involving the $\delta$ Function?
+
+…
