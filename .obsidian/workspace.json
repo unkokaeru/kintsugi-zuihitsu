@@ -38,27 +38,24 @@
               "icon": "lucide-file",
               "title": "mth3006 pre-lecture 2"
             }
-          }
-        ],
-        "currentTab": 1
-      },
-      {
-        "id": "6b7b3702cb9f7de1",
-        "type": "tabs",
-        "children": [
+          },
           {
-            "id": "09e2302239e5c1c3",
+            "id": "ed33cdde74405088",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "attached/files/mth3006 original notes 1.pdf"
+                "file": "clear/project/omoikane/mth3006/Fourier transform.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
               },
-              "icon": "lucide-file-text",
-              "title": "mth3006 original notes 1"
+              "icon": "lucide-file",
+              "title": "Fourier transform"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -186,11 +183,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "abdb1d8bd6e4a303",
+  "active": "ed33cdde74405088",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3006/mth3006 pre-lecture 2.md",
+    "clear/project/omoikane/mth3006/Fourier transform.md",
     "clear/project/omoikane/mth3006/mth3006.md",
     "attached/files/mth3006 original notes 1.pdf",
-    "clear/project/omoikane/mth3006/mth3006 pre-lecture 2.md",
     "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3007/mth3007 pre-lecture 1.md",
     "clear/project/omoikane/mth3007/mth3007 lecture 1.md",
@@ -202,7 +200,6 @@
     "attached/files/mth3007 original notes 1.pdf",
     "attached/remarkable notes/Lectures/Year 3/mth3006/mth3006 lectures.pdf",
     "clear/project/omoikane/omoikane.md",
-    "clear/project/omoikane/mth3006/Fourier transform.md",
     "clear/project/omoikane/mth3006/Fourier's inversion theorem.md",
     "clear/project/omoikane/mth3006/Fourier series.md",
     "attached/remarkable notes/Lectures/Year 3/mth3007/mth3007 lectures.md",
