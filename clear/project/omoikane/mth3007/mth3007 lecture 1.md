@@ -8,7 +8,7 @@
 
 First, we've gotta handle the dependencies using a package manager - here we use `micropip`.
 
-```python
+```python runnable
 import micropip
 await micropip.install("matplotlib")
 await micropip.install("numpy")
@@ -19,7 +19,7 @@ import numpy as np
 
 Then, to solve some of the earlier warm-up questions we devise a function to sum the squares of a given list of floats - a useful helper function later, too.
 
-```python
+```python runnable
 def sum_of_squares(values: list[float]) -> float:
     """
     Calculate the sum of squares of a list of values.
@@ -39,7 +39,7 @@ def sum_of_squares(values: list[float]) -> float:
 
 The main linear regression stuff is then done here, implementing the logic derived during the lecture - formulae repeated in the notes of the function.
 
-```python
+```python runnable
 def linear_regression(x_values: list[float], y_values: list[float]) -> tuple[float, float]:
     """
     Perform linear regression on a set of 2D points.
@@ -83,7 +83,7 @@ def linear_regression(x_values: list[float], y_values: list[float]) -> tuple[flo
 
 To test our linear regression stuff, we can plot all the pairs of coordinates and the line of best fit we calculated (using the slope and intercept returned from the function). This was outside of the scope of the lecture, but I had some extra time.
 
-```python
+```python runnable
 def plot_data(x_values: list[float], y_values: list[float], slope: float, intercept: float) -> None:
     """
     Plot the original data points and the fitted linear regression line.
@@ -116,7 +116,7 @@ def plot_data(x_values: list[float], y_values: list[float], slope: float, interc
 
 Now that all of our functions are set up, time to input the data we were given in the lecture!
 
-```python
+```python runnable
 coordinate_pairs: list[tuple[float, float]] = [
     (0.526993994, 3.477982975),
     (0.691126852, 4.197925374),
@@ -136,13 +136,13 @@ y_values: list[float] = [y for _, y in coordinate_pairs]
 
 Let's just double check the actual values first, so we can cross-reference against manual working, or just a calculator.
 
-```python
+```python runnable
 print(linear_regression(x_values, y_values))
 ```
 
 Finally, the plot…
 
-```python
+```python runnable
 plot_data(x_values, y_values, *linear_regression(x_values, y_values))
 ```
 
