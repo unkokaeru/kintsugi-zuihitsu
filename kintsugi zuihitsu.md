@@ -1,6 +1,6 @@
 # Kintsugi Zuihitsu
 
-![[chillin sushi guy.svg|Following the brush wherever curiosity leads, mending each broken understanding with golden connections|700x200]]
+<img src="chillin sushi guy.svg" style="width:100%;">
 
 **Kintsugi** (金継ぎ), the art of golden repair, transforms brokenness into beauty by highlighting fractures with precious metal rather than hiding them. **Zuihitsu** (随筆), meaning "following the brush," represents the Japanese literary form of spontaneous, personal reflection that flows naturally from thought to thought.
 
