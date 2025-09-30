@@ -19,7 +19,6 @@ $$
 Find the Fourier transform of
 
 $$
-
 f(t) =
 
   \begin{cases}
@@ -31,15 +30,12 @@ f(t) =
 	 0 & \text{otherwise}
 
   \end{cases}
-
 $$
 
-first by using the exponential form of the transform and then by using
+First by using the exponential form of the transform and then by using
 
 $$
-
 \tilde{f}(\omega) = -i \sqrt{\frac{2}{\pi}} \int_{0}^{\infty} f(t) \sin(\omega t) \, dt
-
 $$
 
 (valid since the function is odd). The two results should be the same.
@@ -49,15 +45,12 @@ $$
 Use an appropriate form of the Fourier transform to calculate
 
 $$
-
  \tilde{f}(\omega)
-
 $$
 
  when
 
 $$
-
 f(t) =
 
   \begin{cases}
@@ -67,13 +60,11 @@ f(t) =
 	0 & \text{when } |t| \geq 1
 
   \end{cases}
-
 $$
 
-and use your result to show that
+And use your result to show that
 
 $$
-
 \int_{0}^{\infty}
   \dfrac{\sin x - x \cos x}{x^3}
   \cos \left( \dfrac{x}{2} \right)
@@ -81,7 +72,6 @@ $$
   =
 
   \dfrac{3\pi}{16}
-
 $$
 
 ## Question Five
@@ -89,12 +79,10 @@ $$
 Find the Fourier cosine transform of $f(t) = \exp(-m|t|)$, $m > 0$, and use your result to show that
 
 $$
-
 \int_{0}^{\infty}
   \dfrac{\cos(pv)}{v^2 + \beta^2}
   dv
   =
 
   \dfrac{\pi}{2\beta}\exp(-p\beta)
-
 $$

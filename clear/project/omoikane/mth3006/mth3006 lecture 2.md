@@ -1,5 +1,11 @@
 # Mth3006 Lecture 2
 
+What type of function do you get when multiplying an odd function and an even function?::Odd function
+
+What type of function do you get when multiplying two odd functions?::Even function
+
+What type of function do you get when multiplying two even functions?::Even function
+
 ## How Do You Derive the Fourier Cosine Transform and Its Inverse?
 
 …
