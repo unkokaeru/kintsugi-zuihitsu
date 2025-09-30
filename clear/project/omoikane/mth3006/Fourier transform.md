@@ -1,5 +1,8 @@
 # Fourier Transform
 
+> [!important] Useful skill to build
+> Look at questions and decide what form of the Fourier transform you'd use! Exponential? Cosine form? Sine form? Think about what your reasoning is: even, odd, already has an exponential in it? etc.
+
 A **Fourier transform** is where a ==non-periodic== function is represented as the ==integral== over ==trigonometric functions==, usually in the form of ==complex exponentials==.
 
 $$
@@ -17,7 +20,7 @@ Calculating ==Fourier transforms and then their inverses== to find an equivalent
 We can generalise the transforms for even and odd functions to the following:
 
 - For an even function ==$f(t)=f(-t)$==, the ==Fourier transform== generalises to ==$\tilde{f}_{c}(\omega)=\sqrt{ \frac{2}{\pi} }\int_{0}^{\infty}f(t)\cos \omega t dt$== and its inverse as $f(t)=\sqrt{ \frac{2}{\pi} }\int_{0}^{\infty}\tilde{f}_{c}(\omega)\cos \omega t d \omega$.
-- For an odd function $-f(t)=f(-t)$, the ==Fourier transform== generalises to ==$\dots$==.
+- For an odd function $-f(t)=f(-t)$, the ==Fourier transform== generalises to ==$\tilde{f}_{s}(\omega)=\dots$==.
 
 ---
 

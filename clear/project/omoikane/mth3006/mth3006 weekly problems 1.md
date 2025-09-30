@@ -4,6 +4,10 @@
 
 Calculate the Fourier transform of the delta function $\delta(t - a)$.
 
+### Solution
+
+…
+
 ## Question Two
 
 Calculate the inverse Fourier transform of
@@ -13,6 +17,10 @@ $$
 $$
 
 , where $\omega_0$ is a real, non-zero constant, writing your answer in terms of a trigonometric function.
+
+### Solution
+
+…
 
 ## Question Three
 
@@ -39,6 +47,10 @@ $$
 $$
 
 (valid since the function is odd). The two results should be the same.
+
+### Solution
+
+…
 
 ## Question Four
 
@@ -74,6 +86,10 @@ $$
   \dfrac{3\pi}{16}
 $$
 
+### Solution
+
+…
+
 ## Question Five
 
 Find the Fourier cosine transform of $f(t) = \exp(-m|t|)$, $m > 0$, and use your result to show that
@@ -86,3 +102,7 @@ $$
 
   \dfrac{\pi}{2\beta}\exp(-p\beta)
 $$
+
+### Solution
+
+…
