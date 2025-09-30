@@ -14,4 +14,4 @@ Methodical progression from basic layer-by-layer solving to advanced CFOP method
 - **Equipment optimization** - cube selection, tensioning, maintenance
 - **Consistency training** - reliable execution under time pressure
 
-The systematic approach to memorization and pattern recognition parallels techniques used in [[../Japanese|language acquisition]] and connects to the rapid processing skills needed for [[Puro|competitive programming]].
+The systematic approach to memorization and pattern recognition parallels techniques used in [[japanese|language acquisition]] and connects to the rapid processing skills needed for [[puro|competitive programming]].

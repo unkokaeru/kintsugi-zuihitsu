@@ -17,4 +17,4 @@ Competitive programming excellence through the Wikibot challenge. Algorithmic ma
 
 Performance metrics include steps taken, computation speed, memory usage, code elegance, and creative approaches. Success requires both algorithmic thinking and implementation excellence.
 
-The systematic problem-solving approach builds on analytical skills developed through [[../Chess|chess tactics]] and connects to optimization thinking used in [[../Kuebiko|schedule management]].
+The systematic problem-solving approach builds on analytical skills developed through [[chess|chess tactics]] and connects to optimization thinking used in [[kuebiko|schedule management]].

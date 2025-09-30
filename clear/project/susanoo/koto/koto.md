@@ -13,4 +13,4 @@ Master Debussy's Claire de Lune with both technical accuracy and musical express
 - **Practice methodology** - efficient repetition and error correction
 - **Performance readiness** - memorization and stage presence
 
-The disciplined practice approach mirrors the systematic improvement methods used in [[Puro|competitive programming]] and structured learning techniques from [[../Omoikane|academic work]].
+The disciplined practice approach mirrors the systematic improvement methods used in [[puro|competitive programming]] and structured learning techniques from [[omoikane|academic work]].

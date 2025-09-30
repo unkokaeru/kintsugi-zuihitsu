@@ -17,7 +17,7 @@ Experimentation-based learning with recipe collection and technique practice. Fo
 - **Flavour profiles** - acid balance, umami, aromatic combinations
 - **Equipment mastery** - tool selection and maintenance
 
-Each failed dish provides valuable education in timing and technique that strengthens future attempts, much like the iterative improvement approach used in [[Susanoo/Koto|piano practice]].
+Each failed dish provides valuable education in timing and technique that strengthens future attempts, much like the iterative improvement approach used in [[koto|piano practice]].
 
 ```folder-overview
 id: 16daf4b8-9ec6-4915-bffa-291d3c900e27

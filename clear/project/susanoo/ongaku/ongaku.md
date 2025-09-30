@@ -14,4 +14,4 @@ Systematic study of each aspect of music production rather than random experimen
 - **Composition principles** - harmonic structure, rhythm, arrangement
 - **Creative process** - idea development, project management, completion strategies
 
-The methodical skill acquisition connects to systematic approaches used in [[../Chess|chess improvement]] and the structured learning philosophy of [[../Japanese|language acquisition]].
+The methodical skill acquisition connects to systematic approaches used in [[chess|chess improvement]] and the structured learning philosophy of [[japanese|language acquisition]].

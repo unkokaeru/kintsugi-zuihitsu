@@ -17,7 +17,7 @@ Mixed sources including online platforms, books, and game studies. Focus areas i
 - **Game analysis** - annotated games and position evaluation
 - **Checkmate patterns** - systematic mating attacks
 
-The mental discipline required connects naturally to other analytical pursuits, particularly the systematic problem-solving approaches used in [[susanoo/puro|competitive programming]].
+The mental discipline required connects naturally to other analytical pursuits, particularly the systematic problem-solving approaches used in [[puro|competitive programming]].
 
 ```folder-overview
 id: c53d8f98-3831-4382-b146-f464ee114efa
