@@ -10,6 +10,10 @@ Some books use different definitions for a Fourier transform - as long as they m
 
 You find the Fourier transform just by ==substituting your function into the formula and simplifying==, often ==reducing the limits of integration== by ==the definition of the function==, too, and even using the ==exponential definitions of trigonometric functions==. This then defines ==the level of frequency for the function== across its values.
 
+Sometimes finding inverse Fourier transforms can be simplified by using ==Euler's formula== to write it in terms of ==trigonometric functions== to then analyse the parts of the function that are ==odd/even==, as long as the integral is defined ==symmetrically==.
+
+Calculating ==Fourier transforms and then their inverses== to find an equivalent ==integral== definition of a function can be useful after ==equating== them to find the solutions of very complicated integrals.
+
 We can generalise the transforms for even and odd functions to the following:
 
 - For an even function ==$f(t)=f(-t)$==, the ==Fourier transform== generalises to ==$\tilde{f}_{c}(\omega)=\sqrt{ \frac{2}{\pi} }\int_{0}^{\infty}f(t)\cos \omega t dt$== and its inverse as $f(t)=\sqrt{ \frac{2}{\pi} }\int_{0}^{\infty}\tilde{f}_{c}(\omega)\cos \omega t d \omega$.
