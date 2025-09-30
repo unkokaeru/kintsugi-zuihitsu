@@ -7,6 +7,8 @@
 
 In the context of Google service migration, Hachiman represents the analytical framework needed for complex system transitions while maintaining security and functionality. The goal is systematic replacement of Google dependencies with self-hosted alternatives—email servers, file storage, and productivity tools.
 
+> [!question] Maybe I could use [N8N](https://n8n.io/) in some automation bits? Email summaries?
+
 ---
 
 # Implementation
