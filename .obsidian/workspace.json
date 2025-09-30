@@ -54,8 +54,7 @@
               "title": "mth3007 lecture 1"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -185,12 +184,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "29190c35ee8b20d5",
+  "active": "d5e22a0c19b2de75",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3007/mth3007 lecture 1.md",
+    "attached/files/chillin sushi guy.svg",
+    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3007/mth3007.md",
     "clear/project/omoikane/mth3006/mth3006 weekly problems 1.md",
-    "clear/project/omoikane/mth3007/mth3007 lecture 1.md",
-    "kintsugi zuihitsu.md",
     "clear/project/omoikane/omoikane.md",
     "clear/project/omoikane/mth3004/mth3004.md",
     "clear/project/omoikane/mth3011/mth3011.md",
@@ -221,7 +221,6 @@
     "attached/remarkable notes/Lectures/Year 3/mth3007/mth3007 lectures.pdf",
     "clear/project/omoikane/mth3006/mth3006 lecture 1.md",
     "clear/project/omoikane/mth3006/mth3006 pre-lecture 1.md",
-    "clear/project/omoikane/mth3007/Least squares regression.md",
     "attached/files/mth3007 original notes 1.pdf",
     "attached/remarkable notes/Lectures/Year 3/mth3006/mth3006 lectures.pdf",
     "attached/remarkable notes/Lectures/Year 3/mth3007",
@@ -231,7 +230,6 @@
     "quartz/docs/images/social-image-preview-dark.png",
     "quartz/docs/images/quartz-layout-tablet.png",
     "quartz/docs/images/quartz-layout-mobile.png",
-    "quartz/docs/images/quartz-layout-desktop.png",
-    "quartz/docs/images/quartz transform pipeline.png"
+    "quartz/docs/images/quartz-layout-desktop.png"
   ]
 }
