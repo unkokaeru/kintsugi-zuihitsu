@@ -68,9 +68,21 @@
               "icon": "lucide-file",
               "title": "mth3006 weekly problems 1"
             }
+          },
+          {
+            "id": "d6c223bc010fb41a",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "attached/files/mth3006 original notes 1.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "mth3006 original notes 1"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -198,13 +210,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d2c47617a4c078e3",
+  "active": "d6c223bc010fb41a",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3006/Heaviside step function.md",
     "clear/project/omoikane/mth3006/Dirac delta-function.md",
+    "clear/project/omoikane/mth3006/mth3006 weekly problems 1.md",
+    "clear/project/omoikane/mth3006/Heaviside step function.md",
     "clear/project/omoikane/mth3006/Fourier transform.md",
     "kintsugi zuihitsu.md",
-    "clear/project/omoikane/mth3006/mth3006 weekly problems 1.md",
     "attached/files/mth3006 original notes 1.pdf",
     "clear/project/omoikane/mth3006/mth3006 lecture 2.md",
     "clear/project/omoikane/mth3006/mth3006 pre-lecture 2.md",
