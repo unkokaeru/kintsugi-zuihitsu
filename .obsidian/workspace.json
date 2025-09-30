@@ -38,9 +38,24 @@
               "icon": "lucide-file",
               "title": "mth3006 weekly problems 1"
             }
+          },
+          {
+            "id": "12918fe28057f226",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/kuebiko/kuebiko.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "kuebiko"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -90,8 +105,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 414.51103591918945,
-    "collapsed": true
+    "width": 414.51103591918945
   },
   "right": {
     "id": "b91c281c8050caa8",
@@ -170,11 +184,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a26566fec3e0f1c9",
+  "active": "12918fe28057f226",
   "lastOpenFiles": [
     "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3006/mth3006 weekly problems 1.md",
     "clear/library/sloth bytes/sloth bytes.md",
+    "clear/library/sloth bytes/Keyword Cipher.md",
     "clear/library/sloth bytes/Censor.md",
     "clear/library/sloth bytes/Calculator Text.md",
     "clear/library/sloth bytes/Bridge Shuffle.md",
@@ -197,7 +212,6 @@
     "clear/library/sloth bytes/Pig Latin.md",
     "clear/library/sloth bytes/Phone Number.md",
     "clear/library/sloth bytes/Pasting.md",
-    "clear/library/sloth bytes/Numbers to English.md",
     "clear/library/sloth bytes",
     "attached/files/chillin sushi guy.svg",
     "clear/project/omoikane/mth3011",
