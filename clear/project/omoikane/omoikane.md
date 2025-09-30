@@ -15,8 +15,10 @@ In the context of academic mathematics work, Omoikane embodies the systematic me
 
 ### Semester A
 
+- [[mth3004]] - Pedagogy
 - [[mth3006]] - Methods of Mathematical Physics
 - [[mth3007]] - Numerical Methods
+- [[mth3011]] - Advanced Project and Communication
 
 ### Semester B
 
