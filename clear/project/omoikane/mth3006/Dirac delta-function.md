@@ -12,4 +12,4 @@ $$
 \lim_{ \Delta t \to 0 } f(a)\left( \frac{1}{\Delta t} \right)\cdot \Delta t=f(a)
 $$
 
-So that $\int_{-\infty}^{\infty}f(t)\delta(t-a)dt=f(a)$.
+So that $\int_{-\infty}^{\infty}f(t)\delta(t-a)dt=f(a)$: the **sifting property** of the $\delta$ function (or simply the definition).
