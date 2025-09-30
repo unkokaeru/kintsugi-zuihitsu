@@ -12,7 +12,7 @@ You find the Fourier transform just by ==substituting your function into the for
 
 We can generalise the transforms for even and odd functions to the following:
 
-- For an even function ==$f(t)=f(-t)$==, the ==Fourier transform== generalises to ==$$==.
+- For an even function ==$f(t)=f(-t)$==, the ==Fourier transform== generalises to ==$\tilde{f}_{c}(\omega)=\sqrt{ \frac{2}{\pi} }\int_{0}^{\infty}f(t)\cos \omega t dt$== and its inverse as $f(t)=\sqrt{ \frac{2}{\pi} }\int_{0}^{\infty}\tilde{f}_{c}(\omega)\cos \omega t d \omega$.
 - For an odd function $-f(t)=f(-t)$, the ==Fourier transform== generalises to ==$\dots$==.
 
 ---
