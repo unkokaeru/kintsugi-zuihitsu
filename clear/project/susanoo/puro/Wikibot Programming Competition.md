@@ -92,7 +92,6 @@ Each round provides competitors with start and end Wikipedia pages as JSON input
 	- Build instructions
 	- Dependency documentation
 	- Minification proof (if applicable)
-  
 - README must explain:
 	- Algorithmic approach
 	- Execution instructions
