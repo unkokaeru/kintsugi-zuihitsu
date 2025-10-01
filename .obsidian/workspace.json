@@ -58,19 +58,19 @@
         "currentTab": 2
       },
       {
-        "id": "9c4ca5e69d9edd2f",
+        "id": "e212682787b42d10",
         "type": "tabs",
         "children": [
           {
-            "id": "9abf8f23a3dbff58",
+            "id": "3b2423d5646f14a2",
             "type": "leaf",
             "state": {
               "type": "pdf",
               "state": {
-                "file": "attached/files/mth3011 lecture one.pdf"
+                "file": "attached/files/mth3011 lecture notes one.pdf"
               },
               "icon": "lucide-file-text",
-              "title": "mth3011 lecture one"
+              "title": "mth3011 lecture notes one"
             }
           }
         ]
@@ -203,12 +203,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "1a4f3c68cddc538a",
+  "active": "3b2423d5646f14a2",
   "lastOpenFiles": [
-    "attached/files/mth3011 lecture one.pdf",
     "clear/project/omoikane/mth3011/mth3011.md",
-    "clear/project/omoikane/mth3006/Dirac delta-function.md",
     "attached/files/mth3011 lecture notes one.pdf",
+    "attached/files/mth3011 lecture one.pdf",
+    "clear/project/omoikane/mth3006/Dirac delta-function.md",
     "clear/project/omoikane/mth3006/mth3006 weekly problems 1.md",
     "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3006/Fourier transform.md",
