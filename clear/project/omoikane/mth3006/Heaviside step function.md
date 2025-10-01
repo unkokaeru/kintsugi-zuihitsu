@@ -5,3 +5,4 @@ Defined as ==$H(t)=\begin{cases}1 & \text{for }t\gt0 \\ 0 & \text{for }t\lt{0}\e
 ![[heaviside step function.png|Heaviside step function]]
 
 The ==step function== and the ==$\delta$ function== are related by ==$H^{\prime}(t)=\delta(t)$==, since the ==gradient== at the middle of the step function is ==infinite== at $t$.
+<!--SR:!2000-01-01,1,250!2025-10-04,3,250!2000-01-01,1,250!2025-10-04,3,250!2000-01-01,1,250-->
