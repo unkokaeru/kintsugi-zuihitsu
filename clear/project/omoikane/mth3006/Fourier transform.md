@@ -14,6 +14,7 @@ Some books use different definitions for a Fourier transform - as long as they m
 <!--SR:!2000-01-01,1,250!2025-10-04,3,250!2000-01-01,1,250-->
 
 You find the Fourier transform just by ==substituting your function into the formula and simplifying==, often ==reducing the limits of integration== by ==the definition of the function==, too, and even using the ==exponential definitions of trigonometric functions==. This then defines ==the level of frequency for the function== across its values.
+<!--SR:!2000-01-01,1,250!2025-10-03,2,248!2000-01-01,1,250!2000-01-01,1,250!2000-01-01,1,250-->
 
 Sometimes finding inverse Fourier transforms can be simplified by using ==Euler's formula== to write it in terms of ==trigonometric functions== to then analyse the parts of the function that are ==odd/even==, as long as the integral is defined ==symmetrically==.
 <!--SR:!2025-10-04,3,250!2000-01-01,1,250!2000-01-01,1,250!2025-10-04,3,250-->
@@ -25,7 +26,7 @@ We can generalise the transforms for even and odd functions to the following:
 
 - For an even function ==$f(t)=f(-t)$==, the ==Fourier transform== generalises to ==$\tilde{f}_{c}(\omega)=\sqrt{ \frac{2}{\pi} }\int_{0}^{\infty}f(t)\cos \omega t dt$== and its inverse as $f(t)=\sqrt{ \frac{2}{\pi} }\int_{0}^{\infty}\tilde{f}_{c}(\omega)\cos \omega t d \omega$.
 - For an odd function $-f(t)=f(-t)$, the ==Fourier transform== generalises to ==$\tilde{f}_{s}(\omega)=\sqrt{ \frac{2}{\pi} }\int_{0}^{\infty}f(t)\sin \omega t dt$== and its inverse as $f(t)=\sqrt{ \frac{2}{\pi} }\int_{0}^{\infty}\tilde{f}_{s}(\omega)\sin \omega t d \omega$.
-<!--SR:!2000-01-01,1,250!2000-01-01,1,250!2025-10-02,1,230!2000-01-01,1,250!2000-01-01,1,250-->
+<!--SR:!2000-01-01,1,250!2000-01-01,1,250!2025-10-02,1,230!2000-01-01,1,250!2025-10-02,1,228-->
 
 ---
 

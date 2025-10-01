@@ -8,6 +8,12 @@ This vault embodies both concepts: **kintsugi** in how it transforms scattered t
 
 The structure separates [[clear|transparent knowledge]] that can be shared publicly from [[cloudy|protected development]] requiring privacy, while maintaining natural connections between all areas of exploration.
 
+## To-Do List
+
+- [[Wikibot Programming Competition]] - review pull request.
+- [[yatagarasu]] - clean up notes.
+- [[mth3006 weekly problems 1]] - complete questions.
+
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
 const res = {};
