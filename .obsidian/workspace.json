@@ -56,24 +56,6 @@
           }
         ],
         "currentTab": 2
-      },
-      {
-        "id": "e212682787b42d10",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "3b2423d5646f14a2",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/mth3011 lecture notes one.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "mth3011 lecture notes one"
-            }
-          }
-        ]
       }
     ],
     "direction": "vertical"
@@ -203,10 +185,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "3b2423d5646f14a2",
+  "active": "1a4f3c68cddc538a",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3011/mth3011.md",
     "attached/files/mth3011 lecture notes one.pdf",
+    "clear/project/omoikane/mth3011/mth3011.md",
     "attached/files/mth3011 lecture one.pdf",
     "clear/project/omoikane/mth3006/Dirac delta-function.md",
     "clear/project/omoikane/mth3006/mth3006 weekly problems 1.md",
