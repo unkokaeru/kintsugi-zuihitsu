@@ -154,8 +154,8 @@
             "state": {
               "type": "folder-overview-view",
               "state": {},
-              "icon": "settings",
-              "title": "Folder Overview settings"
+              "icon": "lucide-ghost",
+              "title": "folder-overview-view"
             }
           }
         ],
