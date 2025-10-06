@@ -23,8 +23,10 @@ function getCleanFileName(filePath) {
   return filePath.split('/').pop().replace(/\.md$/, '');
 }
 
-// Unresolved link stubs
+// Unresolved link stubs, SKIP if page is in attached/
 for (let page in unresolvedLinksMap) {
+  if (page.startsWith('attached/')) continue; // Skip attached/ files
+
   const unresolved = Object.keys(unresolvedLinksMap[page]);
   if (unresolved.length === 0) continue;
   for (let link of unresolved) {
@@ -35,8 +37,10 @@ for (let page in unresolvedLinksMap) {
   }
 }
 
-// Stub headers ("…") — wrap header text in backticks to prevent rendering
+// Stub headers ("…") — also SKIP pages in attached/
 for (let page of dv.pages()) {
+  if (page.file.path.startsWith('attached/')) continue; // Skip attached/ files
+
   const file = app.vault.getAbstractFileByPath(page.file.path);
   if (!(file && file instanceof obsidian.TFile)) continue;
 
@@ -48,9 +52,10 @@ for (let page of dv.pages()) {
     const headerText = match[2].trim();
     const body = match[3].trim();
     if (body === '…') {
+      const pageName = getCleanFileName(page.file.name);
       todoItems.push({
-        item: `\`${headerText}\``, // Wrap in backticks to prevent rendering
-        foundIn: `[[${getCleanFileName(page.file.name)}]]`
+        item: `[[${pageName}#${headerText}|${headerText}]]`,
+        foundIn: `[[${pageName}]]`
       });
     }
   }
@@ -66,6 +71,14 @@ for (let t of todoItems) {
     data.push([t.item, t.foundIn]);
   }
 }
+
+// SORT by foundIn, then item
+data.sort((a, b) => {
+  if (a[1].toLowerCase() === b[1].toLowerCase()) {
+    return a[0].toLowerCase().localeCompare(b[0].toLowerCase());
+  }
+  return a[1].toLowerCase().localeCompare(b[1].toLowerCase());
+});
 
 if (!data.length) {
   dv.header(2, "To-Do List");
