@@ -1,0 +1,3 @@
+.cm-comment, .cm-html-comment {
+    display: none !important;
+}

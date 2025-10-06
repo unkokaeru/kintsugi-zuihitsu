@@ -1,4 +1,7 @@
 {
   "accentColor": "#667f6c",
-  "cssTheme": "Typomagical"
+  "cssTheme": "Typomagical",
+  "enabledCssSnippets": [
+    "hide_html_comments"
+  ]
 }
