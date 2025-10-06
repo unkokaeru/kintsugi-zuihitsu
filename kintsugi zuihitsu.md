@@ -10,11 +10,12 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ## To-Do List
 
-- [[Wikibot Programming Competition]] - review pull request.
-- [[yatagarasu]] - clean up notes.
+- [[yatagarasu]] - clean up notes, split system into dev/prod, send laptop link, and complete the system.
 - [[mth3006 weekly problems 1]] - complete questions.
 - Pedagogy prep for Thursday.
 - Prep **all** Numerical Methods.
+- [[mth3006 weekly problems 2]] - complete questions.
+- Update [[mth3006]] index.
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;

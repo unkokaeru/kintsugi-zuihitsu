@@ -2,4 +2,3 @@
 
 - [[Fourier transform]] - four properties (emphasis on scaling and differentiation).
 - [[Convolution]], incl. The convolution theorem.
-- [[Laplace transform]].
