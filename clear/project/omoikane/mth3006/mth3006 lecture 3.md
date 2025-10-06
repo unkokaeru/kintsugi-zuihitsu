@@ -1,5 +1,8 @@
 # Mth3006 Lecture 3
 
+- [[Fourier transform]] - four properties (emphasis on scaling and differentiation).
+- [[Convolution]].
+
 ## How Do You Prove the Scaling Property of Fourier Transforms?
 
 …

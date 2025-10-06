@@ -1,16 +1,9 @@
 # Mth3006 Lecture 2
 
-What type of function do you get when multiplying an odd function and an even function?::Odd function
-
-What type of function do you get when multiplying two odd functions?::Even function
-
-<!--SR:!2025-10-05,4,270-->
-
-What type of function do you get when multiplying two even functions?::Even function
-
-Is $\cos x$ an even or odd function?::Even function
-
-Is $\sin x$ an even or odd function?::Odd function
+- [[Fourier transform|Fourier cosine and sine transforms for general even and odd functions]].
+- [[Even and odd functions]].
+- [[Dirac delta-function]].
+- [[Heaviside step function]].
 
 ## How Do You Derive the Fourier Cosine Transform and Its Inverse?
 

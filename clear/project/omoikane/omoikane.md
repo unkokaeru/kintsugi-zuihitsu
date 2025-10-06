@@ -28,7 +28,7 @@ In the context of academic mathematics work, Omoikane embodies the systematic me
 
 # Methodology
 
-1. **Pre-Lecture Preparation**: Create priming notes before each lecture to establish mental frameworks for new concepts.
+1. **Pre-Lecture Preparation**: Create priming version of notes before each lecture to establish mental frameworks for new concepts.
 2. **Active Questioning**: During lectures, focus on writing questions rather than passive note-taking to maintain engagement and identify knowledge gaps.
 3. **Post-Lecture Processing**: Answer generated questions immediately after lectures for active recall, converting successful Q&As into flashcard material.
 4. **Spaced Repetition**: Use flashcard systems to ensure long-term retention of mathematical concepts and procedures.
