@@ -10,124 +10,68 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ## To-Do List
 
-- [[yatagarasu]] - clean up notes, split system into dev/prod, send laptop link, and complete the system.
-- [[omoikane]]:
-	- Notes:
-		- [[mth3006 lecture 1#How is the Fourier Transform Derived?]]
-		- [[mth3006 lecture 2#How Do You Derive the Fourier Cosine Transform and Its Inverse?]]
-		- [[mth3006 lecture 2#How Do You Derive the Fourier Sine Transform and Its Inverse?]]
-		- [[mth3006 lecture 3#How Do You Prove the Scaling Property of Fourier Transforms?]]
-		- [[mth3006 lecture 3#How Do You Prove the Translation Property of Fourier Transforms?]]
-		- [[mth3006 lecture 3#How Do You Prove the Exponential Multiplication Property of Fourier Transforms?]]
-		- [[mth3007 lecture 1#How Can We Derive the Formula for Least Squares Regression?]]
-		- [[Guest lecture 1 - is the quantum realm bigger than we think]] - expand and complete
-		- Pedagogy prep for Thursday.
-		- Prep **all** Numerical Methods.
-	- Questions:
-		- [[mth3006 weekly problems 1]] - complete questions.
-		- [[mth3006 weekly problems 2]] - complete questions.
+- [[yatagarasu]] - split system into dev/prod, send laptop link, and complete the system.
+- Pedagogy prep for Thursday.
+- Numerical Methods prep (all lectures).
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
 const todoItems = [];
 
-// Function to extract clean filename from path
+// Get clean filename without path or extension
 function getCleanFileName(filePath) {
-  // Extract just the filename from the full path and remove .md extension
-  const fileName = filePath.split('/').pop().replace(/\.md$/, '');
-  return fileName;
+  return filePath.split('/').pop().replace(/\.md$/, '');
 }
 
-// Function to create a simple file link
-function createFileLink(fileName) {
-  const baseName = getCleanFileName(fileName);
-  return `[[${baseName}]]`;
-}
-
-// Function to create header link
-function createHeaderLink(fileName, headerText) {
-  const baseName = getCleanFileName(fileName);
-  return `[[${baseName}#${headerText}]]`;
-}
-
-// Collect unresolved links
+// Unresolved link stubs
 for (let page in unresolvedLinksMap) {
   const unresolved = Object.keys(unresolvedLinksMap[page]);
   if (unresolved.length === 0) continue;
-  
   for (let link of unresolved) {
     todoItems.push({
-      type: "Unresolved Link",
       item: `[[${link}]]`,
-      containedIn: createFileLink(page)
+      foundIn: `[[${getCleanFileName(page)}]]`
     });
   }
 }
 
-// Find headers with body only containing "…"
+// Stub headers ("…") — wrap header text in backticks to prevent rendering
 for (let page of dv.pages()) {
   const file = app.vault.getAbstractFileByPath(page.file.path);
   if (!(file && file instanceof obsidian.TFile)) continue;
 
   const content = await app.vault.read(file);
-  
-  // Regex to match headers and their content until next header or end
   const headerRegex = /^(\#{1,6})\s+(.*?)\s*\n([\s\S]*?)(?=\n\#{1,6}\s|\n*$)/gm;
 
   let match;
   while ((match = headerRegex.exec(content)) !== null) {
     const headerText = match[2].trim();
     const body = match[3].trim();
-    
     if (body === '…') {
       todoItems.push({
-        type: "Stub Header",
-        item: createHeaderLink(page.file.name, headerText),
-        containedIn: createFileLink(page.file.name)
+        item: `\`${headerText}\``, // Wrap in backticks to prevent rendering
+        foundIn: `[[${getCleanFileName(page.file.name)}]]`
       });
     }
   }
 }
 
-// Group items by their link to consolidate duplicates
-const groupedItems = {};
-for (let item of todoItems) {
-  const key = item.item;
-  if (!groupedItems[key]) {
-    groupedItems[key] = {
-      type: item.type,
-      item: item.item,
-      containedIn: []
-    };
-  }
-  // Add contained in files, avoiding duplicates
-  if (!groupedItems[key].containedIn.includes(item.containedIn)) {
-    groupedItems[key].containedIn.push(item.containedIn);
+// Group by item + foundIn (avoid duplicate rows)
+const seen = new Set();
+const data = [];
+for (let t of todoItems) {
+  const key = t.item + '|' + t.foundIn;
+  if (!seen.has(key)) {
+    seen.add(key);
+    data.push([t.item, t.foundIn]);
   }
 }
 
-// Create the output
-if (Object.keys(groupedItems).length === 0) {
+if (!data.length) {
   dv.header(2, "To-Do List");
   dv.paragraph("✅ No unresolved links or stub headers found!");
 } else {
-  // Convert to table format
-  const tableData = Object.values(groupedItems).map(item => {
-    const containedInText = item.containedIn.length > 1 
-      ? item.containedIn.join(', ')
-      : item.containedIn[0];
-    
-    return [
-      item.type,
-      item.item,
-      containedInText
-    ];
-  });
-  
   dv.header(2, "To-Do List");
-  dv.table(
-    ["Type", "Item", "Found In"],
-    tableData
-  );
+  dv.table(["Item", "Found In"], data);
 }
 ```
