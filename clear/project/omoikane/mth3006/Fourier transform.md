@@ -53,7 +53,7 @@ Fourier transforms have four main properties: ==scaling==, ==differentiation==, 
 
 The scaling property of Fourier transforms is defined as::$\mathcal{F}[f(at)]=\frac{1}{|a|}\tilde{f}\left( \frac{\omega}{a} \right):a\ne0$.
 
-The differentiation property of Fourier transforms is defined as::$\mathcal{F}[f^\prime(t)]=i \omega \tilde{f}(\omega)$.
+The differentiation property of Fourier transforms, often used for **transforming differential equations into algebraic equations**, is defined as:::$\mathcal{F}[f^\prime(t)]=i \omega \tilde{f}(\omega)$.
 
 The translation property of Fourier transforms is defined as::$\mathcal{F}[f(t+a)]=e^{ia \omega}\tilde{f}(\omega)$.
 

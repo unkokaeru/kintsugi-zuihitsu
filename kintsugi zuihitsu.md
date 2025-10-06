@@ -16,6 +16,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 - Prep **all** Numerical Methods.
 - [[mth3006 weekly problems 2]] - complete questions.
 - Update [[mth3006]] index.
+- Decide how to use the active questioning in lectures.
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
