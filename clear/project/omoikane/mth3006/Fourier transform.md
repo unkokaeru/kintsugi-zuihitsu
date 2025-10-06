@@ -15,6 +15,8 @@ Some books use different definitions for a Fourier transform - as long as they m
 
 <!--SR:!2000-01-01,1,250!2025-10-04,3,250!2000-01-01,1,250-->
 
+Notation for Fourier transforms vary, too, writing the Fourier transform of $f(t)$ as $\tilde{f}(\omega)$ or $$
+
 You find the Fourier transform just by ==substituting your function into the formula and simplifying==, often ==reducing the limits of integration== by ==the definition of the function==, too, and even using the ==exponential definitions of trigonometric functions==. This then defines ==the level of frequency for the function== across its values.
 
 <!--SR:!2000-01-01,1,250!2025-10-03,2,248!2000-01-01,1,250!2000-01-01,1,250!2000-01-01,1,250-->
@@ -42,3 +44,9 @@ Calculate the Fourier transform of $f(t)=\begin{cases}1 & -1\lt t \lt 1 \\ 0 & |
 ## Example Two
 
 Calculate the inverse Fourier transform of $\tilde{f}(w)=\sqrt{ \frac{2}{\pi} } \frac{\sin(\omega)}{\omega}$::$\frac{2}{\pi}\int_{0}^{\infty} \frac{\sin(\omega)\cos(\omega t)}{\omega}d \omega$
+
+
+---
+
+# Properties of Fourier Transforms
+

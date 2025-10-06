@@ -13,6 +13,8 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 - [[Wikibot Programming Competition]] - review pull request.
 - [[yatagarasu]] - clean up notes.
 - [[mth3006 weekly problems 1]] - complete questions.
+- Pedagogy prep for Thursday.
+- Prep **all** Numerical Methods.
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
