@@ -11,12 +11,17 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 ## To-Do List
 
 - [[yatagarasu]] - clean up notes, split system into dev/prod, send laptop link, and complete the system.
+- [[mth3006 lecture 1#How is the Fourier Transform Derived?]]
+- [[mth3006 lecture 2#How Do You Derive the Fourier Cosine Transform and Its Inverse?]]
+- [[mth3006 lecture 2#How Do You Derive the Fourier Sine Transform and Its Inverse?]]
+- [[mth3006 lecture 3#How Do You Prove the Scaling Property of Fourier Transforms?]]
+- [[mth3006 lecture 3#How Do You Prove the Translation Property of Fourier Transforms?]]
+- [[mth3006 lecture 3#How Do You Prove the Exponential Multiplication Property of Fourier Transforms?]]
 - [[mth3006 weekly problems 1]] - complete questions.
 - Pedagogy prep for Thursday.
 - Prep **all** Numerical Methods.
 - [[mth3006 weekly problems 2]] - complete questions.
 - Update [[mth3006]] index.
-- Decide how to use the active questioning in lectures.
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;

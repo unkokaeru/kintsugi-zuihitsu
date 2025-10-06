@@ -13,4 +13,4 @@
 
 ---
 
-`![[Remarkable notes from lecture (if present).pdf]]`
+`![[mth3000 lectures.pdf#page=lecturenum]]`

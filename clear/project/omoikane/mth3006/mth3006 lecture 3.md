@@ -34,3 +34,7 @@ Applying again, we find that $\mathcal{F}[f^{\prime\prime} (t)]=i \omega \mathca
 ## What is De-Convolution?
 
 In practice, we find the resolution function from the observed function to find the original function - "de-blurring" a measurement, or image. Maybe this is with machine learning or similar, though.
+
+---
+
+![[mth3006 lectures.pdf#page=3]]

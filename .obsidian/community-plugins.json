@@ -45,5 +45,6 @@
   "obsidian-git",
   "OA-file-hider",
   "code-emitter",
-  "symbols-prettifier"
+  "symbols-prettifier",
+  "opener"
 ]

@@ -12,3 +12,7 @@
 ## How Do You Derive the Fourier Sine Transform and Its Inverse?
 
 …
+
+---
+
+![[mth3006 lectures.pdf#page=2]]

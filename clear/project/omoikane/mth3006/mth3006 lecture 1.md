@@ -17,4 +17,4 @@
 
 ---
 
-![[mth3006 lectures.pdf]]
+![[mth3006 lectures.pdf#page=1]]

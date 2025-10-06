@@ -590,16 +590,16 @@
       "wordCountTowardGoal": 0,
       "wordGoal": null,
       "pageCount": 0.21666666666666667,
-      "characterCount": 573,
-      "nonWhitespaceCharacterCount": 487,
+      "characterCount": 580,
+      "nonWhitespaceCharacterCount": 494,
       "newlineCount": 21,
       "readingTimeInMinutes": 0.24528301886792453,
       "linkCount": 11,
       "embedCount": 1,
       "aliases": null,
       "createdDate": 1759173343424,
-      "modifiedDate": 1759744728561,
-      "sizeInBytes": 575,
+      "modifiedDate": 1759746071146,
+      "sizeInBytes": 582,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 0.03666666666666667,
@@ -2985,64 +2985,6 @@
         "newlineCount": 6
       }
     },
-    "attached/remarkable notes/Lectures/Year 3/mth3007/mth3007 lectures.pdf": {
-      "isCountable": false,
-      "targetNodeType": "file",
-      "noteCount": 0,
-      "wordCount": 0,
-      "wordCountTowardGoal": 0,
-      "wordGoal": 0,
-      "pageCount": 0,
-      "characterCount": 0,
-      "nonWhitespaceCharacterCount": 0,
-      "newlineCount": 0,
-      "readingTimeInMinutes": 0,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": [],
-      "createdDate": 1759170394507,
-      "modifiedDate": 1759170394508,
-      "sizeInBytes": 43737,
-      "sessionStart": {
-        "noteCount": 0,
-        "pageCount": 0,
-        "wordCount": 0,
-        "characterCount": 0,
-        "nonWhitespaceCharacterCount": 0,
-        "newlineCount": 0
-      }
-    },
-    "attached/remarkable notes/Lectures/Year 3/mth3007/mth3007 lectures.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 66,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.22,
-      "characterCount": 516,
-      "nonWhitespaceCharacterCount": 420,
-      "newlineCount": 32,
-      "readingTimeInMinutes": 0.2490566037735849,
-      "linkCount": 1,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1759170394530,
-      "modifiedDate": 1759170394531,
-      "sizeInBytes": 590,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.22,
-        "wordCount": 66,
-        "characterCount": 516,
-        "nonWhitespaceCharacterCount": 420,
-        "newlineCount": 32
-      },
-      "frontmatter": {
-        "scrybble_filename": "mth3007 lectures",
-        "scrybble_timestamp": 1759170394
-      }
-    },
     "attached/remarkable notes/Lectures/Year 3/mth3006/Step function.pdf": {
       "isCountable": false,
       "targetNodeType": "file",
@@ -3099,64 +3041,6 @@
       "frontmatter": {
         "scrybble_filename": "Step function",
         "scrybble_timestamp": 1759229561
-      }
-    },
-    "attached/remarkable notes/Lectures/Year 3/mth3006/mth3006 lectures.pdf": {
-      "isCountable": false,
-      "targetNodeType": "file",
-      "noteCount": 0,
-      "wordCount": 0,
-      "wordCountTowardGoal": 0,
-      "wordGoal": 0,
-      "pageCount": 0,
-      "characterCount": 0,
-      "nonWhitespaceCharacterCount": 0,
-      "newlineCount": 0,
-      "readingTimeInMinutes": 0,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": [],
-      "createdDate": 1759170390558,
-      "modifiedDate": 1759170390558,
-      "sizeInBytes": 148474,
-      "sessionStart": {
-        "noteCount": 0,
-        "pageCount": 0,
-        "wordCount": 0,
-        "characterCount": 0,
-        "nonWhitespaceCharacterCount": 0,
-        "newlineCount": 0
-      }
-    },
-    "attached/remarkable notes/Lectures/Year 3/mth3006/mth3006 lectures.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 138,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.46,
-      "characterCount": 1042,
-      "nonWhitespaceCharacterCount": 875,
-      "newlineCount": 33,
-      "readingTimeInMinutes": 0.5207547169811321,
-      "linkCount": 2,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1759170390587,
-      "modifiedDate": 1759738717433,
-      "sizeInBytes": 1118,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.46,
-        "wordCount": 138,
-        "characterCount": 1047,
-        "nonWhitespaceCharacterCount": 876,
-        "newlineCount": 37
-      },
-      "frontmatter": {
-        "scrybble_filename": "mth3006 lectures",
-        "scrybble_timestamp": 1759170389
       }
     },
     "attached/remarkable notes/Lectures/Year 3/mth3006/dirac delta function.pdf": {
@@ -3593,6 +3477,64 @@
         "characterCount": 0,
         "nonWhitespaceCharacterCount": 0,
         "newlineCount": 0
+      }
+    },
+    "attached/remarkable notes/Lectures/Year 3/mth3006/mth3006 lectures.pdf": {
+      "isCountable": false,
+      "targetNodeType": "file",
+      "noteCount": 0,
+      "wordCount": 0,
+      "wordCountTowardGoal": 0,
+      "wordGoal": 0,
+      "pageCount": 0,
+      "characterCount": 0,
+      "nonWhitespaceCharacterCount": 0,
+      "newlineCount": 0,
+      "readingTimeInMinutes": 0,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": [],
+      "createdDate": 1759745904535,
+      "modifiedDate": 1759745904540,
+      "sizeInBytes": 136456,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
+      }
+    },
+    "attached/remarkable notes/Lectures/Year 3/mth3006/mth3006 lectures.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 29,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.09666666666666666,
+      "characterCount": 200,
+      "nonWhitespaceCharacterCount": 165,
+      "newlineCount": 7,
+      "readingTimeInMinutes": 0.10943396226415095,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1759745904604,
+      "modifiedDate": 1759745995116,
+      "sizeInBytes": 274,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
+      },
+      "frontmatter": {
+        "scrybble_filename": "mth3006 lectures",
+        "scrybble_timestamp": 1759745995
       }
     }
   }
