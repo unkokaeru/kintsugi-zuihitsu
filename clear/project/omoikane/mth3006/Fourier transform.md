@@ -52,3 +52,9 @@ Calculate the inverse Fourier transform of $\tilde{f}(w)=\sqrt{ \frac{2}{\pi} } 
 Fourier transforms have four main properties: ==scaling==, ==differentiation==, ==translation==, and ==exponential multiplication==.
 
 The scaling property of Fourier transforms is defined as::$\mathcal{F}[f(at)]=\frac{1}{|a|}\tilde{f}\left( \frac{\omega}{a} \right):a\ne0$.
+
+The differentiation property of Fourier transforms is defined as::$\mathcal{F}[f^\prime(t)]=i \omega \tilde{f}(\omega)$.
+
+The translation property of Fourier transforms is defined as::$\mathcal{F}[f(t+a)]=e^{ia \omega}\tilde{f}(\omega)$.
+
+The exponential multiplication properties of Fourier transforms is defined as::$\mathcal{F}[e^{\alpha t}f(t)]=\tilde{f}(\omega+i \alpha)$.

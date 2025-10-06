@@ -40,18 +40,18 @@
             }
           },
           {
-            "id": "148a829be1216c96",
+            "id": "9cb9f4040db6d246",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3006/Fourier transform.md",
+                "file": "clear/project/omoikane/mth3006/mth3006 lecture 3.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Fourier transform"
+              "title": "mth3006 lecture 3"
             }
           },
           {
@@ -68,24 +68,9 @@
               "icon": "lucide-file",
               "title": "mth3006 weekly problems 2"
             }
-          },
-          {
-            "id": "8753f1274c7f019b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "attached/remarkable notes/Lectures/Year 3/mth3006/mth3006 lectures.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "mth3006 lectures"
-            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 1
       },
       {
         "id": "219f60626bd9b247",
@@ -233,15 +218,17 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "8753f1274c7f019b",
+  "active": "107fc394e4bcb5dc",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3006/mth3006 lecture 2.md",
-    "clear/project/omoikane/mth3006/mth3006 pre-lecture 3.md",
-    "clear/project/omoikane/mth3006/Fourier transform.md",
-    "attached/files/mth3006 original notes 2.pdf",
-    "clear/project/omoikane/mth3006/mth3006 weekly problems 2.md",
     "kintsugi zuihitsu.md",
+    "clear/project/omoikane/mth3006/mth3006 pre-lecture 3.md",
+    "clear/project/omoikane/mth3006/mth3006 lecture 3.md",
+    "clear/project/omoikane/mth3006/Fourier transform.md",
+    "clear/project/omoikane/mth3006/mth3006 weekly problems 2.md",
     "clear/project/omoikane/mth3006/mth3006.md",
+    "attached/remarkable notes/Lectures/Year 3/mth3006/mth3006 lectures.md",
+    "clear/project/omoikane/mth3006/mth3006 lecture 2.md",
+    "attached/files/mth3006 original notes 2.pdf",
     "attached/files/MTH3006_Weekly_Problems_2.pdf",
     "clear/project/omoikane/mth3006/mth3006 weekly problems 1.md",
     "clear/project/omoikane/mth3011/mth3011.md",
@@ -263,7 +250,6 @@
     "clear/library/sloth bytes/Calculator Text.md",
     "clear/library/sloth bytes/Bridge Shuffle.md",
     "clear/library/sloth bytes/Alphabet.md",
-    "clear/library/sloth bytes/Yelling.md",
     "clear/library/sloth bytes",
     "attached/files/chillin sushi guy.svg",
     "clear/project/omoikane/mth3011",
