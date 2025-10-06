@@ -6,7 +6,7 @@
 
 ## How Do You Prove the Differentiation Property of Fourier Transforms?
 
-PROOF: $\mathcal{F}[f^\prime (t)]=i \omega \tilde{f}(\omega)$
+**PROOF**: $\mathcal{F}[f^\prime (t)]=i \omega \tilde{f}(\omega)$
 
 $$
 \begin{align}
