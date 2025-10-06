@@ -1,1 +1,0 @@
-# Mth300x Template
