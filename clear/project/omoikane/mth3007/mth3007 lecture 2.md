@@ -1,13 +1,8 @@
 # Mth3007 Lecture 2
 
-- `[[Definition of a topic]]`
-- `[[Another definition of some theorem]]`
+- [[Solving systems of equations]]
 
-## What is an Active Question about part of the Lecture?
-
-…
-
-## Another Question that Can Be Answered to Learn More?
+## How Do We Program a Systems of Equations Solver?
 
 …
 

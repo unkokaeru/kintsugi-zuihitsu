@@ -1,6 +1,6 @@
 ---
 scrybble_filename: mth3007 lectures
-scrybble_timestamp: 1759746774
+scrybble_timestamp: 1759755005
 ---
 # mth3007 lectures
 
@@ -15,6 +15,15 @@ scrybble_timestamp: 1759746774
 #### Typed text
 
 ##### 
+
+
+### [[mth3007 lectures.pdf#page=2|mth3007 lectures, page 2]]
+
+#### Typed text
+
+##### Lecture two
+
+Just Gauss-Jordan bits for solving systems of equations, that's it. Expand on this myself for stuff about LU decomp of square matrices (chapter 10 of Chapra and Canale).
 
 
 
