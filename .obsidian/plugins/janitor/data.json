@@ -13,5 +13,7 @@
   "processExpired": false,
   "processBig": true,
   "honorObsidianExcludedFiles": true,
-  "excludedFilesFilters": []
+  "excludedFilesFilters": [
+    "attached/files/chillin sushi guy.svg"
+  ]
 }

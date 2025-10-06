@@ -1,5 +1,7 @@
 # Mth3007 Lecture 1
 
+- [[Least squares regression]]
+
 ## How Can We Derive the Formula for Least Squares Regression?
 
 …
@@ -150,4 +152,4 @@ Looks good!
 
 ---
 
-![[mth3007 lectures.pdf]]
+![[mth3007 lectures.pdf#page=1]]
