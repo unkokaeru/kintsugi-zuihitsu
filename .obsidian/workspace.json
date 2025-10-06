@@ -15,7 +15,7 @@
               "type": "markdown",
               "state": {
                 "file": "kintsugi zuihitsu.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false,
                 "backlinks": false
               },
@@ -172,9 +172,11 @@
   "active": "d5e22a0c19b2de75",
   "lastOpenFiles": [
     "clear/project/omoikane/omoikane.md",
+    "kintsugi zuihitsu.md",
+    "cloudy/project/kagaseo/kagaseo.md",
+    "cloudy/project/kagaseo/LSA Website Content Plan.md",
     "clear/project/omoikane/mth3011/mth3011.md",
     "clear/project/omoikane/mth3011/Guest lecture 1 - is the quantum realm bigger than we think.md",
-    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3007/mth3007.md",
     "clear/project/omoikane/mth3007/mth3007 lecture 1.md",
     "attached/remarkable notes/Lectures/Year 3/mth3007/mth3007 lectures.md",
@@ -201,9 +203,7 @@
     "clear/project/omoikane/mth3006/Fourier transform.md",
     "clear/project/omoikane/mth3006/Fourier series.md",
     "attached/files/mth3006 original notes.pdf",
-    "clear/project/omoikane/mth3006/Convolution.md",
     "attached/files/MTH3006_Weekly_Problems_2.pdf",
-    "clear/project/omoikane/mth3006/mth3006 weekly problems 2.md",
     "attached/files/mth3011 lecture notes one.pdf",
     "attached/files/mth3011 lecture one.pdf",
     "clear/library/sloth bytes",
