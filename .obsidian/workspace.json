@@ -30,13 +30,13 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3006/Convolution.md",
+                "file": "clear/project/omoikane/mth3006/mth3006 pre-lecture 3.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Convolution"
+              "title": "mth3006 pre-lecture 3"
             }
           }
         ],
@@ -190,11 +190,12 @@
   },
   "active": "5280fd4a4af2fb9d",
   "lastOpenFiles": [
-    "kintsugi zuihitsu.md",
-    "clear/project/omoikane/mth3006/Convolution.md",
-    "clear/project/omoikane/mth3006/mth3006 lecture 3.md",
-    "clear/project/omoikane/mth3006/Fourier transform.md",
     "clear/project/omoikane/mth3006/mth3006.md",
+    "clear/project/omoikane/mth3006/mth3006 lecture 3.md",
+    "clear/project/omoikane/mth3006/Convolution.md",
+    "kintsugi zuihitsu.md",
+    "clear/project/omoikane/mth3006/mth3006 lecture 2.md",
+    "clear/project/omoikane/mth3006/Fourier transform.md",
     "clear/project/omoikane/mth3006/mth3006 pre-lecture 3.md",
     "clear/project/omoikane/mth3006/mth3006 pre-lecture 4.md",
     "attached/files/mth3006 original notes 2.pdf",
@@ -202,7 +203,6 @@
     "clear/project/omoikane/mth3006/mth3006 weekly problems 2.md",
     "clear/project/omoikane/mth3006/mth3006 weekly problems 1.md",
     "attached/remarkable notes/Lectures/Year 3/mth3006/mth3006 lectures.md",
-    "clear/project/omoikane/mth3006/mth3006 lecture 2.md",
     "clear/project/omoikane/mth3011/mth3011.md",
     "attached/files/mth3011 lecture notes one.pdf",
     "attached/files/mth3011 lecture one.pdf",
