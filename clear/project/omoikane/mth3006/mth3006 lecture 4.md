@@ -1,7 +1,7 @@
 # Mth3006 Lecture 4
 
 - [[Convolution Theorem]].
-- [[Laplace transforms]]
+- [[Laplace transforms]].
 
 ## How Do You Derive the Convolution Theorem?
 

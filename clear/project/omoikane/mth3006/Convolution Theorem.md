@@ -15,3 +15,11 @@ $$
 $$
 
 With a similar proof.
+
+---
+
+## Example One
+
+Calculate the Fourier transform of the wave packet $\phi(x)=\exp\left( -\frac{x^{2}}{2a^{2}} \right)e^{iqx}$::$a \exp\left( -\frac{(k-q)^{2}a^{2}}{2} \right)$.
+
+*Note*: the result is normally found by calculating each function's Fourier transform and then using the Convolution Theorem, but it can also be found by using the exponential multiplication property of Fourier Transforms: $\mathcal{F}[e^{\alpha t}f(t)]=\tilde{f}(\omega+i \alpha)$.
