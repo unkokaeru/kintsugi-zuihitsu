@@ -1,5 +1,7 @@
 # The Quantum Realm - is it Bigger than We Think?
 
+**Original video**: <https://www.youtube.com/watch?v=mE0yfsD1xDA>.
+
 - Quantum theory - Copenhagen most common, but many other interpretations; if bits can't be disproven then they stick around and possibly confuse more. Calculations seem valid despite contradictory logic, though.
 - Normally only in the micro-scale, but the Necker cube appears in the macro scale, as does the Lissajous figure (both representing superposition in an optical way). Cognition, too, doesn't follow standard probability theory - maybe has links? Not implying that the brain is a quantum computer, though.
 - Conjucation fallacy further connotes this non-classical cognition - why don't humans follow mathematical logic?
