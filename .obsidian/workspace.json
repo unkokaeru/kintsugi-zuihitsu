@@ -196,8 +196,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 360.5,
-    "collapsed": true
+    "width": 360.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -218,16 +217,17 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "6e798c33783d351f",
+  "active": "8ce44f015bb7a3eb",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3006/Convolution Theorem.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 4.md",
+    "clear/project/omoikane/mth3006/Laplace transforms.md",
+    "attached/files/mth3006 original notes.pdf",
     "clear/project/omoikane/mth3011/Guest lecture 1 - is the quantum realm bigger than we think.md",
     "kintsugi zuihitsu.md",
+    "clear/project/omoikane/mth3006/Convolution Theorem.md",
     "clear/project/omoikane/mth3006/mth3006.md",
     "clear/project/omoikane/mth3006/Dirac delta-function.md",
     "clear/project/omoikane/mth3006/Convolution.md",
-    "attached/files/mth3006 original notes.pdf",
     "clear/project/omoikane/mth3006/mth3006 lecture 3.md",
     "clear/project/omoikane/mth3011/mth3011.md",
     "clear/project/omoikane/mth3007/mth3007 lecture 1.md",
@@ -250,8 +250,6 @@
     "attached/templates/mth3000 lecture template.md",
     "attached/remarkable notes/Lectures/Year 3/mth3006/mth3006 lectures.pdf",
     "clear/project/omoikane/mth3006/Even and odd functions.md",
-    "clear/project/omoikane/mth3006/mth3006 pre-lecture 4.md",
-    "clear/project/omoikane/mth3006/mth3006 pre-lecture 3.md",
     "attached/files/MTH3006_Weekly_Problems_2.pdf",
     "attached/files/mth3011 lecture notes one.pdf",
     "attached/files/mth3011 lecture one.pdf",
