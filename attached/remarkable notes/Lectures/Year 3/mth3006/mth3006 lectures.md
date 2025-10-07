@@ -1,6 +1,6 @@
 ---
 scrybble_filename: mth3006 lectures
-scrybble_timestamp: 1759826502
+scrybble_timestamp: 1759827869
 ---
 # mth3006 lectures
 

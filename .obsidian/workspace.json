@@ -38,55 +38,6 @@
               "icon": "lucide-file",
               "title": "Guest lecture 1 - is the quantum realm bigger than we think"
             }
-          },
-          {
-            "id": "6e798c33783d351f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3006/mth3006 lecture 4.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "mth3006 lecture 4"
-            }
-          }
-        ],
-        "currentTab": 2
-      },
-      {
-        "id": "d6dd20e7d4caa4cb",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "9fa713af6f044040",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/mth3006 original notes.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "mth3006 original notes"
-            }
-          },
-          {
-            "id": "c10252a68f468b05",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3006/mth3006 lecture 3.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "mth3006 lecture 3"
-            }
           }
         ]
       }
@@ -196,7 +147,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 360.5
+    "width": 360.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -217,18 +169,18 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "8ce44f015bb7a3eb",
+  "active": "d5e22a0c19b2de75",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3006/mth3006 lecture 4.md",
-    "clear/project/omoikane/mth3006/Laplace transforms.md",
-    "attached/files/mth3006 original notes.pdf",
     "clear/project/omoikane/mth3011/Guest lecture 1 - is the quantum realm bigger than we think.md",
+    "clear/project/omoikane/mth3006/mth3006 lecture 4.md",
+    "clear/project/omoikane/mth3006/mth3006.md",
+    "clear/project/omoikane/mth3006/mth3006 lecture 3.md",
+    "attached/files/mth3006 original notes.pdf",
+    "clear/project/omoikane/mth3006/Laplace transforms.md",
     "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3006/Convolution Theorem.md",
-    "clear/project/omoikane/mth3006/mth3006.md",
     "clear/project/omoikane/mth3006/Dirac delta-function.md",
     "clear/project/omoikane/mth3006/Convolution.md",
-    "clear/project/omoikane/mth3006/mth3006 lecture 3.md",
     "clear/project/omoikane/mth3011/mth3011.md",
     "clear/project/omoikane/mth3007/mth3007 lecture 1.md",
     "clear/project/omoikane/mth3007/mth3007 lecture 2.md",
