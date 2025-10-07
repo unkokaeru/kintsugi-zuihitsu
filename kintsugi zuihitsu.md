@@ -10,7 +10,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ## To-Do List
 
-- [[yatagarasu]] - split system into dev/prod, send laptop link (and other hardware bits, like monitor!), and complete the system.
+- [[yatagarasu]] - split system into dev/prod, send laptop link (and other hardware bits, like monitor!)--, and complete the system.
 - Pedagogy prep for Thursday.
 - Numerical Methods prep (all lectures).
 
