@@ -9,7 +9,7 @@
 
 …
 
-## Another Question that Can Be Answered to Learn More?
+## How Do You Derive the Flipped Convolution Theorem?
 
 …
 
