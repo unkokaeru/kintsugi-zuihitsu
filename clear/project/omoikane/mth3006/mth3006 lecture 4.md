@@ -3,7 +3,9 @@
 - [[Convolution Theorem]].
 - [[Laplace transforms]]
 
-## What is an Active Question about part of the Lecture?
+## How Do You Derive the Convolution Theorem?
+
+> [!important] This one is one you have to remember for exams!
 
 …
 
