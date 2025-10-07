@@ -17,3 +17,5 @@ $$
 $$
 
 So that $\int_{-\infty}^{\infty}f(t)\delta(t-a)dt=f(a)$: the **sifting property** of the $\delta$ function (or simply the definition).
+
+The $\delta$ function ==copies functions to its location(s)== when finding the ==convolution== between it and another function.
