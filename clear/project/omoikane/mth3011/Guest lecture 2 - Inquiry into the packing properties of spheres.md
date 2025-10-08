@@ -30,4 +30,10 @@ How about finding a maximum? Randomly? Square, like in markets? Hexagonal the be
 
 LINKS TO CRYSTALLOGRAPHY! Look at recording/slideshow for the $\eta$ 2d/3d values and then figure out how they're calculated.
 
-Lagrange proved the 2d maximum in the 18th century, whilst Kepler conjectured in 1611 ("The Kepler Conjecture") that the hexagonal packing would be best. Gauss took this up and proved it, for regular packing (define this), in the 19th century. Much later, Hales & Ferguson in 1998 proved by exhaustion that it is the case; after such, Hales started a formal proof in 2003 which was verified by a computer over the following 12 years. In 2017, this was complete. It doesn't stop here though, and there is still a frontier of science for packing fracti
+Lagrange proved the 2d maximum in the 18th century, whilst Kepler conjectured in 1611 ("The Kepler Conjecture") that the hexagonal packing would be best. Gauss took this up and proved it, for regular packing (define this), in the 19th century. Much later, Hales & Ferguson in 1998 proved by exhaustion that it is the case; after such, Hales started a formal proof in 2003 which was verified by a computer over the following 12 years. In 2017, this was complete. It doesn't stop here though, and there is still a frontier of science for packing fractions in higher dimensions (explore this).
+
+Knowing that hexagonal stacking is best tells us nothing on the maximal value for randomly organised spheres, though.
+
+Vertical tapping of spheres - natural for most people to tap a container to compact its contents slightly more (rice, cereal, etc.) - can impact the simulation slightly, increasing $\eta$ with every tap. Charlotte Vale ran a lot of simulations to plot this, and densification occurs for all amplitudes but doesn't seem to go above $\eta\approx 0.64< \frac{\pi}{3\sqrt{ 2 }}$. Also shows that gentler, smaller amplitude, taps condense the spheres more rapidly with a higher value for saturation.
+
+Scott, Nature 188, 908 (1960) - plots density fraction against the reciprocal of the size of the container. These correlate linearly, and intercept at a theoretical $\frac{1}{D}=0$ where the size is theoretically infinite - explore critical opinions of this - and calculates a maximum
