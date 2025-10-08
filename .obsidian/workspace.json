@@ -23,112 +23,6 @@
               "icon": "lucide-file",
               "title": "kintsugi zuihitsu"
             }
-          },
-          {
-            "id": "00d73c6052f011c2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3007/mth3007.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "mth3007"
-            }
-          }
-        ],
-        "currentTab": 1
-      },
-      {
-        "id": "f18c1bf7acad499f",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "eee23cb2abd38ec7",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/Session_3_Curve_Fitting_2.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Session_3_Curve_Fitting_2"
-            }
-          },
-          {
-            "id": "365dff9a039a820b",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/Session_4_Curve_Fitting_2.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Session_4_Curve_Fitting_2"
-            }
-          },
-          {
-            "id": "456e9a296f1fa26c",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/Session_5_Curve Fitting_3.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Session_5_Curve Fitting_3"
-            }
-          },
-          {
-            "id": "290585ca297f8f3d",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/Session_6_Questions and applications.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Session_6_Questions and applications"
-            }
-          },
-          {
-            "id": "dce0103dcdcb37e5",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/Session_8_Nonlinear_Equations.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Session_8_Nonlinear_Equations"
-            }
-          },
-          {
-            "id": "97d72d34e7f362fa",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/Session_9_Ordinary_Differential_Equations.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Session_9_Ordinary_Differential_Equations"
-            }
-          },
-          {
-            "id": "575e2019a4ed5094",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/Session_10_Fourier_Series.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Session_10_Fourier_Series"
-            }
           }
         ]
       }
@@ -260,10 +154,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "00d73c6052f011c2",
+  "active": "d5e22a0c19b2de75",
   "lastOpenFiles": [
-    "attached/files/Session_3_Curve_Fitting_2.pdf",
+    "cloudy/project/yatagarasu/yatagarasu.md",
+    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3007/mth3007.md",
+    "clear/project/omoikane/mth3007/mth3007 lecture 2.md",
+    "attached/files/Session_3_Curve_Fitting_2.pdf",
     "attached/files/Session_10_Fourier_Series.pdf",
     "attached/files/Session_9_Ordinary_Differential_Equations.pdf",
     "attached/files/Session_8_Nonlinear_Equations.pdf",
@@ -272,7 +169,6 @@
     "attached/files/Session_4_Curve_Fitting_2.pdf",
     "attached/files/Session_2_System_of_Linear_Equations_1.pdf",
     "attached/files/Session_1_Curve_Fitting_1.pdf",
-    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3011/Guest lecture 1 - is the quantum realm bigger than we think.md",
     "clear/project/omoikane/mth3011/Guest lecture 2 - Inquiry into the packing properties of spheres.md",
     "clear/project/omoikane/mth3011/mth3011.md",
@@ -289,7 +185,6 @@
     "clear/project/omoikane/mth3006/Dirac delta-function.md",
     "clear/project/omoikane/mth3006/Convolution.md",
     "clear/project/omoikane/mth3007/mth3007 lecture 1.md",
-    "clear/project/omoikane/mth3007/mth3007 lecture 2.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 1.md",
     "attached/remarkable notes/Lectures/Year 3/mth3006/mth3006 lectures.md",
     "clear/project/omoikane/mth3006/mth3006 weekly problems 2.md",
