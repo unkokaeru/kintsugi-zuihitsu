@@ -47,30 +47,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "f89b9592c1582631",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/Session_1_Curve_Fitting_1.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Session_1_Curve_Fitting_1"
-            }
-          },
-          {
-            "id": "5bc6dd4d69a3cdd4",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/Session_2_System_of_Linear_Equations_1.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Session_2_System_of_Linear_Equations_1"
-            }
-          },
-          {
             "id": "eee23cb2abd38ec7",
             "type": "leaf",
             "state": {
@@ -155,7 +131,7 @@
             }
           }
         ],
-        "currentTab": 8
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -287,9 +263,8 @@
   },
   "active": "00d73c6052f011c2",
   "lastOpenFiles": [
-    "attached/files/Session_10_Fourier_Series.pdf",
-    "clear/project/omoikane/mth3007/mth3007.md",
     "attached/files/Session_9_Ordinary_Differential_Equations.pdf",
+    "clear/project/omoikane/mth3007/mth3007.md",
     "attached/files/Session_8_Nonlinear_Equations.pdf",
     "attached/files/Session_6_Questions and applications.pdf",
     "attached/files/Session_5_Curve Fitting_3.pdf",
@@ -297,6 +272,7 @@
     "attached/files/Session_3_Curve_Fitting_2.pdf",
     "attached/files/Session_2_System_of_Linear_Equations_1.pdf",
     "attached/files/Session_1_Curve_Fitting_1.pdf",
+    "attached/files/Session_10_Fourier_Series.pdf",
     "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3011/Guest lecture 1 - is the quantum realm bigger than we think.md",
     "clear/project/omoikane/mth3011/Guest lecture 2 - Inquiry into the packing properties of spheres.md",
