@@ -3,7 +3,6 @@
 > [!quote] Fabien Paillusson
 > You've probably never considered the packing properties of spheres, so that's why I'm here to talk about it.
 
-
 $$
 \text{Packing fraction} = \eta=\frac{N_{v}}{V_{\text{packing}}}
 $$
@@ -42,6 +41,8 @@ Scott, Nature 188, 908 (1960) - plots density fraction against the reciprocal of
 
 Prof. J. D. Bernal, F.R.S., believed that there's an absolute impossibility of forming a homogeneous assembly of points of volume intermediate between those of long ranged order and close packed disorder - basically, there's no $\eta$ between random packing's max (64%) and perfect hexagonal packing (72% or whatever). This is viewed as a new Kepler conjecture (find reference). Links to the continuum hypothesis (explore - count rationals and reals and there is no set in-between).
 
-Others (vol 84 number 10 of physical review letters in 6 March 2000, one guy doing a publication a day!) pointed out that "random" isn't well defined: if it's disorder then it must be quantified, and the mean to quantify is not unique, hence it must be associated with a parameter.
+Others (vol 84 number 10 of physical review letters in 6 March 2000, Torquato doing a publication a day!) pointed out that "random" isn't well defined: if it's disorder then it must be quantified, and the mean to quantify is not unique, hence it must be associated with a parameter.
 
-RCP is not really an absolute limit, even for tapped granular.
+RCP (random close packing, 64%) is not really an absolute limit, even for tapped granular. For vertical tapping then it is a limit, but horizontal packing actually exceeds.
+
+Look into what the speaker has written about the field! Final slides of slideshow? Still lots of things to be explored!
