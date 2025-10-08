@@ -13,6 +13,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 - [[yatagarasu]] - split system into dev/prod, send laptop link (and other hardware bits, like monitor!)--, and complete the system.
 - Pedagogy prep for Thursday.
 - Numerical Methods prep (all lectures).
+- Re-write/refine [[Guest lecture 1 - is the quantum realm bigger than we think]] and [[Guest lecture 2 - Inquiry into the packing properties of spheres]].
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
