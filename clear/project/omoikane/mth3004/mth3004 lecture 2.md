@@ -35,3 +35,5 @@
 - Warrants
 
 Effective teaching is working alongside the student to develop their long-term understanding of a subject they previously had minimal base knowledge on.
+
+Instead of just learning to answer a set of questions in the short-term, such as during exams, students should learn to answer a multitude of questions in the long-term. By building up knowledge in this way, fully understanding a foundation of knowledge and slowly 
