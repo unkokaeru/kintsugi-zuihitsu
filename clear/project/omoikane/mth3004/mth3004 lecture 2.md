@@ -1,5 +1,7 @@
 # Mth3004 Lecture 2
 
+- [[Professional arguments]]
+
 1. What is "effective teaching"?
 	- **BEFORE**: Helping the student discover and understand the subject taught for long-term memory and ability to apply knowledge imparted.
 	- **AFTER**: …
