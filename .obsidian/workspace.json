@@ -85,7 +85,25 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
+      },
+      {
+        "id": "9d576c576c0704cf",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8d21b1069253fe43",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "attached/files/Session 2 Critical Arguments in Education.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "Session 2 Critical Arguments in Education"
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -215,8 +233,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "9787e947d5f6a1f2",
+  "active": "2ccaf10b1c3e115a",
   "lastOpenFiles": [
+    "attached/files/Session 2 Critical Arguments in Education.pdf",
     "clear/project/omoikane/mth3004/mth3004 lecture 2.md",
     "clear/project/omoikane/mth3004/mth3004.md",
     "cloudy/project/yatagarasu/temp old.md",
@@ -226,7 +245,6 @@
     "attached/files/Session 1 Overview of the Module.pdf",
     "cloudy/project/kagaseo/kagaseo.md",
     "cloudy/project/yatagarasu/Code Building.md",
-    "attached/files/Session 2 Critical Arguments in Education.pdf",
     "clear/project/omoikane/mth3004/Mth3004 lecture 1.md",
     "clear/project/omoikane/mth3011/mth3011.md",
     "clear/project/omoikane/mth3007/mth3007.md",
@@ -252,7 +270,6 @@
     "clear/project/omoikane/mth3006/Convolution Theorem.md",
     "clear/project/omoikane/mth3006/Dirac delta-function.md",
     "clear/project/omoikane/mth3006/Convolution.md",
-    "clear/project/omoikane/mth3007/mth3007 lecture 1.md",
     "attached/files/chillin sushi guy.svg",
     "attached/files/dirac delta function.png",
     "attached/files/heaviside step function.png",
