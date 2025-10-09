@@ -34,4 +34,4 @@
 - Acknowledgement and Response
 - Warrants
 
-Effective teaching is working alongside the student to develop their long-term understanding of a subject they previously had minimal foundation on.
+Effective teaching is working alongside the student to develop their long-term understanding of a subject they previously had minimal base knowledge on.
