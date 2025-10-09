@@ -10,4 +10,4 @@ It is formed by:
 2. Reasons - "Why you think"::Reasons included to support the claim, providing a logical basis for the claim - they may be debatable.
 3. Evidence - "How you know that's true"::Personal experience, experts in the field, research, statistics, data, etc.
 4. Acknowledgement and Response - "But what about"::Acknowledge/response to possible counterarguments, recognising the counterclaims and indicating the extend to which you disagree, hence responding.
-5. Conclusion or Warrant - "Why you think your reasoning is good"::Generally forming 
+5. Conclusion or Warrant - "Why you think your reasoning is good"::General logical reasoning forming the bridge between claim and evidence, step-by-step and developmental.

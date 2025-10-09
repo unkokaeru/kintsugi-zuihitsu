@@ -46,5 +46,6 @@
   "OA-file-hider",
   "code-emitter",
   "opener",
-  "symbols-prettifier"
+  "symbols-prettifier",
+  "typewriter-mode"
 ]

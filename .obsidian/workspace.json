@@ -53,14 +53,7 @@
               "icon": "lucide-file",
               "title": "Professional arguments"
             }
-          }
-        ],
-        "currentTab": 2
-      },
-      {
-        "id": "9d576c576c0704cf",
-        "type": "tabs",
-        "children": [
+          },
           {
             "id": "8d21b1069253fe43",
             "type": "leaf",
@@ -73,7 +66,8 @@
               "title": "Session 2 Critical Arguments in Education"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -207,9 +201,9 @@
   "lastOpenFiles": [
     "clear/project/omoikane/mth3004/mth3004 lecture 2.md",
     "kintsugi zuihitsu.md",
+    "attached/files/Session 2 Critical Arguments in Education.pdf",
     "clear/project/omoikane/mth3004/Professional arguments.md",
     "cloudy/project/yatagarasu/yatagarasu.md",
-    "attached/files/Session 2 Critical Arguments in Education.pdf",
     "clear/project/omoikane/mth3004/mth3004.md",
     "cloudy/project/yatagarasu/temp old.md",
     "clear/project/omoikane/mth3004/mth3004 lecture 1.md",
@@ -240,7 +234,6 @@
     "clear/project/omoikane/mth3006/Laplace transforms.md",
     "clear/project/omoikane/mth3006/Convolution Theorem.md",
     "clear/project/omoikane/mth3006/Dirac delta-function.md",
-    "clear/project/omoikane/mth3006/Convolution.md",
     "attached/files/chillin sushi guy.svg",
     "attached/files/dirac delta function.png",
     "attached/files/heaviside step function.png",

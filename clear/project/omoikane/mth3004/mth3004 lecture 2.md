@@ -25,3 +25,13 @@
 	- **AFTER**: …
 
 > Vaguely look into teaching bursary and PGCE/QTS.
+
+## What is "Effective Teaching"?
+
+- Claim
+- Reasons
+- Evidence
+- Acknowledgement and Response
+- Warrants
+
+Effective teaching is working alongside the student to develop their long-term understanding of a subject they previously had minimal foundation on.
