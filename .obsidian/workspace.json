@@ -50,9 +50,21 @@
               "icon": "lucide-file-text",
               "title": "Session 2 Critical Arguments in Education"
             }
+          },
+          {
+            "id": "455eb2f688809aa8",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.9.14"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.9.14"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -182,7 +194,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "8d21b1069253fe43",
+  "active": "455eb2f688809aa8",
   "lastOpenFiles": [
     "clear/project/omoikane/mth3004/Professional arguments.md",
     "clear/project/omoikane/mth3004/mth3004 lecture 2.md",
