@@ -37,3 +37,5 @@
 Effective teaching is working alongside the student to develop their long-term understanding of a subject they previously had minimal base knowledge on.
 
 Instead of just learning to answer a set of questions in the short-term, such as during exams, students should learn to answer a multitude of questions in the long-term. This would initially involve building a foundation of knowledge, which the student can build understanding on with future learning. By creating a diverse and nuanced understanding of multiple topics over the long-term, the student would be able to apply understanding from various topics to problems in unrelated subject areas. This approach enables the student to continue learning in new scenarios, adapting to problems in future education or eventually in the workplace.
+
+…
