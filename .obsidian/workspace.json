@@ -197,46 +197,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "floating": {
-    "id": "306dfdcaf06adb91",
-    "type": "floating",
-    "children": [
-      {
-        "id": "1ff900aeac1cd8ca",
-        "type": "window",
-        "children": [
-          {
-            "id": "aa91ee23fb7ab3d9",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "18972ce282e291e4",
-                "type": "leaf",
-                "state": {
-                  "type": "webviewer",
-                  "state": {
-                    "url": "https://obsidian.md/account/#sync",
-                    "title": "Account - Obsidian",
-                    "mode": "webview"
-                  },
-                  "icon": "globe-2",
-                  "title": "Account - Obsidian"
-                }
-              }
-            ]
-          }
-        ],
-        "direction": "vertical",
-        "x": 341,
-        "y": 133,
-        "width": 1025,
-        "height": 801,
-        "maximize": false,
-        "zoom": 0.5
-      }
-    ]
-  },
-  "active": "18972ce282e291e4",
+  "active": "fde6fe9e6a527423",
   "lastOpenFiles": [
     "clear/project/omoikane/mth3006/Laplace transform.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 5.md",
