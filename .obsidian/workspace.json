@@ -23,8 +23,69 @@
               "icon": "lucide-file",
               "title": "kintsugi zuihitsu"
             }
+          },
+          {
+            "id": "9e3d6e0b03fee344",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3006/mth3006.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "mth3006"
+            }
+          },
+          {
+            "id": "6b271bd6744af27c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3006/mth3006 weekly problems 3.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "mth3006 weekly problems 3"
+            }
+          },
+          {
+            "id": "168123b34ea9e849",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3006/Table of Laplace transforms.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "Table of Laplace transforms"
+            }
+          },
+          {
+            "id": "743351bbfe2f5e91",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3006/mth3006 lecture 5.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "mth3006 lecture 5"
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -154,10 +215,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d5e22a0c19b2de75",
+  "active": "6b271bd6744af27c",
   "lastOpenFiles": [
-    "FFMS.md",
+    "clear/project/omoikane/mth3006/Table of Laplace transforms.md",
+    "clear/project/omoikane/mth3006/mth3006 weekly problems 3.md",
+    "clear/project/omoikane/mth3006/mth3006.md",
     "kintsugi zuihitsu.md",
+    "clear/project/omoikane/mth3006/mth3006 lecture 5.md",
+    "clear/project/omoikane/mth3006/mth3006 weekly problems 2.md",
+    "clear/project/omoikane/mth3006/mth3006 lecture 4.md",
+    "FFMS.md",
     "clear/project/omoikane/mth3007/mth3007.md",
     "attached/remarkable notes/Lectures/Year 3/mth3007/mth3007 lectures.md",
     "clear/project/omoikane/mth3004/mth3004 lecture 2.md",
@@ -186,12 +253,6 @@
     "clear/project/omoikane/mth3011/Guest lecture 2 - Inquiry into the packing properties of spheres.md",
     "clear/library/sloth bytes/sloth bytes.md",
     "clear/library/sloth bytes/Phone Number Letter Combinations.md",
-    "clear/project/susanoo/puro/puro.md",
-    "clear/project/omoikane/mth3006/mth3006.md",
-    "clear/project/omoikane/mth3006/mth3006 lecture 4.md",
-    "clear/project/omoikane/mth3006/mth3006 lecture 3.md",
-    "clear/project/omoikane/mth3006/Laplace transforms.md",
-    "clear/project/omoikane/mth3006/Convolution Theorem.md",
     "attached/files/chillin sushi guy.svg",
     "attached/files/dirac delta function.png",
     "attached/files/heaviside step function.png",
