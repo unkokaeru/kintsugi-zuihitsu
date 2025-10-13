@@ -3810,6 +3810,33 @@
         "nonWhitespaceCharacterCount": 0,
         "newlineCount": 0
       }
+    },
+    "clear/project/omoikane/mth3011/The Surprisingly Complex World of Sphere Packing - From Malteser Bags to Mathematical Mysteries.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 1208,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 4.026666666666666,
+      "characterCount": 16210,
+      "nonWhitespaceCharacterCount": 14957,
+      "newlineCount": 99,
+      "readingTimeInMinutes": 4.558490566037736,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1760357447030,
+      "modifiedDate": 1760357481159,
+      "sizeInBytes": 16320,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
+      }
     }
   }
 }
