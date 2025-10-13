@@ -32,7 +32,7 @@ Using the [[Table of Laplace transforms]], find $f(t)$ if $\tilde{f}(s)= \frac{s
 
 **Laplace transforms** have four main properties: ==the shift theorem==, ==scaling==, ==exponential product==, and ==convolution theorem==.
 
-The shift theorem of Laplace transforms is defined as::$\mathcal{L}[e^{ -at }f(t)]=\tilde{f}(s+a)$.
+The shift theorem of Laplace transforms is defined as::$\mathcal{L}[e^{ -at }f(t)]=\tilde{f}(s+a)$, proven by using the laws of exponentials and definitions.
 
 The scaling property of Laplace transforms is defined as::$\mathcal{L}[f(at)]=\frac{1}{a}\tilde{f}\left( \frac{s}{a} \right)$.
 
