@@ -70,10 +70,10 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       },
       {
-        "id": "c2e31b06c25500a9",
+        "id": "8589f4491b74bf3e",
         "type": "tabs",
         "children": [
           {
@@ -221,14 +221,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "84fa7421ae03ddce",
+  "active": "02324efc279ad847",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3011/Guest lecture 2 - Inquiry into the packing properties of spheres.md",
-    "clear/project/omoikane/mth3011/The Hidden Mathematics of Your Morning Cereal - Why Sphere Packing Matters More Than You Think.md",
-    "clear/project/omoikane/mth3011/mth3011.md",
     "kintsugi zuihitsu.md",
-    "clear/project/omoikane/mth3007/MTH3007 lecture 3.md",
+    "clear/project/omoikane/mth3011/mth3011.md",
+    "clear/project/omoikane/mth3011/The Hidden Mathematics of Your Morning Cereal - Why Sphere Packing Matters More Than You Think.md",
     "clear/project/omoikane/mth3011/Guest lecture 1 - is the quantum realm bigger than we think.md",
+    "clear/project/omoikane/mth3011/Untitled.md",
+    "clear/project/omoikane/mth3011/Guest lecture 2 - Inquiry into the packing properties of spheres.md",
+    "clear/project/omoikane/mth3007/MTH3007 lecture 3.md",
     "clear/project/omoikane/mth3004/mth3004 lecture 2.md",
     "clear/project/omoikane/mth3007/mth3007.md",
     "clear/project/omoikane/mth3007/mth3007 lecture 2.md",
@@ -249,7 +250,6 @@
     "clear/project/omoikane/mth3006/Laplace transform inversion.md",
     "clear/project/omoikane/mth3006/mth3006 weekly problems 2.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 4.md",
-    "attached/remarkable notes/Lectures/Year 3/mth3007/mth3007 lectures.md",
     "attached/files/Session 2 Critical Arguments in Education.pdf",
     "attached/files/Session 1 Overview of the Module.pdf",
     "attached/files/Session_3_Curve_Fitting_2.pdf",
