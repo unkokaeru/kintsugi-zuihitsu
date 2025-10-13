@@ -22,7 +22,21 @@ Use the result that $\mathcal{L}[t^n f(t)] = (-1)^n \frac{d^n}{ds^n} \tilde{f}(s
 
 ### Solution
 
-…
+Part one can be completed by…
+
+$$
+\begin{align}
+\mathcal{L}[te^{ -2t }]&=(-1) \frac{d}{ds} \tilde{f}(s) \\
+&= - \frac{d}{ds} \left( \frac{1}{s+2} \right) \\
+&= - \frac{d}{ds}(s+2)^{-1} \\
+&= (s+2)^{-2} \\
+&= \boxed{\frac{1}{(s+2)^2}}
+\end{align}
+$$
+
+Whilst part evaluates to...
+
+...
 
 ## Question Three
 
