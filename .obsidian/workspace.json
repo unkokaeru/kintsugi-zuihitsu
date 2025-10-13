@@ -53,14 +53,7 @@
               "icon": "lucide-file",
               "title": "Laplace transform"
             }
-          }
-        ],
-        "currentTab": 2
-      },
-      {
-        "id": "cabe717bb9542da6",
-        "type": "tabs",
-        "children": [
+          },
           {
             "id": "41264eeff9fc6dd5",
             "type": "leaf",
@@ -73,7 +66,8 @@
               "title": "MTH3006_Notes_3"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -205,16 +199,16 @@
   },
   "active": "fde6fe9e6a527423",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3006/Fourier transform.md",
+    "clear/project/omoikane/mth3006/Table of Laplace transforms.md",
     "clear/project/omoikane/mth3006/Laplace transform.md",
-    "clear/project/omoikane/mth3006/mth3006 lecture 5.md",
-    "clear/project/omoikane/mth3006/Gamma function.md",
-    "kintsugi zuihitsu.md",
     "attached/files/MTH3006_Notes_3.pdf",
+    "clear/project/omoikane/mth3006/mth3006 lecture 5.md",
+    "kintsugi zuihitsu.md",
+    "clear/project/omoikane/mth3006/Fourier transform.md",
+    "clear/project/omoikane/mth3006/Gamma function.md",
     "clear/project/omoikane/mth3006/Laplace transform inversion.md",
     "clear/project/omoikane/mth3006/mth3006 weekly problems 3.md",
     "clear/project/omoikane/mth3006/mth3006.md",
-    "clear/project/omoikane/mth3006/Table of Laplace transforms.md",
     "clear/project/omoikane/mth3006/mth3006 weekly problems 2.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 4.md",
     "FFMS.md",

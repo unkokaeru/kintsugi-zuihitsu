@@ -24,10 +24,12 @@ Calculate $\mathcal{L}(\sin \omega t)$::$\frac{\omega}{s^2 + \omega^2}$.
 
 ## Example Three
 
-Using the [[Table of Laplace transforms]], find $f(t)$ if $\tilde{f}(s)= \frac{s+3}{s(s+1)}$::
+Using the [[Table of Laplace transforms]], find $f(t)$ if $\tilde{f}(s)= \frac{s+3}{s(s+1)}$::$f(t)=3-2e^{ -t }$.
 
 ---
 
 # Properties of Laplace Transforms
+
+**Laplace transforms** have four main properties: ==the shift theorem==, ==scaling==, ==exponential product identity==, and ==convolution theorem==.
 
 …
