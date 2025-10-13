@@ -14,14 +14,14 @@
 
 ## Miscellaneous Tasks
 
-### Task 1 - calculating sums
+### Task 1 - Calculating Sums
 
 …
 
-### Task 2 - finding optimal parameters
+### Task 2 - Finding Optimal Parameters
 
 …
 
-### Task 3 - 
+### Task 3 - Regression with Multiple Variables
 
 …
