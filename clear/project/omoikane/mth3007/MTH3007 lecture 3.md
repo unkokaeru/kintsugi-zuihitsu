@@ -1,16 +1,17 @@
 # Mth3007 Lecture 3
 
-- `[[Definition of a topic]]`
-- `[[Another definition of some theorem]]`
+- [[Least squares regression]] - expanding to any general polynomial.
 
-## What is an Active Question about part of the Lecture?
+## How Do You Derive Polynomial Least Squares Regression?
 
 …
 
-## Another Question that Can Be Answered to Learn More?
+## How Do You Program Polynomial Least Squares Regression?
 
 …
 
 ---
 
-![[mth3007 lectures.pdf#page=3]]
+## Miscellaneous Tasks
+
+…

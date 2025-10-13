@@ -12,9 +12,11 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 - Split Yatagarasu building to dev/prod branches to complete the prod system to the point of being able to test.
 - Complete [[mth3004 lecture 2#What is "Effective Teaching"?|mth3004 lecture 2 paragraphs]].
+- Finish [[Guest lecture 2 - Inquiry into the packing properties of spheres]] notes.
 - [[FFMS]]?
 - Look into downloading all Blackboard modules for archiving.
 - Read chapters 14 and 15 of "Numerical Recipes".
+- Catch up with [[MTH3007 lecture 3]] when less tired 😵 - [notes](https://mattatlincoln.github.io/teaching/numerical_methods/lecture_3/#/7).
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;

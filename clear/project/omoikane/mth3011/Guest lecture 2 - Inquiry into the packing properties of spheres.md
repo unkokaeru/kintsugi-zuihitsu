@@ -1,50 +1,87 @@
-# Inquiry into the Packing Properties of Spheres
+> [[original notes]]
 
-> [!quote] Fabien Paillusson
-> You've probably never considered the packing properties of spheres, so that's why I'm here to talk about it.
+# Packing Spheres: From Cereal Boxes to Centuries of Mathematics
 
-$$
-\text{Packing fraction} = \eta=\frac{N_{v}}{V_{\text{packing}}}
-$$
+**Dr. Fabien Paillusson**'s seminar offered a look into sphere packing—a topic that may feel distant from everyday life, until you find yourself eyeing a half-empty box of Maltesers or cereal.
 
-$N$ is the number of spheres, $v$ is the volume of a sphere, and $V_{\text{packing}}$ is the total volume occupied.
+## Why Do Packages Never Feel Full?
 
-Spheres spawned randomly and allowed to fall to partially fill a container - this simulation can then calculate the packing fraction over several iterations, where each iteration may vary. Note: no friction in the simulation.
-
-This is important to understand commercial packing, like with filling a Maltesers bag.
+Sphere packing is about how efficiently a bunch of spheres fill a given space. This efficiency is measured by the **packing fraction**:
 
 $$
-\Delta N=N \frac{\Delta n}{\eta}\approx \frac{|\eta_{1}-\eta_{2}|}{\eta_{1}}
+\eta = \frac{N v}{V_{\text{packing}}}
 $$
 
-This calculates the variation between simulations, and hence how manufacturers' error can vary when packing; hence what the consumer receives varying (link to Chris Spargo approx weight packaging error stuff)
+Where $N$ is the number of spheres, $v$ the volume of each, and $V_{\text{packing}}$ the total volume [1][2]. When factories fill your bag of treats, the result is subject to randomness—spheres drop in without careful alignment, and friction (or the lack of it) creates further variation in how densely they can be arranged.
 
-"went to the best source possible, Wikipedia of course" - to correct the simulation with friction, which then raises variation further to increase error.
+Paillusson ran simple simulations—spheres falling without friction—to explore how the packing fraction changes each time. This models why one box of Maltesers sometimes weighs a touch less than another.
 
-The dynamics of the grains is deterministic because of the random initial state, but can we find anything mathematically rather than through simulations?
+$$
+\Delta N = N \frac{\Delta \eta}{\eta} \approx \frac{|\eta_1 - \eta_2|}{\eta_1}
+$$
 
-> Is there any reliable mathematical or physical prediction that we can make on sphere packing?
+This formula tracks how much manufacturers' error can vary from run to run, so what the consumer receives also varies—linking directly to commercial packaging error (see regulations and Chris Spargo's ℮ analysis) [3][4]. Simulation with friction (from Wikipedia's physical models) further increases this variation.
 
-How about finding a maximum? Randomly? Square, like in markets? Hexagonal the bestagon? Duh :) - remember they're assumed rigid, too, obviously.
+The dynamics of grains are deterministic (they follow physics), but the outcome is random because the starting arrangement is random. The central open question is whether mathematical theory can predict final packing densities, or if simulation is necessary.
 
-LINKS TO CRYSTALLOGRAPHY! Look at recording/slideshow for the $\eta$ 2d/3d values and then figure out how they're calculated.
+## What Does "Best" Mean in Packing?
 
-Lagrange proved the 2d maximum in the 18th century, whilst Kepler conjectured in 1611 ("The Kepler Conjecture") that the hexagonal packing would be best. Gauss took this up and proved it, for regular packing (define this), in the 19th century. Much later, Hales & Ferguson in 1998 proved by exhaustion that it is the case; after such, Hales started a formal proof in 2003 which was verified by a computer over the following 12 years. In 2017, this was complete. It doesn't stop here though, and there is still a frontier of science for packing fractions in higher dimensions (explore this).
+The mathematical history is long. In 1611, Kepler conjectured that the densest possible ball packing is the "hexagonal close packing"—where spheres nestle perfectly. Lagrange proved the 2D case (close-packed circles in a plane) in the 18th century; Gauss tackled regular 3D packing a century later [5][6]. In 1998, Hales and Ferguson used a computer to check all possible regular configurations; Hales then formally verified the proof, with help from computers, by 2017—a major milestone in mathematical rigor [6][7].
 
-Knowing that hexagonal stacking is best tells us nothing on the maximal value for randomly organised spheres, though.
+But real-world sphere arrangements aren't perfectly regular. In random packing, there's always extra space.
 
-**Vertical tapping of spheres** - natural for most people to tap a container to compact its contents slightly more (rice, cereal, etc.) - can impact the simulation slightly, increasing $\eta$ with every tap. Charlotte Vale ran a lot of simulations to plot this, and densification occurs for all amplitudes but doesn't seem to go above $\eta\approx 0.64< \frac{\pi}{3\sqrt{ 2 }}$. Also shows that gentler, smaller amplitude, taps condense the spheres more rapidly with a higher value for saturation.
+The connection to **crystallography** is direct: optimal sphere packing models how atoms arrange in crystals, but also how grains or beads fill physical containers.
 
-Scott, Nature 188, 908 (1960) - plots density fraction against the reciprocal of the size of the container. These correlate linearly, and intercept at a theoretical $\frac{1}{D}=0$ where the size is theoretically infinite - explore critical opinions of this - and calculates a maximum of $\eta\approx0.64$, the same as before by Charlotte Vale!
+## The 64% Ceiling (and Why Tapping Doesn't Help Forever)
 
-**Additional load on the spheres**, like pushing on the spheres, is another option (which can then be combined with tapping). This however actually reduces the density of the system. Probably because they need slight freedom to re-arrange themselves when tapped.
+Drop spheres into a box, or shake your cereal to settle it, and the packing fraction rarely tops 64% [8][9]. Charlotte Vale's simulations with vertical tapping showed densification for all amplitudes—gentler taps fill quicker, but even the best approach can't exceed roughly $\eta \approx 0.64 < \frac{\pi}{3\sqrt{2}}$. Scott, Nature (1960) measured how density fraction (packing efficiency) correlates with container size; the extrapolated maximum lands at the same 64% barrier for large containers [10].
 
-Prof. J. D. Bernal, F.R.S., believed that there's an absolute impossibility of forming a homogeneous assembly of points of volume intermediate between those of long ranged order and close packed disorder - basically, there's no $\eta$ between random packing's max (64%) and perfect hexagonal packing (74%). This is viewed as a new Kepler conjecture (find reference). Links to the continuum hypothesis (explore - count rationals and reals and there is no set in-between).
+Applying extra downward force—rather than just tapping—decreases density, likely because grains get locked up and can't rearrange. Tapping helps up to a point, but vertical motion is a hard limit for random packing. Horizontal shaking, though, can eke out a bit more density.
 
-Others (vol 84 number 10 of physical review letters in 6 March 2000, Torquato doing a publication a day!) pointed out that "random" isn't well defined: if it's disorder then it must be quantified, and the mean to quantify is not unique, hence it must be associated with a parameter.
+## Filling the Gaps: Is There a "Middle" Packing?
 
-RCP (random close packing, 64%) is not really an absolute limit, even for tapped granular. For vertical tapping then it is a limit, but horizontal packing actually exceeds.
+Prof. J. D. Bernal proposed that no homogeneous assembly of points with packing fraction exists in-between random close packing (64%) and perfect hexagonal order (74%). This is sometimes dubbed the "new Kepler conjecture," and links (conceptually) to the continuum hypothesis: there is no set with cardinality (size) strictly between the rationals and the reals.
 
-Look into what the speaker (Fabien Paillusson) has written about the field, what it built the foundation for, and what is yet to be built on that foundation looking into the future. Maybe check recent publications to cite what is currently in progress or the cutting edge in the field.
+Others (Torquato et al., Physical Review Letters, 2000) have pushed back: "random" can be formally defined many ways, and quantifying disorder is not unique [11][12]. RCP (random close packing) isn't a sharp threshold, just a practical best for vertical tapping—other arrangements and "jammed" states in the statistical physics literature sometimes squeeze past it, especially in higher dimensions [13][14].
 
-Summarise what we can say about sphere packing and everything else discussed.
+## Why Care? Beyond Snacks and Sweets
+
+The sphere packing problem is more than theoretical: it affects how pills are bottled, how grains are stored, and how codes are designed for communications and data storage. Recent breakthroughs, like Viazovska's optimal packing in 8 and 24 dimensions, push the boundaries of what's possible for high-density digital encoding [13][14].
+
+Dr. Paillusson's own work investigates the statistical mechanics of packing processes, clarifying how small changes in protocol (tapping, vibration, compression) shift outcomes [15]. These findings translate abstract mathematics into practical industrial know-how.
+
+## In Summary
+
+Packing spheres may seem trivial or even pointless until you realise that the gaps in your cereal box are the result of hundreds of years of mathematical inquiry. Hexagonal close packing—the theoretical limit—is not just fun math, but a constraint for every business shipping spherical goods. Between random and regular packing, there's no practical middle ground, and the "random close packing" frontier remains an active area in physical and mathematical research [1][2][5][6][7][8][9][10][11][12][13][14][15].
+
+## References
+
+[1] F. Paillusson, "Dr Fabien Paillusson - Staff Directory," University of Lincoln. [Online]. Available: <https://staff.lincoln.ac.uk/fb900eee-83e8-4a49-b5ec-6d9ac9715750>. [Accessed: Oct. 13, 2025].
+
+[2] "Sphere packing," Wikipedia, Nov. 15, 2003. [Online]. Available: <https://en.wikipedia.org/wiki/Sphere_packing>. [Accessed: Oct. 13, 2025].
+
+[3] C. Spargo, "What does ℮ mean?," YouTube, Sep. 14, 2025. [Online]. Available: <https://www.youtube.com/watch?v=5tD2bEzihY8>. [Accessed: Oct. 13, 2025].
+
+[4] "A Guide to Average Weight Legislation in the UK," MWS Ltd. [Online]. Available: <https://www.mws.ltd.uk/a-guide-to-average-weight-legislation-in-the-uk/>. [Accessed: Oct. 13, 2025].
+
+[5] E. W. Weisstein, "Kepler Conjecture," Wolfram MathWorld. [Online]. Available: <https://mathworld.wolfram.com/KeplerConjecture.html>. [Accessed: Oct. 13, 2025].
+
+[6] "Kepler conjecture," Wikipedia, Nov. 15, 2003. [Online]. Available: <https://en.wikipedia.org/wiki/Kepler_conjecture>. [Accessed: Oct. 13, 2025].
+
+[7] "The proof of the packing," Nature, vol. 425, p. 126, 2003. [Online]. Available: <https://www.nature.com/articles/425126c.pdf>. [Accessed: Oct. 13, 2025].
+
+[8] "Random close pack," Wikipedia, Jul. 17, 2007. [Online]. Available: <https://en.wikipedia.org/wiki/Random_close_pack>. [Accessed: Oct. 13, 2025].
+
+[9] M. Wilson, "The secrets of random packing," Physics World, Jan. 14, 2018. [Online]. Available: <https://physicsworld.com/a/the-secrets-of-random-packing/>. [Accessed: Oct. 13, 2025].
+
+[10] G. D. Scott and D. M. Kilgour, "The density of random close packing of spheres," Semantic Scholar, Mar. 4, 2006. [Online]. Available: <https://www.semanticscholar.org/paper/The-density-of-random-close-packing-of-spheres-Scott-Kilgour/300045ee4130bd27d6e74a39633f4f4e1e3c4597>. [Accessed: Oct. 13, 2025].
+
+[11] S. Torquato, T. M. Truskett, and P. G. Debenedetti, "Is Random Close Packing of Spheres Well Defined?," arXiv preprint cond-mat/0003416, Mar. 24, 2000. [Online]. Available: <https://arxiv.org/abs/cond-mat/0003416>. [Accessed: Oct. 13, 2025].
+
+[12] S. Torquato, T. M. Truskett, and P. G. Debenedetti, "Is Random Close Packing of Spheres Well Defined?," Phys. Rev. Lett., vol. 84, p. 2064, Mar. 5, 2000. [Online]. Available: <https://link.aps.org/doi/10.1103/PhysRevLett.84.2064>. [Accessed: Oct. 13, 2025].
+
+[13] E. Klarreich, "To Pack Spheres Tightly, Mathematicians Throw Them at Random," Quanta Magazine, Apr. 29, 2024. [Online]. Available: <https://www.quantamagazine.org/to-pack-spheres-tightly-mathematicians-throw-them-at-random-20240430/>. [Accessed: Oct. 13, 2025].
+
+[14] E. Klarreich, "New Sphere-Packing Record Stems From an Unexpected Source," Quanta Magazine, Aug. 18, 2025. [Online]. Available: <https://www.quantamagazine.org/new-sphere-packing-record-stems-from-an-unexpected-source-20250707/>. [Accessed: Oct. 13, 2025].
+
+[15] F. Paillusson, "Devising a protocol-related statistical mechanics framework," Phys. Rev. E, vol. 91, 012204, 2015. [Online]. Available: <https://link.aps.org/doi/10.1103/PhysRevE.91.012204>. [Accessed: Oct. 13, 2025].
