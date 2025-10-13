@@ -29,14 +29,23 @@ $$
 \mathcal{L}[te^{ -2t }]&=(-1) \frac{d}{ds} \tilde{f}(s) \\
 &= - \frac{d}{ds} \left( \frac{1}{s+2} \right) \\
 &= - \frac{d}{ds}(s+2)^{-1} \\
-&= (s+2)^{-2} \\
-&= \boxed{\frac{1}{(s+2)^2}}
+&= -(s+2)^{-2} \\
+&= \boxed{-\frac{1}{(s+2)^2}}
 \end{align}
 $$
 
-Whilst part evaluates to...
+Whilst part evaluates to…
 
-...
+$$
+\begin{align}
+\mathcal{L}[t^2 e^{ -2t }]&=(-1)^2 \frac{d^2}{ds^2}\tilde{f}(s) \\
+&= \frac{d^2}{ds^2}(s+2)^{-1} \\
+&= (s+2)^{-3} \\
+&= \boxed{\frac{1}{(s+2)^3}}
+\end{align}
+$$
+
+Showing that the power of $t$ just dictates the number of times you differentiate.
 
 ## Question Three
 

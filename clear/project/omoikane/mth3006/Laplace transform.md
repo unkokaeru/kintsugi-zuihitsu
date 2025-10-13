@@ -38,4 +38,4 @@ The scaling property of Laplace transforms is defined as::$\mathcal{L}[f(at)]=\f
 
 The exponential product property of Laplace transforms is defined as::$\mathcal{L}[t^n f(t)]=(-1)^n \frac{d^n}{ds^n}\tilde{f}(s)$, which relates products within transforms with differentiation.
 
-The convolution theorem for Laplace transforms is defined as::$\mathcal{L}\left[ \int_{0}^{t}f(t-u)g(u)du \right]=\tilde{f}(s)\tilde{g}(s)$.
+The convolution theorem for Laplace transforms is defined as::$\mathcal{L}\left[ \int_{0}^{t}f(t-u)g(u)du \right]=\tilde{f}(s)\tilde{g}(s)$, which can reflect a sort of memory in systems.
