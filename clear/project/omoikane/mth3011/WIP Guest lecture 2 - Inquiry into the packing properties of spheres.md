@@ -44,7 +44,7 @@ Others (Torquato et al., Physical Review Letters, 2000) have pushed back: "rando
 
 ## Why Care? Beyond Snacks and Sweets
 
-The sphere packing problem is more than theoretical: it affects how pills are bottled, how grains are stored, and how codes are designed for communications and data storage. Recent breakthroughs, like Viazovska's optimal packings in 8 and 24 dimensions, push the boundaries of what's possible for high-density digital encoding [13][14].
+The sphere packing problem is more than theoretical: it affects how pills are bottled, how grains are stored, and how codes are designed for communications and data storage. Recent breakthroughs, like Viazovska's optimal packing in 8 and 24 dimensions, push the boundaries of what's possible for high-density digital encoding [13][14].
 
 Dr. Paillusson's own work investigates the statistical mechanics of packing processes, clarifying how small changes in protocol (tapping, vibration, compression) shift outcomes [15]. These findings translate abstract mathematics into practical industrial know-how.
 

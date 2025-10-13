@@ -14,6 +14,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 - Complete [[mth3004 lecture 2#What is "Effective Teaching"?|mth3004 lecture 2 paragraphs]].
 - [[FFMS]]?
 - Look into downloading all Blackboard modules for archiving.
+- Read chapters 14 and 15 of "Numerical Recipes".
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
