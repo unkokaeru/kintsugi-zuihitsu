@@ -73,20 +73,20 @@
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 360,
+      "wordCount": 361,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 1.2,
-      "characterCount": 3503,
-      "nonWhitespaceCharacterCount": 2928,
-      "newlineCount": 91,
-      "readingTimeInMinutes": 1.349622641509434,
-      "linkCount": 7,
+      "pageCount": 1.2033333333333334,
+      "characterCount": 3515,
+      "nonWhitespaceCharacterCount": 2938,
+      "newlineCount": 92,
+      "readingTimeInMinutes": 1.3533962264150943,
+      "linkCount": 8,
       "embedCount": 0,
       "aliases": null,
       "createdDate": 1748873467610,
-      "modifiedDate": 1760203534099,
-      "sizeInBytes": 3521,
+      "modifiedDate": 1760340739833,
+      "sizeInBytes": 3533,
       "sessionStart": {
         "noteCount": 1,
         "pageCount": 1.1233333333333333,
@@ -3593,6 +3593,33 @@
       "frontmatter": {
         "scrybble_filename": "dirac delta function",
         "scrybble_timestamp": 1759229538
+      }
+    },
+    "FFMS.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 39,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.13,
+      "characterCount": 238,
+      "nonWhitespaceCharacterCount": 190,
+      "newlineCount": 10,
+      "readingTimeInMinutes": 0.1471698113207547,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1760340742132,
+      "modifiedDate": 1760340772068,
+      "sizeInBytes": 238,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
       }
     }
   }
