@@ -14,4 +14,14 @@
 
 ## Miscellaneous Tasks
 
+### Task 1 - calculating sums
+
+…
+
+### Task 2 - finding optimal parameters
+
+…
+
+### Task 3 - 
+
 …
