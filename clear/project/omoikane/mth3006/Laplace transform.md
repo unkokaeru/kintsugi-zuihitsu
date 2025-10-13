@@ -1,4 +1,4 @@
-# Laplace Transforms
+# Laplace Transform
 
 The **Laplace transform** of a function $f(t)$ is defined by ==$\tilde{f}(s)=\int_{0}^{\infty}f(t)e^{ -st }dt$==.
 
@@ -17,3 +17,9 @@ Calculate $\mathcal{L}(\cos \omega t)$::$\frac{s}{s^2 + \omega^2}$.
 ## Example Two
 
 Calculate $\mathcal{L}(\sin \omega t)$::$\frac{\omega}{s^2 + \omega^2}$.
+
+---
+
+# Properties of Laplace Transforms
+
+…

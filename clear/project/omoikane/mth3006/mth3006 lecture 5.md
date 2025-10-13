@@ -1,13 +1,13 @@
 # Mth3006 Lecture 5
 
-- `[[Definition of a topic]]`
-- `[[Another definition of some theorem]]`
+- [[Laplace transform]] - inversion and properties.
+- [[Gamma function]] - definition and properties.
 
-## What is an Active Question about part of the Lecture?
+## How Do You Prove the Properties of Laplace Transforms?
 
 …
 
-## Another Question that Can Be Answered to Learn More?
+## How Do You Prove the Properties of the Gamma Function?
 
 …
 
