@@ -10,10 +10,10 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ## To-Do List
 
-- Migrate [[temp old]] to [[yatagarasu]], then split building to dev/prod branches; send laptop link. Then complete the system to the point of being able to test. Figure out how to install a CSL Gradeshift Dualcom Pro 2 (GSM + LAN).
-- Re-write/refine [[Guest lecture 1 - is the quantum realm bigger than we think]] and [[Guest lecture 2 - Inquiry into the packing properties of spheres]].
+- Split Yatagarasu building to dev/prod branches to complete the prod system to the point of being able to test.
 - Complete [[mth3004 lecture 2#What is "Effective Teaching"?|mth3004 lecture 2 paragraphs]].
 - [[FFMS]]?
+- Look into downloading all Blackboard modules for archiving.
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
