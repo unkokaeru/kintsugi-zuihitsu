@@ -10,7 +10,7 @@ The **Laplace transform** of a function $f(t)$ is defined by ==$\tilde{f}(s)=\in
 
 **Laplace transforms** are often denoted by ==$\mathcal{L}[f(t)]$==.
 
-Inverting **Laplace transforms** is often done so with ==table lookups== rather than ==contour integrals==, by ==breaking a function into known ones==.
+Inverting **Laplace transforms** is often done so with ==table lookups== rather than ==contour integrals==, by ==breaking a function into known ones== to hence find $\mathcal{L}^{-1}$ of everything to then consolidate.
 
 ---
 
@@ -30,6 +30,12 @@ Using the [[Table of Laplace transforms]], find $f(t)$ if $\tilde{f}(s)= \frac{s
 
 # Properties of Laplace Transforms
 
-**Laplace transforms** have four main properties: ==the shift theorem==, ==scaling==, ==exponential product identity==, and ==convolution theorem==.
+**Laplace transforms** have four main properties: ==the shift theorem==, ==scaling==, ==exponential product==, and ==convolution theorem==.
 
-…
+The shift theorem of Laplace transforms is defined as::$\mathcal{L}[e^{ -at }f(t)]=\tilde{f}(s+a)$.
+
+The scaling property of Laplace transforms is defined as::$\mathcal{L}[f(at)]=\frac{1}{a}\tilde{f}\left( \frac{s}{a} \right)$.
+
+The exponential product property of Laplace transforms is defined as::$\mathcal{L}[t^n f(t)]=(-1)^n \frac{d^n}{ds^n}\tilde{f}(s)$.
+
+The convolution theorem for Laplace transforms is defined as::$\mathcal{L}\left[ \int_{0}^{t}f(t-u)g(u)du \right]=\tilde{f}(s)\tilde{g}(s)$.
