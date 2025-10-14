@@ -15,7 +15,6 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 - Finish [[Guest lecture 2 - Inquiry into the packing properties of spheres]] notes.
 - [[FFMS]]?
 - Look into downloading all Blackboard modules for archiving.
-- Read chapters 14 and 15 of "Numerical Recipes".
 - Catch up with [[MTH3007 lecture 3]] when less tired 😵 - [[nm_worksheet_wk_2.pdf]] & open VS Code.
 
 ```dataviewjs
