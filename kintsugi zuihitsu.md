@@ -16,7 +16,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 - [[FFMS]]?
 - Look into downloading all Blackboard modules for archiving.
 - Read chapters 14 and 15 of "Numerical Recipes".
-- Catch up with [[MTH3007 lecture 3]] when less tired 😵 - [notes](https://mattatlincoln.github.io/teaching/numerical_methods/lecture_3/#/7).
+- Catch up with [[MTH3007 lecture 3]] when less tired 😵 - [[nm_worksheet_wk_2.pdf]] & open VS Code.
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;

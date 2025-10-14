@@ -8,6 +8,10 @@
 
 …
 
+## How Do You Derive the Gamma Function and Its Factorial Relation?
+
+…
+
 ## How Do You Prove the Properties of the Gamma Function?
 
 …
