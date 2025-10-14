@@ -8,7 +8,7 @@ We can also invert the **Convolution Theorem** to simplify the calculation of so
 
 The **Convolution Theorem** is defined for Laplace transforms as::$\mathcal{L}\left[ \int_{0}^{t}f(t-u)g(u)du \right]=\tilde{f}(s)\tilde{g}(s)$.
 
-We can also invert the **Convolution Theorem** to simplify the calculation of some Laplace transforms with convolutions::$\mathcal{L}^{-1}\left[ \tilde{f}(s)\tilde{g}(s) \right]=\int_{0}^{t}f(t-u)g(u)du$.
+We can also invert the **Convolution Theorem** to simplify the calculation of some Laplace transforms with convolutions::$\mathcal{L}^{-1}\left[ \tilde{f}(s)\tilde{g}(s) \right]=\int_{0}^{t}f(t-u)g(u)du$, which is very useful to calculate inverse Laplace transforms instead of doing contour integrals.
 
 ---
 
@@ -20,4 +20,8 @@ Calculate the Fourier transform of the wave packet $\phi(x)=\exp\left( -\frac{x^
 
 ## Example Two
 
-Calculate the Laplace transform of $\int_{0}^t e^{ au }\cos(b(t-u))du$::$\frac{s}{(s^2+b^2)(s-a)}$.
+Calculate the Laplace transform, using the [[Table of Laplace transforms]], of $\int_{0}^t e^{ au }\cos(b(t-u))du$::$\frac{s}{(s^2+b^2)(s-a)}$.
+
+## Example Three
+
+Evaluate $\mathcal{L}^{-1}\left[ \frac{4}{s^2(s+2)^2} \right]$::$(t+1)e^{ -2t }+t-1$.
