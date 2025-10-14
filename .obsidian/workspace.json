@@ -67,37 +67,22 @@
             }
           },
           {
-            "id": "c029eccf539b4df0",
+            "id": "c76d6d25b1580244",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3006/mth3006 lecture 5.md",
+                "file": "clear/project/omoikane/mth3006/Convolution Theorem.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "mth3006 lecture 5"
-            }
-          },
-          {
-            "id": "79acfed70a70c501",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3006/Laplace transform.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "Laplace transform"
+              "title": "Convolution Theorem"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -227,15 +212,17 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "8ea700ec0d285b7c",
+  "active": "c76d6d25b1580244",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3006/mth3006 lecture 5.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 6.md",
+    "clear/project/omoikane/mth3006/Convolution Theorem.md",
     "clear/project/omoikane/mth3006/Laplace transform.md",
+    "clear/project/omoikane/mth3006/mth3006 lecture 5.md",
     "attached/files/nm_worksheet_wk_2.pdf",
-    "clear/project/omoikane/mth3006/mth3006.md",
     "clear/project/omoikane/mth3007/MTH3007 lecture 3.md",
     "kintsugi zuihitsu.md",
+    "clear/project/omoikane/mth3006/Convolution.md",
+    "clear/project/omoikane/mth3006/mth3006.md",
     "clear/project/omoikane/mth3007/mth3007 lecture 2.md",
     "clear/project/omoikane/mth3007/mth3007 lecture 1.md",
     "clear/project/omoikane/mth3007/Least squares regression.md",
@@ -254,8 +241,6 @@
     "clear/project/omoikane/mth3006/Gamma function.md",
     "attached/files/MTH3006_Notes_3.pdf",
     "clear/project/omoikane/mth3006/mth3006 weekly problems 3.md",
-    "clear/project/omoikane/mth3006/Table of Laplace transforms.md",
-    "clear/project/omoikane/mth3006/Fourier transform.md",
     "attached/files/Session 2 Critical Arguments in Education.pdf",
     "attached/files/Session 1 Overview of the Module.pdf",
     "attached/files/Session_3_Curve_Fitting_2.pdf",
