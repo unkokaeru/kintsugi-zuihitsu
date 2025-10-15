@@ -10,7 +10,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ## To-Do List
 
-- Start development on [[FFMS]].
+- Start development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
 - Split Yatagarasu building to dev/prod branches to complete the prod system to the point of being able to test.
 - Get Windows 11 etc. on `BILBODESK`.
 - Complete [[mth3004 lecture 2#What is "Effective Teaching"?|mth3004 lecture 2 paragraphs]].
