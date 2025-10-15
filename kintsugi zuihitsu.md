@@ -16,6 +16,8 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 - [[FFMS]]?
 - Look into downloading all Blackboard modules for archiving.
 - Catch up with [[MTH3007 lecture 3]] when less tired 😵 - [[nm_worksheet_wk_2.pdf]] & open VS Code.
+- Spreadsheet of things I do, all with weights of importance to objectively score and hence optimise my time.
+- Get Windows 11 etc. on `BILBODESK`.
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
