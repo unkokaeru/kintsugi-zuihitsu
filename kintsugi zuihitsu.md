@@ -10,14 +10,12 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ## To-Do List
 
+- Start development on [[FFMS]].
 - Split Yatagarasu building to dev/prod branches to complete the prod system to the point of being able to test.
+- Get Windows 11 etc. on `BILBODESK`.
 - Complete [[mth3004 lecture 2#What is "Effective Teaching"?|mth3004 lecture 2 paragraphs]].
 - Finish [[Guest lecture 2 - Inquiry into the packing properties of spheres]] notes.
-- [[FFMS]]?
-- Look into downloading all Blackboard modules for archiving.
 - Catch up with [[MTH3007 lecture 3]] when less tired 😵 - [[nm_worksheet_wk_2.pdf]] & open VS Code.
-- Spreadsheet of things I do, all with weights of importance to objectively score and hence optimise my time.
-- Get Windows 11 etc. on `BILBODESK`.
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
