@@ -38,8 +38,39 @@
               "icon": "lucide-file",
               "title": "MTH3007 lecture 3"
             }
+          },
+          {
+            "id": "9642839724e70374",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3011/mth3011.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "mth3011"
+            }
+          },
+          {
+            "id": "e5574570c3cce593",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3011/Research Plan.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "Research Plan"
+            }
           }
-        ]
+        ],
+        "currentTab": 3
       },
       {
         "id": "d138438067c75a8e",
@@ -187,10 +218,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "d5e22a0c19b2de75",
+  "active": "e5574570c3cce593",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3007/MTH3007 lecture 3.md",
     "kintsugi zuihitsu.md",
+    "clear/project/omoikane/mth3011/Research Plan.md",
+    "clear/project/omoikane/mth3007/MTH3007 lecture 3.md",
+    "clear/project/omoikane/mth3011/mth3011.md",
     "attached/files/nm_worksheet_wk_2.pdf",
     "clear/library/cooking/FFMS.md",
     "clear/project/omoikane/mth3006/Gamma function.md",
@@ -207,7 +240,6 @@
     "clear/project/omoikane/mth3011/Guest lecture 2 - Inquiry into the packing properties of spheres.md",
     "clear/project/omoikane/mth3011/original notes.md",
     "clear/project/omoikane/mth3011/WIP Guest lecture 2 - Inquiry into the packing properties of spheres.md",
-    "clear/project/omoikane/mth3011/mth3011.md",
     "clear/project/omoikane/mth3011/The Surprisingly Complex World of Sphere Packing - From Malteser Bags to Mathematical Mysteries.md",
     "clear/project/omoikane/mth3011/Guest lecture 1 - is the quantum realm bigger than we think.md",
     "clear/project/omoikane/mth3004/mth3004 lecture 2.md",
