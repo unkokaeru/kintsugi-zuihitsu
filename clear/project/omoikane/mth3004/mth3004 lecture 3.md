@@ -44,5 +44,7 @@
 		- Practical work
 		- **Questioning** <- this one :)
 			- Develop higher order thinking and metacognition - good use of dialogue and questioning in order to do so.
+			- Counter-argument - pressure to constantly stay active rather than building up with scaffolding. Don't want to detract learning with your own pace; adding in your own breaks (Martin on chair!).
+			- Breaks to ask/develop questions and process information?
 		- Demonstrations
 		- Modelling
