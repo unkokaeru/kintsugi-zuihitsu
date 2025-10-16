@@ -17,7 +17,7 @@
 	- feedback
 	- educate students
 	- safeguarding
-	- engaging
+	- Engaging - link to situational interest etc.
 	- resilience
 	- understanding
 	- Creativity - new pedagogical techniques:
@@ -30,9 +30,19 @@
 		- Expeditionary learning,
 		- Active learning
 	- **Adaptability** versus differentiation - not having different materials for different groups, but improvising on the go
-	- Motivating - creating inner drive by inciting passion/goals, situational/personal interest building, financial incentive, social consequence
+	- Motivating - creating inner drive by inciting passion/goals, situational/personal interest building, financial incentive, social consequence; maybe not developing an actual inner drive, but maintaining the interest during lesson (etc.)
 	- National curriculum 1988 - pre and after? Regulations on what to teach?
-	- patience to answer all questions, even if seemingly not useful
+	- Active listening - patience to answer all questions, even if seemingly not useful
 	- accountable
 	- administrative
-	- 
+- What is pedagogy?
+	- "the science behind the teaching" / "the theory and practice of teaching" / "the methods of teaching and learning" - teaching another versus teaching yourself? (research and draw onto personal experience!)
+	- Approaches:
+		- Whole-class teaching
+		- Group work
+		- Guided learning
+		- Practical work
+		- **Questioning** <- this one :)
+			- Develop higher order thinking and metacognition - good use of dialogue and questioning in order to do so.
+		- Demonstrations
+		- Modelling
