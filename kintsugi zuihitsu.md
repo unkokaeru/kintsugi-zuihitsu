@@ -15,6 +15,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 - Complete my [[Research Plan]].
 - Finish [[Guest lecture 2 - Inquiry into the packing properties of spheres]] notes.
 - Catch up with [[MTH3007 lecture 3]] when less tired 😵 - [[nm_worksheet_wk_2.pdf]] & open VS Code.
+- Go over [[mth3004 lecture 3]] and [[mth3004 lecture 4]] to then outline [[What is Effective Teaching in Mathematics]].
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
