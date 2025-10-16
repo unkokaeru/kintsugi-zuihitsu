@@ -7,6 +7,8 @@
 	- Vicarious experiences,
 	- Social persuasion,
 	- Emotional/physiological states.
+	- HOWEVER, criticised by more social experiences - individualistic versus collectivist society.
+		- **Preference versus motivation**?
 - Online/virtual practical work reduces barrier to entry for experience; reduces risk to students whilst maintaining experience vicariously.
 - What is a teacher and what makes them stand out?
 	- Patient/understanding (following along learning without giving up),
@@ -21,5 +23,5 @@
 - understanding
 - creativity
 - adaptability
-- motivating (creating inner drive by inciting passion/goals, situational/personal interest building)
-- 
+- Motivating - creating inner drive by inciting passion/goals, situational/personal interest building, financial incentive, social consequence)
+- National curriculum 1988 - pre and after? Regulations on what to teach?
