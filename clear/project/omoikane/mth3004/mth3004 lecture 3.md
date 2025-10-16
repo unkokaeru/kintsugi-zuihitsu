@@ -11,17 +11,28 @@
 		- **Preference versus motivation**?
 - Online/virtual practical work reduces barrier to entry for experience; reduces risk to students whilst maintaining experience vicariously.
 - What is a teacher and what makes them stand out?
-	- Patient/understanding (following along learning without giving up),
-	- Empathetic (can't fill knowledge gaps without knowing the knowledge gaps),
-	- …
-- scaffolding theory
-- feedback
-- educate students
-- safeguarding
-- engaging
-- resilience
-- understanding
-- creativity
-- adaptability
-- Motivating - creating inner drive by inciting passion/goals, situational/personal interest building, financial incentive, social consequence)
-- National curriculum 1988 - pre and after? Regulations on what to teach?
+	- Patient/understanding - following along learning without giving up
+	- Empathetic - can't fill knowledge gaps without knowing the knowledge gaps
+	- scaffolding theory
+	- feedback
+	- educate students
+	- safeguarding
+	- engaging
+	- resilience
+	- understanding
+	- Creativity - new pedagogical techniques:
+		- Constructivism
+		- Inquiry-based learning
+		- Peer teaching
+		- Direct instruction
+		- Discussion-based learning
+		- Hand-on learning
+		- Expeditionary learning,
+		- Active learning
+	- **Adaptability** versus differentiation - not having different materials for different groups, but improvising on the go
+	- Motivating - creating inner drive by inciting passion/goals, situational/personal interest building, financial incentive, social consequence
+	- National curriculum 1988 - pre and after? Regulations on what to teach?
+	- patience to answer all questions, even if seemingly not useful
+	- accountable
+	- administrative
+	- 
