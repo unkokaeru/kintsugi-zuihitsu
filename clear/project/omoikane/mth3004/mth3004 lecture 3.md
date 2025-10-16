@@ -12,7 +12,7 @@
 - Online/virtual practical work reduces barrier to entry for experience; reduces risk to students whilst maintaining experience vicariously.
 - What is a teacher and what makes them stand out?
 	- Patient/understanding - following along learning without giving up
-	- Empathetic - can't fill knowledge gaps without knowing the knowledge gaps
+		- **Empathetic - can't fill knowledge gaps without knowing the knowledge gaps** <- important! Can't frame answers without knowing what knowledge you can frame them with.
 	- scaffolding theory
 	- feedback
 	- educate students
