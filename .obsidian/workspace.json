@@ -25,54 +25,37 @@
             }
           },
           {
-            "id": "815531cbc556118c",
+            "id": "a80d5ecb0fb42e8f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3007/MTH3007 lecture 3.md",
+                "file": "clear/project/omoikane/mth3004/mth3004.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "MTH3007 lecture 3"
+              "title": "mth3004"
             }
           },
           {
-            "id": "9642839724e70374",
+            "id": "06ab24cc6914531d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3011/mth3011.md",
+                "file": "clear/project/omoikane/mth3004/mth3004 lecture 3.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "mth3011"
+              "title": "mth3004 lecture 3"
             }
           }
-        ]
-      },
-      {
-        "id": "d138438067c75a8e",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "b4729e7606986ca9",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/nm_worksheet_wk_2.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "nm_worksheet_wk_2"
-            }
-          }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -139,8 +122,8 @@
             "state": {
               "type": "planner-timeline",
               "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Timeline"
+              "icon": "lucide-ghost",
+              "title": "planner-timeline"
             }
           },
           {
@@ -151,8 +134,8 @@
               "type": "SCRYBBLE_VIEW",
               "state": {},
               "pinned": true,
-              "icon": "pencil-line",
-              "title": "Scrybble"
+              "icon": "lucide-ghost",
+              "title": "SCRYBBLE_VIEW"
             }
           },
           {
@@ -161,8 +144,8 @@
             "state": {
               "type": "github-copilot-chat-view",
               "state": {},
-              "icon": "bot-message-square",
-              "title": "Copilot Chat"
+              "icon": "lucide-ghost",
+              "title": "github-copilot-chat-view"
             }
           },
           {
@@ -173,6 +156,16 @@
               "state": {},
               "icon": "lucide-ghost",
               "title": "folder-overview-view"
+            }
+          },
+          {
+            "id": "1e131c0a8304a7fb",
+            "type": "leaf",
+            "state": {
+              "type": "planner-timeline",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Timeline"
             }
           }
         ],
@@ -187,27 +180,24 @@
     "hiddenItems": {
       "bases:Create new base": false,
       "command-palette:Open command palette": false,
-      "omnisearch:Omnisearch": false,
       "workspaces:Manage workspace layouts": false,
-      "obsidian-day-planner:Open Multi-Day View": false,
-      "obsidian-excalidraw-plugin:New drawing": false,
       "obsidian-spaced-repetition:Review flashcards": false,
-      "size-history:Vault size history": false,
-      "callout-manager:Insert Callout": false,
-      "templater-obsidian:Templater": false,
       "graph:Open graph view": false,
-      "obsidian-day-planner:Open Timeline": false,
       "obsidian42-brat:BRAT": false,
-      "quartz-syncer:Quartz Syncer publication center": false,
-      "obsidian-git:Open Git source control": false
+      "callout-manager:Insert Callout": false,
+      "obsidian-day-planner:Open Timeline": false,
+      "obsidian-day-planner:Open Multi-Day View": false,
+      "obsidian-excalidraw-plugin:New drawing": false
     }
   },
-  "active": "d5e22a0c19b2de75",
+  "active": "06ab24cc6914531d",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3011/mth3011.md",
-    "clear/project/omoikane/mth3011/Research Plan.md",
+    "clear/project/omoikane/mth3004/mth3004.md",
     "kintsugi zuihitsu.md",
+    "clear/project/omoikane/mth3004/mth3004 lecture 3.md",
+    "clear/project/omoikane/mth3011/mth3011.md",
     "clear/project/omoikane/mth3007/MTH3007 lecture 3.md",
+    "clear/project/omoikane/mth3011/Research Plan.md",
     "attached/files/nm_worksheet_wk_2.pdf",
     "clear/library/cooking/FFMS.md",
     "clear/project/omoikane/mth3006/Gamma function.md",
@@ -229,8 +219,6 @@
     "clear/project/omoikane/mth3004/mth3004 lecture 2.md",
     "clear/project/omoikane/mth3007/mth3007.md",
     "cloudy/project/yatagarasu/yatagarasu.md",
-    "clear/project/omoikane/mth3006/mth3006 lecture 1.md",
-    "clear/library/cooking/cooking.md",
     "attached/files/MTH3006_Notes_3.pdf",
     "attached/files/Session 2 Critical Arguments in Education.pdf",
     "attached/files/Session 1 Overview of the Module.pdf",
