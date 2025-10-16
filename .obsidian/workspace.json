@@ -41,24 +41,6 @@
           }
         ],
         "currentTab": 1
-      },
-      {
-        "id": "56ffc25baca68a8e",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "00998bca2f380e87",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/Session 4 Learning Theories and Motivation(1) - Tagged.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Session 4 Learning Theories and Motivation(1) - Tagged"
-            }
-          }
-        ]
       }
     ],
     "direction": "vertical"
