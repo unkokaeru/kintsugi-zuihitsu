@@ -1,5 +1,7 @@
 # What is Effective Teaching in Mathematics?
 
+> [!important] KEY FOCUS: Questioning to develop higher-order thinking and metacognition
+
 ## Introduction (250 words)
 
 > Definition of effective teaching then introduce key focus - one area
