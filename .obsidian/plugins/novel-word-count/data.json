@@ -4026,6 +4026,33 @@
         "scrybble_filename": "mth3006 lectures",
         "scrybble_timestamp": 1760346749
       }
+    },
+    "clear/library/sloth bytes/Find the Itinerary in Alphabetical Order.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 146,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.4866666666666667,
+      "characterCount": 4851,
+      "nonWhitespaceCharacterCount": 1417,
+      "newlineCount": 14,
+      "readingTimeInMinutes": 0.5509433962264151,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1760697335005,
+      "modifiedDate": 1760697344863,
+      "sizeInBytes": 4860,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
+      }
     }
   }
 }
