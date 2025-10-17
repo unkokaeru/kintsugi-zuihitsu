@@ -6,5 +6,11 @@
       ],
       "key": "O"
     }
+  ],
+  "typewriter-mode:writing-focus-toggle": [
+    {
+      "modifiers": [],
+      "key": "F11"
+    }
   ]
 }
