@@ -25,18 +25,6 @@
             }
           },
           {
-            "id": "210777644c7277ae",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/nm_worksheet_wk_2.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "nm_worksheet_wk_2"
-            }
-          },
-          {
             "id": "768cf06b71a70e7b",
             "type": "leaf",
             "state": {
@@ -53,6 +41,24 @@
           }
         ],
         "currentTab": 1
+      },
+      {
+        "id": "fbe29833909779ec",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "210777644c7277ae",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "attached/files/nm_worksheet_wk_2.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "nm_worksheet_wk_2"
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -202,10 +208,11 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "210777644c7277ae",
+  "active": "768cf06b71a70e7b",
   "lastOpenFiles": [
-    "kintsugi zuihitsu.md",
+    "attached/files/nm_worksheet_wk_2.pdf",
     "clear/project/omoikane/mth3007/MTH3007 lecture 3.md",
+    "kintsugi zuihitsu.md",
     "clear/library/sloth bytes/sloth bytes.md",
     "clear/library/sloth bytes/Find the Itinerary in Alphabetical Order.md",
     "clear/project/omoikane/mth3004/mth3004 lecture 4.md",
@@ -218,7 +225,6 @@
     "clear/project/omoikane/mth3011/mth3011.md",
     "clear/project/omoikane/mth3004/mth3004 lecture 1.md",
     "clear/project/omoikane/mth3011/Research Plan.md",
-    "attached/files/nm_worksheet_wk_2.pdf",
     "clear/library/cooking/FFMS.md",
     "clear/project/omoikane/mth3006/Gamma function.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 6.md",
@@ -232,7 +238,6 @@
     "clear/project/omoikane/mth3007/mth3007 lecture 1.md",
     "clear/project/omoikane/mth3007/Least squares regression.md",
     "clear/project/omoikane/mth3011/Guest lecture 2 - Inquiry into the packing properties of spheres.md",
-    "clear/project/omoikane/mth3011/original notes.md",
     "attached/files/MTH3006_Notes_3.pdf",
     "attached/files/Session 2 Critical Arguments in Education.pdf",
     "attached/files/Session 1 Overview of the Module.pdf",
