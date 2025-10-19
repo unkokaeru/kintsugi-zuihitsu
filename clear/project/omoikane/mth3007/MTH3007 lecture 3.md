@@ -2,14 +2,18 @@
 
 - [[Least squares regression]] - expanding to any general polynomial.
 
-## Task 1 - Calculating Sums
+## How Can You Calculate Various Sums?
 
-… *some code bits, not actually misc.*
+…
 
-## Task 2 - Finding Optimal Parameters
+## How Do You Find the Optimal Parameters for Fitting a Quadratic?
 
-… *derivation followed by code bits, I guess not really misc. either*
+…
 
-## Task 3 - Regression with Multiple Variables
+## How Can You Find the Optimal Parameters for Fitting a Function with Multiple Variables?
 
-… *derivation followed by code bits, I guess not really misc. either*
+…
+
+## How Do You Apply Multiple Linear Regression to Non-linear Data?
+
+…
