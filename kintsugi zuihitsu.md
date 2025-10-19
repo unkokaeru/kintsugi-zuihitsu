@@ -10,11 +10,10 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ## To-Do List
 
-- Start development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
 - Split Yatagarasu building to dev/prod branches to complete the prod system to the point of being able to test.
 - Complete my [[Research Plan]].
 - Finish [[Guest lecture 2 - Inquiry into the packing properties of spheres]] notes.
-- Catch up with [[MTH3007 lecture 3]] when less tired 😵 - [[nm_worksheet_wk_2.pdf]] & open VS Code.
+- Start development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
 - Go over [[mth3004 lecture 3]] and [[mth3004 lecture 4]] to then outline [[What is Effective Teaching in Mathematics]].
 
 ```dataviewjs
