@@ -40,4 +40,12 @@ The exponential product property of Laplace transforms is defined as::$\mathcal{
 
 This ==exponential product== property of Laplace transforms can also defined the Laplace transform of a first derivative as ==$\mathcal{L}\left[ \frac{df}{dt} \right]=-f(0)+s \tilde{f}(s)$==. Similarly, the second derivative is defined as ==$\mathcal{L}\left[\frac{d^2f}{dt^2}\right]=s^2 \tilde{f}(s)-sf(0)-f^\prime(0)$==.
 
+Using Laplace transforms to solve differential equations can be much easier when: 1. ==initial conditions are supplied== and 2. ==when the right-hand side is not zero==.
+
 The convolution theorem for Laplace transforms is defined as::$\mathcal{L}\left[ \int_{0}^{t}f(t-u)g(u)du \right]=\tilde{f}(s)\tilde{g}(s)$, which can reflect a sort of memory in systems.
+
+---
+
+## Example One
+
+Find the solution of $y^{\prime\prime}+4y^\prime+4y=t^2e^{ -2t }$::$y=\frac{t^4e^{ -2t }}{12}$.
