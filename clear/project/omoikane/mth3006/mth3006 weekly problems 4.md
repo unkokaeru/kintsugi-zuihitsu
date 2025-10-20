@@ -26,14 +26,8 @@ s^2 \tilde{y}-s+1-s \tilde{y}+1-6 \tilde{y}&=0 \\
 &\implies s-2=(A+B)s+(-3A+2B) \\
 &\implies A+B=1,-3A+2B=-2 \\
 &\implies A=\frac{4}{5}, B=\frac{1}{5} \\
-\tilde{y}&=\frac{1}{s+2}+\frac{4}{5s-3)} \\
-\tilde{y}&=
-\end{align}
-$$
-
-$$
-\begin{align}
-
+\tilde{y}&=\frac{1}{5}\left(\frac{4}{s+2}+\frac{1}{s-3}\right) \\
+\tilde{y}&=\boxed{\frac{4}{5}e^{ -2t }+ \frac{1}{5}e^{ 3t }}
 \end{align}
 $$
 

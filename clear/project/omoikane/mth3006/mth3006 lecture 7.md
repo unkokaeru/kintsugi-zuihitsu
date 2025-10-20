@@ -12,4 +12,4 @@
 
 ---
 
-![[mth3006 lectures.pdf#page=7]]
+![[MTH3006_Notes_4.pdf]]
