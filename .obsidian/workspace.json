@@ -70,7 +70,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -220,12 +220,12 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "0fbf4ce4c9df45cb",
+  "active": "9ead9b10b2e26f99",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3011/Meeting notes 1.md",
     "clear/project/omoikane/mth3011/Research Plan.md",
     "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3007/mth3007 lecture 4.md",
-    "clear/project/omoikane/mth3011/Meeting notes 1.md",
     "clear/project/omoikane/mth3007/Untitled.md",
     "clear/project/omoikane/mth3007/mth3007 lecture 3.md",
     "clear/project/omoikane/mth3007/Least squares regression.md",
