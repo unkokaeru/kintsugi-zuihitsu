@@ -6,6 +6,10 @@
 
 …
 
+## How Do You Apply Laplace Transforms to Solve Damped Oscillation Differential Equations?
+
+…
+
 ---
 
 ![[mth3006 lectures.pdf#page=7]]

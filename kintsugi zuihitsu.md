@@ -11,7 +11,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 ## To-Do List
 
 - Split Yatagarasu building to dev/prod branches to complete the prod system to the point of being able to test.
-- Complete my [[Research Plan]].
+- Complete my [[Research Plan]] using the resources on my desktop.
 - Finish [[Guest lecture 2 - Inquiry into the packing properties of spheres]] notes.
 - Start development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
 - Go over [[mth3004 lecture 3]] and [[mth3004 lecture 4]] to then outline [[What is Effective Teaching in Mathematics]].
