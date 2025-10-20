@@ -14,11 +14,18 @@ $$
 
 $$
 \begin{align}
-\mathcal{L}[y^{\prime\prime}-y^\prime-6y]=\mathcal{L}[0]
+\mathcal{L}[y^{\prime\prime}-y^\prime-6y]&=\mathcal{L}[0] \\
+\mathcal{L}[y^{\prime\prime}]-\mathcal{L}[y^\prime]-6\mathcal{L}[y]&=0 \\
+(s^2 \tilde{y} - s y(0) - y'(0))-(s \tilde{y} - y(0))-(6 \tilde{y})&=0 \\
+s^2 \tilde{y}-s+1-s \tilde{y}+1-6 \tilde{y}&=0 \\
+(s^2-s-6) \tilde{y}+2-s&=0 \\
+(s^2-s-6) \tilde{y}&=s-2 \\
+\tilde{y}&=\frac{s-2}{s^2-s-6} \\
+\tilde{y}&=\frac{s-2}{(s-3)(s+2)} \\
+\tilde{y}&=\frac{A}{s-3}+\frac{B}{s+2} \\
+\tilde{y}&=
 \end{align}
 $$
-
-\mathcal{}
 
 ### Part B
 
