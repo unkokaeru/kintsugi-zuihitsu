@@ -46,5 +46,6 @@
   "templater-obsidian",
   "text-extractor",
   "typewriter-mode",
-  "obsidian-wakatime"
+  "obsidian-wakatime",
+  "autofit-tabs"
 ]

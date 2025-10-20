@@ -14,5 +14,6 @@
   "spellcheck": false,
   "userIgnoreFilters": [
     "quartz/"
-  ]
+  ],
+  "readableLineLength": true
 }
