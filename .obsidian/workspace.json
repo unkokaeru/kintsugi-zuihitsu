@@ -38,9 +38,19 @@
               "icon": "lucide-file",
               "title": "Research Plan"
             }
+          },
+          {
+            "id": "bc1b3cd5a1174fbf",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -190,10 +200,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "8ca0690666ad26b4",
+  "active": "bc1b3cd5a1174fbf",
   "lastOpenFiles": [
-    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3011/Research Plan.md",
+    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3007/mth3007 lecture 1.md",
     "clear/project/omoikane/mth3007/MTH3007 lecture 3.md",
     "attached/remarkable notes/Lectures/Year 3/mth3007/mth3007 lectures.md",
