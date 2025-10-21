@@ -12,4 +12,8 @@
 
 ---
 
+<https://mattatlincoln.github.io/teaching/numerical_methods/lecture_4/#/>
+
+![[nm_worksheet_wk4.pdf]]
+
 ![[mth3007 lectures.pdf#page=4]]
