@@ -4216,24 +4216,24 @@
         "newlineCount": 0
       }
     },
-    "Untitled.md": {
+    "cloudy/project/yatagarasu/Meeting notes.md": {
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 54,
+      "wordCount": 65,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.18,
-      "characterCount": 414,
-      "nonWhitespaceCharacterCount": 347,
-      "newlineCount": 6,
-      "readingTimeInMinutes": 0.2037735849056604,
+      "pageCount": 0.21666666666666667,
+      "characterCount": 493,
+      "nonWhitespaceCharacterCount": 412,
+      "newlineCount": 7,
+      "readingTimeInMinutes": 0.24528301886792453,
       "linkCount": 0,
       "embedCount": 0,
       "aliases": null,
       "createdDate": 1761130285116,
-      "modifiedDate": 1761132253589,
-      "sizeInBytes": 416,
+      "modifiedDate": 1761132854766,
+      "sizeInBytes": 497,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
