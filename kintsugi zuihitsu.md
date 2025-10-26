@@ -10,7 +10,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ## To-Do List
 
-	- ! Split Yatagarasu building to dev/prod branches to complete the prod system to the point of being able to test; [[Meeting notes]].
+- ! Split Yatagarasu building to dev/prod branches to complete the prod system to the point of being able to test; [[Meeting notes]].
 - ! Complete my [[Research Plan]] using the resources on my desktop after going over [[Meeting notes 0]].
 - Finish [[Guest lecture 2 - Inquiry into the packing properties of spheres]] notes.
 - Start development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
