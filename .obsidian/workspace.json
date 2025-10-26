@@ -74,7 +74,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 424.51103591918945
+    "width": 424.51103591918945,
+    "collapsed": true
   },
   "right": {
     "id": "b91c281c8050caa8",
@@ -175,9 +176,14 @@
   },
   "active": "d5e22a0c19b2de75",
   "lastOpenFiles": [
-    "cloudy/cloudy.md",
-    "cloudy/project/daikokuten/daikokuten.md",
+    "clear/project/inari/inari.md",
     "kintsugi zuihitsu.md",
+    "clear/project/doosojin/doosojin.md",
+    "clear/project/kuebiko/kuebiko.md",
+    "clear/project/hachiman/hachiman.md",
+    "clear/project/susanoo/susanoo.md",
+    "cloudy/project/daikokuten/daikokuten.md",
+    "cloudy/cloudy.md",
     "cloudy/project/yatagarasu/Meeting notes.md",
     "clear/project/omoikane/mth3011/Meeting notes 0.md",
     "clear/project/omoikane/mth3011/mth3011.md",
@@ -198,11 +204,6 @@
     "clear/project/omoikane/mth3006/Table of Laplace transforms.md",
     "clear/project/omoikane/mth3006/Laplace transform.md",
     "clear/project/omoikane/mth3006/mth3006 weekly problems 3.md",
-    "clear/project/omoikane/mth3006/mth3006 weekly problems 2.md",
-    "clear/project/omoikane/mth3006/mth3006 lecture 5.md",
-    "clear/project/omoikane/mth3006/Convolution Theorem.md",
-    "clear/project/omoikane/mth3007/mth3007 lecture 1.md",
-    "clear/project/omoikane/mth3007/mth3007 lecture 2.md",
     "attached/files/nm_worksheet_wk_2.pdf",
     "attached/files/Session 4 Learning Theories and Motivation(1) - Tagged.pdf",
     "attached/files/MTH3006_Notes_3 1.pdf",
