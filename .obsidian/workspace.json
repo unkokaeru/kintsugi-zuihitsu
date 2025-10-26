@@ -74,8 +74,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 424.51103591918945,
-    "collapsed": true
+    "width": 424.51103591918945
   },
   "right": {
     "id": "b91c281c8050caa8",
@@ -176,8 +175,10 @@
   },
   "active": "d5e22a0c19b2de75",
   "lastOpenFiles": [
-    "cloudy/project/yatagarasu/Meeting notes.md",
+    "cloudy/cloudy.md",
+    "cloudy/project/daikokuten/daikokuten.md",
     "kintsugi zuihitsu.md",
+    "cloudy/project/yatagarasu/Meeting notes.md",
     "clear/project/omoikane/mth3011/Meeting notes 0.md",
     "clear/project/omoikane/mth3011/mth3011.md",
     "clear/project/omoikane/mth3011/Research Plan.md",
@@ -203,8 +204,6 @@
     "clear/project/omoikane/mth3007/mth3007 lecture 1.md",
     "clear/project/omoikane/mth3007/mth3007 lecture 2.md",
     "attached/files/nm_worksheet_wk_2.pdf",
-    "clear/library/sloth bytes/sloth bytes.md",
-    "clear/library/sloth bytes/Find the Itinerary in Alphabetical Order.md",
     "attached/files/Session 4 Learning Theories and Motivation(1) - Tagged.pdf",
     "attached/files/MTH3006_Notes_3 1.pdf",
     "attached/files/MTH3006_Notes_3.pdf",
