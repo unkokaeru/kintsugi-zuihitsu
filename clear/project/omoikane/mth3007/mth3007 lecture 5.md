@@ -81,7 +81,7 @@ Instead of fitting one high-order polynomial, **splines** connect many simple fu
 
 **Requirements:**
 - Pass through all $n$ data points (provides $2n$ equations)
-- Neighboring polynomials have same gradients at overlap points ($n-1$ equations)
+- Neighbouring polynomials have same gradients at overlap points ($n-1$ equations)
 - For cubic: same curvature at overlap points ($n-1$ equations)
 - Boundary conditions (typically curvature = 0 at endpoints)
 
