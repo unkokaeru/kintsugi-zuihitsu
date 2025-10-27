@@ -15,6 +15,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 - Finish [[Guest lecture 2 - Inquiry into the packing properties of spheres]] notes.
 - Start development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
 - Go over [[mth3004 lecture 3]] and [[mth3004 lecture 4]] to then outline [[What is Effective Teaching in Mathematics]].
+- Review [[Method of characteristics]] to then complete [[mth3006 lecture 9]] along with some practice examples from [[mth3006 weekly problems 5]].
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;

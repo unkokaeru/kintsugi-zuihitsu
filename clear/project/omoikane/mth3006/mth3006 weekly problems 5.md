@@ -25,7 +25,7 @@ Use the method of characteristics for homogeneous equations to solve the followi
 
 ### Solution
 
-**Step 1:** This partial differential equation is **homogeneous**, since ==the right-hand side is zero==.
+**Step 1:** This partial differential equation is **homogeneous**, since the right-hand side is zero.
 
 **Step 2:** Write the characteristic equation:
 
@@ -54,7 +54,7 @@ $$
 
 where $P$ is a parameter labeling each characteristic.
 
-**Step 4:** For a homogeneous partial differential equation, ==the solution is constant along each characteristic curve==, so
+**Step 4:** For a homogeneous partial differential equation, the solution is constant along each characteristic curve, so
 
 $$
 u = f(P) = f(x^2 - y^2)
@@ -110,7 +110,7 @@ $$
 \boxed{ u(x, y) = \cos \left( \sqrt{ \frac{x^2 - y^2 + 1}{2} } \right ) }
 $$
 
-==To solve a homogeneous equation by the method of characteristics, compute the constant of integration along each characteristic curve, relate it to the boundary condition, and substitute to express the solution for any $(x, y)$==.
+To solve a homogeneous equation by the method of characteristics, compute the constant of integration along each characteristic curve, relate it to the boundary condition, and substitute to express the solution for any $(x, y)$.
 
 ## Question Four
 
