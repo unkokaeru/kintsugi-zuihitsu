@@ -75,6 +75,24 @@
           }
         ],
         "currentTab": 1
+      },
+      {
+        "id": "549ee0aa63ebacb1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b9e6d776169004d1",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "attached/files/Formal-Methods-Research-Plan.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "Formal-Methods-Research-Plan"
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -225,8 +243,9 @@
       "open-editors:Open editors": false
     }
   },
-  "active": "377d393512c61933",
+  "active": "ca3f8b6a68dbe37a",
   "lastOpenFiles": [
+    "attached/files/Formal-Methods-Research-Plan.pdf",
     "attached/files/research-plan-formal-methods.pdf",
     "clear/project/omoikane/mth3011/Research Plan.md",
     "clear/project/omoikane/mth3011/mth3011.md",
@@ -261,7 +280,6 @@
     "attached/files/Session 4 Learning Theories and Motivation(1) - Tagged.pdf",
     "attached/files/MTH3006_Notes_3 1.pdf",
     "attached/files/MTH3006_Notes_3.pdf",
-    "attached/files/Session 2 Critical Arguments in Education.pdf",
     "attached/files/chillin sushi guy.svg",
     "attached/files/dirac delta function.png",
     "attached/files/heaviside step function.png",

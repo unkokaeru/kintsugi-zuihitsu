@@ -18,7 +18,7 @@ This project dives into the realm of formal methods in mathematics, and can rang
 
 ---
 
-- [[research-plan-formal-methods.pdf]]
+- [[research-plan-formal-methods.pdf]] / [[Formal-Methods-Research-Plan.pdf]]
 
 # Research Plan - Formal Methods of Mathematics
 
