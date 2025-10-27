@@ -10,7 +10,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ## To-Do List
 
-- ! Complete Yatagarasu `prod` build to a state of testing, then send an email to all participants; [[Meeting notes]].
+- ! Complete Yatagarasu `prod` build to a state of testing, then send an email to all participants; [[Meeting notes]]. Modify the `prod` branch of Yatagarasu to hide incomplete parts of platform with a form of what the user would expect to see, also add a feedback button
 - ! Complete my [[Research Plan]] using the resources on my desktop after going over [[Meeting notes 0]].
 - Finish [[Guest lecture 2 - Inquiry into the packing properties of spheres]] notes.
 - Start development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
