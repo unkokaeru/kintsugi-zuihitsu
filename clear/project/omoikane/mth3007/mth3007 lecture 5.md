@@ -208,6 +208,7 @@ print(f"p({x_test}) = {result}")
 #### (i) Temperature Interpolation
 
 **Given data:**
+
 | x | y | T(x, y) |
 |---|---|---------|
 | 2 | 2 | 60      |
