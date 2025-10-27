@@ -15,3 +15,29 @@ This project dives into the realm of formal methods in mathematics, and can rang
 2. H. Geuvers, "Proof assistants: history, ideas and future", Sadhana vol. 34, pp. 3-25, 2009.
 3. L. C. Paulson, "A machine-assisted proof of Godel's incompleteness theorems for the theory of hereditarily finite sets", Review of Symbolic Logic vol. 7 no. 3, pp. 484-498, 2014.
 4. E. Mendelson, "Introduction to mathematical logic", 6th ed, CRC Press, 2015.
+
+---
+
+- [[research-plan-formal-methods.pdf]]
+
+# Research Plan - Formal Methods of Mathematics
+
+PROJECT DESCRIPTION
+
+PROJECT CONNECTIONS
+
+## Literature Survey
+
+…
+
+## References
+
+…
+
+## Action Plan
+
+…
+
+## Supervision Discussion Arrangements
+
+…
