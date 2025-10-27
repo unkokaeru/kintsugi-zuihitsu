@@ -40,11 +40,11 @@ In the Method of Characteristics, boundary conditions are used to ==fix the form
 
 Given: $2xy\frac{\partial u}{\partial x} + (x^2 + y^2)\frac{\partial u}{\partial y} = 0$ with $u = \frac{e^{x}}{x-y}$ along $x+y=1$.
 
-**Step 1:** Find the characteristic curves. Since $F = 0$, write::$\frac{dx}{2xy} = \frac{dy}{x^2 + y^2}$, or equivalently $\frac{dy}{dx} = \frac{x^2 + y^2}{2xy}$.
+**Step 1:** Find the characteristic curves. Since $F = 0$, write $\frac{dx}{2xy} = \frac{dy}{x^2 + y^2}$, or equivalently $\frac{dy}{dx} = \frac{x^2 + y^2}{2xy}$.
 
-**Step 2:** The ODE is not separable. Notice that the right-hand side contains $x$ and $y$ only in combinations of $\frac{y}{x}$, so ==substitute $v = \frac{y}{x}$== to make it separable.
+**Step 2:** The ODE is not separable. Notice that the right-hand side contains $x$ and $y$ only in combinations of $\frac{y}{x}$, so substitute $v = \frac{y}{x}$ to make it separable.
 
-With $y = vx$, we have::$\frac{dy}{dx} = v + x\frac{dv}{dx}$.
+With $y = vx$, we have $\frac{dy}{dx} = v + x\frac{dv}{dx}$.
 
 Substitute into the characteristic ODE:
 
