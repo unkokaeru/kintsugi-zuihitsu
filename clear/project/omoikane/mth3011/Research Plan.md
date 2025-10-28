@@ -9,7 +9,7 @@
 
 ## 2. Project Description and Introduction
 
-…
+Mathematical proofs
 
 ## 3. Connection to Previous Studies
 

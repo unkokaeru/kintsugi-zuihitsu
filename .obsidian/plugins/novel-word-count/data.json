@@ -733,7 +733,7 @@
       "embedCount": 0,
       "aliases": null,
       "createdDate": 1760533858095,
-      "modifiedDate": 1761657766040,
+      "modifiedDate": 1761658248482,
       "sizeInBytes": 9769,
       "sessionStart": {
         "noteCount": 1,
@@ -4720,6 +4720,33 @@
       "createdDate": 1761657738105,
       "modifiedDate": 1761657751888,
       "sizeInBytes": 2456,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
+      }
+    },
+    "clear/project/omoikane/mth3011/Untitled 1.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 313,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 1.0433333333333332,
+      "characterCount": 2493,
+      "nonWhitespaceCharacterCount": 2092,
+      "newlineCount": 45,
+      "readingTimeInMinutes": 1.181132075471698,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1761658330951,
+      "modifiedDate": 1761658368519,
+      "sizeInBytes": 2494,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
