@@ -43,38 +43,22 @@
 
 ***
 
-**Reference List** (formatted for conversion to IEEE style when you write the prose):
+**Reference List**:
 
- J. Avigad, "Formal methods in mathematics and the Lean theorem prover," presented at the Oxford Formal Methods Conference, Oxford, U.K., Jul. 2017.[1]
-
- G. Lowe, "An attack on the Needham-Schroeder public key authentication protocol," Inf. Process. Lett., vol. 56, no. 3, pp. 131–136, Nov. 1995.[2]
-
- S. Kremer and M. D. Ryan, "Analysing the vulnerability of protocols to produce known-pair and chosen-text attacks," in Proc. Electron. Notes Theor. Comput. Sci., 2004, pp. 1–15.[3]
-
- G. Gonthier et al., "A machine-checked proof of the odd order theorem," in Interactive Theorem Proving, 4th Int. Conf., ITP 2013, Proc., Lecture Notes in Computer Science, vol. 7998, Springer, Berlin, Heidelberg, 2013, pp. 163–179.[4]
-
- X. Leroy, "Formal verification of a realistic compiler," Commun. ACM, vol. 52, no. 7, pp. 107–115, Jul. 2009.[5]
-
- S. Paul et al., "Formal verification of safety-critical aerospace systems," IEEE Aerosp. Electron. Syst. Mag., vol. 38, no. 4, pp. 2–14, Apr. 2023.[6]
-
- Formal Methods and Validation Methods for Safety-Critical Systems, Leadvent Group Technical Report, Oct. 2024.[7]
-
- Lean Forward Project Summary, Vrije Universiteit Amsterdam, Dept. of Computer Science, 2023. [Online]. Available: <https://lean-forward.github.io>[8]
-
- J. Harrison, "Formal verification at Intel," presented at the Nijmegen Seminar, Nijmegen, Netherlands, Jun. 2002.[9]
-
- CompCert: Main Page - The CompCert Verified Compiler Project. [Online]. Available: <https://compcert.org>[10]
-
- Formal Methods in Aerospace—NASA Official Documentation, Washington, D.C., 2024.[11]
-
- J. Harrison, "Formal methods at Intel: An overview," presented at the Oregon Summer School, Oregon, U.S.A., Jul. 2012.[12]
-
- Wikipedia Contributors, "Formal methods," in Wikipedia, The Free Encyclopedia. [Online]. Available: <https://en.wikipedia.org/wiki/Formal_methods>[13]
-
- B. Cook, "Formal reasoning about the security of Amazon Web Services," in Computer Aided Verification, 30th Int. Conf., CAV 2018, Proc., Lecture Notes in Computer Science, vol. 10981, Springer, Cham, 2018, pp. 3–26.[14]
-
- T. Hallgren, B. Cook, and J. Berdine, "Systems correctness practices at Amazon Web Services," Commun. ACM, vol. 68, no. 6, pp. 44–52, Jun. 2025.[15]
-
- AdaCore Blog, "Amazon relies on formal methods for the security of AWS," [Online]. Available: <https://blog.adacore.com/amazon-relies-on-formal-methods-for-the-security-of-aws>. [Accessed: Oct. 28, 2025].[16]
-
- Microsoft Research, "Theorem proof gains acclaim," Blog, Oct. 2016. [Online]. Available: <<https://www.microsoft.com/en-us/research/blog/theorem-proof-gains-acclaim/>[17]
+ 1. J. Avigad, "Formal methods in mathematics and the Lean theorem prover," presented at the Oxford Formal Methods Conference, Oxford, U.K., Jul. 2017.
+2. G. Lowe, "An attack on the Needham-Schroeder public key authentication protocol," Inf. Process. Lett., vol. 56, no. 3, pp. 131–136, Nov. 1995.
+ 3. S. Kremer and M. D. Ryan, "Analysing the vulnerability of protocols to produce known-pair and chosen-text attacks," in Proc. Electron. Notes Theor. Comput. Sci., 2004, pp. 1–15.
+ 4. G. Gonthier et al., "A machine-checked proof of the odd order theorem," in Interactive Theorem Proving, 4th Int. Conf., ITP 2013, Proc., Lecture Notes in Computer Science, vol. 7998, Springer, Berlin, Heidelberg, 2013, pp. 163–179.
+ 5. X. Leroy, "Formal verification of a realistic compiler," Commun. ACM, vol. 52, no. 7, pp. 107–115, Jul. 2009.
+ 6. S. Paul et al., "Formal verification of safety-critical aerospace systems," IEEE Aerosp. Electron. Syst. Mag., vol. 38, no. 4, pp. 2–14, Apr. 2023.
+ 7. Formal Methods and Validation Methods for Safety-Critical Systems, Leadvent Group Technical Report, Oct. 2024.
+ 8. Lean Forward Project Summary, Vrije Universiteit Amsterdam, Dept. of Computer Science, 2023. [Online]. Available: <https://lean-forward.github.io>
+ 9. J. Harrison, "Formal verification at Intel," presented at the Nijmegen Seminar, Nijmegen, Netherlands, Jun. 2002.
+ 10. CompCert: Main Page - The CompCert Verified Compiler Project. [Online]. Available: <https://compcert.org>
+ 11. Formal Methods in Aerospace—NASA Official Documentation, Washington, D.C., 2024.[11]
+ 12. J. Harrison, "Formal methods at Intel: An overview," presented at the Oregon Summer School, Oregon, U.S.A., Jul. 2012.
+ 13. Wikipedia Contributors, "Formal methods," in Wikipedia, The Free Encyclopedia. [Online]. Available: <https://en.wikipedia.org/wiki/Formal_methods>
+ 14. B. Cook, "Formal reasoning about the security of Amazon Web Services," in Computer Aided Verification, 30th Int. Conf., CAV 2018, Proc., Lecture Notes in Computer Science, vol. 10981, Springer, Cham, 2018, pp. 3–26.
+ 15. T. Hallgren, B. Cook, and J. Berdine, "Systems correctness practices at Amazon Web Services," Commun. ACM, vol. 68, no. 6, pp. 44–52, Jun. 2025.
+ 16. AdaCore Blog, "Amazon relies on formal methods for the security of AWS," [Online]. Available: <https://blog.adacore.com/amazon-relies-on-formal-methods-for-the-security-of-aws>. [Accessed: Oct. 28, 2025].
+ 17. Microsoft Research, "Theorem proof gains acclaim," Blog, Oct. 2016. [Online]. Available: <https://www.microsoft.com/en-us/research/blog/theorem-proof-gains-acclaim/>
