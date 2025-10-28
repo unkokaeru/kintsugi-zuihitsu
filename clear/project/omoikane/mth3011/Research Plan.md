@@ -130,13 +130,30 @@ Given the theoretical and computational nature of the project, health and safety
 
 Given these risks, the project will take the following control measures to mitigate risk to the following residual considerations:
 
-|         Task          |                Hazard                |      Who's Affected       |     Probability      | Severity  | Initial Risk |
-| :-------------------: | :----------------------------------: | :-----------------------: | :------------------: | :-------: | :----------: |
-| Extended computer use | Eye strain, repetitive strain injury |          Student          |     3 (Probable)     | 2 (Minor) |  6 (Medium)  |
-|     Computer use      |          Electrical hazard           | Student and others nearby | 1 (Extremely remote) | 4 (Major) |   4 (Low)    |
-|   Prolonged sitting   |      Musculoskeletal discomfort      |          Student          |     2 (Possible)     | 2 (Minor) |   4 (Low)    |
-|    Mental workload    |      Stress, cognitive fatigue       |          Student          |     2 (Possible)     | 2 (Minor) |   4 (Low)    |
+|         Task          |                                                           Control Measures                                                            |     Probability      | Severity  | Residual Risk |
+| :-------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: | :------------------: | :-------: | :-----------: |
+| Extended computer use | Take 20-minute breaks every hour; follow Display Screen Equipment (DSE) guidelines; maintain proper posture; adjust screen brightness | 1 (Extremely remote) | 2 (Minor) |    2 (Low)    |
+|     Computer use      |                               PAT-tested equipment; no liquids near equipment; proper cable management                                | 1 (Extremely remote) | 4 (Major) |    4 (Low)    |
+|   Prolonged sitting   |                                             Regular breaks; stretching; ergonomic seating                                             | 1 (Extremely remote) | 2 (Minor) |    2 (Low)    |
+|    Mental workload    |                           Structured work schedule; regular supervisor meetings; maintain work-life balance                           | 1 (Extremely remote) | 2 (Minor) |    2 (Low)    |
+
+**Overall Risk Assessment**: Low (all residual risks ≤ 4), so no specialised risk assessment required as confirmed with supervisor. The assessment will be reviewed if project scope changes to include any physical experiments or equipment testing that isn't currently anticipated.
 
 ## 11. Arrangements for Regular Supervisory Discussions
 
-…
+The following arrangements have been established for supervisory meetings:
+
+> **Supervisor**: Dr. Yuri Santos Rego
+> **Email**: <YSantosRego@lincoln.ac.uk>
+
+### Meeting Schedule
+
+- **Frequency**: Every week.
+- **Duration**: Approximately 30 minutes per meeting.
+- **Location**: Supervisor's office.
+
+### Meeting Structure
+
+1. Review of logbook entries since previous meeting
+2. Discussion of progress on current phase objectives
+3. Technical questions and problem-solving
