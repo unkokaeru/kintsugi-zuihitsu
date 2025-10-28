@@ -47,7 +47,13 @@ This project dives into the realm of formal methods in mathematics, and can rang
 
 ## 4. Literature Survey
 
-…
+IEEE!
+
+1. M. Ayala-Rincon, F. L. C. de Moura, "Applied logic for computer scientists. Computational deduction and formal proofs", Springer, 2017.
+2. H. Geuvers, "Proof assistants: history, ideas and future", Sadhana vol. 34, pp. 3-25, 2009.
+3. L. C. Paulson, "A machine-assisted proof of Godel's incompleteness theorems for the theory of hereditarily finite sets", Review of Symbolic Logic vol. 7 no. 3, pp. 484-498, 2014.
+4. E. Mendelson, "Introduction to mathematical logic", 6th ed, CRC Press, 2015.
+5. …
 
 ## 5. References
 
@@ -55,11 +61,33 @@ This project dives into the realm of formal methods in mathematics, and can rang
 
 ## 6. Equipment, Facilities, and Software Requirements
 
-…
+### Software and Computational Resources
+
+- **Primary Tools**:
+	- **Lean 4** with `mathlib` library (primary proof assistant),
+	- **Coq** with standard library (secondary/comparative study),
+	- **VS Code** with Lean/Coq extensions (development environment),
+	- **Git/GitHub** for version control of formalised code.
+- **Development Environment**:
+	- Personal laptop (sufficient for proof assistant work),
+	- No specialised hardware required.
+- **Documentation and Writing**:
+	- **LaTeX** local installation for report preparation.
+	- **Obsidian/Markdown** for research notes and logbook.
+
+***All required software is freely available** as open-source tools, requiring no financial expenditure.*
+
+### Facilities
+
+**Primary workspace**: University of Lincoln, Isaac Newton Building, INB2304 (quiet study, computer access).
+**Secondary workspace**: University of Lincoln, University Library (quiet study, library access).
+**Meeting Space**: University of Lincoln, Isaac Newton Building, INB3311 (supervisor's office).
+
+***No special laboratory requirements** as project is predominantly theoretical/computational.*
 
 ## 7. Consumables and Costs
 
-…
+The project involves no physical consumables or materials requiring purchase, and all software
 
 ## 8. Action Plan and Timeline
 
