@@ -38,30 +38,6 @@
               "icon": "lucide-file",
               "title": "Research Plan"
             }
-          },
-          {
-            "id": "ca3f8b6a68dbe37a",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/research-plan-formal-methods.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "research-plan-formal-methods"
-            }
-          },
-          {
-            "id": "b9e6d776169004d1",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/Formal-Methods-Research-Plan.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Formal-Methods-Research-Plan"
-            }
           }
         ],
         "currentTab": 1
@@ -211,17 +187,16 @@
       "omnisearch:Omnisearch": false,
       "quartz-syncer:Quartz Syncer publication center": false,
       "size-history:Vault size history": false,
-      "templater-obsidian:Templater": false,
-      "open-editors:Open editors": false
+      "templater-obsidian:Templater": false
     }
   },
   "active": "377d393512c61933",
   "lastOpenFiles": [
+    "attached/files/research-plan-formal-methods.pdf",
     "attached/files/Formal-Methods-Research-Plan.pdf",
+    "clear/project/omoikane/mth3011/Research Plan.md",
     "cloudy/project/yatagarasu/yatagarasu.md",
     "kintsugi zuihitsu.md",
-    "clear/project/omoikane/mth3011/Research Plan.md",
-    "attached/files/research-plan-formal-methods.pdf",
     "clear/project/omoikane/mth3011/mth3011.md",
     "clear/library/cooking/FFMS.md",
     "clear/project/omoikane/mth3007/mth3007 lecture 5.md",

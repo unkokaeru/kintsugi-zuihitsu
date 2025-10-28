@@ -18,27 +18,14 @@ This project dives into the realm of formal methods in mathematics, and can rang
 
 ---
 
-- [[research-plan-formal-methods.pdf]] / [[Formal-Methods-Research-Plan.pdf]]
+# Research Plan: Formal Methods in Mathematics
 
- 
-# Research Plan - Formal Methods of Mathematics
+**Student Name**: William Fayers
+**Project Supervisor**: Dr. Yuri Santos Rego
+**Email**: <YSantosRego@lincoln.ac.uk>
+**Module**: MTH3011
+**Date**: 28 October 2025
 
-PROJECT DESCRIPTION
+## 1. Project TItle
 
-PROJECT CONNECTIONS
-
-## Literature Survey
-
-…
-
-## References
-
-…
-
-## Action Plan
-
-…
-
-## Supervision Discussion Arrangements
-
-…
+**Formal Methods in Mathematics**: A Study of 
