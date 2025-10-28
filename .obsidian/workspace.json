@@ -38,6 +38,18 @@
               "icon": "lucide-file",
               "title": "Research Plan"
             }
+          },
+          {
+            "id": "e7f6365573400e98",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "attached/files/Formal-Methods-Research-Plan.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "Formal-Methods-Research-Plan"
+            }
           }
         ],
         "currentTab": 1
@@ -192,9 +204,9 @@
   },
   "active": "377d393512c61933",
   "lastOpenFiles": [
-    "attached/files/research-plan-formal-methods.pdf",
     "attached/files/Formal-Methods-Research-Plan.pdf",
     "clear/project/omoikane/mth3011/Research Plan.md",
+    "attached/files/research-plan-formal-methods.pdf",
     "cloudy/project/yatagarasu/yatagarasu.md",
     "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3011/mth3011.md",

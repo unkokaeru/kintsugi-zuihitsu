@@ -21,10 +21,7 @@ This project dives into the realm of formal methods in mathematics, and can rang
 # Research Plan: Formal Methods in Mathematics
 
 > **Student Name**: William Fayers
-> **Project Supervisor**: Dr. Yuri Santos Rego
-> **Email**: <YSantosRego@lincoln.ac.uk>
 > **Module**: MTH3011
-> **Date**: 28 October 2025
 
 ## 1. Project Title
 
@@ -152,8 +149,13 @@ The following arrangements have been established for supervisory meetings:
 - **Duration**: Approximately 30 minutes per meeting.
 - **Location**: Supervisor's office.
 
+**Back-up Arrangements** will be decided on an ad-hoc basis after email contact.
+
 ### Meeting Structure
 
-1. Review of logbook entries since previous meeting
-2. Discussion of progress on current phase objectives
-3. Technical questions and problem-solving
+1. Review of logbook entries since previous meeting,
+2. Discussion of progress on current phase objectives,
+3. Technical questions and problem-solving,
+4. Feedback on written work or formal developments,
+5. Agreement on goals for next meeting period,
+6. Supervisor signature and date in logbook.
