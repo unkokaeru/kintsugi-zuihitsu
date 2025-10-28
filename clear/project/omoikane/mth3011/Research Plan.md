@@ -119,7 +119,23 @@ Should the scope expand to include any of the above then appropriate ethics appr
 
 ## 10. Risk Assessment
 
-Given the theoretical and computational nature of the project, health and safety risks posed are minimal and comparable to everyday office/study activities. However, the following 
+Given the theoretical and computational nature of the project, health and safety risks posed are minimal and comparable to everyday office/study activities. However, the following considerations apply:
+
+|         Task          |                Hazard                |      Who's Affected       |     Probability      | Severity  | Initial Risk |
+| :-------------------: | :----------------------------------: | :-----------------------: | :------------------: | :-------: | :----------: |
+| Extended computer use | Eye strain, repetitive strain injury |          Student          |     3 (Probable)     | 2 (Minor) |  6 (Medium)  |
+|     Computer use      |          Electrical hazard           | Student and others nearby | 1 (Extremely remote) | 4 (Major) |   4 (Low)    |
+|   Prolonged sitting   |      Musculoskeletal discomfort      |          Student          |     2 (Possible)     | 2 (Minor) |   4 (Low)    |
+|    Mental workload    |      Stress, cognitive fatigue       |          Student          |     2 (Possible)     | 2 (Minor) |   4 (Low)    |
+
+Given these risks, the project will take the following control measures to mitigate risk to the following residual considerations:
+
+|         Task          |                Hazard                |      Who's Affected       |     Probability      | Severity  | Initial Risk |
+| :-------------------: | :----------------------------------: | :-----------------------: | :------------------: | :-------: | :----------: |
+| Extended computer use | Eye strain, repetitive strain injury |          Student          |     3 (Probable)     | 2 (Minor) |  6 (Medium)  |
+|     Computer use      |          Electrical hazard           | Student and others nearby | 1 (Extremely remote) | 4 (Major) |   4 (Low)    |
+|   Prolonged sitting   |      Musculoskeletal discomfort      |          Student          |     2 (Possible)     | 2 (Minor) |   4 (Low)    |
+|    Mental workload    |      Stress, cognitive fatigue       |          Student          |     2 (Possible)     | 2 (Minor) |   4 (Low)    |
 
 ## 11. Arrangements for Regular Supervisory Discussions
 
