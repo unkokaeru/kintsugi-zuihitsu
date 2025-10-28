@@ -44,17 +44,15 @@ This project dives into the realm of formal methods in mathematics, and can rang
 
 ## 4. Literature Survey
 
-IEEE!
+1. …
 
-1. M. Ayala-Rincon, F. L. C. de Moura, "Applied logic for computer scientists. Computational deduction and formal proofs", Springer, 2017.
-2. H. Geuvers, "Proof assistants: history, ideas and future", Sadhana vol. 34, pp. 3-25, 2009.
-3. L. C. Paulson, "A machine-assisted proof of Godel's incompleteness theorems for the theory of hereditarily finite sets", Review of Symbolic Logic vol. 7 no. 3, pp. 484-498, 2014.
-4. E. Mendelson, "Introduction to mathematical logic", 6th ed, CRC Press, 2015.
+## 5. References (IEEE)
+
+1. M. Ayala-Rincon and F. L. C. de Moura, *Applied Logic for Computer Scientists: Computational Deduction and Formal Proofs*, Springer, 2017.
+2. H. Geuvers, "Proof assistants: history, ideas and future," *Sadhana*, vol. 34, pp. 3–25, 2009.
+3. L. C. Paulson, "A machine-assisted proof of Gödel's incompleteness theorems for the theory of hereditarily finite sets," *Review of Symbolic Logic*, vol. 7, no. 3, pp. 484–498, 2014.
+4. E. Mendelson, *Introduction to Mathematical Logic*, 6th ed., CRC Press, 2015.
 5. …
-
-## 5. References
-
-…
 
 ## 6. Equipment, Facilities, and Software Requirements
 
@@ -93,14 +91,60 @@ IEEE!
 
 ## 8. Action Plan and Timeline
 
-The project spans approximately 29 weeks from 23 October 2025 to the final deadline of 22 May 2026, employing a mixed theoretical-practical methodology as seen below:
+The project spans approximately 30 weeks from 23 October 2025 to the final deadline of 22 May 2026, employing a mixed theoretical-practical methodology as seen below:
 
 1. **Foundational Study (Weeks 1-8)**: Background reading and software familiarisation.
 2. **Core Research (Weeks 9-18)**: …
 3. **Practical Implementation (Weeks 18-23)**: …
 4. **Mid-Project Report (Week 24)**: …
 5. **Analysis & Refinement (Weeks 25-28)**: …
-6. **Final Report (Week 29)**: …
+6. **Final Report (Weeks 29-30)**: …
+
+```mermaid
+gantt
+    title Formal Methods in Mathematics - Project Timeline
+    dateFormat YYYY-MM-DD
+    axisFormat %d %b
+    
+    section Phase 1: Foundation
+    Foundational Study           :foundation, 2025-10-23, 2025-12-17
+    Literature Review            :lit1, 2025-10-23, 56d
+    Learn Lean 4                 :lean1, 2025-10-30, 49d
+    Logic & Type Theory          :logic1, 2025-11-13, 35d
+    
+    section Phase 2: Core Research
+    Core Research                :core, 2025-12-18, 2026-02-25
+    Advanced Theory Study        :theory, 2025-12-18, 70d
+    Case Study Analysis          :cases, 2026-01-08, 49d
+    Intermediate Formalization   :form1, 2026-01-22, 35d
+    
+    section Phase 3: Implementation
+    Practical Implementation     :impl, 2026-02-19, 2026-04-01
+    Major Theorem Formalization  :theorem, 2026-02-19, 42d
+    Code Documentation           :doc1, 2026-03-12, 21d
+    
+    section Phase 4: Mid-Project
+    Mid-Project Report           :milestone, mid, 2026-04-02, 2026-04-08
+    Progress Review              :review, 2026-04-02, 7d
+    
+    section Phase 5: Analysis
+    Analysis & Refinement        :analysis, 2026-04-09, 2026-05-06
+    Critical Evaluation          :eval, 2026-04-09, 28d
+    Draft Report Writing         :draft, 2026-04-16, 21d
+    Draft Report Due             :milestone, draft_due, 2026-05-01, 1d
+    
+    section Phase 6: Final Report
+    Final Report                 :final, 2026-05-07, 2026-05-20
+    Revisions & Proofreading     :revise, 2026-05-07, 14d
+    Final Submission             :crit, milestone, submit, 2026-05-22, 1d
+    
+    section Phase 7: Viva
+    Viva Preparation             :viva_prep, 2026-05-21, 2026-06-11
+    Viva Examination             :milestone, viva, 2026-06-12, 1d
+    
+    section Key Milestones
+    Research Plan Submitted      :done, milestone, plan, 2025-10-22, 1d
+```
 
 ## 9. Ethical Considerations
 
