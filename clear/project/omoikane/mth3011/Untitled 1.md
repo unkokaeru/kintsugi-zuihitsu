@@ -66,7 +66,7 @@
 
 [7] J. Rushby, C. Shankar, and S. Owre, "Formal verification of the AAMP5 microprocessor: A case study in the industrial use of formal methods," in *NASA Contractor Rep. CR-4382*, 1991.
 
-[8] S. Langely Formal Methods Program, "Theorem proving with PVS," available: https://shemesh.larc.nasa.gov/fm/pvs/
+[8] S. Langely Formal Methods Program, "Theorem proving with PVS," available: <https://shemesh.larc.nasa.gov/fm/pvs/>
 
 [9] B. Bentley, "Validating the Intel Pentium 4 microprocessor," in *Proc. Design Autom. Conf. (DAC)*, ACM, 2001, pp. 244–248.
 
@@ -76,6 +76,6 @@
 
 [12] B. Cook and C. Varela, "Systems correctness practices at Amazon Web Services," *Commun. ACM*, vol. 68, no. 6, pp. 82–92, 2025.
 
-[13] L. C. Paulson, "Formalising Gödel's incompleteness theorems, I," Blog post, May 2022, available: https://lawrencecpaulson.github.io/2022/05/18/Formalising-Incompleteness-I.html
+[13] L. C. Paulson, "Formalising Gödel's incompleteness theorems, I," Blog post, May 2022, available: <https://lawrencecpaulson.github.io/2022/05/18/Formalising-Incompleteness-I.html>
 
-[14] P. Raatikainen, "Gödel's incompleteness theorems," in *Stanford Encyclopedia of Philosophy*, Stanford Univ., 2023, available: https://plato.stanford.edu/entries/goedel-incompleteness/
+[14] P. Raatikainen, "Gödel's incompleteness theorems," in *Stanford Encyclopedia of Philosophy*, Stanford Univ., 2023, available: <https://plato.stanford.edu/entries/goedel-incompleteness/>
