@@ -9,7 +9,7 @@
 
 ## 2. Project Description and Introduction
 
-Mathematical proofs
+Mathematical proof embodies absolute truth, yet carries an implicit 
 
 ## 3. Connection to Previous Studies
 
