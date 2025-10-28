@@ -20,12 +20,52 @@ This project dives into the realm of formal methods in mathematics, and can rang
 
 # Research Plan: Formal Methods in Mathematics
 
-**Student Name**: William Fayers
-**Project Supervisor**: Dr. Yuri Santos Rego
-**Email**: <YSantosRego@lincoln.ac.uk>
-**Module**: MTH3011
-**Date**: 28 October 2025
+> **Student Name**: William Fayers
+> **Project Supervisor**: Dr. Yuri Santos Rego
+> **Email**: <YSantosRego@lincoln.ac.uk>
+> **Module**: MTH3011
+> **Date**: 28 October 2025
 
-## 1. Project TItle
+## 1. Project Title
 
-**Formal Methods in Mathematics**: A Study of 
+**Formal Methods in Mathematics**: An Investigation into Proof Assistants and Formal Mathematical Reasoning
+
+## 2. Project Description and Introduction
+
+…
+
+## 3. Connection to Previous Studies
+
+…
+
+## 4. Literature Survey
+
+…
+
+## 5. References
+
+…
+
+## 6. Equipment, Facilities, and Software Requirements
+
+…
+
+## 7. Consumables and Costs
+
+…
+
+## 8. Action Plan and Timeline
+
+…
+
+## 9. Ethical Considerations
+
+…
+
+## 10. Risk Assessment
+
+…
+
+## 11. Arrangements for Regular Supervisory Discussions
+
+…
