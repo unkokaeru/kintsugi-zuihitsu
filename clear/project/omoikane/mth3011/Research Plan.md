@@ -93,7 +93,7 @@ IEEE!
 
 ## 8. Action Plan and Timeline
 
-The project spans approximately 29 weeks from 27 October 2025 to the final deadline of 22 May 2026, employing a mixed theoretical-practical methodology as seen below:
+The project spans approximately 29 weeks from 23 October 2025 to the final deadline of 22 May 2026, employing a mixed theoretical-practical methodology as seen below:
 
 1. **Foundational Study (Weeks 1-8)**: Background reading and software familiarisation.
 2. **Core Research (Weeks 9-18)**: …
