@@ -13,7 +13,7 @@ This project dives into the realm of formal methods in mathematics, and can rang
 
 1. M. Ayala-Rincon, F. L. C. de Moura, "Applied logic for computer scientists. Computational deduction and formal proofs", Springer, 2017.
 2. H. Geuvers, "Proof assistants: history, ideas and future", Sadhana vol. 34, pp. 3-25, 2009.
-3. L. C. Paulson, "A machine-assisted proof of Godel's incompleteness theorems for the theory of hereditarily finite sets", Review of Symbolic Logic vol. 7 no. 3, pp. 484-498, 2014.
+3. L. C. Paulson, "A machine-assisted proof of Gödel's incompleteness theorems for the theory of hereditarily finite sets", Review of Symbolic Logic vol. 7 no. 3, pp. 484-498, 2014.
 4. E. Mendelson, "Introduction to mathematical logic", 6th ed, CRC Press, 2015.
 
 ---
@@ -29,7 +29,15 @@ This project dives into the realm of formal methods in mathematics, and can rang
 
 ## 2. Project Description and Introduction
 
-…
+Mathematical proofs have always carried an uncomfortable truth: they depend on human minds, and human minds make mistakes. The Needham-Schroeder protocol, proposed in 1978, stood unchallenged for years before its flaws emerged. The Feit-Thompson theorem, a cornerstone of group theory, spans hundreds of pages - far beyond what any single mathematician can reliably verify. These aren't edge cases. When proof complexity outstrips our capacity for careful review, errors slip through. In safety-critical systems like aerospace navigation, cryptographic protocols, or medical device controllers, those errors can kill.
+
+Formal methods offer a different approach. Proof assistants like Lean, Coq, and PVS don't trust mathematicians - they verify every logical step using higher-order logic and type theory. NASA uses PVS to certify flight systems. Intel formally verifies processor designs after the Pentium division bug cost them $475 million. Amazon AWS now requires formal verification for core infrastructure. This isn't academic posturing; it's industrial necessity.
+
+The stakes keep rising. Mathematical complexity now routinely exceeds what peer review can catch. AI systems claiming trustworthiness need mathematical guarantees, not just test suites that pass. Formal verification expertise has become valuable currency in both academia and industry, precisely because it addresses problems testing cannot solve.
+
+I've felt this gap personally. As a programmer working in Python and TypeScript, I've watched tests pass while bugs lurked in edge cases I hadn't imagined. As a mathematics student, I've seen peer review catch errors months after publication. The intersection of logic, computation, and mathematical truth fascinates me because it promises something rare: actual certainty. Formal methods enforce the precision my own work requires but cannot guarantee on its own.
+
+This project combines those threads. I'll build theoretical foundations in logic, type theory, and the limits Gödel's incompleteness theorems impose. I'll formalize substantial mathematical theorems through hands-on work with Lean or Coq, experiencing firsthand what mechanized proof demands. I'll examine real-world applications where formal verification solves concrete problems - and critically analyze where it adds genuine value versus where it's overhead. The goal is both rigorous code and honest assessment: where do formal methods actually matter?
 
 ## 3. Connection to Previous Studies
 
