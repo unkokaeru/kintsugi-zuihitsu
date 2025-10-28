@@ -87,19 +87,39 @@ IEEE!
 
 ## 7. Consumables and Costs
 
-The project involves no physical consumables or materials requiring purchase, and all software
+**Consumables**: £0 (no physical materials required).
+**Software**: £0 (all tools are free and open-source).
+**Equipment**: £0 (using existing personal/university computers).
+**Total Project Cost**: £0
+
+***The project is minimal-cost**, relying on existing resources and freely available software.*
 
 ## 8. Action Plan and Timeline
 
-…
+The project spans approximately 29 weeks from 27 October 2025 to the final deadline of 22 May 2026, employing a mixed theoretical-practical methodology as seen below:
+
+1. **Foundational Study (Weeks 1-8)**: Background reading and software familiarisation.
+2. **Core Research (Weeks 9-18)**: …
+3. **Practical Implementation (Weeks 18-23)**: …
+4. **Mid-Project Report (Week 24)**: …
+5. **Analysis & Refinement (Weeks 25-28)**: …
+6. **Final Report (Week 29)**: …
 
 ## 9. Ethical Considerations
 
-…
+This project has been reviewed according to University of Lincoln ethical guidelines. The research involves:
+
+- No human participants or subjects,
+- No animal subjects,
+- No collection of personal data,
+- No sensitive or confidential data,
+- No potential for physical, psychological, or social harm.
+
+Should the scope expand to include any of the above then appropriate ethics approval will be sought via the College ethics committee before proceeding.
 
 ## 10. Risk Assessment
 
-…
+Given the theoretical and computational nature of the project, health and safety risks posed are minimal and comparable to everyday office/study activities. However, the following 
 
 ## 11. Arrangements for Regular Supervisory Discussions
 
