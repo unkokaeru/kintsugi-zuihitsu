@@ -33,14 +33,12 @@ This project dives into the realm of formal methods in mathematics, and can rang
 
 ## 3. Connection to Previous Studies
 
-…
+The project builds upon several areas of academic and practical experience:
 
 - **Proof and Logic (Ideas of Proof, Algebra, Algebraic Structures)**: These modules taught me rigorous proof techniques and fostered an understanding of mathematical reasoning essential for engaging with formal proofs.
 - **Computation and Technical Application (Scientific Computing, Computer Algebra and Technical Computing, Numerical Methods)**: Practice using algorithmic approaches and computation enables me to work effectively with proof assistants and work in a computational environment.
-- **Abstract Structures and Advanced Topics (Linear Algebra, Differential Equations, Complex Analysis, Coding Theory, Industrial and Financial Mathematics)**: Increased my structural reasoning and knowledge of fields where formal methods see real-world use, e.g. 
-- **Programming Expertise**: …
-
-…
+- **Abstract Structures and Advanced Topics (Linear Algebra, Differential Equations, Complex Analysis, Coding Theory, Industrial and Financial Mathematics)**: Increased my structural reasoning and knowledge of fields where formal methods see real-world use, e.g. cryptography.
+- **Programming Expertise**: Extensive experience in Python in real-world environments alongside comprehensive documentation, as well as experience in a variety of other modern software following best development practices.
 
 ## 4. Literature Survey
 

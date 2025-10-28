@@ -41,24 +41,6 @@
           }
         ],
         "currentTab": 1
-      },
-      {
-        "id": "5c7a6e03c5506310",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "e7f6365573400e98",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/Formal-Methods-Research-Plan.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Formal-Methods-Research-Plan"
-            }
-          }
-        ]
       }
     ],
     "direction": "vertical"
