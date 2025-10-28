@@ -38,7 +38,14 @@
               "icon": "lucide-file",
               "title": "Research Plan"
             }
-          },
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "5c7a6e03c5506310",
+        "type": "tabs",
+        "children": [
           {
             "id": "e7f6365573400e98",
             "type": "leaf",
@@ -51,8 +58,7 @@
               "title": "Formal-Methods-Research-Plan"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"

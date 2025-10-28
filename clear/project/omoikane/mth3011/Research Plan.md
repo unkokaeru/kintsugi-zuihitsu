@@ -35,9 +35,9 @@ This project dives into the realm of formal methods in mathematics, and can rang
 
 …
 
-- **Proof and Logic (Ideas of Proof, Algebra, Algebraic Structures)**: …
-- **Computation and Technical Application (Scientific Computing, Computer Algebra and Technical Computing, Numerical Methods)**: …
-- **Abstract Structures and Advanced Topics (Linear Algebra, Differential Equations, Complex Analysis, Coding Theory, Industrial and Financial Mathematics)**: …
+- **Proof and Logic (Ideas of Proof, Algebra, Algebraic Structures)**: These modules taught me rigorous proof techniques and fostered an understanding of mathematical reasoning essential for engaging with formal proofs.
+- **Computation and Technical Application (Scientific Computing, Computer Algebra and Technical Computing, Numerical Methods)**: Practice using algorithmic approaches and computation enables me to work effectively with proof assistants and work in a computational environment.
+- **Abstract Structures and Advanced Topics (Linear Algebra, Differential Equations, Complex Analysis, Coding Theory, Industrial and Financial Mathematics)**: Increased my structural reasoning and knowledge of fields where formal methods see real-world use, e.g. 
 - **Programming Expertise**: …
 
 …
@@ -107,10 +107,10 @@ gantt
     axisFormat %d %b
     
     section Phase 1: Foundation
+    Research Plan Submitted      :milestone, plan, 2025-10-22, 1d
     Foundational Study           :foundation, 2025-10-23, 2025-12-17
     Literature Review            :lit1, 2025-10-23, 56d
     Learn Lean 4                 :lean1, 2025-10-30, 49d
-    Logic & Type Theory          :logic1, 2025-11-13, 35d
     
     section Phase 2: Core Research
     Core Research                :core, 2025-12-18, 2026-02-25
@@ -141,9 +141,6 @@ gantt
     section Phase 7: Viva
     Viva Preparation             :viva_prep, 2026-05-21, 2026-06-11
     Viva Examination             :milestone, viva, 2026-06-12, 1d
-    
-    section Key Milestones
-    Research Plan Submitted      :done, milestone, plan, 2025-10-22, 1d
 ```
 
 ## 9. Ethical Considerations
