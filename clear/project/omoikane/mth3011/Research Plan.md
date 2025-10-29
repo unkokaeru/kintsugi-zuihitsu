@@ -15,7 +15,9 @@ Mathematical proofs claim absolute truth yet depend on fallible human reasoning.
 
 Formal methods prevent this by methodically verifying logic using proof assistants: Lean, Coq, PVS, among others. These proof assistants rely on type theory and higher-order logic rather than human intuition, using boolean foundations to enforce absolute truth without human reasoning. Enough mistakes have been made that formal methods are now industrial necessity rather than just academic rigour: the Intel Pentium division bug cost $475 million, Amazon Web Services requires formal verification for core infrastructure, NASA certifies flight systems with PVS. These systems decompose logic into its simplest form: true or false.
 
-No individual could ever explore every nuance across 255 pages, diving into each sentence with consistency. Peer review simply cannot catch every subtlety in modern research or engineering, especially as mathematical and computational complexity continues to increase.
+No individual could ever explore every nuance across 255 pages, diving into each sentence with consistency. Peer review simply cannot catch every subtlety in modern research or engineering, especially as mathematical and computational complexity continues to increase - which is precisely why proof assistants have gained such significance.
+
+Personally, in programming work I've watched tests pass whilst bugs remain in edge cases I never considered. In mathematics work, I've completed proofs only for others to find mistakes when reviewing. ...x
 
 ## 3. Connection to Previous Studies
 
