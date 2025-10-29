@@ -15,10 +15,7 @@ For example, the Needham-Schroeder protocol (1978) was widely accepted as secure
 
 The 255-page Feit-Thompson theorem (1963) had verification attempts, but no individual could fully verify the proof - underpinning theorems like the classification of finite simple groups -, until the Microsoft Research-Inria Joint Centre completed computer-assisted verification in 2012.
 
-
-presents a similar problem: no individual can fully verify the proof, potentially leaving hidden flaws that others would then build upon. Had an error been found, dependent theorems in group theory, including the classification of finite simple groups, would be invalidated.
-
-Lowe's corrected protocol remains logically sound, with vulnerabilities only at the implementation level where human reasoning introduces flaws.
+These 
 
 ## 3. Connection to Previous Studies
 
