@@ -11,8 +11,6 @@
 
 ## 2. Project Description and Introduction
 
-Mathematical proofs claim absolute truth yet depend on fallible human reasoning. The Needham-Schroeder protocol (1978) was widely accepted as secure based only on design rationale and informal peer review, remaining unchallenged for 17 years until Gavin Lowe published the first attack in 1995 using formal computer-aided analysis. The 255-page Feit-Thompson theorem (1963) - underpinning theorems like the classification of finite simple groups - had verification attempts, but no individual could fully verify the proof until the Microsoft Research-Inria Joint Centre completed computer-assisted verification in 2012. When proof complexity exceeds review capacity, errors can slip through. In safety-critical systems such as aerospace, cryptography, and medical devices, these errors can kill.
-
 Mathematical proofs claim absolute truth yet depend on fallible human reasoning. The Needham-Schroeder protocol (1978) was widely accepted as secure based on design rationale and informal peer review, unchallenged for 17 years until Gavin Lowe published an attack in 1995 using formal computer-aided analysis. The 255-page Feit-Thompson theorem (1963), which underpins the classification of finite simple groups, had no complete individual verification until Microsoft Research-Inria completed computer-assisted verification in 2012. When proof complexity exceeds review capacity, errors persist undetected. In aerospace, cryptography, and medical devices, these errors kill.
 
 ## 3. Connection to Previous Studies
