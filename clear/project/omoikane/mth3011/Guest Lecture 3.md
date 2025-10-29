@@ -10,3 +10,9 @@
 	- EXAMPLES: Daniel Bolnick retraction, Jan Schön scandal (Nobel Prize contender right after PhD but others found duplication/inconsistencies suggesting fabrication/falsification), Elisabeth Bik finding duplicated images (links to Schön).
 - Ethics & Science: process of producing science, effects of science on society, ethics considers human conduct in terms of "rightness" or "wrongness" underpinning "goodness" or "badness".
 	- Fabrication and falsification of data undermines scientific integrity, wastes public funds, damages public trust, derails careers of young scientists, and highlights weaknesses in peer review.
+	- Theories:
+		- Kanitan ethics: we have certain duties and must conform our actions to the moral law. **Society determines rules that must be followed**, i.e. about what you put in.
+		- Utilitarian ethics: we must calculate the benefits and costs of proposed actions. **Actions are evaluated methodically**, i.e. about what comes out.
+		- Virtue ethics: values and character. **People are evaluated subjectively**, i.e. the principle of what happens.
+			- More accepted, probably because it's more generic and informal.
+		- Combining society, actions, and people: a somewhat accurate model of ethics.
