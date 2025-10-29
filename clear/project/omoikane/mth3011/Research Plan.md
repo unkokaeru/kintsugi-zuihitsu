@@ -9,7 +9,7 @@
 
 ## 2. Project Description and Introduction
 
-Mathematical proof embodies absolute truth, yet carries an implicit reliance on fallible human reasoning. For example, the Needham-Schroeder protocol (1978) 
+Mathematical proof embodies absolute truth, yet carries an implicit reliance on fallible human reasoning. For example, the Needham-Schroeder protocol (1978)
 
 ## 3. Connection to Previous Studies
 
