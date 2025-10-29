@@ -11,11 +11,12 @@
 
 Mathematical proof embodies absolute truth, yet depends on fallible human reasoning.
 
-For example, the Needham-Schroeder protocol (1978) was widely accepted as secure based only on design rationale and informal peer review, remaining unchallenged for 17 years until Gavin Lowe published the first attack in 1995 using formal computer-aided analysis.
+The Needham-Schroeder protocol (1978) was widely accepted as secure based only on design rationale and informal peer review, remaining unchallenged for 17 years until Gavin Lowe published the first attack in 1995 using formal computer-aided analysis.
 
 The 255-page Feit-Thompson theorem (1963) had verification attempts, but no individual could fully verify the proof - underpinning theorems like the classification of finite simple groups -, until the Microsoft Research-Inria Joint Centre completed computer-assisted verification in 2012.
 
-These 
+When proof complexity outgrows the capacity 
+grows, review capacity often falls behind.
 
 ## 3. Connection to Previous Studies
 
