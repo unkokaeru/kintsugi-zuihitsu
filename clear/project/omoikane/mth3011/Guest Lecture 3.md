@@ -17,4 +17,10 @@
 			- More accepted, probably because it's more generic and informal.
 		- Combining society, actions, and people: a somewhat accurate model of ethics.
 	- Virtuous Scientist six values:
-		- H
+		1. Honesty
+		2. Objectivity
+		3. Tolerance
+		4. Doubt of Certitude
+		5. Unselfish Engagement
+		6. Accountability
+	- Scientists are part of society too!
