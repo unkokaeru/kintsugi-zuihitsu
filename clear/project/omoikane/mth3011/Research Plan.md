@@ -17,7 +17,9 @@ Formal methods prevent this by methodically verifying logic using proof assistan
 
 No individual could ever explore every nuance across 255 pages, diving into each sentence with consistency. Peer review simply cannot catch every subtlety in modern research or engineering, especially as mathematical and computational complexity continues to increase - which is precisely why proof assistants have gained such significance.
 
-Personally, in programming work I've watched tests pass whilst bugs remain in edge cases I never considered. In mathematics work, I've completed proofs only for others to find mistakes when reviewing. ...
+Personally, as a programmer working in multiple high-stakes industries I've worked hard to comprehensively test what I design, yet still often miss edge cases I never considered. As a mathematics student, I've spent hours on problems only for a colleague to point out a minor error at the beginning of my solutions. The intersection of logic, computation, and mathematics fascinates me because it promises something rare: actual certainty. Formal methods enforce the precision my work requires but cannot guarantee on its own.
+
+This project combines those fields. I'll build theoretical foundations in logic, type theory, and the limits Gödel's incompleteness theorems impose. I'll formalise mathematical theorems through hands-on work with Lean or Coq, discovering why so many industries use proof assistants. I'll examine these real-work applications and critically analyse where these formalities add genuine value versus unnecessary overhead. The outcome is rigour and honest assessment: where do formal methods actually matter?
 
 ## 3. Connection to Previous Studies
 
