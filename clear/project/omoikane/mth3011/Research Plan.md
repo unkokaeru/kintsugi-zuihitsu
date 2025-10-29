@@ -13,6 +13,8 @@ Mathematical proof embodies absolute truth, yet carries an implicit reliance on 
 
 For example, the Needham-Schroeder protocol (1978) was widely accepted as secure based on design rationale and informal peer review, remaining unchallenged for 17 years until Gavin Lowe published the first attack in 1995 using formal computer-aided analysis. Lowe's corrected protocol remains logically sound, with vulnerabilities only at the implementation level where human reasoning introduces flaws.
 
+The Feit-Thompson theorem, spanning hundreds of pages, introduces a secondary problem where an individual could never fully verify the entire theorem.
+
 ## 3. Connection to Previous Studies
 
 The project builds upon several areas of academic and practical experience:
