@@ -9,11 +9,18 @@
 
 ## 2. Project Description and Introduction
 
-Mathematical proof embodies absolute truth, yet carries an implicit reliance on fallible human reasoning.
+Mathematical proof embodies absolute truth, yet depends on fallible human reasoning.
 
-For example, the Needham-Schroeder protocol (1978) was widely accepted as secure based on design rationale and informal peer review, remaining unchallenged for 17 years until Gavin Lowe published the first attack in 1995 using formal computer-aided analysis. Lowe's corrected protocol remains logically sound, with vulnerabilities only at the implementation level where human reasoning introduces flaws.
+For example, the Needham-Schroeder protocol (1978) was widely accepted as secure based only on design rationale and informal peer review, remaining unchallenged for 17 years until Gavin Lowe published the first attack in 1995 using formal computer-aided analysis.
 
-The 255-page Feit-Thompson theorem (1963) presents a similar problem: no individual can fully verify the proof, possibly leaving hidden flaws that others would then build upon. If an error were found, dependent theorems in group theory, such as the classification of finite simple groups, would be invalidated. In this case, it was again computer-assisted verification which proved the theorem in 2012.
+The 255-page Feit-Thompson theorem (1963) had verification attempts, but no individual could fully verify the proof underpinning theorems like the classification of finite simple groups,
+
+
+presents a similar problem: no individual can fully verify the proof, potentially leaving hidden flaws that others would then build upon. Had an error been found, dependent theorems in group theory, including the classification of finite simple groups, would be invalidated.
+
+Lowe's corrected protocol remains logically sound, with vulnerabilities only at the implementation level where human reasoning introduces flaws.
+
+Computer-assisted verification finally confirmed the Feit-Thompson theorem in 2012.
 
 ## 3. Connection to Previous Studies
 
