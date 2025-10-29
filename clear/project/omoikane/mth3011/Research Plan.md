@@ -9,7 +9,13 @@
 
 ## 2. Project Description and Introduction
 
-Mathematical proof embodies absolute truth, yet carries an implicit reliance on fallible human reasoning. For example, the Needham-Schroeder protocol (1978)
+Mathematical proof embodies absolute truth, yet carries an implicit reliance on fallible human reasoning.
+
+For example, the Needham-Schroeder protocol (1978) was widely accepted as secure implicitly from design rationale and only reviewed informally by peers. This protocol remained unchallenged for 17 years before its first published attack in 1995 by Gavin Lowe, after Lowe used formal methods of computer-aided protocol analysis. As such, Lowe's corrected Needham–Schroeder–Lowe protocol remains logically sound to this day with its only vulnerabilities being found at the implementation level.
+
+For example, the Needham-Schroeder protocol (1978) was widely accepted as secure
+
+For example, the Needham-Schroeder protocol (1978) was widely accepted as secure based on design rationale and informal peer review. The protocol remained unchallenged for 17 years until Gavin Lowe published the first attack in 1995 using formal computer-aided analysis. Lowe's corrected Needham-Schroeder-Lowe protocol remains logically sound, with vulnerabilities only at the implementation level.
 
 ## 3. Connection to Previous Studies
 

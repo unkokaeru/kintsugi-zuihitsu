@@ -16,3 +16,5 @@
 		- Virtue ethics: values and character. **People are evaluated subjectively**, i.e. the principle of what happens.
 			- More accepted, probably because it's more generic and informal.
 		- Combining society, actions, and people: a somewhat accurate model of ethics.
+	- Virtuous Scientist six values:
+		- H
