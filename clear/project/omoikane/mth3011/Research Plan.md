@@ -2,6 +2,8 @@
 
 > **Student Name**: William Fayers
 > **Module**: MTH3011
+> **Supervisor**: Dr. Yuri Santos Rego
+> **Email**: <YSantosRego@lincoln.ac.uk>
 
 ## 1. Project Title
 
@@ -9,14 +11,7 @@
 
 ## 2. Project Description and Introduction
 
-Mathematical proof embodies absolute truth, yet depends on fallible human reasoning.
-
-The Needham-Schroeder protocol (1978) was widely accepted as secure based only on design rationale and informal peer review, remaining unchallenged for 17 years until Gavin Lowe published the first attack in 1995 using formal computer-aided analysis.
-
-The 255-page Feit-Thompson theorem (1963) had verification attempts, but no individual could fully verify the proof - underpinning theorems like the classification of finite simple groups -, until the Microsoft Research-Inria Joint Centre completed computer-assisted verification in 2012.
-
-When proof complexity outgrows the capacity 
-grows, review capacity often falls behind.
+Mathematical proof claim absolute truth, yet depends on fallible human reasoning. The Needham-Schroeder protocol (1978) was widely accepted as secure based only on design rationale and informal peer review, remaining unchallenged for 17 years until Gavin Lowe published the first attack in 1995 using formal computer-aided analysis. The 255-page Feit-Thompson theorem (1963) - underpinning theorems like the classification of finite simple groups - had verification attempts, but no individual could fully verify the proof until the Microsoft Research-Inria Joint Centre completed computer-assisted verification in 2012. When proof complexity exceeds review capacity, errors can slip through. In safety-critical systems such as aerospace, cryptography, and medical devices, these errors can kill.
 
 ## 3. Connection to Previous Studies
 
