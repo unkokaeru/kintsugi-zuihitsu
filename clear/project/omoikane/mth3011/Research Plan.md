@@ -17,7 +17,7 @@ Formal methods prevent this by methodically verifying logic using proof assistan
 
 No individual could ever explore every nuance across 255 pages, diving into each sentence with consistency. Peer review simply cannot catch every subtlety in modern research or engineering, especially as mathematical and computational complexity continues to increase - which is precisely why proof assistants have gained such significance.
 
-Personally, in programming work I've watched tests pass whilst bugs remain in edge cases I never considered. In mathematics work, I've completed proofs only for others to find mistakes when reviewing. ...x
+Personally, in programming work I've watched tests pass whilst bugs remain in edge cases I never considered. In mathematics work, I've completed proofs only for others to find mistakes when reviewing. ...
 
 ## 3. Connection to Previous Studies
 
