@@ -104,11 +104,11 @@ gantt
     Core Research                :core, 2025-12-18, 2026-02-25
     Advanced Theory Study        :theory, 2025-12-18, 70d
     Case Study Analysis          :cases, 2026-01-08, 49d
-    Intermediate Formalization   :form1, 2026-01-22, 35d
+    Intermediate Formalisation   :form1, 2026-01-22, 35d
     
     section Phase 3: Implementation
     Practical Implementation     :impl, 2026-02-19, 2026-04-01
-    Major Theorem Formalization  :theorem, 2026-02-19, 42d
+    Major Theorem Formalisation  :theorem, 2026-02-19, 42d
     Code Documentation           :doc1, 2026-03-12, 21d
     
     section Phase 4: Mid-Project
