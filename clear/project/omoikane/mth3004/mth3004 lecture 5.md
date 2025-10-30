@@ -12,7 +12,3 @@
 		- Conceptual misunderstandings: over-generalisation or doesn't help with other preconceived notions/non-scientific beliefs.
 		- Vernacular misconceptions: word-use in everyday life and scientific contexts conflicting.
 		- Factual misconceptions: false information at an early age unchallenged into adulthood.
-
----
-
-![[Session 5 Misconceptions with Dr Nikolaos Fotou.pdf]]
