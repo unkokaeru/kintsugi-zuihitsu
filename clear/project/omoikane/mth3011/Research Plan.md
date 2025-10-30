@@ -88,6 +88,8 @@ The project spans approximately 30 weeks from 23 October 2025 to the final deadl
 5. **Analysis & Refinement (Weeks 25-28)**: …
 6. **Final Report (Weeks 29-30)**: …
 
+*Further detail to be added throughout the project*.
+
 ```mermaid
 gantt
     title Formal Methods in Mathematics - Project Timeline
