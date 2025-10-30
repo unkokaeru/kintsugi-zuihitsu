@@ -12,3 +12,8 @@
 		- Conceptual misunderstandings: over-generalisation or doesn't help with other preconceived notions/non-scientific beliefs.
 		- Vernacular misconceptions: word-use in everyday life and scientific contexts conflicting.
 		- Factual misconceptions: false information at an early age unchallenged into adulthood.
+- Conceptual change - presenting new concepts or theories:
+	1. Intelligible: using (bridging) analogies, models, etc.
+	2. Plausible: linked to existing knowledge.
+	3. Fruitful: be useful in the future.
+- Cognitive conflict by presenting data that does not match their misconception to increase their adaptability to change - just using rote learning will not be substantial.
