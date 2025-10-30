@@ -1,0 +1,19 @@
+.mermaid .taskText,
+.mermaid .taskTextOutsideRight,
+.mermaid .taskTextOutsideLeft {
+    fill: #293328 !important;
+    font-family: Roboto, 'Segoe UI', Arial, sans-serif !important;
+    font-size: 15px !important;
+}
+.mermaid .section {
+    fill: #e9ece9 !important;
+}
+.mermaid .task {
+    fill: #667f6c !important;
+    stroke: #667f6c !important;
+}
+.mermaid .sectionTitle {
+    fill: #293328 !important;
+    font-size: 18px !important;
+    font-family: Roboto, 'Segoe UI', Arial, sans-serif !important;
+}

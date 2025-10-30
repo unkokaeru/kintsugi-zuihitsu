@@ -2,6 +2,7 @@
   "accentColor": "#667f6c",
   "cssTheme": "Typomagical",
   "enabledCssSnippets": [
-    "hide_html_comments"
+    "hide_html_comments",
+    "mermaid_styling"
   ]
 }
