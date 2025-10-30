@@ -2,22 +2,22 @@
 
 > [!important] KEY FOCUS: Questioning to develop higher-order thinking and metacognition
 
-![[]]
+> [!info] Use [[Professional arguments]] throughout supported by literature (IEEE)
 
-## Introduction (250 words)
+## Introduction (250 Words / 1 paragraph)
 
-> Definition of effective teaching then introduce key focus - one area
-
-…
-
-## Discussion and Analysis (500 words)
-
-> Discuss key area supported by literature (IEEE) then evaluate what is demonstrated
+> Definition of effective teaching then introduce key focus
 
 …
 
-## Conclusion (250 words)
+## Discussion and Analysis (500 Words / 4 paragraphs)
 
-> Summarise and conclude with an answer to the question, supported by literature (IEEE)
+> Discuss key focus then evaluate what is demonstrated
+
+…
+
+## Conclusion (250 Words / 1 paragraph)
+
+> Summarise and conclude with an answer to the question
 
 …
