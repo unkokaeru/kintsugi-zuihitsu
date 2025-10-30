@@ -10,6 +10,8 @@
 		- Preconceived notions: "popular" conceptions rooted in everyday observations.
 		- Non-scientific beliefs: views learned by students from sources other than scientific education, such as religious or mythical teachings.
 		- Conceptual misunderstandings: over-generalisation or doesn't help with other preconceived notions/non-scientific beliefs.
+		- Vernacular misconceptions: word-use in everyday life and scientific contexts conflicting.
+		- Factual misconceptions: false information at an early age unchallenged into adulthood.
 
 ---
 
