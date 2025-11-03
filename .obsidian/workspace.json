@@ -71,24 +71,6 @@
           }
         ],
         "currentTab": 2
-      },
-      {
-        "id": "57a81a16f0389922",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "78806cad507a6f92",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/MTH3006_Notes_6.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "MTH3006_Notes_6"
-            }
-          }
-        ]
       }
     ],
     "direction": "vertical"
