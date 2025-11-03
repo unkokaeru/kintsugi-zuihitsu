@@ -70,24 +70,12 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       },
       {
         "id": "57a81a16f0389922",
         "type": "tabs",
         "children": [
-          {
-            "id": "ba57e7ed13628d5c",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/MTH3006_Notes_5.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "MTH3006_Notes_5"
-            }
-          },
           {
             "id": "78806cad507a6f92",
             "type": "leaf",
@@ -250,10 +238,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "36f490f022c9d3ae",
+  "active": "074aa488dd353018",
   "lastOpenFiles": [
-    "attached/files/MTH3006_Notes_5.pdf",
     "clear/project/omoikane/mth3006/Separation of variables.md",
+    "attached/files/MTH3006_Notes_5.pdf",
     "clear/project/omoikane/mth3006/mth3006 lecture 11.md",
     "clear/project/omoikane/mth3006/Method of characteristics.md",
     "clear/project/omoikane/mth3006/mth3006.md",
