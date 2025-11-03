@@ -10,12 +10,12 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ## To-Do List
 
-- **Yatagarasu**: `prod` to facade level with integrated feedback (incl. "what do you expect to see here" pages), then email participants with regard to [[Meeting notes]].
+- ! **Yatagarasu**: `prod` to facade level with integrated feedback (incl. "what do you expect to see here" pages), then email participants with regard to [[Meeting notes]].
 - **Omoikane**:
-	- **MTH3004**: Outline [[What is Effective Teaching in Mathematics]] according to [[mth3004 lecture 3]] and [[mth3004 lecture 4]].
-	- **MTH3006**: Review [[Method of characteristics]] to then complete [[mth3006 lecture 9]] and some examples from [[mth3006 weekly problems 5]].
+	- ! **MTH3004**: Outline [[What is Effective Teaching in Mathematics]] according to [[mth3004 lecture 3]], [[mth3004 lecture 4]], and [[mth3004 lecture 5]].
+	- ? **MTH3006**: Review [[Method of characteristics]] to then complete [[mth3006 lecture 9]] and some examples from [[mth3006 weekly problems 5]].
 	- **MTH3007**: Review [[mth3007 lecture 5]] and associated notes.
-	- **MTH3011**: Begin logbook ([[Meeting notes 0]], second one mostly admin), complete the [[Research Plan]], and finish [[Guest lecture 2 - Inquiry into the packing properties of spheres]] article / [[Guest Lecture 3]].
+	- ! **[[MTH3011]]**: Begin logbook ([[Meeting notes 0]], second one mostly admin), complete the [[Research Plan]], and finish [[Guest lecture 2 - Inquiry into the packing properties of spheres]] article / [[Guest Lecture 3]].
 - **Kuebiko**: Start development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
 
 ```dataviewjs
