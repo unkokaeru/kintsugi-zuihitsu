@@ -15,7 +15,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 	- ! **MTH3004**: Outline [[What is Effective Teaching in Mathematics]] according to [[mth3004 lecture 3]], [[mth3004 lecture 4]], and [[mth3004 lecture 5]].
 	- ? **MTH3006**: Review and complete all recent notes and questions.
 	- ? **MTH3007**: Review and complete all recent notes and questions.
-	- ! **[[MTH3011]]**: Begin logbook ([[Meeting notes 0]], second one mostly admin), complete the [[Research Plan]], and finish [[Guest lecture 2 - Inquiry into the packing properties of spheres]] article / [[Guest Lecture 3]].
+	- ! **MTH3011**: Complete [[Research Plan]] references/literature survey. Finish [[Guest lecture 2]] and [[Guest Lecture 3]].
 - **Kuebiko**: Start development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
 
 ```dataviewjs
