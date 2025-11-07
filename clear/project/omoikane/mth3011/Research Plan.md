@@ -90,6 +90,8 @@ The project spans approximately 30 weeks from 23 October 2025 to the final deadl
 
 *Further detail to be added throughout the project*.
 
+**NOTE**: Might be a way to style this better in mermaid?
+
 ```mermaid
 gantt
     title Formal Methods in Mathematics - Project Timeline
