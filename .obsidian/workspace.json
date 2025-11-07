@@ -115,7 +115,7 @@
             }
           }
         ],
-        "currentTab": 6
+        "currentTab": 2
       },
       {
         "id": "d215d94b6487adee",
@@ -295,21 +295,22 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "a0e5772335bc4191",
+  "active": "7769035aa567b3fd",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3006/mth3006 lecture 9.md",
+    "clear/project/omoikane/mth3006/mth3006 lecture 11.md",
+    "clear/project/omoikane/mth3006/Separation of variables.md",
+    "clear/project/omoikane/mth3006/mth3006.md",
+    "clear/project/omoikane/mth3006/mth3006 lecture 12.md",
+    "clear/project/omoikane/mth3006/Method of characteristics.md",
     "clear/library/sloth bytes/sloth bytes.md",
     "clear/library/sloth bytes/pomodoro timer.md",
     "clear/library/sloth bytes/When should you sleep.md",
     "clear/project/omoikane/mth3006/Untitled.md",
-    "clear/project/omoikane/mth3006/mth3006 lecture 12.md",
     "clear/project/omoikane/mth3011/Research Plan.md",
     "clear/project/omoikane/mth3011/Untitled.md",
     "clear/project/omoikane/mth3011/mth3011.md",
-    "clear/project/omoikane/mth3006/Method of characteristics.md",
-    "clear/project/omoikane/mth3006/mth3006.md",
-    "clear/project/omoikane/mth3006/mth3006 lecture 9.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 10.md",
-    "clear/project/omoikane/mth3006/mth3006 lecture 11.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 8.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 7.md",
     "clear/project/omoikane/mth3006/Laplace transform.md",
@@ -332,7 +333,6 @@
     "clear/project/omoikane/mth3004/mth3004 lecture 4.md",
     "clear/project/omoikane/mth3011/Guest lecture 2.md",
     "clear/project/omoikane/mth3011/Meeting notes 0.md",
-    "clear/project/omoikane/mth3006/Separation of variables.md",
     "attached/files/mth3006 lectures-11.png",
     "attached/files/chillin sushi guy.svg",
     "attached/files/dirac delta function.png",
