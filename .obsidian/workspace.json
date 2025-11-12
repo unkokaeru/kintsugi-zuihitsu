@@ -70,7 +70,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -220,11 +220,11 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "d7842f1086389fa4",
+  "active": "0a21b1a4287adee2",
   "lastOpenFiles": [
+    "cloudy/project/yatagarasu/Vicky Feedback.md",
     "cloudy/project/yatagarasu/Ray Feedback.md",
     "cloudy/project/yatagarasu/User Feedback.md",
-    "cloudy/project/yatagarasu/Vicky Feedback.md",
     "cloudy/project/yatagarasu/yatagarasu.md",
     "kintsugi zuihitsu.md",
     "attached/files/MTH3006_Notes_6.pdf",
