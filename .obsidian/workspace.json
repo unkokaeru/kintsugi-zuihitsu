@@ -70,7 +70,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -220,10 +220,12 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "0a21b1a4287adee2",
+  "active": "a3d4a62b109e8a74",
   "lastOpenFiles": [
-    "cloudy/project/yatagarasu/Untitled.md",
+    "clear/library/sloth bytes/sloth bytes.md",
+    "clear/library/sloth bytes/Can You Reach the Exit.md",
     "cloudy/project/yatagarasu/User Feedback.md",
+    "cloudy/project/yatagarasu/Untitled.md",
     "cloudy/project/yatagarasu/Vicky Feedback.md",
     "cloudy/project/yatagarasu/Ray Feedback.md",
     "cloudy/project/yatagarasu/yatagarasu.md",
@@ -241,7 +243,6 @@
     "Untitled 1.md",
     "Untitled.md",
     "clear/project/omoikane/mth3006/Separation of variables.md",
-    "clear/library/sloth bytes/sloth bytes.md",
     "clear/library/sloth bytes/pomodoro timer.md",
     "clear/library/sloth bytes/When should you sleep.md",
     "clear/project/omoikane/mth3006/Untitled.md",
@@ -250,7 +251,6 @@
     "clear/project/omoikane/mth3011/mth3011.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 8.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 7.md",
-    "clear/project/omoikane/mth3006/Laplace transform.md",
     "attached/files/MTH3006_Problems_6.pdf",
     "attached/files/example research plan 4.pdf",
     "attached/files/example research plan 3.pdf",
