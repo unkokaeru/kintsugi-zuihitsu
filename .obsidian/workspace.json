@@ -85,7 +85,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -235,10 +235,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "01cb93c374e9b3cd",
+  "active": "0a21b1a4287adee2",
   "lastOpenFiles": [
-    "cloudy/project/yatagarasu/User Feedback.md",
     "cloudy/project/yatagarasu/Untitled.md",
+    "cloudy/project/yatagarasu/User Feedback.md",
     "cloudy/project/yatagarasu/Vicky Feedback.md",
     "cloudy/project/yatagarasu/Ray Feedback.md",
     "clear/library/sloth bytes/sloth bytes.md",
