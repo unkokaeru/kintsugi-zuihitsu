@@ -25,7 +25,28 @@ Assessment happens during and after learning, in the classroom and in end tests 
 
 From these examples, you can see that summative assessment is where teaching is held accountable, and hence formative assessment is discussed less frequently in lower-performing environments. However, when formative assessment is focused on, then summative assessment naturally improves itself - that said, some "pure exam skills" can inhibit the evaluation of individuals' actual understanding level due to misinterpretations or incorrect wording.
 
-From research across 250 research journals from 1988 (national curriculum start) and 1997, Paul Black and Dylan William from King's College
+From research across 250 research journals from 1988 (national curriculum start) and 1997, Paul Black and Dylan William from King's College (using empirical data and control groups) identified these five key factors that influence learning assessments:
+
+1. Providing **effective feedback** to pupils.
+2. Actively **involving pupils in their own learning**.
+3. Adjusting teaching to **take account of the results of assessments**.
+4. Recognising the profound influence assessment has on the **motivation and self-esteem** of pupils, both of which are crucial to learning.
+5. Considering the need for pupils to be able to **assess themselves and to understand how to improve**.
+
+The research also identifies a number of risks with regard to assessment:
+
+1. Valuing quantity and presentation rather than the quality of learning.
+2. Lowering the self-esteem of pupils by over-concentrating on judgements rather than advice for improvement.
+3. Demoralising pupils by comparing them negatively and repeatedly with more successful learners.
+4. Giving feedback that serves social and managerial purposes rather than helping pupils to learn more effectively.
+5. Working with an incomplete picture of pupils' learning needs.
+
+Essentially, this breaks down to these key features of Assessment for Learning (formative assessment):
+
+1. Effective questioning.
+2. Feedback through marking.
+3. Peer-assessment and self-assessment.
+4. Formative use of summative tests.
 
 ## Why Do We Assess?
 
