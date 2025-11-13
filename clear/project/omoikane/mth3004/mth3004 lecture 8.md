@@ -48,6 +48,22 @@ Essentially, this breaks down to these key features of Assessment for Learning (
 3. Peer-assessment and self-assessment.
 4. Formative use of summative tests.
 
+For students completing assessments, they need to know how to succeed:
+
+- Mark schemes.
+- Marking criteria.
+- GCSE grade areas.
+- Numbers of marks a question is worth.
+- Length and detail expected.
+- "What A Good One Looks Like" (model answers).
+- "What I'm Looking For" (success criteria).
+
+### Assessment for Learning against Assessment of Learning - Which is Most Important?
+
+*Roughly, I feel they should be weighted equally but by different levels - "for learning" by teachers to help students, "of learning" by headteachers to help teachers*.
+
+…
+
 ## Why Do We Assess?
 
 > To track progress and evaluate an individual's progress against peers, hence to also meta-analyse the teacher's ability.
