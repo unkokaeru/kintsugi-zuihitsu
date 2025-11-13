@@ -10,10 +10,10 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ## To-Do List
 
-- ! **Yatagarasu**: `prod` to facade level with integrated feedback (incl. "what do you expect to see here" pages), then email participants with regard to [[Meeting notes]]. Complete the intake form, too.
+- ! **Yatagarasu**: Complete onboarding form, integrate feedback, and plan next stages of testing. Add [[Meeting notes]] into notes, too.
 - **Omoikane**:
 	- ! **MTH3004**: Outline [[What is Effective Teaching in Mathematics]] according to [[mth3004 lecture 3]], [[mth3004 lecture 4]], and [[mth3004 lecture 5]].
-	- ? **MTH3006**: Review and complete all recent notes and questions.
+	- ? **MTH3006**: Review and complete all recent notes and questions, then complete [[MTH3006_Coursework.pdf|coursework]].
 	- ? **MTH3007**: Review and complete all recent notes and questions.
 	- ! **MTH3011**: Complete [[Research Plan]] references/literature survey. Finish [[Guest lecture 2]] and [[Guest Lecture 3]].
 - **Kuebiko**: Start development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
