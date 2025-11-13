@@ -10,7 +10,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ## To-Do List
 
-- ! **Yatagarasu**: Complete onboarding form, integrate feedback, and plan next stages of testing. Add [[Meeting notes]] into notes, too.
+- ! **Yatagarasu**: Complete onboarding form, integrate [[User Feedback]], and plan next stages of testing. Add [[Meeting notes]] into notes, too.
 - **Omoikane**:
 	- ! **MTH3004**: Outline [[What is Effective Teaching in Mathematics]] according to [[mth3004 lecture 3]], [[mth3004 lecture 4]], and [[mth3004 lecture 5]].
 	- ? **MTH3006**: Review and complete all recent notes and questions, then complete [[MTH3006_Coursework.pdf|coursework]].
