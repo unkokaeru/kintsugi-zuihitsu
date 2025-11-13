@@ -55,7 +55,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       },
       {
         "id": "687a459cc037ccd5",
@@ -226,7 +226,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "0a21b1a4287adee2",
+  "active": "8fe6c86cd79b2f52",
   "lastOpenFiles": [
     "cloudy/project/yatagarasu/Ray Feedback.md",
     "cloudy/project/yatagarasu/Ray Feedback - concise.md",
