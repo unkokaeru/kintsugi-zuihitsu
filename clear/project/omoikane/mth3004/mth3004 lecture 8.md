@@ -60,9 +60,11 @@ For students completing assessments, they need to know how to succeed:
 
 ### Assessment for Learning against Assessment of Learning - Which is Most Important?
 
-*Roughly, I feel they should be weighted equally but by different levels - "for learning" by teachers to help students, "of learning" by headteachers to help teachers*.
+*Roughly, I feel they should be weighted equally but by different levels - "for learning" by teachers to help students, "of learning" by headteachers to help teachers. Maybe Assessment of Learning if more important, though, as by assessing teachers you can rely that the teachers can help the students effectively and can assess their assessments of the students so in turn assess both in one assessment. This does reduce the resolution of results and hence accuracy of results.*
 
-…
+*Could also make an argument towards what is currently the case - "of learning" important as qualifications, whilst "for learning" is important as experience; the latter of which is more favoured in job/study applications.*
+
+… [[Professional arguments]].
 
 ## Why Do We Assess?
 
