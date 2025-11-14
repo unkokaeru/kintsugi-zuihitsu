@@ -23,8 +23,19 @@
               "icon": "lucide-file",
               "title": "kintsugi zuihitsu"
             }
+          },
+          {
+            "id": "325347e9f8bb4f45",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -174,8 +185,11 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "dfaf42785ec25d0c",
+  "active": "325347e9f8bb4f45",
   "lastOpenFiles": [
+    "kintsugi zuihitsu.md",
+    "clear/library/sloth bytes/sloth bytes.md",
+    "clear/library/sloth bytes/Imposter Syndrome as a Service.md",
     "cloudy/project/yatagarasu/ASAP TO INTEGRATE.md",
     "cloudy/project/yatagarasu/User Feedback.md",
     "cloudy/project/yatagarasu/yatagarasu.md",
@@ -186,12 +200,10 @@
     "clear/project/omoikane/mth3004/mth3004 lecture 2.md",
     "attached/files/Session 2 Critical Arguments in Education.pdf",
     "attached/files/Session 7 Assessment and Assessment for Learning - Tagged.pdf",
-    "kintsugi zuihitsu.md",
     "cloudy/project/yatagarasu/R Feedback.md",
     "attached/files/MTH3006_Coursework.pdf",
     "cloudy/project/yatagarasu/Untitled 1.md",
     "cloudy/project/yatagarasu/Vicky Feedback.md",
-    "clear/library/sloth bytes/sloth bytes.md",
     "clear/library/sloth bytes/Can You Reach the Exit.md",
     "attached/files/MTH3006_Notes_6.pdf",
     "attached/files/MTH3006_Notes_5.pdf",
@@ -207,7 +219,6 @@
     "Untitled.md",
     "clear/project/omoikane/mth3006/Separation of variables.md",
     "clear/library/sloth bytes/pomodoro timer.md",
-    "clear/library/sloth bytes/When should you sleep.md",
     "attached/files/MTH3006_Problems_6.pdf",
     "attached/files/example research plan 4.pdf",
     "attached/files/example research plan 3.pdf",
