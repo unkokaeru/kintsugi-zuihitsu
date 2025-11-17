@@ -17,7 +17,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 	- ? **MTH3006**: Review and complete all recent notes and questions, then complete [[MTH3006_Coursework.pdf|coursework]].
 	- ? **MTH3007**: Review and complete all recent notes and questions.
 	- ! **MTH3011**: Complete [[Research Plan]] references/literature survey. Finish [[Guest lecture 2]] and [[Guest Lecture 3]].
-- **Kuebiko**: Start development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
+- **Kuebiko**: Continue development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
