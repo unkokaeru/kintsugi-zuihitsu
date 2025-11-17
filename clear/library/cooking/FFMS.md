@@ -17,7 +17,8 @@ Make this referenced correctly by [[cooking]], too.
 *User requirements -> Database design -> …*
 
 ---
-## User requirements
+
+## User Requirements
 
 - **User Accounts**: Support user creation and login, with each account having a name, food preferences, and defaults (time availability, complexity willing to cook, daily presence).
 - **Food Properties**: Food should have ingredients (to control suggestion based on food preferences), an average rating (updated after each meal occurrence), and an optional recipe/photo.
@@ -26,14 +27,16 @@ Make this referenced correctly by [[cooking]], too.
 - **User-Friendly Interface**: Require minimum setup and minimum continuous input, and anything required must be simple and clean to use (i.e. user and food creation). Potential extensions to allow rating via Amazon Alexa.
 
 ---
-## Database design
+
+## Database Design
 
 …
 
 Look over the projects my brother sent me, starting with [sds](C:/Users/wills/Documents/Programs%20by%20my%20brother/sds/) before looking at [acm_2](C:/Users/wills/Documents/Programs%20by%20my%20brother/acm_2/).
 
 ---
-## Tech stack
+
+## Tech Stack
 
 - **Database**:
 	- **Relational Database** *MySQL* database to store user accounts and possible meals (with their associated properties).

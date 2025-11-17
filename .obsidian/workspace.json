@@ -23,24 +23,8 @@
               "icon": "lucide-file",
               "title": "kintsugi zuihitsu"
             }
-          },
-          {
-            "id": "325347e9f8bb4f45",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/library/cooking/FFMS.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "FFMS"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -190,8 +174,9 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "325347e9f8bb4f45",
+  "active": "dfaf42785ec25d0c",
   "lastOpenFiles": [
+    "clear/library/cooking/FFMS.md",
     "kintsugi zuihitsu.md",
     "clear/library/sloth bytes/sloth bytes.md",
     "clear/library/sloth bytes/Imposter Syndrome as a Service.md",
@@ -223,7 +208,6 @@
     "Untitled 1.md",
     "Untitled.md",
     "clear/project/omoikane/mth3006/Separation of variables.md",
-    "clear/library/sloth bytes/pomodoro timer.md",
     "attached/files/MTH3006_Problems_6.pdf",
     "attached/files/example research plan 4.pdf",
     "attached/files/example research plan 3.pdf",
