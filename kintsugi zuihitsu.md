@@ -10,6 +10,8 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ## To-Do List
 
+> Maybe open VS Code in this directory to complete notes quicker alongside Copilot?
+
 - ! **[[Yatagarasu]]**: Complete onboarding form, integrate [[User Feedback]], and plan next stages of testing. Add [[Meeting notes]] / [[ASAP TO INTEGRATE]] into notes, too.
 - **[[Omoikane]]**:
 	- *Change cloze flashcard generation to be bold text instead of highlighted text.*
