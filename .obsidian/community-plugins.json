@@ -47,5 +47,6 @@
   "text-extractor",
   "typewriter-mode",
   "obsidian-wakatime",
-  "autofit-tabs"
+  "autofit-tabs",
+  "janitor"
 ]

@@ -11,7 +11,6 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 ## To-Do List
 
 > Maybe open VS Code in this directory to complete notes quicker alongside Copilot?
-> Think about how to control my insane spending by the way, around £3.5k over budget over the last two weeks…
 
 - ! **[[Yatagarasu]]**: Complete onboarding form, integrate [[User Feedback]], and plan next stages of testing. Add [[Meeting notes]] / [[ASAP TO INTEGRATE]] into notes, too.
 - **[[Omoikane]]**:
