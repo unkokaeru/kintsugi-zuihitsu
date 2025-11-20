@@ -171,13 +171,16 @@
       "omnisearch:Omnisearch": false,
       "quartz-syncer:Quartz Syncer publication center": false,
       "size-history:Vault size history": false,
-      "templater-obsidian:Templater": false
+      "templater-obsidian:Templater": false,
+      "janitor:Janitor: scan vault": false
     }
   },
   "active": "dfaf42785ec25d0c",
   "lastOpenFiles": [
-    "Untitled.md",
+    "clear/project/omoikane/mth3011/Research Plan.md",
     "kintsugi zuihitsu.md",
+    "cloudy/project/yatagarasu/ASAP TO INTEGRATE.md",
+    "Untitled.md",
     "clear/project/omoikane/mth3011/Guest Lecture 4.md",
     "clear/library/sloth bytes/sloth bytes.md",
     "clear/library/sloth bytes/One Two Skip a Few.md",
@@ -188,7 +191,6 @@
     "attached/files/nm_worksheet_wk8.pdf",
     "clear/library/cooking/FFMS.md",
     "clear/library/sloth bytes/Imposter Syndrome as a Service.md",
-    "cloudy/project/yatagarasu/ASAP TO INTEGRATE.md",
     "cloudy/project/yatagarasu/User Feedback.md",
     "cloudy/project/yatagarasu/yatagarasu.md",
     "cloudy/project/yatagarasu/Meeting notes.md",
@@ -209,7 +211,6 @@
     "clear/project/omoikane/mth3006/mth3006 lecture 12.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 11.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 10.md",
-    "clear/project/omoikane/mth3006/mth3006 lecture 9.md",
     "attached/files/MTH3006_Problems_6.pdf",
     "attached/files/example research plan 4.pdf",
     "attached/files/mth3006 lectures-11.png",
