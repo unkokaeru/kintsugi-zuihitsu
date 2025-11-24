@@ -23,7 +23,6 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ### Granular Task List
 
-
 1. **Complete MTH3006 lecture 12 notes** from this week (30 minutes)
 2. **Complete MTH3006 lecture 11 notes** from this week (30 minutes)
 3. **Review MTH3006 lectures 1-10** for understanding (2 hours)

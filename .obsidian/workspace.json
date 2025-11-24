@@ -4,27 +4,40 @@
     "type": "split",
     "children": [
       {
-        "id": "5e6da0044f8a79d8",
+        "id": "73656ff55924ab69",
         "type": "tabs",
         "children": [
           {
-            "id": "dfaf42785ec25d0c",
+            "id": "d7e9123ec3dbdb4b",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "kintsugi zuihitsu.md",
+                "file": "clear/project/omoikane/mth3006/mth3006.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "kintsugi zuihitsu"
+              "title": "mth3006"
+            }
+          },
+          {
+            "id": "a2913cbb964fe43c",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "attached/files/MTH3006_Coursework.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "MTH3006_Coursework"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -157,6 +170,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "janitor:Janitor: scan vault": false,
       "bases:Create new base": false,
       "command-palette:Open command palette": false,
       "workspaces:Manage workspace layouts": false,
@@ -171,14 +185,17 @@
       "omnisearch:Omnisearch": false,
       "quartz-syncer:Quartz Syncer publication center": false,
       "size-history:Vault size history": false,
-      "templater-obsidian:Templater": false,
-      "janitor:Janitor: scan vault": false
+      "templater-obsidian:Templater": false
     }
   },
-  "active": "dfaf42785ec25d0c",
+  "active": "a2913cbb964fe43c",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3011/Research Plan.md",
+    "clear/project/omoikane/mth3006/mth3006.md",
+    "clear/project/omoikane/mth3006/mth3006 lecture 11.md",
+    "clear/project/omoikane/mth3006/mth3006 lecture 9.md",
+    "clear/project/omoikane/mth3006/Method of characteristics.md",
     "kintsugi zuihitsu.md",
+    "clear/project/omoikane/mth3011/Research Plan.md",
     "cloudy/project/yatagarasu/yatagarasu.md",
     "cloudy/project/yatagarasu/User Feedback.md",
     "cloudy/project/yatagarasu/Meeting notes.md",
@@ -206,9 +223,6 @@
     "attached/files/Session 7 Assessment and Assessment for Learning - Tagged.pdf",
     "cloudy/project/yatagarasu/R Feedback.md",
     "attached/files/MTH3006_Coursework.pdf",
-    "cloudy/project/yatagarasu/Untitled 1.md",
-    "cloudy/project/yatagarasu/Vicky Feedback.md",
-    "clear/library/sloth bytes/Can You Reach the Exit.md",
     "attached/files/MTH3006_Notes_6.pdf",
     "attached/files/MTH3006_Notes_5.pdf",
     "attached/files/MTH3006_Notes_4-7-9.pdf",
