@@ -12,25 +12,16 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 > Maybe open VS Code in this directory to complete notes quicker alongside Copilot?
 
-- ! **[[Yatagarasu]]**: Complete onboarding form, integrate [[User Feedback]], and plan next stages of testing. Add [[Meeting notes]] / [[ASAP TO INTEGRATE]] into notes, too.
+- **[[Yatagarasu]]**: Complete onboarding form, integrate [[User Feedback]] into notes, and keep working on the platform.
 - **[[Omoikane]]**:
 	- ? Change cloze flashcard generation to be bold text instead of highlighted text.
 	- **[[MTH3004]]**: Outline [[What is Effective Teaching in Mathematics]] according to [[mth3004 lecture 3]], [[mth3004 lecture 4]], and [[mth3004 lecture 5]]. Learn the National Curriculum and my subject of choice throughout for the poster part of the coursework.
 	- **[[MTH3006]]**: Review and complete all recent notes and questions, then complete [[MTH3006_Coursework.pdf|coursework]] and revise for the upcoming [[MTH3006_Porfolio_Test_information.pdf|midterm]].
 	- **[[MTH3007]]**: Review and complete all recent notes and questions. Follow slides not the [[nm_worksheet_wk8.pdf|worksheet for week 8]] - incorrect formula.
-	- ! **[[MTH3011]]**: Complete [[Research Plan]] references/literature survey. Finish [[Guest lecture 2]], [[Guest Lecture 3]], and [[guest lecture 4]].
+	- **[[MTH3011]]**: Re-write [[Research Plan]] and complete articles ([[Guest lecture 2]], [[Guest Lecture 3]], and [[guest lecture 4]]).
 - **Kuebiko**: Continue development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
 
 ### Granular Task List
-
-Simultaneously…
-
-- **Integrate Yatagarasu user feedback** into system (12 hours)
-- **Prepare Yatagarasu for Monday testing** (2 hours)
-- **Add meeting notes to Yatagarasu documentation** (10 minutes)
-- **Complete Yatagarasu onboarding form** (6 hours)
-
-Consecutively…
 
 1. **Read and take notes on 4 existing references** for MTH3011 Research Plan (2 hours)
 2. **Find and add 2-11 more references** to reach minimum 6 for MTH3011 (1-3 hours)

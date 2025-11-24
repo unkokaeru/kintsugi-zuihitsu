@@ -39,7 +39,8 @@
               "title": "Research Plan"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -190,16 +191,18 @@
       "janitor:Janitor: scan vault": false
     }
   },
-  "active": "dfaf42785ec25d0c",
+  "active": "55e57577f1428bde",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3011/Research Plan.md",
     "kintsugi zuihitsu.md",
+    "cloudy/project/yatagarasu/yatagarasu.md",
+    "cloudy/project/yatagarasu/User Feedback.md",
+    "clear/project/omoikane/mth3011/Research Plan.md",
+    "cloudy/project/yatagarasu/Meeting notes.md",
+    "cloudy/project/yatagarasu/ASAP TO INTEGRATE.md",
     "clear/project/omoikane/mth3011/~$search Plan.docx",
     "clear/project/omoikane/mth3011/Research Plan.docx",
     "clear/project/omoikane/mth3004/Professional arguments.md",
     "clear/project/omoikane/mth3011/mth3011.md",
-    "cloudy/project/yatagarasu/ASAP TO INTEGRATE.md",
-    "cloudy/project/yatagarasu/User Feedback.md",
     "clear/project/kuebiko/kuebiko.md",
     "clear/project/omoikane/mth3011/Meeting notes 0.md",
     "Untitled.md",
@@ -212,8 +215,6 @@
     "attached/files/nm_worksheet_wk8.pdf",
     "clear/library/cooking/FFMS.md",
     "clear/library/sloth bytes/Imposter Syndrome as a Service.md",
-    "cloudy/project/yatagarasu/yatagarasu.md",
-    "cloudy/project/yatagarasu/Meeting notes.md",
     "clear/project/omoikane/mth3004/mth3004 lecture 8.md",
     "clear/project/omoikane/mth3004/mth3004.md",
     "clear/project/omoikane/mth3004/mth3004 lecture 2.md",
