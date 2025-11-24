@@ -11,15 +11,15 @@
 
 ## 2. Project Description and Introduction
 
-Mathematical proofs claim absolute truth, yet depend on fallible human reasoning. The Needham-Schroeder protocol (1978) was widely accepted as secure based on design rationale and informal peer review, unchallenged for 17 years until Gavin Lowe published an attack in 1995 using formal computer-aided analysis. The 255-page Feit-Thompson theorem (1963), which underpins the classification of finite simple groups, had no complete individual verification until Microsoft Research-Inria completed computer-assisted verification in 2012. When proof complexity exceeds review capacity, errors can remain undetected. In safety-critical systems such as aerospace, cryptography, and medical devices, these errors can be fatal.
+Mathematical proofs claim absolute truth, yet depend on fallible human reasoning \[1\]. The Needham-Schroeder protocol (1978) was widely accepted as secure based on design rationale and informal peer review, unchallenged for 17 years until Gavin Lowe published an attack in 1995 using formal computer-aided analysis \[11\]. The 255-page Feit-Thompson theorem (1963), which underpins the classification of finite simple groups \[7\], had no complete individual verification until Microsoft Research-Inria completed computer-assisted verification in 2012 \[7\]. When proof complexity exceeds review capacity, errors can remain undetected. In safety-critical systems such as aerospace, cryptography, and medical devices, these errors can be fatal.
 
-Formal methods prevent this by methodically verifying logic using proof assistants, such as Lean, Coq, and PVS. These proof assistants rely on type theory and higher-order logic to minimise human intuition, enhancing the reliability of proofs. The prevalence of mistakes in critical systems has made formal methods more than just academic rigour: they're an industrial necessity. For example, the Intel Pentium division bug cost $475 million, Amazon Web Services requires formal verification for core infrastructure, and NASA certifies flight systems with PVS. These systems decompose logic into its simplest form: true or false.
+Formal methods prevent this by methodically verifying logic using proof assistants, such as Lean \[5\], Coq \[6\], and PVS. These proof assistants rely on type theory \[9\] and higher-order logic \[4\] to minimise human intuition, enhancing the reliability of proofs. The prevalence of mistakes in critical systems has made formal methods more than just academic rigour: they're an industrial necessity. For example, the Intel Pentium division bug cost $475 million, Amazon Web Services requires formal verification for core infrastructure, and NASA certifies flight systems with PVS. These systems decompose logic into its simplest form: true or false.
 
-Given the complexity of proofs like the 255-page Feit-Thompson theorem, no individual could explore every nuance with consistency. Peer reviewers simply cannot catch every subtlety in modern research or engineering, especially as mathematical and computational complexity continues to increase - which is precisely why proof assistants have gained such significance.
+Given the complexity of proofs like the 255-page Feit-Thompson theorem, no individual could explore every nuance with consistency \[7\]. Peer reviewers simply cannot catch every subtlety in modern research or engineering, especially as mathematical and computational complexity continues to increase - which is precisely why proof assistants have gained such significance \[2\].
 
 Personally, as a programmer working in multiple high-stakes industries, I have worked hard to comprehensively test what I design, yet still often miss edge cases I never considered. As a mathematics student, I have spent hours on problems only for a colleague to point out a minor error at the beginning of my solutions. The intersection of logic, computation, and mathematics fascinates me because it promises something rare: actual certainty. Formal methods enforce the precision my work requires but cannot guarantee on its own.
 
-This project combines those fields. I will build theoretical foundations in logic, type theory, and the limits imposed by Gödel's incompleteness theorems. I will formalise mathematical theorems through hands-on work with Lean or Coq, discovering why so many industries use proof assistants. I will examine these real-world applications and critically analyse where these formalities add genuine value versus unnecessary overhead. The outcome is rigour and honest assessment: where do formal methods actually matter?
+This project combines those fields. I will build theoretical foundations in logic, type theory, and the limits imposed by Gödel's incompleteness theorems \[3\]\[4\]. I will formalise mathematical theorems through hands-on work with Lean or Coq \[5\]\[6\], discovering why so many industries use proof assistants \[12\]. I will examine these real-world applications and critically analyse where these formalities add genuine value versus unnecessary overhead. The outcome is rigour and honest assessment: where do formal methods actually matter?
 
 ## 3. Connection to Previous Studies
 
@@ -27,7 +27,7 @@ The project builds upon several areas of academic and practical experience:
 
 - **Proof and Logic (Ideas of Proof, Algebra, Algebraic Structures)**: These modules taught me rigorous proof techniques and fostered an understanding of mathematical reasoning essential for engaging with formal proofs.
 - **Computation and Technical Application (Scientific Computing, Computer Algebra and Technical Computing, Numerical Methods)**: Practice using algorithmic approaches and computation enables me to work effectively with proof assistants and work in a computational environment.
-- **Abstract Structures and Advanced Topics (Linear Algebra, Differential Equations, Complex Analysis, Coding Theory, Industrial and Financial Mathematics)**: Increased my structural reasoning and knowledge of fields where formal methods see real-world use, e.g. cryptography.
+- **Abstract Structures and Advanced Topics (Linear Algebra, Differential Equations, Complex Analysis, Coding Theory, Industrial and Financial Mathematics)**: Increased my structural reasoning and knowledge of fields where formal methods see real-world use, e.g. cryptography \[12\].
 - **Programming Expertise**: Extensive experience in Python in real-world environments alongside comprehensive documentation, as well as experience in a variety of other modern software following best development practices.
 
 ## 4. Literature Survey
@@ -36,31 +36,42 @@ The project builds upon several areas of academic and practical experience:
 | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 2017 | Ayala-Rincón, M. & de Moura, F.L.C.                                                                                                                                                       | Applied Logic for Computer Scientists: Computational Deduction and Formal Proofs                                                                                 | Comprehensive textbook covering propositional logic, first-order logic, formal proof systems, recursive functions, and type theory foundations specific to computational applications.                                               | Provides foundational knowledge in computational logic and derivation techniques essential for understanding proof assistants like Lean and Coq.                                                                                            |
 | 2009 | Geuvers, H.                                                                                                                                                                               | Proof Assistants: History, Ideas and Future, *Sadhana*, vol. 34, pp. 3–25                                                                                        | Surveys historical development of proof assistants from Automath through LCF, HOL, Coq, and Isabelle; discusses type theory foundations, Curry-Howard correspondence, and evolution of proof assistant architecture.                 | Provides essential historical context and theoretical understanding of how modern proof assistants evolved, particularly type theory and development of different proof approaches.                                                         |
-| 2014 | Paulson, L.C.                                                                                                                                                                             | A Machine-Assisted Proof of Gödel's Incompleteness Theorems for Hereditarily Finite Sets, *Review of Symbolic Logic*, vol. 7, no. 3, pp. 484–498                 | First complete formal verification of Gödel's second incompleteness theorem using Isabelle/HOL, demonstrating use of hereditarily finite sets and revealing subtleties in traditional proofs.                                        | Exemplifies power of formal methods in catching proof errors and demonstrating where machine verification adds rigorous value; demonstrates technical challenges in formalizing complex mathematical theorems.                              |
+| 2014 | Paulson, L.C.                                                                                                                                                                             | A Machine-Assisted Proof of Gödel's Incompleteness Theorems for Hereditarily Finite Sets, *Review of Symbolic Logic*, vol. 7, no. 3, pp. 484–498                 | First complete formal verification of Gödel's second incompleteness theorem using Isabelle/HOL, demonstrating use of hereditarily finite sets and revealing subtleties in traditional proofs.                                        | Exemplifies power of formal methods in catching proof errors and demonstrating where machine verification adds rigorous value; demonstrates technical challenges in formalising complex mathematical theorems.                              |
 | 2015 | Mendelson, E.                                                                                                                                                                             | Introduction to Mathematical Logic, 6th ed., CRC Press                                                                                                           | Comprehensive textbook covering propositional calculus, quantification theory, formal number theory, set theory axioms, and effective computability with detailed treatment of Gödel's incompleteness theorems.                      | Supplies rigorous theoretical foundations in mathematical logic, proof theory, and computability essential for understanding formal systems implemented in proof assistants.                                                                |
-| 2015 | de Moura, L., Kong, S., Avigad, J., van Doorn, F., & von Raumer, J.                                                                                                                       | The Lean Theorem Prover (System Description), *25th International Conference on Automated Deduction (CADE-25)*                                                   | System description of Lean's design with focus on small trusted kernel based on dependent type theory, elaboration procedures, universe polymorphism, and integration of automation tactics.                                         | Primary reference for understanding Lean architecture, design philosophy, and technical implementation; essential for hands-on formalization work in Lean 4.                                                                                |
-| 2004 | Bertot, Y. & Castéran, P.                                                                                                                                                                 | Interactive Theorem Proving and Program Development: Coq'Art – The Calculus of Inductive Constructions, Springer                                                 | Pragmatic introduction to Coq covering calculus of inductive constructions, proof tactics, program extraction, and numerous practical examples of mathematical theory development.                                                   | Provides comprehensive practical guidance for Coq formalization; essential reference for secondary proof assistant study and comparison with Lean.                                                                                          |
-| 2012 | Gonthier, G., Asperti, A., Avigad, J., Bertot, Y., Cohen, C., Garillot, F., Le Roux, S., Mahboubi, A., O'Connor, R., Pal, S., Pasca, I., Rideau, L., Solovyev, A., Tassi, E., & Théry, L. | A Machine-Checked Proof of the Odd Order Theorem, *Interactive Theorem Proving (ITP 2013)*, LNCS 7998                                                            | Six-year formal verification of the Feit-Thompson theorem in Coq (255-page proof formalized as ~150,000 lines of code with 4,000 definitions and 13,000 lemmas); demonstrates feasibility of formalizing complex modern mathematics. | Landmark case study of formal methods applied to major mathematical result; demonstrates both capabilities and effort required for large-scale mathematical formalization; directly supports project's examination of formal methods value. |
-| 2012 | Gonthier, G.                                                                                                                                                                              | A Computer-Checked Proof of the Four Colour Theorem, in *Handbook of the History of Logic, Vol. 9: Computational Logic*                                          | First complete formal proof of the Four Colour Theorem in Coq (60,000+ lines of proof code); demonstrates formalization of theorem combining mathematical reasoning with computer-verified case analysis.                            | Major case study showing application of formal methods to previously computer-dependent proof; illustrates intersection of mathematics, computation, and verification relevant to project objectives.                                       |
-| 2023 | Nederpelt, R.P. & Geuvers, H.                                                                                                                                                             | Type Theory and Formal Proof: An Introduction, 2nd ed., Cambridge University Press                                                                               | Advanced textbook building from lambda calculus through simply-typed and dependent type systems to calculus of constructions; includes elaborated examples of formalizing mathematical proofs.                                       | Comprehensive treatment of type theory foundations underlying modern proof assistants; provides theoretical depth for understanding proof assistant design and formal mathematics.                                                          |
-| 2024 | Tao, T., Gowers, T., Green, B., & Manners, F.                                                                                                                                             | Marton's Polynomial Freiman-Ruzsa Conjecture, preprint; formalized in Lean 4                                                                                     | Recent breakthrough proof of PFR conjecture with complete Lean formalization (3 weeks from paper publication); demonstrates rapid collaborative formalization and integration of AI-assisted proof discovery in modern mathematics.  | State-of-the-art example of formal methods adoption in cutting-edge mathematics; shows practical integration of Lean in active mathematical research and AI applications; exemplifies real value of formal verification.                    |
+| 2015 | de Moura, L., Kong, S., Avigad, J., van Doorn, F., & von Raumer, J.                                                                                                                       | The Lean Theorem Prover (System Description), *25th International Conference on Automated Deduction (CADE-25)*                                                   | System description of Lean's design with focus on small trusted kernel based on dependent type theory, elaboration procedures, universe polymorphism, and integration of automation tactics.                                         | Primary reference for understanding Lean architecture, design philosophy, and technical implementation; essential for hands-on formalisation work in Lean 4.                                                                                |
+| 2004 | Bertot, Y. & Castéran, P.                                                                                                                                                                 | Interactive Theorem Proving and Program Development: Coq'Art – The Calculus of Inductive Constructions, Springer                                                 | Pragmatic introduction to Coq covering calculus of inductive constructions, proof tactics, program extraction, and numerous practical examples of mathematical theory development.                                                   | Provides comprehensive practical guidance for Coq formalisation; essential reference for secondary proof assistant study and comparison with Lean.                                                                                          |
+| 2012 | Gonthier, G., Asperti, A., Avigad, J., Bertot, Y., Cohen, C., Garillot, F., Le Roux, S., Mahboubi, A., O'Connor, R., Pal, S., Pasca, I., Rideau, L., Solovyev, A., Tassi, E., & Théry, L. | A Machine-Checked Proof of the Odd Order Theorem, *Interactive Theorem Proving (ITP 2013)*, LNCS 7998                                                            | Six-year formal verification of the Feit-Thompson theorem in Coq (255-page proof formalised as ~150,000 lines of code with 4,000 definitions and 13,000 lemmas); demonstrates feasibility of formalising complex modern mathematics. | Landmark case study of formal methods applied to major mathematical result; demonstrates both capabilities and effort required for large-scale mathematical formalisation; directly supports project's examination of formal methods value. |
+| 2012 | Gonthier, G.                                                                                                                                                                              | A Computer-Checked Proof of the Four Colour Theorem, in *Handbook of the History of Logic, Vol. 9: Computational Logic*                                          | First complete formal proof of the Four Colour Theorem in Coq (60,000+ lines of proof code); demonstrates formalisation of theorem combining mathematical reasoning with computer-verified case analysis.                            | Major case study showing application of formal methods to previously computer-dependent proof; illustrates intersection of mathematics, computation, and verification relevant to project objectives.                                       |
+| 2023 | Nederpelt, R.P. & Geuvers, H.                                                                                                                                                             | Type Theory and Formal Proof: An Introduction, 2nd ed., Cambridge University Press                                                                               | Advanced textbook building from lambda calculus through simply-typed and dependent type systems to calculus of constructions; includes elaborated examples of formalising mathematical proofs.                                       | Comprehensive treatment of type theory foundations underlying modern proof assistants; provides theoretical depth for understanding proof assistant design and formal mathematics.                                                          |
+| 2024 | Tao, T., Gowers, T., Green, B., & Manners, F.                                                                                                                                             | Marton's Polynomial Freiman-Ruzsa Conjecture, preprint; formalised in Lean 4                                                                                     | Recent breakthrough proof of PFR conjecture with complete Lean formalisation (3 weeks from paper publication); demonstrates rapid collaborative formalisation and integration of AI-assisted proof discovery in modern mathematics.  | State-of-the-art example of formal methods adoption in cutting-edge mathematics; shows practical integration of Lean in active mathematical research and AI applications; exemplifies real value of formal verification.                    |
 | 1995 | Lowe, G.                                                                                                                                                                                  | Breaking and Fixing the Needham-Schroeder Public-Key Protocol using CSP and FDR, *Tools and Algorithms for the Construction and Analysis of Systems (TACAS '96)* | Formal discovery of previously unknown man-in-the-middle attack on widely-accepted Needham-Schroeder protocol using formal methods; demonstrates necessity of rigorous verification in cryptographic protocols.                      | Historical case study illustrating critical failure of informal peer review and essential role of formal methods in security-critical systems; motivates formal verification methodology.                                                   |
 | 2011 | Smyth, B.                                                                                                                                                                                 | Formal Verification of Cryptographic Protocols (PhD Thesis), University of Birmingham                                                                            | Comprehensive treatment of formal verification techniques for cryptographic protocols with emphasis on automation and symbolic analysis; discusses Dolev-Yao model and protocol verification methodologies.                          | Demonstrates industrial applications of formal methods in cryptography; provides concrete examples of where formal verification provides essential security guarantees relevant to project's critical systems analysis.                     |
 
 ## 5. References (IEEE)
 
-1. M. Ayala-Rincon and F. L. C. de Moura, *Applied Logic for Computer Scientists: Computational Deduction and Formal Proofs*, Springer, 2017.
-2. H. Geuvers, "Proof assistants: history, ideas and future," *Sadhana*, vol. 34, pp. 3–25, 2009.
-3. L. C. Paulson, "A machine-assisted proof of Gödel's incompleteness theorems for the theory of hereditarily finite sets," *Review of Symbolic Logic*, vol. 7, no. 3, pp. 484–498, 2014.
-4. E. Mendelson, *Introduction to Mathematical Logic*, 6th ed., CRC Press, 2015.
-5. L. de Moura, S. Kong, J. Avigad, F. van Doorn, and J. von Raumer, "The Lean theorem prover (system description)," in *25th International Conference on Automated Deduction (CADE-25)*, Berlin, Germany, 2015.
-6. Y. Bertot and P. Castéran, *Interactive Theorem Proving and Program Development: Coq'Art – The Calculus of Inductive Constructions*, Springer, 2004.
-7. G. Gonthier, A. Asperti, J. Avigad, Y. Bertot, C. Cohen, F. Garillot, S. Le Roux, A. Mahboubi, R. O'Connor, S. Pal, I. Pasca, L. Rideau, A. Solovyev, E. Tassi, and L. Théry, "A machine-checked proof of the odd order theorem," in *Interactive Theorem Proving (ITP 2013)*, LNCS 7998, 2012.
-8. G. Gonthier, "A computer-checked proof of the four colour theorem," in *Handbook of the History of Logic, Vol. 9: Computational Logic*, Elsevier, 2012.
-9. R. P. Nederpelt and H. Geuvers, *Type Theory and Formal Proof: An Introduction*, 2nd ed., Cambridge University Press, 2023.
-10. T. Tao, T. Gowers, B. Green, and F. Manners, "Marton's Polynomial Freiman-Ruzsa conjecture," preprint, 2024. [Online]. Available: [https://teorth.github.io/pfr/](https://teorth.github.io/pfr/)
-11. G. Lowe, "Breaking and fixing the Needham-Schroeder public-key protocol using CSP and FDR," in *Tools and Algorithms for the Construction and Analysis of Systems (TACAS '96)*, 1995.
-12. B. Smyth, "Formal verification of cryptographic protocols," Ph.D. dissertation, University of Birmingham, 2011.
+\[1\] M. Ayala-Rincon and F. L. C. de Moura, *Applied Logic for Computer Scientists: Computational Deduction and Formal Proofs*, Springer, 2017.
+
+\[2\] H. Geuvers, "Proof assistants: history, ideas and future," *Sadhana*, vol. 34, pp. 3–25, 2009.
+
+\[3\] L. C. Paulson, "A machine-assisted proof of Gödel's incompleteness theorems for the theory of hereditarily finite sets," *Review of Symbolic Logic*, vol. 7, no. 3, pp. 484–498, 2014.
+
+\[4\] E. Mendelson, *Introduction to Mathematical Logic*, 6th ed., CRC Press, 2015.
+
+\[5\] L. de Moura, S. Kong, J. Avigad, F. van Doorn, and J. von Raumer, "The Lean theorem prover (system description)," in *25th International Conference on Automated Deduction (CADE-25)*, Berlin, Germany, 2015.
+
+\[6\] Y. Bertot and P. Castéran, *Interactive Theorem Proving and Program Development: Coq'Art – The Calculus of Inductive Constructions*, Springer, 2004.
+
+\[7\] G. Gonthier, A. Asperti, J. Avigad, Y. Bertot, C. Cohen, F. Garillot, S. Le Roux, A. Mahboubi, R. O'Connor, S. Pal, I. Pasca, L. Rideau, A. Solovyev, E. Tassi, and L. Théry, "A machine-checked proof of the odd order theorem," in *Interactive Theorem Proving (ITP 2013)*, LNCS 7998, 2012.
+
+\[8\] G. Gonthier, "A computer-checked proof of the four colour theorem," in *Handbook of the History of Logic, Vol. 9: Computational Logic*, Elsevier, 2012.
+
+\[9\] R. P. Nederpelt and H. Geuvers, *Type Theory and Formal Proof: An Introduction*, 2nd ed., Cambridge University Press, 2023.
+
+\[10\] T. Tao, T. Gowers, B. Green, and F. Manners, "Marton's Polynomial Freiman-Ruzsa conjecture," preprint, 2024. \[Online\]. Available: <https://teorth.github.io/pfr/>
+
+\[11\] G. Lowe, "Breaking and fixing the Needham-Schroeder public-key protocol using CSP and FDR," in *Tools and Algorithms for the Construction and Analysis of Systems (TACAS '96)*, 1995.
+
+\[12\] B. Smyth, "Formal verification of cryptographic protocols," Ph.D. dissertation, University of Birmingham, 2011.
 
 ## 6. Equipment, Facilities, and Software Requirements
 
@@ -101,16 +112,81 @@ The project builds upon several areas of academic and practical experience:
 
 The project spans approximately 30 weeks from 23 October 2025 to the final deadline of 22 May 2026, employing a mixed theoretical-practical methodology as seen below:
 
-1. **Foundational Study (Weeks 1-8)**: Background reading and software familiarisation.
-2. **Core Research (Weeks 9-18)**: …
-3. **Practical Implementation (Weeks 18-23)**: …
-4. **Mid-Project Report (Week 24)**: …
-5. **Analysis & Refinement (Weeks 25-28)**: …
-6. **Final Report (Weeks 29-30)**: …
+### Phase 1: Foundational Study (Weeks 1-8, 23 Oct – 17 Dec 2025)
 
-*Further detail to be added throughout the project*.
+- Complete foundational reading of core references \[1\], \[2\], \[4\], \[9\] to establish theoretical base in logic, type theory, and proof assistant history
+- Install and configure Lean 4 with mathlib and Coq with VS Code development environment
+- Complete initial Lean 4 tutorials (Mathematics in Lean, Theorem Proving in Lean)
+- Study Curry-Howard correspondence and basic type theory concepts
+- Weekly supervisor meetings to review progress and discuss theoretical concepts
+- Logbook entries documenting reading progress and software setup challenges
 
-**NOTE**: Might be a way to style this better in me
+### Phase 2: Core Research (Weeks 9-18, 18 Dec 2025 – 25 Feb 2026)
+
+- Advanced study of proof assistant architecture and design \[5\], \[6\]; compare Lean and Coq approaches
+- In-depth examination of case studies: Feit-Thompson formalisation \[7\], Four Colour Theorem \[8\], and Gödel incompleteness formalisation \[3\]
+- Analyse Lean formalisation of Polynomial Freiman-Ruzsa conjecture \[10\] as state-of-the-art example
+- Develop intermediate-level proficiency in both Lean and Coq through practical exercises
+- Identify 2-3 mathematical theorems suitable for formalisation (from different mathematical domains)
+- Critical analysis of formal verification applications in cryptography \[11\], \[12\] and industrial systems
+- Produce detailed notes on strengths/weaknesses of each proof assistant
+- Supervisor meetings to discuss case study findings and formalisation strategy
+
+### Phase 3: Practical Implementation (Weeks 18-23, 26 Feb – 01 Apr 2026)
+
+- formalise selected mathematical theorems in Lean 4 as primary project deliverable
+- Document formalisation process, including debugging and proof strategy decisions
+- Develop secondary Coq formalisation for comparison and learning
+- Create comprehensive code documentation with inline comments explaining proof structures
+- Reflect on practical challenges encountered: where formal methods added value versus overhead
+- Produce preliminary comparative analysis of formal methods effectiveness
+- Code repository commits with clear documentation of progress
+- Supervisor meetings to review formalisation quality and discuss emerging insights
+
+### Phase 4: Mid-Project Report (Week 24, 02 – 08 Apr 2026)
+
+- Progress review with supervisor; present formalisation and preliminary analysis
+- Synthesise findings from phases 1-3 into coherent narrative
+- Identify any gaps requiring additional focus before final report
+- Revise project objectives based on discoveries and remaining time
+- Supervisor feedback session and refinement of final report structure
+
+### Phase 5: Analysis and Refinement (Weeks 25-28, 09 Apr – 06 May 2026)
+
+- Critical evaluation: assess where formal methods provide genuine value versus where they add complexity
+- Analyse cost-benefit of formalisation across different mathematical domains
+- Compare theoretical foundations with practical implementation experience
+- Synthesise case study insights (Feit-Thompson, Four Colour, PFR, Gödel) with own findings
+- Write draft final report incorporating all phases, analysis, and conclusions
+- Incorporate supervisor feedback on draft sections
+- Logbook completion with final reflections on learning journey
+- Draft report due: 01 May 2026
+
+### Phase 6: Final Report Preparation (Weeks 29-30, 07 – 22 May 2026)
+
+- Comprehensive revisions and proofreading of final report
+- Refine figures, diagrams, and mathematical notation
+- Final incorporation of all formalisation code snippets and case study references
+- Submission of formal code repository with complete documentation
+- Final supervisor review and approval
+- Final submission: 22 May 2026
+
+### Phase 7: Viva Preparation and Examination (21 May – 12 Jun 2026)
+
+- Prepare presentation slides and viva materials
+- Practice presentation explaining formalisation, key findings, and conclusions
+- Prepare for questions on theoretical foundations and practical implementation
+- Viva examination: 12 June 2026
+
+### Key Milestones and Deliverables
+
+- **Week 8**: Literature review complete, Lean/Coq environments functional
+- **Week 18**: Case studies analysed, formalisation strategy finalised
+- **Week 23**: Primary mathematical theorems formalised in Lean
+- **Week 24**: Mid-project report and progress review
+- **Week 28**: Draft final report completed
+- **Week 30**: Final report and code repository submitted
+- **Week 32**: Viva examination
 
 ```mermaid
 gantt
