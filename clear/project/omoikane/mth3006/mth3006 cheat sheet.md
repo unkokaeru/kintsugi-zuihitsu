@@ -50,15 +50,11 @@ Add some games, too + some fun decor (photos, frogs?)
 	2. Use the table of Laplace transforms to transform $f(t)\to \tilde{f}(t)$ using $s$.
 		- May have to separate into multiple transforms, depending on $f(t)$.
 2. Finding the transform…
-	1. 
+	1. Directly evaluate the integral to be in terms of $t$.
+	2. Use the table of Laplace transforms to transform $f(t)\to \tilde{f}(t)$, in terms of $s$.
+		- Each term is a separate transform.
 3. Solving differential equations…
-	1. …
-
-**\[X1, 10 marks\]** Find the Laplace transform of…
-
-$$
-f(t)=\int_{0}^t u^2-u+e^{-u}du
-$$
+	1. Use the table of Laplace transforms to transform the equation terms.
 
 **\[B4, 15 marks\]** Use Laplace transforms to solve the differential equation, given that $x(0)=1$…
 
