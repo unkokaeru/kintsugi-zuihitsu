@@ -97,18 +97,38 @@ $$
 f(t)=\int_{0}^t u^2-u+e^{-u}du
 $$
 
-### 2x Method of Characteristics (homogeneous, non-homogeneous)
+### Method of Characteristics (homogeneous, non-homogeneous)
 
-**\[A1, 10 marks\]** Use the method of characteristics to solve the following subject to the boundary condition $u=\left( 1 + \frac{1}{x} \right)^2$ on $y=x$...
+**\[A1, 15 marks\]** Use the method of characteristics to solve the following, subject to the boundary condition $u=\left( 1 + \frac{1}{x} \right)^2$ on $y=x$…
 
 $$
-x \frac{\delta u(x,y)}{\delta x}
+x \frac{\partial u(x,y)}{\partial x}+(1+y) \frac{\partial u(x,y)}{\partial y}=0
+$$
+
+**\[C4, 15 marks\]** Use the method of characteristics to solve the following, subject to the boundary condition $u=1$ on $x=0$…
+
+$$
+\frac{\partial u(x,y)}{\partial x}-x^2 \frac{\partial u(x,y)}{\partial y}=2x^2y
 $$
 
 ### 2x Change of Variables (xi, eta/tau)
 
-…
+**\[B3, 10 marks\]** Show that making the change of variables $\xi=y+2x$ and $\eta=y-2x$ transforms the differential equation…
+
+$$
+\frac{\partial^2u}{\partial x^2}-4 \frac{\partial^2u}{\partial y^2}+ \frac{\partial u}{\partial x}=0 \to 8 \frac{\partial^2u}{\partial \xi \partial \eta}- \frac{\partial u}{\partial \xi}+ \frac{\partial u}{\partial \eta}=0
+$$
+
+**\[X4, 15 marks\]** Transform the following differential equation, where $\gamma$ and $D$ are constants, to a coordinate system given by $\xi=x-\gamma t$ and $\tau=t$…
+
+$$
+\frac{\partial u}{\partial t}+\gamma\frac{\partial u}{\partial x}=D \frac{\partial^2u}{\partial x^2}
+$$
 
 ### Separation of Variables (with Second-order differential)
 
-…
+**\[A3, 15 marks\]** Use separation of variables to solve the following, subject to the boundary conditions $u(0,t)=u(2,t)=0$ and $u(x,0)=3\sin(2\pi x)+2\sin(4\pi x)$…
+
+$$
+\frac{\partial u(x,t)}{\partial t}=\frac{\partial^2u(x,t)}{\partial x^2}
+$$
