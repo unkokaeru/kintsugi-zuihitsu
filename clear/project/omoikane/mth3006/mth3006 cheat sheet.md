@@ -38,31 +38,15 @@ Add some games, too + some fun decor (photos, frogs?)
 		- $\mathcal{L}^{-1}\left\{\frac{s}{s^2+a^2}\right\} = \cos(at)$.
 		- $\mathcal{L}^{-1}\left\{ \frac{a}{s^2+a^2} \right\} = \sin(at)$.
 	- Simplify.
-2. Convolution theorem…
+2. ==Convolution theorem==…
 	1. If $\tilde{F}(s) = F(s) G(s)$, then $f(t) = \int_0^t f(\tau) g(t-\tau) d\tau$.
-
-**\[B2, 15 marks\]** Use partial fractions to find the inverse Laplace transform of…
-
-$$
-\tilde{f}(s)=\frac{s^2-15s+41}{(s+2)(s-3)^2}
-$$
-
-**\[X3, 15 marks\]** Show that the inverse Laplace transform of the following can be written in the form $f(t)=ae^{3t}+b\cos2t+c\sin2t$, and find the values of the constants $a$, $b$, and $c$…
-
-$$
-\tilde{f}(s)=\frac{5s^2-4s-7}{(s-3)(s^2+4)}
-$$
-
-**\[C2, 15 marks\]** Use the convolution theorem to calculate the inverse Laplace transform of…
-
-$$
-\tilde{F}(s)=\frac{1}{s^2(s^2-1)}
-$$
+		- $\mathcal{L}^{-1}\left\{ \frac{1}{s^2} \right\} = t$.
+		- $\mathcal{L}^{-1}\left\{ \frac{1}{s^2-1)} \right\} = \sinh t$.
 
 ### 3. Laplace Transforms (10/15 marks)
 
-- Evaluate integrals (75%, 10 marks)
-- Solve differential equation (25%, 15 marks)
+1. Evaluating integrals…
+	1. …
 
 **\[A4, 10 marks\]** Use Laplace transforms to evaluate the integrals…
 
