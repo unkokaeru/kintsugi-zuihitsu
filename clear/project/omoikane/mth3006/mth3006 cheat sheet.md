@@ -27,7 +27,11 @@ Add some games, too + some fun decor (photos, frogs?)
 ### 2. Inverse Laplace Transform (15 marks)
 
 1. Partial fractions (real/complex roots)…
-	1. Decompose $\tilde{f}(s)$ 
+	1. Decompose $\tilde{f}(s)$ into separate fractions for each of the denominator's factors:
+		- Linear factor $ax+b$, use the form $\frac{A}{ax+b}$.
+		- Repeated linear factor $(ax+b)^n$, use the form $\frac{A_{1}}{ax+b}+\frac{A_{2}}{(ax+b)^2}+\dots+\frac{A_{n}}{(ax+b)^n}$.
+		- Irreducible quadratic factor $ax^2+bx+c$, us
+		- For the denominator form $ax^2+bx+c$, use the fraction form $\frac{Ax+B}{ax^2+bx+c}$.
 2. Convolution theorem…
 
 **\[B2, 15 marks\]** Use partial fractions to find the inverse Laplace transform of…
