@@ -23,21 +23,8 @@
               "icon": "lucide-file",
               "title": "mth3006"
             }
-          },
-          {
-            "id": "a2913cbb964fe43c",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/MTH3006_Coursework.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "MTH3006_Coursework"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -188,10 +175,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "a2913cbb964fe43c",
+  "active": "d7e9123ec3dbdb4b",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3006/Fourier transform.md",
     "attached/files/MTH3006_Coursework.pdf",
+    "clear/project/omoikane/mth3006/Fourier transform.md",
     "clear/project/omoikane/mth3006/Laplace transform.md",
     "clear/project/omoikane/mth3011/Research Plan.md",
     "clear/project/omoikane/mth3006/mth3006.md",
