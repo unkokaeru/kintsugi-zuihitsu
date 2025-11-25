@@ -11,8 +11,12 @@ Add some games, too + some fun decor (photos, frogs?)
 
 ### 1. Fourier Transform (10 marks)
 
-- Piecewise (75%)
-- Sine (25%)
+1. Piecewise
+	1. Write out the formula: $\tilde{f}(\omega) = \frac{1}{\sqrt{ 2\pi }}\int_{-\infty}^{\infty} f(t)e^{-i \omega t }dt$.
+	2. Separate the integral into each piecewise range.
+	3. Evaluate/simplify, using limits when substituting ooo
+2. Sine (odd function) - …
+3. Cos (even function) - …
 
 **\[A1, 10 marks\]** Calculate the Fourier transform of…
 
