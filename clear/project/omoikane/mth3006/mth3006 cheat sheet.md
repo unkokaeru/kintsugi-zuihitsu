@@ -30,9 +30,16 @@ Add some games, too + some fun decor (photos, frogs?)
 	1. Decompose $\tilde{f}(s)$ into separate fractions for each of the denominator's factors:
 		- Linear factor $ax+b$, use the form $\frac{A}{ax+b}$.
 		- Repeated linear factor $(ax+b)^n$, use the form $\frac{A_{1}}{ax+b}+\frac{A_{2}}{(ax+b)^2}+\dots+\frac{A_{n}}{(ax+b)^n}$.
-		- Irreducible quadratic factor $ax^2+bx+c$, us
-		- For the denominator form $ax^2+bx+c$, use the fraction form $\frac{Ax+B}{ax^2+bx+c}$.
+		- Irreducible quadratic factor $ax^2+bx+c$, use the form $\frac{Ax+B}{ax^2+bx+c}$.
+		- Repeated irreducible quadratic factor $(ax^2 + bx + c)^m$, use the form $\frac{A_1x + B_1}{ax^2 + bx + c} + \frac{A_2x + B_2}{(ax^2 + bx + c)^2} + \cdots + \frac{A_mx + B_m}{(ax^2 + bx + c)^m}$.
+	2. Apply the appropriate transform for each term:
+		- $\mathcal{L}^{-1}\left\{ \frac{1}{s-a} \right\} = e^{at}$.
+		- $\mathcal{L}^{-1}\left\{ \frac{1}{(s-a)^2} \right\} = te^{at}$.
+		- $\mathcal{L}^{-1}\left\{\frac{s}{s^2+a^2}\right\} = \cos(at)$.
+		- $\mathcal{L}^{-1}\left\{ \frac{a}{s^2+a^2} \right\} = \sin(at)$.
+	- Simplify.
 2. Convolution theorem…
+	1. If $\tilde{F}(s) = F(s) G(s)$, then $f(t) = \int_0^t f(\tau) g(t-\tau) d\tau$.
 
 **\[B2, 15 marks\]** Use partial fractions to find the inverse Laplace transform of…
 

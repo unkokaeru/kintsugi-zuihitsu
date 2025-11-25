@@ -142,81 +142,79 @@ Rationalise denominator: Multiply top and bottom by
 
 $$
  1 - i\omega 
-$$:  
 $$
 
- F(\omega) = \frac{1 - i\omega}{1 + \omega^2}
+:
 
+$$
+ F(\omega) = \frac{1 - i\omega}{1 + \omega^2}
 $$
 
 #### **Example [B1]**
 
-Calculate Fourier Transform for  
-$$
+Calculate Fourier Transform for
 
+$$
  f(t) = \begin{cases} e^t, & -a < t < a \\ 0, & \text{otherwise} \end{cases}
-
 $$
 
-**Solution:**  
-$$
+**Solution:**
 
+$$
  F(\omega) = \int_{-a}^{a} e^t e^{-i\omega t} dt = \int_{-a}^a e^{(1 - i\omega)t} dt
-
-$$  
 $$
 
+$$
  = \frac{e^{a(1 - i\omega)} - e^{-a(1 - i\omega)}}{1 - i\omega}
-
 $$
 
 #### **Example [C1]**
 
-Calculate Fourier Transform for  
-$$
+Calculate Fourier Transform for
 
+$$
  f(t) = \begin{cases} t, & 0 \leq t \leq 1 \\ 0, & \text{otherwise} \end{cases}
-
 $$
 
-**Solution:**  
-$$
+**Solution:**
 
+$$
  F(\omega) = \int_0^1 t e^{-i\omega t} dt
+$$
 
-$$  
-Integration by parts:  
+Integration by parts:
+
 Let
-$$
 
+$$
  u = t
-
-$$,
 $$
 
+,
+
+$$
  dv = e^{-i\omega t} dt
-
-$$.  
 $$
 
- F(\omega) = \frac{1 - e^{-i\omega}[1 + i\omega]}{\omega^2}
+.
 
+$$
+ F(\omega) = \frac{1 - e^{-i\omega}[1 + i\omega]}{\omega^2}
 $$
 
 #### **Example [X1 - Sine Transform]**
 
 Calculate Fourier sine transform of
-$$
 
+$$
  f(t) = e^{-t}
-
-$$:
-
 $$
 
+:
+
+$$
  F_s(\omega) = \sqrt{\frac{2}{\pi}} \int_{0}^{\infty} e^{-t} \sin(\omega t) dt
 = \sqrt{\frac{2}{\pi}} \cdot \frac{\omega}{1 + \omega^2}
-
 $$
 
 ***
@@ -226,35 +224,42 @@ $$
 #### **A. Partial Fractions**
 
 **Key formulas:**
-- 
-$$ \mathcal{L}^{-1}\{1/(s-a)\} = e^{at} 
+
+$$
+ \mathcal{L}^{-1}\{1/(s-a)\} = e^{at} 
 $$
 
-$$ \mathcal{L}^{-1}\{1/(s-a)^2\} = te^{at} 
+$$
+ \mathcal{L}^{-1}\{1/(s-a)^2\} = te^{at} 
 $$
 
-$$ \mathcal{L}^{-1}\{s/(s^2+a^2)\} = \cos(at) 
+$$
+ \mathcal{L}^{-1}\{s/(s^2+a^2)\} = \cos(at) 
 $$
 
-$$ \mathcal{L}^{-1}\{a/(s^2+a^2)\} = \sin(at) 
+$$
+ \mathcal{L}^{-1}\{a/(s^2+a^2)\} = \sin(at) 
 $$
 
 **Example [B2]:**
 
 Find inverse Laplace of
 
-$$ \tilde{f}(s) = \frac{s^2-15s+41}{(s+2)(s-3)^2} 
+$$
+ \tilde{f}(s) = \frac{s^2-15s+41}{(s+2)(s-3)^2} 
 $$
 
 **Solution:**
 Decompose:
 
-$$ \tilde{f}(s) = \frac{3}{s+2} - \frac{2}{s-3} + \frac{1}{(s-3)^2} 
+$$
+ \tilde{f}(s) = \frac{3}{s+2} - \frac{2}{s-3} + \frac{1}{(s-3)^2} 
 $$  
 
 Apply transform:
 
-$$ f(t) = 3e^{-2t} - 2e^{3t} + t e^{3t} = 3e^{-2t} + (t-2) e^{3t} 
+$$
+ f(t) = 3e^{-2t} - 2e^{3t} + t e^{3t} = 3e^{-2t} + (t-2) e^{3t} 
 $$
 
 ***
@@ -265,17 +270,20 @@ $$
 
 Find inverse Laplace of
 
-$$ \tilde{f}(s) = \frac{5s^2-4s-7}{(s-3)(s^2 + 4)} 
+$$
+ \tilde{f}(s) = \frac{5s^2-4s-7}{(s-3)(s^2 + 4)} 
 $$
 
 Decompose:
 
-$$ \tilde{f}(s) = \frac{2}{s-3} + \frac{3s+5}{s^2+4} 
+$$
+ \tilde{f}(s) = \frac{2}{s-3} + \frac{3s+5}{s^2+4} 
 $$  
 
 Apply transform:
 
-$$ f(t) = 2e^{3t} + 3\cos(2t) + \frac{5}{2}\sin(2t) 
+$$
+ f(t) = 2e^{3t} + 3\cos(2t) + \frac{5}{2}\sin(2t) 
 $$
 
 ***
@@ -284,27 +292,36 @@ $$
 
 If
 
-$$ \tilde{F}(s) = F(s) G(s) 
-$$, then
-$$ f(t) = \int_0^t f(\tau) g(t-\tau) d\tau 
+$$
+ \tilde{F}(s) = F(s) G(s) 
+$$
+
+, then
+
+$$
+ f(t) = \int_0^t f(\tau) g(t-\tau) d\tau
 $$
 
 **Example [C2]:**
 
-$$ \tilde{F}(s) = \frac{1}{s^2(s^2-1)} = \frac{1}{s^2} \times \frac{1}{s^2-1} 
+$$
+ \tilde{F}(s) = \frac{1}{s^2(s^2-1)} = \frac{1}{s^2} \times \frac{1}{s^2-1}
 $$
 
 Inverse Laplace:
 
-$$ \mathcal{L}^{-1}\{1/s^2\} = t 
+$$
+ \mathcal{L}^{-1}\{1/s^2\} = t
 $$
 
-$$ \mathcal{L}^{-1}\{1/(s^2-1)\} = \sinh t 
+$$
+ \mathcal{L}^{-1}\{1/(s^2-1)\} = \sinh t
 $$
 
 Thus final answer:
 
-$$ f(t) = \sinh t - t 
+$$
+ f(t) = \sinh t - t
 $$
 
 ***
@@ -315,18 +332,27 @@ $$
 
 **Example [A4]:**
 
-$$ \int_{0}^{\infty} \sin(3t)e^{-2t} dt = \mathcal{L}\{\sin(3t)\}|_{s=2} = \frac{3}{13} 
-$$  
+$$
+ \int_{0}^{\infty} \sin(3t)e^{-2t} dt = \mathcal{L}\{\sin(3t)\}|*{s=2} = \frac{3}{13}
+$$
 
-$$ \int_{0}^{\infty} (t-\cos(3t))e^{-t} dt = 1 - \frac{1}{10} = \frac{9}{10} 
-$$  
+$$
+ \int*{0}^{\infty} (t-\cos(3t))e^{-t} dt = 1 - \frac{1}{10} = \frac{9}{10}
+$$
 
 (Since
 
-$$ \mathcal{L}\{t\}|_{s=1} = 1 
-$$, 
-$$ \mathcal{L}\{\cos(3t)\}|_{s=1} = 1/10 
-$$)
+$$
+ \mathcal{L}\{t\}|_{s=1} = 1
+$$
+
+,
+
+$$
+ \mathcal{L}\{\cos(3t)\}|_{s=1} = 1/10 
+$$
+
+)
 
 ***
 
@@ -334,14 +360,20 @@ $$)
 
 **Example [C3]:**
 
-For real constant 
-$$ a 
-$$:
-- 
-$$ \int_{0}^{\infty} e^{-3t} t^3 dt = \frac{2}{27} 
+For real constant
+
+$$
+ a
 $$
 
-$$ \int_{0}^{\infty} \cos(at) e^{-t} dt = \frac{1}{1+a^2} 
+:
+
+$$
+ \int_{0}^{\infty} e^{-3t} t^3 dt = \frac{2}{27} 
+$$
+
+$$
+ \int_{0}^{\infty} \cos(at) e^{-t} dt = \frac{1}{1+a^2} 
 $$
 
 ***
@@ -351,21 +383,28 @@ $$
 **Example [X1]:**
 Find Laplace transform of
 
-$$ f(t) = \int_0^t (u^2-u+e^{-u}) du 
-$$:
+$$
+ f(t) = \int_0^t (u^2-u+e^{-u}) du 
+$$
 
-Property: 
-$$ \mathcal{L}\left\{ \int_0^t g(u) du \right\} = \frac{G(s)}{s} 
-$$  
+:
+
+Property:
+
+$$
+ \mathcal{L}\left\{ \int_0^t g(u) du \right\} = \frac{G(s)}{s}
+$$
 
 So:
 
-$$ G(s) = \frac{2}{s^3} - \frac{1}{s^2} + \frac{1}{s+1} 
-$$  
+$$
+ G(s) = \frac{2}{s^3} - \frac{1}{s^2} + \frac{1}{s+1}
+$$
 
 Final answer:
 
-$$ F(s) = \frac{2}{s^4} - \frac{1}{s^3} + \frac{1}{s(s+1)} 
+$$
+ F(s) = \frac{2}{s^4} - \frac{1}{s^3} + \frac{1}{s(s+1)}
 $$
 
 ***
@@ -375,21 +414,28 @@ $$
 **Example [B4]:**
 Solve
 
-$$ \frac{dx}{dt} + 3x = e^{-t},\, x(0)=1 
-$$:
+$$
+ \frac{dx}{dt} + 3x = e^{-t},\, x(0)=1
+$$
 
-Take Laplace:  
-$$ s X(s) - 1 + 3 X(s) = \frac{1}{s+1} \implies X(s) = \frac{s+2}{(s+3)(s+1)} 
-$$  
+:
+
+Take Laplace:
+
+$$
+ s X(s) - 1 + 3 X(s) = \frac{1}{s+1} \implies X(s) = \frac{s+2}{(s+3)(s+1)}
+$$
 
 Partial fractions:
 
-$$ X(s) = \frac{1/2}{s+3} + \frac{1/2}{s+1} 
-$$  
+$$
+ X(s) = \frac{1/2}{s+3} + \frac{1/2}{s+1}
+$$
 
 Inverse transform:
 
-$$ x(t) = \frac{1}{2}e^{-3t} + \frac{1}{2}e^{-t} 
+$$
+ x(t) = \frac{1}{2}e^{-3t} + \frac{1}{2}e^{-t}
 $$
 
 ***
@@ -399,67 +445,83 @@ $$
 **General form:**
 For
 
-$$ a(x,y)u_x + b(x,y)u_y = c(x,y,u) 
-$$:
-
-1. Set up equations:  
-   
-$$ \frac{dx}{ds} = a(x,y) 
+$$
+ a(x,y)u_x + b(x,y)u_y = c(x,y,u)
 $$
 
-$$ \frac{dy}{ds} = b(x,y) 
+:
+
+1. Set up equations:
+
+$$
+ \frac{dx}{ds} = a(x,y)
 $$
 
-$$ \frac{du}{ds} = c(x,y,u) 
+$$
+ \frac{dy}{ds} = b(x,y)
+$$
+
+$$
+ \frac{du}{ds} = c(x,y,u)
 $$
 
 1. Solve ODEs.
 2. Eliminate parameter
 
-$$ s 
-$$.  
-4. Apply boundary conditions and write
+$$
+ s
 $$
 
- u(x,y) $$.
+.
+
+1. Apply boundary conditions and write
+
+$$
+ u(x,y)
+$$
+
+.
 
 **Example [A2]:**
 
 $$
- x\,u_x + (1+y)u_y = 0,\, u=\left(1+\frac{1}{x}\right)^2 
-$$ on
+ x\,u_x + (1+y)u_y = 0,\, u=\left(1+\frac{1}{x}\right)^2
 $$
 
+ on
+
+$$
  y=x
-
-$$:
-
-Along characteristics:  
 $$
 
- u(x, y) = \left( \frac{x+y+1}{x} \right)^2
+:
 
+Along characteristics:
+
+$$
+ u(x, y) = \left( \frac{x+y+1}{x} \right)^2
 $$
 
 ***
 
 **Example [C4]:**
-$$
 
+$$
  u_x - x^2 u_y = 2x^2y,\, u=1
-
-$$ on
 $$
 
- x=0
+ on
 
-$$:
+$$
+ x=0
+$$
+
+:
 
 Try undetermined coefficients:
+
 $$
-
  u(x, y) = 1 + \frac{2}{3}x^{3}y + \frac{1}{9}x^{6}
-
 $$
 
 ***
@@ -470,23 +532,23 @@ Find how derivatives transform under new coordinates (chain rule).
 
 **Example [B3]:**
 Show
+
+$$
+ \xi = y+2x,\, \eta = y-2x
 $$
 
- \xi = y+2x,\, \eta = y-2x
-
-$$:
+:
 
 Given
-$$
 
+$$
  u_{xx} - 4u_{yy} + u_x = 0
-
 $$
+
 becomes
+
 $$
-
  8u_{\xi \eta} - u_\xi + u_\eta = 0
-
 $$
 
 ***
@@ -494,64 +556,63 @@ $$
 **Example [X4]:**
 
 $$
-
  u_t + \gamma u_x = D u_{xx}
-
-$$ under
 $$
 
+ under
+
+$$
  \xi = x-\gamma t,\, \tau = t
-
-$$:
-
-Transformed equation:  
 $$
 
- u_\tau = D u_{\xi\xi}
+:
 
+Transformed equation:
+
+$$
+ u_\tau = D u_{\xi\xi}
 $$
 
 ***
 
 ### **6. Separation of Variables**
 
-**For Heat Equation**:  
-$$
+**For Heat Equation**:
 
+$$
  u_t = u_{xx},\, u(0,t) = u(2,t) = 0,\, u(x) = 3\sin(2\pi x) + 2\sin(4\pi x)
-
 $$
 
-Eigenfunctions:  
-$$
+Eigenfunctions:
 
+$$
  X_n(x) = \sin(n\pi x / 2)
-
-$$
-Eigenvalues:  
 $$
 
+Eigenvalues:
+
+$$
  \lambda_n = (n\pi/2)^2
-
-$$
-General solution:  
 $$
 
+General solution:
+
+$$
  u(x, t) = \sum B_n \sin(n\pi x/2) e^{-\lambda_n t}
-
-$$  
-Given initial condition, only
 $$
 
- n=2,4
+Given initial condition, only
 
-$$ are nonzero.
+$$
+ n=2,4
+$$
+
+ are nonzero.
 
 So:
+
 $$
-
  u(x,t) = 3\sin(2\pi x) e^{-4\pi^2 t} + 2 \sin(4\pi x) e^{-16\pi^2 t}
-
 $$
 
 ***
@@ -559,47 +620,45 @@ $$
 ## **Integrating Factor (First Order ODEs) Method**
 
 Given
+
+$$
+ \frac{dy}{dx} + P(x) y = Q(x)
 $$
 
- \frac{dy}{dx} + P(x) y = Q(x)
-
-$$:
+:
 
 1. Compute integrating factor:
-$$
 
+$$
  \mu(x) = e^{\int P(x)dx}
-
-$$
-2. Multiply whole equation by
 $$
 
+1. Multiply whole equation by
+
+$$
  \mu(x)
-
-$$  
-3. The LHS becomes
 $$
 
+1. The LHS becomes
+
+$$
  \frac{d}{dx}[\mu(x) y]
-
 $$
-4. Solve by integrating both sides.
+
+1. Solve by integrating both sides.
 
 **Example:**
-$$
 
+$$
  \frac{dy}{dx} + 2y = x
-
-$$  
 $$
 
+$$
  \mu(x) = e^{2x}
-
-$$  
 $$
 
+$$
  y = \frac{x}{2} - \frac{1}{4} + Ce^{-2x}
-
 $$
 
 ***
@@ -607,115 +666,126 @@ $$
 ## **Second Order ODEs**
 
 General:
+
 $$
-
  ay'' + by' + cy = f(x)
-
 $$
 
 **Complementary solution** (homogeneous part):
 - Auxiliary equation:
-$$
 
+$$
  ak^2 + bk + c = 0
-
 $$
+
 - If roots are real and distinct:
-$$
 
+$$
  y_{cf} = Ae^{k_1x} + Be^{k_2x}
-
 $$
+
 - If roots repeated:
-$$
 
+$$
  y_{cf} = (A + Bx)e^{kx}
-
 $$
+
 - If roots complex:
-$$
 
+$$
  y_{cf} = e^{\alpha x}(A \cos \beta x + B \sin \beta x)
-
 $$
 
-**Particular solution:**  
-- If rhs is polynomial, try another polynomial  
+**Particular solution:**
+- If rhs is polynomial, try another polynomial
 - If rhs is
-$$
 
+$$
  e^{ax}
-
-$$, try
 $$
 
+, try
+
+$$
  Ae^{ax}
+$$
 
-$$  
 - If rhs is trig (
-$$
 
+$$
  \sin(ax), \cos(ax)
-
-$$), try
 $$
 
+), try
+
+$$
  Asin(ax) + Bcos(ax)
+$$
 
-$$  
 - If this is part of
-$$
 
+$$
  y_{cf}
-
-$$, multiply guess by
 $$
 
- x
+, multiply guess by
 
-$$!
+$$
+ x
+$$
+
+!
 
 ***
 
 ## **Integration By Parts**
-$$
 
+$$
 \int u\, dv = uv - \int v\, du
+$$
+
+Common:
 
 $$
-Common: 
-$$ u = t, dv = e^{at} dt 
-$$ or 
-$$ u = t, dv = \sin(at) dt 
+ u = t, dv = e^{at} dt
+$$
+
+ or
+
+$$
+ u = t, dv = \sin(at) dt
 $$
 
 ***
 
 ## **Standard Integrals**
 
-$$ \int e^{ax} dx = \frac{e^{ax}}{a} + C 
 $$
-
-$$ \int \sin(ax) dx = -\frac{\cos(ax)}{a} + C 
-$$
-
-$$ \int \cos(ax) dx = \frac{\sin(ax)}{a} + C
+ \int e^{ax} dx = \frac{e^{ax}}{a} + C
 $$
 
 $$
- \int \sinh(ax) dx = \frac{\cosh(ax)}{a} + C 
+ \int \sin(ax) dx = -\frac{\cos(ax)}{a} + C
 $$
 
 $$
- \int \cosh(ax) dx = \frac{\sinh(ax)}{a} + C 
+ \int \cos(ax) dx = \frac{\sin(ax)}{a} + C
 $$
 
 $$
- \int e^{-at}\sin(bt) dt = \frac{e^{-at}[-a\sin(bt) - b\cos(bt)]}{a^2+b^2} + C 
+ \int \sinh(ax) dx = \frac{\cosh(ax)}{a} + C
 $$
 
 $$
- \int e^{-at}\cos(bt) dt = \frac{e^{-at}[-a\cos(bt) + b\sin(bt)]}{a^2+b^2} + C 
+ \int \cosh(ax) dx = \frac{\sinh(ax)}{a} + C
+$$
+
+$$
+ \int e^{-at}\sin(bt) dt = \frac{e^{-at}[-a\sin(bt) - b\cos(bt)]}{a^2+b^2} + C
+$$
+
+$$
+ \int e^{-at}\cos(bt) dt = \frac{e^{-at}[-a\cos(bt) + b\sin(bt)]}{a^2+b^2} + C
 $$
 
 ***
@@ -724,8 +794,10 @@ $$
 
 - For Laplace and Fourier questions, always write out the transform formula first.
 - Highlight boundary and initial conditions before starting PDE/ODE.
-- If you need to use integration by parts: choose $$ u
+- If you need to use integration by parts: choose
 
+$$
+ u
 $$ so derivative gets simpler!
 - Rationalise denominators with conjugates for Fourier answers.
 - Use partial fractions for Laplace inverses with complicated denominators.
