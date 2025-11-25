@@ -18,11 +18,48 @@ Add some games, too + some fun decor (photos, frogs?)
 
 ### 4x Fourier Transform (piecewise, Normal, sine)
 
-…
+**\[A1, 10 marks\]** Calculate the Fourier transform of…
+
+$$
+f(t)=\begin{cases}
+e^-t & \text{when} & t\geq0 \\
+0 & \text{when} & t<0
+\end{cases}
+$$
+
+**\[B1, 10 marks\]** Calculate, where $a>0$ is a real constant, the Fourier transform of…
+
+$$
+f(t)=\begin{cases}
+e^t & \text{when} & -a<t<a\\
+0 & \text{otherwise}
+\end{cases}
+$$
+
+**\[C1, 10 marks\]** Calculate the Fourier transform of…
+
+$$
+f(t)=\begin{cases}
+t & \text{when } & 0\leq t\leq {1} \\
+0 & \text{otherwise}
+\end{cases}
+$$
+
+**\[X1, 10 marks\]** Calculate the Fourier sine transform of the function $f(t)=\exp(-t)$, using…
+
+$$
+f_{s}(\omega)=\sqrt{ \frac{2}{\pi} }\int_{0}^{\infty}f(t)\sin(\omega t)dt
+$$
 
 ### 4x Inverse Laplace Transform (partial Fractions, Convolution theorem)
 
-…
+**\[B1, 10 marks\]** Use partial fractions to find the inverse Laplace transform of...
+
+$$
+\tilde{f}(s)=\frac{s^2-15s+41}{(s+2)(s-3)^2}
+$$
+
+**\[C1, 15 marks\]** Use the convolution theorem to calculate the inverse Laplace transform
 
 ### 3x Laplace Transforms
 
