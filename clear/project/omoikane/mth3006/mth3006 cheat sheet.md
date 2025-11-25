@@ -16,7 +16,10 @@ Add some games, too + some fun decor (photos, frogs?)
 
 ## Possible Question Topics and Their Explanations
 
-### Fourier Transform (piecewise, Normal, sine)
+### 1. Fourier Transform (10 marks)
+
+- Piecewise (75%)
+- Sine (25%)
 
 **\[A1, 10 marks\]** Calculate the Fourier transform of…
 
@@ -51,15 +54,17 @@ $$
 f_{s}(\omega)=\sqrt{ \frac{2}{\pi} }\int_{0}^{\infty}f(t)\sin(\omega t)dt
 $$
 
-### Inverse Laplace Transform (partial Fractions, Convolution theorem)
+### Inverse Laplace Transform (Partial Fractions 67%, Convolution Theorem 33%)
 
-**\[B1, 10 marks\]** Use partial fractions to find the inverse Laplace transform of…
+- Question 2 (67%) / 1 (33%), 15 marks (100%)
+
+**\[B2, 15 marks\]** Use partial fractions to find the inverse Laplace transform of…
 
 $$
 \tilde{f}(s)=\frac{s^2-15s+41}{(s+2)(s-3)^2}
 $$
 
-**\[C1, 15 marks\]** Use the convolution theorem to calculate the inverse Laplace transform of…
+**\[C2, 15 marks\]** Use the convolution theorem to calculate the inverse Laplace transform of…
 
 $$
 \tilde{F}(s)=\frac{1}{s^2(s^2-1)}
@@ -99,7 +104,7 @@ $$
 
 ### Method of Characteristics (homogeneous, non-homogeneous)
 
-**\[A1, 15 marks\]** Use the method of characteristics to solve the following, subject to the boundary condition $u=\left( 1 + \frac{1}{x} \right)^2$ on $y=x$…
+**\[A2, 15 marks\]** Use the method of characteristics to solve the following, subject to the boundary condition $u=\left( 1 + \frac{1}{x} \right)^2$ on $y=x$…
 
 $$
 x \frac{\partial u(x,y)}{\partial x}+(1+y) \frac{\partial u(x,y)}{\partial y}=0
