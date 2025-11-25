@@ -54,7 +54,7 @@ $$
 f_{s}(\omega)=\sqrt{ \frac{2}{\pi} }\int_{0}^{\infty}f(t)\sin(\omega t)dt
 $$
 
-### 2/3. Inverse Laplace Transform (15 marks)
+### 2. Inverse Laplace Transform (15 marks)
 
 - Partial fractions (67%)
 - Convolution theorem (33%)
@@ -77,7 +77,7 @@ $$
 \tilde{F}(s)=\frac{1}{s^2(s^2-1)}
 $$
 
-### 4/3/1. Laplace Transforms (10/15 marks)
+### 3. Laplace Transforms (10/15 marks)
 
 - Evaluate integrals (75%, 10 marks)
 - Solve differential equation (25%, 15 marks)
@@ -106,7 +106,7 @@ $$
 \frac{dx(t)}{dt}+3x(t)=e^{-t}
 $$
 
-### 2/4. Method of Characteristics (15 marks)
+### 4. Method of Characteristics (15 marks)
 
 - Homogeneous (50%)
 - Non-homogeneous (50%)
@@ -123,7 +123,7 @@ $$
 \frac{\partial u(x,y)}{\partial x}-x^2 \frac{\partial u(x,y)}{\partial y}=2x^2y
 $$
 
-### 3/4. Change of Variables (10-15 marks)
+### 5. Change of Variables (10/15 marks)
 
 **\[B3, 10 marks\]** Show that making the change of variables $\xi=y+2x$ and $\eta=y-2x$ transforms the differential equation…
 
@@ -137,7 +137,7 @@ $$
 \frac{\partial u}{\partial t}+\gamma\frac{\partial u}{\partial x}=D \frac{\partial^2u}{\partial x^2}
 $$
 
-### 3. Separation of Variables (15 marks)
+### 6. Separation of Variables (15 marks)
 
 - Second-order differential equation
 - First-order differential equation
