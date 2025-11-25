@@ -45,27 +45,24 @@ Add some games, too + some fun decor (photos, frogs?)
 
 ### 3. Laplace Transforms (10/15 marks)
 
-1. Evaluating integrals…
+1. Evaluating integrals (10 marks)…
 	1. Match then given integral with the form $\tilde{f}(s)=\int_{0}^{\infty}f(t)e^{ -st }dt$ to find $f(t)$ and $s$.
 	2. Use the table of Laplace transforms to transform $f(t)\to \tilde{f}(t)$ using $s$.
 		- May have to separate into multiple transforms, depending on $f(t)$.
-2. Finding the transform…
+2. Finding the transform (10 marks)…
 	1. Directly evaluate the integral to be in terms of $t$.
 	2. Use the table of Laplace transforms to transform $f(t)\to \tilde{f}(t)$, in terms of $s$.
 		- Each term is a separate transform.
-3. Solving differential equations…
-	1. Use the table of Laplace transforms to transform the equation terms.
-
-**\[B4, 15 marks\]** Use Laplace transforms to solve the differential equation, given that $x(0)=1$…
-
-$$
-\frac{dx(t)}{dt}+3x(t)=e^{-t}
-$$
+3. Solving differential equations (15 marks)…
+	1. *(optional) Re-write the $\frac{dy}{dx}$ form as $y^\prime$.*
+	2. Use the table of Laplace transforms to transform the equation terms.
+	3. Solve for the transformed function, $\tilde{y}$ or $\tilde{x}$, etc.
+	4. Go to Section 2: Inverse Laplace Transforms (partial fractions) to find $y$ or $x$, etc.
 
 ### 4. Method of Characteristics (15 marks)
 
-- Homogeneous (50%)
-- Non-homogeneous (50%)
+1. Homogeneous
+2. Non-homogeneous
 
 **\[A2, 15 marks\]** Use the method of characteristics to solve the following, subject to the boundary condition $u=\left( 1 + \frac{1}{x} \right)^2$ on $y=x$…
 
