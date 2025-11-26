@@ -69,7 +69,7 @@ Add some games, too + some fun decor (photos, frogs?)
 	4. Since $\frac{du}{ds}=0$, $u$ is constant, so the general solution is $u(x,y)=f(\alpha)=f(\dots)$.
 	5. Apply boundary conditions and substitute into $u$ and each other.
 	6. Simplify $u$.
-2. Non-homogeneous…
+2. Inhomogeneous…
 	1. Write PDE as $A(x,y)u_{x}+B(x,y)u_{y}=C(x,y)$.
 	2. Write characteristic system, $\frac{dx}{A}=\frac{dy}{B}=\frac{du}{C}$.
 	3. Solve $\frac{dx}{A}=\frac{dy}{B}$ using separation of variables, then solve for the constant, e.g. $c_{1}$, and $y$.
@@ -89,18 +89,14 @@ Add some games, too + some fun decor (photos, frogs?)
 2. Divide through by $XY$ to isolate $x$ and $y$.
 3. Re-arrange to make each side of the equation only dependent on either $x$ or $y$.
 4. Given both sides are independent, they must be equal to a constant, $\alpha$ (separation constant).
-5. Solve these two equations using separation of variables (in an exam this is the only technique required for simplicity, ==I really hope, otherwise separat==).
+5. Solve these two equations using separation of variables (in an exam this is the only technique required for simplicity, ==I really hope, otherwise separate this into 1st/2nd order==).
 6. Specify a solution given by the boundary condition.
-
-**\[A3, 15 marks\]** Use separation of variables to solve the following, subject to the boundary conditions $u(0,t)=u(2,t)=0$ and $u(x,0)=3\sin(2\pi x)+2\sin(4\pi x)$…
-
-$$
-\frac{\partial u(x,t)}{\partial t}=\frac{\partial^2u(x,t)}{\partial x^2}
-$$
 
 ---
 
 ## Worked Examples
+
+> ==go through these before exam and the suggested ones on the answers==
 
 ### 1. Fourier Transform (10 marks)
 
@@ -113,6 +109,8 @@ e^-t & \text{when} & t\geq0 \\
 \end{cases}
 $$
 
+> Similar: [[mth3006 weekly problems 1#Question Three]], [[mth3006 weekly problems 2#Question Two]].
+
 **\[B1, 10 marks\]** Calculate, where $a>0$ is a real constant, the Fourier transform of…
 
 $$
@@ -122,6 +120,8 @@ e^t & \text{when} & -a<t<a\\
 \end{cases}
 $$
 
+> Similar: [[mth3006 weekly problems 1#Question Three]].
+
 **\[C1, 10 marks\]** Calculate the Fourier transform of…
 
 $$
@@ -130,6 +130,8 @@ t & \text{when } & 0\leq t\leq {1} \\
 0 & \text{otherwise}
 \end{cases}
 $$
+
+> Similar: [[mth3006 weekly problems 1#Question Three]].
 
 **\[X2, 10 marks\]** Calculate the Fourier sine transform of the function $f(t)=\exp(-t)$, using…
 
@@ -145,6 +147,8 @@ $$
 \tilde{f}(s)=\frac{s^2-15s+41}{(s+2)(s-3)^2}
 $$
 
+> Similar: [[mth3006 weekly problems 3#Question Three]] (part two).
+
 **\[X3, 15 marks\]** Show that the inverse Laplace transform of the following can be written in the form $f(t)=ae^{3t}+b\cos2t+c\sin2t$, and find the values of the constants $a$, $b$, and $c$…
 
 $$
@@ -157,6 +161,8 @@ $$
 \tilde{F}(s)=\frac{1}{s^2(s^2-1)}
 $$
 
+> Similar: [[mth3006 weekly problems 3#Question Three]] (part one).
+
 ### 3. Laplace Transforms (10/15 marks)
 
 **\[A4, 10 marks\]** Use Laplace transforms to evaluate the integrals…
@@ -165,11 +171,15 @@ $$
 \int_{0}^{\infty}(\sin 3t)e^{-2t}dt\quad \text{and}\quad \int_{0}^{\infty}(t-\cos(3t))e^{-t}dt
 $$
 
+> Similar: [[mth3006 weekly problems 3#Question Four]].
+
 **\[C3, 10 marks\]** Use Laplace transforms, where $a$ is a real, non-zero constant, to evaluate the integrals…
 
 $$
 \int_{0}^{\infty} e^{-3t}t^{3}dt\quad \text{and}\quad \int_{0}^{\infty}(\cos(at))e^{-t}dt
 $$
+
+> Similar: [[mth3006 weekly problems 3#Question Four]].
 
 **\[X1, 10 marks\]** Find the Laplace transform of…
 
@@ -183,6 +193,8 @@ $$
 \frac{dx(t)}{dt}+3x(t)=e^{-t}
 $$
 
+> Similar: [[mth3006 weekly problems 4#Question One]].
+
 ### 4. Method of Characteristics (15 marks)
 
 **\[A2, 15 marks\]** Use the method of characteristics to solve the following, subject to the boundary condition $u=\left( 1 + \frac{1}{x} \right)^2$ on $y=x$…
@@ -191,11 +203,15 @@ $$
 x \frac{\partial u(x,y)}{\partial x}+(1+y) \frac{\partial u(x,y)}{\partial y}=0
 $$
 
+> Similar: [[mth3006 weekly problems 5#Question One]].
+
 **\[C4, 15 marks\]** Use the method of characteristics to solve the following, subject to the boundary condition $u=1$ on $x=0$…
 
 $$
 \frac{\partial u(x,y)}{\partial x}-x^2 \frac{\partial u(x,y)}{\partial y}=2x^2y
 $$
+
+> Similar …
 
 ### 5. Change of Variables (10/15 marks)
 
@@ -204,6 +220,8 @@ $$
 $$
 \frac{\partial^2u}{\partial x^2}-4 \frac{\partial^2u}{\partial y^2}+ \frac{\partial u}{\partial x}=0 \to 8 \frac{\partial^2u}{\partial \xi \partial \eta}- \frac{\partial u}{\partial \xi}+ \frac{\partial u}{\partial \eta}=0
 $$
+
+> Similar: [[mth3006 weekly problems 5#Question Four]].
 
 **\[X4, 15 marks\]** Transform the following differential equation, where $\gamma$ and $D$ are constants, to a coordinate system given by $\xi=x-\gamma t$ and $\tau=t$…
 
@@ -218,3 +236,5 @@ $$
 $$
 \frac{\partial u(x,t)}{\partial t}=\frac{\partial^2u(x,t)}{\partial x^2}
 $$
+
+> Similar: [[mth3006 weekly problems 6#Question Three]], [[mth3006 weekly problems 6#Question Four]].
