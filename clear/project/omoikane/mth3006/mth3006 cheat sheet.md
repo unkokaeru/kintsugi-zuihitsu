@@ -85,24 +85,28 @@ Add some games, too + some fun decor (photos, frogs?)
 
 ### 6. Separation of Variables (15 marks)
 
-1. First-order partial differential…
+
+1. Second-order partial differential (heat equation/wave equation)…
+	1. Assume separable solution: $u(x,t)=X(x)T(t)$ (adjust variables as needed).
+	2. Substitute into PDE: re-write in terms of $X$, $X^{\prime}$, $Y$, and $Y^{\prime}$, then divide by $XY$.
+	3. Set equal to a separation constant, $-\lambda$: Since one side depends only on $x$ and the other only on $t$, both equal a constant $-\lambda$, yielding two ODEs.
+		- Spatial ODE: $X^{\prime\prime}+\lambda X=0$.
+		- Temporal ODE: depends on PDE type (step 7).
+	4. Solve spatial ODE by applying spatial boundary conditions. For $\lambda>0$, the general solution is: $X=A\cos(\sqrt{ \lambda })+B\sin(\sqrt{ \lambda x })$. Apply boundary conditions to find $A$ and $B$.
+	5. Find eigenvalues for non-trivial solutions:
+		- If $B \neq 0$ and boundary gives condition like $\sin(L\sqrt{\lambda_n}) = 0$, then $L\sqrt{\lambda_n} = n\pi$, so $\lambda_n = \frac{n^2\pi^2}{L^2}$.
+		- If $A \neq 0$ and boundary gives $\cos(L\sqrt{\lambda_n}) = 0$, then $L\sqrt{\lambda_n} = \frac{\pi}{2} + n\pi = \frac{(2n+1)\pi}{2}$, so $\lambda_n = \frac{(2n+1)^2\pi^2}{4L^2}$.
+	6. Find eigenfunctions corresponding to $\lambda_{n}$:
+		- $X_n(x) = \sin(\sqrt{\lambda_n}x)$ if from $B$ (Dirichlet-Dirichlet boundary conditinos)
+		- $X_n(x) = \cos(\sqrt{\lambda_n}x)$ if from $A$ (Neumann or mixed BC)
+2. First-order partial differential (unlikely to show up, isn't really a thing)…
 	1. Assume that the solution is $u(x,t)=X(x)T(t)$ (or whatever the variables really are).
 	2. Substitute into the PDE, re-writing in terms of $X$, $X^{\prime}$, $Y$, and $Y^{\prime}$, then dividing by $XY$.
 	3. Set equal to a separation constant, $\alpha$, to get two ODEs (as both sides are independent).
-	4. Split into two ODEs and solve both.
+	4. Split into two ODEs and solve both using separation of variables.
 	5. Substitute solutions of $X$ and $Y$ back into $u$, simplifying.
 	6. Use the principle of superposition to find the general solution (sum $u$ over $C$ and $\alpha$).
 	7. Specify a solution given by the boundary condition.
-2. Second-order partial differential (heat equation/wave equation)…
-	1. Assume that the solution is $u(x,t)=X(x)T(t)$ (or whatever the variables really are).
-	2. Substitute into the PDE, re-writing in terms of $X$, $X^{\prime}$, $Y$, and $Y^{\prime}$, then dividing by $XY$.
-	3. Set equal to a separation constant, $\lambda$, to get two ODEs (spatial/temporal).
-	4. Solve spatial ODE by applying spatial boundary conditions ($X$), recalling for $\lambda>0$: $X=A\cos(\sqrt{ \lambda })+B\sin(\sqrt{ \lambda x })$, and hence find $A$ and $B$.
-	5. For a non-trivial solution, find eigenvalues ($x \sqrt{  \lambda_{n} }=n \pi:n=1,2,3,\dots$, where $x$ should be from the previous steps' boundary conditions, like when finding $A$ or $B$).
-	6. Given the eigenvalues $\lambda_{n}$, find corresponding eigenfunctions.
-		- $X_{n}(x)=\cos(\sqrt{ \lambda }x)$, if eigenvalue from $A$.
-		- $X_{n}(x)=\sin(\sqrt{ \lambda }x)$, if eigenvalue from $B$.
-	7. Solve temporal ODE, $T_{n} (t)=C_{n}e^{-\lambda_{n}t}$.
 
 …
 
