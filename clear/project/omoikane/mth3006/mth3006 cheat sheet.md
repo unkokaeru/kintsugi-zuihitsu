@@ -86,7 +86,15 @@ Add some games, too + some fun decor (photos, frogs?)
 ### 6. Separation of Variables (15 marks)
 
 1. First-order partial differential…
+	1. Assume that the solution is $u(x,t)=X(x)T(t)$ (or whatever the variables really are).
+	2. Substitute into the PDE, re-writing in terms of $X$, $X^{\prime}$, $Y$, and $Y^{\prime}$, then dividing by $XY$.
+	3. Set equal to a separation constant, $\lambda$, to get two ODEs.
 2. Second-order partial differential (heat equation/wave equation)…
+	1. Assume that the solution is $u(x,t)=X(x)T(t)$ (or whatever the variables really are).
+	2. Substitute into the PDE, re-writing in terms of $X$, $X^{\prime}$, $Y$, and $Y^{\prime}$, then dividing by $XY$.
+	3. Set equal to a separation constant, $\lambda$, to get two ODEs (spatial/temporal).
+	4. Apply spatial boundary conditions ($X$), recalling for $\lambda>0$: $X=A\cos(\sqrt{ \lambda })+B\sin(\sqrt{ \lambda x })$, and hence find $A$ and $B$.
+	5. Find eigenvalues ()
 
 …
 
