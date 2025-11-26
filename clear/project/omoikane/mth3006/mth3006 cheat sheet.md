@@ -88,17 +88,21 @@ Add some games, too + some fun decor (photos, frogs?)
 1. First-order partial differential…
 	1. Assume that the solution is $u(x,t)=X(x)T(t)$ (or whatever the variables really are).
 	2. Substitute into the PDE, re-writing in terms of $X$, $X^{\prime}$, $Y$, and $Y^{\prime}$, then dividing by $XY$.
-	3. Set equal to a separation constant, $\lambda$, to get two ODEs.
+	3. Set equal to a separation constant, $\alpha$, to get two ODEs (as both sides are independent).
+	4. Split into two ODEs and solve both.
+	5. Substitute solutions of $X$ and $Y$ back into $u$, simplifying.
+	6. Use the principle of superposition to find the general solution (sum $u$ over $C$ and $\alpha$).
+	7. Specify a solution given by the boundary condition.
 2. Second-order partial differential (heat equation/wave equation)…
 	1. Assume that the solution is $u(x,t)=X(x)T(t)$ (or whatever the variables really are).
 	2. Substitute into the PDE, re-writing in terms of $X$, $X^{\prime}$, $Y$, and $Y^{\prime}$, then dividing by $XY$.
 	3. Set equal to a separation constant, $\lambda$, to get two ODEs (spatial/temporal).
-	4. Apply spatial boundary conditions ($X$), recalling for $\lambda>0$: $X=A\cos(\sqrt{ \lambda })+B\sin(\sqrt{ \lambda x })$, and hence find $A$ and $B$.
+	4. Solve spatial ODE by applying spatial boundary conditions ($X$), recalling for $\lambda>0$: $X=A\cos(\sqrt{ \lambda })+B\sin(\sqrt{ \lambda x })$, and hence find $A$ and $B$.
 	5. For a non-trivial solution, find eigenvalues ($x \sqrt{  \lambda_{n} }=n \pi:n=1,2,3,\dots$, where $x$ should be from the previous steps' boundary conditions, like when finding $A$ or $B$).
 	6. Given the eigenvalues $\lambda_{n}$, find corresponding eigenfunctions.
-		- $X_{n}(x)=\cos\sqrt{ \lambda }x$, if eigenvalue from $A$.
-		- $X_{n}(x)=\sin\sqrt{ \lambda }x$, if eigenvalue from $B$.
-	7. Solve temporal ODE
+		- $X_{n}(x)=\cos(\sqrt{ \lambda }x)$, if eigenvalue from $A$.
+		- $X_{n}(x)=\sin(\sqrt{ \lambda }x)$, if eigenvalue from $B$.
+	7. Solve temporal ODE, $T_{n} (t)=C_{n}e^{-\lambda_{n}t}$.
 
 …
 
