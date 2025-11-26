@@ -4,6 +4,7 @@
 > Make sure to read this before the exam - I recommend completing a practice test with it so you learn where everything is and can ask if you don't understand something. I might've made mistakes! There's a sudoku at the end in case you finish early, and the cheat sheet is generated based on analysis of past exams and given material. It should also include topics that I don't think will come up, but they theoretically could - these topic explanations will be much more brief.
 
 ```
+Add integrating methods: integrating factor, integration by parts, 2nd order ODEs
 Add some games, too + some fun decor (photos, frogs?)
 ```
 
@@ -72,33 +73,24 @@ Add some games, too + some fun decor (photos, frogs?)
 	1. Write PDE as $A(x,y)u_{x}+B(x,y)u_{y}=C(x,y)$.
 	2. Write characteristic system, $\frac{dx}{A}=\frac{dy}{B}=\frac{du}{C}$.
 	3. Solve $\frac{dx}{A}=\frac{dy}{B}$ using separation of variables, then solve for the constant, e.g. $c_{1}$, and $y$.
-	4. Solve $\frac{du}{C}=\frac{dx}{A}$ using separation of variables, then solve for $u$ and apply boundary conditions to find second constant, e.g. $c_{2}$.
-	5. S
-
-**\[C4, 15 marks\]** Use the method of characteristics to solve the following, subject to the boundary condition $u=1$ on $x=0$…
-
-$$
-\frac{\partial u(x,y)}{\partial x}-x^2 \frac{\partial u(x,y)}{\partial y}=2x^2y
-$$
+	4. Solve $\frac{du}{C}=\frac{dx}{A}$ using separation of variables, then solve for $u$.
+	5. Apply boundary conditions to find second constant, e.g. $c_{2}$.
+	6. Simplify $u$, substituting in values from step 3/5 into step 4.
 
 ### 5. Change of Variables (10/15 marks)
 
-**\[B3, 10 marks\]** Show that making the change of variables $\xi=y+2x$ and $\eta=y-2x$ transforms the differential equation…
-
-$$
-\frac{\partial^2u}{\partial x^2}-4 \frac{\partial^2u}{\partial y^2}+ \frac{\partial u}{\partial x}=0 \to 8 \frac{\partial^2u}{\partial \xi \partial \eta}- \frac{\partial u}{\partial \xi}+ \frac{\partial u}{\partial \eta}=0
-$$
-
-**\[X4, 15 marks\]** Transform the following differential equation, where $\gamma$ and $D$ are constants, to a coordinate system given by $\xi=x-\gamma t$ and $\tau=t$…
-
-$$
-\frac{\partial u}{\partial t}+\gamma\frac{\partial u}{\partial x}=D \frac{\partial^2u}{\partial x^2}
-$$
+1. Use chain rule to express partial derivatives under new variables. e.g. $\frac{\partial u}{\partial t}= \frac{\partial u}{\partial\xi} \frac{\partial\xi}{\partial t}+\frac{\partial u}{\partial \tau} \frac{\partial \tau}{\partial t}$, etc.
+2. Evaluate partial derivatives of new variables.
+3. Substitute evaluate partial derivatives into original equation, then simplify.
 
 ### 6. Separation of Variables (15 marks)
 
-- Second-order differential equation
-- First-order differential equation
+1. Assume that the solution is $u=XY$ and hence write the PDE in terms of $X$, $X^{\prime}$, $Y$, and $Y^{\prime}$.
+2. Divide through by $XY$ to isolate $x$ and $y$.
+3. Re-arrange to make each side of the equation only dependent on either $x$ or $y$.
+4. Given both sides are independent, they must be equal to a constant, $\alpha$ (separation constant).
+5. Solve these two equations using separation of variables (in an exam this is the only technique required for simplicity, ==I really hope, otherwise separat==).
+6. Specify a solution given by the boundary condition.
 
 **\[A3, 15 marks\]** Use separation of variables to solve the following, subject to the boundary conditions $u(0,t)=u(2,t)=0$ and $u(x,0)=3\sin(2\pi x)+2\sin(4\pi x)$…
 
