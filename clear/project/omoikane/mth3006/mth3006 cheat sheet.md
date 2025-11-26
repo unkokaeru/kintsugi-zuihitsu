@@ -203,7 +203,7 @@ $$
 x \frac{\partial u(x,y)}{\partial x}+(1+y) \frac{\partial u(x,y)}{\partial y}=0
 $$
 
-> Similar: [[mth3006 weekly problems 5#Question One]].
+> Similar: [[mth3006 weekly problems 5#Question Three]].
 
 **\[C4, 15 marks\]** Use the method of characteristics to solve the following, subject to the boundary condition $u=1$ on $x=0$…
 
@@ -211,7 +211,7 @@ $$
 \frac{\partial u(x,y)}{\partial x}-x^2 \frac{\partial u(x,y)}{\partial y}=2x^2y
 $$
 
-> Similar …
+> Similar: [[mth3006 weekly problems 5#Question One]], [[mth3006 weekly problems 5#Question Two]].
 
 ### 5. Change of Variables (10/15 marks)
 
