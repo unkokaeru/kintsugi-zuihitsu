@@ -62,6 +62,11 @@ Add some games, too + some fun decor (photos, frogs?)
 ### 4. Method of Characteristics (15 marks)
 
 1. Homogeneous…
+	1. Write PDE as $A(x,y)u_{x}+B(x,y)u_{y}=C(x,y)$.
+	2. Write characteristic system, $\frac{dx}{A}=\frac{dy}{B}\left( =\frac{du}{C} \right)$.
+	3. Solve $\frac{dx}{A}=\frac{dy}{B}$ using separation of variables - remember constant of integration!!
+	4. Since $\frac{du}{ds}=0$, $u$ is constant (just write this line out).
+	5. Write general solution
 2. Non-homogeneous…
 
 **\[A2, 15 marks\]** Use the method of characteristics to solve the following, subject to the boundary condition $u=\left( 1 + \frac{1}{x} \right)^2$ on $y=x$…
