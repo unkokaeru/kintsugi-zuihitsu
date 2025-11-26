@@ -85,11 +85,16 @@ Add some games, too + some fun decor (photos, frogs?)
 
 ### 6. Separation of Variables (15 marks)
 
+1. First-order partial differential…
+2. Second-order partial differential…
+
+…
+
 1. Assume that the solution is $u=XY$ and hence write the PDE in terms of $X$, $X^{\prime}$, $Y$, and $Y^{\prime}$.
 2. Divide through by $XY$ to isolate $x$ and $y$.
 3. Re-arrange to make each side of the equation only dependent on either $x$ or $y$.
 4. Given both sides are independent, they must be equal to a constant, $\alpha$ (separation constant).
-5. Solve these two equations using separation of variables (in an exam this is the only technique required for simplicity, ==I really hope, otherwise separate this into 1st/2nd order==).
+5. Solve these two equations.
 6. Specify a solution given by the boundary condition.
 
 ---
