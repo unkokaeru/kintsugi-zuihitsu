@@ -29,20 +29,36 @@ Add some games, too + some fun decor (photos, frogs?)
 
 1. Partial fractions (real/complex roots)…
 	1. Decompose $\tilde{f}(s)$ into separate fractions for each of the denominator's factors:
-		- Linear factor $ax+b$, use the form $\frac{A}{ax+b}$.
-		- Repeated linear factor $(ax+b)^n$, use the form $\frac{A_{1}}{ax+b}+\frac{A_{2}}{(ax+b)^2}+\dots+\frac{A_{n}}{(ax+b)^n}$.
-		- Irreducible quadratic factor $ax^2+bx+c$, use the form $\frac{Ax+B}{ax^2+bx+c}$.
-		- Repeated irreducible quadratic factor $(ax^2 + bx + c)^m$, use the form $\frac{A_1x + B_1}{ax^2 + bx + c} + \frac{A_2x + B_2}{(ax^2 + bx + c)^2} + \cdots + \frac{A_mx + B_m}{(ax^2 + bx + c)^m}$.
+		- Linear factor $as+b$, use the form $\frac{A}{as+b}$.
+		- Repeated linear factor $(as+b)^n$, use the form $\frac{A_{1}}{as+b}+\frac{A_{2}}{(as+b)^2}+\dots+\frac{A_{n}}{(as+b)^n}$.
+		- Irreducible quadratic factor $as^2+bs+c$, use the form $\frac{as+b}{as^2+bs+c}$.
+		- Repeated irreducible quadratic factor $(ax^2 + bx + c)^m$, use the form $\frac{A_1s + B_1}{as^2 + bs + c} + \frac{A_2s + B_2}{(as^2 + bs + c)^2} + \cdots + \frac{A_ms + B_m}{(as^2 + bs + c)^m}$.
 	2. Apply the appropriate transform for each term:
 		- $\mathcal{L}^{-1}\left\{ \frac{1}{s-a} \right\} = e^{at}$.
 		- $\mathcal{L}^{-1}\left\{ \frac{1}{(s-a)^2} \right\} = te^{at}$.
 		- $\mathcal{L}^{-1}\left\{\frac{s}{s^2+a^2}\right\} = \cos(at)$.
 		- $\mathcal{L}^{-1}\left\{ \frac{a}{s^2+a^2} \right\} = \sin(at)$.
-	- Simplify.
-2. ==Convolution theorem==…
+		- *May be other forms, just look up from table of Laplace transforms or use multiples.*
+	- Simplify and combine terms.
+2. Convolution theorem…
 	1. If $\tilde{F}(s) = F(s) G(s)$, then $f(t) = \int_0^t f(\tau) g(t-\tau) d\tau$.
 		- $\mathcal{L}^{-1}\left\{ \frac{1}{s^2} \right\} = t$.
 		- $\mathcal{L}^{-1}\left\{ \frac{1}{s^2-1)} \right\} = \sinh t$.
+3. **Convolution theorem…**
+	1. *When to use: If $\tilde{f}(s) = F(s) \cdot G(s)$ is a product of two Laplace transforms that you recognise, use convolution instead of partial fractions - or if told.*
+	2. Write Convolution formula: $\mathcal{L}^{-1}\{F(s) \cdot G(s)\} = (f * g)(t) = \int_0^t f(\tau) g(t-\tau) \, d\tau$, where $f(t) = \mathcal{L}^{-1}\{F(s)\}$ and $g(t) = \mathcal{L}^{-1}\{G(s)\}$.
+	3. Identify $F(s)$ and $G(s)$ as separate factors.
+	4. Find $f(t) = \mathcal{L}^{-1}\{F(s)\}$ and $g(t) = \mathcal{L}^{-1}\{G(s)\}$ using tables.
+	5. Compute the convolution integral: $\int_0^t f(\tau) g(t-\tau) \, d\tau$.
+	6. Evaluate the integral (often requires substitution or integration by parts).
+	7. **Useful inverse transforms for convolution:**
+		- $\mathcal{L}^{-1}\left\{ \frac{1}{s} \right\} = 1$.
+		- $\mathcal{L}^{-1}\left\{ \frac{1}{s^2} \right\} = t$.
+		- $\mathcal{L}^{-1}\left\{ \frac{1}{s^n} \right\} = \frac{t^{n-1}}{(n-1)!}$.
+		- $\mathcal{L}^{-1}\left\{ \frac{1}{s-a} \right\} = e^{at}$.
+		- $\mathcal{L}^{-1}\left\{ \frac{1}{s^2+a^2} \right\} = \frac{1}{a}\sin(at)$.
+		- $\mathcal{L}^{-1}\left\{ \frac{1}{s^2-a^2} \right\} = \frac{1}{a}\sinh(at)$.
+	8. **Note:** Convolution is commutative: $f * g = g * f$, so you can choose whichever order makes the integral easier.
 
 ### 3. Laplace Transforms (10/15 marks)
 
@@ -85,7 +101,6 @@ Add some games, too + some fun decor (photos, frogs?)
 
 ### 6. Separation of Variables (15 marks)
 
-
 1. Second-order partial differential (heat equation/wave equation)…
 	1. Assume separable solution: $u(x,t)=X(x)T(t)$ (adjust variables as needed).
 	2. Substitute into PDE: re-write in terms of $X$, $X^{\prime}$, $Y$, and $Y^{\prime}$, then divide by $XY$.
@@ -97,8 +112,16 @@ Add some games, too + some fun decor (photos, frogs?)
 		- If $B \neq 0$ and boundary gives condition like $\sin(L\sqrt{\lambda_n}) = 0$, then $L\sqrt{\lambda_n} = n\pi$, so $\lambda_n = \frac{n^2\pi^2}{L^2}$.
 		- If $A \neq 0$ and boundary gives $\cos(L\sqrt{\lambda_n}) = 0$, then $L\sqrt{\lambda_n} = \frac{\pi}{2} + n\pi = \frac{(2n+1)\pi}{2}$, so $\lambda_n = \frac{(2n+1)^2\pi^2}{4L^2}$.
 	6. Find eigenfunctions corresponding to $\lambda_{n}$:
-		- $X_n(x) = \sin(\sqrt{\lambda_n}x)$ if from $B$ (Dirichlet-Dirichlet boundary conditinos)
-		- $X_n(x) = \cos(\sqrt{\lambda_n}x)$ if from $A$ (Neumann or mixed BC)
+		- $X_n(x) = \sin(\sqrt{\lambda_n}x)$ if from $B$ (Dirichlet-Dirichlet boundary conditions).
+		- $X_n(x) = \cos(\sqrt{\lambda_n}x)$ if from $A$ (Neumann or mixed boundary conditions).
+	7. Solve temporal ODE:
+		- Heat equation (first-order in time): $T'(t) + \lambda_n T(t) = 0$…
+			- Solution: $T_n(t) = C_n e^{-\lambda_n t}$.
+		- Wave equation (second-order in time): $T''(t) + c^2\lambda_n T(t) = 0$…
+			- Solution: $T_n(t) = A_n\cos(\sqrt{c^2\lambda_n}t) + B_n\sin(\sqrt{c^2\lambda_n}t)$.
+	8. Form general solution by superposition: $u(x,t) = \sum_{n} C_n X_n(x) T_n(t)$.
+	9. Apply initial condition(s): Match Fourier coefficients by comparing $u(x)$ (and $\frac{\partial u}{\partial t}(x)$ for wave equation) to find the constants $C_n$ (or $A_n$, $B_n$).
+	10. Write final solution with determined coefficients.
 2. First-order partial differential (unlikely to show up, isn't really a thing)…
 	1. Assume that the solution is $u(x,t)=X(x)T(t)$ (or whatever the variables really are).
 	2. Substitute into the PDE, re-writing in terms of $X$, $X^{\prime}$, $Y$, and $Y^{\prime}$, then dividing by $XY$.
@@ -107,15 +130,6 @@ Add some games, too + some fun decor (photos, frogs?)
 	5. Substitute solutions of $X$ and $Y$ back into $u$, simplifying.
 	6. Use the principle of superposition to find the general solution (sum $u$ over $C$ and $\alpha$).
 	7. Specify a solution given by the boundary condition.
-
-…
-
-1. Assume that the solution is $u=XY$ and hence write the PDE in terms of $X$, $X^{\prime}$, $Y$, and $Y^{\prime}$.
-2. Divide through by $XY$ to isolate $x$ and $y$.
-3. Re-arrange to make each side of the equation only dependent on either $x$ or $y$.
-4. Given both sides are independent, they must be equal to a constant, $\alpha$ (separation constant).
-5. Solve these two equations.
-6. Specify a solution given by the boundary condition.
 
 ---
 
