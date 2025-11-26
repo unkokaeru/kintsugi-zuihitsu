@@ -61,8 +61,8 @@ Add some games, too + some fun decor (photos, frogs?)
 
 ### 4. Method of Characteristics (15 marks)
 
-1. Homogeneous
-2. Non-homogeneous
+1. Homogeneous…
+2. Non-homogeneous…
 
 **\[A2, 15 marks\]** Use the method of characteristics to solve the following, subject to the boundary condition $u=\left( 1 + \frac{1}{x} \right)^2$ on $y=x$…
 
