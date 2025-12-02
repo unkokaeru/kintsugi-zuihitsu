@@ -4,54 +4,36 @@
     "type": "split",
     "children": [
       {
-        "id": "73656ff55924ab69",
+        "id": "5e6da0044f8a79d8",
         "type": "tabs",
         "children": [
           {
-            "id": "d7e9123ec3dbdb4b",
+            "id": "dfaf42785ec25d0c",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3006/mth3006.md",
+                "file": "kintsugi zuihitsu.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "mth3006"
+              "title": "kintsugi zuihitsu"
             }
           },
           {
-            "id": "30a186f664e75252",
+            "id": "6149e4a61143f9bf",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "release-notes",
               "state": {
-                "file": "clear/project/omoikane/mth3006/mth3006 cheat sheet.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
+                "currentVersion": "1.10.6"
               },
-              "icon": "lucide-file",
-              "title": "mth3006 cheat sheet"
-            }
-          },
-          {
-            "id": "f4d6bf7f6d4a9ddd",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3006/mth3006 cheat sheet worked examples.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "mth3006 cheat sheet worked examples"
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.10.6"
             }
           }
         ],
@@ -206,14 +188,14 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "30a186f664e75252",
+  "active": "6149e4a61143f9bf",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3006/mth3006.md",
     "clear/project/omoikane/mth3006/mth3006 cheat sheet worked examples.md",
-    "clear/project/omoikane/mth3006/Separation of variables.md",
     "clear/project/omoikane/mth3006/mth3006 cheat sheet.md",
+    "clear/project/omoikane/mth3006/Separation of variables.md",
     "clear/project/omoikane/mth3006/mth3006 weekly problems 2.md",
     "clear/project/omoikane/mth3006/mth3006 weekly problems 6.md",
-    "clear/project/omoikane/mth3006/mth3006.md",
     "clear/project/omoikane/mth3006/mth3006 weekly problems 5.md",
     "clear/project/omoikane/mth3006/Laplace transform.md",
     "clear/project/omoikane/mth3006/Fourier transform.md",
