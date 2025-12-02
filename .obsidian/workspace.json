@@ -23,21 +23,8 @@
               "icon": "lucide-file",
               "title": "kintsugi zuihitsu"
             }
-          },
-          {
-            "id": "6149e4a61143f9bf",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.10.6"
-              },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.10.6"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -188,8 +175,11 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "6149e4a61143f9bf",
+  "active": "dfaf42785ec25d0c",
   "lastOpenFiles": [
+    "cloudy/project/yatagarasu/yatagarasu.md",
+    "cloudy/project/yatagarasu/temp old.md",
+    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3006/mth3006.md",
     "clear/project/omoikane/mth3006/mth3006 cheat sheet worked examples.md",
     "clear/project/omoikane/mth3006/mth3006 cheat sheet.md",
@@ -204,8 +194,6 @@
     "clear/project/omoikane/mth3011/Research Plan.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 11.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 9.md",
-    "kintsugi zuihitsu.md",
-    "cloudy/project/yatagarasu/yatagarasu.md",
     "cloudy/project/yatagarasu/User Feedback.md",
     "cloudy/project/yatagarasu/Meeting notes.md",
     "cloudy/project/yatagarasu/ASAP TO INTEGRATE.md",
@@ -218,7 +206,6 @@
     "Untitled.md",
     "clear/project/omoikane/mth3011/Guest Lecture 4.md",
     "clear/library/sloth bytes/sloth bytes.md",
-    "clear/library/sloth bytes/One Two Skip a Few.md",
     "attached/files/MTH3006_Porfolio_Test_information.pdf",
     "attached/files/nm_worksheet_wk8.pdf",
     "attached/files/Session 2 Critical Arguments in Education.pdf",

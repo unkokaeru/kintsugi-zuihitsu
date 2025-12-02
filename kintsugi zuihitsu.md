@@ -16,7 +16,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 - **[[Omoikane]]**:
 	- ? Change cloze flashcard generation to be bold text instead of highlighted text.
 	- **[[MTH3004]]**: Outline [[What is Effective Teaching in Mathematics]] according to [[mth3004 lecture 3]], [[mth3004 lecture 4]], and [[mth3004 lecture 5]]. Learn the National Curriculum and my subject of choice throughout for the poster part of the coursework.
-	- **[[MTH3006]]**: Review and complete all recent notes and questions, then complete [[MTH3006_Coursework.pdf|coursework]] and revise for the upcoming [[MTH3006_Porfolio_Test_information.pdf|midterm]].
+	- **[[MTH3006]]**: Review and complete all recent notes and questions.
 	- **[[MTH3007]]**: Review and complete all recent notes and questions. Follow slides not the [[nm_worksheet_wk8.pdf|worksheet for week 8]] - incorrect formula.
 	- **[[MTH3011]]**: Re-write [[Research Plan]] and complete articles ([[Guest lecture 2]], [[Guest Lecture 3]], and [[guest lecture 4]]).
 - **Kuebiko**: Continue development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
