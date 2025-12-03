@@ -23,57 +23,63 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ### Granular Task List
 
-1. MTH3006 lecture notes
-	1. **Complete MTH3006 lecture 12 notes** from this week (30 minutes)
-	2. **Complete MTH3006 lecture 11 notes** from this week (30 minutes)
-	3. **Review MTH3006 lectures 1-10** for understanding (2 hours)
-2. MTH3006 problem sets
-	1. **Complete MTH3006 Problems Set 1** (90 minutes)
-	2. **Complete MTH3006 Problems Set 2** (90 minutes)
-	3. **Complete MTH3006 Problems Set 3** (90 minutes)
-	4. **Complete MTH3006 Problems Set 4** (90 minutes)
-	5. **Complete MTH3006 Problems Set 5** (90 minutes)
-	6. **Complete MTH3006 Problems Set 6** (90 minutes)
-3. **Create initial MTH3006 cheat sheet draft** (2 hours)
-4. **Practice test with cheat sheet version 1** (1 hour)
-5. **Refine cheat sheet to version 2** (30 minutes)
-6. **Practice test with cheat sheet version 2** (1 hour)
-7. **Final refinement to cheat sheet version 3** (30 minutes)
-8. **Final practice test** (1 hour)
-9. **Get peer feedback on cheat sheet** (15 minutes wait time)
-10. **Complete MTH3006 coursework** (2-3 hours)
-11. **Take MTH3006 midterm** (26th at 12:30)
-12. **Watch Guest Lecture 4 recording** and take initial notes (45 minutes)
-13. **Write up Guest Lecture 4** blog-style seminar report (30 minutes)
-14. **Review/rewrite Guest Lecture 2** seminar report (30 minutes)
-15. **Review/rewrite Guest Lecture 3** seminar report (30 minutes)
-16. **Review MTH3007 lectures 1-5 notes** (1.5 hours)
-17. **Complete MTH3007 lecture 6 notes** (30 minutes)
-18. **Complete MTH3007 lecture 7 notes** (30 minutes)
-19. **Complete MTH3007 lecture 8 notes** using slides not worksheet (30 minutes)
-20. **Complete MTH3007 Problems Set 1** (90 minutes)
-21. **Complete MTH3007 Problems Set 2** (90 minutes)
-22. **Complete MTH3007 Problems Set 3** (90 minutes)
-23. **Complete MTH3007 Problems Set 4** (90 minutes)
-24. **Complete MTH3007 Problems Set 5** (90 minutes)
-25. **Complete MTH3007 Problems Set 6** (90 minutes)
-26. **Complete MTH3007 Problems Set 7** (90 minutes)
-27. **Complete MTH3007 Problems Set 8** (90 minutes)
-28. **Research MTH3004 essay sources** on effective mathematics teaching (1 hour)
-29. **Create essay outline** based on lectures 3, 4, 5 (1 hour)
-30. **Write essay introduction** (30 minutes)
-31. **Write essay body paragraph 1** (30 minutes)
-32. **Write essay body paragraph 2** (30 minutes)
-33. **Write essay body paragraph 3** (30 minutes)
-34. **Write essay conclusion** (30 minutes)
-35. **Edit and proofread essay** (30 minutes)
-36. **Submit MTH3004 essay draft** (by 27th November)
-37. **Research National Curriculum** for chosen topic (1 hour)
-38. **Plan poster structure** for Year 7-13 topic development (30 minutes)
-39. **Search for highlighting in notes** to count flashcards (5 minutes)
-40. **Change flashcard syntax** from == to ** globally (30 minutes)
-41. **Update Obsidian settings** for new cloze format (5 minutes)
-42. **Test new flashcard format** works correctly (10 minutes)
+1. MTH3006…
+	1. Lecture notes…
+		1. **Complete MTH3006 lecture 12 notes** from this week (30 minutes)
+		2. **Complete MTH3006 lecture 11 notes** from this week (30 minutes)
+		3. **Review MTH3006 lectures 1-10** for understanding (2 hours)
+	2. Problem sets…
+		1. **Complete MTH3006 Problems Set 1** (90 minutes)
+		2. **Complete MTH3006 Problems Set 2** (90 minutes)
+		3. **Complete MTH3006 Problems Set 3** (90 minutes)
+		4. **Complete MTH3006 Problems Set 4** (90 minutes)
+		5. **Complete MTH3006 Problems Set 5** (90 minutes)
+		6. **Complete MTH3006 Problems Set 6** (90 minutes)
+	3. Cheat sheet refinement
+2. MTH3011…
+	1. Guest lectures…
+		1. **Watch Guest Lecture 4 recording** and take initial notes (45 minutes)
+		2. **Write up Guest Lecture 4** blog-style seminar report (30 minutes)
+		3. **Review/rewrite Guest Lecture 2** seminar report (30 minutes)
+		4. **Review/rewrite Guest Lecture 3** seminar report (30 minutes)
+3. MTH3007…
+	1. Lecture notes…
+		1. **Review MTH3007 lectures 1-5 notes** (1.5 hours)
+		2. **Complete MTH3007 lecture 6 notes** (30 minutes)
+		3. **Complete MTH3007 lecture 7 notes** (30 minutes)
+		4. **Complete MTH3007 lecture 8 notes** using slides not worksheet (30 minutes)
+	2. Problem sets…
+		1. **Complete MTH3007 Problems Set 1** (90 minutes)
+		2. **Complete MTH3007 Problems Set 2** (90 minutes)
+		3. **Complete MTH3007 Problems Set 3** (90 minutes)
+		4. **Complete MTH3007 Problems Set 4** (90 minutes)
+		5. **Complete MTH3007 Problems Set 5** (90 minutes)
+		6. **Complete MTH3007 Problems Set 6** (90 minutes)
+		7. **Complete MTH3007 Problems Set 7** (90 minutes)
+		8. **Complete MTH3007 Problems Set 8** (90 minutes)
+4. MTH3004…
+	1. Essay…
+		1. **Research MTH3004 essay sources** on effective mathematics teaching (1 hour)
+		2. **Create essay outline** based on lectures 3, 4, 5 (1 hour)
+		3. **Write essay introduction** (30 minutes)
+		4. **Write essay body paragraph 1** (30 minutes)
+		5. **Write essay body paragraph 2** (30 minutes)
+		6. **Write essay body paragraph 3** (30 minutes)
+		7. **Write essay conclusion** (30 minutes)
+		8. **Edit and proofread essay** (30 minutes)
+		9. **Submit MTH3004 essay draft** (by 27th November)
+	2. Poster…
+		1. **Research National Curriculum** for chosen topic (1 hour)
+		2. **Plan poster structure** for Year 7-13 topic development (30 minutes)
+5. Kintsugi Zuihitsu…
+	1. **Search for highlighting in notes** to count flashcards (5 minutes)
+	2. **Change flashcard syntax** from == to ** globally (30 minutes)
+	3. **Update Obsidian settings** for new cloze format (5 minutes)
+	4. **Test new flashcard format** works correctly (10 minutes)
+6. Yatagarasu…
+	1. …
+7. Kuebiko…
+	1. …
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
