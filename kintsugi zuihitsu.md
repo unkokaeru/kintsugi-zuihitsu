@@ -23,7 +23,21 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ### Granular Task List
 
-1. MTH3006…
+1. MTH3004…
+	1. Essay…
+		1. **Research MTH3004 essay sources** on effective mathematics teaching (1 hour)
+		2. **Create essay outline** based on lectures 3, 4, 5 (1 hour)
+		3. **Write essay introduction** (30 minutes)
+		4. **Write essay body paragraph 1** (30 minutes)
+		5. **Write essay body paragraph 2** (30 minutes)
+		6. **Write essay body paragraph 3** (30 minutes)
+		7. **Write essay conclusion** (30 minutes)
+		8. **Edit and proofread essay** (30 minutes)
+		9. **Submit MTH3004 essay draft** (by 27th November)
+	2. Poster…
+		1. **Research National Curriculum** for chosen topic (1 hour)
+		2. **Plan poster structure** for Year 7-13 topic development (30 minutes)
+2. MTH3006…
 	1. Lecture notes…
 		1. **Complete MTH3006 lecture 12 notes** from this week (30 minutes)
 		2. **Complete MTH3006 lecture 11 notes** from this week (30 minutes)
@@ -36,13 +50,13 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 		5. **Complete MTH3006 Problems Set 5** (90 minutes)
 		6. **Complete MTH3006 Problems Set 6** (90 minutes)
 	3. Cheat sheet refinement
-2. MTH3011…
+3. MTH3011…
 	1. Guest lectures…
 		1. **Watch Guest Lecture 4 recording** and take initial notes (45 minutes)
 		2. **Write up Guest Lecture 4** blog-style seminar report (30 minutes)
 		3. **Review/rewrite Guest Lecture 2** seminar report (30 minutes)
 		4. **Review/rewrite Guest Lecture 3** seminar report (30 minutes)
-3. MTH3007…
+4. MTH3007…
 	1. Lecture notes…
 		1. **Review MTH3007 lectures 1-5 notes** (1.5 hours)
 		2. **Complete MTH3007 lecture 6 notes** (30 minutes)
@@ -57,20 +71,6 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 		6. **Complete MTH3007 Problems Set 6** (90 minutes)
 		7. **Complete MTH3007 Problems Set 7** (90 minutes)
 		8. **Complete MTH3007 Problems Set 8** (90 minutes)
-4. MTH3004…
-	1. Essay…
-		1. **Research MTH3004 essay sources** on effective mathematics teaching (1 hour)
-		2. **Create essay outline** based on lectures 3, 4, 5 (1 hour)
-		3. **Write essay introduction** (30 minutes)
-		4. **Write essay body paragraph 1** (30 minutes)
-		5. **Write essay body paragraph 2** (30 minutes)
-		6. **Write essay body paragraph 3** (30 minutes)
-		7. **Write essay conclusion** (30 minutes)
-		8. **Edit and proofread essay** (30 minutes)
-		9. **Submit MTH3004 essay draft** (by 27th November)
-	2. Poster…
-		1. **Research National Curriculum** for chosen topic (1 hour)
-		2. **Plan poster structure** for Year 7-13 topic development (30 minutes)
 5. Kintsugi Zuihitsu…
 	1. **Search for highlighting in notes** to count flashcards (5 minutes)
 	2. **Change flashcard syntax** from == to ** globally (30 minutes)
