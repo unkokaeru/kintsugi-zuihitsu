@@ -10,20 +10,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 ## To-Do List
 
-> Maybe open VS Code in this directory to complete notes quicker alongside Copilot?
-
-- **[[Yatagarasu]]**: Complete onboarding form, integrate [[User Feedback]] into notes, and keep working on the platform.
-- **[[Omoikane]]**:
-	- ? Change cloze flashcard generation to be bold text instead of highlighted text.
-	- **[[MTH3004]]**: Outline [[What is Effective Teaching in Mathematics]] according to [[mth3004 lecture 3]], [[mth3004 lecture 4]], and [[mth3004 lecture 5]]. Learn the National Curriculum and my subject of choice throughout for the poster part of the coursework.
-	- **[[MTH3006]]**: Review and complete all recent notes and questions.
-	- **[[MTH3007]]**: Review and complete all recent notes and questions. Follow slides not the [[nm_worksheet_wk8.pdf|worksheet for week 8]] - incorrect formula.
-	- **[[MTH3011]]**: Re-write [[Research Plan]] and complete articles ([[Guest lecture 2]], [[Guest Lecture 3]], and [[guest lecture 4]]).
-- **Kuebiko**: Continue development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
-
-### Granular Task List
-
-1. MTH3004…
+1. [[MTH3004]]…
 	1. Essay…
 		1. **Research MTH3004 essay sources** on effective mathematics teaching (1 hour)
 		2. **Create essay outline** based on lectures 3, 4, 5 (1 hour)
@@ -37,9 +24,20 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 	2. Poster…
 		1. **Research National Curriculum** for chosen topic (1 hour)
 		2. **Plan poster structure** for Year 7-13 topic development (30 minutes)
-2. MTH3006…
+2. [[MTH3006]]…
 	1. Lecture notes…
-		1. **Review/Complete MTH3006 lectures 1-12** (4 hours)
+		1. **Review and Complete MTH3006 lecture 1** (20 minutes)
+		2. **Review and Complete MTH3006 lecture 2** (20 minutes)
+		3. **Review and Complete MTH3006 lecture 3** (20 minutes)
+		4. **Review and Complete MTH3006 lecture 4** (20 minutes)
+		5. **Review and Complete MTH3006 lecture 5** (20 minutes)
+		6. **Review and Complete MTH3006 lecture 6** (20 minutes)
+		7. **Review and Complete MTH3006 lecture 7** (20 minutes)
+		8. **Review and Complete MTH3006 lecture 8** (20 minutes)
+		9. **Review and Complete MTH3006 lecture 9** (20 minutes)
+		10. **Review and Complete MTH3006 lecture 10** (20 minutes)
+		11. **Review and Complete MTH3006 lecture 11** (20 minutes)
+		12. **Review and Complete MTH3006 lecture 12** (20 minutes)
 	2. Problem sets…
 		1. **Complete MTH3006 Problems Set 1** (90 minutes)
 		2. **Complete MTH3006 Problems Set 2** (90 minutes)
@@ -48,15 +46,22 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 		5. **Complete MTH3006 Problems Set 5** (90 minutes)
 		6. **Complete MTH3006 Problems Set 6** (90 minutes)
 	3. Cheat sheet refinement
-3. MTH3011…
+3. [[MTH3011]]…
 	1. Guest lectures…
 		1. **Watch Guest Lecture 4 recording** and take initial notes (45 minutes)
 		2. **Write up Guest Lecture 4** blog-style seminar report (30 minutes)
 		3. **Review/rewrite Guest Lecture 2** seminar report (30 minutes)
 		4. **Review/rewrite Guest Lecture 3** seminar report (30 minutes)
-4. MTH3007…
+4. [[MTH3007]]…
 	1. Lecture notes…
-		1. **Review/Complete MTH3007 lectures 1-8 notes** (4 hours)
+		1. **Review and Complete MTH3007 lecture 1** (30 minutes)
+		2. **Review and Complete MTH3007 lecture 2** (30 minutes)
+		3. **Review and Complete MTH3007 lecture 3** (30 minutes)
+		4. **Review and Complete MTH3007 lecture 4** (30 minutes)
+		5. **Review and Complete MTH3007 lecture 5** (30 minutes)
+		6. **Review and Complete MTH3007 lecture 6** (30 minutes)
+		7. **Review and Complete MTH3007 lecture 7** (30 minutes)
+		8. **Review and Complete MTH3007 lecture 8** (30 minutes)
 	2. Problem sets…
 		1. **Complete MTH3007 Problems Set 1** (90 minutes)
 		2. **Complete MTH3007 Problems Set 2** (90 minutes)
@@ -66,15 +71,18 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 		6. **Complete MTH3007 Problems Set 6** (90 minutes)
 		7. **Complete MTH3007 Problems Set 7** (90 minutes)
 		8. **Complete MTH3007 Problems Set 8** (90 minutes)
-5. Kintsugi Zuihitsu…
+5. [[Yatagarasu]]…
+	1. Prep for UAT Phase 1.2, to the send out email(s) inviting users.
+	2. Complete onboarding form.
+	3. Integrate and refine all notes, including [[User Feedback]], to establish remaining progress.
+6. [[Kuebiko]]…
+	1. Continue development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
+7. [[Kintsugi Zuihitsu]]…
 	1. **Search for highlighting in notes** to count flashcards (5 minutes)
 	2. **Change flashcard syntax** from == to ** globally (30 minutes)
 	3. **Update Obsidian settings** for new cloze format (5 minutes)
 	4. **Test new flashcard format** works correctly (10 minutes)
-6. Yatagarasu…
-	1. …
-7. Kuebiko…
-	1. …
+	5. **Complete unfinished notes** shown below (in Obsidian)…
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
@@ -143,10 +151,8 @@ data.sort((a, b) => {
 });
 
 if (!data.length) {
-  dv.header(2, "To-Do List");
   dv.paragraph("✅ No unresolved links or stub headers found!");
 } else {
-  dv.header(2, "To-Do List");
   dv.table(["Item", "Found In"], data);
 }
 ```
