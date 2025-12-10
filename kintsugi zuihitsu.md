@@ -39,9 +39,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 		2. **Plan poster structure** for Year 7-13 topic development (30 minutes)
 2. MTH3006…
 	1. Lecture notes…
-		1. **Complete MTH3006 lecture 12 notes** from this week (30 minutes)
-		2. **Complete MTH3006 lecture 11 notes** from this week (30 minutes)
-		3. **Review MTH3006 lectures 1-10** for understanding (2 hours)
+		1. **Review/Complete MTH3006 lectures 1-12** (4 hours)
 	2. Problem sets…
 		1. **Complete MTH3006 Problems Set 1** (90 minutes)
 		2. **Complete MTH3006 Problems Set 2** (90 minutes)
@@ -58,10 +56,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 		4. **Review/rewrite Guest Lecture 3** seminar report (30 minutes)
 4. MTH3007…
 	1. Lecture notes…
-		1. **Review MTH3007 lectures 1-5 notes** (1.5 hours)
-		2. **Complete MTH3007 lecture 6 notes** (30 minutes)
-		3. **Complete MTH3007 lecture 7 notes** (30 minutes)
-		4. **Complete MTH3007 lecture 8 notes** using slides not worksheet (30 minutes)
+		1. **Review/Complete MTH3007 lectures 1-8 notes** (4 hours)
 	2. Problem sets…
 		1. **Complete MTH3007 Problems Set 1** (90 minutes)
 		2. **Complete MTH3007 Problems Set 2** (90 minutes)
