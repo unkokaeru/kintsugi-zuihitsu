@@ -5296,24 +5296,24 @@
         "newlineCount": 6
       }
     },
-    "clear/project/omoikane/mth3004/FINAL COMPREHENSIVE POSTER PLAN.md": {
+    "clear/project/omoikane/mth3004/Poster Plan.md": {
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 2097,
+      "wordCount": 2042,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 6.99,
-      "characterCount": 24415,
-      "nonWhitespaceCharacterCount": 18299,
-      "newlineCount": 369,
-      "readingTimeInMinutes": 7.913207547169812,
+      "pageCount": 6.806666666666667,
+      "characterCount": 21265,
+      "nonWhitespaceCharacterCount": 15618,
+      "newlineCount": 410,
+      "readingTimeInMinutes": 7.70566037735849,
       "linkCount": 0,
       "embedCount": 0,
       "aliases": null,
       "createdDate": 1765459832893,
-      "modifiedDate": 1765459835673,
-      "sizeInBytes": 27618,
+      "modifiedDate": 1765460427678,
+      "sizeInBytes": 24464,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
