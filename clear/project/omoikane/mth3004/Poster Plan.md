@@ -184,8 +184,8 @@
 ## What's Learned (from National Curriculum)
 
 - "extend fluency with expressions and equations from key stage 3, to include quadratic equations, simultaneous equations and inequalities"​
-- "factorising quadratic expressions of the form x² + bx + c, including the difference of two squares; factorising quadratic expressions of the form ax² + bx + c"​
-- "identify and interpret roots, intercepts and turning points of quadratic functions graphically; deduce roots algebraically and turning points by completing the square"​
+- "factorising quadratic expressions of the form x² + bx + c, including the difference of two squares; factorising quadratic expressions of the form $ax² + bx + c$"​
+- "identify and interpret roots, intercepts, and turning points of quadratic functions graphically; deduce roots algebraically and turning points by completing the square"​
 - "solve quadratic equations… algebraically by factorising, by completing the square and by using the quadratic formula; find approximate solutions using a graph"​
 - "solve two simultaneous equations in two variables (linear/linear or linear/quadratic) algebraically; find approximate solutions using a graph"​
 - "find approximate solutions to equations numerically using iteration"​
@@ -194,7 +194,7 @@
 
 ## Knowledge, Skills & Understanding Developed
 
-- **Knowledge:** Quadratic structure (ax²+bx+c); discriminant indicates root count; equations ≠ identities
+- **Knowledge:** Quadratic structure ($ax²+bx+c$); discriminant indicates root count; equations ≠ identities
 - **Skills:** Factorising; completing square; quadratic formula; simultaneous solving; iterative approximation
 - **Understanding:** Multiple solution methods exist; graphs reveal root count; non-linear requires new techniques
 - **"+1 Technique":** What if equation isn't linear? Need factorising, formula, or approximation
@@ -205,21 +205,19 @@
 - Three small parabolas showing 0, 1, 2 roots (discriminant)
 - Caption: "Roots are where curve crosses x-axis" / "Discriminant tells us how many"
 
----
-
-## **KS5 Section (Y12-13) - Top Box**
+## Key Stage 5 Section (Year 12 to 13) - Top Box
 
 ## What's Learned (from National Curriculum)
 
-- "Work with quadratic functions and their graphs; the discriminant… completing the square; solution of quadratic equations including solving quadratic equations in a function of the unknown​
-- "Solve simultaneous equations in two variables by elimination and by substitution, including one linear and one quadratic equation​
-- "Solve equations of the form aˣ = b​
-- "Solve simple trigonometric equations in a given interval, including quadratic equations in sin, cos and tan and equations involving multiples of the unknown angle​
-- "Locate roots of f(x) = 0 by considering changes of sign… Understand how change of sign methods can fail​
-- "Solve equations using the Newton-Raphson method and other recurrence relations… Understand how such methods can fail​
-- "Evaluate the analytical solution of simple first order differential equations with separable variables​
-- "Solve linear and quadratic inequalities in a single variable and interpret such inequalities graphically​
-- "Understand and use parametric equations of curves​
+- "Work with quadratic functions and their graphs; the discriminant… completing the square; solution of quadratic equations including solving quadratic equations in a function of the unknown​"
+- "Solve simultaneous equations in two variables by elimination and by substitution, including one linear and one quadratic equation​"
+- "Solve equations of the form $aˣ = b$​"
+- "Solve simple trigonometric equations in a given interval, including quadratic equations in sin, cos, and tan and equations involving multiples of the unknown angle​"
+- "Locate roots of $f(x) = 0$ by considering changes of sign… Understand how the change of sign methods can fail​"
+- "Solve equations using the Newton-Raphson method and other recurrence relations… Understand how such methods can fail​"
+- "Evaluate the analytical solution of simple first order differential equations with separable variables​"
+- "Solve linear and quadratic inequalities in a single variable and interpret such inequalities graphically​"
+- "Understand and use parametric equations of curves​"
 
 ## Knowledge, Skills & Understanding Developed
 
@@ -234,18 +232,16 @@
 - Small Newton-Raphson tangent iteration diagram
 - Caption: "Solution = where f(x) = g(x)" / "Numerical methods approximate via tangents"
 
----
+## Poster Misconceptions Content
 
-## **MISCONCEPTIONS CONTENT (Full List)**
-
-## KS3 Misconceptions
+## Key Stage 3 Misconceptions
 
 1. "Treating '=' as 'makes' or 'the answer is' rather than equivalence" \[Swan, 2001\]
 2. "Believing x + 3 = 7 means 'x and 3 makes 7' (concatenation thinking)" \[Booth, 1984\]
 3. "Cannot work with negative numbers in equations" \[Common diagnostic\]
-4. "Letter-number reversal: 2x = x2" \[Küchemann, 1981\]
+4. "Letter-number reversal: $2x = x2$" \[Küchemann, 1981\]
 
-## KS4 Misconceptions
+## Key Stage 4 Misconceptions
 
 1. "Forgetting ± when solving x² = 9" \[Common error analysis\]
 2. "Confusing equations (solve for x) with identities (true for all x)" \[Kieran, 2007\]
@@ -253,16 +249,14 @@
 4. "Dividing both sides by a variable that might be zero" \[Tall & Vinner, 1981\]
 5. "Believing 'completing the square' is separate from quadratic formula (not seeing connection)"
 
-## KS5 Misconceptions
+## Key Stage 5 Misconceptions
 
 1. "Forgetting domain restrictions when using logarithms (x > 0)" \[Common calculus error\]
 2. "Not recognising when numerical methods are necessary vs. analytical solutions"
 3. "Ignoring convergence/divergence in iterative methods" \[Numerical methods research\]
-4. "Treating dy/dx as a fraction that can be separated arbitrarily" \[Tall, 1992\]
+4. "Treating $dy/dx$ as a fraction that can be separated arbitrarily" \[Tall, 1992\]
 
----
-
-## **LEARNING THEORIES CONTENT (Full List)**
+## Poster Learning Theories Content
 
 ## 1. Schema Theory (Piaget)
 
@@ -281,7 +275,7 @@
 ## 3. Zone of Proximal Development (Vygotsky)
 
 - **Theory:** Learning occurs in zone between what student can do alone vs. with support
-- **Application:** Each equation level should be in ZPD of previous; KS4 quadratics in ZPD of KS3 linears
+- **Application:** Each equation level should be in ZPD of previous; Key Stage 4 quadratics in ZPD of Key Stage 3 linears
 - **Implication:** Don't rush progression; ensure mastery before advancing complexity
 - **Citation:** Vygotsky, L. S. (1978). Mind in society
 
@@ -299,23 +293,21 @@
 - **Implication:** Diagnose gaps in prior knowledge before teaching new equation types
 - **Citation:** Bruner, J. S. (1966). Toward a theory of instruction
 
----
+## Poster Design Specifications
 
-## **DESIGN SPECIFICATIONS**
+## Colour Palette
 
-## Color Palette
-
-- **Introduction boxes:** Light blue (#E3F2FD)
-- **KS3 box:** Light blue (#BBDEFB)
-- **KS4 box:** Medium blue (#64B5F6)
-- **KS5 box:** Dark blue (#1976D2)
-- **Skills column:** Light green (#C8E6C9)
-- **Graph column:** Light grey (#F5F5F5)
-- **Misconceptions:** Light orange (#FFE0B2)
-- **Learning theory:** Light purple (#E1BEE7)
-- **Conclusion:** Teal (#B2DFDB)
-- **References:** White (#FFFFFF)
-- **Text:** All dark grey/black (#212121) for contrast
+- **Introduction boxes:** Light blue (`#E3F2FD`)
+- **Key Stage 3 box:** Light blue (`#BBDEFB`)
+- **Key Stage 4 box:** Medium blue (`#64B5F6`)
+- **Key Stage 5 box:** Dark blue (`#1976D2`)
+- **Skills column:** Light green (`#C8E6C9`)
+- **Graph column:** Light grey (`#F5F5F5`)
+- **Misconceptions:** Light orange (`#FFE0B2`)
+- **Learning theory:** Light purple (`#E1BEE7`)
+- **Conclusion:** Teal (`#B2DFDB`)
+- **References:** White (`#FFFFFF`)
+- **Text:** All dark grey/black (`#212121`) for contrast
 
 ## Typography
 
@@ -334,74 +326,34 @@
 - **Internal padding:** 1cm within boxes
 - **Line spacing:** 1.2-1.5 for readability
 
----
-
-## **KEY REFERENCES TO INCLUDE**
+## Poster Key Reference to Include
 
 ## Curriculum Documents (Primary sources)
 
-Department for Education, "Mathematics programmes of study: key stage 3," National Curriculum in England, 2013.
-
-Department for Education, "Mathematics programmes of study: key stage 4," National Curriculum in England, 2014.​
-
-Department for Education, "GCE AS and A level subject content for mathematics," 2016.GCE_AS_and_A_level_subject_content_for_mathematics_with_appendices.pdf​
+- Department for Education, "Mathematics programmes of study: key stage 3," National Curriculum in England, 2013.
+- Department for Education, "Mathematics programmes of study: key stage 4," National Curriculum in England, 2014.​
+- Department for Education, "GCE AS and A level subject content for mathematics," 2016.
 
 ## Learning Theory
 
-L. S. Vygotsky, Mind in Society. Harvard University Press, 1978.
-
-J. Piaget, The Psychology of Intelligence. Routledge, 1950.
-
-R. E. Mayer, Multimedia Learning, 2nd ed. Cambridge University Press, 2009.
-
-F. Marton, Necessary Conditions of Learning. Routledge, 2015.
-
-J. S. Bruner, Toward a Theory of Instruction. Harvard University Press, 1966.
+- L. S. Vygotsky, Mind in Society. Harvard University Press, 1978.
+- J. Piaget, The Psychology of Intelligence. Routledge, 1950.
+- R. E. Mayer, Multimedia Learning, 2nd ed. Cambridge University Press, 2009.
+- F. Marton, Necessary Conditions of Learning. Routledge, 2015.
+- J. S. Bruner, Toward a Theory of Instruction. Harvard University Press, 1966.
 
 ## Algebra Education Research
 
-C. Kieran, "Learning and teaching algebra at the middle school through college levels," in Second Handbook of Research on Mathematics Teaching and Learning, 2007, pp. 707-762.
-
-L. R. Booth, "Algebra: Children's strategies and errors," NFER-Nelson, 1984.
-
-M. Swan, "Dealing with misconceptions in mathematics," in Issues in Mathematics Teaching, 2001, pp. 147-165.
-
-D. Küchemann, "Algebra," in Children's Understanding of Mathematics: 11-16, 1981, pp. 102-119.
+- C. Kieran, "Learning and teaching algebra at the middle school through college levels," in Second Handbook of Research on Mathematics Teaching and Learning, 2007, pp. 707-762.
+- L. R. Booth, "Algebra: Children's strategies and errors," NFER-Nelson, 1984.
+- M. Swan, "Dealing with misconceptions in mathematics," in Issues in Mathematics Teaching, 2001, pp. 147-165.
+- D. Küchemann, "Algebra," in Children's Understanding of Mathematics: 11-16, 1981, pp. 102-119.
 
 ## Cognitive Science
 
-J. Sweller, "Cognitive load during problem solving," Cognitive Science, vol. 12, no. 2, pp. 257-285, 1988.
-
-D. Tall and S. Vinner, "Concept image and concept definition in mathematics," Educational Studies in Mathematics, vol. 12, pp. 151-169, 1981.
+- J. Sweller, "Cognitive load during problem solving," Cognitive Science, vol. 12, no. 2, pp. 257-285, 1988.
+- D. Tall and S. Vinner, "Concept image and concept definition in mathematics," Educational Studies in Mathematics, vol. 12, pp. 151-169, 1981.
 
 ## Additional (as Needed for Specific points)
 
-\[15-20\] More specific algebra misconceptions, pedagogy, or assessment research
-
----
-
-## **FINAL CHECKLIST**
-
-✅ **Introduction:** Background + personal motivation + literature = complete
-
-✅ **Progression Map:** Y7-13 curriculum quoted/paraphrased with citations = complete
-
-✅ **Knowledge/Skills:** Explicitly stated what develops at each level = complete
-
-✅ **Misconceptions:** Listed by level with citations = complete
-
-✅ **Learning Theories:** 5 theories with applications and implications = complete
-
-✅ **Graphical Understanding:** Sketches showing what solutions mean = complete
-
-✅ **Conclusion:** 5 key teaching implications = complete
-
-✅ **References:** IEEE format list at bottom = complete
-
-✅ **Logical Structure:** Clear flow, connections shown = complete
-
-✅ **Academic Rigor:** Citations throughout, research-backed = complete
-
----
-
-This is your complete, final, academic pedagogy poster plan. The progression goes **bottom-to-top** (KS3→KS4→KS5) in the middle section, while overall poster reads **top-to-bottom** (Intro→Map→Theory→Conclusion). Every marking criterion is addressed with specific content and citations.
+- \[15-20\] More specific algebra misconceptions, pedagogy, or assessment research
