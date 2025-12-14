@@ -115,7 +115,7 @@ The project spans approximately 30 weeks from 23 October 2025 to the final deadl
 ### Phase 1: Foundational Study (Weeks 1-8, 23 Oct – 17 Dec 2025)
 
 - Complete foundational reading of core references \[1\], \[2\], \[4\], \[9\] to establish theoretical base in logic, type theory, and proof assistant history
-- Install and configure Lean 4 with mathlib and Coq with VS Code development environment
+- Install and configure Lean 4 with mathlib and Coq with VS Code development environment1
 - Complete initial Lean 4 tutorials (Mathematics in Lean, Theorem Proving in Lean)
 - Study Curry-Howard correspondence and basic type theory concepts
 - Weekly supervisor meetings to review progress and discuss theoretical concepts
