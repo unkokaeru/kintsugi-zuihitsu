@@ -1,0 +1,8 @@
+# DnD
+
+- **Luna Butters** (Alex) - slug-person were-rat (bitten on the farm), really good at illusion magic to always look human. Really good prostitute (when under their illusion). Loves lettuce, nothing salty (pretends not to though). Farm worker originally, also a bit of a drinker, until bitten and taken in by Tinder Thunderbush. Just wants to be free.
+- **Tinder Thunderbush** (Katie) - obnoxiously straight fairy. Loan shark and pimp (of Luna Butters, best worker). Just wants to make money and match people with Luna Butters, her best worker. Owes a lot of money to some mysterious people, but pretends not to because she's really up herself so instead takes out loans to give people even more loans.
+- **Mister Skybreaker** (Dan) - dwarf raised by giants, hates short people (under 10 feet, single digiters), thinks he's really tall. Insanely addicted to gambling, so goes to Tinder for loans.
+- **Slugbert Oozeworth** / *Hubert Oxworth, originally* (Tom) - slimy, scaly, smelly. Born disgusting looking like a slug-person, so their royal family told them and the public that he was cursed (because no-one could NATURALLY look that disgusting). Works on a journey to become uncursed and human again, and on the way becomes an enforcer for some shady loan sharks (that end up loaning to Tinder Thunderbush). Eventually discovers he's just really ugly and filled with self-hatred, so changes journey to self-acceptance.
+
+![[image.png]]
