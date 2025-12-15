@@ -68,19 +68,8 @@
               "icon": "lucide-file",
               "title": "Research Plan"
             }
-          },
-          {
-            "id": "20eb3a49d445497a",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "vertical"
@@ -231,12 +220,15 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "20eb3a49d445497a",
+  "active": "dfaf42785ec25d0c",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3011/Research Plan.md",
+    "cloudy/project/yatagarasu/yatagarasu.md",
+    "cloudy/project/yatagarasu/temp old.md",
+    "clear/library/cooking/FFMS.md",
     "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3004/What is Effective Teaching in Mathematics.md",
     "clear/project/omoikane/mth3006/mth3006.md",
-    "clear/project/omoikane/mth3011/Research Plan.md",
     "clear/project/omoikane/mth3004/Poster Plan.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 12.md",
     "clear/project/omoikane/mth3011/mth3011.md",
@@ -246,10 +238,8 @@
     "attached/files/Session 11 Effective Teaching and PCK.pdf",
     "clear/project/omoikane/mth3004/mth3004 lecture 8.md",
     "cloudy/project/yatagarasu/User Feedback.md",
-    "cloudy/project/yatagarasu/yatagarasu.md",
     "clear/library/sloth bytes/sloth bytes.md",
     "clear/library/sloth bytes/Day Number of Year.md",
-    "cloudy/project/yatagarasu/temp old.md",
     "clear/project/omoikane/mth3006/mth3006 cheat sheet worked examples.md",
     "clear/project/omoikane/mth3006/mth3006 cheat sheet.md",
     "clear/project/omoikane/mth3006/Separation of variables.md",
@@ -260,7 +250,6 @@
     "clear/project/omoikane/mth3006/Fourier transform.md",
     "clear/project/omoikane/mth3006/Method of characteristics.md",
     "attached/files/MTH3006_Coursework.pdf",
-    "clear/project/omoikane/mth3006/mth3006 lecture 11.md",
     "clear/project/omoikane/mth3011/~$search Plan.docx",
     "clear/project/omoikane/mth3011/Research Plan.docx",
     "attached/files/MTH3006_Porfolio_Test_information.pdf",
