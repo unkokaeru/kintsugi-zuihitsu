@@ -68,8 +68,19 @@
               "icon": "lucide-file",
               "title": "Research Plan"
             }
+          },
+          {
+            "id": "20eb3a49d445497a",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -220,11 +231,11 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "dfaf42785ec25d0c",
+  "active": "20eb3a49d445497a",
   "lastOpenFiles": [
+    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3004/What is Effective Teaching in Mathematics.md",
     "clear/project/omoikane/mth3006/mth3006.md",
-    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3011/Research Plan.md",
     "clear/project/omoikane/mth3004/Poster Plan.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 12.md",
