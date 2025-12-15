@@ -38,6 +38,16 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 		10. **Review and Complete MTH3006 lecture 10** (20 minutes)
 		11. **Review and Complete MTH3006 lecture 11** (20 minutes)
 		12. **Review and Complete MTH3006 lecture 12** (20 minutes)
+		13. **Review and Complete MTH3006 lecture 13** (20 minutes)
+		14. **Review and Complete MTH3006 lecture 14** (20 minutes)
+		15. **Review and Complete MTH3006 lecture 15** (20 minutes)
+		16. **Review and Complete MTH3006 lecture 16** (20 minutes)
+		17. **Review and Complete MTH3006 lecture 17** (20 minutes)
+		18. **Review and Complete MTH3006 lecture 18** (20 minutes)
+		19. **Review and Complete MTH3006 lecture 19** (20 minutes)
+		20. **Review and Complete MTH3006 lecture 20** (20 minutes)
+		21. **Review and Complete MTH3006 lecture 21** (20 minutes)
+		22. **Review and Complete MTH3006 lecture 22** (20 minutes)
 	2. Problem sets…
 		1. **Complete MTH3006 Problems Set 1** (90 minutes)
 		2. **Complete MTH3006 Problems Set 2** (90 minutes)
@@ -45,6 +55,11 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 		4. **Complete MTH3006 Problems Set 4** (90 minutes)
 		5. **Complete MTH3006 Problems Set 5** (90 minutes)
 		6. **Complete MTH3006 Problems Set 6** (90 minutes)
+		7. **Complete MTH3006 Problems Set 7** (90 minutes)
+		8. **Complete MTH3006 Problems Set 8** (90 minutes)
+		9. **Complete MTH3006 Problems Set 9** (90 minutes)
+		10. **Complete MTH3006 Problems Set 10** (90 minutes)
+		11. **Complete MTH3006 Problems Set 11** (90 minutes)
 	3. Cheat sheet refinement
 3. [[MTH3011]]…
 	1. Guest lectures…
