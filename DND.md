@@ -5,4 +5,4 @@
 - **Mister Skybreaker** (Dan) - dwarf raised by giants, hates short people (under 10 feet, single digiters), thinks he's really tall. Insanely addicted to gambling, so goes to Tinder for loans.
 - **Slugbert Oozeworth** / *Hubert Oxworth, originally* (Tom) - slimy, scaly, smelly. Born disgusting looking like a slug-person, so their royal family told them and the public that he was cursed (because no-one could NATURALLY look that disgusting). Works on a journey to become uncursed and human again, and on the way becomes an enforcer for some shady loan sharks (that end up loaning to Tinder Thunderbush). Eventually discovers he's just really ugly and filled with self-hatred, so changes journey to self-acceptance.
 
-![[image.png]]
+![[image.png|Slugbert]]
