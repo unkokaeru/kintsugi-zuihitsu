@@ -98,6 +98,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 	3. **Update Obsidian settings** for new cloze format (5 minutes)
 	4. **Test new flashcard format** works correctly (10 minutes)
 	5. **Complete unfinished notes** shown below (in Obsidian)…
+	6. [[DND]] hehehehhe.
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
