@@ -13,7 +13,9 @@
 
 > Definition of effective teaching then introduce key focus
 
-…
+Effective mathematics teaching transcends content delivery to develop independent thinkers capable of self-regulated learning. Husbands and Pearce's influential report synthesises educational research into nine evidence-based claims characterising great pedagogy [1]. Their seventh claim - that effective pedagogies "focus on developing higher order thinking and metacognition, and make good use of dialogue and questioning to do so" [1] - proves particularly significant for mathematics education. Higher-order thinking, within Bloom's revised taxonomy, encompasses analysis, evaluation, and synthesis beyond factual recall [2]. Metacognition involves learners' awareness and regulation of their own cognitive processes [3]. This essay argues that focusing on higher-order thinking and metacognition through questioning represents the most critical factor for effective mathematics teaching, uniquely enabling other pedagogical principles. Constructivist learning theory, which positions learners as active meaning-makers rather than passive recipients [10], provides theoretical grounding for this claim: questioning catalyses the cognitive conflict necessary for conceptual development. The discussion examines how this claim manifests through pedagogical content knowledge, addresses mathematical misconceptions, and enhances assessment for learning, before acknowledging implementation challenges.
+
+Effective teaching in mathematics is more than just helping students memorise content, it's about developing the students' ability to self-learn and adapt existing knowledge to unfamiliar situations.
 
 ## Discussion and Analysis (500 Words / 4 paragraphs)
 
