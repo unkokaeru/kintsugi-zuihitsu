@@ -2,22 +2,13 @@
 
 > [!important] KEY FOCUS: Questioning to develop higher-order thinking and metacognition
 
-> [!info] Use **Professional Arguments** throughout supported by literature (IEEE)
-> 1. **Claim** - "What you think": A debatable statement that forms the main part of an argument - something unlikely to accept without good reason, intended to make the reader think/act differently.
-> 2. **Reasons** - "Why you think": Reasons included to support the claim, providing a logical basis for the claim - they may be debatable.
-> 3. **Evidence** - "How you know that's true": Personal experience, experts in the field, research, statistics, data, etc.
-> 4. **Acknowledgement and Response** - "But what about": Acknowledge/response to possible counterarguments, recognising the counterclaims and indicating the extend to which you disagree, hence responding.
-> 5. **Conclusion or Warrant** - "Why you think your reasoning is good": General logical reasoning forming the bridge between claim and evidence, step-by-step and developmental.
-
 ## Introduction (221/250 Words)
 
 Effective teaching in mathematics is more than just helping students memorise content, it's about developing the students' ability to self-learn and adapt existing knowledge to unfamiliar situations. Husbands and Pearce's report combines a breadth of educational research into nine evidence-based claims to describe great pedagogy [1]. Their seventh claim - that effective pedagogies "focus on developing higher order thinking and metacognition, and make good use of dialogue and questioning to do so" [1] - is especially relevant for mathematics education. Within Bloom's revised taxonomy, another piece of educational research, higher-order thinking is comprised of note just remembering, but understanding, applying, analysing, evaluating, and creating [2]. Metacognition, as described by Flavell, a student analysing their own thinking and mental processes [3].
 
 This essay argues that a combination of these ideas - higher-order thinking and metacognition - is the most important element of teaching, encouraged through dialogue and questioning, such that it then enables the student to better use other pedagogies. This claim is backed by constructivist learning theory, which states that students must actively try to find meaning, rather than just passively taking it in [10]: questioning creates the cognitive conflict which instigates longer-term learning. Pedagogical content knowledge (PCKs), mathematical misconceptions, and assessment for learning (AfL), all reinforce this claim as later discussed, albeit with some mentioned challenges implementing these techniques.
 
-## Discussion and Analysis (146/500 Words)
-
-> Discuss key focus then evaluate what is demonstrated
+## Discussion and Analysis (519/500 Words)
 
 Among the nine claims posed by Husbands and Pearce, developing higher-order thinking through dialogue and questioning stands out by addressing the most fundamental aspect of teaching: improving a student's cognitive abilities. Whilst the other claims focus on the conditions required to learn, this claim focuses on what learning should actually achieve. Schoenfeld's research explains that metacognition is what separates expert mathematical problem-solvers from novices [4] - experts use a continuous strategy of self-questioning when solving problems, monitoring their own progress and changing techniques throughout depending on what they find. This aligns with the constructivist learning theory mentioned earlier: Kilpatrick et al. argue a similar need for "adaptive reasoning" and "productive disposition", alongside the usual ability to methodically complete steps [10]. Teachers that develop their students' abilities to analyse their own cognition not only equip them with content knowledge, but the methods to self-learn.
 
@@ -27,12 +18,6 @@ The seventh claim posed by Husbands and Pearce also naturally enables assessment
 
 Critics might propose that subject knowledge or prior learning claims are more fundamental - without knowledge, how can thinking develop? This represents a false dichotomy: questioning simultaneously builds knowledge and develops thinking, rather than improving them discretely. However, effective questioning requires a substantial amount of teacher expertise, which often remains a challenge to build, yet does not diminish the claim's importance at all. Instead, it emphasises that developing these questioning skills should be further prioritised in teacher education and professional development in the first place [8][9].
 
-## Conclusion (250 Words / 1 paragraph)
+## Conclusion (184/250 Words)
 
-> Summarise and conclude with an answer to the question
-
-```
-By making questioning for higher-order thinking the centrepiece of practice, grounded in strong PCK and informed by learning theory, teachers cultivate capacities extending beyond mathematics into all areas of learning [1][10].
-```
-
-In summary, focusing on higher-order thinking and metacognition through questioning represents the most significant factor for effective teaching within mathematics. Constructivist learning theory describes the requirement for active engagement over passive reception for cognitive development [10], and questioning remains the single tool to instigate this. This claim is unique among the nine collated by Husbands and Pearce, enabling a variety of pedagogical principles: scaffolding becomes meaningful when developing a students' capability thinking, assessment for learning requires metacognitive awareness, and addressing misconceptions remains difficult without strategic questioning informed by PCK [1][8][11]. Teachers must intentionally progress through Bloom's cognitive levels [2], planning questions to step through the levels with enough wait time afterwards for genuine thinking [5], and design metacognitive questioning that students can internalise [7]. Assessment practices should place higher value on reasoning alongside correct answers [9]; effective mathematics teaching develops mathematical thinkers rather than mere mathematical doers. By making questioning for higher-order thinking a central practice, grounding in strong PCK and informed by learning theories, teachers can cultivate student ability beyond mathematics and into all areas of learning [1][1]
+In summary, focusing on higher-order thinking and metacognition through questioning represents the most significant factor for effective teaching within mathematics. Constructivist learning theory describes the requirement for active engagement over passive reception for cognitive development [10], and questioning remains the single tool to instigate this. This claim is unique among the nine collated by Husbands and Pearce, enabling a variety of pedagogical principles: scaffolding becomes meaningful when developing a students' capability thinking, assessment for learning requires metacognitive awareness, and addressing misconceptions remains difficult without strategic questioning informed by PCK [1][8][11]. Teachers must intentionally progress through Bloom's cognitive levels [2], planning questions to step through the levels with enough wait time afterwards for genuine thinking [5], and design metacognitive questioning that students can internalise [7]. Assessment practices should place higher value on reasoning alongside correct answers [9]; effective mathematics teaching develops mathematical thinkers rather than mere mathematical doers. By making questioning for higher-order thinking a central practice, grounding in strong PCK and informed by learning theories, teachers can cultivate student ability beyond mathematics and into all areas of learning [1][10].
