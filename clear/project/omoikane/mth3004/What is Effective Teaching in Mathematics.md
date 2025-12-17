@@ -9,15 +9,11 @@
 > 4. **Acknowledgement and Response** - "But what about": Acknowledge/response to possible counterarguments, recognising the counterclaims and indicating the extend to which you disagree, hence responding.
 > 5. **Conclusion or Warrant** - "Why you think your reasoning is good": General logical reasoning forming the bridge between claim and evidence, step-by-step and developmental.
 
-## Introduction (250 Words / 1 paragraph)
-
-> Definition of effective teaching then introduce key focus
-
-Constructivist learning theory, which positions learners as active meaning-makers rather than passive recipients [10], provides theoretical grounding for this claim: questioning catalyses the cognitive conflict necessary for conceptual development. The discussion examines how this claim manifests through pedagogical content knowledge, addresses mathematical misconceptions, and enhances assessment for learning, before acknowledging implementation challenges.
+## Introduction (221 Words)
 
 Effective teaching in mathematics is more than just helping students memorise content, it's about developing the students' ability to self-learn and adapt existing knowledge to unfamiliar situations. Husbands and Pearce's report combines a breadth of educational research into nine evidence-based claims to describe great pedagogy [1]. Their seventh claim - that effective pedagogies "focus on developing higher order thinking and metacognition, and make good use of dialogue and questioning to do so" [1] - is especially relevant for mathematics education. Within Bloom's revised taxonomy, another piece of educational research, higher-order thinking is comprised of note just remembering, but understanding, applying, analysing, evaluating, and creating [2]. Metacognition, as described by Flavell, a student analysing their own thinking and mental processes [3].
 
-This essay argues that a combination of these ideas - higher-order thinking and metacognition - is the most important element of teaching, encouraged through dialogue and questioning, such that it then enables the student to better use other pedagogies. This claim is backed by constructivist learning theory, which states that students must actively engage in creating meaning, rather than just passively receiving it.
+This essay argues that a combination of these ideas - higher-order thinking and metacognition - is the most important element of teaching, encouraged through dialogue and questioning, such that it then enables the student to better use other pedagogies. This claim is backed by constructivist learning theory, which states that students must actively try to find meaning, rather than just passively taking it in [10]: questioning creates the cognitive conflict which instigates longer-term learning. Pedagogical content knowledge (PCKs), mathematical misconceptions, and assessment for learning (AfL), all reinforce this claim as later discussed, albeit with some mentioned challenges implementing these techniques.
 
 ## Discussion and Analysis (500 Words / 4 paragraphs)
 
