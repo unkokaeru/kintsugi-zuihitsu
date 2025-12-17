@@ -69,6 +69,33 @@
     "debugMode": false
   },
   "cachedCounts": {
+    "DND.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 377,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 1.2566666666666666,
+      "characterCount": 2455,
+      "nonWhitespaceCharacterCount": 2063,
+      "newlineCount": 9,
+      "readingTimeInMinutes": 1.4226415094339622,
+      "linkCount": 0,
+      "embedCount": 1,
+      "aliases": null,
+      "createdDate": 1765805355277,
+      "modifiedDate": 1765808843751,
+      "sizeInBytes": 2455,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 1.2566666666666666,
+        "wordCount": 377,
+        "characterCount": 2455,
+        "nonWhitespaceCharacterCount": 2063,
+        "newlineCount": 9
+      }
+    },
     "kintsugi zuihitsu.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -96,31 +123,58 @@
         "newlineCount": 175
       }
     },
-    "DND.md": {
+    "cloudy/project/project.md": {
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 377,
+      "wordCount": 86,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 1.2566666666666666,
-      "characterCount": 2455,
-      "nonWhitespaceCharacterCount": 2063,
-      "newlineCount": 9,
-      "readingTimeInMinutes": 1.4226415094339622,
+      "pageCount": 0.2866666666666667,
+      "characterCount": 852,
+      "nonWhitespaceCharacterCount": 754,
+      "newlineCount": 29,
+      "readingTimeInMinutes": 0.32452830188679244,
       "linkCount": 0,
-      "embedCount": 1,
+      "embedCount": 0,
       "aliases": null,
-      "createdDate": 1765805355277,
-      "modifiedDate": 1765808843751,
-      "sizeInBytes": 2455,
+      "createdDate": 1758735467041,
+      "modifiedDate": 1758972991451,
+      "sizeInBytes": 852,
       "sessionStart": {
         "noteCount": 1,
-        "pageCount": 1.2566666666666666,
-        "wordCount": 377,
-        "characterCount": 2455,
-        "nonWhitespaceCharacterCount": 2063,
-        "newlineCount": 9
+        "pageCount": 0.2866666666666667,
+        "wordCount": 86,
+        "characterCount": 852,
+        "nonWhitespaceCharacterCount": 754,
+        "newlineCount": 29
+      }
+    },
+    "cloudy/project/yatagarasu/User Feedback.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 1804,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 6.013333333333334,
+      "characterCount": 22222,
+      "nonWhitespaceCharacterCount": 13425,
+      "newlineCount": 184,
+      "readingTimeInMinutes": 6.807547169811321,
+      "linkCount": 2,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1762882834095,
+      "modifiedDate": 1763982650969,
+      "sizeInBytes": 22245,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 6.013333333333334,
+        "wordCount": 1804,
+        "characterCount": 22222,
+        "nonWhitespaceCharacterCount": 13425,
+        "newlineCount": 184
       }
     },
     "cloudy/project/yatagarasu/yatagarasu.md": {
@@ -175,33 +229,6 @@
         "characterCount": 10582,
         "nonWhitespaceCharacterCount": 8771,
         "newlineCount": 231
-      }
-    },
-    "cloudy/project/yatagarasu/User Feedback.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 1804,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 6.013333333333334,
-      "characterCount": 22222,
-      "nonWhitespaceCharacterCount": 13425,
-      "newlineCount": 184,
-      "readingTimeInMinutes": 6.807547169811321,
-      "linkCount": 2,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1762882834095,
-      "modifiedDate": 1763982650969,
-      "sizeInBytes": 22245,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 6.013333333333334,
-        "wordCount": 1804,
-        "characterCount": 22222,
-        "nonWhitespaceCharacterCount": 13425,
-        "newlineCount": 184
       }
     },
     "cloudy/project/yatagarasu/Meeting notes.md": {
@@ -447,33 +474,6 @@
         "newlineCount": 10
       }
     },
-    "cloudy/project/kagaseo/LSA Content Plan.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 1623,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 5.41,
-      "characterCount": 15139,
-      "nonWhitespaceCharacterCount": 12944,
-      "newlineCount": 399,
-      "readingTimeInMinutes": 6.124528301886793,
-      "linkCount": 7,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1750166308806,
-      "modifiedDate": 1750707285374,
-      "sizeInBytes": 15158,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 5.41,
-        "wordCount": 1623,
-        "characterCount": 15139,
-        "nonWhitespaceCharacterCount": 12944,
-        "newlineCount": 399
-      }
-    },
     "cloudy/project/kagaseo/LSA Implementation Journey.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -501,31 +501,31 @@
         "newlineCount": 201
       }
     },
-    "cloudy/project/kagaseo/LSA Content Plan - Strategic Reasoning & Psychology.md": {
+    "cloudy/project/kagaseo/LSA Content Plan.md": {
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 1036,
+      "wordCount": 1623,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 3.453333333333333,
-      "characterCount": 9932,
-      "nonWhitespaceCharacterCount": 8609,
-      "newlineCount": 299,
-      "readingTimeInMinutes": 3.909433962264151,
-      "linkCount": 0,
+      "pageCount": 5.41,
+      "characterCount": 15139,
+      "nonWhitespaceCharacterCount": 12944,
+      "newlineCount": 399,
+      "readingTimeInMinutes": 6.124528301886793,
+      "linkCount": 7,
       "embedCount": 0,
       "aliases": null,
-      "createdDate": 1750706880567,
-      "modifiedDate": 1750707709401,
-      "sizeInBytes": 9938,
+      "createdDate": 1750166308806,
+      "modifiedDate": 1750707285374,
+      "sizeInBytes": 15158,
       "sessionStart": {
         "noteCount": 1,
-        "pageCount": 3.453333333333333,
-        "wordCount": 1036,
-        "characterCount": 9932,
-        "nonWhitespaceCharacterCount": 8609,
-        "newlineCount": 299
+        "pageCount": 5.41,
+        "wordCount": 1623,
+        "characterCount": 15139,
+        "nonWhitespaceCharacterCount": 12944,
+        "newlineCount": 399
       }
     },
     "cloudy/project/kagaseo/LSA Content Plan OLD.md": {
@@ -555,31 +555,31 @@
         "newlineCount": 371
       }
     },
-    "cloudy/project/kagaseo/Lone Star Analysis UK - Website Renewal Proposal.md": {
+    "cloudy/project/kagaseo/LSA Content Plan - Strategic Reasoning & Psychology.md": {
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 1517,
+      "wordCount": 1036,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 5.056666666666667,
-      "characterCount": 13955,
-      "nonWhitespaceCharacterCount": 12183,
-      "newlineCount": 275,
-      "readingTimeInMinutes": 5.724528301886792,
+      "pageCount": 3.453333333333333,
+      "characterCount": 9932,
+      "nonWhitespaceCharacterCount": 8609,
+      "newlineCount": 299,
+      "readingTimeInMinutes": 3.909433962264151,
       "linkCount": 0,
       "embedCount": 0,
       "aliases": null,
-      "createdDate": 1754413064889,
-      "modifiedDate": 1754570671655,
-      "sizeInBytes": 14001,
+      "createdDate": 1750706880567,
+      "modifiedDate": 1750707709401,
+      "sizeInBytes": 9938,
       "sessionStart": {
         "noteCount": 1,
-        "pageCount": 5.056666666666667,
-        "wordCount": 1517,
-        "characterCount": 13955,
-        "nonWhitespaceCharacterCount": 12183,
-        "newlineCount": 275
+        "pageCount": 3.453333333333333,
+        "wordCount": 1036,
+        "characterCount": 9932,
+        "nonWhitespaceCharacterCount": 8609,
+        "newlineCount": 299
       }
     },
     "cloudy/project/kagaseo/LSA Content Plan - Notes.md": {
@@ -607,6 +607,33 @@
         "characterCount": 4433,
         "nonWhitespaceCharacterCount": 3766,
         "newlineCount": 30
+      }
+    },
+    "cloudy/project/kagaseo/Lone Star Analysis UK - Website Renewal Proposal.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 1517,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 5.056666666666667,
+      "characterCount": 13955,
+      "nonWhitespaceCharacterCount": 12183,
+      "newlineCount": 275,
+      "readingTimeInMinutes": 5.724528301886792,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1754413064889,
+      "modifiedDate": 1754570671655,
+      "sizeInBytes": 14001,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 5.056666666666667,
+        "wordCount": 1517,
+        "characterCount": 13955,
+        "nonWhitespaceCharacterCount": 12183,
+        "newlineCount": 275
       }
     },
     "cloudy/project/kagaseo/Lone Star Analysis UK - Business Overview from Proposal Summaries.md": {
@@ -661,33 +688,6 @@
         "characterCount": 2337,
         "nonWhitespaceCharacterCount": 1997,
         "newlineCount": 53
-      }
-    },
-    "cloudy/project/project.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 86,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.2866666666666667,
-      "characterCount": 852,
-      "nonWhitespaceCharacterCount": 754,
-      "newlineCount": 29,
-      "readingTimeInMinutes": 0.32452830188679244,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1758735467041,
-      "modifiedDate": 1758972991451,
-      "sizeInBytes": 852,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.2866666666666667,
-        "wordCount": 86,
-        "characterCount": 852,
-        "nonWhitespaceCharacterCount": 754,
-        "newlineCount": 29
       }
     },
     "cloudy/project/daikokuten/daikokuten.md": {
@@ -771,33 +771,6 @@
         "newlineCount": 6
       }
     },
-    "clear/project/susanoo/rippo/rippo.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 106,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.35333333333333333,
-      "characterCount": 982,
-      "nonWhitespaceCharacterCount": 857,
-      "newlineCount": 18,
-      "readingTimeInMinutes": 0.4,
-      "linkCount": 2,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1758735245899,
-      "modifiedDate": 1759230243088,
-      "sizeInBytes": 982,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.35333333333333333,
-        "wordCount": 106,
-        "characterCount": 982,
-        "nonWhitespaceCharacterCount": 857,
-        "newlineCount": 18
-      }
-    },
     "clear/project/susanoo/susanoo.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -879,31 +852,31 @@
         "newlineCount": 21
       }
     },
-    "clear/project/susanoo/koto/koto.md": {
+    "clear/project/susanoo/rippo/rippo.md": {
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 95,
+      "wordCount": 106,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.31666666666666665,
-      "characterCount": 822,
-      "nonWhitespaceCharacterCount": 710,
-      "newlineCount": 17,
-      "readingTimeInMinutes": 0.3584905660377358,
+      "pageCount": 0.35333333333333333,
+      "characterCount": 982,
+      "nonWhitespaceCharacterCount": 857,
+      "newlineCount": 18,
+      "readingTimeInMinutes": 0.4,
       "linkCount": 2,
       "embedCount": 0,
       "aliases": null,
-      "createdDate": 1758735214458,
-      "modifiedDate": 1759230182054,
-      "sizeInBytes": 822,
+      "createdDate": 1758735245899,
+      "modifiedDate": 1759230243088,
+      "sizeInBytes": 982,
       "sessionStart": {
         "noteCount": 1,
-        "pageCount": 0.31666666666666665,
-        "wordCount": 95,
-        "characterCount": 822,
-        "nonWhitespaceCharacterCount": 710,
-        "newlineCount": 17
+        "pageCount": 0.35333333333333333,
+        "wordCount": 106,
+        "characterCount": 982,
+        "nonWhitespaceCharacterCount": 857,
+        "newlineCount": 18
       }
     },
     "clear/project/susanoo/ongaku/ongaku.md": {
@@ -931,6 +904,33 @@
         "characterCount": 928,
         "nonWhitespaceCharacterCount": 809,
         "newlineCount": 18
+      }
+    },
+    "clear/project/susanoo/koto/koto.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 95,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.31666666666666665,
+      "characterCount": 822,
+      "nonWhitespaceCharacterCount": 710,
+      "newlineCount": 17,
+      "readingTimeInMinutes": 0.3584905660377358,
+      "linkCount": 2,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1758735214458,
+      "modifiedDate": 1759230182054,
+      "sizeInBytes": 822,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.31666666666666665,
+        "wordCount": 95,
+        "characterCount": 822,
+        "nonWhitespaceCharacterCount": 710,
+        "newlineCount": 17
       }
     },
     "clear/project/susanoo/kagi/kagi.md": {
@@ -987,384 +987,6 @@
         "newlineCount": 29
       }
     },
-    "clear/project/omoikane/omoikane.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 256,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.8533333333333334,
-      "characterCount": 2159,
-      "nonWhitespaceCharacterCount": 1870,
-      "newlineCount": 40,
-      "readingTimeInMinutes": 0.9624905660377359,
-      "linkCount": 6,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1758735187778,
-      "modifiedDate": 1759744685610,
-      "sizeInBytes": 2167,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.8533333333333334,
-        "wordCount": 256,
-        "characterCount": 2159,
-        "nonWhitespaceCharacterCount": 1870,
-        "newlineCount": 40
-      }
-    },
-    "clear/project/omoikane/mth3007/Newton Divided Difference.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 470,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 1.5666666666666667,
-      "characterCount": 4791,
-      "nonWhitespaceCharacterCount": 3748,
-      "newlineCount": 169,
-      "readingTimeInMinutes": 1.7735849056603774,
-      "linkCount": 7,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1761574116920,
-      "modifiedDate": 1761574184018,
-      "sizeInBytes": 4797,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 1.5666666666666667,
-        "wordCount": 470,
-        "characterCount": 4791,
-        "nonWhitespaceCharacterCount": 3748,
-        "newlineCount": 169
-      }
-    },
-    "clear/project/omoikane/mth3007/Spline Interpolation.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 648,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 2.16,
-      "characterCount": 5716,
-      "nonWhitespaceCharacterCount": 4833,
-      "newlineCount": 189,
-      "readingTimeInMinutes": 2.4452830188679244,
-      "linkCount": 3,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1761574213861,
-      "modifiedDate": 1761574623525,
-      "sizeInBytes": 5718,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 2.16,
-        "wordCount": 648,
-        "characterCount": 5716,
-        "nonWhitespaceCharacterCount": 4833,
-        "newlineCount": 189
-      }
-    },
-    "clear/project/omoikane/mth3007/mth3007.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 144,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.48,
-      "characterCount": 1219,
-      "nonWhitespaceCharacterCount": 1032,
-      "newlineCount": 28,
-      "readingTimeInMinutes": 0.5433962264150943,
-      "linkCount": 5,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1759150109262,
-      "modifiedDate": 1761572781417,
-      "sizeInBytes": 1219,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.48,
-        "wordCount": 144,
-        "characterCount": 1219,
-        "nonWhitespaceCharacterCount": 1032,
-        "newlineCount": 28
-      }
-    },
-    "clear/project/omoikane/mth3007/mth3007 lecture 5.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 875,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 2.9166666666666665,
-      "characterCount": 7516,
-      "nonWhitespaceCharacterCount": 5888,
-      "newlineCount": 302,
-      "readingTimeInMinutes": 3.30188679245283,
-      "linkCount": 8,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1761572782384,
-      "modifiedDate": 1761576399418,
-      "sizeInBytes": 7528,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 2.9166666666666665,
-        "wordCount": 875,
-        "characterCount": 7516,
-        "nonWhitespaceCharacterCount": 5888,
-        "newlineCount": 302
-      }
-    },
-    "clear/project/omoikane/mth3007/mth3007 lecture 4.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 20,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.06666666666666667,
-      "characterCount": 269,
-      "nonWhitespaceCharacterCount": 232,
-      "newlineCount": 20,
-      "readingTimeInMinutes": 0.07547169811320754,
-      "linkCount": 1,
-      "embedCount": 2,
-      "aliases": null,
-      "createdDate": 1760965064792,
-      "modifiedDate": 1761054923016,
-      "sizeInBytes": 273,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.06666666666666667,
-        "wordCount": 20,
-        "characterCount": 269,
-        "nonWhitespaceCharacterCount": 232,
-        "newlineCount": 20
-      }
-    },
-    "clear/project/omoikane/mth3007/mth3007 lecture 3.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 1509,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 5.03,
-      "characterCount": 17171,
-      "nonWhitespaceCharacterCount": 12849,
-      "newlineCount": 514,
-      "readingTimeInMinutes": 5.694339622641509,
-      "linkCount": 2,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1760350514119,
-      "modifiedDate": 1760888843922,
-      "sizeInBytes": 17223,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 5.03,
-        "wordCount": 1509,
-        "characterCount": 17171,
-        "nonWhitespaceCharacterCount": 12849,
-        "newlineCount": 514
-      }
-    },
-    "clear/project/omoikane/mth3007/mth3007 lecture 2.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 566,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 1.8866666666666667,
-      "characterCount": 6855,
-      "nonWhitespaceCharacterCount": 5273,
-      "newlineCount": 193,
-      "readingTimeInMinutes": 2.1358490566037736,
-      "linkCount": 1,
-      "embedCount": 1,
-      "aliases": null,
-      "createdDate": 1759754065905,
-      "modifiedDate": 1759780032943,
-      "sizeInBytes": 6857,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 1.8866666666666667,
-        "wordCount": 566,
-        "characterCount": 6855,
-        "nonWhitespaceCharacterCount": 5273,
-        "newlineCount": 193
-      }
-    },
-    "clear/project/omoikane/mth3007/mth3007 lecture 1.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 490,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 1.6333333333333333,
-      "characterCount": 4328,
-      "nonWhitespaceCharacterCount": 3345,
-      "newlineCount": 156,
-      "readingTimeInMinutes": 1.849056603773585,
-      "linkCount": 1,
-      "embedCount": 1,
-      "aliases": null,
-      "createdDate": 1759153346152,
-      "modifiedDate": 1759746773149,
-      "sizeInBytes": 4339,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 1.6333333333333333,
-        "wordCount": 490,
-        "characterCount": 4328,
-        "nonWhitespaceCharacterCount": 3345,
-        "newlineCount": 156
-      }
-    },
-    "clear/project/omoikane/mth3007/Linear Interpolation.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 320,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 1.0666666666666667,
-      "characterCount": 2756,
-      "nonWhitespaceCharacterCount": 2241,
-      "newlineCount": 102,
-      "readingTimeInMinutes": 1.2075471698113207,
-      "linkCount": 5,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1761574103067,
-      "modifiedDate": 1761574554957,
-      "sizeInBytes": 2760,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 1.0666666666666667,
-        "wordCount": 320,
-        "characterCount": 2756,
-        "nonWhitespaceCharacterCount": 2241,
-        "newlineCount": 102
-      }
-    },
-    "clear/project/omoikane/mth3007/Least squares regression.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 104,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.3466666666666667,
-      "characterCount": 1031,
-      "nonWhitespaceCharacterCount": 922,
-      "newlineCount": 8,
-      "readingTimeInMinutes": 0.39245283018867927,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1759174324257,
-      "modifiedDate": 1760887131490,
-      "sizeInBytes": 1031,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.3466666666666667,
-        "wordCount": 104,
-        "characterCount": 1031,
-        "nonWhitespaceCharacterCount": 922,
-        "newlineCount": 8
-      }
-    },
-    "clear/project/omoikane/mth3007/Lagrange Interpolation.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 518,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 1.7266666666666666,
-      "characterCount": 4651,
-      "nonWhitespaceCharacterCount": 3755,
-      "newlineCount": 161,
-      "readingTimeInMinutes": 1.9547169811320755,
-      "linkCount": 7,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1761574188619,
-      "modifiedDate": 1761574603675,
-      "sizeInBytes": 4651,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 1.7266666666666666,
-        "wordCount": 518,
-        "characterCount": 4651,
-        "nonWhitespaceCharacterCount": 3755,
-        "newlineCount": 161
-      }
-    },
-    "clear/project/omoikane/mth3007/Interpolation.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 200,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.6666666666666666,
-      "characterCount": 1540,
-      "nonWhitespaceCharacterCount": 1299,
-      "newlineCount": 45,
-      "readingTimeInMinutes": 0.7547169811320755,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1761574058360,
-      "modifiedDate": 1761574519980,
-      "sizeInBytes": 1540,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.6666666666666666,
-        "wordCount": 200,
-        "characterCount": 1540,
-        "nonWhitespaceCharacterCount": 1299,
-        "newlineCount": 45
-      }
-    },
-    "clear/project/omoikane/mth3007/Bilinear Interpolation.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 630,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 2.1,
-      "characterCount": 5205,
-      "nonWhitespaceCharacterCount": 4117,
-      "newlineCount": 163,
-      "readingTimeInMinutes": 2.3773584905660377,
-      "linkCount": 6,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1761574242724,
-      "modifiedDate": 1761574641101,
-      "sizeInBytes": 5205,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 2.1,
-        "wordCount": 630,
-        "characterCount": 5205,
-        "nonWhitespaceCharacterCount": 4117,
-        "newlineCount": 163
-      }
-    },
     "clear/project/omoikane/mth3011/Research Plan.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -1392,33 +1014,6 @@
         "newlineCount": 291
       }
     },
-    "clear/project/omoikane/mth3011/original notes.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 726,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 2.42,
-      "characterCount": 4784,
-      "nonWhitespaceCharacterCount": 4014,
-      "newlineCount": 51,
-      "readingTimeInMinutes": 2.739622641509434,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1760359475027,
-      "modifiedDate": 1760359476720,
-      "sizeInBytes": 4784,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 2.42,
-        "wordCount": 726,
-        "characterCount": 4784,
-        "nonWhitespaceCharacterCount": 4014,
-        "newlineCount": 51
-      }
-    },
     "clear/project/omoikane/mth3011/mth3011.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -1444,6 +1039,33 @@
         "characterCount": 6004,
         "nonWhitespaceCharacterCount": 5027,
         "newlineCount": 152
+      }
+    },
+    "clear/project/omoikane/mth3011/original notes.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 726,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 2.42,
+      "characterCount": 4784,
+      "nonWhitespaceCharacterCount": 4014,
+      "newlineCount": 51,
+      "readingTimeInMinutes": 2.739622641509434,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1760359475027,
+      "modifiedDate": 1760359476720,
+      "sizeInBytes": 4784,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 2.42,
+        "wordCount": 726,
+        "characterCount": 4784,
+        "nonWhitespaceCharacterCount": 4014,
+        "newlineCount": 51
       }
     },
     "clear/project/omoikane/mth3011/Meeting notes 0.md": {
@@ -1581,6 +1203,411 @@
         "newlineCount": 14
       }
     },
+    "clear/project/omoikane/omoikane.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 256,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.8533333333333334,
+      "characterCount": 2159,
+      "nonWhitespaceCharacterCount": 1870,
+      "newlineCount": 40,
+      "readingTimeInMinutes": 0.9624905660377359,
+      "linkCount": 6,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1758735187778,
+      "modifiedDate": 1759744685610,
+      "sizeInBytes": 2167,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.8533333333333334,
+        "wordCount": 256,
+        "characterCount": 2159,
+        "nonWhitespaceCharacterCount": 1870,
+        "newlineCount": 40
+      }
+    },
+    "clear/project/omoikane/mth3007/Spline Interpolation.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 648,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 2.16,
+      "characterCount": 5716,
+      "nonWhitespaceCharacterCount": 4833,
+      "newlineCount": 189,
+      "readingTimeInMinutes": 2.4452830188679244,
+      "linkCount": 3,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1761574213861,
+      "modifiedDate": 1761574623525,
+      "sizeInBytes": 5718,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 2.16,
+        "wordCount": 648,
+        "characterCount": 5716,
+        "nonWhitespaceCharacterCount": 4833,
+        "newlineCount": 189
+      }
+    },
+    "clear/project/omoikane/mth3007/Newton Divided Difference.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 470,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 1.5666666666666667,
+      "characterCount": 4791,
+      "nonWhitespaceCharacterCount": 3748,
+      "newlineCount": 169,
+      "readingTimeInMinutes": 1.7735849056603774,
+      "linkCount": 7,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1761574116920,
+      "modifiedDate": 1761574184018,
+      "sizeInBytes": 4797,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 1.5666666666666667,
+        "wordCount": 470,
+        "characterCount": 4791,
+        "nonWhitespaceCharacterCount": 3748,
+        "newlineCount": 169
+      }
+    },
+    "clear/project/omoikane/mth3007/mth3007.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 144,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.48,
+      "characterCount": 1219,
+      "nonWhitespaceCharacterCount": 1032,
+      "newlineCount": 28,
+      "readingTimeInMinutes": 0.5433962264150943,
+      "linkCount": 5,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1759150109262,
+      "modifiedDate": 1761572781417,
+      "sizeInBytes": 1219,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.48,
+        "wordCount": 144,
+        "characterCount": 1219,
+        "nonWhitespaceCharacterCount": 1032,
+        "newlineCount": 28
+      }
+    },
+    "clear/project/omoikane/mth3007/mth3007 lecture 4.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 20,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.06666666666666667,
+      "characterCount": 269,
+      "nonWhitespaceCharacterCount": 232,
+      "newlineCount": 20,
+      "readingTimeInMinutes": 0.07547169811320754,
+      "linkCount": 1,
+      "embedCount": 2,
+      "aliases": null,
+      "createdDate": 1760965064792,
+      "modifiedDate": 1761054923016,
+      "sizeInBytes": 273,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.06666666666666667,
+        "wordCount": 20,
+        "characterCount": 269,
+        "nonWhitespaceCharacterCount": 232,
+        "newlineCount": 20
+      }
+    },
+    "clear/project/omoikane/mth3007/mth3007 lecture 5.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 875,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 2.9166666666666665,
+      "characterCount": 7516,
+      "nonWhitespaceCharacterCount": 5888,
+      "newlineCount": 302,
+      "readingTimeInMinutes": 3.30188679245283,
+      "linkCount": 8,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1761572782384,
+      "modifiedDate": 1761576399418,
+      "sizeInBytes": 7528,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 2.9166666666666665,
+        "wordCount": 875,
+        "characterCount": 7516,
+        "nonWhitespaceCharacterCount": 5888,
+        "newlineCount": 302
+      }
+    },
+    "clear/project/omoikane/mth3007/mth3007 lecture 3.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 1509,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 5.03,
+      "characterCount": 17171,
+      "nonWhitespaceCharacterCount": 12849,
+      "newlineCount": 514,
+      "readingTimeInMinutes": 5.694339622641509,
+      "linkCount": 2,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1760350514119,
+      "modifiedDate": 1760888843922,
+      "sizeInBytes": 17223,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 5.03,
+        "wordCount": 1509,
+        "characterCount": 17171,
+        "nonWhitespaceCharacterCount": 12849,
+        "newlineCount": 514
+      }
+    },
+    "clear/project/omoikane/mth3007/mth3007 lecture 2.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 566,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 1.8866666666666667,
+      "characterCount": 6855,
+      "nonWhitespaceCharacterCount": 5273,
+      "newlineCount": 193,
+      "readingTimeInMinutes": 2.1358490566037736,
+      "linkCount": 1,
+      "embedCount": 1,
+      "aliases": null,
+      "createdDate": 1759754065905,
+      "modifiedDate": 1759780032943,
+      "sizeInBytes": 6857,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 1.8866666666666667,
+        "wordCount": 566,
+        "characterCount": 6855,
+        "nonWhitespaceCharacterCount": 5273,
+        "newlineCount": 193
+      }
+    },
+    "clear/project/omoikane/mth3007/mth3007 lecture 1.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 490,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 1.6333333333333333,
+      "characterCount": 4328,
+      "nonWhitespaceCharacterCount": 3345,
+      "newlineCount": 156,
+      "readingTimeInMinutes": 1.849056603773585,
+      "linkCount": 1,
+      "embedCount": 1,
+      "aliases": null,
+      "createdDate": 1759153346152,
+      "modifiedDate": 1759746773149,
+      "sizeInBytes": 4339,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 1.6333333333333333,
+        "wordCount": 490,
+        "characterCount": 4328,
+        "nonWhitespaceCharacterCount": 3345,
+        "newlineCount": 156
+      }
+    },
+    "clear/project/omoikane/mth3007/Linear Interpolation.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 320,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 1.0666666666666667,
+      "characterCount": 2756,
+      "nonWhitespaceCharacterCount": 2241,
+      "newlineCount": 102,
+      "readingTimeInMinutes": 1.2075471698113207,
+      "linkCount": 5,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1761574103067,
+      "modifiedDate": 1761574554957,
+      "sizeInBytes": 2760,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 1.0666666666666667,
+        "wordCount": 320,
+        "characterCount": 2756,
+        "nonWhitespaceCharacterCount": 2241,
+        "newlineCount": 102
+      }
+    },
+    "clear/project/omoikane/mth3007/Lagrange Interpolation.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 518,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 1.7266666666666666,
+      "characterCount": 4651,
+      "nonWhitespaceCharacterCount": 3755,
+      "newlineCount": 161,
+      "readingTimeInMinutes": 1.9547169811320755,
+      "linkCount": 7,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1761574188619,
+      "modifiedDate": 1761574603675,
+      "sizeInBytes": 4651,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 1.7266666666666666,
+        "wordCount": 518,
+        "characterCount": 4651,
+        "nonWhitespaceCharacterCount": 3755,
+        "newlineCount": 161
+      }
+    },
+    "clear/project/omoikane/mth3007/Least squares regression.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 104,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.3466666666666667,
+      "characterCount": 1031,
+      "nonWhitespaceCharacterCount": 922,
+      "newlineCount": 8,
+      "readingTimeInMinutes": 0.39245283018867927,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1759174324257,
+      "modifiedDate": 1760887131490,
+      "sizeInBytes": 1031,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.3466666666666667,
+        "wordCount": 104,
+        "characterCount": 1031,
+        "nonWhitespaceCharacterCount": 922,
+        "newlineCount": 8
+      }
+    },
+    "clear/project/omoikane/mth3007/Interpolation.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 200,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.6666666666666666,
+      "characterCount": 1540,
+      "nonWhitespaceCharacterCount": 1299,
+      "newlineCount": 45,
+      "readingTimeInMinutes": 0.7547169811320755,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1761574058360,
+      "modifiedDate": 1761574519980,
+      "sizeInBytes": 1540,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.6666666666666666,
+        "wordCount": 200,
+        "characterCount": 1540,
+        "nonWhitespaceCharacterCount": 1299,
+        "newlineCount": 45
+      }
+    },
+    "clear/project/omoikane/mth3007/Bilinear Interpolation.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 630,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 2.1,
+      "characterCount": 5205,
+      "nonWhitespaceCharacterCount": 4117,
+      "newlineCount": 163,
+      "readingTimeInMinutes": 2.3773584905660377,
+      "linkCount": 6,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1761574242724,
+      "modifiedDate": 1761574641101,
+      "sizeInBytes": 5205,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 2.1,
+        "wordCount": 630,
+        "characterCount": 5205,
+        "nonWhitespaceCharacterCount": 4117,
+        "newlineCount": 163
+      }
+    },
+    "clear/project/omoikane/mth3006/mth3006.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 225,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.75,
+      "characterCount": 1862,
+      "nonWhitespaceCharacterCount": 1555,
+      "newlineCount": 86,
+      "readingTimeInMinutes": 0.8490566037735849,
+      "linkCount": 28,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1759088230919,
+      "modifiedDate": 1765789287074,
+      "sizeInBytes": 1872,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.75,
+        "wordCount": 225,
+        "characterCount": 1862,
+        "nonWhitespaceCharacterCount": 1555,
+        "newlineCount": 86
+      }
+    },
     "clear/project/omoikane/mth3006/Table of Laplace transforms.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -1633,33 +1660,6 @@
         "characterCount": 2572,
         "nonWhitespaceCharacterCount": 2189,
         "newlineCount": 101
-      }
-    },
-    "clear/project/omoikane/mth3006/mth3006.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 225,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.75,
-      "characterCount": 1862,
-      "nonWhitespaceCharacterCount": 1555,
-      "newlineCount": 86,
-      "readingTimeInMinutes": 0.8490566037735849,
-      "linkCount": 28,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1759088230919,
-      "modifiedDate": 1765789287074,
-      "sizeInBytes": 1872,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.75,
-        "wordCount": 225,
-        "characterCount": 1862,
-        "nonWhitespaceCharacterCount": 1555,
-        "newlineCount": 86
       }
     },
     "clear/project/omoikane/mth3006/mth3006 weekly problems 6.md": {
@@ -1716,33 +1716,6 @@
         "newlineCount": 130
       }
     },
-    "clear/project/omoikane/mth3006/mth3006 weekly problems 3.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 226,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.7533333333333333,
-      "characterCount": 1900,
-      "nonWhitespaceCharacterCount": 1595,
-      "newlineCount": 84,
-      "readingTimeInMinutes": 0.8528301886792453,
-      "linkCount": 1,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1760341142628,
-      "modifiedDate": 1760346658364,
-      "sizeInBytes": 1914,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.7533333333333333,
-        "wordCount": 226,
-        "characterCount": 1900,
-        "nonWhitespaceCharacterCount": 1595,
-        "newlineCount": 84
-      }
-    },
     "clear/project/omoikane/mth3006/mth3006 weekly problems 4.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -1768,6 +1741,33 @@
         "characterCount": 1450,
         "nonWhitespaceCharacterCount": 1299,
         "newlineCount": 53
+      }
+    },
+    "clear/project/omoikane/mth3006/mth3006 weekly problems 3.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 226,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.7533333333333333,
+      "characterCount": 1900,
+      "nonWhitespaceCharacterCount": 1595,
+      "newlineCount": 84,
+      "readingTimeInMinutes": 0.8528301886792453,
+      "linkCount": 1,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1760341142628,
+      "modifiedDate": 1760346658364,
+      "sizeInBytes": 1914,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.7533333333333333,
+        "wordCount": 226,
+        "characterCount": 1900,
+        "nonWhitespaceCharacterCount": 1595,
+        "newlineCount": 84
       }
     },
     "clear/project/omoikane/mth3006/mth3006 weekly problems 2.md": {
@@ -1824,33 +1824,6 @@
         "newlineCount": 109
       }
     },
-    "clear/project/omoikane/mth3006/mth3006 lecture 8.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 343,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 1.1433333333333333,
-      "characterCount": 2723,
-      "nonWhitespaceCharacterCount": 2267,
-      "newlineCount": 102,
-      "readingTimeInMinutes": 1.2943396226415094,
-      "linkCount": 1,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1761556293294,
-      "modifiedDate": 1761559702883,
-      "sizeInBytes": 2723,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 1.1433333333333333,
-        "wordCount": 343,
-        "characterCount": 2723,
-        "nonWhitespaceCharacterCount": 2267,
-        "newlineCount": 102
-      }
-    },
     "clear/project/omoikane/mth3006/mth3006 lecture 9.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -1876,6 +1849,33 @@
         "characterCount": 146,
         "nonWhitespaceCharacterCount": 120,
         "newlineCount": 12
+      }
+    },
+    "clear/project/omoikane/mth3006/mth3006 lecture 8.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 343,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 1.1433333333333333,
+      "characterCount": 2723,
+      "nonWhitespaceCharacterCount": 2267,
+      "newlineCount": 102,
+      "readingTimeInMinutes": 1.2943396226415094,
+      "linkCount": 1,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1761556293294,
+      "modifiedDate": 1761559702883,
+      "sizeInBytes": 2723,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 1.1433333333333333,
+        "wordCount": 343,
+        "characterCount": 2723,
+        "nonWhitespaceCharacterCount": 2267,
+        "newlineCount": 102
       }
     },
     "clear/project/omoikane/mth3006/mth3006 lecture 7.md": {
@@ -1932,33 +1932,6 @@
         "newlineCount": 22
       }
     },
-    "clear/project/omoikane/mth3006/mth3006 lecture 4.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 35,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.11666666666666667,
-      "characterCount": 285,
-      "nonWhitespaceCharacterCount": 233,
-      "newlineCount": 19,
-      "readingTimeInMinutes": 0.1320754716981132,
-      "linkCount": 2,
-      "embedCount": 1,
-      "aliases": null,
-      "createdDate": 1759824414357,
-      "modifiedDate": 1760342067122,
-      "sizeInBytes": 289,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.11666666666666667,
-        "wordCount": 35,
-        "characterCount": 285,
-        "nonWhitespaceCharacterCount": 233,
-        "newlineCount": 19
-      }
-    },
     "clear/project/omoikane/mth3006/mth3006 lecture 5.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -1986,31 +1959,31 @@
         "newlineCount": 13
       }
     },
-    "clear/project/omoikane/mth3006/mth3006 lecture 3.md": {
+    "clear/project/omoikane/mth3006/mth3006 lecture 4.md": {
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 151,
+      "wordCount": 35,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.5033333333333333,
-      "characterCount": 1332,
-      "nonWhitespaceCharacterCount": 1145,
-      "newlineCount": 41,
-      "readingTimeInMinutes": 0.569811320754717,
+      "pageCount": 0.11666666666666667,
+      "characterCount": 285,
+      "nonWhitespaceCharacterCount": 233,
+      "newlineCount": 19,
+      "readingTimeInMinutes": 0.1320754716981132,
       "linkCount": 2,
       "embedCount": 1,
       "aliases": null,
-      "createdDate": 1759738722653,
-      "modifiedDate": 1759746128964,
-      "sizeInBytes": 1338,
+      "createdDate": 1759824414357,
+      "modifiedDate": 1760342067122,
+      "sizeInBytes": 289,
       "sessionStart": {
         "noteCount": 1,
-        "pageCount": 0.5033333333333333,
-        "wordCount": 151,
-        "characterCount": 1332,
-        "nonWhitespaceCharacterCount": 1145,
-        "newlineCount": 41
+        "pageCount": 0.11666666666666667,
+        "wordCount": 35,
+        "characterCount": 285,
+        "nonWhitespaceCharacterCount": 233,
+        "newlineCount": 19
       }
     },
     "clear/project/omoikane/mth3006/mth3006 lecture 2.md": {
@@ -2038,6 +2011,33 @@
         "characterCount": 384,
         "nonWhitespaceCharacterCount": 319,
         "newlineCount": 19
+      }
+    },
+    "clear/project/omoikane/mth3006/mth3006 lecture 3.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 151,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.5033333333333333,
+      "characterCount": 1332,
+      "nonWhitespaceCharacterCount": 1145,
+      "newlineCount": 41,
+      "readingTimeInMinutes": 0.569811320754717,
+      "linkCount": 2,
+      "embedCount": 1,
+      "aliases": null,
+      "createdDate": 1759738722653,
+      "modifiedDate": 1759746128964,
+      "sizeInBytes": 1338,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.5033333333333333,
+        "wordCount": 151,
+        "characterCount": 1332,
+        "nonWhitespaceCharacterCount": 1145,
+        "newlineCount": 41
       }
     },
     "clear/project/omoikane/mth3006/mth3006 lecture 12.md": {
@@ -2283,33 +2283,6 @@
         "newlineCount": 9
       }
     },
-    "clear/project/omoikane/mth3006/Fourier's inversion theorem.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 28,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.09333333333333334,
-      "characterCount": 212,
-      "nonWhitespaceCharacterCount": 182,
-      "newlineCount": 4,
-      "readingTimeInMinutes": 0.10566037735849057,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1759171691135,
-      "modifiedDate": 1759171773021,
-      "sizeInBytes": 212,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.09333333333333334,
-        "wordCount": 28,
-        "characterCount": 212,
-        "nonWhitespaceCharacterCount": 182,
-        "newlineCount": 4
-      }
-    },
     "clear/project/omoikane/mth3006/Gamma function.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -2337,6 +2310,33 @@
         "newlineCount": 10
       }
     },
+    "clear/project/omoikane/mth3006/Fourier's inversion theorem.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 28,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.09333333333333334,
+      "characterCount": 212,
+      "nonWhitespaceCharacterCount": 182,
+      "newlineCount": 4,
+      "readingTimeInMinutes": 0.10566037735849057,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1759171691135,
+      "modifiedDate": 1759171773021,
+      "sizeInBytes": 212,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.09333333333333334,
+        "wordCount": 28,
+        "characterCount": 212,
+        "nonWhitespaceCharacterCount": 182,
+        "newlineCount": 4
+      }
+    },
     "clear/project/omoikane/mth3006/Fourier transform.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -2362,33 +2362,6 @@
         "characterCount": 4131,
         "nonWhitespaceCharacterCount": 3661,
         "newlineCount": 61
-      }
-    },
-    "clear/project/omoikane/mth3006/Euler's Formula.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 9,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.03,
-      "characterCount": 81,
-      "nonWhitespaceCharacterCount": 70,
-      "newlineCount": 4,
-      "readingTimeInMinutes": 0.033962264150943396,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1759311533960,
-      "modifiedDate": 1759311597041,
-      "sizeInBytes": 81,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.03,
-        "wordCount": 9,
-        "characterCount": 81,
-        "nonWhitespaceCharacterCount": 70,
-        "newlineCount": 4
       }
     },
     "clear/project/omoikane/mth3006/Fourier series.md": {
@@ -2445,31 +2418,31 @@
         "newlineCount": 14
       }
     },
-    "clear/project/omoikane/mth3006/Dirac delta-function.md": {
+    "clear/project/omoikane/mth3006/Euler's Formula.md": {
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 175,
+      "wordCount": 9,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.5833333333333334,
-      "characterCount": 1474,
-      "nonWhitespaceCharacterCount": 1285,
-      "newlineCount": 22,
-      "readingTimeInMinutes": 0.660377358490566,
+      "pageCount": 0.03,
+      "characterCount": 81,
+      "nonWhitespaceCharacterCount": 70,
+      "newlineCount": 4,
+      "readingTimeInMinutes": 0.033962264150943396,
       "linkCount": 0,
-      "embedCount": 1,
+      "embedCount": 0,
       "aliases": null,
-      "createdDate": 1759220250330,
-      "modifiedDate": 1759824897275,
-      "sizeInBytes": 1474,
+      "createdDate": 1759311533960,
+      "modifiedDate": 1759311597041,
+      "sizeInBytes": 81,
       "sessionStart": {
         "noteCount": 1,
-        "pageCount": 0.5833333333333334,
-        "wordCount": 175,
-        "characterCount": 1474,
-        "nonWhitespaceCharacterCount": 1285,
-        "newlineCount": 22
+        "pageCount": 0.03,
+        "wordCount": 9,
+        "characterCount": 81,
+        "nonWhitespaceCharacterCount": 70,
+        "newlineCount": 4
       }
     },
     "clear/project/omoikane/mth3006/Convolution.md": {
@@ -2496,6 +2469,33 @@
         "wordCount": 170,
         "characterCount": 1289,
         "nonWhitespaceCharacterCount": 1102,
+        "newlineCount": 22
+      }
+    },
+    "clear/project/omoikane/mth3006/Dirac delta-function.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 175,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.5833333333333334,
+      "characterCount": 1474,
+      "nonWhitespaceCharacterCount": 1285,
+      "newlineCount": 22,
+      "readingTimeInMinutes": 0.660377358490566,
+      "linkCount": 0,
+      "embedCount": 1,
+      "aliases": null,
+      "createdDate": 1759220250330,
+      "modifiedDate": 1759824897275,
+      "sizeInBytes": 1474,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.5833333333333334,
+        "wordCount": 175,
+        "characterCount": 1474,
+        "nonWhitespaceCharacterCount": 1285,
         "newlineCount": 22
       }
     },
@@ -2526,33 +2526,6 @@
         "newlineCount": 28
       }
     },
-    "clear/project/omoikane/mth3004/What is Effective Teaching in Mathematics.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 184,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.6133333333333333,
-      "characterCount": 1389,
-      "nonWhitespaceCharacterCount": 1167,
-      "newlineCount": 29,
-      "readingTimeInMinutes": 0.6943396226415094,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1760619952206,
-      "modifiedDate": 1765713898677,
-      "sizeInBytes": 1395,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.6133333333333333,
-        "wordCount": 184,
-        "characterCount": 1389,
-        "nonWhitespaceCharacterCount": 1167,
-        "newlineCount": 29
-      }
-    },
     "clear/project/omoikane/mth3004/Professional arguments.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -2580,31 +2553,31 @@
         "newlineCount": 14
       }
     },
-    "clear/project/omoikane/mth3004/Poster Plan.md": {
+    "clear/project/omoikane/mth3004/What is Effective Teaching in Mathematics.md": {
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 1960,
+      "wordCount": 184,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 6.533333333333333,
-      "characterCount": 20257,
-      "nonWhitespaceCharacterCount": 14738,
-      "newlineCount": 360,
-      "readingTimeInMinutes": 7.39622641509434,
+      "pageCount": 0.6133333333333333,
+      "characterCount": 1389,
+      "nonWhitespaceCharacterCount": 1167,
+      "newlineCount": 29,
+      "readingTimeInMinutes": 0.6943396226415094,
       "linkCount": 0,
       "embedCount": 0,
       "aliases": null,
-      "createdDate": 1765459832893,
-      "modifiedDate": 1765460820902,
-      "sizeInBytes": 23424,
+      "createdDate": 1760619952206,
+      "modifiedDate": 1765713898677,
+      "sizeInBytes": 1395,
       "sessionStart": {
         "noteCount": 1,
-        "pageCount": 6.533333333333333,
-        "wordCount": 1960,
-        "characterCount": 20257,
-        "nonWhitespaceCharacterCount": 14738,
-        "newlineCount": 360
+        "pageCount": 0.6133333333333333,
+        "wordCount": 184,
+        "characterCount": 1389,
+        "nonWhitespaceCharacterCount": 1167,
+        "newlineCount": 29
       }
     },
     "clear/project/omoikane/mth3004/mth3004.md": {
@@ -2632,6 +2605,33 @@
         "characterCount": 2508,
         "nonWhitespaceCharacterCount": 2103,
         "newlineCount": 63
+      }
+    },
+    "clear/project/omoikane/mth3004/Poster Plan.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 1960,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 6.533333333333333,
+      "characterCount": 20257,
+      "nonWhitespaceCharacterCount": 14738,
+      "newlineCount": 360,
+      "readingTimeInMinutes": 7.39622641509434,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1765459832893,
+      "modifiedDate": 1765460820902,
+      "sizeInBytes": 23424,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 6.533333333333333,
+        "wordCount": 1960,
+        "characterCount": 20257,
+        "nonWhitespaceCharacterCount": 14738,
+        "newlineCount": 360
       }
     },
     "clear/project/omoikane/mth3004/mth3004 lecture 8.md": {
@@ -2715,6 +2715,33 @@
         "newlineCount": 131
       }
     },
+    "clear/project/omoikane/mth3004/mth3004 lecture 10.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 95,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.31666666666666665,
+      "characterCount": 773,
+      "nonWhitespaceCharacterCount": 660,
+      "newlineCount": 9,
+      "readingTimeInMinutes": 0.3584905660377358,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1765444338457,
+      "modifiedDate": 1765446422756,
+      "sizeInBytes": 773,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.31666666666666665,
+        "wordCount": 95,
+        "characterCount": 773,
+        "nonWhitespaceCharacterCount": 660,
+        "newlineCount": 9
+      }
+    },
     "clear/project/omoikane/mth3004/mth3004 lecture 3.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -2769,33 +2796,6 @@
         "newlineCount": 42
       }
     },
-    "clear/project/omoikane/mth3004/mth3004 lecture 10.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 95,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.31666666666666665,
-      "characterCount": 773,
-      "nonWhitespaceCharacterCount": 660,
-      "newlineCount": 9,
-      "readingTimeInMinutes": 0.3584905660377358,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1765444338457,
-      "modifiedDate": 1765446422756,
-      "sizeInBytes": 773,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.31666666666666665,
-        "wordCount": 95,
-        "characterCount": 773,
-        "nonWhitespaceCharacterCount": 660,
-        "newlineCount": 9
-      }
-    },
     "clear/project/omoikane/mth3004/mth3004 lecture 1.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -2821,33 +2821,6 @@
         "characterCount": 240,
         "nonWhitespaceCharacterCount": 211,
         "newlineCount": 13
-      }
-    },
-    "clear/project/hachiman/hachiman.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 168,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.56,
-      "characterCount": 1390,
-      "nonWhitespaceCharacterCount": 1203,
-      "newlineCount": 27,
-      "readingTimeInMinutes": 0.6233207547169811,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1758735077143,
-      "modifiedDate": 1759267612924,
-      "sizeInBytes": 1404,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.56,
-        "wordCount": 168,
-        "characterCount": 1390,
-        "nonWhitespaceCharacterCount": 1203,
-        "newlineCount": 27
       }
     },
     "clear/project/kuebiko/kuebiko.md": {
@@ -2904,6 +2877,33 @@
         "newlineCount": 25
       }
     },
+    "clear/project/hachiman/hachiman.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 168,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.56,
+      "characterCount": 1390,
+      "nonWhitespaceCharacterCount": 1203,
+      "newlineCount": 27,
+      "readingTimeInMinutes": 0.6233207547169811,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1758735077143,
+      "modifiedDate": 1759267612924,
+      "sizeInBytes": 1404,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.56,
+        "wordCount": 168,
+        "characterCount": 1390,
+        "nonWhitespaceCharacterCount": 1203,
+        "newlineCount": 27
+      }
+    },
     "clear/project/doosojin/doosojin.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -2929,6 +2929,60 @@
         "characterCount": 1434,
         "nonWhitespaceCharacterCount": 1238,
         "newlineCount": 25
+      }
+    },
+    "clear/clear.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 59,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.19666666666666666,
+      "characterCount": 488,
+      "nonWhitespaceCharacterCount": 426,
+      "newlineCount": 6,
+      "readingTimeInMinutes": 0.22264150943396227,
+      "linkCount": 2,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1758734768096,
+      "modifiedDate": 1759079722227,
+      "sizeInBytes": 488,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.19666666666666666,
+        "wordCount": 59,
+        "characterCount": 488,
+        "nonWhitespaceCharacterCount": 426,
+        "newlineCount": 6
+      }
+    },
+    "clear/library/library.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 88,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.29333333333333333,
+      "characterCount": 860,
+      "nonWhitespaceCharacterCount": 760,
+      "newlineCount": 29,
+      "readingTimeInMinutes": 0.3320754716981132,
+      "linkCount": 1,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1758734887508,
+      "modifiedDate": 1759079727273,
+      "sizeInBytes": 860,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.29333333333333333,
+        "wordCount": 88,
+        "characterCount": 860,
+        "nonWhitespaceCharacterCount": 760,
+        "newlineCount": 29
       }
     },
     "clear/library/sloth bytes/Yelling.md": {
@@ -3066,33 +3120,6 @@
         "newlineCount": 15
       }
     },
-    "clear/library/sloth bytes/Virus.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 85,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.2833333333333333,
-      "characterCount": 3087,
-      "nonWhitespaceCharacterCount": 1063,
-      "newlineCount": 8,
-      "readingTimeInMinutes": 0.32075471698113206,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1759254697683,
-      "modifiedDate": 1744205924326,
-      "sizeInBytes": 3091,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.2833333333333333,
-        "wordCount": 85,
-        "characterCount": 3087,
-        "nonWhitespaceCharacterCount": 1063,
-        "newlineCount": 8
-      }
-    },
     "clear/library/sloth bytes/Vowel Skewers.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -3120,31 +3147,31 @@
         "newlineCount": 10
       }
     },
-    "clear/library/sloth bytes/Valid Hex Code.md": {
+    "clear/library/sloth bytes/Virus.md": {
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 77,
+      "wordCount": 85,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.25666666666666665,
-      "characterCount": 3532,
-      "nonWhitespaceCharacterCount": 1248,
-      "newlineCount": 10,
-      "readingTimeInMinutes": 0.29056603773584905,
+      "pageCount": 0.2833333333333333,
+      "characterCount": 3087,
+      "nonWhitespaceCharacterCount": 1063,
+      "newlineCount": 8,
+      "readingTimeInMinutes": 0.32075471698113206,
       "linkCount": 0,
       "embedCount": 0,
       "aliases": null,
-      "createdDate": 1759254547196,
-      "modifiedDate": 1759254570021,
-      "sizeInBytes": 3537,
+      "createdDate": 1759254697683,
+      "modifiedDate": 1744205924326,
+      "sizeInBytes": 3091,
       "sessionStart": {
         "noteCount": 1,
-        "pageCount": 0.25666666666666665,
-        "wordCount": 77,
-        "characterCount": 3532,
-        "nonWhitespaceCharacterCount": 1248,
-        "newlineCount": 10
+        "pageCount": 0.2833333333333333,
+        "wordCount": 85,
+        "characterCount": 3087,
+        "nonWhitespaceCharacterCount": 1063,
+        "newlineCount": 8
       }
     },
     "clear/library/sloth bytes/Video Length Conversion.md": {
@@ -3174,58 +3201,31 @@
         "newlineCount": 9
       }
     },
-    "clear/library/sloth bytes/Time Time Conversion.md": {
+    "clear/library/sloth bytes/Valid Hex Code.md": {
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 51,
+      "wordCount": 77,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.17,
-      "characterCount": 482,
-      "nonWhitespaceCharacterCount": 418,
-      "newlineCount": 7,
-      "readingTimeInMinutes": 0.19245283018867926,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1759254697668,
-      "modifiedDate": 1731690319580,
-      "sizeInBytes": 486,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.17,
-        "wordCount": 51,
-        "characterCount": 482,
-        "nonWhitespaceCharacterCount": 418,
-        "newlineCount": 7
-      }
-    },
-    "clear/library/sloth bytes/Trace the Path of the Word.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 93,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.31,
-      "characterCount": 2052,
-      "nonWhitespaceCharacterCount": 873,
-      "newlineCount": 9,
-      "readingTimeInMinutes": 0.35094339622641507,
+      "pageCount": 0.25666666666666665,
+      "characterCount": 3532,
+      "nonWhitespaceCharacterCount": 1248,
+      "newlineCount": 10,
+      "readingTimeInMinutes": 0.29056603773584905,
       "linkCount": 0,
       "embedCount": 0,
       "aliases": null,
       "createdDate": 1759254547196,
-      "modifiedDate": 1759254582164,
-      "sizeInBytes": 2056,
+      "modifiedDate": 1759254570021,
+      "sizeInBytes": 3537,
       "sessionStart": {
         "noteCount": 1,
-        "pageCount": 0.31,
-        "wordCount": 93,
-        "characterCount": 2052,
-        "nonWhitespaceCharacterCount": 873,
-        "newlineCount": 9
+        "pageCount": 0.25666666666666665,
+        "wordCount": 77,
+        "characterCount": 3532,
+        "nonWhitespaceCharacterCount": 1248,
+        "newlineCount": 10
       }
     },
     "clear/library/sloth bytes/USB Memory.md": {
@@ -3255,6 +3255,33 @@
         "newlineCount": 8
       }
     },
+    "clear/library/sloth bytes/Trace the Path of the Word.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 93,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.31,
+      "characterCount": 2052,
+      "nonWhitespaceCharacterCount": 873,
+      "newlineCount": 9,
+      "readingTimeInMinutes": 0.35094339622641507,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1759254547196,
+      "modifiedDate": 1759254582164,
+      "sizeInBytes": 2056,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.31,
+        "wordCount": 93,
+        "characterCount": 2052,
+        "nonWhitespaceCharacterCount": 873,
+        "newlineCount": 9
+      }
+    },
     "clear/library/sloth bytes/Time.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -3282,30 +3309,30 @@
         "newlineCount": 8
       }
     },
-    "clear/library/sloth bytes/Sticky Keys.md": {
+    "clear/library/sloth bytes/Time Time Conversion.md": {
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 111,
+      "wordCount": 51,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.37,
-      "characterCount": 3471,
-      "nonWhitespaceCharacterCount": 1318,
+      "pageCount": 0.17,
+      "characterCount": 482,
+      "nonWhitespaceCharacterCount": 418,
       "newlineCount": 7,
-      "readingTimeInMinutes": 0.4188679245283019,
+      "readingTimeInMinutes": 0.19245283018867926,
       "linkCount": 0,
       "embedCount": 0,
       "aliases": null,
-      "createdDate": 1759254697660,
-      "modifiedDate": 1744205929504,
-      "sizeInBytes": 3483,
+      "createdDate": 1759254697668,
+      "modifiedDate": 1731690319580,
+      "sizeInBytes": 486,
       "sessionStart": {
         "noteCount": 1,
-        "pageCount": 0.37,
-        "wordCount": 111,
-        "characterCount": 3471,
-        "nonWhitespaceCharacterCount": 1318,
+        "pageCount": 0.17,
+        "wordCount": 51,
+        "characterCount": 482,
+        "nonWhitespaceCharacterCount": 418,
         "newlineCount": 7
       }
     },
@@ -3336,31 +3363,31 @@
         "newlineCount": 8
       }
     },
-    "clear/library/sloth bytes/Spiral Matrix.md": {
+    "clear/library/sloth bytes/Sticky Keys.md": {
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 66,
+      "wordCount": 111,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.22,
-      "characterCount": 1347,
-      "nonWhitespaceCharacterCount": 591,
-      "newlineCount": 8,
-      "readingTimeInMinutes": 0.2490566037735849,
+      "pageCount": 0.37,
+      "characterCount": 3471,
+      "nonWhitespaceCharacterCount": 1318,
+      "newlineCount": 7,
+      "readingTimeInMinutes": 0.4188679245283019,
       "linkCount": 0,
       "embedCount": 0,
       "aliases": null,
-      "createdDate": 1759254234515,
-      "modifiedDate": 1759254250074,
-      "sizeInBytes": 1347,
+      "createdDate": 1759254697660,
+      "modifiedDate": 1744205929504,
+      "sizeInBytes": 3483,
       "sessionStart": {
         "noteCount": 1,
-        "pageCount": 0.22,
-        "wordCount": 66,
-        "characterCount": 1347,
-        "nonWhitespaceCharacterCount": 591,
-        "newlineCount": 8
+        "pageCount": 0.37,
+        "wordCount": 111,
+        "characterCount": 3471,
+        "nonWhitespaceCharacterCount": 1318,
+        "newlineCount": 7
       }
     },
     "clear/library/sloth bytes/Sorting.md": {
@@ -3388,6 +3415,33 @@
         "characterCount": 162,
         "nonWhitespaceCharacterCount": 118,
         "newlineCount": 7
+      }
+    },
+    "clear/library/sloth bytes/Spiral Matrix.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 66,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.22,
+      "characterCount": 1347,
+      "nonWhitespaceCharacterCount": 591,
+      "newlineCount": 8,
+      "readingTimeInMinutes": 0.2490566037735849,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1759254234515,
+      "modifiedDate": 1759254250074,
+      "sizeInBytes": 1347,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.22,
+        "wordCount": 66,
+        "characterCount": 1347,
+        "nonWhitespaceCharacterCount": 591,
+        "newlineCount": 8
       }
     },
     "clear/library/sloth bytes/sloth bytes.md": {
@@ -3552,33 +3606,6 @@
         "newlineCount": 8
       }
     },
-    "clear/library/sloth bytes/pomodoro timer.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 17,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.056666666666666664,
-      "characterCount": 1011,
-      "nonWhitespaceCharacterCount": 554,
-      "newlineCount": 6,
-      "readingTimeInMinutes": 0.06415094339622641,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1762530534907,
-      "modifiedDate": 1762530539421,
-      "sizeInBytes": 1011,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.056666666666666664,
-        "wordCount": 17,
-        "characterCount": 1011,
-        "nonWhitespaceCharacterCount": 554,
-        "newlineCount": 6
-      }
-    },
     "clear/library/sloth bytes/Ping Pong.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -3633,31 +3660,31 @@
         "newlineCount": 10
       }
     },
-    "clear/library/sloth bytes/Pasting.md": {
+    "clear/library/sloth bytes/pomodoro timer.md": {
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 131,
+      "wordCount": 17,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.43666666666666665,
-      "characterCount": 963,
-      "nonWhitespaceCharacterCount": 795,
-      "newlineCount": 8,
-      "readingTimeInMinutes": 0.49433962264150944,
+      "pageCount": 0.056666666666666664,
+      "characterCount": 1011,
+      "nonWhitespaceCharacterCount": 554,
+      "newlineCount": 6,
+      "readingTimeInMinutes": 0.06415094339622641,
       "linkCount": 0,
       "embedCount": 0,
       "aliases": null,
-      "createdDate": 1759254697627,
-      "modifiedDate": 1730894854729,
-      "sizeInBytes": 977,
+      "createdDate": 1762530534907,
+      "modifiedDate": 1762530539421,
+      "sizeInBytes": 1011,
       "sessionStart": {
         "noteCount": 1,
-        "pageCount": 0.43666666666666665,
-        "wordCount": 131,
-        "characterCount": 963,
-        "nonWhitespaceCharacterCount": 795,
-        "newlineCount": 8
+        "pageCount": 0.056666666666666664,
+        "wordCount": 17,
+        "characterCount": 1011,
+        "nonWhitespaceCharacterCount": 554,
+        "newlineCount": 6
       }
     },
     "clear/library/sloth bytes/Phone Number.md": {
@@ -3684,6 +3711,33 @@
         "wordCount": 76,
         "characterCount": 559,
         "nonWhitespaceCharacterCount": 473,
+        "newlineCount": 8
+      }
+    },
+    "clear/library/sloth bytes/Pasting.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 131,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.43666666666666665,
+      "characterCount": 963,
+      "nonWhitespaceCharacterCount": 795,
+      "newlineCount": 8,
+      "readingTimeInMinutes": 0.49433962264150944,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1759254697627,
+      "modifiedDate": 1730894854729,
+      "sizeInBytes": 977,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.43666666666666665,
+        "wordCount": 131,
+        "characterCount": 963,
+        "nonWhitespaceCharacterCount": 795,
         "newlineCount": 8
       }
     },
@@ -3741,33 +3795,6 @@
         "newlineCount": 12
       }
     },
-    "clear/library/sloth bytes/Numbers to English.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 65,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.21666666666666667,
-      "characterCount": 580,
-      "nonWhitespaceCharacterCount": 500,
-      "newlineCount": 8,
-      "readingTimeInMinutes": 0.24528301886792453,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1759254697624,
-      "modifiedDate": 1730465267268,
-      "sizeInBytes": 584,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.21666666666666667,
-        "wordCount": 65,
-        "characterCount": 580,
-        "nonWhitespaceCharacterCount": 500,
-        "newlineCount": 8
-      }
-    },
     "clear/library/sloth bytes/Number Splitting.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -3793,6 +3820,33 @@
         "characterCount": 881,
         "nonWhitespaceCharacterCount": 390,
         "newlineCount": 6
+      }
+    },
+    "clear/library/sloth bytes/Numbers to English.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 65,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.21666666666666667,
+      "characterCount": 580,
+      "nonWhitespaceCharacterCount": 500,
+      "newlineCount": 8,
+      "readingTimeInMinutes": 0.24528301886792453,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1759254697624,
+      "modifiedDate": 1730465267268,
+      "sizeInBytes": 584,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.21666666666666667,
+        "wordCount": 65,
+        "characterCount": 580,
+        "nonWhitespaceCharacterCount": 500,
+        "newlineCount": 8
       }
     },
     "clear/library/sloth bytes/Nom Nom Numbers.md": {
@@ -3957,33 +4011,6 @@
         "newlineCount": 10
       }
     },
-    "clear/library/sloth bytes/Format Checker.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 75,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.25,
-      "characterCount": 2269,
-      "nonWhitespaceCharacterCount": 770,
-      "newlineCount": 10,
-      "readingTimeInMinutes": 0.2830188679245283,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1759254697610,
-      "modifiedDate": 1735762321678,
-      "sizeInBytes": 2273,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.25,
-        "wordCount": 75,
-        "characterCount": 2269,
-        "nonWhitespaceCharacterCount": 770,
-        "newlineCount": 10
-      }
-    },
     "clear/library/sloth bytes/Happy Year.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -4009,6 +4036,33 @@
         "characterCount": 2655,
         "nonWhitespaceCharacterCount": 833,
         "newlineCount": 8
+      }
+    },
+    "clear/library/sloth bytes/Format Checker.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 75,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.25,
+      "characterCount": 2269,
+      "nonWhitespaceCharacterCount": 770,
+      "newlineCount": 10,
+      "readingTimeInMinutes": 0.2830188679245283,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1759254697610,
+      "modifiedDate": 1735762321678,
+      "sizeInBytes": 2273,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.25,
+        "wordCount": 75,
+        "characterCount": 2269,
+        "nonWhitespaceCharacterCount": 770,
+        "newlineCount": 10
       }
     },
     "clear/library/sloth bytes/Find the Itinerary in Alphabetical Order.md": {
@@ -4281,33 +4335,6 @@
         "newlineCount": 9
       }
     },
-    "clear/library/sloth bytes/Censor.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 77,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.25666666666666665,
-      "characterCount": 1855,
-      "nonWhitespaceCharacterCount": 738,
-      "newlineCount": 8,
-      "readingTimeInMinutes": 0.29056603773584905,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1759254697708,
-      "modifiedDate": 1737920806639,
-      "sizeInBytes": 1859,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.25666666666666665,
-        "wordCount": 77,
-        "characterCount": 1855,
-        "nonWhitespaceCharacterCount": 738,
-        "newlineCount": 8
-      }
-    },
     "clear/library/sloth bytes/Colour Inversion.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -4360,6 +4387,33 @@
         "characterCount": 3065,
         "nonWhitespaceCharacterCount": 1274,
         "newlineCount": 9
+      }
+    },
+    "clear/library/sloth bytes/Censor.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 77,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.25666666666666665,
+      "characterCount": 1855,
+      "nonWhitespaceCharacterCount": 738,
+      "newlineCount": 8,
+      "readingTimeInMinutes": 0.29056603773584905,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1759254697708,
+      "modifiedDate": 1737920806639,
+      "sizeInBytes": 1859,
+      "sessionStart": {
+        "noteCount": 1,
+        "pageCount": 0.25666666666666665,
+        "wordCount": 77,
+        "characterCount": 1855,
+        "nonWhitespaceCharacterCount": 738,
+        "newlineCount": 8
       }
     },
     "clear/library/sloth bytes/Can You Reach the Exit.md": {
@@ -4524,33 +4578,6 @@
         "newlineCount": 8
       }
     },
-    "clear/library/library.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 88,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.29333333333333333,
-      "characterCount": 860,
-      "nonWhitespaceCharacterCount": 760,
-      "newlineCount": 29,
-      "readingTimeInMinutes": 0.3320754716981132,
-      "linkCount": 1,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1758734887508,
-      "modifiedDate": 1759079727273,
-      "sizeInBytes": 860,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.29333333333333333,
-        "wordCount": 88,
-        "characterCount": 860,
-        "nonWhitespaceCharacterCount": 760,
-        "newlineCount": 29
-      }
-    },
     "clear/library/japanese/japanese.md": {
       "isCountable": true,
       "targetNodeType": "file",
@@ -4603,33 +4630,6 @@
         "characterCount": 1149,
         "nonWhitespaceCharacterCount": 990,
         "newlineCount": 21
-      }
-    },
-    "clear/library/chess/chess.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 150,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.5,
-      "characterCount": 1410,
-      "nonWhitespaceCharacterCount": 1229,
-      "newlineCount": 44,
-      "readingTimeInMinutes": 0.5660377358490566,
-      "linkCount": 1,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1758734949324,
-      "modifiedDate": 1759230269016,
-      "sizeInBytes": 1412,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.5,
-        "wordCount": 150,
-        "characterCount": 1410,
-        "nonWhitespaceCharacterCount": 1229,
-        "newlineCount": 44
       }
     },
     "clear/library/cooking/recipe/lemon bars.md": {
@@ -4713,58 +4713,31 @@
         "newlineCount": 44
       }
     },
-    "clear/clear.md": {
+    "clear/library/chess/chess.md": {
       "isCountable": true,
       "targetNodeType": "file",
       "noteCount": 1,
-      "wordCount": 59,
+      "wordCount": 150,
       "wordCountTowardGoal": 0,
       "wordGoal": null,
-      "pageCount": 0.19666666666666666,
-      "characterCount": 488,
-      "nonWhitespaceCharacterCount": 426,
-      "newlineCount": 6,
-      "readingTimeInMinutes": 0.22264150943396227,
-      "linkCount": 2,
+      "pageCount": 0.5,
+      "characterCount": 1410,
+      "nonWhitespaceCharacterCount": 1229,
+      "newlineCount": 44,
+      "readingTimeInMinutes": 0.5660377358490566,
+      "linkCount": 1,
       "embedCount": 0,
       "aliases": null,
-      "createdDate": 1758734768096,
-      "modifiedDate": 1759079722227,
-      "sizeInBytes": 488,
+      "createdDate": 1758734949324,
+      "modifiedDate": 1759230269016,
+      "sizeInBytes": 1412,
       "sessionStart": {
         "noteCount": 1,
-        "pageCount": 0.19666666666666666,
-        "wordCount": 59,
-        "characterCount": 488,
-        "nonWhitespaceCharacterCount": 426,
-        "newlineCount": 6
-      }
-    },
-    "attached/templates/mth3000 lecture template.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 33,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 0.11,
-      "characterCount": 272,
-      "nonWhitespaceCharacterCount": 224,
-      "newlineCount": 17,
-      "readingTimeInMinutes": 0.12452830188679245,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1759745132957,
-      "modifiedDate": 1759746107421,
-      "sizeInBytes": 276,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 0.11,
-        "wordCount": 33,
-        "characterCount": 272,
-        "nonWhitespaceCharacterCount": 224,
-        "newlineCount": 17
+        "pageCount": 0.5,
+        "wordCount": 150,
+        "characterCount": 1410,
+        "nonWhitespaceCharacterCount": 1229,
+        "newlineCount": 44
       }
     },
     "attached/remarkable notes/Lectures/Year 3/mth3007/mth3007 lectures.pdf": {
@@ -4945,31 +4918,31 @@
         "scrybble_timestamp": 1759229538
       }
     },
-    "attached/files/nm_worksheet_wk4.pdf": {
-      "isCountable": false,
+    "attached/templates/mth3000 lecture template.md": {
+      "isCountable": true,
       "targetNodeType": "file",
-      "noteCount": 0,
-      "wordCount": 0,
+      "noteCount": 1,
+      "wordCount": 33,
       "wordCountTowardGoal": 0,
-      "wordGoal": 0,
-      "pageCount": 0,
-      "characterCount": 0,
-      "nonWhitespaceCharacterCount": 0,
-      "newlineCount": 0,
-      "readingTimeInMinutes": 0,
+      "wordGoal": null,
+      "pageCount": 0.11,
+      "characterCount": 272,
+      "nonWhitespaceCharacterCount": 224,
+      "newlineCount": 17,
+      "readingTimeInMinutes": 0.12452830188679245,
       "linkCount": 0,
       "embedCount": 0,
-      "aliases": [],
-      "createdDate": 1761054921552,
-      "modifiedDate": 1761054921554,
-      "sizeInBytes": 174613,
+      "aliases": null,
+      "createdDate": 1759745132957,
+      "modifiedDate": 1759746107421,
+      "sizeInBytes": 276,
       "sessionStart": {
-        "noteCount": 0,
-        "pageCount": 0,
-        "wordCount": 0,
-        "characterCount": 0,
-        "nonWhitespaceCharacterCount": 0,
-        "newlineCount": 0
+        "noteCount": 1,
+        "pageCount": 0.11,
+        "wordCount": 33,
+        "characterCount": 272,
+        "nonWhitespaceCharacterCount": 224,
+        "newlineCount": 17
       }
     },
     "attached/files/Session 7 Assessment and Assessment for Learning - Tagged.pdf": {
@@ -4990,6 +4963,33 @@
       "createdDate": 1763046157467,
       "modifiedDate": 1763046157467,
       "sizeInBytes": 410684,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
+      }
+    },
+    "attached/files/nm_worksheet_wk4.pdf": {
+      "isCountable": false,
+      "targetNodeType": "file",
+      "noteCount": 0,
+      "wordCount": 0,
+      "wordCountTowardGoal": 0,
+      "wordGoal": 0,
+      "pageCount": 0,
+      "characterCount": 0,
+      "nonWhitespaceCharacterCount": 0,
+      "newlineCount": 0,
+      "readingTimeInMinutes": 0,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": [],
+      "createdDate": 1761054921552,
+      "modifiedDate": 1761054921554,
+      "sizeInBytes": 174613,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
@@ -5269,33 +5269,6 @@
         "newlineCount": 0
       }
     },
-    "attached/files/example logbook 3.pdf": {
-      "isCountable": false,
-      "targetNodeType": "file",
-      "noteCount": 0,
-      "wordCount": 0,
-      "wordCountTowardGoal": 0,
-      "wordGoal": 0,
-      "pageCount": 0,
-      "characterCount": 0,
-      "nonWhitespaceCharacterCount": 0,
-      "newlineCount": 0,
-      "readingTimeInMinutes": 0,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": [],
-      "createdDate": 1762175076967,
-      "modifiedDate": 1762175077221,
-      "sizeInBytes": 39255967,
-      "sessionStart": {
-        "noteCount": 0,
-        "pageCount": 0,
-        "wordCount": 0,
-        "characterCount": 0,
-        "nonWhitespaceCharacterCount": 0,
-        "newlineCount": 0
-      }
-    },
     "attached/files/example logbook 2.pdf": {
       "isCountable": false,
       "targetNodeType": "file",
@@ -5314,6 +5287,33 @@
       "createdDate": 1762175076049,
       "modifiedDate": 1762175076054,
       "sizeInBytes": 4743970,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
+      }
+    },
+    "attached/files/example logbook 3.pdf": {
+      "isCountable": false,
+      "targetNodeType": "file",
+      "noteCount": 0,
+      "wordCount": 0,
+      "wordCountTowardGoal": 0,
+      "wordGoal": 0,
+      "pageCount": 0,
+      "characterCount": 0,
+      "nonWhitespaceCharacterCount": 0,
+      "newlineCount": 0,
+      "readingTimeInMinutes": 0,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": [],
+      "createdDate": 1762175076967,
+      "modifiedDate": 1762175077221,
+      "sizeInBytes": 39255967,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,
