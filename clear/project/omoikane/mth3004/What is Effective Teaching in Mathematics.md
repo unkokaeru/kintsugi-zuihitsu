@@ -21,7 +21,7 @@ This essay argues that a combination of these ideas - higher-order thinking and 
 
 Among Husbands and Pearce's nine claims, developing higher-order thinking through questioning holds primacy because it addresses education's fundamental purpose. While other claims focus on conditions for learning, this claim targets the cognitive transformation effective teaching should achieve. Schoenfeld's research demonstrates that metacognition distinguishes expert from novice mathematical problem-solvers [4]; experts continuously self-question during problem-solving, monitoring progress and adjusting strategies. Constructivist learning theory supports this position: Kilpatrick et al. argue that mathematical proficiency requires "adaptive reasoning" and "productive disposition" alongside procedural fluency [10]. Teachers who develop metacognitive capacity equip students not merely with knowledge but with tools for autonomous learning.
 
-
+Among the nine claims posed by Husbands and Pearce, developing higher-order thinking through dialogue and questioning stands out by addressing the most fundamental aspect of teaching: improving a student's cognitive abilities. Whilst the other claims focus on the conditions required to learn, this claim focuses on what learning should actually achieve. Schoenfeld's research explains that metacognition is what separates expert mathematical problem-solvers from novices [4] - experts use a continuous strategy of self-questioning when solving problems, monitoring their own progress and changing tech
 
 ## Conclusion (250 Words / 1 paragraph)
 
