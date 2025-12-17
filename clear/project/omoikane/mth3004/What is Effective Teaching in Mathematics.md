@@ -15,11 +15,13 @@ Effective teaching in mathematics is more than just helping students memorise co
 
 This essay argues that a combination of these ideas - higher-order thinking and metacognition - is the most important element of teaching, encouraged through dialogue and questioning, such that it then enables the student to better use other pedagogies. This claim is backed by constructivist learning theory, which states that students must actively try to find meaning, rather than just passively taking it in [10]: questioning creates the cognitive conflict which instigates longer-term learning. Pedagogical content knowledge (PCKs), mathematical misconceptions, and assessment for learning (AfL), all reinforce this claim as later discussed, albeit with some mentioned challenges implementing these techniques.
 
-## Discussion and Analysis (500 Words / 4 paragraphs)
+## Discussion and Analysis (500 Words)
 
 > Discuss key focus then evaluate what is demonstrated
 
-…
+Among Husbands and Pearce's nine claims, developing higher-order thinking through questioning holds primacy because it addresses education's fundamental purpose. While other claims focus on conditions for learning, this claim targets the cognitive transformation effective teaching should achieve. Schoenfeld's research demonstrates that metacognition distinguishes expert from novice mathematical problem-solvers [4]; experts continuously self-question during problem-solving, monitoring progress and adjusting strategies. Constructivist learning theory supports this position: Kilpatrick et al. argue that mathematical proficiency requires "adaptive reasoning" and "productive disposition" alongside procedural fluency [10]. Teachers who develop metacognitive capacity equip students not merely with knowledge but with tools for autonomous learning.
+
+
 
 ## Conclusion (250 Words / 1 paragraph)
 
