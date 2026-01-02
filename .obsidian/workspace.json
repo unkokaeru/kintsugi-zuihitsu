@@ -23,8 +23,24 @@
               "icon": "lucide-file",
               "title": "kintsugi zuihitsu"
             }
+          },
+          {
+            "id": "85fda99df82c099a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Levels of Organisation.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "Levels of Organisation"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -175,8 +191,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "dfaf42785ec25d0c",
+  "active": "85fda99df82c099a",
   "lastOpenFiles": [
+    "kintsugi zuihitsu.md",
+    "Levels of Organisation.md",
     "attached/files/image-6.png",
     "attached/files/image-5.png",
     "attached/files/image-4.png",
@@ -185,7 +203,6 @@
     "attached/files/image-1.png",
     "clear/project/omoikane/mth3004/What is Effective Teaching in Mathematics.md",
     "clear/project/omoikane/mth3004/mth3004.md",
-    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3004/Untitled.md",
     "clear/project/omoikane/mth3004/mth3004 lecture 10.md",
     "clear/project/omoikane/mth3004/Professional arguments.md",
@@ -221,7 +238,6 @@
     "attached/files/MTH3006_Notes_5.pdf",
     "attached/files/mth3006 lectures-11.png",
     "attached/files/chillin sushi guy.svg",
-    "attached/files/dirac delta function.png",
-    "attached/files/heaviside step function.png"
+    "attached/files/dirac delta function.png"
   ]
 }
