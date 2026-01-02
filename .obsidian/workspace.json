@@ -23,8 +23,24 @@
               "icon": "lucide-file",
               "title": "kintsugi zuihitsu"
             }
+          },
+          {
+            "id": "11f9b73acd5ca789",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3004/What is Effective Teaching in Mathematics.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "What is Effective Teaching in Mathematics"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -175,15 +191,15 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "dfaf42785ec25d0c",
+  "active": "11f9b73acd5ca789",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3004/mth3004.md",
+    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3004/What is Effective Teaching in Mathematics.md",
     "clear/project/omoikane/mth3004/Untitled.md",
-    "clear/project/omoikane/mth3004/mth3004.md",
     "clear/project/omoikane/mth3004/mth3004 lecture 10.md",
     "clear/project/omoikane/mth3004/Professional arguments.md",
     "clear/project/omoikane/mth3004/mth3004 lecture 2.md",
-    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3011/mth3011.md",
     "clear/project/omoikane/mth3004/Poster Plan.md",
     "DND.md",
