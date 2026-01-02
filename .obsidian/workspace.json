@@ -39,8 +39,7 @@
               "title": "Levels of Organisation"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -191,10 +190,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "85fda99df82c099a",
+  "active": "dfaf42785ec25d0c",
   "lastOpenFiles": [
-    "kintsugi zuihitsu.md",
     "Levels of Organisation.md",
+    "kintsugi zuihitsu.md",
     "attached/files/image-6.png",
     "attached/files/image-5.png",
     "attached/files/image-4.png",
