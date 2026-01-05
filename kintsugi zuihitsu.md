@@ -12,20 +12,14 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 
 > [[Levels of Organisation]]
 
-- Complete notes for [[yatagarasu]] (incl. [[User Feedback]]) and collate into a KanBan board.
+- Complete notes for [[yatagarasu]] (incl. [[User Feedback]]) and collate into a KanBan board (with durations to timeline everything).
 - Complete [[yatagarasu]] onboarding form and other tasks (fixes/features).
 - Complete the [[mth3011]] Guest Lecture blog-style seminar reports.
 - Starting with [[mth3007]] - exam soon! -, go through previous modules, completing notes and problems sets; perhaps with custom AI agents within VS Code. Optionally, then refine their respective cheat sheet(s).
 - Complete a Lean proof for [[mth3011]], and any other associated module work before the next meeting with my supervisor - confirm date, too!
 - Complete taxes and other finance-related tasks.
-- Continue development on [[FFMS]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
-- [[Kintsugi Zuihitsu]]…
-	- **Search for highlighting in notes** to count flashcards (5 minutes)
-	- **Change flashcard syntax** from == to ** globally (30 minutes)
-	- **Update Obsidian settings** for new cloze format (5 minutes)
-	- **Test new flashcard format** works correctly (10 minutes)
-	- **Complete unfinished notes** shown below (in Obsidian)…
-	- [[DND]] hehehehhe.
+- Continue development on [[FFMS]] for [[Kuebiko]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
+- Change flashcard syntax within [[Kintsugi Zuihitsu]] from == to ** globally and then update the Obsidian settings for the new cloze format.
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
