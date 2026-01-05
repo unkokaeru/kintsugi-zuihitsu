@@ -193,7 +193,7 @@
       "embedCount": 0,
       "aliases": null,
       "createdDate": 1749143850109,
-      "modifiedDate": 1767612973675,
+      "modifiedDate": 1767622571070,
       "sizeInBytes": 1664,
       "sessionStart": {
         "noteCount": 1,
@@ -256,33 +256,6 @@
         "characterCount": 10582,
         "nonWhitespaceCharacterCount": 8771,
         "newlineCount": 231
-      }
-    },
-    "cloudy/project/yatagarasu/Audit.md": {
-      "isCountable": true,
-      "targetNodeType": "file",
-      "noteCount": 1,
-      "wordCount": 2589,
-      "wordCountTowardGoal": 0,
-      "wordGoal": null,
-      "pageCount": 8.63,
-      "characterCount": 26381,
-      "nonWhitespaceCharacterCount": 20997,
-      "newlineCount": 818,
-      "readingTimeInMinutes": 9.769811320754718,
-      "linkCount": 0,
-      "embedCount": 0,
-      "aliases": null,
-      "createdDate": 1762882748055,
-      "modifiedDate": 1762882755985,
-      "sizeInBytes": 26589,
-      "sessionStart": {
-        "noteCount": 1,
-        "pageCount": 8.63,
-        "wordCount": 2589,
-        "characterCount": 26381,
-        "nonWhitespaceCharacterCount": 20997,
-        "newlineCount": 818
       }
     },
     "cloudy/project/yatagarasu/Meeting notes.md": {
