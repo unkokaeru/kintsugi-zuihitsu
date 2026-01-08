@@ -38,7 +38,3 @@
 |         8         |    Long replies    |  Complete problems   |   Complete bugs    |
 |         9         |     Sync data      |   Review progress    | Implement features |
 |        10         |    Review goals    |    Further study     |  Review meetings   |
-
-## Historic Levels
-
-2026/01/02 - 0 / 10 / 0 / 0 / 3 / 4 / 0 / 0 (overall, 2.125).
