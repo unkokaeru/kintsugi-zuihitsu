@@ -5592,6 +5592,33 @@
         "nonWhitespaceCharacterCount": 426,
         "newlineCount": 6
       }
+    },
+    "clear/project/omoikane/mth3006/Practice Questions.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 20,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.06666666666666667,
+      "characterCount": 265,
+      "nonWhitespaceCharacterCount": 229,
+      "newlineCount": 18,
+      "readingTimeInMinutes": 0.07547169811320754,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1768208763068,
+      "modifiedDate": 1768208939354,
+      "sizeInBytes": 265,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
+      }
     }
   }
 }
