@@ -92,249 +92,55 @@ For a simple example, consider a line. If I increase the length of a line, then 
 
 If I consider a disc instead, the area is proportional to the radius or diameter squared: A ∝ r². The mass will be proportional to the size (radius or diameter) squared. Therefore, because the power is 2, it is a two-dimensional object.
 
-For a cube, we have something similar.
+For a cube, the mass (or volume) is proportional to the length to the power of 3, and therefore it is a three-dimensional object.
 
-I'll take the efforts. So those brackets denote averaging.
+There is another object called the Koch curve (or Koch snowflake) that can be generated as follows: Imagine you have a triangle, and then you replace one of the sides by adding a little triangle in the middle. Then you repeat that process. Here, each line segment is replaced by this segment pattern. If you do this indefinitely, you can actually show this resulting object (the Koch curve) has a dimension of log(4)/log(3) ≈ 1.26. So it is actually between a line (dimension 1) and a disc (dimension 2).
 
-So capital hours is defined as the sum of the individual steps.
+In the same way, we can also calculate the dimension of a random walk. We saw that the size scales as r√n. For every step, say it has a certain mass. Then mass is proportional to the number of steps n. Using our relation, the number of steps is proportional to the size squared: n ∝ Size². Because n is proportional to Size², this means Mass ∝ Size², so it is a two-dimensional object.
 
-So you have the summation over all steps, are I? And I average over a small quantity.
+This is the case even when you consider random walks in other dimensions. Here I showed a random walk in two dimensions, but even for a random walk in three dimensions, it is a two-dimensional object. Therefore, you can see this kind of space-filling behavior. In two dimensions or three dimensions, there is a fractal structure.
 
-What's the average of the some variables?
+## Connection to Glass Materials
 
-It's the same as the sum of the average of five. So there's a property.
+What do random walks have to do with glasses? In glass or liquid, I can draw a schematic picture. Here I have particles moving around in a liquid. If you focus on one particle (the blue one), it might have come from this side, and then it bumps into this particle, then that particle, and so on.
 
-But in promoting statistics, so I can just take the average inside to some.
+If you look at the trajectory of the blue particle, it actually looks like a random walk. You can actually show this is the case. That is the connection of random walks to materials like this—they basically show random walk-like behavior. This is also called diffusion behavior.
 
-And now we know that for four years, a random walk, the probability of going up seems gone down.
+You can actually see this under a microscope. There are videos that show this. This random walk is also known as Brownian motion. For example, milk fat globules: if you look with a microscope, you can observe that those milk fat globules move around because of thermal motion. They get kicked by other particles and show this jiggling behavior. Basically, if you look at long-time behavior, it behaves exactly like a random walk.
 
-So the efforts, the step size will be zero because it move in one direction.
+So if you see a glass of milk, all those particles are moving around. For water, it would be more difficult to observe. You can also simulate this using molecular dynamics. Here I have a sample with particles that I can let start moving. They will show random walk-like statistics when they are close to each other and bounce into each other. If you look at trajectories, the step size looks constant, but you can define a mean step size.
 
-This equal like it to will your direction. So we'll average until. So we can see average displacements is actually zero for.
+## Mathematical Modeling with Newton's Second Law
 
-Word. This does give some information, but it doesn't tell you anything.
+How can we model this mathematically? We start with Newton's second law. If I write the position of a particle, the first derivative with respect to time is the velocity. The second derivative is the acceleration.
 
-The size of the right to know something about the size.
+Newton's second law states that mass times acceleration of a particle equals the force acting on that particle. That is basically Newton's second law.
 
-We can look at the lengths or the average square displacements.
+If you want to study the motion of a particle, you have to know what kind of external forces are acting on this particle. One of those forces is called the drag force or friction force.
 
-So what do I know what the corporations are, what are.
+Basically, if you drop a sphere in a liquid, initially it will accelerate because of gravity. But then eventually it will reach a constant velocity with increasing time. That is because the force due to gravitation is balanced by the drag force. The drag force basically tries to slow the particle down.
 
-So this is basically the leg square. The average square. And again, I use a definition capsule.
+It is proportional to the velocity of the particle with a minus sign, and the proportionality constant is called the friction coefficient ζ. This friction coefficient is actually related to the viscosity, which I mentioned before. For a sphere in a liquid, it is given by Stokes' law: ζ = 6πηr, where η is the viscosity and r is the radius of the sphere.
 
-Ours is some of our I. The same for the second one I just stated that dummy index, Jay.
+That is the drag force and the friction coefficient, which is part of the drag force. As I said, r is the radius of the sphere.
 
-Now I use again the same property that the average of a sum is the same as a sum and averages.
+That is one force acting on a particle in a liquid. Another force is due to random collisions. I can describe this fluctuating force by ζG, where G is a random vector depending on time t. When you look at time t, these are kicks due to surrounding particles.
 
-I have a normal sum game. Will this. Well.
+We know that on average, it is equally likely to kick from above or below or in any direction. Therefore, the average of this random signal will be zero: ⟨G⟩ = 0.
 
-And what I do now here. So I have had some of I am J. And now I split this J sum into two parts, one part which J speaking to I.
+This G will not be determined entirely by the average. We also look at the second moment. The second moment is basically the magnitude squared: ⟨G(t) · G(t')⟩, where t' is a different time (the dot product).
 
-So it is this part. And one part for shape illegal.
+We can define this as being equal to 2dD times δ(t - t'), where d is the dimension (in two dimensions, d = 2), D is the diffusion coefficient (the strength of this random driving force), and δ is the Dirac delta function.
 
-This is this part. Wouldn't Jayyousi?
+You might have heard of the Dirac delta function. It is basically a function that is zero everywhere except at the argument equal to zero.
 
-I again just replace the genuine. So that's what I did here for today.
+You can define it as the limit of a rectangle with area 1 where the width goes to zero. The Delta function is the limit as ε goes to zero from above: δ(x) = 1/(2ε) for |x| < ε, and 0 for |x| > ε. Dividing by 2ε ensures that the area of this rectangle is 1.
 
-Equal to I. Now I told you after every step, the direction is completely random again.
+You can also define it as a Gaussian where the width of the Gaussian goes to zero but the area remains 1.
 
-So mobility off the step. I have a certain direction, say, upwards or downwards since and same.
+This inner product is therefore equal to δ(t - t'). The reason is that the delta function will be zero when the times are different. This is because the random kicks are uncorrelated in time, not the same as in a random walk. If you have one step and then the next step, those steps are uncorrelated—the average of those two steps will be zero. It is the same for this case. This is the continuous equivalent, except when t = t', in which case the delta function is not zero.
 
-And therefore, on average, this term will be zero.
-
-Except for when you look at the stuff itself, because if our eye was apart, then this basically just keeps the length of the vector squared.
-
-So there's always a positive numbers with company zero. And if I say the length, if all the steps line you saying that is length,
-
-I can do loaded by this hour, then this will get just replaced by our squirt.
-
-So the average squared displacement is just the sum of our R-squared for each step.
-
-And if I have any steps, this just goes equal to end times, R-squared.
-
-It is actually very important results in rather walks.
-
-So the extent of random walk is actually awesome.
-
-To the square root of this quantity is just so if I take the square of this result squared off and times are good.
-
-But this is bad. Times are. And well, you can see.
-
-So the extent of a run walk is basically are average size Times Square of the number of steps, which means that if I take four pounds more steps.
-
-Then the random walk average size and the the war becomes two times larger because square to form, it's a.
-
-And to interpret this in a different way can also get a dimension of the object and the dimension of our random walk in particularly.
-
-So hoping to find the mention of an object I can find as follows, say Mars, equal to or proportional to size to power of dimension.
-
-So that will be you.
-
-So for a simple example for line, we know that if I increase the length of line, then the Mars will increase in the same proportion.
-
-If a double the line saying it's made of wood, then the total Mars of the plank will increase by factor of two.
-
-So the Mars is proportional to the size.
-
-If I consider this instead, instead of lying, then the area, the disc, awful fuel, the radius or diameter or squares, it's some prefecture.
-
-So it will be some of this, then the mosque will be proportional to the size radius or diameter square.
-
-And therefore, because it was power to means it's a two dimensional object.
-
-For Kupe, we have something similar.
-
-Now Kube, the MOS volume of the with for short to the length of the power tree and therefore it's a three dimensional object.
-
-There's another object which called the cork curve. Or MURF.
-
-I can be generated as follows. So say imagine you have a triangle and then you face one of the sides.
-
-By adding a little triangle.
-
-And the middle. And then you repeat that.
-
-So here this line segments based by this segment here, you picked out the only thing that's indefinitely there.
-
-You can actually show this objects, the resulting objects of core girth as the mention of monkhood to six, possibly.
-
-So it's actually between a line and a disc to wanted to do much.
-
-Now, in the same way, we can also quote, like dimensional removal. We saw that when the what the size, what you want to do,
-
-more steps to borrow half and for every step say it has a certain MOS, then Mars is proportional to the steps.
-
-And if you virtuous relation, then the numerous steps proportional to the size to power to.
-
-Because it's proportional, the size of our tool, it means is a two dimensional objects.
-
-And this is even the case which you conserved in other dimensions.
-
-So here I showed a runner walking to emotions, even for a runner walking three dimensions.
-
-It's a two dimensional effect. And therefore, you can see this kind of space feeling as well in two dimensions.
-
-In three dimensions, there wouldn't be space shuttle. So what does those rebel war have to do actually with glasses?
-
-I glass eye was kind of a liquids, no liquids.
-
-Yeah. I draw a schematic picture of liquids. So here I have the particles moved around in liquids.
-
-And if you now focus on one part of the blue one, it might have come from this flight and then it will bump into this particle.
-
-Then this particle is that that, et cetera.
-
-Now, if you look at this trajectory of the blue particle, it actually looks like a random walk.
-
-Yeah, you can actually show it to the renewal. And that's exactly.
-
-Yeah, so that's the connexion of the random walks, the park was like this.
-
-They basically show random like behaviour. And this also called diffusion behaviour.
-
-And you can actually see this under a microscope. So there's some videos like this show, you know, one.
-
-So this is Randall Ward is also known as Brownian Motion.
-
-Of milk, fat globules. So if you look with a microscope, you can at least observe that those milk fat globules move around because internal motion.
-
-And they get kicked by auto particles. And they show this jiggling behaviour.
-
-Basically, if you look at long time behaviour to be exactly like the one of your.
-
-So you see that glass of milk, all those particles can be moving around the world easily for water.
-
-It's the water will be more difficult to observe. And you can as I said, you can also simulate this using like the nomics here.
-
-I just have the B sample. Here are particles.
-
-And I can let them start moving. And then they will likely show also run a walk like statistics when they.
-
-Close to each other. So they bounce into his shoulder.
-
-You know, if you look at it to decorate the step size look, Constance. But you can define that kind of mean step size.
-
-And this will be also similar to the one on your. Let me go back to issue.
-
-So now how can we model this now mathematically? Now, it first starts with Newton's second law.
-
-So basically, if I were in a position with a particle the first the rest of the position of the but the time it's velocity.
-
-The second derivative is the exploration.
-
-And then Newton's second law states that Mars times acceleration of a particle is created by the force acting on the spot.
-
-That is basically 12 seconds long.
-
-So if you want to study the motion of a particle, you have to know what kind of external forces acting in this article.
-
-One of those forces is called a direct force libbrecht force.
-
-It's basically you can see if you drop the sphere in kind of this is liquid.
-
-Initially, it will accelerate because of gravity. But then eventually it will go dog with increasing velocity.
-
-And that's because the force due to gravitation is balanced by the force.
-
-Due to this direct strike force basically tries to slow the particle down.
-
-So it is proportional to the velocity of the particle with the minus sign and is proportional constant.
-
-It's called the friction coefficient Satur. And this friction coefficients actually is related to the viscosity, which I mentioned before.
-
-And if this quantity of the material. So tip of this liquids adds up.
-
-And Warshel. So it's getting by. Zanta six times pi atha viscosity times the radius of the sphere.
-
-So that's the drag force acting on the friction coefficient.
-
-Which is part of the threat force. So, yeah, so as I said, R is the radius of the sphere.
-
-So that's one force acting moombahton liquid, not a force, is due to those random conditions.
-
-And I can describe this fluctuating force by the friction coefficients.
-
-G G is a random vector depending on time t.
-
-So when you look at the time to. So those are kick's due to soroban particles.
-
-And we know that the average is equally likely to kick from, say, above or below or in any direction.
-
-So therefore, the average of this random signal will be zero.
-
-And so I can use this averaging Brackett's average or G will be two zero.
-
-Zero. So this G won't be determined entirely by the effort.
-
-They also look at the second moments. Now, the second moment, guess basically the magnitude squares that.
-
-So G of t g t primer t primes a different time.
-
-The DOT products, then you can define this as being equal to two times D d this dimension.
-
-So in two dimensions we two and here Capital D.
-
-To the shooting offices. The strength of this random driving force.
-
-Times Delta team owner Steve Fine. Delta here might have heard of it, although a module was called the direct Delta function.
-
-Dirac Delta function was basically picked at argument Zieger to zero in this case.
-
-And you can define it as the limit of a rectangle. He would area where the width goes to zero.
-
-So as follows, the Delta function is the limit of Absolom gone to zero from above.
-
-So plus one or two Epsilon four X small or 82 Absolom and zero for X, right.
-
-And. So dividing by two Epel will ensure that the area of this rectangle is a one.
-
-You can also define it as a gorshin. Where the width of the gorshin goes to zero, the area of the Goshute will systemis.
-
-So this inner a product is therefore equal to Delta Force of T minus two prime.
-
-And the reason is so does Delta function will be zero. The times a difference.
-
-And is because the random kicks are incorporated in time. Not the same as in random walk.
+So we have our equation of motion: m(d²r/dt²) = -ζ(dr/dt) + ζG(t), where m is mass times acceleration.
 
 If you had to have one step and then the next step that those steps are uncorrelated for the average of those two steps will be zero.
 
