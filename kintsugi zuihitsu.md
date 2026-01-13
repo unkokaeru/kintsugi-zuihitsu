@@ -13,7 +13,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 > [[Levels of Organisation]]
 
 - Complete the [[mth3011]] Guest Lecture blog-style seminar reports.
-- Starting with [[mth3007]] - [[mth3007 practice test.pdf|exam]] soon! -, go through previous modules, completing notes and problems sets; perhaps with custom AI agents within VS Code. Optionally, then refine their respective cheat sheet(s).
+- Starting with [[mth3006]] - exam soon! -, go through previous modules, completing notes and problems sets; perhaps with custom AI agents within VS Code. Then, create/refine their respective cheat sheet(s).
 - Complete notes for [[yatagarasu]] & tasks on the [[yatagarasu]] Kanban board.
 - Apply to the [Lincoln Summer Teacher Training]([https://uolcareers.co.uk/students-graduates/lincoln-award/lincoln-award-teacher-training/](https://uolcareers.co.uk/students-graduates/lincoln-award/lincoln-award-teacher-training/)).
 - Complete a Lean proof for [[mth3011]], and any other associated module work before the next meeting with my supervisor - confirm date, too!
