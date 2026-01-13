@@ -32,263 +32,87 @@ In this case, what we can do is use the theory of dynamical systems to provide q
 
 The system was introduced independently by two scientists: Lotka and Volterra. They both were interested in applications involving two competing species. It could be two animal species, or it could be bacteria and something else—something in biology. A predator-prey model, as I have already said, has been used to describe the evolution of systems in ecology, biology, and finance. We will see an example related to epidemics. It is a toy model.
 
-So what I mean by that is that it's not that realistic as like, let's say modern models would be more interesting,
+What I mean by "toy model" is that it is not as realistic as modern models, but it works well enough and serves as a very good starting point. We have an understanding of the model because we can solve it. Understanding solutions is the best way to grasp mathematical modeling—start with something simple with the least possible number of variables to gain an understanding of the problem.
 
-but it works well enough, well enough and it's a very, very good starting point.
+Very briefly, about Lotka and Volterra: they were born in the 19th century, and their theories were developed more than 100 years ago. Lotka was a biostatistician and logician, while Volterra worked as a mathematician and physicist. They worked independently but came to the same conclusions. Lotka published his work in 1925, and Volterra published in 1926. If you want to learn more about these scientists and what they did historically, I can share the slides with you.
 
-And um, yeah, we have an understanding of the model because we can solve it for, you know, what is.
+## Three Basic Steps of Mathematical Modeling
 
-Then the variables with understanding solutions is the,
+Now, thinking about mathematical modeling, it is interesting to see how we start with this mathematical model. There are three basic steps:
 
-the best way to understand mathematical modelling and start by something simple with at least possible number of wearables.
+First, we need to select variables. We want to study this system with two population species. We need the variable x and the variable y. As you see in this diagram, one population (the prey) loses to the other (the predator). There is a flow running from x (the prey) to y (the predator).
 
-Um, you know, to, to have a, an understanding of the problem.
+To describe the system, if you have ever worked in mathematical modeling and want to use differential equations, you need to find the derivatives of the model. Once we have the system, we need to solve it. These are the three steps we need to follow.
 
-Um, oh, very quickly, this is a lot. CA And first of all, there are, uh, they were in the 19th century, born and developed more than 100 years ago.
+## Example: Rabbits and Foxes
 
-The theories, um, locavores say biostatistician and logician, um, Voltaire worked as a mathematician and was a physicist.
+Let us say we want to study this particular system. A classic example is rabbits (the prey) and foxes (the predators). If you want to see how this works over time, you can collect real data, measure from real life, and plot the data you obtain.
 
-Um, well, the work independently, they came up to the same conclusions and published their works in 39, uh, locations in 31 earlier.
+So, as I said already, x and y describe the dynamics. We want to see how they evolve over time. What do the derivatives tell us? Well, dx/dt is the population growth rate of the prey, and dy/dt is the population growth rate of the predators.
 
-Altera and I don't know Fabian, you can read the title.
+Before giving the equations straight away, how would you start? We want to see how the growth changes. One can think: how would the rabbits do if they were alone? We need some assumptions. Let us say they have an infinite amount of food. If they do not have any enemies, their population would grow and grow. The population growth rate—the derivative—could be, for example... Does anyone have any idea? You need something positive, of course, but how would they change?
 
-I want to, um, I would say we researched the slides.
+If you have two rabbits, then four rabbits, then eight rabbits, and so on, this means we have exponential growth. That means the derivative is linear—proportional to x. So dx/dt is proportional to x. That is a good start.
 
-If you want to have a second look about this people and what they did historically.
+What about the foxes? If they have no food around, they will starve and very quickly go extinct. That means for y, we would have something proportional to -y.
 
-So yeah, we think the content of mathematical modelling one is interesting to see what this mathematical model how do we start?
+When we allow the populations to be together, the system becomes more balanced. The rabbits have exponential growth, but then they are eaten by the foxes, so their population falls. If the prey population falls a lot, then the foxes do not have enough food, so they cannot reproduce much. Their population starts to go down again. If the predator population goes down, the prey find the opportunity to reproduce again. What you get in the end is a balanced ecosystem with ups and downs—like a cycle. You expect to have oscillations.
 
-Um, well, the three basic steps, I mean, how did they start?
+Now, in terms of the equations: you have births, deaths, and interactions. When you allow them to interact, you need an interaction term between x and y—mathematically, something that contains both x and y at the same time. This is the interaction term that couples the system. It is negative for the prey (they are consumed) and positive for the predators (they gain energy from prey). This is how they came up with this model.
 
-It's all about, okay, we want to study this system. So we need to select variables.
+## Hartman-Grobman Theorem
 
-We can have two population spaces. So we had need the variable x and the variable Y is, you see, this is a graph.
+Now the third step is to solve the system. We are going to discuss a very important theorem from dynamical systems: the Hartman-Grobman theorem. This is a very important result in the local qualitative theory of ordinary differential equations.
 
-Uh, bizarro means that this population loses from that one.
+The theory shows that near a hyperbolic equilibrium point (let me skip the word "hyperbolic" if you have not heard it before), the nonlinear system has the same qualitative structure as the linearized system. Imagine that dx/dt = F(x), where x is a vector. For a system of equations, this nonlinear system has the same qualitative structure as the linear system: dx/dt = Ax, where A is the Jacobian matrix evaluated at the equilibrium point.
 
-So there's like a flow running from X to what?
+How many of you have already seen the Jacobian matrix before? Great, that is nice. The Jacobian provides you with all the necessary information to extract the qualitative behavior—not precisely or explicitly, but qualitatively.
 
-Okay, the from the brain to the predator and to describe the system.
+When you have two systems of differential equations, we can say that their solutions are topologically equivalent, which means they have the same properties qualitatively in the neighborhood of the fixed point—the same qualitative structure. We will see what this means.
 
-Well, generally, if you ever worked in mathematical modelling and you want to use differential equations to try to,
+## Finding Fixed Points
 
-to plot the solution straight away, the dynamics of the system are much simpler.
+Let me now apply this theorem to the specific Lotka-Volterra model. What we need to start with is finding whether we have any fixed points. The equations are:
 
-Okay. So what we need to find is the derivatives of the model and then once we have the system, we need to to solve it.
+dx/dt = αx - βxy
+dy/dt = -γy + δxy
 
-Okay, these are the three steps we need to follow and.
+How do we find the fixed points? We set the derivatives equal to zero. We need the right-hand side to equal zero. We need to solve this system for the fixed points:
 
-So say that we want to study this particular system where.
+αx - βxy = 0
+-γy + δxy = 0
 
-Yeah, that's a kind of a funny example can be the pregunto.
+From the first equation, we can factor: x(α - βy) = 0. This gives us either x = 0 or y = α/β.
 
-The rabbits, rabbits and the foxes are the predators.
+From the second equation, we factor: y(-γ + δx) = 0. This gives us either y = 0 or x = γ/δ.
 
-But if the rabbits and you want to see how this works and they're waiting for a time, well,
+So from the first one, we see that the obvious solution is x = 0, or if the parentheses equals zero, then y = α/β. From the second equation, similarly, y can be zero, or x = γ/δ.
 
-you can have real data and you can kind of, um, yeah, I mean, measure of real life and gain data that you want to plot.
+The first case is x = 0. When x = 0, the second equation becomes -γy = 0, so y must equal zero. So one fixed point is (0, 0).
 
-Um, what? Um, yeah, so exactly what I said already wasn't six and why.
+When y = 0, we plug that into the second equation and get -γy + δxy = 0, which becomes δx · 0 = 0. But from the first equation with y = 0, we get αx = 0, so x = 0 as well. Actually, let me reconsider: when y = 0, from the first equation we get x(α - 0) = 0, so x must be 0 or α can equal 0, but α is positive, so x = 0.
 
-Um, I want to describe the dynamics. So we want to see how the.
+Actually, the second fixed point comes from the interior case: x = γ/δ and y = α/β. So we have two fixed points:
+1. The origin: (0, 0)
+2. The coexistence point: (γ/δ, α/β)
 
-They even leave some chains. And what do the derivatives say to us?
+We can sketch these. The first one is at the origin, and the second one is somewhere in the positive quadrant at the point (γ/δ, α/β).
 
-Well, the X over the T is the population growth of the brain, the Y over the TS, the population growth of the predators.
+## Computing the Jacobian Matrix
 
-And, um.
+Now, what the Hartman-Grobman theorem tells us is to find the linearized system. We need to find the Jacobian matrix. How do we find the Jacobian matrix? How many elements do we need? Two by two.
 
-Before giving the equation straight away. Well, how would you start?
+The first row corresponds to the partial derivatives of the first equation. Imagine that the right-hand side of the first equation is f₁(x, y) = αx - βxy, and the second is f₂(x, y) = -γy + δxy. The Jacobian matrix consists of:
 
-You could say, okay, we want to see how the chains, the how the growth chains.
+∂f₁/∂x    ∂f₁/∂y
+∂f₂/∂x    ∂f₂/∂y
 
-So one can think of how would the rabbit rabbits do if they were alone?
+With a quick computation, this equals:
 
-If they. So we need some assumptions. Let's say that they have an infinite amount of food.
+(α - βy     -βx    )
+(δy      -γ + δx)
 
-For example, I think I'm populating the population. So if they don't have any enemies, their population would grow and grow.
-
-And so the population growth, the derivative, you could make a guess that could be, for example, anybody have any idea of that?
-
-You need something positive, of course. But you would you kind of do have any guess how would they change?
-
-Somewhere between. Well, and these are guesses, too.
-
-If you want the rabbit of be, let's say you have two of them.
-
-Of them, have four of them, then have eight of them and so on means we have exponential growth.
-
-So that means that the derivative is linear.
-
-So that means that the expertise is something proportional to X.
-
-So that's a good start. And about the foxes.
-
-If they have no food around, you can tell you they will starve and very quickly they will be extinct.
-
-So then that means that for the why would the team that should be.
-
-Yes, please. Yes. Can you speak a bit louder?
-
-Logarithmic. That means it very slow. That exponential exponential that is the.
-
-But it could fit. So depending on the model, you have actually all answers.
-
-That could be correct. Okay. So in this case, let's say if they all don't have food, they kind of almost immediately will go extinct.
-
-So yeah. So you need something that is proportional to minus Y.
-
-Okay. So that's a good start then, um, when we allow the populations to be together, um, this is the most imbalanced one.
-
-I mean, doesn't mean that if the rabbits have the foxes around doesn't mean they go extinct because they populate exponentially again,
-
-so they have an exponential growth, then they are eaten by the foxes, so their population kind of falls.
-
-But if the population population falls, falls a lot, then the foxes don't have enough food so they cannot populate much.
-
-They, um, their population starts to go down again.
-
-And if the population goes down, these finds, these find the opportunity to, um, to populate again.
-
-So what you get at the end is a balanced, nice ecosystem that you have like ups and downs, like, like a cycle.
-
-Um, so you expect to have something more or less.
-
-Okay.
-
-Now in terms of the equations, uh, so you have here the, the births, the, the deaths and in terms of interaction, now if you allow them to interact,
-
-you need something that, you need some interaction between X and Y, I mean also mathematical, something that contains X and Y at the same time.
-
-So this is the interaction term that couples the system, the X and Y populations,
-
-and it is a minus because it means that, you know, if you yourself, you extract something from here and you are there.
-
-Okay, So they came up through this model and came up with that model and.
-
-Yeah. And now the third step is to solve the system.
-
-So now we're going to speak about a very important theorem that comes from Dynamical Systems and.
-
-I will show you precisely the theorem, but to more or less what it says.
-
-It says the form is following itself by Hardman and Grover and adds,
-
-It says That is a very important result in the local qualitative theory of the ordinary differential equations.
-
-The theory shows that near. Let me skip the word hyperbolic if you haven't heard before.
-
-We are at an equilibrium point. We all know what's the equilibrium point?
-
-One of the things points an equilibrium point with some good properties the nonlinear system.
-
-Imagine that x is a vector is equal to F of x.
-
-So you have a system of equations, not just one. So this nonlinear system has the same qualitative structure as the linear system below.
-
-So you can, let's say, very close to the equilibrium points.
-
-So around this equilibrium point, you can regard the linear system.
-
-So X0 is a where it is a matrix times X, and this matrix is the Jacobin function, the Jacobean matrix.
-
-So have you how many of you have already remember the mode Jacobin have seen before?
-
-Okay, great. That's nice. So yeah, the Jacobin provides you with all the necessary information to extract the qualitative behaviour.
-
-Okay. Not precise, not to explicitly, but to the qualitative.
-
-And yeah, just say a remark.
-
-Let's say that when you have two systems of different equations and this one does two, we can say, okay,
-
-I'll give a key word if it doesn't in advance, don't worry, you can skip that if it's too, too difficult.
-
-Well they can say that their, their solutions look like topological equivalent, which means that they have,
-
-let's say, the same properties more or less qualitatively in the neighbourhood of the fixed point.
-
-Okay, the same qualitative structure, and we will see what this means.
-
-Yeah. So maybe I can now use it with the whiteboard so we can go on and apply this number one theorem in the specific model.
-
-And what we need to start is, first of all, to see, um.
-
-Do we have any fixed points or not, sir?
-
-All right, Mr. Equations. Well, the first one is an X minus, but is an x, Y and Y.
-
-Do this finds gamma y loss of x, y.
-
-And so think about that because we have to find them first.
-
-And how do we find the fixed points when they're at zero?
-
-Yeah, but they don't sit there. Yeah. So when the.
-
-Exactly the right hand side zero. So we need to solve this system for the fixed points.
-
-We need that. The first equation is equal to zero.
-
-Let me take it outside and then inside the power of minus.
-
-But are y equal to zero? And then from the second one, we have this y times minus gamma plus that lives in equal zero.
-
-So from the first one, we see that the obvious one obvious one is actually 1 to 0,
-
-or if the parentheses equals zero means that y is equal to alpha beta and from the second along in a similar way we have that y can be zero maybe,
-
-but let's find straight away the the points.
-
-So the first case is that x is equal to zero. So when x is equal to zero means that this is a constant.
-
-So y has to be equal to zero. So here one has to be much easier that corresponds to one Kings Point or one Y is equal to zero.
-
-We plug that in inside the second equation and we get that minus Going past the lines must be zero.
-
-Or in other words, the X has to be one divided by Delta.
-
-But that's the second point. So we have two fixed points that we can sketch them here.
-
-So that's the first one, which is the origin, and that is the second 105.
-
-But the third goes up and then gives the matrix.
-
-Okay, so the other one is somewhere here. So here's the point.
-
-I'm over Delta, comma, Alpha.
-
-But what's the other issue we'll have to fix once? Know, what the heartbroken theorist said is try to find the linear system, the linear ized one.
-
-So we need to find the Jacobean matrix.
-
-So how would we start to, uh, how, how can we find the Jacobean matrix?
-
-How many elements we need to buy you to buy to.
-
-Okay, so the first row corresponds to the partial derivatives of.
-
-I presume, with respect to X of which functions of.
-
-Of the right hand side. Okay. So imagine that.
-
-That's the tricky part. So this is imagine that this is a one. This is a two of X and Y both.
-
-And this is a copy. And matrix is the partial derivative of the of the first element.
-
-Of your vector field of your first equation. The right hand side.
-
-So the personal five one with respect to x, the partial of everyone who spoke to Y, the person who chooses to X and the person of a.
-
-Sorry to disappoint you. X. Y.
-
-So with a quick computation, this will be equal to alpha miles.
-
-But why? And mine's better.
-
-And then it goes back to X.
-
-The second equation gives them or Y and respect was a minus gamma plus.
+The second row gives us: ∂f₂/∂x = δy and ∂f₂/∂y = -γ + δx.
 
 So the X. I haven't done any tribal.
 
