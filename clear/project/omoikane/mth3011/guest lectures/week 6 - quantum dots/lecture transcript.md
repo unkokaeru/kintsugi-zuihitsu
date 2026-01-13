@@ -1,318 +1,84 @@
-# Lecture Transcript
+# Lecture Transcript: Quantum Dots and Their Applications in Biotechnology
 
 Hello and welcome to this seminar on quantum dots and their applications in biotechnology.
 
-Now, to begin with, the name Quantum Dots might sound quite exotic.
+The name "quantum dots" might sound quite exotic, so I will begin by explaining what they are. Quantum dots are nanocrystals—crystals at the nanoscale made from semiconducting material.
 
-So I'll go ahead and tell you what they are and what they are. None of crystals.
+You should be familiar with semiconductors from the condensed matter module you took last year with Matt Watkins. However, the picture you see here, which shows colored fluids in bottles, may conflict with the idea you have of what a semiconductor looks like. I will explain this toward the middle of the talk.
 
-So crystals are the nanoscale made from semiconducting material.
+First, I want to speak more generally from a physics perspective about what quantum dots are. Then I will discuss briefly how we synthesize these materials, which will explain why they appear as fluids. The picture you see on the right-hand side of the screen shows a series of quantum dot samples made by a third-year student at Lincoln back in 2017. Finally, I will discuss some of the properties that make these materials interesting for various applications in biotechnology.
 
-And you should be familiar with what a semicolon semiconductor is from the condensed matter model you took last year with Wilkins.
+I should emphasize that biotechnology is not the only area of application. Quantum dots are useful for photovoltaics and LCDs—the latest television technologies use quantum dot displays. They can also be used to make lasers. There are many applications for these materials.
 
-But the picture you see here, which seemingly shows coloured fluids in bottles,
+The reason I wanted to focus on biotechnology applications is because of this story. The URL shown at the top provides more details, but the gist is that a team from MIT has developed the ability to encode information about someone's vaccination record in the form of a quantum dot tattoo, which would lie just under the skin. This would be invisible to the naked eye but readable by standard smartphone technology.
 
-may conflicts with the idea you have in your hands of what a semicolon semiconductor looks like.
+Hopefully, by the end of this talk, you will know enough about quantum dots to understand why they are necessary for this kind of application and why we cannot simply use existing organic dyes.
 
-So I'll explain this towards the middle of the talk. But first, I want to speak more generally from a physics perspective.
+If you search for this story on the Internet, you will find many articles. I have highlighted this one because of how they describe quantum dots as "tiny glowing dots." This is correct—they are tiny and they do glow—but this is hardly a technical description.
 
-What quantum dots are? Then I'll go on to discuss briefly how we go about synthesising these materials, which will explain why they appear as fluids.
+## Semiconductor Physics Recap
 
-And instantly, the picture you see on the right hand side of the screen here shows a series of quantum dot samples made by a third,
+Let us recap some semiconductor physics, specifically the band theory you learned with Matt Watkins last year. This will put us in a position to discuss some of the interesting properties I have listed here.
 
-issued an Air Lincoln back in 2001 17 and are finished by talking a little bit about some of the
+This diagram shows the general picture of electrons in a semiconductor—how we describe electrons in a semiconductor. On the vertical axis, we have the energy of electrons. On the horizontal axis, we have the wave vector of electrons, which is essentially the momentum. This is like an electron momentum map of electrons in a semiconductor.
 
-properties which make these materials interesting for various applications in biotechnology.
+At the bottom, we have the valence band, which corresponds to the outermost orbitals of the electrons of the atoms. At the top, we have the conduction band, which is not shaded in gray, suggesting that it is mostly unoccupied.
 
-But I don't give the impression that this is the only area of application. Quantum dots are useful for photovoltaics, for LCD.
+If we imagine an incident photon with energy perfectly matching the band gap, when this is absorbed by the material, an electron will be promoted from the valence band up into the conduction band, leaving a hole behind. This hole is more technically called an electron vacancy, and we can treat it like an actual particle. It has a positive charge relative to its environment and an effective mass, just like the electron in the conduction band has an effective mass. It can delocalize throughout the material and move freely around.
 
-So the latest television technologies use quantum dot displays. And also they can be used to make lasers.
+This does not have to happen at zero momentum. It can happen at higher values of momentum. We simply require that the incident photon has energy larger than the band gap.
 
-So there are many, many applications for these materials.
+So we have this positively charged hole in the valence band and this negatively charged electron in the conduction band. These interact via the Coulomb interaction and actually form a bound state, which we call an exciton, and which we can treat as a particle in and of itself.
 
-But the reason I wanted to focus on biotechnology applications is because of this story here.
+The way we describe the size of this particle, which consists of the electron-hole pair, is by making an analogy with the hydrogen atom. The hydrogen atom has a positive nucleus and a negatively charged electron. We can discuss the most likely separation of these two objects or the most stable separation.
 
-So the euro is shown at the top that if you want to go and read for yourself and get the gist of this is that
+We do this by discussing the Bohr radius. We can apply the same concept to the exciton and discuss the Bohr radius of the exciton, which represents the most stable separation distance between the hole and the electron. This is given by the equation shown here.
 
-a team from M.I.T. have developed the ability to encode information about somebodies vaccination record,
+The material property parameters that become important are the dielectric constant (which describes how easily an electric field penetrates this particular semiconductor relative to vacuum) and the reduced mass μ, which combines the mass of the electron and the hole.
 
-for example, and in the form of a quantum dot tattoo, which would lie just under the skin,
+If you do not remember anything about reduced mass, there are a few slides that explain it. The effective mass m*_e is the effective mass of the electron in the conduction band, and m*_h is the effective mass of the hole in the valence band.
 
-meaning that it would be invisible to the naked eye, but readable by kind of standard smartphone technology.
+The key point I want to make is that this exciton has a stable size—a size at which it wants to exist. If we reduce the size of the semiconductor so that it is smaller than this Bohr radius, we say that the exciton is quantum confined. I will talk more about quantum confinement later. This is the definition of quantum dots: when the size of the crystal in all directions is smaller than this Bohr radius, we say that quantum confinement is strong and that this material is a quantum dot.
 
-Now, hopefully, by the end of this talk, you'll know enough about quantum dots to understand why they're necessary for this kind of application.
+## Material Parameters and Exciton Radii
 
-Why we can't just use existing organic dyes. OK.
+Looking more specifically at these material parameters for semiconductors, semiconductors tend to have a large dielectric constant. As a result, we get significant electron screening. The positively charged hole and negatively charged electron in the conduction band interact via the Coulomb interaction, but the presence of all the other electrons in the material actually reduces this Coulomb interaction. This results in a smaller binding energy between the hole and electron. All these other electrons shield the electron-hole pair from each other, reducing the interaction. They can exist further apart in a stable manner.
 
-So if you do look for this story on the Internet, you'll find many, many articles.
+In other words, the exciton radius increases—the Bohr radius gets larger. The effective masses affect this as well. In semiconductors, we discuss what are called Wannier excitons, which have radii anywhere from 1 to 20 nanometers. This contrasts with Frenkel excitons seen in molecules, where there is not as much screening, the Coulomb interaction is at full strength, and the exciton radius is very small in comparison.
 
-I've highlighted this one here just because of the way they describe quantum dots as tiny glowing dots.
+These excitons have a typical radius of, say, 10 nanometers. Because they are so large (relatively speaking), it is actually quite feasible to make crystals smaller than this exciton Bohr radius. It is quite easy to make semiconductor crystals in which the exciton is "squashed."
 
-And this is correct. They are tiny and they do glow.
+We can make a rough analogy with a jack-in-the-box. If you think about a jack-in-the-box being pushed into the box and then we release the lid, this is like the electron being promoted up into the conduction band, and when you open the box, it is like it relaxing back down and giving off a photon. If you imagine putting this jack-in-the-box and then squeezing the box down to size, when you open it, it will have more energy than it would have otherwise. This is not a perfect analogy, but it gives the idea of what is happening. The color we see here is actually dependent on the size, and that is because of this jack-in-the-box effect.
 
-But this is hardly a technical description.
+## Density of States and Dimensionality
 
-So let's proceed to recap some semiconductor physics and specifically the band theory you learnt with Matt Watkins last year.
+Let me discuss these size-dependent properties in more detail. Hopefully, you remember from last year about the density of states, which is the number of available states per unit volume at a given energy. It varies with the square root of energy. This is a continuous function for bulk systems.
 
-And that will put us in a position to discuss some of these interesting properties which I have listed here.
+However, when we reduce the dimensionality of a material, the density of states becomes discontinuous. What do I mean by low-dimensional materials? If you take a bulk crystal and compress it such that it becomes an extremely thin sheet, this would be a two-dimensional material. If we then take this thin sheet and compress it along one of the remaining axes, we end up with an extremely thin line, like a nanowire. If you then take this nanowire and compress it along the final axis so that it is essentially a point, this is what we call a zero-dimensional material. This is what a quantum dot is.
 
-OK, so this here is the kind of general picture of electrons in a semiconductor, how we describe electrons in a semi semiconductor.
+If you look at the density of states of these low-dimensional materials relative to the density of states for a 3D material, we see that the valence band here is full again, and the conduction band is empty. The lines vary with the square root of energy. For a 2D density of states, we start to see what looks like a step function—a series of step functions. You can see there is some discontinuity. If we reduce the dimensionality down to one dimension, we start to see even more interesting structure in the density of states. If we take it to the extreme and reduce the dimensionality to zero dimensions, we see an extremely discrete density of states.
 
-So on a vertical axis that we have the energy of electrons.
+Quantum dots are sometimes called artificial atoms because of this discrete density of states. We have discrete energy levels that look very much like atomic spectra. I will not go into detail about these density of states derivations. If you want to see the derivations, there is a good website shown at the bottom. If you go there and have questions, feel free to email me or ask me when you see me.
 
-And on the horizontal axis, we have the wave vector of electrons, which is essentially the momentum.
+## Quantum Confinement: Particle in a Box
 
-So this is like an electron momentum map, if you like, of electrons in a semi conductor.
+Now we want to understand how and why the size of a quantum dot affects the energy levels. The exciton inside our nanocrystal, inside our quantum dot, is modeled as a particle in a box. We will use the terms "box" and "potential well" interchangeably. Essentially, we are looking at a potential well.
 
-So at the bottom there we have a balanced band which corresponds to the outermost orbitals of the electrons of the atoms.
+We can define its width: there is a wall at x = 0 and a wall at x = L. We define this box by its potential. Inside the box, for values of x between zero and L, the potential is essentially zero. This means the exciton is free—like a free particle, it is free to move around. Outside the box—for x greater than L or x smaller than zero—we set the potential to infinity. You can think of this box as having walls at zero and L that are infinitely high, such that the exciton can never climb over these walls. The exciton is trapped in the region between x = 0 and x = L.
 
-And the top that we have, the conduction band, which is not shaded in grey, which suggests that it is mostly unoccupied.
+We are going to look at the Schrödinger equation, but first we want to define some boundary conditions on the wave function. Because the potential outside the box is infinity, the probability of finding the exciton outside the box is zero. This means the wave function is zero outside the box. We want our wave function to be a well-behaved function—by well-behaved, I mean smooth, continuous, and differentiable.
 
-So if we imagine a incident photon, which has an energy perfectly matching the band up when this is absorbed by the material,
+Because the wave function outside the box is zero, the wave function at the boundaries of the box must also equal zero. At x = 0, the wave function must be zero. For the same reason, the wave function at x = L must also equal zero.
 
-an electron will be promoted from the Valence band up into the conduction band, leaving a hole behind.
+If we look at the Schrödinger equation, we have the time-independent version. We are looking at one dimension. Depending on when you watch this video, you may already have covered this particle-in-a-box problem with Bart in the quantum module in third year. He will do a much more complicated version—perhaps in spherical coordinates or the time-dependent version. We are just looking at a very simple version to illustrate some points.
 
-So this whole is more technically called a electron vacancy. And we can treat it like a an actual particle.
+We are looking at the Schrödinger equation inside the box where the potential is zero. This is essentially just the kinetic energy of the particle, the exciton. We try what we call an ansatz wave function or a trial wave function—ansatz is a German word meaning a starting point, an educated guess. We will use this wave function, which is a combination of sine functions: ψ = A sin(kx) + B cos(kx), where A and B are amplitudes.
 
-So it has a positive charge relative to its environment.
+We impose these boundary conditions. First, we had that the wave function at x = 0 was zero. If you plug x = 0 into this wave function, you will see that cos(0) = 1 and sin(0) = 0. So we have ψ(0) = B = 0. This implies B must equal zero. We have simplified our wave function considerably just by considering this first boundary condition.
 
-And it has an effective mass, just like the electron in the conduction band as an effective mass.
+If we consider the other boundary condition—that the wave function at x = L was also equal to zero—then we have A sin(kL) = 0. For that to be true, k must take this value: k = nπ/L, where n is the principal quantum number, which can take values 1, 2, 3, all the way up to infinity. It takes integer values. The wave function then is ψ = A sin(nπx/L).
 
-And so it's that you can delocalised throughout the material and move freely around.
-
-So this doesn't have to happen at Zerok. This can happen at higher values of momentum.
-
-We just require that the incident photon has an energy larger than the bunga bunga.
-
-So we have this positively charged hole in the balance band and we have this negatively charged electrons in the conduction band.
-
-And these interact via the Coulomb interaction and actually form a bound state,
-
-which we call an insight on and which we can treat as a particle in and of itself.
-
-And so the way we describe the kind of size of this particle,
-
-which consists of the electron whole pair, is by making an analogy with the hydrogen atom.
-
-So the hydrogen atom having positive nucleus and negatively charged electron.
-
-And we can talk about the most likely separation of these two objects or the most stable separation.
-
-And we do so by talking about a ball radius. We can do the same for the exciton.
-
-We can talk about the ball radius of the exciton, which would be the most stable separation distance between the whole and the electron.
-
-So this is the equation here.
-
-And the material properties of parameters that become important are the dielectric constant, which describes how easily an electric field compared.
-
-This particular semiconductor relative to the vacuum and the reduced mass on the button that
-
-mue and which is like a combined mass to combine the mass of the electron and the whole pack.
-
-If you don't remember anything about this reduced mass,
-
-There's a few slides there which explain about this reduced mass. So here this M star E is the effective mass of the electron in the conduction band.
-
-And this M star H is the effective mass of the hole in the balance.
-
-But. Now, the key point I want to be making here is that this site on has a stable site.
-
-There's a size out which it wants to exist. And if we reduce the size of the semiconductor so that it's smaller than this radius,
-
-this bomb radius, then we say that the excitement is quantum confined.
-
-I'll talk more about this term, quantum confinement later on.
-
-And this is the definition of quantum dots. So when the at the kind of size of the crystal in all directions is smaller than this bar radius,
-
-we say that's quantum confinement is strong and that this material is a quantum dot.
-
-OK, so looking more specifically at these material parameters for semiconductors and semiconductors tend to have a large dielectric constant.
-
-And as a result of this, we get a lot of what we call electron screening.
-
-So there's this positive whole on a negative electron in the conduction band interacting by the Coulomb interaction
-
-and the presence of all these other electrons in the material actually reduce this Coulomb interaction.
-
-And this kind of results in a smaller, binding energy between this positively tousle hole and the negatively charged electrons.
-
-So all these other electrons around kind of shield the electron, whole pair from each other.
-
-Reducing the interaction and they can exist further apart from each other in a stable money.
-
-So in other words, the exciton radius is increase, the spore radius gets larger and the effect masses.
-
-This effect affects the affected muscles.
-
-And so in SEMICON semiconductors, we talk about one of the most exciting things which have a radius anywhere from one to 20 nanometres.
-
-And this is a post to as opposed to Frenkel excitement's, which we see in molecules where there's not so much screening.
-
-The Coulomb interaction is kind of full strength and the exciton radius is very small in comparison.
-
-So these Exide have a kind of typical radius, say, 10 nanometres.
-
-And because they're so large and relatively speaking is actually quite feasible to make crystals smaller than this exact sound bite radius.
-
-So it's quite easy to make crystal of semi semiconductor in which the excitement is kind of squashed.
-
-And we can make a very rough analogy and with a Jack in the Box.
-
-OK. So if you think about Jack-In-The-Box, it's being pushed in a box and then we release the box.
-
-So this is kind of like the electron being promoted up into the collective mind.
-
-And then when you open the box, it's like it reflecting back down and giving off a photo.
-
-So if you imagine putting this Jack in the box and then squeezing the box, like down to size.
-
-And then when you open it, it's going to have more energy than it would have done otherwise.
-
-This is not a great analogy, but it does kind of give give the idea of what's going on here.
-
-So the colour we see here is actually dependent on the size. And that's because of this Jack-In-The-Box effects.
-
-So we'll talk more about these sized dependent properties in more detail.
-
-So hopefully you remember from last year about the density of states, which is the number of available states and per unit volume at a given energy.
-
-And it goes with the square root of the energy. So this is a continuous function for bulk systems.
-
-But when we reduce the dimensionality of a material and extensive states becomes discontinuous.
-
-So what I mean by low dimensional materials.
-
-Well, if you take a bulk crystal and squash it down such that it's an extremely thin sheet, then this would be a two D material.
-
-If we then take this thin sheet and squash it scoff, it's in one of the remaining axes.
-
-And we would would we would end up with a extremely thin line.
-
-And this is kind of like a nanowire.
-
-If you then take this nanowire and again with the final axis, squash it down suits that, it's essentially a point.
-
-Then this is what we call a zero dimensional material. And this is what a quantum dot is.
-
-So if you look at the density of state of these low dimensional materials relative to the density of states for a 3D material.
-
-So we see here this balanced band here is full again.
-
-And this can look from one is empty and the lines kind of go with the square root of energy.
-
-If we look at a 2D density of states, we start to see this what what looks like a step function series of step functions.
-
-You can see that there's some discontinuity there. If we reduce the dementedly dimensionality, if.
-
-If we reduce the dimensionality down to one dimension, we start to see even more interesting structure to the density of states.
-
-And then if we if we take it to the extreme and reduce the dimensionality to zero dimensions, we see this extremely discrete density of states.
-
-So quantum dots are sometimes called artificial atoms because of this and then this discrete domestic space.
-
-So we have these kind of discrete energy levels which look very much like atomic spectra.
-
-So I decided to go into detail here about these density of states.
-
-If you want to see the derivations and this is a good Web sites show at the bottom here.
-
-If you if you go here and you have questions, feel free to email me or ask me when you see me.
-
-So now we want to really get to the bottom of how and why and the size of a quantum dots and effects the energy levels.
-
-So the exciton inside our NUNNA crystal inside our quantum dot is modelled as a particle in a box.
-
-So we'll use the word box well, interchangeably. But essentially what we're looking at is a potential well.
-
-So we can define its width. So we're saying there's a wall that X equals zero and a wall at X equals L.
-
-And we define this box by talking about it to potential. So inside this potential, send for values of X between zero and L to essentially zero.
-
-This means the exact on just free. It's like a free particle is free to move around.
-
-But outside the box. So for X greater than Al of X.
-
-Smaller than zero. We set the potential to infinity. So you can think about this box as having walls zero and L which are infinitely high.
-
-Such that's the exciton can never climb over these walls.
-
-OK, so this exciton is trapped in the region defined by X equals zero.
-
-So we're going to look at a further equation. But first, we want to define these some boundary conditions.
-
-On the way function. So because this central outside of the box is infinity.
-
-This means that the probability of finding the exciton outside of the box is zero.
-
-And this means the way function is zero outside of the box. And so we want our way function to be a well behaved function.
-
-And by well-behaved, I mean smooth, continuous and differentiable.
-
-So because the way function outside of the box is zero, this means that the the way function at the boundaries of the box must also equal zero.
-
-So that X equals zero, the way function must be zero for the same reason we must have.
-
-That's the way function X equals L is also equal zero.
-
-So if we look at the freedom equation, we have the time, independent vision.
-
-And we're looking at one dimension. So depending on the time in which you watch this video and you may already cover this particle,
-
-the box with with BART in the quantum model in third year, he'll we do a much more complicated version.
-
-He may be do you'll maybe do it in spherical coordinates. He might do the time dependent version.
-
-We're just looking at a very simple kind of version. Just kind of illustrate some points.
-
-So we're looking at the Schruder Schrodinger equation inside the box where the potential is zero.
-
-So this is essentially just the kinetic energy of of the particle of the excitement.
-
-So, again,
-
-to try what we call an unsubtle way function or a trial away function and such just means it's a German word for that kind of a starting point.
-
-All right. Educated guess we're gonna use this way function, which is a combination of sine functions.
-
-So we have sine K X multiplied by some amplitude.
-
-A is just a number and B, cosine K, X.
-
-So again, B is just an altitude. No. And we impose these boundy conditions.
-
-So first we look at the first one. So we had at the way function at X equals zero was zero.
-
-And if you plug it, X equals zero into this way function, you will see that we get cost zero.
-
-That would be one. And signs there will be zero. So we have PSI of X equals B equals zero.
-
-So this implies A, B must equals zero. So we've simplified our way function considerably just by considering this first Boundy commission,
-
-if we consider the other boundary condition, which was that the way function at X equals L was also equal zero.
-
-Then we have that this a times sine K L equals zero.
-
-And for that to be true, K must take this value.
-
-It must be equal to n pi over L where.
-
-And here is the principle quantum number which can take values one, two, three, all the way up to infinity.
-
-So it takes integer values. So the way function then is a sign in pi x over L.
-
-So we know from the boundary conditions,
-
-we know that the shape of the way function inside this box to replace four four kind of increasing values of n n equals one.
-
-We just get this simple way function. N equals two, we get a full wavelength.
-
-And as we increase and we just get more and more nodes and notes.
-
-OK, so we know the shape.
-
-But what we're interested in here is how changing the size of this box affects the position in energy of these energy levels.
+From the boundary conditions, we know the shape of the wave function inside this box for increasing values of n. For n = 1, we get this simple wave function. For n = 2, we get a full wavelength. As we increase n, we get more and more nodes. We know the shape, but what we are interested in is how changing the size of this box affects the position in energy of these energy levels.
 
 So we're going to return to the Schroeder equation and we're going to note that it features the second derivative of the way function.
 
