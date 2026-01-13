@@ -142,301 +142,38 @@ This inner product is therefore equal to δ(t - t'). The reason is that the delt
 
 So we have our equation of motion: m(d²r/dt²) = -ζ(dr/dt) + ζG(t), where m is mass times acceleration.
 
-If you had to have one step and then the next step that those steps are uncorrelated for the average of those two steps will be zero.
 
-And so is the same for this one. Only in this case, it's kind of the continuous equivalence of it, except when the TNT prime primer to say that.
+## Langevin Equation and Diffusion
 
-I mean, it's the other function. So that is not zero.
+The equation of motion is: m(d²r/dt²) = -ζ(dr/dt) + ζG(t), which is the Langevin equation. This describes the motion of a particle in a viscous medium with random thermal kicks.
 
-So we have our equation of motion and times a mass times acceleration.
+In overdamped systems (where friction dominates), we can neglect the inertial term m(d²r/dt²), simplifying to: ζ(dr/dt) = ζG(t), or v = G.
 
-The sum of all forces, the flipped weight in force. So Zanta times G.
+Integrating both sides gives: r(t) = r(0) + ∫₀ᵗ G(t') dt'.
 
-Plus, the drag force, sometimes sad, at times, the velocity spread forth, poverty, more city.
+The average displacement is ⟨r(t) - r(0)⟩ = ∫₀ᵗ ⟨G(t')⟩ dt' = 0, since ⟨G⟩ = 0.
 
-And so if you want to determine the trajectory of a park, we have to solve this equation.
+For the mean squared displacement: ⟨|r(t) - r(0)|²⟩ = ⟨∫₀ᵗ G(t') dt' · ∫₀ᵗ G(t'') dt''⟩.
 
-And there's a differential question because acceleration is the force to observe closely.
+Using the correlation ⟨G(t') · G(t'')⟩ = 2dD δ(t' - t''), we get: ⟨|r(t) - r(0)|²⟩ = 2dDt.
 
-Now, you have a very strong physics liquids. You can actually neglect this term because it's much more so.
+The root mean squared displacement grows as √(2dDt) ∝ √t. This square root time dependence is characteristic of diffusive behavior, similar to random walks where the extent scales as √n.
 
-This is called the inverted term and therefore this differential equation simplifies to sanitise velocity.
+## Application to Polymer Glasses
 
-Is this sad at times to fracture or is artefact pencils?
+This diffusive behavior can be observed in experiments with gelatin and other viscous fluids. For polymer glasses, the mean squared displacement shows this √t behavior at high temperatures. As temperature decreases, the system exhibits caging behavior—particles are trapped temporarily before jumping to new positions.
 
-So the velocity is equal to G.
+By introducing a potential barrier (sinusoidal potential), we can model the jumping behavior between cages. The one-dimensional stochastic model captures the essential characteristics: diffusive motion at long times, caging at intermediate times, and vibrations at short times.
 
-And then we can see, is this the first draught of time so we can look what not, its basement is disintegrating both sides social time.
+## Conclusions
 
-So X of T called X of seat. And it is the same specs zero for us to integrate into all of this G from zero to two.
+A one-dimensional stochastic model based on the Langevin equation with a sinusoidal potential provides insights into glass dynamics. The observed trapping and cage-hopping can be modeled by diffusive motion inside the potential.
 
-So this is the starting position. This is the end position and end position depends on starting position in the integrated filter making force with.
+This type of stochastic differential equation also applies to other phenomena:
+- Switching of Earth's magnetic field (the magnetic North Pole sometimes switches direction randomly)
+- Optical circuits
+- Laser physics
 
-Obviously, we can't be featherweights inequal because it's Footlights. That's what we can do, is determine the average behaviour.
+For more details on this research, see the published work in Physical Review E.
 
-The average behaviour is given by the average of that quantity.
-
-So I would say here displacement X of T most X zero does the origin also to the letter.
-
-So this is just by definition, the equal velocity from zero to T.
-
-And with this, everything record's not average in records. I can take insight into girl.
-
-And we I can replace by G because that was in operation what?
-
-Now, I told you that the average of this looks like the signal G. Well, zero.
-
-So I can just replace this by zero. So I have to inequal zero and this is zero.
-
-So the average displacements is actually zero. Just as was and run the walk.
-
-And so if we are likely to go left or right or put on any direction and therefore the average displacement is actually zero.
-
-So therefore it might be more informative to look at the average correct displacement.
-
-So I'll take this X two months, X zero square. This is always more negative.
-
-So the average will be likely to be positive sometimes.
-
-Luden zero, which is the case here. Now, X team, as you know, is just equal velocity and as A squared.
-
-So I write it in full twice. I have a here a second different variables to fry with t double proem.
-
-Now, I can take this integral sign to the front.
-
-And I can take those averaging brackets inside because it average over individuals the same equalled effort.
-
-And now I use this property where the G in a product with itself is too deep.
-
-The North Times, the Delta function is subject to that here. Now, I can find a way.
-
-It's not a function. It's basically a unit integral peaked at argument of zero.
-
-So I can switch places by one if I integrate over one or two times.
-
-So that's what I did here. Now two times did not.
-
-Those are just the constants. I can take them in front of the integral. Now, this inequal of one in two prime.
-
-So this is just t that's the final results. We see that the average squared displacement is equal to two denote homes.
-
-Two. Or if I look at the square root of that, it's Rutan's square displacement.
-
-So does the indication on the distance travelled actually increases with the square root of time?
-
-And this is actually a very important resource.
-
-The this is a very similar to Iran walk because with Iran walk,
-
-the extent of the walk is also both as a square of the number of steps that spread of hand here, but no more steps or shorter time.
-
-So this is also voted this far out of time. We also have the square root behaviour.
-
-And this you can compare it is also if a particle moves, of course, and philosophy moves, of course, and philosophy began,
-
-just replace the mean square root and square displacement by just taking the absolute values of X Themos zero.
-
-And demotes zero will just be the velocity.
-
-I've seen that. So then the room is square displacement, increase it linear you would see while here and squeezes a square of two.
-
-So this is actually slower increase with time. And because the square does increase so fast.
-
-From our city to. And if you force on energy, you could understand this because a random walk, as all says,
-
-the probability of going backwards to the origin, therefore it moves us less.
-
-This is average. May look at large volumes of time.
-
-You can also see this in experiments. So this is for muling from the fusion of think gelatine gelatins, fiscus, medium fiscals fluids.
-
-So if you basically drop it droplet of ink in his fluids, then offer to arms.
-
-This ink droplets will spread due to KICs with the fluids.
-
-Read the motion that this is called also diffusion. And after 40 hours, it's still diffusers.
-
-You can see the ink droplets actually hasn't increased unity in time.
-
-It goes in the square of time. So it doesn't increase so much more.
-
-And this is so you can actually surface from Ruti. So far, we actually looked a motion similar to items in Eliquis.
-
-But what we observed in glass motion is often jump like.
-
-So here I'm showing it to you again. You have this particle kind of jiggles around just as diffusive motion and to the random kicks.
-
-And then suddenly it jumps. So how does this happen?
-
-And also, how can we model this mathematically?
-
-What is actually a device, a simple one, the woman, so you can imagine that in a liquid particle, an atom surrounded by water atoms or particles.
-
-And if it wants to move to a new position, it actually has to come closer to our neighbours.
-
-And for that, it has to overcome a barrier. Farkle stood for repelling.
-
-And this typically occurs seemingly readily space, so the distance is typically labour distance.
-
-And an easy model for this will be to consider Bahcall motion.
-
-One dimension where potential is effectively sinusoidal.
-
-So basically, this is in a cage particle's cage here.
-
-This is kind of like the fence where Farfel isn't really in later position.
-
-And then comes into a new cage. And because this is a likely event, the energy here is higher.
-
-So far, it likes to be at the bottom with nobody to. And so it's all of this.
-
-I can just use park on the inside of an effective potential. You not signed to buy X over all that, so Alice appeared to you not.
-
-It's basically Dubarry of this petition.
-
-And powerful inside of potential, we can model this by realising that the force, due to its potential, is given by minus gradients and the potential.
-
-And then I can add this to the equation of motion. So we had the most dancing serration.
-
-Is this random force, the friction force?
-
-Now the additional force. Do to this potential that you can see the force is typically minus the grey, the hue.
-
-So if the gradient is large, the force is also large.
-
-The gradient here is a positive. The force will be minus a light.
-
-And so the negative tries to put a bark particle back into the position.
-
-Lower energy position. So for the one the motion case became is called clades derivative.
-
-So it's mine is derivative. The sign says mine is too high.
-
-You're not over at all. Goes to fly over elbows in front the sign to co-sign and get us mine.
-
-To sign those forces, you put two minus rated.
-
-If he also did connect as a nurse and saw a Navy get the following differential question,
-
-this is stochastic differential equation because have footwear can force.
-
-Sadly, those voices as those T minus this force.
-
-And so divided was that he had lost he is given my G of T minus to fight.
-
-You not said that. That's was so. And unfortunately, this question can't be solved politically.
-
-So how can we solve it then? One way will be to solve it numerically in the following way.
-
-So the velocity is basically the first derivative of position, respect to time.
-
-And now the approximation here we make is that the first derivs distances is given by X plus double teams at 50.
-
-And divide by not a team right now that goes to zero approximation here is that novelty's not zero.
-
-A very small bubar. And therefore, we have this equation.
-
-Extreme poverty, most of those things. That is a force plus a random force.
-
-And we can hear ISIL bring exile's to you as to the left hand side so that we have an explicit relation for excellent has done.
-
-Yes, functional. So if we know the particles sort of position time.
-
-As the sort of position certain time there we can see predict what the position
-
-of the next time stuff is by using this question where this is this force,
-
-this sign or co-sign term. And this is the random forced.
-
-This Rivendell force, you can actually consider an anomaly approximate by taking a random number from Gorshin distribution with yield variance.
-
-You can solve this actually in Motlop she'd like to or in the order programme with language.
-
-And if I do that and say I start from the origin, I can see a clear it has some diffuse of motion.
-
-In short time and then at some point it will hit this potential war.
-
-So it can't really go up. But once in a while, actually, all the fluctuations would retno for it in the right direction.
-
-So climbs up the barrier and then goes to the next well.
-
-So this is at axis Al or X over ls one.
-
-And then here it goes back again. So it goes down.
-
-So what you can actually see that there is sort of random walk for a short time.
-
-There is also a round walk for a large time, the larger timescale.
-
-Because jobs for the 012 to the first.
-
-And then goes back to zero to minus one. So this is kind of a random walk process and you can also see this.
-
-So this is a victory for individual particle.
-
-We can also look at an average behaviour. So if I look at the mean displacement, I mean squared displacement.
-
-Now, if you do that can actually see that is exactly equal to what I proved before.
-
-New Square misplacement. And if we if the barriers to zero is just proportionate to time to do not time, that's just a straight line.
-
-You can also look at one, the barrier is not equal to zero.
-
-Now you'll see the falling behaviour so short times you have this diffuses behaviour and it continues if the barrier zero.
-
-But if you now increase the barrier. It is less likely to cross it's there, therefore the park or it could get stuck.
-
-The years about 10 to once to. But after some time managed to escape this barrier because all the district waiting forces are kind of
-
-aligned and then managed to escape and then shows this diffuses behaviour at larger timescales again.
-
-So then the Mosquera displacement increase with time again, the prefecture smaller.
-
-And this is the result of this one dimensional model.
-
-And if I compare this this polymer glass, which I showed you in the beginning, and this is from polystyrene,
-
-which is a well-known polymer, like some coffee cups, disposable coffee cups are made from polystyrene.
-
-And you see clear that the behaviour is very similar.
-
-So for large temperature, if you look at Pfeifle before to Kalven, then we have this diffusers behaviour last time skills and it's diffuse.
-
-The behaviour moves to larger and larger time skills.
-
-If I cool down the temperature and this is ranch room temperature wall for actually polystyrene and does the glass position around formed Kelvin.
-
-So you see this this regime is also known as the caging regime,
-
-so its case in those tight timescales and it's exactly what we observe for this one mission without smell.
-
-So this essential characteristics are captured by this one dimensional model.
-
-So it's a function you can increase a barrier or equivalently decrease the temperature, which is kind of equivalent.
-
-Yeah, it shows exactly the same behaviour. So as a conclusion,
-
-you find that a one dimensional stochastic model based on the overnight much of
-
-any question that this is stochastic differential question gets insight glasses.
-
-Observe trappin cage hopping can be modelled by diffusive motion inside the sinusoidal potential.
-
-And actually, this question of motion can also be applied on a phenomena.
-
-For example, the switching of monadic fields of the yards.
-
-So, as you might know, North Pole, the magnetic North Pole of the Earth, sometimes switches the right or the direction.
-
-So then goes to the South Pole and the South Pole. And this is also kind of randomly fence.
-
-You can also model is by like a sign that stochastic differential equation, we didn't assign protection.
-
-Also, let's call circuits. We can also apply similar equations of motion and the same with laser physics.
-
-And if you want to know more about the work I did when I was a piece, these student.
-
-You can be here, find the reference. So was published in Fiscal Review.
-
-But this is a euro. You can also find some. Well, thank you for your attention.
-
+Thank you for your attention.
