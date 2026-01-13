@@ -1,103 +1,36 @@
-# Lecture Transcript
+# Lecture Transcript: Lotka-Volterra Systems
 
-[Auto-generated transcript. Edits may have been applied for clarity.]
-Do you feel sorry for the delay?
+[Auto-generated transcript. Edits have been applied for clarity.]
 
-So we are going to start to talk by an end.
+## Introduction
 
-So some of you probably know her already, but maybe not all of you.
+Thank you for your patience with the slight delay. We are going to begin with a talk by Anne. Some of you probably know her already, but perhaps not all of you. Anne is a lecturer in mathematics in the school, and she works on dynamical systems. She is going to discuss some of them today.
 
-So she's a lecturer in mathematics in the school and she works on Dynamical Systems and she is going to talk about some of them today.
+Just to mention that we are recording the lecture, but I am recording from my laptop directly to the screen, so the quality probably will not be top-notch. Please try to take notes as well if you can. We can probably also obtain the slides afterwards.
 
-Just to say that we are going to record the lecture, but I'm recording from my laptop directly as a screen here,
+Hello, it is a great pleasure to give this seminar to you today. Some of you know me already—I have been around, and we have had lectures in this very room. The whole setting sounds very familiar to me.
 
-so the quality is probably not going to be topnotch. So do try to take notes as well if you if you can.
+## Lotka-Volterra Models
 
-And also probably we can get some slides as well since you have to show slides.
+Today, in this seminar, I am going to talk about a model called the Lotka-Volterra model. This type of model—I have these two equations here—is one example of a Lotka-Volterra system. I will discuss this type of model, which falls within the category of predator-prey models.
 
-So. So that's it. So and then, you know, so it's a great pleasure to give this talk today, this seminar to you.
+We can use these models to describe many things. We can model complex systems, large systems in ecology, but we can also go beyond that and see applications in modeling epidemics. You might have heard of a model called the SIR model. Perhaps some of you have a project related to this. It is all about disease spreading. Simple models like this with only two equations are enough to describe, reasonably well (not perfectly, because the system is more complex), the spreading of viruses, for example. There are also applications in finance. There are many applications for this very simple model.
 
-But yeah, you know me from there I was around.
+I am going straight into the material because we do not have too much time, and I would like to cover as much as possible.
 
-We've had the lecture exactly in this room. So to me it sounds very familiar, the whole setting.
+## What Is This Model and How Did It Start?
 
-Yeah. So today what we're going to hear in this seminar, I'm going to talk about a model that's called Local Madeira and this type of model.
+When we say Lotka-Volterra, we mean essentially these two equations. We have a system of first-order differential equations with two variables, x and y, that we would like to solve and find the solution for this two-dimensional system. We see some parameters: α, β, γ, and δ. All of these are positive constants. In the beginning, let us leave them abstract—we do not specify precise numbers—because these constants give us flexibility to fit real data. According to these parameter values, we can match real data as closely as possible.
 
-So I have these two equations here. That's one example of a lot about our system.
+The Lotka-Volterra model was developed a long time ago by two scientists. They used these equations to describe the evolution of two species, where one represents the predator and the other represents the prey. What we want to find is how the two populations of these two species change over time.
 
-And what I'm going to talk about talk about is that with a type of models, it's called water.
+We are given these first-order differential equations. You have seen in your modules on differential equations that you already know how to solve systems of linear equations with x and y. However, when we encounter nonlinearity, like here, it is not always easy to solve the system. This is one of those cases where the solution of the system is not easy to write down. It is not like cosines, sines, and exponential factors that we know how to handle very well—it is something more complicated.
 
-Water which is within the so called predatory models.
+In this case, what we can do is use the theory of dynamical systems to provide qualitative behavior of the solutions. This is what we are going to see today.
 
-We can do a lot of things. We can model complex systems, large systems in ecology,
+## Key Features
 
-but also we can go on and beyond that and see applications of this model thing
-
-that epidemics you might have heard of a model that's called the SLR model.
-
-Maybe some of you might have a project on the living then.
-
-Um, well, at least one of you should have a project like that.
-
-It's all about the this is spreading. And simple models like that with only two equations are enough to describe well enough.
-
-Okay, most perfectly, because the system is more complex, but well enough.
-
-Um, the spreading of viruses, for example.
-
-But also there are applications in finance. Okay, So there are plenty of applications with a very, very simple model.
-
-And I'm going straight away because we will not have too much time.
-
-And I would like really to say as much as possible.
-
-So what it is about this model and how did it start?
-
-The when we say locomotive, we mean essentially these two equations.
-
-So we have a system of first order,
-
-the first order equations with the two variables X and Y that we like to solve and find the solution of this, a two dimensional system.
-
-And we see some parameters. It's an alphabet, and both of these are just some positive constants.
-
-And so we can leave them in the beginning.
-
-Let's say abstract, we don't specify a precise number because these constants give us some flexibility to, to fit real data.
-
-So according to these values, we can read as best as possible real data.
-
-So computer model actually was developed by a long time,
-
-but they're also the names they use to describe the evolution of two species where one represents the predator and the other represents the prey.
-
-And what we want to find is how the two populations of these two spaces change in time.
-
-Um, so we're given this first the, um, differential equations and you have seen in your module is that in the second you write differential equations,
-
-you know already how to solve maybe systems of linear equations with X and Y.
-
-But when we, when we have, when we encounter the linearity, like here, um, it's not always easy to solve the, the system.
-
-Okay. So this is one of these cases that the solution of that system is not that easy to write down.
-
-It's not like a cosines and signs and exponential factors and factors we know to handle very well something more complicated.
-
-So in this case, what we can do is we can use the theory of the analogous systems to provide the qualitative behaviour of the solutions.
-
-And this is what we're going to see today. So some key features I will have the following couple that I will do this.
-
-I then have a system. Um, it was introduced independently by two scientists and Beltran's team.
-
-They both were interested in applications of, um, two competing theories.
-
-I read the system, okay, either to animals pieces or, you know, could be bacteria and something else.
-
-You know, something in biology, um, a predator prey model is, as I said already,
-
-this was used to describe the evolution of systems in ecology, biology, in finance.
-
-We will see, um, a bit an example in the epidemic, and it is a toy model.
+The system was introduced independently by two scientists: Lotka and Volterra. They both were interested in applications involving two competing species. It could be two animal species, or it could be bacteria and something else—something in biology. A predator-prey model, as I have already said, has been used to describe the evolution of systems in ecology, biology, and finance. We will see an example related to epidemics. It is a toy model.
 
 So what I mean by that is that it's not that realistic as like, let's say modern models would be more interesting,
 
