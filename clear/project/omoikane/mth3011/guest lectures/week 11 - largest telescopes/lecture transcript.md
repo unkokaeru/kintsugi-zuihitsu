@@ -1,102 +1,38 @@
-# Lecture Transcript
+# Lecture Transcript: Research with the World's Largest Telescopes
 
-Okay. Right. So, uh. Yep. I'm Katharine Johnston.
+Okay, I'm Katharine Johnston. I'm one of the astrophysicists, along with Phil Sutton. Today I'm going to tell you about doing research with the world's largest telescopes—interferometers—because that is something I do a lot in my research.
 
-I'm one of the, um, astrophysicists, along with Phil Sutton.
+## Outline
 
-Um, and today I'm going to tell you a bit about, uh, doing research with the world's largest telescopes.
+Here is an outline of what we are going to talk about. First, we will discuss big optical and radio telescopes and why astronomers care about making big telescopes. Then we will talk about why we would want to observe at longer wavelengths—mostly to get around the problem of interstellar dust, which creates issues if you are observing at shorter wavelengths.
 
-Um, and that's interferometers, because that's something I do a lot in my research.
+I will introduce the Atacama Large Millimeter/submillimeter Array (ALMA) and interferometers in general, touching upon how they work. Then I will discuss specific results on a source called AFGL 4176, which is part of my research, looking at a disk of material around a forming massive star.
 
-Um, so, uh, here's an outline of what we're going to talk about.
+I will move on to talk about even bigger interferometers, such as the Event Horizon Telescope (EHT). Then I will discuss science results from the EHT, specifically looking at—you may have seen this in the news—supermassive black holes and the fine detail we can see with this telescope.
 
-Um, first we're going to talk about big optical radio telescopes and why astronomers even care about making big telescopes.
+## Big Optical Telescopes
 
-And then we're going to talk a little bit about why would we even want to observe longer wavelengths.
+First, if you were asked to think of a big telescope, you usually think of big optical telescopes with a big polished parabolic mirror. For instance, the Very Large Telescope (VLT), which confusingly is made of four telescopes that are eight meters in diameter. You can see what it looks like inside one of these four domes: a big mirror supported by a structure that allows it to be pointed in various directions.
 
-And so that's mostly around getting around the problem of interstellar dust and which creates issues.
+The reason we care about making these giant telescopes is twofold. First, we want something called resolution, which is the detail in the image. There is a very important relationship in astronomy: Resolution = λ/D, where λ is the wavelength of the light and D is the diameter of the telescope.
 
-If you're observing at shorter wavelengths, then I'll introduce the um interferometer or large telescope,
+You can see that if we make a bigger telescope, we get finer detail in our image. That is reason one—why we go to all the engineering difficulty to make these big things.
 
-Alma, um, and interferometers in general, a little bit, uh, touching upon how they work.
+There is a second reason: telescopes are just big light buckets. The bigger the bucket you make, the more photons you collect, which means higher sensitivity because you have more photons. That is basically why we care about making big telescopes.
 
-And then I'll talk about some specific results on a source called FTL 4176, which is parts of my research,
+## Giant Radio Telescopes
 
-um, which is looking at, um, a disk of material around a forming massive star.
+You don't just have optical telescopes—you have giant radio telescopes, and these are even bigger. Some of them you may have actually visited, like the Jodrell Bank telescope in Cheshire, which is 76 meters in diameter. Some are up to 500 meters in diameter. Why are they even bigger?
 
-Um, then I'll move on to talk about even bigger telescopes or interferometers, such as the LHC, which is the Event Horizon Telescope.
+Looking back at that relationship (Resolution = λ/D), it makes sense: for a longer wavelength, to get the same detail, we need a bigger telescope. That is why you need these huge telescopes in the radio.
 
-Um, and then speak about some science results from the Event Horizon Telescope, um, specifically looking at um and you may have seen this in the news,
+You might ask: Why do we even care about making even bigger telescopes? It is quite a lot more effort to make these huge things. The reason is that we can actually get more information looking at radio wavelengths and solve a specific problem.
 
-uh, looking at results about supermassive black holes and the really, uh, fine detail and what we can see with, with this telescope.
+## The Problem of Interstellar Dust
 
-Okay. So first of all, if you were asked to think of a big telescope,
+Here is a beautiful image—a fisheye image of a huge portion of the sky looking at the galactic center. This is a very different scale from the view we will see of the galactic center later in this talk. This is taken from the southern hemisphere, actually from the ALMA telescope that I will discuss later.
 
-you usually think of big optical telescopes, right, with a big polished, um, parabolic mirror.
-
-Um, so for instance, like the Very Large Telescope, which actually confusingly,
-
-is made of four telescopes that are eight metres in diameter or so, um, and then you can see what it looks like inside one of these four domes.
-
-And so you've got the big mirror that supports a whole bunch of structure and that allows it to be, um, pointed in various directions.
-
-And so the reason that we care by making these giant telescopes, um, is twofold, really.
-
-First of all, we want something called resolution, which is the detail in the image.
-
-So these are very kind of basic, but uh, very important relationship in astronomy,
-
-which is the resolution or the smallest detail you can get in an image is related to the wavelength of the light,
-
-um, that you're interested in, um, the diameter of the telescope.
-
-So you can see that if we make a bigger telescope, we're going to get finer detail in our image.
-
-So that's reason one. And that's why we go to all the engineering difficulty to make these big things.
-
-But there is a second reason, which is basically that, um, telescopes are just big light buckets.
-
-So the bigger the bucket that you make, the more photons you're going to collect.
-
-And so that means that you're going to have higher sensitivity, um, because you have more photons.
-
-Um, so that's basically the reason we care about making big telescopes.
-
-Um, but you don't just have optical telescopes, you have giant radio telescopes, and these ones are even bigger.
-
-Right? Um, some of them you may have. I actually even visited the Jodrell Bank telescope, um, in Cheshire.
-
-Um, it's 76m in diameter.
-
-So why these ones, you know, even up to 500m in diameter?
-
-Why are they even bigger?
-
-Well, looking back at that relationship, it makes sense that for a longer wavelength, to get the same detail, we need a bigger telescope.
-
-So that's why you need these huge telescopes in the radio.
-
-Um, so you might want to do. Okay. Why do we even care making even bigger telescopes.
-
-It's quite a lot more effort to make these huge things.
-
-Well, the reason is, um, that we can actually get a more information looking at, um, radio wavelengths, um, and actually solve a specific problem.
-
-So here this is a beautiful image. Um, so it's a fisheye, uh, image of a huge portion of the sky looking at the, uh, galactic centre.
-
-So this is a very different kind of scale to the view that we're going to see of the galactic centre later in, uh, in this talk.
-
-And, um, so here, uh, we're in the southern hemisphere.
-
-This is actually taken from the telescope, alma, that I'll talk about later.
-
-Um, and you can see all these kind of black blobby patches there in the we of the light is coming from the galactic centre.
-
-And that is actually due to something called interstellar dust.
-
-Um, and that's really a big pain in the neck if you're an optical.
-
-Um. Strongly. And so what is this stuff that I'm talking?
+You can see all these black blobby patches where light is coming from the galactic center. That is due to something called interstellar dust, which is really a big pain if you are an optical astronomer. What is this stuff I'm talking about?
 
 My duster. So this is, um, a very high, uh, uh, zoomed in image of what dust looks like.
 
@@ -120,97 +56,39 @@ Um, so I should go back there soon. And because at that point, uh, the light doe
 
 It's like, um, um, I don't know if you have very, very long wavelengths.
 
-You can, you know, go through walls even, um, although sometimes your wi fi doesn't, but,
+You can go through walls, although sometimes your Wi-Fi doesn't. The longer the wavelength, the more you can go past these objects. At wavelengths longer than a micron, you actually don't have any more trouble with dust.
 
-uh, the longer the wavelength you've got, the more you can go past these kind of objects.
+## Wien's Law and Thermal Emission
 
-Uh, so, like c longer than a micron, then you actually don't have any more trouble.
+Another benefit of observing at long wavelengths is that you can use Wien's Law, which you have probably come across before. It says that if you have something emitting thermally (a blackbody, meaning everything it absorbs it re-emits), then the peak of the emission wavelength is related directly to its temperature.
 
-Um, so, yeah. And another issue or thing that's good about observing at long wavelengths is you can use, uh, Bean's Law,
+From an astronomical standpoint, luminous massive young stars like the Pleiades (which you may have seen—visible with the naked eye) are really bright blue-tinged stars. That is because they are really hot. Blue is actually hot—you can see that the hotter it is, the shorter the wavelength.
 
-which you've probably come across before, which is just saying if you have something that's emitting thermally.
+I also show an example of an ultra-cool dwarf star, which is the star of the TRAPPIST-1 system. That is incredibly red—obviously this is just an artistic impression. In that case, you have a really cool star. You can see that stars are very close, not exactly but close, to blackbodies when they are emitting.
 
-So it's a black body, and that means that everything it absorbs remains.
+Taking it closer to home: people emit at about 37 degrees Celsius when we are well, and we peak in the infrared wavelengths. That is why you see people when you look through an infrared camera.
 
-Um, then the peak of the emission in a wavelength is related directly to its temperature.
+## Observing at Different Wavelengths: The Horsehead Nebula
 
-So if we look at this from an astronomical standpoint, well, luminous, massive young stars like the Pleiades, you may have seen the Pleiades.
+What do we see if we look at a particular object in space using different wavelengths? This is the Horsehead Nebula. On the left, we have optical wavelengths—you can see the lovely outline of the Horsehead Nebula. We cannot really see into it because the dust is blocking our view.
 
-When you look up, it's, uh, visible with the naked eye whose are really, uh, bright blue and tinged stars.
+In the center, you can look at it in infrared, and then you start to see sources being picked out as light passes through. If we go to even longer wavelengths—what we refer to as submillimeter (just everything with a wavelength shorter than a millimeter)—at that point, the dust actually starts to emit itself. It is very close to being a blackbody, but not exactly. You actually see it emitting light.
 
-And that's because they're really hot.
+That is really useful because now we can tell the content of that cloud, add up the mass, and determine physical properties.
 
-Like, the blue is actually hot because you can see over here, the hotter it is, it the shorter wavelength it is.
+## Molecular Emission Lines
 
-Um, and then over there I put an example of an ultra cooled dwarf star, which is the star of the Trappist one system.
+There is another thing you can do, which is slightly different: using molecules in space. A very common example is carbon monoxide (CO). The idea is you have a carbon and an oxygen atom in this molecule, and they are rotating. That rotation has energy.
 
-Um, and that's incredibly red. Uh, obviously this is just a nice impression, sadly.
+If it starts to rotate more slowly, it will lose energy as a photon. The amount of energy lost is always quantized—it always loses a specific amount of energy. Therefore, you get a line of emission at one specific energy or frequency.
 
-So, uh, and in that case, if got a really, uh, cool star, um, so you can see that it actually works where we have these,
+As we can see on the right, J = 1 → 0, where J is the quantum number for angular momentum of that molecule. For instance, if we go from J = 1 to J = 0, we emit a photon of wavelength 2.6 mm.
 
-uh, stories that are very close, not exactly, but close to black bodies when they're emitting.
+That is useful because we have emission at a very specific wavelength, which we can use to study the dynamics of objects.
 
-Um, yeah. So taking a bit closer to home, people.
+## Doppler Shift and Velocity Measurements
 
-Well, we arrive in about 37, uh, degrees Celsius when we're, well, um, and, um, we peak in the infrared wavelengths.
-
-So that's why you should see this when you look for the infrared camera.
-
-So what what do we see if we look at, um, using, uh, different wavelengths, uh, a particular object in space.
-
-So this is the Horsehead Nebula, um, and so on the left, we've got, uh, optical wavelengths.
-
-You can see the, the lovely outline of the Horsehead Nebula.
-
-We can't really see into it, like they've got this issue that the dust is blocking our view.
-
-And then in the centre, you can look at it in infrared, and then you can start to see sources being picked out and light as you see that there.
-
-Um, then if we go to even longer wavelengths, so what we refer to is submillimeter,
-
-but that's just everything with a wavelength just shorter than a millimetre.
-
-Um, at that point then, um, the dust actually starts to emit itself.
-
-Um, and then we very close to being a black body, but not exactly.
-
-Um, and then you actually see a emitting light.
-
-So then that's really useful. Right. Because now we can actually tell the, the, the content of that cloud we can add up and the mass of it,
-
-we can tell some physical properties about that. Um, and there's actually another thing that you can do which is slightly different.
-
-It's not using dust, it's using molecules in space.
-
-Um, so this is a very common example is carbon monoxide.
-
-And so the idea is you have a carbon and an oxygen atom in this molecule, and they are rotating around um, and that.
-
-Rotation that might have rotation. It has has energy.
-
-So if it for instance then starts to rotate a bit more slowly and then it will lose energy as a photon.
-
-And these uh, the amount of energy it's lost is always quantised.
-
-Right. So it always loses it in this, uh, specific amount of energy.
-
-Um, and so therefore you get a line of emission, which is that it's all at one specific energy or frequency.
-
-And as we can see, uh, this you right over on the right, not smooth.
-
-See, G equals 1 to 0 and g is the, um, uh, the uh, quantum number for uh, angular momentum of that molecule.
-
-So for instance, if we went from 1 to 0, we would emit, uh, a photon of wavelength 2.6mm.
-
-Uh, so that's pretty useful because we can and then, uh,
-
-use it because we have this emission at very specific wavelength to do cool things, working on the dynamics of stuff.
-
-Right. So over here, uh, you probably heard of the Doppler shift it and it obviously works with light as well.
-
-And so, you know, stuff coming towards you, blue shifted the everything or the light, uh, gets, uh, squished together and red shifted.
-
-You probably heard of that, you know, um, the expansion of the universe and then light get, uh, stretched out.
+You have probably heard of the Doppler shift—it works with light as well. Stuff coming towards you is blueshifted (the light gets squished together), and stuff moving away is redshifted (you probably heard of this with the expansion of the universe—light gets stretched out).
 
 Um, in that case, by the universe don't by things moving away.
 
