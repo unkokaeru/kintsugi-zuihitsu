@@ -1,217 +1,233 @@
-# Lecture Transcript: Lotka-Volterra Systems
+# Lecture Transcript: Quantum Dots and Their Applications in Biotechnology
 
-[Auto-generated transcript. Edits have been applied for clarity.]
+Hello and welcome to this seminar on quantum dots and their applications in biotechnology.
 
-## Introduction
+The name "quantum dots" might sound quite exotic, so I will begin by explaining what they are. Quantum dots are nanocrystals—crystals at the nanoscale made from semiconducting material.
 
-Thank you for your patience with the slight delay. We are going to begin with a talk by Anne. Some of you probably know her already, but perhaps not all of you. Anne is a lecturer in mathematics in the school, and she works on dynamical systems. She is going to discuss some of them today.
+You should be familiar with semiconductors from the condensed matter module you took last year with Matt Watkins. However, the picture you see here, which shows colored fluids in bottles, may conflict with the idea you have of what a semiconductor looks like. I will explain this toward the middle of the talk.
 
-Just to mention that we are recording the lecture, but I am recording from my laptop directly to the screen, so the quality probably will not be top-notch. Please try to take notes as well if you can. We can probably also obtain the slides afterwards.
+First, I want to speak more generally from a physics perspective about what quantum dots are. Then I will discuss briefly how we synthesize these materials, which will explain why they appear as fluids. The picture you see on the right-hand side of the screen shows a series of quantum dot samples made by a third-year student at Lincoln back in 2017. Finally, I will discuss some of the properties that make these materials interesting for various applications in biotechnology.
 
-Hello, it is a great pleasure to give this seminar to you today. Some of you know me already—I have been around, and we have had lectures in this very room. The whole setting sounds very familiar to me.
+I should emphasize that biotechnology is not the only area of application. Quantum dots are useful for photovoltaics and LCDs—the latest television technologies use quantum dot displays. They can also be used to make lasers. There are many applications for these materials.
 
-## Lotka-Volterra Models
+The reason I wanted to focus on biotechnology applications is because of this story. The URL shown at the top provides more details, but the gist is that a team from MIT has developed the ability to encode information about someone's vaccination record in the form of a quantum dot tattoo, which would lie just under the skin. This would be invisible to the naked eye but readable by standard smartphone technology.
 
-Today, in this seminar, I am going to talk about a model called the Lotka-Volterra model. This type of model—I have these two equations here—is one example of a Lotka-Volterra system. I will discuss this type of model, which falls within the category of predator-prey models.
+Hopefully, by the end of this talk, you will know enough about quantum dots to understand why they are necessary for this kind of application and why we cannot simply use existing organic dyes.
 
-We can use these models to describe many things. We can model complex systems, large systems in ecology, but we can also go beyond that and see applications in modeling epidemics. You might have heard of a model called the SIR model. Perhaps some of you have a project related to this. It is all about disease spreading. Simple models like this with only two equations are enough to describe, reasonably well (not perfectly, because the system is more complex), the spreading of viruses, for example. There are also applications in finance. There are many applications for this very simple model.
+If you search for this story on the Internet, you will find many articles. I have highlighted this one because of how they describe quantum dots as "tiny glowing dots." This is correct—they are tiny and they do glow—but this is hardly a technical description.
 
-I am going straight into the material because we do not have too much time, and I would like to cover as much as possible.
+## Semiconductor Physics Recap
 
-## What Is This Model and How Did It Start?
+Let us recap some semiconductor physics, specifically the band theory you learned with Matt Watkins last year. This will put us in a position to discuss some of the interesting properties I have listed here.
 
-When we say Lotka-Volterra, we mean essentially these two equations. We have a system of first-order differential equations with two variables, x and y, that we would like to solve and find the solution for this two-dimensional system. We see some parameters: α, β, γ, and δ. All of these are positive constants. In the beginning, let us leave them abstract—we do not specify precise numbers—because these constants give us flexibility to fit real data. According to these parameter values, we can match real data as closely as possible.
+This diagram shows the general picture of electrons in a semiconductor—how we describe electrons in a semiconductor. On the vertical axis, we have the energy of electrons. On the horizontal axis, we have the wave vector of electrons, which is essentially the momentum. This is like an electron momentum map of electrons in a semiconductor.
 
-The Lotka-Volterra model was developed a long time ago by two scientists. They used these equations to describe the evolution of two species, where one represents the predator and the other represents the prey. What we want to find is how the two populations of these two species change over time.
+At the bottom, we have the valence band, which corresponds to the outermost orbitals of the electrons of the atoms. At the top, we have the conduction band, which is not shaded in gray, suggesting that it is mostly unoccupied.
 
-We are given these first-order differential equations. You have seen in your modules on differential equations that you already know how to solve systems of linear equations with x and y. However, when we encounter nonlinearity, like here, it is not always easy to solve the system. This is one of those cases where the solution of the system is not easy to write down. It is not like cosines, sines, and exponential factors that we know how to handle very well—it is something more complicated.
+If we imagine an incident photon with energy perfectly matching the band gap, when this is absorbed by the material, an electron will be promoted from the valence band up into the conduction band, leaving a hole behind. This hole is more technically called an electron vacancy, and we can treat it like an actual particle. It has a positive charge relative to its environment and an effective mass, just like the electron in the conduction band has an effective mass. It can delocalize throughout the material and move freely around.
 
-In this case, what we can do is use the theory of dynamical systems to provide qualitative behavior of the solutions. This is what we are going to see today.
+This does not have to happen at zero momentum. It can happen at higher values of momentum. We simply require that the incident photon has energy larger than the band gap.
 
-## Key Features
+So we have this positively charged hole in the valence band and this negatively charged electron in the conduction band. These interact via the Coulomb interaction and actually form a bound state, which we call an exciton, and which we can treat as a particle in and of itself.
 
-The system was introduced independently by two scientists: Lotka and Volterra. They both were interested in applications involving two competing species. It could be two animal species, or it could be bacteria and something else—something in biology. A predator-prey model, as I have already said, has been used to describe the evolution of systems in ecology, biology, and finance. We will see an example related to epidemics. It is a toy model.
+The way we describe the size of this particle, which consists of the electron-hole pair, is by making an analogy with the hydrogen atom. The hydrogen atom has a positive nucleus and a negatively charged electron. We can discuss the most likely separation of these two objects or the most stable separation.
 
-What I mean by "toy model" is that it is not as realistic as modern models, but it works well enough and serves as a very good starting point. We have an understanding of the model because we can solve it. Understanding solutions is the best way to grasp mathematical modeling—start with something simple with the least possible number of variables to gain an understanding of the problem.
+We do this by discussing the Bohr radius. We can apply the same concept to the exciton and discuss the Bohr radius of the exciton, which represents the most stable separation distance between the hole and the electron. This is given by the equation shown here.
 
-Very briefly, about Lotka and Volterra: they were born in the 19th century, and their theories were developed more than 100 years ago. Lotka was a biostatistician and logician, while Volterra worked as a mathematician and physicist. They worked independently but came to the same conclusions. Lotka published his work in 1925, and Volterra published in 1926. If you want to learn more about these scientists and what they did historically, I can share the slides with you.
+The material property parameters that become important are the dielectric constant (which describes how easily an electric field penetrates this particular semiconductor relative to vacuum) and the reduced mass μ, which combines the mass of the electron and the hole.
 
-## Three Basic Steps of Mathematical Modeling
+If you do not remember anything about reduced mass, there are a few slides that explain it. The effective mass m*_e is the effective mass of the electron in the conduction band, and m*_h is the effective mass of the hole in the valence band.
 
-Now, thinking about mathematical modeling, it is interesting to see how we start with this mathematical model. There are three basic steps:
+The key point I want to make is that this exciton has a stable size—a size at which it wants to exist. If we reduce the size of the semiconductor so that it is smaller than this Bohr radius, we say that the exciton is quantum confined. I will talk more about quantum confinement later. This is the definition of quantum dots: when the size of the crystal in all directions is smaller than this Bohr radius, we say that quantum confinement is strong and that this material is a quantum dot.
 
-First, we need to select variables. We want to study this system with two population species. We need the variable x and the variable y. As you see in this diagram, one population (the prey) loses to the other (the predator). There is a flow running from x (the prey) to y (the predator).
+## Material Parameters and Exciton Radii
 
-To describe the system, if you have ever worked in mathematical modeling and want to use differential equations, you need to find the derivatives of the model. Once we have the system, we need to solve it. These are the three steps we need to follow.
+Looking more specifically at these material parameters for semiconductors, semiconductors tend to have a large dielectric constant. As a result, we get significant electron screening. The positively charged hole and negatively charged electron in the conduction band interact via the Coulomb interaction, but the presence of all the other electrons in the material actually reduces this Coulomb interaction. This results in a smaller binding energy between the hole and electron. All these other electrons shield the electron-hole pair from each other, reducing the interaction. They can exist further apart in a stable manner.
 
-## Example: Rabbits and Foxes
+In other words, the exciton radius increases—the Bohr radius gets larger. The effective masses affect this as well. In semiconductors, we discuss what are called Wannier excitons, which have radii anywhere from 1 to 20 nanometers. This contrasts with Frenkel excitons seen in molecules, where there is not as much screening, the Coulomb interaction is at full strength, and the exciton radius is very small in comparison.
 
-Let us say we want to study this particular system. A classic example is rabbits (the prey) and foxes (the predators). If you want to see how this works over time, you can collect real data, measure from real life, and plot the data you obtain.
+These excitons have a typical radius of, say, 10 nanometers. Because they are so large (relatively speaking), it is actually quite feasible to make crystals smaller than this exciton Bohr radius. It is quite easy to make semiconductor crystals in which the exciton is "squashed."
 
-So, as I said already, x and y describe the dynamics. We want to see how they evolve over time. What do the derivatives tell us? Well, dx/dt is the population growth rate of the prey, and dy/dt is the population growth rate of the predators.
+We can make a rough analogy with a jack-in-the-box. If you think about a jack-in-the-box being pushed into the box and then we release the lid, this is like the electron being promoted up into the conduction band, and when you open the box, it is like it relaxing back down and giving off a photon. If you imagine putting this jack-in-the-box and then squeezing the box down to size, when you open it, it will have more energy than it would have otherwise. This is not a perfect analogy, but it gives the idea of what is happening. The color we see here is actually dependent on the size, and that is because of this jack-in-the-box effect.
 
-Before giving the equations straight away, how would you start? We want to see how the growth changes. One can think: how would the rabbits do if they were alone? We need some assumptions. Let us say they have an infinite amount of food. If they do not have any enemies, their population would grow and grow. The population growth rate—the derivative—could be, for example... Does anyone have any idea? You need something positive, of course, but how would they change?
+## Density of States and Dimensionality
 
-If you have two rabbits, then four rabbits, then eight rabbits, and so on, this means we have exponential growth. That means the derivative is linear—proportional to x. So dx/dt is proportional to x. That is a good start.
+Let me discuss these size-dependent properties in more detail. Hopefully, you remember from last year about the density of states, which is the number of available states per unit volume at a given energy. It varies with the square root of energy. This is a continuous function for bulk systems.
 
-What about the foxes? If they have no food around, they will starve and very quickly go extinct. That means for y, we would have something proportional to -y.
+However, when we reduce the dimensionality of a material, the density of states becomes discontinuous. What do I mean by low-dimensional materials? If you take a bulk crystal and compress it such that it becomes an extremely thin sheet, this would be a two-dimensional material. If we then take this thin sheet and compress it along one of the remaining axes, we end up with an extremely thin line, like a nanowire. If you then take this nanowire and compress it along the final axis so that it is essentially a point, this is what we call a zero-dimensional material. This is what a quantum dot is.
 
-When we allow the populations to be together, the system becomes more balanced. The rabbits have exponential growth, but then they are eaten by the foxes, so their population falls. If the prey population falls a lot, then the foxes do not have enough food, so they cannot reproduce much. Their population starts to go down again. If the predator population goes down, the prey find the opportunity to reproduce again. What you get in the end is a balanced ecosystem with ups and downs—like a cycle. You expect to have oscillations.
+If you look at the density of states of these low-dimensional materials relative to the density of states for a 3D material, we see that the valence band here is full again, and the conduction band is empty. The lines vary with the square root of energy. For a 2D density of states, we start to see what looks like a step function—a series of step functions. You can see there is some discontinuity. If we reduce the dimensionality down to one dimension, we start to see even more interesting structure in the density of states. If we take it to the extreme and reduce the dimensionality to zero dimensions, we see an extremely discrete density of states.
 
-Now, in terms of the equations: you have births, deaths, and interactions. When you allow them to interact, you need an interaction term between x and y—mathematically, something that contains both x and y at the same time. This is the interaction term that couples the system. It is negative for the prey (they are consumed) and positive for the predators (they gain energy from prey). This is how they came up with this model.
+Quantum dots are sometimes called artificial atoms because of this discrete density of states. We have discrete energy levels that look very much like atomic spectra. I will not go into detail about these density of states derivations. If you want to see the derivations, there is a good website shown at the bottom. If you go there and have questions, feel free to email me or ask me when you see me.
 
-## Hartman-Grobman Theorem
+## Quantum Confinement: Particle in a Box
 
-Now the third step is to solve the system. We are going to discuss a very important theorem from dynamical systems: the Hartman-Grobman theorem. This is a very important result in the local qualitative theory of ordinary differential equations.
+Now we want to understand how and why the size of a quantum dot affects the energy levels. The exciton inside our nanocrystal, inside our quantum dot, is modeled as a particle in a box. We will use the terms "box" and "potential well" interchangeably. Essentially, we are looking at a potential well.
 
-The theory shows that near a hyperbolic equilibrium point (let me skip the word "hyperbolic" if you have not heard it before), the nonlinear system has the same qualitative structure as the linearized system. Imagine that dx/dt = F(x), where x is a vector. For a system of equations, this nonlinear system has the same qualitative structure as the linear system: dx/dt = Ax, where A is the Jacobian matrix evaluated at the equilibrium point.
+We can define its width: there is a wall at x = 0 and a wall at x = L. We define this box by its potential. Inside the box, for values of x between zero and L, the potential is essentially zero. This means the exciton is free—like a free particle, it is free to move around. Outside the box—for x greater than L or x smaller than zero—we set the potential to infinity. You can think of this box as having walls at zero and L that are infinitely high, such that the exciton can never climb over these walls. The exciton is trapped in the region between x = 0 and x = L.
 
-How many of you have already seen the Jacobian matrix before? Great, that is nice. The Jacobian provides you with all the necessary information to extract the qualitative behavior—not precisely or explicitly, but qualitatively.
+We are going to look at the Schrödinger equation, but first we want to define some boundary conditions on the wave function. Because the potential outside the box is infinity, the probability of finding the exciton outside the box is zero. This means the wave function is zero outside the box. We want our wave function to be a well-behaved function—by well-behaved, I mean smooth, continuous, and differentiable.
 
-When you have two systems of differential equations, we can say that their solutions are topologically equivalent, which means they have the same properties qualitatively in the neighborhood of the fixed point—the same qualitative structure. We will see what this means.
+Because the wave function outside the box is zero, the wave function at the boundaries of the box must also equal zero. At x = 0, the wave function must be zero. For the same reason, the wave function at x = L must also equal zero.
 
-## Finding Fixed Points
+If we look at the Schrödinger equation, we have the time-independent version. We are looking at one dimension. Depending on when you watch this video, you may already have covered this particle-in-a-box problem with Bart in the quantum module in third year. He will do a much more complicated version—perhaps in spherical coordinates or the time-dependent version. We are just looking at a very simple version to illustrate some points.
 
-Let me now apply this theorem to the specific Lotka-Volterra model. What we need to start with is finding whether we have any fixed points. The equations are:
+We are looking at the Schrödinger equation inside the box where the potential is zero. This is essentially just the kinetic energy of the particle, the exciton. We try what we call an ansatz wave function or a trial wave function—ansatz is a German word meaning a starting point, an educated guess. We will use this wave function, which is a combination of sine functions: ψ = A sin(kx) + B cos(kx), where A and B are amplitudes.
 
-dx/dt = αx - βxy
-dy/dt = -γy + δxy
+We impose these boundary conditions. First, we had that the wave function at x = 0 was zero. If you plug x = 0 into this wave function, you will see that cos(0) = 1 and sin(0) = 0. So we have ψ(0) = B = 0. This implies B must equal zero. We have simplified our wave function considerably just by considering this first boundary condition.
 
-How do we find the fixed points? We set the derivatives equal to zero. We need the right-hand side to equal zero. We need to solve this system for the fixed points:
+If we consider the other boundary condition—that the wave function at x = L was also equal to zero—then we have A sin(kL) = 0. For that to be true, k must take this value: k = nπ/L, where n is the principal quantum number, which can take values 1, 2, 3, all the way up to infinity. It takes integer values. The wave function then is ψ = A sin(nπx/L).
 
-αx - βxy = 0
--γy + δxy = 0
+From the boundary conditions, we know the shape of the wave function inside this box for increasing values of n. For n = 1, we get this simple wave function. For n = 2, we get a full wavelength. As we increase n, we get more and more nodes. We know the shape, but what we are interested in is how changing the size of this box affects the position in energy of these energy levels.
 
-From the first equation, we can factor: x(α - βy) = 0. This gives us either x = 0 or y = α/β.
+So we're going to return to the Schroeder equation and we're going to note that it features the second derivative of the way function.
 
-From the second equation, we factor: y(-γ + δx) = 0. This gives us either y = 0 or x = γ/δ.
+And we can see the wave function here. So we just need to do these derivatives.
 
-So from the first one, we see that the obvious solution is x = 0, or if the parentheses equals zero, then y = α/β. From the second equation, similarly, y can be zero, or x = γ/δ.
+So the first derivative of the way function, we get a factor of empire, El Al, the funds,
 
-The first case is x = 0. When x = 0, the second equation becomes -γy = 0, so y must equal zero. So one fixed point is (0, 0).
+and the same goes to a cosine if again we take the derivative and the cosine goes back to same, but we get a factor of minus one.
 
-When y = 0, we plug that into the second equation and get -γy + δxy = 0, which becomes δx · 0 = 0. But from the first equation with y = 0, we get αx = 0, so x = 0 as well. Actually, let me reconsider: when y = 0, from the first equation we get x(α - 0) = 0, so x must be 0 or α can equal 0, but α is positive, so x = 0.
+And we get another factor of empire. So what we end up with is shown here.
 
-Actually, the second fixed point comes from the interior case: x = γ/δ and y = α/β. So we have two fixed points:
-1. The origin: (0, 0)
-2. The coexistence point: (γ/δ, α/β)
+And you may notice that we can substitute back in the original way function and we're left with this.
 
-We can sketch these. The first one is at the origin, and the second one is somewhere in the positive quadrant at the point (γ/δ, α/β).
+So we can plug this into the Schrodinger equation of what we get is this equation here.
 
-## Computing the Jacobian Matrix
+And we can kind of cancel the way function from both sides. And what we're left with here is what we call the quantum confinement energy.
 
-Now, what the Hartman-Grobman theorem tells us is to find the linearized system. We need to find the Jacobian matrix. How do we find the Jacobian matrix? How many elements do we need? Two by two.
+So this is the energy extra energy particle in the box has.
 
-The first row corresponds to the partial derivatives of the first equation. Imagine that the right-hand side of the first equation is f₁(x, y) = αx - βxy, and the second is f₂(x, y) = -γy + δxy. The Jacobian matrix consists of:
+If you remember from the last slide that we had, Kay was NPI over Al.
 
-∂f₁/∂x    ∂f₁/∂y
-∂f₂/∂x    ∂f₂/∂y
+What we see here is just the momentum squared over two.
 
-With a quick computation, this equals:
+Which, if you remember from classical mechanics, was the kinetic energy.
 
-(α - βy     -βx    )
-(δy      -γ + δx)
+So here, momentum is equal to hate Bach. And instead of.
 
-The second row gives us: ∂f₂/∂x = δy and ∂f₂/∂y = -γ + δx.
+And we have reduced bus.
 
-So we have the Jacobian matrix, let us call it A. The theorem says that near the equilibrium points, the system behaves like the linearized system.
+So the kinetic energy of the exciton in the box increases with the square of the principal quantum number, which is kind of makes sense.
 
-Near the equilibrium point means we have to evaluate the Jacobian at those points. We have to do this computation twice—once for each fixed point.
+And but what we really want to kind of look at here is this dependency of the kinetic energy of the excess on inside this box,
 
-## Analyzing the Origin
+on the width of the box. So it's dependent on one over elsewhere.
 
-First, for the origin where x = 0 and y = 0. Substituting into the Jacobian:
+So if we decrease the width of the box, we increase the kinetic energy of the particle inside the box.
 
-A = (α    0  )
-    (0   -γ)
+And this is the reason why as we reduce the size of the nullah crystal and the the energy levels increase, which means that the Bundgaard gets larger.
 
-## Analyzing the Coexistence Point
+So this is called The Blue Equation. And it describes the band gap of quantum dots as a function of its radius.
 
-For the second fixed point at (γ/δ, α/β), substituting these values:
+So this term in the red box here, this is just this quantum confinement entity that we've just seen,
 
-A = (0           -βγ/δ)
-    (δα/β         0   )
+except that instead of talking about a box width, we're talking about the radius of a sphere.
 
-We found the matrices. According to the theorem, the linearized system near each equilibrium point is:
+And so here the radius would be with two. And this one of two facts, I mean, is why we've got these eight here.
 
-dx/dt = Ax
+So we've got an extra factor of two squared on the bottom. And this changes the two to an eight.
 
-where x is a vector with components (x, y).
+So there is another correction term to kind of correct for the kulam interaction.
 
-## Solving the Linearized Systems
+We're interested just to explain what's going on here with this quantum confinement at ageing.
 
-Now we only need to solve linear systems, which you have already done in your differential equations module.
+So what I am done here is and I've plotted this band gap for a particular material and specifically copper indium sulphite,
 
-For the origin, plugging in the first matrix, we get two uncoupled equations:
+which incidentally is the material you saw.
 
-dx/dt = αx
-dy/dt = -γy
+And those red samples at the beginning of the student and made they were copper and you sulphide and copper himself.
 
-The solution is x(t) = C₁e^(αt) and y(t) = C₂e^(-γt). This shows exponential growth in x and exponential decay in y.
+Five has a band gap and a black band gap of one point five electoral votes.
 
-For the second fixed point, how would you solve this system? We have:
+And what I'm showing you here is the set for contributions to the band Gap.
 
-dx/dt = -βγ/δ · y
-dy/dt = δα/β · x
+And from the electronic showing of Blue and the hole shown in red.
 
-One way to solve this is to find the eigenvalues of the matrix. The eigenvalues tell us about stability. For the origin, the matrix is diagonal, so we have one positive eigenvalue (α) and one negative eigenvalue (-γ). The positive eigenvalue corresponds to an unstable direction where the system expands, while the negative eigenvalue corresponds to a stable direction where the system contracts. This makes the origin a saddle point.
+So instead of using the reduced mass, I split this into the effective mass of the electron in whole.
 
-For the coexistence point, when you find the eigenvalues, you will discover they are purely imaginary. This indicates we have what is called a center. Alternatively, you can find the second derivative and show that d²x/dt² = -k²x for some positive constant k², which gives you cosines and sines—periodic solutions.
+So the contribution to the increase in the band gap as we reduce the crystal radius
 
-## Phase Portrait
+from the electron and blue and the contribution from the whole issue in red.
 
-Let us return to the phase diagram. The theorem tells us the qualitative behavior. For the x-axis, the solution expands; for the y-axis, it contracts. Around the second fixed point (the coexistence point), we get cosines and sines—something like circles.
+So you can see the asymmetry here. And that's because in copper ending sulphide and the effective mass of the
 
-The interesting part is that this is the phase portrait of the model. By knowing the stability of only two points, we are able to sketch the full phase space. These two points tell us everything qualitatively.
+hole is approximately 10 times larger than the effective mass of the electron.
 
-To draw the phase portrait, we need to draw trajectories that are compatible. The arrows represent time—time is a parameter here. The arrows on the x-axis have to go in the same direction, and to be compatible means that these orbits have to grow—they become circles. They enlarge as they move away from the origin.
+Now you see here. The bow radius of copper terms of fines is approximately four point two nanometres, so you can clearly see above that value.
 
-By knowing the stability of only two points, we know the qualitative behavior of the entire system.
+The red and blue lines are parallel.
 
-Because x and y represent populations, we expect x and y to be positive. We are only interested in the first quadrant. Whatever your initial condition, whatever realization of the model you have, the populations will coexist at all times. The solutions are periodic—if y (the predator population) becomes very small, it eventually grows back up again. It is like a circle of life, periodically repeating.
+And when we go below this bar radius and the deep conduction band position and the balance band position can diverge quite, quite quickly.
 
-You construct everything knowing only the qualitative information.
+Depending on size. So the final thing to say about the size and properties of nanomaterials is that at the nano scale, the surface dominates.
 
-To find the eigenvalues, you use standard methods from linear algebra. You put everything together, and this can be done using a computer.
+So then if you'll get this reference, this is from American politics in the 90s, you can look it up, a borsch.
 
-The phase portrait shows periodic orbits. If you go very close to the origin, it looks like a linear system with circles. But as you move outward, you get something between a triangle and a circle—a strange, deformed curve. It is periodic nevertheless, but deformed. This is what "topologically equivalent" means—something deformed in a continuous way, but remaining bounded.
+What we're sharing here is an ad on the x axis.
 
-## Numerical Examples
+We have the quantitate radius. So this is for spherical particles. And on the y axis, out in the vertical, we have the surface area to volume ratio.
 
-If you start very near the origin and plot x and y versus time, you see oscillations that are more or less like cosines and sines—periodic with the same amplitude. If you go further from the fixed point where the orbit becomes more triangular, you get different-shaped periodic oscillations. If you go even further away where your orbit almost touches the x and y axes, you get solutions that approach zero and then grow again.
+And you see that above, say, 20 nanometres and the surface area to volume ratio is very low.
 
-Here, both species coexist at all times, but your system is endangered. If you perturb it slightly or have an external threat, one of the two species will go extinct. If one goes extinct, the other will as well. This represents a very fine balance.
+This means that the volume is much larger relative to the surface area.
 
-## Application to Epidemic Models
+But when we go below 20 nanometres, source eight or below 10, Dunning's is for sure.
 
-Let me mention very quickly that if you take the same equations and set α equal to zero—eliminating the birth term—you get an epidemic model. This is why these equations also describe epidemic models. You do not have births here—you assume the susceptible population has no births—but you have transmission from susceptible to infected.
+This is a this is kind of interesting.
 
-What x represents is the population that has never been infected (susceptible), while y represents the infected population. What you observe is that the susceptible population decreases as everyone becomes infected. The infected population starts at a low value, peaks, and then slowly decays. Interestingly, you get a non-symmetric curve—it decays very slowly compared to how quickly it rises.
+So a major assumption of solid-state physics, of all this band theory we've been talking about and that you did with Matt last year.
 
-You can compare this with real data, such as COVID-19 hospitalization data from government websites. You see how the curve peaks and then slowly decays. You would not expect it to decay as fast as it rose. With these simple two equations, you can capture essential behavior.
+This assumes that these electrons experience this infinite periodic potential is infinite crystal that it can move.
 
-## Extension to Higher Dimensions
+It is about 10 nanometres. So edge effects and dominates other nanoscale surface effects become very important at the nanoscale.
 
-Can you extend this to higher dimensions? Yes, and that is the very challenging part. Research-wise, much is still open. Within four dimensions, the subject is really open. I will give you an example from a paper published in 2019 with Professor Owen from the University of Kent.
+OK, so now we can. Now we're going to spend five minutes or so talking about how these materials are made.
 
-First, how do you generalize the model? If you have four populations, you can create a graph showing who is the predator, who is the prey, and who is in between. For example, x₃ can be both predator and prey at the same time. x₄ might be only prey, x₁ might be a super predator. You can create different graphs, and to each graph corresponds a unique model.
+So on the left, which we see colloidal continents,
 
-How do you do that? When you have the model, you have a linear part and a nonlinear part. If you divide by x₁, you can write the equation such that you get a constant term minus terms like γy. You can add more variables: minus a₃x₃, minus a₄x₄, and so on. This is how you extend to higher dimensions based on the graph structure. If there is an arrow between two populations, you define the interaction. If one is the predator of another, you make the term positive for the predator and negative for the prey.
+So that suspended material in in a solvent.
 
-This leads to a community matrix. The easiest case is when all parameters equal one—you get a symmetric matrix. Then you perform the same reasoning: find the stability of the equilibrium points and so on. You can write this abstractly for n interacting populations.
+On the other hand, we have in situ fabrication of quantum dots on a substrate. There are various methods of making both types of quantum dots, but I do not have time to discuss them all in detail. I will focus on the solvothermal method for making colloidal quantum dots.
 
-I will show you some three-dimensional and four-dimensional pictures. With this particular structure, we investigated different types of solutions. In most cases, populations become extinct. You plug in constants (for example, all equal to one), and most probably you get populations that decay exponentially with time—extinction.
+## Synthesis and Growth Mechanisms
 
-But there were other cases—the most interesting ones—where all four populations coexist at all times. This is the best scenario if your model represents a banking system or population interactions. That is a good scenario, achievable for certain parameter values.
+You may have noticed in the picture that we show yellow, orange, red, and dark red quantum dots. You might ask: Why don't we see green or blue quantum dots? Perhaps I just did not photograph them? I assure you, when you make copper indium sulphide quantum dots, at least, it is impossible—or at least very difficult—to make blue dots. Let me explain why this is the case.
 
-For these parameters, you see three-dimensional projections (plotting only three of the four variables). You see strange structures like a ribbon. Further from the equilibrium point, the ribbon enlarges. Even further, it becomes very flat. At some point, you get totally chaotic orbits—fully chaotic behavior.
+To understand this, we need to consider the mechanisms by which we grow these quantum dots, these nanocrystals, from solution. We start with what we call monomers—essentially copper, indium, and sulfur atoms in solution. There is much chemistry involved here, which I will ignore to focus on the thermodynamics.
 
-In all four populations, you can find chaotic behavior—chaos in four dimensions. Close to the equilibrium point, it is contained. But going further away, like increasing total energy in a physical system, you observe more chaos.
+These atoms are free in solution, floating around. We increase the temperature of the solution and the concentration of these atoms—these copper, indium, and sulfur atoms. If we make the concentration high enough and the temperature high enough, it becomes energetically favorable for these individual atoms to cluster together to form a crystal nucleus.
 
-Another method to detect chaos is the Poincaré section or surface of section. You consider a hyperplane and wait for orbits to intersect it. Every time the orbit intersects, you plot a point numerically. If you see circular structures, these are created from ribbon-style solutions—the chaos is contained and weak. Further from the equilibrium point, you see what chaos really looks like: scattered points without any structure at all.
+However, there are two competing mechanisms at play. First, when we create solid volume, we save energy—this energy saving gives us free energy, which scales with volume. Second, the interface between a solid crystal and the solution (the solvent) costs energy to form, and this cost scales with surface area.
 
-## Conclusions
+If we look at the total free energy by combining these two terms and plot it as the radius changes, we see that at low cluster radii, the energy cost to form the surface dominates. But as we increase the radius, the energy gain from forming the volume becomes more important. At a certain point, these clusters actually become stable. This critical point is called the critical radius.
 
-The Lotka-Volterra system is an interesting model applied in many different fields. In two dimensions, the original model is fully solvable—you know everything about it. But in four dimensions, you can encounter chaos or order. If you encounter order, at least two out of four populations will go extinct. In the chaotic case, everybody coexists. The good scenario—the chaotic case in four dimensions—is strange enough.
+Clusters smaller than this critical radius dissolve very quickly back into solution. But once clusters are larger than this critical radius, they become stable. Even when the solution temperature drops back down to room temperature, these crystals remain stable, suspended in the solvent.
 
-That was all. Thank you for your attention. I am happy to answer any questions.
+## Properties for Biotechnology Applications
+
+Now it is time to discuss some of the properties that make these materials interesting for biotechnology applications.
+
+First, the emission is very narrow. You can see this if you look at this picture. With broadband emission across the visible spectrum, you would see brown. But we see very clear, brilliant colors. This indicates that the emission spectrum is very narrow—perhaps between 20 and 40 nanometers.
+
+Importantly, quantum dots absorb over a broad range of wavelengths but emit over a narrow range. This means we can do multiplexed imaging. If we compare quantum dots to fluorescent dye molecules, both have narrow emission. Dyes also emit narrowly, but they also absorb narrowly. With quantum dots, we can label different parts of a cell with different quantum dots and excite them all with the same excitation wavelength. If we used dyes instead, we would need different excitation wavelengths for each color. Inevitably, this would complicate things and cause cross-channel interference, especially if you want to do quantitative analysis. If you want to see how different parts of the cell interact, quantum dots enable this.
+
+Second, quantum dots are very small, which means they can be easily cleared from the body via renal and hepatic systems. There is some evidence from trials in live primates that there is accumulation in certain organs such as the spleen, but it does not appear to be a huge problem unless there is exposure over extremely long periods.
+
+As I mentioned earlier, the surface is extremely important. One reason this is useful for biological applications is this large surface area. For example, we can attach antibodies that target cancer cells. If we cover the quantum dots with molecules that target cancer cells, when we inject the body with these quantum dots, cancer cells will take up the quantum dots while healthy cells will not. When we do imaging, we can clearly see which tissue is cancerous and which tissue is healthy. This could be useful for diagnosis or surgery.
+
+I do not expect you to understand all these chemical diagrams. The idea is just to show that there is a huge platform for bioconjugation.
+
+The tunability of quantum dots is extremely useful for something called the biological window. You have probably noticed this before: when you hold your hand up to a light and look at the light shining through, as you can see in the photograph, it is the red light that makes its way through the body. If we look at the absorption profile of water on the left, you see a dip around the red region of the spectrum. Light can pass through the body quite easily if it is red.
+
+We can tune our quantum dots to emit at the optimum wavelengths for this biological window. Depending on where in the body we want to look, we would use different colored quantum dots. We cannot do this with dyes—dyes have fixed emission wavelengths. We have limited choice with dyes, but quantum dots can be tuned very easily.
+
+Quantum dots are much more stable than dyes. Quantum dots can go through many cycles of this absorption and emission process, whereas dyes degrade quickly. This is photodegradation: excitation by photons can lead to absorption and emission of a photon, but it can also lead to chemical reactions that permanently change the dye molecule so that it no longer has the capability for absorption and emission. This, I believe, is the main reason quantum dots are being used in the application I mentioned at the beginning: if it were done with dyes, it would not last very long.
+
+It is not just diagnosis. We can also use nanocrystals and quantum dots for therapy. There is something called photothermal cancer therapy. As I mentioned earlier, we can cover the quantum dots or nanocrystals with functional molecules such as antibodies, which allow tumors to take up these quantum dots preferentially. Usually, you would use metal, actually, because of its superior thermal properties, but some quantum dot materials could be used for this. This would heat the cancer cells without heating the surrounding healthy tissue. This is a promising therapy for cancer with fewer side effects compared to standard radiotherapy.
+
+Finally, I want to end by saying that nanotoxicity is a relatively young field and, as far as I am aware, is quite poorly understood in general. We can understand the toxicity of specific nanomaterials by doing certain tests, but for new types of nanomaterials, it is important to carefully assess nanotoxicity. For bulk toxicity, we know about certain materials that are toxic—cadmium and lead, for example. We know not to eat these things. But toxicity at the nanoscale is much more complicated. Size is important, the shape of the nanomaterial becomes important, and the surface chemistry can contribute to toxicity as well. There are many more considerations when thinking about toxicity at the nanoscale.
+
+With all this in mind, the reason quantum dots are used in this application is because their long-term stability makes this technology viable. There is no point having this technology if it lasts only a week. I think they claim this could last five years. The important thing is to be aware that these technologies always come with toxicity considerations. I have not read this paper in sufficient detail to know if they have done a good job of assessing the toxicity, so I am not giving my opinion. I am just making the point that there are various considerations to make when assessing new technology.
+
+With that, I will end here. Thank you very much for your attention. I will be available to answer any questions you might have. Thank you very much.
