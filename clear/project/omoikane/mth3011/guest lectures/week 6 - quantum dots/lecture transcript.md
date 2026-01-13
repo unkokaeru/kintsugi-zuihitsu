@@ -1,3 +1,5 @@
+# Lecture Transcript
+
 Hello and welcome to this seminar on quantum dots and their applications in biotechnology.
 
 Now, to begin with, the name Quantum Dots might sound quite exotic.
