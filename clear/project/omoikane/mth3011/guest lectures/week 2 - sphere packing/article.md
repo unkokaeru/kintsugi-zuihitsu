@@ -1,6 +1,6 @@
 # Inquiry into the Packing Properties of Spheres
 
-**Date:** 8th October 2025  
+**Date:** 8th October 2025
 **Speaker:** Dr Fabien Paillusson
 
 Why does a bag of Maltesers sometimes contain fewer sweets than another identically sized bag? The answer lies in a centuries-old mathematical puzzle about how spheres pack together—a problem that took 406 years to solve definitively.
@@ -48,7 +48,5 @@ Every gap between spheres represents a question waiting to be answered. From gro
 **References:**
 
 1. Yu, A.B. and Hall, J.S. (1994). "Packing of fine powders subjected to tapping." *Powder Technology*, 78(3), 247-256.
-
 2. Hales, T.C. et al. (2017). "A formal proof of the Kepler conjecture." *Forum of Mathematics, Pi*, 5, e2.
-
 3. Jenssen, M. (2024). "The Kepler conjecture and sphere packing." *Bulletin of the American Mathematical Society*, 61(1), 1-60.
