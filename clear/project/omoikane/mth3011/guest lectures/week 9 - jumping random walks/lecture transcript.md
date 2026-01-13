@@ -1,170 +1,98 @@
-# Lecture Transcript
+# Lecture Transcript: Jumping Random Walks and Glass-like Materials
 
-Good day. But first last I want to present some of the research I did when I was a peace deal student just after graduation.
+Good day. I want to present some of the research I did when I was a PhD student just after graduation. The talk is about jumping random walks—a stochastic description for modeling glass-like materials.
 
-So the talk is about jumping. Randall walks a stochastic description from the modelling of class like materials.
+## What Are Glass-like Materials?
 
-So what is now a glass like material? No materials can be quantified by looking at their viscosity.
+Materials can be quantified by looking at their viscosity. Viscosity tells you how easily a material flows.
 
-Viscosity is something that tells you how easy material flows.
+For example, water has a viscosity of about 10⁻³ Pascal-seconds. Pitch is much slower. If you put pitch in a beaker, a droplet will fall only every 10 years or so into the beaker underneath. Therefore, the viscosity is much higher: 10⁸ Pascal-seconds.
 
-For example, water as a viscosity of about 10 toboggans tend to power minus three.
+The viscosity of glass is even higher. Glass, in this sense, is more than just drinking glass or window glass—it is any disordered material with a viscosity larger than 10¹² Pascal-seconds. You can imagine this is already a really slow process for glasses, even 10¹² or slower.
 
-It's called seconds. Pitch is much slower.
+Not every material is a glass. A glass also has to be a disordered material, as opposed to a crystalline material. Glass has properties of both liquids (in that it is disordered like liquid structures) and solids (because it has such a long relaxation time). The definition of glass transition is when the viscosity surpasses 10¹² Pascal-seconds.
 
-And in terms of flowing sample, if you put pitch in his beak,
+You can have a liquid that, if cooled sufficiently and it does not crystallize, can turn into a glass. For example, pitch was actually made into a glass. If you hit it with a hammer, it shatters like a solid, but if you wait a very long time, it actually behaves like a fluid.
 
-her triplet will fall and only it was every 10 years or so to droplet will fall into the beaker underneath.
+The pitch drop experiment is actually the longest-running experiment in the world. You can find YouTube videos showing when the ninth drop fell, and the tenth drop is on its way. There is actually a live webcam you can follow. Most of the time, nothing happens because the process is so slow.
 
-Therefore, the viscosity is much higher. Tend to power.
+## Polymers
 
-Eight hundred million is called seconds. Viscosity of class.
+Pitch consists of polymer chains—many polymer chains. What is a polymer? The word comes from Greek: "poly" means many, "mer" means parts. Basically, it means many identical building blocks joined together.
 
-Is even higher. So glass in in this sense is more than just like drinking glass or window glass,
+Here on the left, I show you a schematic picture of a polymer. You could have a bead necklace with beads joined together, or in the middle, I show you a more realistic polymer where you can see individual atoms. This particular example is polystyrene. On the right is an example of green light, about a millimeter in size, of polymers that can be easily formed into any shape.
 
-but any disordered material which has of this quality, which is larger than tend to pyro 12th Pascall seconds.
+The benefit of polymers is that you can easily mold them into different shapes. For example, safety glasses can be made from polymers. The casing of mobile phones is made of polymer. If you scratch it, it also has self-healing properties. This particular polymer, if you stretch it, after a few hours the scratch will disappear once you heat it.
 
-So you can imagine that this is already really slow process for glasses, even tend to powerful or slower.
+## Molecular Modeling
 
-Now, not every material is a glass. A glass also has to be disorder material as opposed to a crystalline material.
+We can actually model these polymers on a computer. That is what I did during my PhD in molecular modeling. It basically involves solving equations of motion for every particle. In this case, I was interested in mechanical properties, so I tried to pull the material and see how easily it deforms to determine the mechanical properties. You can see the individual atoms as the material elongates and breaks. In this case, it involves thousands of particles, which is computationally quite intense.
 
-So Glass has properties of both liquids in the sense that it's disordered.
+Actually, the goal of this project is to make a simple mathematical model that still captures the essentials of some of the processes we see in polymer glass. Here I have highlighted one polymer chain.
 
-Liquid structures is ordered, but also has properties of solids.
+If you look at it as a function of time, you see it vibrates a little bit and then suddenly it jumps. Then it vibrates again. You have this jumping motion between so-called cages.
 
-Because it had such a long run fixation time.
+## Random Walks
 
-And a definition of the glass is one or glass incision when the viscosity actually surpasses it and so tender parts of called second.
+How can we model this mathematically? The first step is to look at a random walk. A random walk can be defined as follows: a person, after every step, takes one step and then changes direction in a random fashion. They could turn to the front row, left, right, or backwards.
 
-So you can have a liquids dip. Cleveland cooled liquid sufficiently.
+Here, the first step would be to the front, then turn to the right, turn to the left, left again. If after every choice of step, the direction you take is completely random, then this is called a random walk.
 
-If it doesn't crystallise, can turn into a glass. Example, the speech was actually with yeta class.
+In this case, the random walk is on a lattice because there is a discrete number of directions—the angle is basically 360 divided by 4, which is 90 degrees. You can also have a random angle, and it would still be a random walk but not on a lattice anymore.
 
-If you hit it with a hammer, it just structures like Solnit's, but if you wait a very long time, actually behaves like fluid's.
+A random walk can also be generalized to higher dimensions. This is a random walk in three dimensions, sometimes called a random flight. After every step, you take a totally different direction. Making movements in any direction. On the left is an example of a random walk after 20 steps in three dimensions. On the right, it is after 10,000 steps. Here I zoomed out a little bit so the picture fits the screen.
 
-And this experiment of pitch drop is actually the longest run experiment in the world.
+## Characterizing Random Walks
 
-Now you can find YouTube, some of the videos where they show you when the nine drop falls.
+How can we quantify the walks? Here I show you examples of different random walks where the probability of going left, right, up, or down is all equal, but for different realizations. You can see some go to the left. We want to characterize average properties of this random walk.
 
-And now there's a video line drop on the way, 10 droppable fall.
+This random walk is actually a Pólya-type random walk. For a random walk, I can characterize it by the individual steps. At each step, there will be a vector r₁, r₂, and so on. In general, the i-th step will be rᵢ. The total distance traveled, from the start to the end, will be given by capital R.
 
-There's actually also a life web camera. You can follow this process.
+The probability distribution function for a Pólya-type random walk is that the probability of moving in a certain direction (so step i, rᵢ, is in a direction) is the same as the probability that the step will be in the opposite direction (-rᵢ). This will be the case for one-dimensional, two-dimensional, and three-dimensional Pólya-type random walks.
 
-What this the most four times was nothing will happen because the process is so slow now.
+With this property, you can actually prove a lot of things. Basically, it is equally likely to go backward, forward, left, or right in any dimension.
 
-Dispatch this actually consisting of polymer chain of many polymer chains.
+## Average Displacement
 
-So what does our polymer polymer, the more polymer XY comes Greek poly means?
+How do we characterize this? Here I show you random walks on a two-dimensional lattice. The following shows 100 different random walks of 100 steps each. You can see that if I increase the number of steps, the size of the random walk typically increases.
 
-Many more means parks. So basically means many identical building blocks joined together.
+Obviously, it is a random process, so I have to look at averages to characterize it. One possibility is to look at the average displacement.
 
-So he on the left show you schematic. Picture of a polymer.
+Here capital R is the total displacement. I will take the average, denoted by angle brackets ⟨⟩. Capital R is defined as the sum of the individual steps: R = Σᵢ rᵢ.
 
-So you could have a necklace like your beads necklace, which brings.
+When I average over this quantity, the average of the sum equals the sum of the averages. This is a property from probability and statistics. I can take the average inside the sum: ⟨R⟩ = Σᵢ ⟨rᵢ⟩.
 
-And there kind of reinfection. We're in the middle.
+Now we know that for a Pólya-type random walk, the probability of going up is the same as going down. The average of the step size will be zero because moving in one direction is equally likely as moving in the opposite direction. So we average to zero. We can see the average displacement is actually zero for a Pólya-type random walk.
 
-I show you actually a more realistic polymer so we can actually see the individual atoms.
+This does give some information, but it does not tell you anything about the size. To know something about the size, we can look at the length or the average squared displacement.
 
-This particular example is of polystyrene.
+## Mean Squared Displacement
 
-And this is the final into this site. And here on the right, it is an example of greenlights, which is the size of about a millimetre of polymers.
+What do I mean by squared displacement? This is basically ⟨R²⟩, the average of R squared. Again, I use the definition: R = Σᵢ rᵢ. For the second factor, I use a different dummy index j: R = Σⱼ rⱼ.
 
-And this is can be easily formed into any shape for the benefit of polymer.
+So R² = (Σᵢ rᵢ)(Σⱼ rⱼ) = Σᵢ Σⱼ rᵢ · rⱼ.
 
-Instead, you can easily moulded into different shapes. For example, safety glasses that can be made from polymers.
+Now I use the same property that the average of a sum is the same as the sum of averages: ⟨R²⟩ = Σᵢ Σⱼ ⟨rᵢ · rⱼ⟩.
 
-This is one example where the casing of mobile phone, it's made of polymer.
+What I do now: I have a sum over i and j, and I split this j sum into two parts—one part where j is equal to i, and one part where j is not equal to i.
 
-And if you scratch Shed's, then it's also has a self healing property.
+For j ≠ i, I told you that after every step, the direction is completely random again. The probability of step i having a certain direction (say, upwards) and step j having the same direction is the same as any other combination. Therefore, on average, this term will be zero—except when you look at the step itself. If i = j, then rᵢ · rᵢ is just the length of the vector squared, which is always a positive number and cannot be zero.
 
-This particular polymer. So if you stretch it after a few hours, the stretch will disappear once you hit.
+If I say the length of all the steps is the same (call it r), then ⟨rᵢ · rᵢ⟩ = r². So the average squared displacement is just the sum of r² for each step. If I have n steps, this equals n times r²: ⟨R²⟩ = nr².
 
-Now we can actually model those Walmart computer.
+This is actually a very important result in random walks. The extent of a random walk is given by the square root of this quantity: √⟨R²⟩ = √(nr²) = r√n.
 
-So that's also what I did do, my beast in. Molecular modelling.
+The extent of a random walk is basically the average step size times the square root of the number of steps. This means that if I take four times more steps, the random walk average size becomes two times larger, because √4 = 2.
 
-And it basically just involves small thing, equation of motion for every person.
+## Fractal Dimension
 
-In this case, I was interested in mechanical properties.
+We can interpret this in a different way by considering the dimension of the object—the dimension of our random walk in particular. To find the dimension of an object, I define: Mass ∝ Size^D, where D is the dimension.
 
-So what I did was try to pull the material and see how easy it is for to determine the mechanical properties.
+For a simple example, consider a line. If I increase the length of a line, then the mass increases in the same proportion. If I double the line (say it is made of wood), then the total mass of the plank increases by a factor of two. The mass is proportional to the size. Since the power is 1, it is a one-dimensional object.
 
-You can see here the individual choose the material longbrake. And in this case, it involves thousands of particles which computational quite intense.
+If I consider a disc instead, the area is proportional to the radius or diameter squared: A ∝ r². The mass will be proportional to the size (radius or diameter) squared. Therefore, because the power is 2, it is a two-dimensional object.
 
-And actually, the goal of this current project is to make it simple mathematical model,
-
-which still captures the essentials of some of the processes we see in a possible glass.
-
-So here I highlighted once the Poleward Cheng.
-
-And if you look at it as a function of time, you see the Firebrace a little bit and then suddenly it jumps.
-
-And then it vibrates again. So you have a cold jumping motion between so-called cages.
-
-So how can we model this mathematically? The first step is look at a random walk.
-
-Run the walk. Can you find it? It's on us.
-
-This person, basically. After every step and so does one step and then change the direction in random fashion.
-
-So it could turn out to front row, left and right backwards.
-
-So here, the first step would be to the front, then turn to the right, turn to the left, left again.
-
-And if after every choice of step, the direction you take is completely random, then this is called a random walk.
-
-In this case, to run a walk is on the lettuce cause there's a discrete number of directions and all that is basically twelve sixty.
-
-Divide by four degrees. So you can also have it just a random angle.
-
-And I would still be around the walk, but not on the lettuce anymore. A random walk, you can actually also generalise to higher dimensions.
-
-So this is a random walk in three dimensions. Sometimes it's also called a random flight.
-
-So after every step, you take a totally different direction.
-
-Again, you making modest, et cetera. So the left is an example of a random walk in 20 after 20 steps in three dimensions.
-
-And on the right, it's after 10000 steps. So here I sent out a little bit so that the picture does fit the screen.
-
-And so how can we qualified when the walks over here show your example of different random walks?
-
-And so where probability you're going left. Right. Open now it's all equal, but different realisations.
-
-You can see some go to the left. And we want to characterise average properties on this run or walk.
-
-Now, this round of work actually is over Poya type in the walk.
-
-So if a referendum walk, I can characterise the random walk by.
-
-So at each step, like, you know, they are sort of forced out that there will be our one second or two.
-
-So in general, I stepped all the. Ah, I will. Ah. And then the total this has travelled so from the start to the end will be given by Capital R.
-
-And probability must function for a Polier type.
-
-Run the walk is that ability. It's moving in a certain direction.
-
-Ah, so that's a step. Eye, our eye is the direction are the same as the probability that a step will be in the opposite direction.
-
-Are. So this will be the case for one dimensional, two dimensional, dimensional, pointier type.
-
-So with this property, you can actually prove a lot of things.
-
-So basically is equally likely to go back for what we're left out, right?
-
-Pedicle dementia. So how to teched rise this now here and show you said run what tempts taxis with.
-
-And the following is a hundred different drone walks of Hudner steps each.
-
-You can see if I increase the number of steps. The size of the random walk typically increases.
-
-So obviously, it's a random process. So I have to look at averages to characterise it.
-
-And one possibility would be look at the average displacements.
-
-So here is our capital art, total displacement.
+For a cube, we have something similar.
 
 I'll take the efforts. So those brackets denote averaging.
 
