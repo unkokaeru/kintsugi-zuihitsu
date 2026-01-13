@@ -114,373 +114,104 @@ With a quick computation, this equals:
 
 The second row gives us: ∂f₂/∂x = δy and ∂f₂/∂y = -γ + δx.
 
-So the X. I haven't done any tribal.
+So we have the Jacobian matrix, let us call it A. The theorem says that near the equilibrium points, the system behaves like the linearized system.
 
-Okay, so we have the Matrix, we have the Matrix, let's call it a.
+Near the equilibrium point means we have to evaluate the Jacobian at those points. We have to do this computation twice—once for each fixed point.
 
-And the theorem says. But near the equilibrium points, the system looks like that's okay.
+## Analyzing the Origin
 
-So near the equilibrium point means that we have to find that to combine at those points.
+First, for the origin where x = 0 and y = 0. Substituting into the Jacobian:
 
-So we have to do this computation twice.
+A = (α    0  )
+    (0   -γ)
 
-So first of all, for the for the origin, we need to find out the origin.
+## Analyzing the Coexistence Point
 
-Maybe let's start with the origin, please. X and Y are zero.
+For the second fixed point at (γ/δ, α/β), substituting these values:
 
-So we have one -0 zero and minus gammas.
+A = (0           -βγ/δ)
+    (δα/β         0   )
 
-Okay. And then we repeat for the other points.
+We found the matrices. According to the theorem, the linearized system near each equilibrium point is:
 
-So at the point be okay just straight away you come to the competition, you just plug in the, um, the other point and you will get something like.
+dx/dt = Ax
 
-Zero. Miles Bender, Gamma Delta, stand up all over one and zero again.
+where x is a vector with components (x, y).
 
-Okay, so we found the Matrix. And according to the theorem, um, the the system here I use an X called.
+## Solving the Linearized Systems
 
-Okay, this is a vector with a components X and Y.
+Now we only need to solve linear systems, which you have already done in your differential equations module.
 
-Okay. Well, I can use w the first.
+For the origin, plugging in the first matrix, we get two uncoupled equations:
 
-Okay. This is equal to this matrix.
+dx/dt = αx
+dy/dt = -γy
 
-Times X and the same for here. So this is what the theorem says.
+The solution is x(t) = C₁e^(αt) and y(t) = C₂e^(-γt). This shows exponential growth in x and exponential decay in y.
 
-Okay. And it stops them. So now I only need to solve a linear system, which you have already done.
+For the second fixed point, how would you solve this system? We have:
 
-I believe so in the second meaning. Okay.
+dx/dt = -βγ/δ · y
+dy/dt = δα/β · x
 
-So this particularly second is can be solved straight away.
+One way to solve this is to find the eigenvalues of the matrix. The eigenvalues tell us about stability. For the origin, the matrix is diagonal, so we have one positive eigenvalue (α) and one negative eigenvalue (-γ). The positive eigenvalue corresponds to an unstable direction where the system expands, while the negative eigenvalue corresponds to a stable direction where the system contracts. This makes the origin a saddle point.
 
-So if you plug in this matrix here, you will see that you get two equations.
+For the coexistence point, when you find the eigenvalues, you will discover they are purely imaginary. This indicates we have what is called a center. Alternatively, you can find the second derivative and show that d²x/dt² = -k²x for some positive constant k², which gives you cosines and sines—periodic solutions.
 
-The first one is exploded.
+## Phase Portrait
 
-Was. It was on Fox.
+Let us return to the phase diagram. The theorem tells us the qualitative behavior. For the x-axis, the solution expands; for the y-axis, it contracts. Around the second fixed point (the coexistence point), we get cosines and sines—something like circles.
 
-And the second one is the wild. It was minus gamma Y.
+The interesting part is that this is the phase portrait of the model. By knowing the stability of only two points, we are able to sketch the full phase space. These two points tell us everything qualitatively.
 
-And the situation of that is the. So exhausting is some call sometimes into the old party.
+To draw the phase portrait, we need to draw trajectories that are compatible. The arrows represent time—time is a parameter here. The arrows on the x-axis have to go in the same direction, and to be compatible means that these orbits have to grow—they become circles. They enlarge as they move away from the origin.
 
-So exponential growth and why of these some other concerns times into the minds that multi.
+By knowing the stability of only two points, we know the qualitative behavior of the entire system.
 
-Okay. Now for the other one.
+Because x and y represent populations, we expect x and y to be positive. We are only interested in the first quadrant. Whatever your initial condition, whatever realization of the model you have, the populations will coexist at all times. The solutions are periodic—if y (the predator population) becomes very small, it eventually grows back up again. It is like a circle of life, periodically repeating.
 
-Um, do you have any idea how would you solve this one?
+You construct everything knowing only the qualitative information.
 
-So if I cronuts. Well, let me call this Konstanz.
+To find the eigenvalues, you use standard methods from linear algebra. You put everything together, and this can be done using a computer.
 
-Yeah, like we want to do to you. We have something like X equals minus v1y, and to why those people's minds did to X.
+The phase portrait shows periodic orbits. If you go very close to the origin, it looks like a linear system with circles. But as you move outward, you get something between a triangle and a circle—a strange, deformed curve. It is periodic nevertheless, but deformed. This is what "topologically equivalent" means—something deformed in a continuous way, but remaining bounded.
 
-How are you usually solving an equation like that?
+## Numerical Examples
 
-A system like that. But it can be different ways.
+If you start very near the origin and plot x and y versus time, you see oscillations that are more or less like cosines and sines—periodic with the same amplitude. If you go further from the fixed point where the orbit becomes more triangular, you get different-shaped periodic oscillations. If you go even further away where your orbit almost touches the x and y axes, you get solutions that approach zero and then grow again.
 
-One of them is to find the eigenvalues of the matrix.
+Here, both species coexist at all times, but your system is endangered. If you perturb it slightly or have an external threat, one of the two species will go extinct. If one goes extinct, the other will as well. This represents a very fine balance.
 
-And the eigenvalues, actually what they do is they talk about the stability and more or less here you see,
+## Application to Epidemic Models
 
-the matrix is not going to last, but it found a solution.
+Let me mention very quickly that if you take the same equations and set α equal to zero—eliminating the birth term—you get an epidemic model. This is why these equations also describe epidemic models. You do not have births here—you assume the susceptible population has no births—but you have transmission from susceptible to infected.
 
-You have one positive eigenvalue and one negative, um,
+What x represents is the population that has never been infected (susceptible), while y represents the infected population. What you observe is that the susceptible population decreases as everyone becomes infected. The infected population starts at a low value, peaks, and then slowly decays. Interestingly, you get a non-symmetric curve—it decays very slowly compared to how quickly it rises.
 
-and that corresponds to the positive eigenvalue corresponds to a direction that is unstable and your system
+You can compare this with real data, such as COVID-19 hospitalization data from government websites. You see how the curve peaks and then slowly decays. You would not expect it to decay as fast as it rose. With these simple two equations, you can capture essential behavior.
 
-explodes while the negative eigenvalue corresponds to the stable direction where your system contracts.
+## Extension to Higher Dimensions
 
-Okay. And we can draw that when you come here and you find the eigenvalues, it will say that you have two purely imaginary ones.
+Can you extend this to higher dimensions? Yes, and that is the very challenging part. Research-wise, much is still open. Within four dimensions, the subject is really open. I will give you an example from a paper published in 2019 with Professor Owen from the University of Kent.
 
-Okay, so that's one way with the eigenvalues to conclude that you have something that's called the centre.
+First, how do you generalize the model? If you have four populations, you can create a graph showing who is the predator, who is the prey, and who is in between. For example, x₃ can be both predator and prey at the same time. x₄ might be only prey, x₁ might be a super predator. You can create different graphs, and to each graph corresponds a unique model.
 
-If not, well, you can use other ways that you learned in the differential equations.
+How do you do that? When you have the model, you have a linear part and a nonlinear part. If you divide by x₁, you can write the equation such that you get a constant term minus terms like γy. You can add more variables: minus a₃x₃, minus a₄x₄, and so on. This is how you extend to higher dimensions based on the graph structure. If there is an arrow between two populations, you define the interaction. If one is the predator of another, you make the term positive for the predator and negative for the prey.
 
-Maybe you can find the secondary body of this one, for example, and then this will give you the first derivative here and you can substitute that.
+This leads to a community matrix. The easiest case is when all parameters equal one—you get a symmetric matrix. Then you perform the same reasoning: find the stability of the equilibrium points and so on. You can write this abstractly for n interacting populations.
 
-So will have the second derivative of x equals something negative times x.
+I will show you some three-dimensional and four-dimensional pictures. With this particular structure, we investigated different types of solutions. In most cases, populations become extinct. You plug in constants (for example, all equal to one), and most probably you get populations that decay exponentially with time—extinction.
 
-So what you get from that, you get cosines and sines against periodic solutions.
+But there were other cases—the most interesting ones—where all four populations coexist at all times. This is the best scenario if your model represents a banking system or population interactions. That is a good scenario, achievable for certain parameter values.
 
-Okay. So if we go now back to the graph.
+For these parameters, you see three-dimensional projections (plotting only three of the four variables). You see strange structures like a ribbon. Further from the equilibrium point, the ribbon enlarges. Even further, it becomes very flat. At some point, you get totally chaotic orbits—fully chaotic behavior.
 
-Because the theorem says of its quality, it can do the same with the width of here.
+In all four populations, you can find chaotic behavior—chaos in four dimensions. Close to the equilibrium point, it is contained. But going further away, like increasing total energy in a physical system, you observe more chaos.
 
-So we found that for the x axis, it expands the solution for the Y axis contracts.
+Another method to detect chaos is the Poincaré section or surface of section. You consider a hyperplane and wait for orbits to intersect it. Every time the orbit intersects, you plot a point numerically. If you see circular structures, these are created from ribbon-style solutions—the chaos is contained and weak. Further from the equilibrium point, you see what chaos really looks like: scattered points without any structure at all.
 
-And around this point, the second one, we get cosines and sines.
+## Conclusions
 
-We get something like circles. Now, the interesting part is this is the phase portrait or phase base of the model.
+The Lotka-Volterra system is an interesting model applied in many different fields. In two dimensions, the original model is fully solvable—you know everything about it. But in four dimensions, you can encounter chaos or order. If you encounter order, at least two out of four populations will go extinct. In the chaotic case, everybody coexists. The good scenario—the chaotic case in four dimensions—is strange enough.
 
-The interesting thing is that by knowing that stability is about the stability of only two points, we are able to sketch the full face space.
-
-So these two points tell us everything about the quantity.
-
-So what we need to do in the order to have a sudden we need to draw these parents.
-
-And all the parents have to be compatible. Which means that the flow goes like that.
-
-The arrow represents time. Time is also a parameter here.
-
-You don't see that, but it is here.
-
-And once you kind of match together everything.
-
-First of all, let the arrows in the signal. It have to go in the same direction.
-
-And to be compatible means that these orbits have to grow.
-
-So they have to become circles again. So imagine that they they do something like that.
-
-Like that. So they enlarged and imagine this one would come from somewhere and return like that and so on.
-
-Okay. So it's something like that.
-
-So by knowing this ability of only two points, we know the solution of the system.
-
-Now, because X and Y represent populations, you expect that X and Y are positive.
-
-So in fact, we are here only in the first problem.
-
-So you expect that wherever you start, whatever is your initial condition,
-
-you can have like different realisation of the model, but all of them will coexist at all times.
-
-Okay. Like if you are here means that y population becomes.
-
-Um. Yeah. Very, very few foxes remain, but then it goes back up again.
-
-So, you know, it's like a circle of life periodically.
-
-Um, so yeah, that's the idea. So you construct everything, knowing only qualitatively, you construct everything.
-
-Um. Yeah, there is a slide here.
-
-So again, about this, you find the eigenvalues and you use this method to pick up of the stability.
-
-You put everything together and this is done using the computer.
-
-So this how exactly they look like. So you have periodic orbits, but you see the node circles actually if you go very close to the origin,
-
-indeed, it's like you have a linear system, cosines and sides, which gives you circles.
-
-But as you go outside, you get something between a triangle and the circle.
-
-You get a strange curve. Yeah, but it's periodic nevertheless.
-
-It's a deformed circle. It's this is what means a topological equivalent is something deformed in a kind of continuous way that you don't know.
-
-There is no it's not like a broken like a like this curve doesn't go to infinity.
-
-It's a remains bounded. Okay.
-
-And some examples are if you start very near the origin, you can see now when you plot X and Y versus time, okay,
-
-you can see the situation is true where when you're waiting for and you will see these are more or less cosine designs.
-
-Uh, periodic. You see they have the same height, say maximum minimum.
-
-Then if you go further away from the, from the fixed point, you go further away where the orbit becomes like a triangle, you get something different.
-
-Okay. Like that.
-
-Uh, if you go even further away when you're you, your orbit almost touches the x and y axis, you get something that really goes to zero.
-
-So here indeed you have that Both spaces coexist at all times, but your system is a little bit endangered.
-
-I mean, if you kind of perturb it a little bit, if you have an external threat, it's going to one of the two is going to be extinct.
-
-If one goes extinct, the other as well. Yeah.
-
-So this here you have something, a very, very fine balance.
-
-And so one span of a very common.
-
-Right, Uh, 10 minutes. Right.
-
-So I say very quickly that if you take the same equations and imagine that alpha is equal to zero,
-
-so you eliminate the first them, which you are allowed.
-
-Okay, I said that they're positive, but suppose that can be zero as well.
-
-If you eliminate this one, you take that, you take an epidemic model.
-
-So that's why I looked about the also the response to, um, describes epidemic models.
-
-You don't have these equations existence because you don't have births here.
-
-You assume that this x population does not have any births at all, but you have something that extracts from that and that's, that's here.
-
-And what X represents is the population that has never been infected before while Y represents the infected population.
-
-And so what you observe is that now your solution, well, this will go down, kind of everybody will become infected.
-
-But the the the infected population starts by it's a low value.
-
-There is some part of this fact initially it peaks and then it slows down.
-
-But is interesting. You see you have this nice curve that is non symmetric.
-
-So like it it becomes very, very slowly compared to the beginning.
-
-And it's actually I mean, you you find that the straight away from the equations if you compare them where you believe you or if you Yeah.
-
-If you put in numerical even if you try to compare it with a real data like this is taken from the website
-
-of the government about COVID cases and probably that's what's hospitalisation if I remember correctly,
-
-you see how this peak and then it slowly decays.
-
-Yeah. You wouldn't expect like uh, if I speak to decay fast as well, it has to go slowly then.
-
-Uh, so you see with these naive two equations you can do, you can do enough and.
-
-No. Is that all? No. You can go to higher dimensions.
-
-And that's the very, very challenging part. Results wise is open.
-
-There are many things that can be said or within four dimensions is really open to the subject.
-
-Um, and I'll give you an example from a paper published in 2019 with Professor Owen from the University of Kent,
-
-and to do this and we tried to first of all, how do you generalise the model?
-
-So let's first of all, what do you want to do?
-
-So what do you have for populations?
-
-If you have four populations, you can create a graph as you like and see the timing of who is the predator, who is the prey and who is in between.
-
-Like, let's say if you have for about a year, let's see, for example, X3 can be predator and prey at the same time.
-
-Okay. X4 is only prey. X1 is a super predator.
-
-I mean, you can create different graphs. Okay. And to its graphic response, a single model, a unique coming.
-
-So how you can do that? Well, um, usually to the students, they have a project with me.
-
-I tell them to start thinking about that, but I will give you some hints.
-
-So when you have the model, you said that you have a linear part, um, and you have a nonlinear part, which looks like that.
-
-Okay. If you. Well, if you divide by x.
-
-One. Why is this one? You write the equation like that, you get a constant term minus a term that is like gamma Y.
-
-Okay. And you can do that if you have many variables, let's call it now x one can be x one and the other 1x2.
-
-You might have more variables so you can add something like minus those like three, minus two x four and so on.
-
-So more or less this is how you can go to higher dimensions and it's around the graph.
-
-So if you have a narrow between two populations means you define the relation between them and that's the relation, that's the interaction.
-
-If, if this is a predictor of x three, then you might have to make it.
-
-Plus, if it's the prayer of three, you have to leave it as a minus.
-
-That's the rough idea. So then you.
-
-Your eyes to this matrix. Yeah.
-
-So this is a divided by one mixture. I'm about to have some council terms in better form, and that's a matrix which is, um, has a use.
-
-This has some zeros here. The easiest case is to imagine that everything here is a of, of, um, um, value one.
-
-Let's say that of all alpha I, I'm one.
-
-Then you have a symmetric matrix. Okay.
-
-Uh, it's called community matrix defines the directions, uh, times the the vector and Yeah.
-
-And then you try, try to perform the same type of the same reasoning, find the stability of the points and so on in a very dense way.
-
-You can be right. It's like that for an abstract number of JS from 1 to 4.
-
-But uh, you see, you can write it, you can generalise it for and interactive populations and well,
-
-I'll show you just a couple of a33 and pictures are close in four dimensions with this particular structure.
-
-We investigated this work and we saw that they can be different.
-
-What all types of solutions you can have populations which became an extinct.
-
-And so maybe most of the cases were like that where okay so you you plug in in your equation some constants.
-
-It's a obviously are equal to one for example and you the cause sometimes you get the combination of them and so
-
-what you get is that so what's probably what you get like the most probably is that you get the two populations um,
-
-decay exponentially with time. So that's the lowering of its population and the linear behaviour means that it goes down exponentially and to survive.
-
-Okay, so far so good. But there were other cases and that's the most interesting one where all four four populations coexist at all times.
-
-And that's the most interesting part because, um, you want, that's if you, if you, your model represents something of the banking system or,
-
-or the population interactions of animals basis or um, well, the maybe not, but uh,
-
-yeah, from this two examples, you want that everybody coexist at all times.
-
-That's a good scenario. And that could be true for certain values of the parameters.
-
-But what was interesting is that for these parameters you see here some three D projections.
-
-Okay, So the corresponding face project is for the image.
-
-I'm going to draw this. So we plot only three of the four variables and you see some strange structures like a ribbon.
-
-And you go further, let's say far further from the equilibrium point the ribbon enlarges, you go even further becomes very flat.
-
-If you go even further away, at some point, you get a totally chaotic orbit, like fully chaotic.
-
-So what happens in all four of them is that in all four of them you have chaotic behaviour, so you find chaos before dimensions.
-
-But let's say here on the top, which is very close to the equilibrium points kind of contained,
-
-you don't really observe that if you go further and further away, it's like you increase the energy.
-
-If you should just add a physics like similar to increasing the total energy, sometimes you observe more chaos.
-
-Yeah, so that was the idea. Oh, okay, slide the last slide.
-
-There's another method to detect chaos that's called the surface of section.
-
-Um, that means that you consider a hybrid plane and you wait for the orbits to intersect the plane.
-
-Every time the orbit intersect this plane, you plot a point.
-
-Okay? You do that numerically.
-
-And if you see some structure like on the top, you see this kind of circles, these are created from kind of ribbon style of solutions.
-
-Um, I mean, this more or less not really chaotic.
-
-Let's say their scales is really, really contained, very weak.
-
-You go further away and further away from the equilibrium point.
-
-And this is how really chaos looks like in this hyper hyper plane skater points without any structure at all.
-
-Okay. So that was the the conclusions from this.
-
-Um, I would skip the. Yeah. Look the. The system, as you said, is an interesting model applied in many different fields.
-
-In the case of two dimensions, the original model we don't have in the case, the model is fully solvable.
-
-You know everything about. But if you go to four dimensions, the interesting thing is that you can encounter chaos or you can encounter order.
-
-If you encounter order. What happens is that at least two out of four of your populations will extinct.
-
-That's the order case. And the killed the case. Everybody co-exists.
-
-So the good scenarios that killed this case in four dimensions strained enough.
-
-Okay. So that was all about. Thank you for your attention.
-
-I'm happy to answer any questions on the nuclear question.
-
-Yes. And you mentioned it's been extended to kind of any dimension.
-
-Is it always the case that the chaotic one is called coexistence, or is it just kind of nobody has a room and we have no idea.
-
-Okay, So thank you. I will also release the work for next week after the session as well so that you can watch it and that's it.
-
+That was all. Thank you for your attention. I am happy to answer any questions.
