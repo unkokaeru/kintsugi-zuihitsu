@@ -1,114 +1,40 @@
 # Lecture Transcript
 
-Hello. Welcome to this session on the ethics of science.
+# Lecture Transcript: The Ethics of Science
 
-I'd like to talk about this topic in terms of two aspects, really.
+Hello and welcome to this session on the ethics of science.
 
-How ethics relates to the process of producing science and then a little bit towards the end of the
+I would like to explore this topic through two main aspects. First, how ethics relates to the process of producing science. Then, toward the end of the presentation, I will discuss how science affects society and how this might influence not only the ethics of science but also how science might shape the ethics and values of wider society.
 
-presentation on how science affects society and how that might influence not just the ethics of science,
+## Defining Ethics
 
-but how science might influence the ethics and the values of wider society.
+Let us begin by defining what we are discussing. Establishing clear definitions helps ensure clarity of thought and communication.
 
-So let's begin. First of all, by defining we're trying to talk about, it's always a good idea, I think,
+Ethics is the branch of philosophy that examines the values of human conduct in terms of rightness or wrongness—the rightness or wrongness of particular actions, the goodness or badness of particular motives for actions, and whether the products of particular actions can be considered good or bad.
 
-to have a set of definitions in your mind about the things we're talking about.
+Philosophy offers several theories to help us answer questions about whether a particular action is right or wrong, or whether the result of a particular action is good or bad. These theories often provide different answers to questions of rightness and wrongness. Therefore, determining how the ethics of science works is not necessarily straightforward. There is no simple theory or calculus we can apply, because human values are contested. There is no society-wide consensus about our values, so different philosophical theories operate on different values or assess values differently.
 
-It helps in clarity of thought and communication.
+I will discuss how three major ethical theories in philosophy influence our understanding of the ethics of science. I will focus primarily on the process of producing science, though toward the end I will address how science affects society and what responsibilities scientists might have in relation to that effect.
 
-So ethics is the branch of philosophy that considers the values of human conduct in terms of rightness or wrongness, the rightness,
+## Goals of Science and Values
 
-sort of wrongness of particular actions and the goodness or the badness of particular motives
+The values we will discuss today relate to the goals of science. We must consider what these goals are.
 
-for actions and whether the products of particular actions can be considered good or bad.
+My suggestion is that science aims at the production of knowledge about the world and understanding of the world, seeking these things in order to benefit society. Of course, there is an element of seeking understanding simply for its own sake—understanding and knowledge are goods in themselves. However, most scientists believe that their work provides value to wider society and benefits society in some way.
 
-And philosophy has a number of theories that will help us to answer the question about whether a particular action is right or wrong,
+## A Case Study: The Ethical Dilemma
 
-or whether a result of a particular action is good or bad.
+Let us begin with an imaginary case study. Imagine that you are a young scientist poised to publish a significant paper that will establish your reputation. This paper is groundbreaking, proposing a new hypothesis that will revolutionize your field. If the theory is demonstrated and accepted by the scientific community, you are almost certain to receive the Nobel Prize. It is serious—you are on the very cusp of a major breakthrough.
 
-And these theories often give different answers to the question of rightness and wrongness.
+The paper is ready to go, coming out in print or online tomorrow. However, just before publication, you discover a potential error in your data. It is quite a subtle error, but if confirmed, it completely undermines all your work. Your breakthrough will disappear into the ether. It will be nonexistent. Your Nobel Prize will not be awarded, and you will be back to mundane work in the laboratory, trying to understand the data, reproduce your experiments, and find a new way of understanding your work.
 
-So deciding how the ethics of science works is not necessarily a straightforward process.
+You quickly realize that nobody else is going to spot the error. Even if the error exists, no one else will notice it. You could publish your brilliant new hypothesis and establish your reputation.
 
-There's no simple theory or calculus that we can apply because human values are contested.
+The question I would like you to consider is this: Knowing the risk of a potential error in your work, and knowing that stopping publication to check it out will cost you valuable months—during which someone else might publish ahead of you—will you stop the publication of your article? Will you try to stop it, admit to the potential error, and ask for more time? Or will you proceed with publication anyway and hope for the best?
 
-There's no society-wide consensus about what our values are so different for philosophical theories,
+I hope you would all say that you would stop the publication. You would explain that there is a potential issue with the data and that you want to verify it before proceeding. You would think that this is what most, if not all, scientists would do. After all, we expect scientists to be truthful and honest about their data and results.
 
-operates on different values, or assess values differently.
-
-So I'm going to talk about how three of the major ethical theories in philosophy influence our understanding of the ethics of science.
-
-And I'm going to focus mostly on the process of producing science. But towards the end of the presentation,
-
-I'll talk a little bit about how science can affect society and what the responsibilities of scientists might be in relation to that effect.
-
-So the values that we're going to be talking about today are all values that are related to the goals of science.
-
-So we need to think a little bit more about what the goals of science are.
-
-My suggestion is that science aims at the production of knowledge of the world and of understanding of the world,
-
-and it seeks those things in order to benefit society.
-
-Of course, there's an element of seeking understanding simply for the sake of searching.
-
-Understanding and knowledge is a good in itself.
-
-But on the whole, scientists think that their work is valuable to wider society benefits society in some way.
-
-So let's begin with an imaginary case study.
-
-Imagine that you are a young scientist poised to publish a significant paper that will make your reputation.
-
-This paper is groundbreaking. It's proposing a new hypothesis that's going to revolutionise your field.
-
-And if it works, if the theory is demonstrated and accepted by the scientific community, you're almost certain to get the Nobel prise.
-
-It's not serious. You're on that on the very cusp of a major breakthrough.
-
-The papers are all set to go and you know, it's coming out in print or online tomorrow.
-
-It's coming out imminently. But just before it comes out, you discover that there's a potential error in your data in your work.
-
-It's quite a subtle error, but if it's if the error is proved to be correct, it completely undermines all of your work.
-
-Your breakthrough will disappear into the Aether as it were.
-
-It will be non-existence. Your Nobel prise won't be awarded and you'll be back to the mundane.
-
-Work in the laboratory trying to understand the data and trying to reproduce your experiments and find a new way of understanding your work,
-
-you quickly realise that nobody else is going to spot the error.
-
-So even even even if the error is true, no one else is going to spot it.
-
-So you can publish your brilliant new hypothesis and you can make a reputation.
-
-For yourself, so the question that I'd  like you to think about for a moment is knowing this,
-
-knowing that they risk a potential error in your work and stopping publication in order to check
-
-this out will cost you valuable months and perhaps someone else will publish ahead of you.
-
-Will you stop the publication of your journal?
-
-Will you of your article? Will you try and stop the publication and own up to the potential error and ask for more time?
-
-Or will you go ahead and publish anyway and hope for the best?
-
-I'm hoping that you will all say that you would stop the publication.
-
-You would explain that there's a potential issue with the data and that you want to go and check it out before you go ahead and publish.
-
-You'd think, wouldn't you, that that's what most scientists, if not all scientists would do.
-
-After all, we expect scientists to be truthful, honest people about their data and about their results.
-
-But surprisingly, not all, public and all scientists are that honest.
-
-History is replete with examples of scientists who have failed to do the right thing,
-
-who have covered up errors or who have deliberately and fraudulently published results that they know to be untrue.
+However, surprisingly, not all scientists are that honest. History is replete with examples of scientists who have failed to do the right thing—who have covered up errors or deliberately and fraudulently published results they knew to be untrue.
 
 The two examples on the screen there are two scientists who acted in very different ways towards that data.
 
