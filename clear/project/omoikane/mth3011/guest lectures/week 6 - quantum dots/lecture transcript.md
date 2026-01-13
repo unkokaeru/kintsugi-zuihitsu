@@ -188,209 +188,47 @@ So on the left, which we see colloidal continents,
 
 So that suspended material in in a solvent.
 
-And on the other hand, we have a kind of insitu fabrication of quantum dots on a substrate.
+On the other hand, we have in situ fabrication of quantum dots on a substrate. There are various methods of making both types of quantum dots, but I do not have time to discuss them all in detail. I will focus on the solvothermal method for making colloidal quantum dots.
 
-And there are various methods of making both of these types of continents.
+## Synthesis and Growth Mechanisms
 
-And I don't have time to talk about any of these in detail now except this Solvejg thermal method.
+You may have noticed in the picture that we show yellow, orange, red, and dark red quantum dots. You might ask: Why don't we see green or blue quantum dots? Perhaps I just did not photograph them? I assure you, when you make copper indium sulphide quantum dots, at least, it is impossible—or at least very difficult—to make blue dots. Let me explain why this is the case.
 
-And for making colloidal content those. So you may have noticed in this picture, we kind of show yellow, orange, red and dark red content.
+To understand this, we need to consider the mechanisms by which we grow these quantum dots, these nanocrystals, from solution. We start with what we call monomers—essentially copper, indium, and sulfur atoms in solution. There is much chemistry involved here, which I will ignore to focus on the thermodynamics.
 
-Now, you could ask. It would be a good question if you were to ask, why don't you see?
+These atoms are free in solution, floating around. We increase the temperature of the solution and the concentration of these atoms—these copper, indium, and sulfur atoms. If we make the concentration high enough and the temperature high enough, it becomes energetically favorable for these individual atoms to cluster together to form a crystal nucleus.
 
-And green or blue quantum dots. And earlier on, maybe I just didn't take photographs.
+However, there are two competing mechanisms at play. First, when we create solid volume, we save energy—this energy saving gives us free energy, which scales with volume. Second, the interface between a solid crystal and the solution (the solvent) costs energy to form, and this cost scales with surface area.
 
-But I assure you, when you make copper, indium sulphide, quantum dots, at least, and it's impossible to get blue dots or at least it's very difficult.
+If we look at the total free energy by combining these two terms and plot it as the radius changes, we see that at low cluster radii, the energy cost to form the surface dominates. But as we increase the radius, the energy gain from forming the volume becomes more important. At a certain point, these clusters actually become stable. This critical point is called the critical radius.
 
-So I've tried to explain that why that's the case.
+Clusters smaller than this critical radius dissolve very quickly back into solution. But once clusters are larger than this critical radius, they become stable. Even when the solution temperature drops back down to room temperature, these crystals remain stable, suspended in the solvent.
 
-And in order to do so, we need to consider the mechanisms by which we grow these quantum dots on nanocrystals from solution.
+## Properties for Biotechnology Applications
 
-So we start with what we call monomers, and these are essentially copper, indium and sulphur atoms in solution.
+Now it is time to discuss some of the properties that make these materials interesting for biotechnology applications.
 
-Now, there's a lot of chemistry involved here, which I'm going to just ignore and just focus on the thermodynamics of what's going on.
+First, the emission is very narrow. You can see this if you look at this picture. With broadband emission across the visible spectrum, you would see brown. But we see very clear, brilliant colors. This indicates that the emission spectrum is very narrow—perhaps between 20 and 40 nanometers.
 
-So we have these atoms, they're kind of free in solution floating around.
+Importantly, quantum dots absorb over a broad range of wavelengths but emit over a narrow range. This means we can do multiplexed imaging. If we compare quantum dots to fluorescent dye molecules, both have narrow emission. Dyes also emit narrowly, but they also absorb narrowly. With quantum dots, we can label different parts of a cell with different quantum dots and excite them all with the same excitation wavelength. If we used dyes instead, we would need different excitation wavelengths for each color. Inevitably, this would complicate things and cause cross-channel interference, especially if you want to do quantitative analysis. If you want to see how different parts of the cell interact, quantum dots enable this.
 
-And we increase the temperature of the solution and we increase the concentration of these atoms, these kopit ending sulphur atoms.
+Second, quantum dots are very small, which means they can be easily cleared from the body via renal and hepatic systems. There is some evidence from trials in live primates that there is accumulation in certain organs such as the spleen, but it does not appear to be a huge problem unless there is exposure over extremely long periods.
 
-And if we make the construction enough and if we make the temperature high enough,
+As I mentioned earlier, the surface is extremely important. One reason this is useful for biological applications is this large surface area. For example, we can attach antibodies that target cancer cells. If we cover the quantum dots with molecules that target cancer cells, when we inject the body with these quantum dots, cancer cells will take up the quantum dots while healthy cells will not. When we do imaging, we can clearly see which tissue is cancerous and which tissue is healthy. This could be useful for diagnosis or surgery.
 
-it becomes energetically favourable for these individual atoms to clustered together to form a crystal ball.
+I do not expect you to understand all these chemical diagrams. The idea is just to show that there is a huge platform for bioconjugation.
 
-But there are two competing mechanisms at play here. The first is that when we create the solid volume, we we save energy and this energy saving.
+The tunability of quantum dots is extremely useful for something called the biological window. You have probably noticed this before: when you hold your hand up to a light and look at the light shining through, as you can see in the photograph, it is the red light that makes its way through the body. If we look at the absorption profile of water on the left, you see a dip around the red region of the spectrum. Light can pass through the body quite easily if it is red.
 
-This gives free energy and. Goes with the inverse.
+We can tune our quantum dots to emit at the optimum wavelengths for this biological window. Depending on where in the body we want to look, we would use different colored quantum dots. We cannot do this with dyes—dyes have fixed emission wavelengths. We have limited choice with dyes, but quantum dots can be tuned very easily.
 
-So this interface between a solid crystal and a solution as a solvent costs energy to form.
+Quantum dots are much more stable than dyes. Quantum dots can go through many cycles of this absorption and emission process, whereas dyes degrade quickly. This is photodegradation: excitation by photons can lead to absorption and emission of a photon, but it can also lead to chemical reactions that permanently change the dye molecule so that it no longer has the capability for absorption and emission. This, I believe, is the main reason quantum dots are being used in the application I mentioned at the beginning: if it were done with dyes, it would not last very long.
 
-So if we look at the total for energy by just combining these two terms and what we see when we plot this and as the radius changes,
+It is not just diagnosis. We can also use nanocrystals and quantum dots for therapy. There is something called photothermal cancer therapy. As I mentioned earlier, we can cover the quantum dots or nanocrystals with functional molecules such as antibodies, which allow tumors to take up these quantum dots preferentially. Usually, you would use metal, actually, because of its superior thermal properties, but some quantum dot materials could be used for this. This would heat the cancer cells without heating the surrounding healthy tissue. This is a promising therapy for cancer with fewer side effects compared to standard radiotherapy.
 
-we see something like this. So low rated and low cluster radiuses.
+Finally, I want to end by saying that nanotoxicity is a relatively young field and, as far as I am aware, is quite poorly understood in general. We can understand the toxicity of specific nanomaterials by doing certain tests, but for new types of nanomaterials, it is important to carefully assess nanotoxicity. For bulk toxicity, we know about certain materials that are toxic—cadmium and lead, for example. We know not to eat these things. But toxicity at the nanoscale is much more complicated. Size is important, the shape of the nanomaterial becomes important, and the surface chemistry can contribute to toxicity as well. There are many more considerations when thinking about toxicity at the nanoscale.
 
-And this energy cost to form a surface to form this interface and dominate.
+With all this in mind, the reason quantum dots are used in this application is because their long-term stability makes this technology viable. There is no point having this technology if it lasts only a week. I think they claim this could last five years. The important thing is to be aware that these technologies always come with toxicity considerations. I have not read this paper in sufficient detail to know if they have done a good job of assessing the toxicity, so I am not giving my opinion. I am just making the point that there are various considerations to make when assessing new technology.
 
-But as we increase the radius and this energy gain or this energy saving from
-
-do we get from falling the volume and starts to kind of become more important.
-
-And at a certain point, these clusters actually become stable.
-
-So this critical point is called the critical radius.
-
-So clusters that are smaller than this critical radius and dissolve very quickly back into solution.
-
-But once the clusters are larger than this critical radius and they become stable,
-
-even when the solution temperature is is dropped back down to room temperature,
-
-these crystals will still be stable in kind of suspended in the solvent.
-
-So finally, it's time to discuss some of these proxies that the materials have, these content does have in the context of biotechnology.
-
-OK, so first thing to mention is that the emission is is very narrow and so you can see this if you look at this picture, what do you see?
-
-Broadband emission across the visible spectrum. And what you see when you look at these materials is brown.
-
-But what we see here is very clear. Brilliant colours.
-
-And this indicates that the line with the emission spectrum is very narrow, maybe between 20 and 40 nanometres.
-
-So very narrow emission. And importantly, these conduct's absorb over a broad range of wavelengths.
-
-So they absorb over a broad range and they emit over a narrow range.
-
-And what this means is we can do multiplexed imaging.
-
-So if we compare quantum dots to fluorescent dye molecules and they both have this narrow emission.
-
-So dyes also emits very narrowly. But they also absorb very narrowly.
-
-So what we can do with quantum dots is labelled different parts of a cell, for example,
-
-with different quantum dots and excitable with the same excitation women's.
-
-If we were to use dyes instead, we would have to use different excitation wavelengths for each different colour.
-
-And inevitably, this would kind of complicate things and you'd get cross-channel interference.
-
-And especially if you want to do some quantified analysis, this would make it very difficult.
-
-If you want to see how different parts of the cell interact and then we can do this with quantum dots.
-
-The second point to make is that contacts are very small,
-
-which means they can easily be cleared from the body and via these systems, which I won't try to pronounce.
-
-There is some evidence from trials in live primates that there's some accumulation in certain organs such as the spleen.
-
-But it doesn't appear to be a huge problem unless you are kind of exposed over extremely long period of time.
-
-So, again, as I mentioned earlier, that the surface is extremely important.
-
-And one reason this is useful for biological applications is that this large surface
-
-So, for example, we can attach an antibodies which were targets and cancer cells, for example.
-
-So if we cover the quantum dots with this molecule, which targets cancer cells, when we inject the body with these quantum dots,
-
-cancer cells would kind of overtake the quantum dots and healthy cells would not.
-
-Which means when we do imaging, we can really clearly see what tissue is countries and what tissue is healthy.
-
-So this is important. This could be useful for diagnosis or indeed surgery.
-
-So I don't expect you to understand all these chemical diagrams here.
-
-The idea is just to show that there's a huge platform for bio conjugation.
-
-But not to this extent. So the next thing to say is that the true ability of confidence is extremely useful to this,
-
-something called the biological window, which you've probably noticed before.
-
-When you hold your hand up to a light and look at the light shining through,
-
-as you can see in the photograph here, it's the red light that makes its way through the body.
-
-And if we look at the absorption profile of water here on the left, you see this dip around the red region of the spectrum.
-
-So light can pass through the body quite easily if it's if it's red.
-
-So we can tune our quantum dots to emit at the optimum wavelengths for this biological window.
-
-So depending on where whether we're in the body we want to look, we would use different and collude quantum dots.
-
-And we can't do this with dyes. Dyes have a fixed emission wavelengths.
-
-And so we have to kind of. You know, we have limited choice when it comes to dies, but controlled ups can be tuned very easily.
-
-OK. So the next thing to say is that quantum dots are much more stable than dice.
-
-So the quantum dots can go through many, many cycles of this absorption and emission process.
-
-Whereas dice and kind of degrade very quickly. So this is kind of what we would call photo degradation.
-
-So this excitation was photons and can lead to absorption and emission of a photon,
-
-but it can also lead to chemical reactions which permanently change the dye molecule.
-
-And so that they no longer have the capability of this absorption and emission.
-
-So this, I believe, is the main reason why these quantum dots are being used in this,
-
-an application I mentioned at the beginning, because if it if it would be done with dyes, it would just wouldn't last very long.
-
-So. OK, so it's not just kind of diagnosis.
-
-We can also use nanocrystals and quantum dots and efforts for therapy.
-
-So there's something called photo thermal cancer therapy wear.
-
-And as I mentioned earlier, we can cover the quantum dots or nano crystal with functional molecules such as antibodies,
-
-which would allow tumours to take up these cells preferentially.
-
-So usually you'd use metal, actually, because these superior thermal thermal properties and some materials,
-
-some quantum dot materials could be used for this. And this would he took the cancer cells without heating up the surrounding healthy tissue.
-
-So this is a promising and therapy for cancer, which was and which you seem to have side effects compared to kind of a standard radiotherapy.
-
-And so finally, I just want to end by saying none of toxicity is a relatively young field and as far as I'm aware,
-
-it is quite poorly understood and in general, so we can understand the toxicity of specific nanomaterials by doing certain tests and books.
-
-say, a new type of nanomaterials. So it's important for new applications to really carefully assess the nano toxicity.
-
-So toxicity in bulk. We know about certain materials that are toxic, say cadmium and lead.
-
-We know not to eat these things right and put toxicity. The nanoscale is much more complicated.
-
-So the size is important. The shape of the nano material becomes important, and the surface chemistry can contribute to the toxicity as well.
-
-So there's many more considerations to think about. And when you're thinking about toxicity in the nanoscale.
-
-So with all this in mind, as I mentioned, as far as I'm aware,
-
-the reason quantum dots are used in this application is because of their long term stability makes this technology viable.
-
-There's no point having this technology if it lasts for a week. So I think they claim this this this could last five years.
-
-I think I remember seeing both.
-
-The important thing is to to be aware that this these kind of technologies always come with toxic toxicity considerations.
-
-And I haven't read this paper in detail enough to know if they've done a good job of assessing the toxicity.
-
-So I'm not giving my opinion here.
-
-I'm just making the point that and there's there's various considering considerations to make when assessing new technology.
-
-So with that, I will end there.
-
-And thank you very much for your attention.
-
-And at this point, I think on the day of the session and I'll be available to answer any questions you might have.
-
-Thank you very much.
+With that, I will end here. Thank you very much for your attention. I will be available to answer any questions you might have. Thank you very much.
 
