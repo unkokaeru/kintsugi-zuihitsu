@@ -1,7 +1,15 @@
 {
-  "githubRepo": "quartz",
-  "githubUserName": "",
-  "githubToken": "",
+  "git": {
+    "remoteUrl": "",
+    "branch": "v4",
+    "corsProxyUrl": "",
+    "auth": {
+      "type": "basic",
+      "username": "",
+      "secret": ""
+    },
+    "providerHint": "github"
+  },
   "vaultPath": "/",
   "contentFolder": "content",
   "useFullResolutionImages": false,
@@ -13,6 +21,7 @@
   "showPublishedTimestamp": false,
   "usePermalink": false,
   "includeAllFrontmatter": false,
+  "frontmatterFormat": "yaml",
   "pathRewriteRules": "",
   "createdTimestampKey": "created, created_at, date",
   "updatedTimestampKey": "modified, lastmod, updated, last-modified",
@@ -28,8 +37,15 @@
   "useDatacore": false,
   "useExcalidraw": false,
   "useFantasyStatblocks": false,
+  "manageSyncerStyles": true,
   "useThemes": false,
-  "lastUsedSettingsTab": "github",
+  "lastUsedSettingsTab": "git",
   "noteSettingsIsInitialized": true,
-  "pluginVersion": "1.8.10"
+  "pluginVersion": "1.9.2",
+  "diffViewStyle": "auto",
+  "ENABLE_DEVELOPER_TOOLS": false,
+  "logLevel": {
+    "value": 99,
+    "name": "OFF"
+  }
 }
