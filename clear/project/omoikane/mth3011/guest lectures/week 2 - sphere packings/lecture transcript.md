@@ -1,3 +1,5 @@
+# Lecture Transcript
+
 Hello, everyone. I'm Havingue, and in this video we're going to have a seminar.
 
 What I'm going to talk about is an enquiry into the packing properties of spheres. So essentially, this is part of one of the subjects I'm interested in—I'm interested in how we arrange spheres together and so on. It looks strange, but let's talk a bit about what this kind of problem could look like.
