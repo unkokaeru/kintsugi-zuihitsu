@@ -51,4 +51,4 @@ Every gap between spheres represents a question waiting to be answered. From gro
 
 2. Hales, T.C. et al. (2017). "A formal proof of the Kepler conjecture." *Forum of Mathematics, Pi*, 5, e2.
 
-3. Jenssen, M. (2019). "Sphere packing in high dimensions." Lecture notes, Oxford University.
+3. Jenssen, M. (2024). "The Kepler conjecture and sphere packing." *Bulletin of the American Mathematical Society*, 61(1), 1-60.

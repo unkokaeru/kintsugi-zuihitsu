@@ -33,7 +33,7 @@ Quantum dots also enable therapeutic applications. Photothermal cancer therapy u
 
 Despite their promise, quantum dots raise important safety concerns. Nanotoxicity—the biological effects of nanoscale materials—remains poorly understood. Bulk material toxicity provides limited guidance; properties like size, shape, and surface chemistry profoundly influence nanomaterial behavior in living systems.
 
-Early quantum dots contained cadmium or lead—highly toxic elements. While encapsulation strategies minimize exposure, concerns persist. Studies in primates reveal accumulation in organs like the spleen, though long-term consequences remain unclear. According to scientific assessments, "for new types of nanomaterials, it is important to carefully assess nanotoxicity... there are many more considerations when thinking about toxicity at the nanoscale."
+Early quantum dots contained cadmium or lead—highly toxic elements. While encapsulation strategies minimize exposure, concerns persist. Studies in primates reveal accumulation in organs like the spleen, though long-term consequences remain unclear. As Dr Matthew Booth emphasizes in his lecture, "for new types of nanomaterials, it is important to carefully assess nanotoxicity... there are many more considerations when thinking about toxicity at the nanoscale."
 
 Each application requires rigorous safety evaluation. The MIT vaccination tracking system undergoes scrutiny precisely because these quantum dots remain in human tissue for years. Regulators must balance potential benefits against incompletely understood risks.
 
