@@ -48,32 +48,32 @@ This document compiles statistics on all anonymous codes identified in the MTH30
 | 18476 | 2 |
 | 26742 | 1 |
 | 26801 | 5 |
-| 26990 | 2 |
-| 31102 | 3 |
-| 31842 | 7 |
+| 26990 | 4 |
+| 31102 | 4 |
+| 31842 | 8 |
 | 34068 | 1 |
 | 41058 | 5 |
 | 42890 | 18 |
 | 42994 | 3 |
 | 45170 | 1 |
-| 46422 | 3 |
-| 46509 | 3 |
-| 46551 | 4 |
+| 46422 | 4 |
+| 46509 | 4 |
+| 46551 | 3 |
 | 50823 | 2 |
 | 56001 | 4 |
-| 60795 | 5 |
-| 62451 | 6 |
+| 60795 | 4 |
+| 62451 | 5 |
 | 62557 | 3 |
 | 63865 | 1 |
 | 63893 | 3 |
 | 67384 | 4 |
-| 69356 | 2 |
+| 69356 | 3 |
 | 69585 | 1 |
 | 76354 | 4 |
 | 79578 | 4 |
 | 81177 | 4 |
 | 82157 | 1 |
-| 90561 | 10 |
+| 90561 | 11 |
 | 92913 | 4 |
 | 93367 | 4 |
 | 94931 | 5 |
@@ -96,14 +96,13 @@ This document compiles statistics on all anonymous codes identified in the MTH30
 ### Top Feedback Givers (gave 5+ feedback)
 
 1. **42890** - 18 feedback comments
-2. **90561** - 10 feedback comments
-3. **31842** - 7 feedback comments
-4. **62451** - 6 feedback comments
-5. **26801** - 5 feedback comments
-6. **41058** - 5 feedback comments
-7. **60795** - 5 feedback comments
-8. **94931** - 5 feedback comments
-9. **96814** - 5 feedback comments
+2. **90561** - 11 feedback comments
+3. **31842** - 8 feedback comments
+4. **26801** - 5 feedback comments
+5. **41058** - 5 feedback comments
+6. **62451** - 5 feedback comments
+7. **94931** - 5 feedback comments
+8. **96814** - 5 feedback comments
 
 ---
 
@@ -162,19 +161,19 @@ The following codes both wrote articles AND gave feedback:
 | 9463 | 1 | 1 |
 | 15100 | 4 | 3 |
 | 26742 | 4 | 1 |
-| 26990 | 4 | 2 |
-| 31102 | 4 | 3 |
-| 31842 | 3 | 7 |
+| 26990 | 4 | 4 |
+| 31102 | 4 | 4 |
+| 31842 | 3 | 8 |
 | 42890 | 1 | 18 |
-| 46422 | 3 | 3 |
-| 46509 | 2 | 3 |
+| 46422 | 3 | 4 |
+| 46509 | 2 | 4 |
 | 50823 | 1 | 2 |
 | 56001 | 4 | 4 |
 | 63865 | 3 | 1 |
 | 63893 | 2 | 3 |
-| 69356 | 3 | 2 |
+| 69356 | 3 | 3 |
 | 76354 | 3 | 4 |
-| 90561 | 4 | 10 |
+| 90561 | 4 | 11 |
 | 92913 | 4 | 4 |
 | 93367 | 1 | 4 |
 | 94931 | 3 | 5 |
@@ -224,7 +223,7 @@ The following codes both wrote articles AND gave feedback:
 | Codes who only wrote | 3 |
 | Codes who only gave feedback | 16 |
 | Total articles written | 60 |
-| Total feedback comments | ~136 |
+| Total feedback comments | ~140 |
 
 ---
 
