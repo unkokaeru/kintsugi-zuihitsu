@@ -14,4 +14,8 @@ In 1611, Johannes Kepler even conjectured this remained true in three dimensions
 
 However, you may question how this result wasn't found through simple trial and error - randomly packing enough times that it just *randomly* falls into a hexagonal packing. Experiments by G.D. Scott published in Nature identified a strange result - "random close packing" never reached a packing fraction above 0.637, no matter how much the container was tapped.
 
-Yet, even the tapping could be questioned! Yu and Hall's 1994 experiments revealed that tapping direction dramatically changes the results: vertical tapping had packing fractions 0.64, whilst horizontal reaches 0.66, and combining the two reaches an impressive 0.74 - 
+Yet, even the tapping could be questioned! Yu and Hall's 1994 experiments revealed that tapping direction dramatically changes the results: vertical tapping had packing fractions 0.64, whilst horizontal reaches 0.66, and combining the two reaches an impressive 0.74 - matching hexagonal packing in three dimensions!
+
+Recently, research has explored what it even means for packing to be random, exploring its definition from a probability perspective. In 2017, work published in Nature Physics measured every single way you can pack the spheres. Interestingly, it was found that the packing fraction 0.64 doesn't come from some strange geometric barrier, it is just the most probable arrangement - the most accessible state.
+
+Beyond satisfying curiosity, sphere packing is actually critical in multiple industries: pharmacies filling pill containers, material scientists designing granular composites, and of course food manufacturers packing your Maltesers. Understanding packing efficiency directly impacts cost, quality control, and supply chain management. Dr. Paillusson's work demonstrates that even these "simple" questions can reveal great complexity, and current research is even trying to 
