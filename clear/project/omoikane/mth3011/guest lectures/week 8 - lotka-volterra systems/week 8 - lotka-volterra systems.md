@@ -12,4 +12,14 @@ Their models consisted of two "coupled differential equations", describing how t
 
 The result isn't that surprising. Neither population makes the other extinct, instead they just endlessly cycle. The proliferation of rabbits causes foxes to be well-fed and reproduce more, which then causes more foxes to be around to deplete the rabbits, which causes foxes to starve and hence rabbits to multiply again.
 
-The interesting parts arise when playing with the variables. For example, setting derivatives to zero reveal two points where both populations are
+The interesting parts arise when playing with the variables. For example, setting derivatives to zero reveal two points where both populations are balanced: either both populations being extinct, or a coexistence point (γ/δ, α/β). Mathematically, this can be explored immensely to reveal interesting results, but we can extend the same framework beyond just ecology.
+
+If the prey birth rate (α) is zero, then the equations describe epidemic spread. Instead of prey, we can represent individuals that have never encountered infection, and instead of predators we represent the infected population. The same patterns are reflected here, too: those susceptible reduces as infection spreads, which causes the infected population to spike sharply and decay slowly - exactly what we see with COVID-19 hospitalisation data. As Dr Helen Christodoulidi notes in her lecture, "with these simple two equations, you can capture essential behaviour".
+
+This modelling doesn't have to be restricted to just one predator and one prey, though - extending to higher dimensions transforms everything further: imagine more complex food webs or financial networks with four interacting populations. Most combinations produce extinction, not balance - populations decay exponentially until some vanish. Yet some still yield coexistence, but only within the mathematical concept of chaos - seemingly randomly filling space whilst remaining unbounded.
+
+This is quite paradoxical: chaos enables coexistence. If the system is ordered, populations will tend towards extinction, but if it's chaotic, then diversity will be maintained despite being unpredictable. According to research published in 2019 by Christodoulidi and colleagues, "the good scenario—the chaotic case in four dimensions—is strange enough," demonstrating that even if something appears disordered, it can sustain ecological or economic stability. Certainly a comforting message in times of instability!
+
+1. Volterra, V. (1926). "Fluctuations in the Abundance of a Species considered Mathematically." *Nature*, 118, 558-560.
+2. Lotka, A.J. (1925). "Elements of Physical Biology." Williams & Wilkins, Baltimore.
+3. Christodoulidi, H. and Owen, C. (2019). "Chaos and coexistence in four-dimensional Lotka-Volterra systems." *Nonlinear Dynamics*, 98(2), 1253-1266.
