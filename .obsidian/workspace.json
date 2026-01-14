@@ -25,49 +25,49 @@
             }
           },
           {
-            "id": "b6071a7c784b9df3",
+            "id": "d5ffcea384aec8fb",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/week 6 - quantum dots.md",
+                "file": "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/week 8 - lotka-volterra systems.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "week 6 - quantum dots"
+              "title": "week 8 - lotka-volterra systems"
             }
           }
         ],
         "currentTab": 1
       },
       {
-        "id": "3325231baf609713",
+        "id": "41e97c36bc2ed3df",
         "type": "tabs",
         "children": [
           {
-            "id": "a9c8088131748421",
+            "id": "05fb4fc57427f6ff",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/article outline.md",
+                "file": "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/peer articles/56001.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "article outline"
+              "title": "56001"
             }
           },
           {
-            "id": "0c3f422b2757c23c",
+            "id": "121758522dbbf8d7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/article.md",
+                "file": "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/article.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
@@ -77,33 +77,18 @@
             }
           },
           {
-            "id": "266da52d6b955613",
+            "id": "384aa2678361a92a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/peer articles/31842.md",
+                "file": "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/article outline.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "31842"
-            }
-          },
-          {
-            "id": "16b17a35fedd1fde",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/lecture transcript.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "lecture transcript"
+              "title": "article outline"
             }
           }
         ],
@@ -258,15 +243,22 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "b6071a7c784b9df3",
+  "active": "d5ffcea384aec8fb",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/article.md",
-    "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/week 6 - quantum dots.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/article.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/article outline.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/week 8 - lotka-volterra systems.md",
+    "clear/project/omoikane/mth3011/guest lectures/MTH3011 Guest Lecture Assessment Brief.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/peer articles/56001.md",
     "clear/project/omoikane/mth3011/guest lectures/week 2 - sphere packing/week 2 - sphere packing.md",
-    "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/article outline.md",
-    "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/peer articles/31842.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/week 6 - quantum dots.md",
     "clear/project/omoikane/mth3011/guest lectures/Guest Lecture Anonymous Code Statistics.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/lecture slides.pdf",
+    "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/lecture transcript.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/article.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/article outline.md",
     "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/lecture transcript.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/peer articles/31842.md",
     "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/peer articles/46422.md",
     "clear/project/omoikane/mth3011/guest lectures/week 3 - planetary rings/week 3 - planetary rings.md",
     "clear/project/omoikane/mth3011/guest lectures/week 2 - sphere packing/article outline.md",
@@ -276,16 +268,10 @@
     "clear/project/omoikane/mth3011/guest lectures/week 2 - sphere packing/article.md",
     "clear/project/omoikane/mth3011/guest lectures/week 2 - sphere packing/peer articles/94931.md",
     "clear/project/omoikane/mth3011/mth3011.md",
-    "clear/project/omoikane/mth3011/guest lectures/MTH3011 Guest Lecture Assessment Brief.md",
     "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/week 11 - largest telescopes.md",
-    "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/week 8 - lotka-volterra systems.md",
     "clear/project/omoikane/mth3011/guest lectures/week 5 - ethics in science/week 5 - ethics in science.md",
     "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/peer articles/92913.md",
-    "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/peer articles/63865.md",
-    "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/peer articles/56001.md",
-    "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/peer articles/31102.md",
-    "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/peer articles/15100.md",
     "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/peer articles",
     "clear/project/omoikane/mth3011/guest lectures/week 9 - jumping random walks/peer articles",
     "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/peer articles",
@@ -294,7 +280,6 @@
     "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes",
     "clear/project/omoikane/mth3011/guest lectures/week 9 - jumping random walks",
     "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/lecture whiteboard.pdf",
-    "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/lecture slides.pdf",
     "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems",
     "attached/files/chillin sushi guy.svg",
     "attached/files/image-6.png",

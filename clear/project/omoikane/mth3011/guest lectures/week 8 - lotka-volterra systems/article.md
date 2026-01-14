@@ -1,6 +1,6 @@
 # Lotka-Volterra Systems: Dynamics and Applications
 
-**Date:** 19th November 2025  
+**Date:** 19th November 2025
 **Speaker:** Dr Helen Christodoulidi
 
 Picture a forest where rabbits multiply and foxes hunt. What happens over time? Do populations explode, collapse, or somehow balance? This century-old question finds answers in the Lotka-Volterra equations—deceptively simple formulas that reveal profound truths about ecosystems, epidemics, and even financial markets.
@@ -11,7 +11,8 @@ In the 1920s, two scientists working independently arrived at identical conclusi
 
 Their model consists of two coupled differential equations describing how prey (x) and predator (y) populations change over time:
 
-dx/dt = αx - βxy  
+dx/dt = αx - βxy
+
 dy/dt = -γy + δxy
 
 These equations encode intuitive logic. Alone with unlimited food, rabbits reproduce exponentially—their growth rate (dx/dt) proportional to population size (αx). Foxes without prey starve to extinction (−γy). Together, interaction terms (βxy and δxy) couple the populations: predation reduces prey and sustains predators.
@@ -48,7 +49,7 @@ This accessibility matters. Understanding simple cases builds intuition for comp
 
 Societally, these models inform conservation biology, public health policy, and systems biology. Predicting how interventions affect population dynamics—whether species reintroductions, vaccination campaigns, or market regulations—requires understanding cyclical dynamics and stability conditions these equations reveal.
 
-In research contexts, Lotka-Volterra systems remain active frontiers. Higher-dimensional variants pose open questions about chaos, coexistence, and parameter sensitivity. As Vito Volterra himself recognized, writing in 1926, "the laws which govern the struggle for existence... are of a universal character applicable to all domains where competition exists." His prescience endures: from plankton to pandemics, these equations illuminate competition's mathematics.
+In research contexts, Lotka-Volterra systems remain active frontiers. Higher-dimensional variants pose open questions about chaos, coexistence, and parameter sensitivity. As Vito Volterra himself recognized, writing in 1926, "the laws which govern the struggle for existence… are of a universal character applicable to all domains where competition exists." His prescience endures: from plankton to pandemics, these equations illuminate competition's mathematics.
 
 ## The Circle of Life
 
@@ -61,7 +62,5 @@ Rabbits and foxes remain the iconic example, but the framework extends wherever 
 **References:**
 
 1. Volterra, V. (1926). "Fluctuations in the Abundance of a Species considered Mathematically." *Nature*, 118, 558-560.
-
 2. Lotka, A.J. (1925). "Elements of Physical Biology." Williams & Wilkins, Baltimore.
-
 3. Christodoulidi, H. and Owen, C. (2019). "Chaos and coexistence in four-dimensional Lotka-Volterra systems." *Nonlinear Dynamics*, 98(2), 1253-1266.

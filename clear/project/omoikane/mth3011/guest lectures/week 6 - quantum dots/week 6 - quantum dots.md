@@ -1,4 +1,4 @@
-# Week 6 - Quantum Dots
+# Quantum Dots and Their Applications in Biotechnology
 
 > **Anonymous Code**: 58648
 > **Date**: 5th November 2025
@@ -17,3 +17,9 @@ For imaging cells, this matters much more than you'd think. As Dr Matthew Booth 
 To apply these quantum dots further, they can be coated with targeting molecules such as antibodies. Cancer researchers are exploiting this by engineering quantum dots that only bind to tumour cells, so that surgeons can have real-time visualisation of cancers under appropriate lighting for longer duration and deeper depths compared to traditional dye. They can even be used to treat the cancer itself, with fewer side effects than conventional radiotherapy, using "photothermal cancer therapy"; quantum dots with tumor-targeting antibodies that absorb light and convert it to heat, destroying cancer cells but avoiding healthy tissue.
 
 Despite all of these uses, and even more unmentioned, quantum dots do raise important safety concerns that you may have even thought of. Nanotoxicity - the biological effects of these tiny, nanoscale, materials - remains not very understood. Lots of different properties influence the behaviour of nanomaterials, and early quantum dots even contained highly toxic elements like cadmium and lead. Strategies can be imposed to minimise exposure, but some studies reveal unclear long-term consequences. As Dr Matthew Booth emphasizes in his lecture, "for new types of nanomaterials, it is important to carefully assess nanotoxicity… there are many more considerations when thinking about toxicity at the nanoscale."
+
+Even so, invisible data-holding tattoos are pretty cool, so keep an eye out as nanotechnology advances and hopefully the safety elements will follow alongside the innovation, soon.
+
+1. McHugh, K.J. et al. (2019). "Biocompatible near-infrared quantum dots delivered to the skin by microneedle patches record vaccination." *Science Translational Medicine*, 11(523), eaay7162. Massachusetts Institute of Technology.
+2. Bawendi, M.G., Ekimov, A.I., and Efros, A.L. (2023). "For the discovery and synthesis of quantum dots." Nobel Prize in Chemistry citation.
+3. Resch-Genger, U. et al. (2008). "Quantum dots versus organic dyes as fluorescent labels." *Nature Methods*, 5(9), 763-775.

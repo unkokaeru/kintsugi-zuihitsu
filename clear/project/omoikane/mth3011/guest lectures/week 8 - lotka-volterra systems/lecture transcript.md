@@ -50,7 +50,7 @@ Let us say we want to study this particular system. A classic example is rabbits
 
 So, as I said already, x and y describe the dynamics. We want to see how they evolve over time. What do the derivatives tell us? Well, dx/dt is the population growth rate of the prey, and dy/dt is the population growth rate of the predators.
 
-Before giving the equations straight away, how would you start? We want to see how the growth changes. One can think: how would the rabbits do if they were alone? We need some assumptions. Let us say they have an infinite amount of food. If they do not have any enemies, their population would grow and grow. The population growth rate—the derivative—could be, for example... Does anyone have any idea? You need something positive, of course, but how would they change?
+Before giving the equations straight away, how would you start? We want to see how the growth changes. One can think: how would the rabbits do if they were alone? We need some assumptions. Let us say they have an infinite amount of food. If they do not have any enemies, their population would grow and grow. The population growth rate—the derivative—could be, for example… Does anyone have any idea? You need something positive, of course, but how would they change?
 
 If you have two rabbits, then four rabbits, then eight rabbits, and so on, this means we have exponential growth. That means the derivative is linear—proportional to x. So dx/dt is proportional to x. That is a good start.
 
@@ -75,11 +75,13 @@ When you have two systems of differential equations, we can say that their solut
 Let me now apply this theorem to the specific Lotka-Volterra model. What we need to start with is finding whether we have any fixed points. The equations are:
 
 dx/dt = αx - βxy
+
 dy/dt = -γy + δxy
 
 How do we find the fixed points? We set the derivatives equal to zero. We need the right-hand side to equal zero. We need to solve this system for the fixed points:
 
 αx - βxy = 0
+
 -γy + δxy = 0
 
 From the first equation, we can factor: x(α - βy) = 0. This gives us either x = 0 or y = α/β.
@@ -93,6 +95,7 @@ The first case is x = 0. When x = 0, the second equation becomes -γy = 0, so y 
 When y = 0, we plug that into the second equation and get -γy + δxy = 0, which becomes δx · 0 = 0. But from the first equation with y = 0, we get αx = 0, so x = 0 as well. Actually, let me reconsider: when y = 0, from the first equation we get x(α - 0) = 0, so x must be 0 or α can equal 0, but α is positive, so x = 0.
 
 Actually, the second fixed point comes from the interior case: x = γ/δ and y = α/β. So we have two fixed points:
+
 1. The origin: (0, 0)
 2. The coexistence point: (γ/δ, α/β)
 
@@ -104,13 +107,15 @@ Now, what the Hartman-Grobman theorem tells us is to find the linearized system.
 
 The first row corresponds to the partial derivatives of the first equation. Imagine that the right-hand side of the first equation is f₁(x, y) = αx - βxy, and the second is f₂(x, y) = -γy + δxy. The Jacobian matrix consists of:
 
-∂f₁/∂x    ∂f₁/∂y
-∂f₂/∂x    ∂f₂/∂y
+∂f₁/∂x ∂f₁/∂y
+
+∂f₂/∂x ∂f₂/∂y
 
 With a quick computation, this equals:
 
-(α - βy     -βx    )
-(δy      -γ + δx)
+(α - βy -βx )
+
+(δy -γ + δx)
 
 The second row gives us: ∂f₂/∂x = δy and ∂f₂/∂y = -γ + δx.
 
@@ -122,15 +127,17 @@ Near the equilibrium point means we have to evaluate the Jacobian at those point
 
 First, for the origin where x = 0 and y = 0. Substituting into the Jacobian:
 
-A = (α    0  )
-    (0   -γ)
+A = (α 0  )
+
+	(0 -γ)
 
 ## Analyzing the Coexistence Point
 
 For the second fixed point at (γ/δ, α/β), substituting these values:
 
-A = (0           -βγ/δ)
-    (δα/β         0   )
+A = (0 -βγ/δ)
+
+	(δα/β 0   )
 
 We found the matrices. According to the theorem, the linearized system near each equilibrium point is:
 
@@ -145,6 +152,7 @@ Now we only need to solve linear systems, which you have already done in your di
 For the origin, plugging in the first matrix, we get two uncoupled equations:
 
 dx/dt = αx
+
 dy/dt = -γy
 
 The solution is x(t) = C₁e^(αt) and y(t) = C₂e^(-γt). This shows exponential growth in x and exponential decay in y.
@@ -152,6 +160,7 @@ The solution is x(t) = C₁e^(αt) and y(t) = C₂e^(-γt). This shows exponenti
 For the second fixed point, how would you solve this system? We have:
 
 dx/dt = -βγ/δ · y
+
 dy/dt = δα/β · x
 
 One way to solve this is to find the eigenvalues of the matrix. The eigenvalues tell us about stability. For the origin, the matrix is diagonal, so we have one positive eigenvalue (α) and one negative eigenvalue (-γ). The positive eigenvalue corresponds to an unstable direction where the system expands, while the negative eigenvalue corresponds to a stable direction where the system contracts. This makes the origin a saddle point.
