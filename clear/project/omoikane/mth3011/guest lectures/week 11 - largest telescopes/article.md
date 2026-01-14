@@ -1,6 +1,6 @@
 # Research with the World's Largest Telescopes
 
-**Date:** 10th December 2025  
+**Date:** 10th December 2025
 **Speaker:** Dr Katharine Johnston
 
 In 2019, humanity glimpsed the unseeable: the shadow of a black hole. The remarkable image of M87's supermassive black hole captured headlines worldwide, and the answer to how we achieved it lies in a simple but profound concept—building a telescope the size of Earth itself.
@@ -43,6 +43,5 @@ In the quest to understand the cosmos, sometimes the only solution is to build a
 
 **References:**
 
-1. European Space Agency. "Event Horizon Telescope: How to Measure a Black Hole." Available at: https://www.esa.int/Science_Exploration/Space_Science/Event_Horizon_Telescope_How_to_measure_a_black_hole
-
+1. European Space Agency. "Event Horizon Telescope: How to Measure a Black Hole." Available at: <https://www.esa.int/Science_Exploration/Space_Science/Event_Horizon_Telescope_How_to_measure_a_black_hole>
 2. Event Horizon Telescope Collaboration et al. (2019). "First M87 Event Horizon Telescope Results. I. The Shadow of the Supermassive Black Hole." *The Astrophysical Journal Letters*, 875(1), L1.
