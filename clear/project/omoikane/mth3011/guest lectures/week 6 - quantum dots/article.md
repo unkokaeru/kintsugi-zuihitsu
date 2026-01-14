@@ -1,6 +1,6 @@
 # Quantum Dots and Their Applications in Biotechnology
 
-**Date:** 5th November 2025  
+**Date:** 5th November 2025
 **Speaker:** Dr Matthew Booth
 
 Researchers at MIT have developed an invisible quantum dot "tattoo" that stores vaccination records beneath the skin, readable by standard smartphones. This technology sounds like science fiction, yet it represents just one application of quantum dots—semiconductor nanocrystals whose remarkable properties are transforming biotechnology, displays, and medical imaging.
@@ -33,7 +33,7 @@ Quantum dots also enable therapeutic applications. Photothermal cancer therapy u
 
 Despite their promise, quantum dots raise important safety concerns. Nanotoxicity—the biological effects of nanoscale materials—remains poorly understood. Bulk material toxicity provides limited guidance; properties like size, shape, and surface chemistry profoundly influence nanomaterial behavior in living systems.
 
-Early quantum dots contained cadmium or lead—highly toxic elements. While encapsulation strategies minimize exposure, concerns persist. Studies in primates reveal accumulation in organs like the spleen, though long-term consequences remain unclear. As Dr Matthew Booth emphasizes in his lecture, "for new types of nanomaterials, it is important to carefully assess nanotoxicity... there are many more considerations when thinking about toxicity at the nanoscale."
+Early quantum dots contained cadmium or lead—highly toxic elements. While encapsulation strategies minimize exposure, concerns persist. Studies in primates reveal accumulation in organs like the spleen, though long-term consequences remain unclear. As Dr Matthew Booth emphasizes in his lecture, "for new types of nanomaterials, it is important to carefully assess nanotoxicity… there are many more considerations when thinking about toxicity at the nanoscale."
 
 Each application requires rigorous safety evaluation. The MIT vaccination tracking system undergoes scrutiny precisely because these quantum dots remain in human tissue for years. Regulators must balance potential benefits against incompletely understood risks.
 
@@ -54,7 +54,5 @@ Yet these advantages come with responsibilities. As nanotechnology advances, res
 **References:**
 
 1. McHugh, K.J. et al. (2019). "Biocompatible near-infrared quantum dots delivered to the skin by microneedle patches record vaccination." *Science Translational Medicine*, 11(523), eaay7162. Massachusetts Institute of Technology.
-
 2. Bawendi, M.G., Ekimov, A.I., and Efros, A.L. (2023). "For the discovery and synthesis of quantum dots." Nobel Prize in Chemistry citation.
-
 3. Resch-Genger, U. et al. (2008). "Quantum dots versus organic dyes as fluorescent labels." *Nature Methods*, 5(9), 763-775.

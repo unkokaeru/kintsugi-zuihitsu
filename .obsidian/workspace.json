@@ -25,22 +25,89 @@
             }
           },
           {
-            "id": "078cf67c60de4fe7",
+            "id": "b6071a7c784b9df3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3011/guest lectures/week 2 - sphere packing/week 2 - sphere packing.md",
+                "file": "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/week 6 - quantum dots.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "week 2 - sphere packing"
+              "title": "week 6 - quantum dots"
             }
           }
         ],
         "currentTab": 1
+      },
+      {
+        "id": "3325231baf609713",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a9c8088131748421",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/article outline.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "article outline"
+            }
+          },
+          {
+            "id": "0c3f422b2757c23c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/article.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "article"
+            }
+          },
+          {
+            "id": "266da52d6b955613",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/peer articles/31842.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "31842"
+            }
+          },
+          {
+            "id": "16b17a35fedd1fde",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/lecture transcript.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "lecture transcript"
+            }
+          }
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -191,21 +258,26 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "078cf67c60de4fe7",
+  "active": "b6071a7c784b9df3",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3011/guest lectures/Guest Lecture Anonymous Code Statistics.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/peer articles/31842.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/lecture transcript.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/peer articles/46422.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/article outline.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/article.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/week 6 - quantum dots.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 3 - planetary rings/week 3 - planetary rings.md",
+    "clear/project/omoikane/mth3011/guest lectures/week 2 - sphere packing/week 2 - sphere packing.md",
     "clear/project/omoikane/mth3011/guest lectures/week 2 - sphere packing/article outline.md",
     "clear/project/omoikane/mth3011/Guest lecture 2.md",
     "clear/project/omoikane/mth3011/original notes.md",
-    "clear/project/omoikane/mth3011/guest lectures/week 2 - sphere packing/week 2 - sphere packing.md",
     "clear/project/omoikane/mth3011/guest lectures/week 2 - sphere packing/lecture transcript.md",
     "clear/project/omoikane/mth3011/guest lectures/week 2 - sphere packing/article.md",
     "clear/project/omoikane/mth3011/guest lectures/week 2 - sphere packing/peer articles/94931.md",
-    "clear/project/omoikane/mth3011/guest lectures/Guest Lecture Anonymous Code Statistics.md",
     "clear/project/omoikane/mth3011/mth3011.md",
     "clear/project/omoikane/mth3011/guest lectures/MTH3011 Guest Lecture Assessment Brief.md",
     "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/week 11 - largest telescopes.md",
-    "clear/project/omoikane/mth3011/guest lectures/week 3 - planetary rings/week 3 - planetary rings.md",
-    "clear/project/omoikane/mth3011/guest lectures/week 6 - quantum dots/week 6 - quantum dots.md",
     "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/week 8 - lotka-volterra systems.md",
     "clear/project/omoikane/mth3011/guest lectures/week 5 - ethics in science/week 5 - ethics in science.md",
     "kintsugi zuihitsu.md",
@@ -214,11 +286,6 @@
     "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/peer articles/56001.md",
     "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/peer articles/31102.md",
     "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/peer articles/15100.md",
-    "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/temp.md",
-    "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/peer articles/26742.md",
-    "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/peer articles/90561.md",
-    "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/peer articles/26990.md",
-    "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/peer articles/93367.md",
     "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/peer articles",
     "clear/project/omoikane/mth3011/guest lectures/week 9 - jumping random walks/peer articles",
     "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/peer articles",
