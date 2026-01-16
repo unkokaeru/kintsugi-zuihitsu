@@ -16,7 +16,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 - Complete notes for [[yatagarasu]] & tasks on the [[yatagarasu]] Kanban board.
 - Apply to the [Lincoln Summer Teacher Training]([https://uolcareers.co.uk/students-graduates/lincoln-award/lincoln-award-teacher-training/](https://uolcareers.co.uk/students-graduates/lincoln-award/lincoln-award-teacher-training/)).
 - Complete a Lean proof for [[mth3011]], and any other associated module work before the next meeting with my supervisor - confirm date, too!
-- Make a Kanban board for Kintsugi Zuihitsu, like Yatagarasu (and then maybe an easy way to switch between them).
+- Make a Kanban board for Kintsugi Zuihitsu, like Yatagarasu (and then maybe an easy way to switch between them) - do so by overhauling Kintsugi Zuihitsu website generation, maybe? Could make it look cooler then, too.
 - Redo budgets (etc.) on Revolut, incl. joint account and new savings/taxes etc.
 - Continue development on [[FFMS]] for [[Kuebiko]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
 - Change flashcard syntax within [[Kintsugi Zuihitsu]] from == to ** globally and then update the Obsidian settings for the new cloze format.
