@@ -31,7 +31,7 @@
 	- Use table: $\mathcal{L}\{f(t)\}|_{s=a}$ gives the integral value.
 2. **Example**: $\int_0^\infty e^{-at}(t+\sin t)dt$
 	- Set $s=a$, use $\mathcal{L}\{t\}=\frac{1}{s^2}$, $\mathcal{L}\{\sin t\}=\frac{1}{s^2+1}$.
-	- Result: $\frac{1}{a^2}+\frac{1}{a^2+1}$.
+	- Result: $\boxed{\frac{1}{a^2}+\frac{1}{a^2+1}}$.
 
 ### 2. Laplace Transforms — Solve ODEs (8-15 marks)
 
@@ -62,6 +62,8 @@
 
 1. **Method**: Find $f=\mathcal{L}^{-1}\{F\}$, $g=\mathcal{L}^{-1}\{G\}$ → compute integral.
 	- Note: $f*g=g*f$ (choose easier order).
+2. **Delta function shifting**: $f(t)*\delta(t-a) = f(t-a)$.
+	- E.g., $f*[\delta(t-a)+\delta(t+a)] = \boxed{f(t-a)+f(t+a)}$.
 
 ### 5. PDEs — Separation of Variables (8 Marks, ~1× per paper)
 
@@ -73,7 +75,7 @@
 	- General solution: $u=\sum C_n X_n T_n$.
 3. **Example**: $u_x=\beta u_y$, $u(0,y)=e^{-y}$
 	- Separation: $\frac{X'}{X}=\beta\frac{Y'}{Y}=\alpha$ → $X=e^{\alpha x}$, $Y=e^{\alpha y/\beta}$.
-	- BC gives $\alpha=-\beta$ → $u=e^{-\beta x-y}$.
+	- BC gives $\alpha=-\beta$ → $\boxed{u=e^{-\beta x-y}}$.
 
 ### 6. PDEs — Method of Characteristics (8-9 Marks, ~1× per paper)
 
@@ -87,7 +89,7 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 	- Apply BC.
 3. **Example**: $(x-1)u_x+yu_y=0$, $u=1-\frac{1}{x}$ on $y=x$
 	- Chars give $\alpha=\frac{y}{x-1}$.
-	- On BC: $\alpha=\frac{x}{x-1}$, $u=\frac{1}{\alpha}$ → solution $u=\frac{x-1}{y}$.
+	- On BC: $\alpha=\frac{x}{x-1}$, $u=\frac{1}{\alpha}$ → $\boxed{u=\frac{x-1}{y}}$.
 
 ### 7. PDEs — Change of Variables (8 Marks, ~1× per paper)
 
@@ -114,7 +116,7 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 	- Substitute back: $c=\int_a^b h(z)[f(z)+\lambda c\cdot g(z)]dz$. Solve for $c$.
 3. **Example**: $y=\cosh x-x+\frac{1}{6}\int_0^1 zy\,dz$
 	- Let $c=\int_0^1 zy\,dz$ → $y=\cosh x-x+\frac{c}{6}$.
-	- Substitute, solve: $c=\frac{12}{11}(\frac{3}{2}-e^{-1})$.
+	- Substitute, solve: $\boxed{c=\frac{12}{11}(\frac{3}{2}-e^{-1})}$.
 
 ### 9. Integral Equations — Convert to/from ODE (8-9 marks)
 
@@ -122,7 +124,7 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 	- E.g., $y''+\omega^2 y=f(x)$, $y(0)=0$, $y'(0)=v_0$:
 	- Result: $y=v_0 x+\int_0^x(x-z)f(z)dz-\omega^2\int_0^x(x-z)y(z)dz$ (Volterra).
 2. **Integral→ODE**: Differentiate using Leibniz rule.
-	- E.g., $y=2x+4\int_0^x(z-x)y\,dz$ → $y'=2-4\int_0^x y\,dz$ → $y''=-4y$.
+	- E.g., $y=2x+4\int_0^x(z-x)y\,dz$ → $y'=2-4\int_0^x y\,dz$ → $\boxed{y''=-4y}$.
 	- ICs from evaluating at $x=0$: $y(0)=0$, $y'(0)=2$.
 3. **Volterra with convolution kernel** $K(t-u)$:
 	- Take Laplace → $\tilde{y}=\frac{\tilde{f}}{1-\lambda\tilde{K}}$ → inverse.
@@ -138,7 +140,7 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 	- **No $x$ in $F$**: Beltrami identity $F-y'\frac{\partial F}{\partial y'}=C$ → solve for $y'$.
 3. **Example**: $I=\int_0^1(3x^2y'+(y')^2)dx$, $y(0)=y(1)=0$
 	- No $y$ in $F$ → use $\frac{\partial F}{\partial y'}=3x^2+2y'=C$.
-	- Solve: $y'=\frac{C-3x^2}{2}$ → integrate → apply BCs → $y=\frac{x(1-x^2)}{2}$, $I=-\frac{1}{10}$.
+	- Solve: $y'=\frac{C-3x^2}{2}$ → integrate → apply BCs → $y=\frac{x(1-x^2)}{2}$, $\boxed{I=-\frac{1}{10}}$.
 
 ### 11. Calculus of Variations — Constrained (Isoperimetric) (8-9 marks)
 
@@ -148,7 +150,7 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 	- Solve $\nabla f+\lambda\nabla g=0$ and $g=c$.
 3. **Example**: min $x^2+y^2$ subject to $y+x^2=1$
 	- Equations: $2x+2\lambda x=0$, $2y+\lambda=0$, $y+x^2=1$.
-	- Solution: min $\frac{3}{4}$ at $(\pm\frac{1}{\sqrt{2}},\frac{1}{2})$.
+	- Solution: $\boxed{\min = \frac{3}{4}}$ at $(\pm\frac{1}{\sqrt{2}},\frac{1}{2})$.
 
 ### 12. Fourier Transforms (8-9 Marks, ~1-2× per paper)
 
