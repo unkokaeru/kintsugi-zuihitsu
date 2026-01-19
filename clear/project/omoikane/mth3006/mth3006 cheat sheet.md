@@ -16,8 +16,8 @@
 
 1. **Gamma function**: $\Gamma(p) = \int_0^{\infty} t^{p-1}e^{-t}dt$. Prove $\Gamma(p+1) = p\Gamma(p)$: IBP with $u=t^p$, $dv=e^{-t}dt$ gives $[-t^pe^{-t}]_0^\infty + p\int_0^\infty t^{p-1}e^{-t}dt = p\Gamma(p)$. Values: $\Gamma(1)=1$, $\Gamma(n+1)=n!$, $\Gamma(\frac{1}{2})=\sqrt{\pi}$.
 2. **Double integral lemma**: $\int_a^x \int_a^s f(z)\,dz\,ds = \int_a^x (x-z)f(z)\,dz$.
-	- Proof: Region is $a \leq z \leq s \leq x$. Swap order: $z$ from $a$ to $x$, $s$ from $z$ to $x$.
-	- $\int_a^x \int_z^x f(z)\,ds\,dz = \int_a^x f(z)[s]_z^x dz = \int_a^x (x-z)f(z)\,dz$.
+	- Region: $\underbrace{a \leq z \leq s}_{\text{inner}},\; \underbrace{a \leq s \leq x}_{\text{outer}}$ $\Rightarrow$ swap: $\underbrace{a \leq z \leq x}_{\text{outer}},\; \underbrace{z \leq s \leq x}_{\text{inner}}$
+	- Evaluate: $\int_a^x \left(\int_z^x f(z)\,ds\right)dz = \int_a^x f(z)\cdot\left[s\right]_{s=z}^{s=x} dz = \int_a^x f(z)\cdot(x-z)\,dz$.
 3. **Euler**: $e^{i\theta}=\cos\theta+i\sin\theta$, $\sin\theta=\frac{e^{i\theta}-e^{-i\theta}}{2i}$, $\cos\theta=\frac{e^{i\theta}+e^{-i\theta}}{2}$
 4. **Leibniz rule**: $\frac{d}{dx}\int_{a(x)}^{b(x)} f(x,z)\,dz = f(x,b)b' - f(x,a)a' + \int_{a}^{b} \frac{\partial f}{\partial x}dz$
 5. **Delta function FT**: $\widetilde{\delta(t-a)+\delta(t+a)}(\omega) = \sqrt{\frac{2}{\pi}}\cos(a\omega)$
@@ -125,9 +125,12 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 
 ### 9. Integral Equations - Convert to/from ODE (8-9 marks)
 
-1. **ODE→Integral**: Integrate twice using double integral lemma.
+1. **ODE→Integral**: Integrate twice, apply double integral lemma.
 	- E.g., $y''+\omega^2 y=f(x)$, $y(0)=0$, $y'(0)=v_0$:
-	- Result: $y=v_0 x+\int_0^x(x-z)f(z)dz-\omega^2\int_0^x(x-z)y(z)dz$ (Volterra).
+	- Rearrange: $y'' = f(x) - \omega^2 y$.
+	- Integrate: $[y']_0^x = \int_0^x f\,ds - \omega^2\int_0^x y\,ds$ → $y' = v_0 + \int_0^x f\,ds - \omega^2\int_0^x y\,ds$.
+	- Integrate again: $y = v_0 x + \int_0^x\int_0^t f(s)\,ds\,dt - \omega^2\int_0^x\int_0^t y(s)\,ds\,dt$.
+	- Apply lemma: $\boxed{y = v_0 x + \int_0^x(x-z)f(z)\,dz - \omega^2\int_0^x(x-z)y(z)\,dz}$ (Volterra).
 2. **Integral→ODE**: Differentiate using Leibniz rule.
 	- E.g., $y=2x+4\int_0^x(z-x)y\,dz$ → $y'=2-4\int_0^x y\,dz$ → $\boxed{y''=-4y}$.
 	- ICs from evaluating at $x=0$: $y(0)=0$, $y'(0)=2$.
