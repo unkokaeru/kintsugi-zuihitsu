@@ -133,12 +133,12 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 
 1. **Method**: Compute $\frac{\partial F}{\partial y}$, $\frac{\partial F}{\partial y'}$, $\frac{d}{dx}(\frac{\partial F}{\partial y'})$ → solve ODE → apply BCs.
 	- If asked for stationary value: substitute $y(x)$ back into $I$.
-2. **Simplified cases**:
-	- No $y$ in $F$: $\frac{\partial F}{\partial y'}=C$.
-	- No $x$ in $F$: Beltrami identity $F-y'\frac{\partial F}{\partial y'}=C$.
+2. **Simplified cases** (reduce to 1st-order ODE):
+	- **No $y$ in $F$**: $\frac{\partial F}{\partial y}=0$ so $\frac{\partial F}{\partial y'}=C$ → solve for $y'$ → integrate.
+	- **No $x$ in $F$**: Beltrami identity $F-y'\frac{\partial F}{\partial y'}=C$ → solve for $y'$.
 3. **Example**: $I=\int_0^1(3x^2y'+(y')^2)dx$, $y(0)=y(1)=0$
-	- $\frac{\partial F}{\partial y}=0$ → E-L gives $y''=-3x$.
-	- Solution: $y=\frac{x(1-x^2)}{2}$, $I=-\frac{1}{10}$.
+	- No $y$ in $F$ → use $\frac{\partial F}{\partial y'}=3x^2+2y'=C$.
+	- Solve: $y'=\frac{C-3x^2}{2}$ → integrate → apply BCs → $y=\frac{x(1-x^2)}{2}$, $I=-\frac{1}{10}$.
 
 ### 11. Calculus of Variations — Constrained (Isoperimetric) (8-9 marks)
 
