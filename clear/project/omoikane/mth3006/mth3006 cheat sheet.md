@@ -15,7 +15,9 @@
 ### Key Proofs & Identities
 
 1. **Gamma function**: $\Gamma(p) = \int_0^{\infty} t^{p-1}e^{-t}dt$. Prove $\Gamma(p+1) = p\Gamma(p)$: IBP with $u=t^p$, $dv=e^{-t}dt$ gives $[-t^pe^{-t}]_0^\infty + p\int_0^\infty t^{p-1}e^{-t}dt = p\Gamma(p)$. Values: $\Gamma(1)=1$, $\Gamma(n+1)=n!$, $\Gamma(\frac{1}{2})=\sqrt{\pi}$.
-2. **Double integral lemma**: $\int_a^x \int_a^s f(z)\,dz\,ds = \int_a^x (x-z)f(z)\,dz$. Proof: swap order, region $a≤z≤s≤x$ becomes $z≤s≤x$, so $\int_a^x f(z)[s]_z^x dz$.
+2. **Double integral lemma**: $\int_a^x \int_a^s f(z)\,dz\,ds = \int_a^x (x-z)f(z)\,dz$.
+	- Proof: Region is $a \leq z \leq s \leq x$. Swap order: $z$ from $a$ to $x$, $s$ from $z$ to $x$.
+	- $\int_a^x \int_z^x f(z)\,ds\,dz = \int_a^x f(z)[s]_z^x dz = \int_a^x (x-z)f(z)\,dz$.
 3. **Euler**: $e^{i\theta}=\cos\theta+i\sin\theta$, $\sin\theta=\frac{e^{i\theta}-e^{-i\theta}}{2i}$, $\cos\theta=\frac{e^{i\theta}+e^{-i\theta}}{2}$
 4. **Leibniz rule**: $\frac{d}{dx}\int_{a(x)}^{b(x)} f(x,z)\,dz = f(x,b)b' - f(x,a)a' + \int_{a}^{b} \frac{\partial f}{\partial x}dz$
 5. **Delta function FT**: $\widetilde{\delta(t-a)+\delta(t+a)}(\omega) = \sqrt{\frac{2}{\pi}}\cos(a\omega)$
@@ -24,7 +26,7 @@
 
 ## Question Topics (ordered by Frequency × marks)
 
-### 1. Laplace Transforms — Evaluate Integrals (8 Marks, ~2-3× per paper)
+### 1. Laplace Transforms - Evaluate Integrals (8 Marks, ~2-3× per paper)
 
 1. **Method**: Match integral with $\tilde{f}(s)=\int_{0}^{\infty}f(t)e^{-st}dt$.
 	- Identify $f(t)$ and the value of $s$.
@@ -33,7 +35,7 @@
 	- Set $s=a$, use $\mathcal{L}\{t\}=\frac{1}{s^2}$, $\mathcal{L}\{\sin t\}=\frac{1}{s^2+1}$.
 	- Result: $\boxed{\frac{1}{a^2}+\frac{1}{a^2+1}}$.
 
-### 2. Laplace Transforms — Solve ODEs (8-15 marks)
+### 2. Laplace Transforms - Solve ODEs (8-15 marks)
 
 1. **Method**: Take $\mathcal{L}$ of entire equation.
 	- Use $\mathcal{L}\{y'\}=s\tilde{y}-y(0)$, $\mathcal{L}\{y''\}=s^2\tilde{y}-sy(0)-y'(0)$.
@@ -43,7 +45,7 @@
 	- Transform: $(s+1)\tilde{x}=\frac{2}{s+1}+\frac{1}{s+2}$
 	- Solve for $\tilde{x}$, then inverse.
 
-### 3. Inverse Laplace Transform — Partial Fractions (8-9 marks)
+### 3. Inverse Laplace Transform - Partial Fractions (8-9 marks)
 
 | Factor type | Decomposition |
 |-------------|---------------|
@@ -54,18 +56,21 @@
 1. **Method**: Decompose → find coefficients (cover-up or equate) → invert each term.
 	- $\mathcal{L}^{-1}\{\frac{1}{s-a}\}=e^{at}$, $\mathcal{L}^{-1}\{\frac{\omega}{s^2+\omega^2}\}=\sin\omega t$, etc.
 
-### 4. Inverse Laplace Transform — Convolution (8-9 marks)
+### 4. Convolution (8-9 marks)
 
-**When**: $\tilde{f}(s)=F(s)G(s)$ is a product (e.g., $\frac{1}{s^3(s-1)}$).
+**Formula**: $(f*g)(t)=\int_0^t f(\tau)g(t-\tau)d\tau$
 
-**Formula**: $\mathcal{L}^{-1}\{FG\}=(f*g)(t)=\int_0^t f(\tau)g(t-\tau)d\tau$
+**Properties**:
+- $f*g=g*f$ (commutative) - choose whichever order makes the integral easier.
+- $f*(g+h)=f*g+f*h$ (distributive) - expand sums before convolving.
+- $f(t)*\delta(t-a) = f(t-a)$ (shifting) - delta functions just shift the argument.
 
-1. **Method**: Find $f=\mathcal{L}^{-1}\{F\}$, $g=\mathcal{L}^{-1}\{G\}$ → compute integral.
-	- Note: $f*g=g*f$ (choose easier order).
-2. **Delta function shifting**: $f(t)*\delta(t-a) = f(t-a)$.
-	- E.g., $f*[\delta(t-a)+\delta(t+a)] = \boxed{f(t-a)+f(t+a)}$.
+1. **For inverse Laplace**: When $\tilde{f}(s)=F(s)G(s)$ is a product, use $\mathcal{L}^{-1}\{FG\}=f*g$.
+	- Find $f=\mathcal{L}^{-1}\{F\}$, $g=\mathcal{L}^{-1}\{G\}$ → compute convolution integral.
+2. **Direct convolution**: Apply formula directly, use properties to simplify.
+	- E.g., $f*[\delta(t-a)+\delta(t+a)] = \boxed{f(t-a)+f(t+a)}$ (distributive then shifting).
 
-### 5. PDEs — Separation of Variables (8 Marks, ~1× per paper)
+### 5. PDEs - Separation of Variables (8 Marks, ~1× per paper)
 
 1. **Method**: Assume $u(x,y)=X(x)Y(y)$ (or $u(x,t)=X(x)T(t)$).
 	- Substitute into PDE, divide by $XY$ to separate.
@@ -77,7 +82,7 @@
 	- Separation: $\frac{X'}{X}=\beta\frac{Y'}{Y}=\alpha$ → $X=e^{\alpha x}$, $Y=e^{\alpha y/\beta}$.
 	- BC gives $\alpha=-\beta$ → $\boxed{u=e^{-\beta x-y}}$.
 
-### 6. PDEs — Method of Characteristics (8-9 Marks, ~1× per paper)
+### 6. PDEs - Method of Characteristics (8-9 Marks, ~1× per paper)
 
 For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac{du}{C})$.
 
@@ -91,7 +96,7 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 	- Chars give $\alpha=\frac{y}{x-1}$.
 	- On BC: $\alpha=\frac{x}{x-1}$, $u=\frac{1}{\alpha}$ → $\boxed{u=\frac{x-1}{y}}$.
 
-### 7. PDEs — Change of Variables (8 Marks, ~1× per paper)
+### 7. PDEs - Change of Variables (8 Marks, ~1× per paper)
 
 **Chain rule formulas** for new variables $\xi(x,y)$, $\eta(x,y)$:
 - $u_x=u_\xi\xi_x+u_\eta\eta_x$
@@ -102,7 +107,7 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 	- Compute: $\xi_x=-1$, $\xi_y=1$, $\eta_x=2$, $\eta_y=1$.
 	- Substitute and simplify.
 
-### 8. Integral Equations — Separable Kernels (8-9 Marks, ~2× per paper)
+### 8. Integral Equations - Separable Kernels (8-9 Marks, ~2× per paper)
 
 | Type | Limits | $y$ appears |
 |------|--------|-------------|
@@ -118,7 +123,7 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 	- Let $c=\int_0^1 zy\,dz$ → $y=\cosh x-x+\frac{c}{6}$.
 	- Substitute, solve: $\boxed{c=\frac{12}{11}(\frac{3}{2}-e^{-1})}$.
 
-### 9. Integral Equations — Convert to/from ODE (8-9 marks)
+### 9. Integral Equations - Convert to/from ODE (8-9 marks)
 
 1. **ODE→Integral**: Integrate twice using double integral lemma.
 	- E.g., $y''+\omega^2 y=f(x)$, $y(0)=0$, $y'(0)=v_0$:
@@ -129,7 +134,7 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 3. **Volterra with convolution kernel** $K(t-u)$:
 	- Take Laplace → $\tilde{y}=\frac{\tilde{f}}{1-\lambda\tilde{K}}$ → inverse.
 
-### 10. Calculus of Variations — Euler-Lagrange (8-9 Marks, ~1-2× per paper)
+### 10. Calculus of Variations - Euler-Lagrange (8-9 Marks, ~1-2× per paper)
 
 **E-L equation**: For $I[y]=\int_{x_1}^{x_2}F(x,y,y')dx$, stationary $y$ satisfies $\frac{\partial F}{\partial y}-\frac{d}{dx}\frac{\partial F}{\partial y'}=0$.
 
@@ -142,7 +147,7 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 	- No $y$ in $F$ → use $\frac{\partial F}{\partial y'}=3x^2+2y'=C$.
 	- Solve: $y'=\frac{C-3x^2}{2}$ → integrate → apply BCs → $y=\frac{x(1-x^2)}{2}$, $\boxed{I=-\frac{1}{10}}$.
 
-### 11. Calculus of Variations — Constrained (Isoperimetric) (8-9 marks)
+### 11. Calculus of Variations - Constrained (Isoperimetric) (8-9 marks)
 
 1. **Isoperimetric**: Extremize $I=\int F\,dx$ subject to $J=\int G\,dx=\ell$.
 	- Apply E-L to $H=F+\lambda G$.
