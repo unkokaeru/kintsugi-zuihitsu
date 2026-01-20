@@ -83,12 +83,16 @@
 
 ### 5. PDEs - Separation of Variables (8 Marks, ~1× per paper)
 
-| Separated ODE | General Solution |
-|---------------|------------------|
-| $\frac{X'}{X}=\alpha$ | $X=Ae^{\alpha x}$ |
-| $\frac{X''}{X}=0$ | $X=Ax+B$ |
-| $\frac{X''}{X}=\lambda>0$ | $X=Ae^{\sqrt{\lambda}x}+Be^{-\sqrt{\lambda}x}$ (or $A\cosh+B\sinh$) |
-| $\frac{X''}{X}=-\lambda<0$ | $X=A\cos(\sqrt{\lambda}x)+B\sin(\sqrt{\lambda}x)$ |
+**1st order** — direct integration: $\frac{X'}{X} = g(x)$ → $\frac{dX}{X} = g(x)\,dx$ → $\ln|X| = \int g(x)\,dx$ → $X = A\exp\left(\int g(x)\,dx\right)$.
+- E.g. $X'/X = \alpha x$ → $\ln|X| = \frac{\alpha x^2}{2}$ → $X = Ae^{\alpha x^2/2}$.
+
+**2nd order** — use table:
+
+| Separated ODE              | General Solution                                                    |
+| -------------------------- | ------------------------------------------------------------------- |
+| $\frac{X''}{X}=0$          | $X=Ax+B$                                                            |
+| $\frac{X''}{X}=\lambda>0$  | $X=Ae^{\sqrt{\lambda}x}+Be^{-\sqrt{\lambda}x}$ (or $A\cosh+B\sinh$) |
+| $\frac{X''}{X}=-\lambda<0$ | $X=A\cos(\sqrt{\lambda}x)+B\sin(\sqrt{\lambda}x)$                   |
 
 1. **Method**: Assume $u(x,y)=X(x)Y(y)$ (or $u(x,t)=X(x)T(t)$).
 	- Substitute into PDE, divide by $XY$ to separate.
