@@ -110,8 +110,10 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 ### 7. PDEs - Change of Variables (8 Marks, ~1× per paper)
 
 **Chain rule formulas** for new variables $\xi(x,y)$, $\eta(x,y)$:
-- $u_x=u_\xi\xi_x+u_\eta\eta_x$
-- $u_{xx}=u_{\xi\xi}\xi_x^2+2u_{\xi\eta}\xi_x\eta_x+u_{\eta\eta}\eta_x^2+u_\xi\xi_{xx}+u_\eta\eta_{xx}$
+- $u_x=u_\xi\xi_x+u_\eta\eta_x$, $\quad u_y=u_\xi\xi_y+u_\eta\eta_y$
+- $u_{xx}=u_{\xi\xi}\xi_x^2+2u_{\xi\eta}\xi_x\eta_x+u_{\eta\eta}\eta_x^2 \;(+u_\xi\xi_{xx}+u_\eta\eta_{xx}$ if $\xi,\eta$ nonlinear$)$
+- $u_{yy}=u_{\xi\xi}\xi_y^2+2u_{\xi\eta}\xi_y\eta_y+u_{\eta\eta}\eta_y^2$
+- $u_{xy}=u_{\xi\xi}\xi_x\xi_y+u_{\xi\eta}(\xi_x\eta_y+\xi_y\eta_x)+u_{\eta\eta}\eta_x\eta_y$
 
 1. **Method**: Compute partials of $\xi,\eta$ → substitute into PDE → collect coefficients → simplify.
 2. **Example**: Show $\xi=y-x$, $\eta=y+2x$ reduces $u_{xx}-u_{xy}-2u_{yy}=0$ to $u_{\xi\eta}=0$.
