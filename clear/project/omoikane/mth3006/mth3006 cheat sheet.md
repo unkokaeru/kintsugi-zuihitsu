@@ -15,13 +15,21 @@
 
 ### Key Proofs & Identities
 
-1. **Gamma function**: $\Gamma(p) = \int_0^{\infty} t^{p-1}e^{-t}dt$. Prove $\Gamma(p+1) = p\Gamma(p)$: IBP with $u=t^p$, $dv=e^{-t}dt$ gives $[-t^pe^{-t}]_0^\infty + p\int_0^\infty t^{p-1}e^{-t}dt = p\Gamma(p)$. Values: $\Gamma(1)=1$, $\Gamma(n+1)=n!$, $\Gamma(\frac{1}{2})=\sqrt{\pi}$.
+> **Potential "show that" / "derive" questions**: Γ(p+1)=pΓ(p), double integral lemma, convolution theorems (Laplace & Fourier).
+
+1. **Gamma function**: $\Gamma(p) = \int_0^{\infty} t^{p-1}e^{-t}dt$. Prove $\Gamma(p+1) = p\Gamma(p)$: integration by parts with $u=t^p$, $dv=e^{-t}dt$ gives $[-t^pe^{-t}]_0^\infty + p\int_0^\infty t^{p-1}e^{-t}dt = p\Gamma(p)$. Values: $\Gamma(1)=1$, $\Gamma(n+1)=n!$, $\Gamma(\frac{1}{2})=\sqrt{\pi}$.
 2. **Double integral lemma**: $\int_a^x \int_a^s f(z)\,dz\,ds = \int_a^x (x-z)f(z)\,dz$.
-	- Region: $\underbrace{a \leq z \leq s}_{\text{inner}},\; \underbrace{a \leq s \leq x}_{\text{outer}}$ $\Rightarrow$ swap: $\underbrace{a \leq z \leq x}_{\text{outer}},\; \underbrace{z \leq s \leq x}_{\text{inner}}$
-	- Evaluate: $\int_a^x \left(\int_z^x f(z)\,ds\right)dz = \int_a^x f(z)\cdot\left[s\right]_{s=z}^{s=x} dz = \int_a^x f(z)\cdot(x-z)\,dz$.
-3. **Euler**: $e^{i\theta}=\cos\theta+i\sin\theta$, $\sin\theta=\frac{e^{i\theta}-e^{-i\theta}}{2i}$, $\cos\theta=\frac{e^{i\theta}+e^{-i\theta}}{2}$
-4. **Leibniz rule**: $\frac{d}{dx}\int_{a(x)}^{b(x)} f(x,z)\,dz = f(x,b)b' - f(x,a)a' + \int_{a}^{b} \frac{\partial f}{\partial x}dz$
-5. **Delta function FT**: $\widetilde{\delta(t-a)+\delta(t+a)}(\omega) = \sqrt{\frac{2}{\pi}}\cos(a\omega)$
+	- *Method 1 (Region swap)*: $\underbrace{a \leq z \leq s}_{\text{inner}},\; \underbrace{a \leq s \leq x}_{\text{outer}}$ $\Rightarrow$ $\underbrace{a \leq z \leq x}_{\text{outer}},\; \underbrace{z \leq s \leq x}_{\text{inner}}$ → $\int_a^x (x-z)f(z)\,dz$.
+	- *Method 2 (Integration by parts)*: Let $F(s)=\int_a^s f(z)\,dz$, so $F'(s)=f(s)$, $F(a)=0$.
+		- $\int_a^x F(s)\,ds = [sF(s)]_a^x - \int_a^x sf(s)\,ds = xF(x) - \int_a^x sf(s)\,ds = \int_a^x (x-s)f(s)\,ds$.
+3. **Convolution theorem (Laplace)**: $\mathcal{L}\{f*g\} = \tilde{f}(s)\tilde{g}(s)$.
+	- $\mathcal{L}\{f*g\} = \int_0^\infty e^{-st}\left(\int_0^t f(\tau)g(t-\tau)d\tau\right)dt$. Swap order: $\int_0^\infty f(\tau)\left(\int_\tau^\infty e^{-st}g(t-\tau)dt\right)d\tau$.
+	- Sub $u=t-\tau$: $\int_0^\infty f(\tau)e^{-s\tau}\left(\int_0^\infty e^{-su}g(u)du\right)d\tau = \tilde{f}(s)\tilde{g}(s)$.
+4. **Convolution theorem (Fourier)**: $\widetilde{f*g}(\omega) = \sqrt{2\pi}\,\tilde{f}(\omega)\tilde{g}(\omega)$.
+	- Similar: swap order in $\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{-i\omega t}\left(\int_{-\infty}^{\infty}f(\tau)g(t-\tau)d\tau\right)dt$, sub $u=t-\tau$, separate into product.
+5. **Euler**: $e^{i\theta}=\cos\theta+i\sin\theta$, $\sin\theta=\frac{e^{i\theta}-e^{-i\theta}}{2i}$, $\cos\theta=\frac{e^{i\theta}+e^{-i\theta}}{2}$
+6. **Leibniz rule**: $\frac{d}{dx}\int_{a(x)}^{b(x)} f(x,z)\,dz = f(x,b)b' - f(x,a)a' + \int_{a}^{b} \frac{\partial f}{\partial x}dz$
+7. **Delta function FT**: $\widetilde{\delta(t-a)+\delta(t+a)}(\omega) = \sqrt{\frac{2}{\pi}}\cos(a\omega)$
 
 ---
 
@@ -69,6 +77,7 @@
 
 1. **For inverse Laplace**: When $\tilde{f}(s)=F(s)G(s)$ is a product, use $\mathcal{L}^{-1}\{FG\}=f*g$.
 	- Find $f=\mathcal{L}^{-1}\{F\}$, $g=\mathcal{L}^{-1}\{G\}$ → compute convolution integral.
+	- E.g. $\mathcal{L}^{-1}\{\frac{1}{s(s+1)}\}$: $F=\frac{1}{s}\to 1$, $G=\frac{1}{s+1}\to e^{-t}$ → $(1*e^{-t})=\int_0^t e^{-(t-\tau)}d\tau = 1-e^{-t}$.
 2. **Direct convolution**: Apply formula directly, use properties to simplify.
 	- E.g., $f*[\delta(t-a)+\delta(t+a)] = \boxed{f(t-a)+f(t+a)}$ (distributive then shifting).
 
@@ -203,7 +212,8 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 
 ### 13. Green's Functions (8-9 Marks, ~1× per paper)
 
-**Solution form**: For $Ly=f(x)$ with BCs: $y(x)=\int_a^b G(x,\xi)f(\xi)d\xi$.
+**Solution form**: For $Ly=f(x)$ with BCs: $y(x)=\int_a^b G(x,z)f(z)\,dz$ where $z$ is dummy variable.
+- **Limits**: Use domain from BCs. If $G=0$ for $x<z$, integral reduces to $\int_a^x$ (only $z<x$ contributes).
 
 1. **Properties of $G$**:
 	- $LG=0$ for $x≠\xi$.
