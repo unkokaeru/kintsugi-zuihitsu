@@ -4,13 +4,14 @@
 
 ### Laplace Transform Table
 
-| $f(t)$ | $\tilde{f}(s)$ | | $f(t)$ | $\tilde{f}(s)$ |
-|--------|---------------|---|--------|---------------|
-| $1$ | $\frac{1}{s}$ | | $e^{at}$ | $\frac{1}{s-a}$ |
-| $t^n$ | $\frac{n!}{s^{n+1}}$ | | $\sin(\omega t)$ | $\frac{\omega}{s^2+\omega^2}$ |
-| $t^p$ | $\frac{\Gamma(p+1)}{s^{p+1}}$ | | $\cos(\omega t)$ | $\frac{s}{s^2+\omega^2}$ |
-| $\sinh(at)$ | $\frac{a}{s^2-a^2}$ | | $\cosh(at)$ | $\frac{s}{s^2-a^2}$ |
-| $y'$ | $s\tilde{y} - y(0)$ | | $y''$ | $s^2\tilde{y} - sy(0) - y'(0)$ |
+| $f(t)$                    | $\tilde{f}(s)$                |     | $f(t)$                               | $\tilde{f}(s)$                 |
+| ------------------------- | ----------------------------- | --- | ------------------------------------ | ------------------------------ |
+| $1$                       | $\frac{1}{s}$                 |     | $e^{at}$                             | $\frac{1}{s-a}$                |
+| $t^n$                     | $\frac{n!}{s^{n+1}}$          |     | $\sin(\omega t)$                     | $\frac{\omega}{s^2+\omega^2}$  |
+| $t^p$                     | $\frac{\Gamma(p+1)}{s^{p+1}}$ |     | $\cos(\omega t)$                     | $\frac{s}{s^2+\omega^2}$       |
+| $\sinh(at)$               | $\frac{a}{s^2-a^2}$           |     | $\cosh(at)$                          | $\frac{s}{s^2-a^2}$            |
+| $y'$                      | $s\tilde{y} - y(0)$           |     | $y''$                                | $s^2\tilde{y} - sy(0) - y'(0)$ |
+| **s-shift**: $e^{at}f(t)$ | $\tilde{f}(s-a)$              |     | e.g. $\frac{1}{(s+1)^2} \to te^{-t}$ | (shift $\frac{1}{s^2}\to t$)   |
 
 ### Key Proofs & Identities
 
@@ -54,7 +55,8 @@
 | Quadratic | $\frac{As+B}{as^2+bs+c}$ |
 
 1. **Method**: Decompose → find coefficients (cover-up or equate) → invert each term.
-	- $\mathcal{L}^{-1}\{\frac{1}{s-a}\}=e^{at}$, $\mathcal{L}^{-1}\{\frac{\omega}{s^2+\omega^2}\}=\sin\omega t$, etc.
+	- **Linearity**: $\mathcal{L}^{-1}\{F+G\} = \mathcal{L}^{-1}\{F\} + \mathcal{L}^{-1}\{G\}$ — handle each fraction separately, don't combine.
+	- $\mathcal{L}^{-1}\{\frac{1}{s-a}\}=e^{at}$, $\mathcal{L}^{-1}\{\frac{1}{(s-a)^2}\}=te^{at}$, $\mathcal{L}^{-1}\{\frac{\omega}{s^2+\omega^2}\}=\sin\omega t$, etc.
 
 ### 4. Convolution (8-9 marks)
 
