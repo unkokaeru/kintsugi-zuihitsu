@@ -98,9 +98,12 @@
 For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac{du}{C})$.
 
 1. **Homogeneous** ($C=0$):
-	- Solve $\frac{dx}{A}=\frac{dy}{B}$ → integrate to get $\alpha(x,y)=\text{const}$ (the characteristic).
+	- Solve $\frac{dx}{A}=\frac{dy}{B}$ → cross-multiply, integrate both sides: $\int\frac{1}{A}dx = \int\frac{1}{B}dy + c$.
+	- Rearrange to $\alpha(x,y)=c$ (the constant of integration becomes the characteristic constant).
 	- General solution: $u=f(\alpha)$ for arbitrary $f$.
-	- Apply BC: on BC curve, express $\alpha$ and $u$ in terms of one variable → find $f$.
+	- **Find $f$**: On BC curve, compute $\alpha$ and $u$ both in terms of one variable (say $x$).
+		- Write $u = f(\alpha)$ → invert to express $f(\alpha) = \text{(expression in }\alpha\text{)}$.
+		- Substitute back: $u = f\left(\alpha(x,y)\right)$.
 2. **Inhomogeneous** ($C\neq 0$):
 	- Also solve $\frac{dx}{A}=\frac{du}{C}$ (or $\frac{dy}{B}=\frac{du}{C}$) → get $u$ in terms of $x$ (or $y$) and a constant.
 	- Combine with characteristic $\alpha$ to get general solution.
