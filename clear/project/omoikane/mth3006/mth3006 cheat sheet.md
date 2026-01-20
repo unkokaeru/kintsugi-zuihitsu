@@ -75,12 +75,13 @@
 1. **Method**: Assume $u(x,y)=X(x)Y(y)$ (or $u(x,t)=X(x)T(t)$).
 	- Substitute into PDE, divide by $XY$ to separate.
 	- Each side equals constant $\alpha$ (or $-\lambda$) → two ODEs.
-	- Solve ODEs, apply boundary conditions.
+	- Solve ODEs: $\frac{X'}{X}=\alpha \Rightarrow X=Ae^{\alpha x}$; $\frac{X''}{X}=-\lambda \Rightarrow X=A\cos(\sqrt{\lambda}x)+B\sin(\sqrt{\lambda}x)$.
+	- Combine: $u = XY$ (with constant absorbed). Apply BC to find $\alpha$ (or $\lambda$).
 2. **2nd-order (heat/wave)**: Get eigenvalues $\lambda_n$, eigenfunctions $X_n$.
 	- General solution: $u=\sum C_n X_n T_n$.
 3. **Example**: $u_x=\beta u_y$, $u(0,y)=e^{-y}$
-	- Separation: $\frac{X'}{X}=\beta\frac{Y'}{Y}=\alpha$ → $X=e^{\alpha x}$, $Y=e^{\alpha y/\beta}$.
-	- BC gives $\alpha=-\beta$ → $\boxed{u=e^{-\beta x-y}}$.
+	- Separation: $\frac{X'}{X}=\beta\frac{Y'}{Y}=\alpha$ → $X=Ae^{\alpha x}$, $Y=Be^{\alpha y/\beta}$ → $u=Ce^{\alpha x + \alpha y/\beta}$.
+	- Apply BC: $u(0,y)=Ce^{\alpha y/\beta}=e^{-y}$ → $C=1$, $\alpha/\beta=-1$ → $\boxed{u=e^{-\beta x-y}}$.
 
 ### 6. PDEs - Method of Characteristics (8-9 Marks, ~1× per paper)
 
@@ -125,11 +126,12 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 
 ### 9. Integral Equations - Convert to/from ODE (8-9 marks)
 
-1. **ODE→Integral**: Integrate twice, apply double integral lemma.
+1. **ODE→Integral**: Integrate twice, apply double integral lemma (see section 0.2).
+	- Use dummy variables ($s$, $t$, $z$) for integration; original variable ($x$) stays as the limit.
 	- E.g., $y''+\omega^2 y=f(x)$, $y(0)=0$, $y'(0)=v_0$:
 	- Rearrange: $y'' = f(x) - \omega^2 y$.
-	- Integrate: $[y']_0^x = \int_0^x f\,ds - \omega^2\int_0^x y\,ds$ → $y' = v_0 + \int_0^x f\,ds - \omega^2\int_0^x y\,ds$.
-	- Integrate again: $y = v_0 x + \int_0^x\int_0^t f(s)\,ds\,dt - \omega^2\int_0^x\int_0^t y(s)\,ds\,dt$.
+	- Integrate ($x \to s$): $[y']_0^x = \int_0^x f(s)\,ds - \omega^2\int_0^x y(s)\,ds$ → $y' = v_0 + \int_0^x f(s)\,ds - \omega^2\int_0^x y(s)\,ds$.
+	- Integrate again ($x \to t$): $y = v_0 x + \int_0^x\int_0^t f(s)\,ds\,dt - \omega^2\int_0^x\int_0^t y(s)\,ds\,dt$.
 	- Apply lemma: $\boxed{y = v_0 x + \int_0^x(x-z)f(z)\,dz - \omega^2\int_0^x(x-z)y(z)\,dz}$ (Volterra).
 2. **Integral→ODE**: Differentiate using Leibniz rule.
 	- E.g., $y=2x+4\int_0^x(z-x)y\,dz$ → $y'=2-4\int_0^x y\,dz$ → $\boxed{y''=-4y}$.
