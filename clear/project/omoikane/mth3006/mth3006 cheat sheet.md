@@ -72,14 +72,27 @@
 
 ### 5. PDEs - Separation of Variables (8 Marks, ~1× per paper)
 
+| Separated ODE | General Solution |
+|---------------|------------------|
+| $\frac{X'}{X}=\alpha$ | $X=Ae^{\alpha x}$ |
+| $\frac{X''}{X}=0$ | $X=Ax+B$ |
+| $\frac{X''}{X}=\lambda>0$ | $X=Ae^{\sqrt{\lambda}x}+Be^{-\sqrt{\lambda}x}$ (or $A\cosh+B\sinh$) |
+| $\frac{X''}{X}=-\lambda<0$ | $X=A\cos(\sqrt{\lambda}x)+B\sin(\sqrt{\lambda}x)$ |
+
 1. **Method**: Assume $u(x,y)=X(x)Y(y)$ (or $u(x,t)=X(x)T(t)$).
 	- Substitute into PDE, divide by $XY$ to separate.
-	- Each side equals constant $\alpha$ (or $-\lambda$) → two ODEs.
-	- Solve ODEs: $\frac{X'}{X}=\alpha \Rightarrow X=Ae^{\alpha x}$; $\frac{X''}{X}=-\lambda \Rightarrow X=A\cos(\sqrt{\lambda}x)+B\sin(\sqrt{\lambda}x)$.
-	- Combine: $u = XY$ (with constant absorbed). Apply BC to find $\alpha$ (or $\lambda$).
-2. **2nd-order (heat/wave)**: Get eigenvalues $\lambda_n$, eigenfunctions $X_n$.
-	- General solution: $u=\sum C_n X_n T_n$.
-3. **Example**: $u_x=\beta u_y$, $u(0,y)=e^{-y}$
+	- Each side equals constant → two ODEs. Solve using table above.
+	- Combine: $u = XY$ (absorb one constant). Apply BC to find separation constant.
+2. **Heat/wave (eigenvalue problems)**: BCs on $X$ determine eigenvalues $\lambda_n$, eigenfunctions $X_n$.
+
+| BCs on $[0,L]$ | Eigenvalues | Eigenfunctions |
+|----------------|-------------|----------------|
+| $X(0)=X(L)=0$ | $\lambda_n=\left(\frac{n\pi}{L}\right)^2$ | $X_n=\sin\frac{n\pi x}{L}$ |
+| $X'(0)=X'(L)=0$ | $\lambda_n=\left(\frac{n\pi}{L}\right)^2$ | $X_n=\cos\frac{n\pi x}{L}$ (incl. $\lambda_0=0$) |
+| $X(0)=X'(L)=0$ | $\lambda_n=\left(\frac{(2n-1)\pi}{2L}\right)^2$ | $X_n=\sin\frac{(2n-1)\pi x}{2L}$ |
+
+- General solution: $u=\sum C_n X_n T_n$. Find $C_n$ via orthogonality/Fourier.
+1. **Example**: $u_x=\beta u_y$, $u(0,y)=e^{-y}$
 	- Separation: $\frac{X'}{X}=\beta\frac{Y'}{Y}=\alpha$ → $X=Ae^{\alpha x}$, $Y=Be^{\alpha y/\beta}$ → $u=Ce^{\alpha x + \alpha y/\beta}$.
 	- Apply BC: $u(0,y)=Ce^{\alpha y/\beta}=e^{-y}$ → $C=1$, $\alpha/\beta=-1$ → $\boxed{u=e^{-\beta x-y}}$.
 
