@@ -4,14 +4,14 @@
 
 ### Laplace Transform Table
 
-| $f(t)$                    | $\tilde{f}(s)$                |     | $f(t)$                               | $\tilde{f}(s)$                 |
-| ------------------------- | ----------------------------- | --- | ------------------------------------ | ------------------------------ |
-| $1$                       | $\frac{1}{s}$                 |     | $e^{at}$                             | $\frac{1}{s-a}$                |
-| $t^n$                     | $\frac{n!}{s^{n+1}}$          |     | $\sin(\omega t)$                     | $\frac{\omega}{s^2+\omega^2}$  |
-| $t^p$                     | $\frac{\Gamma(p+1)}{s^{p+1}}$ |     | $\cos(\omega t)$                     | $\frac{s}{s^2+\omega^2}$       |
-| $\sinh(at)$               | $\frac{a}{s^2-a^2}$           |     | $\cosh(at)$                          | $\frac{s}{s^2-a^2}$            |
-| $y'$                      | $s\tilde{y} - y(0)$           |     | $y''$                                | $s^2\tilde{y} - sy(0) - y'(0)$ |
-| **s-shift**: $e^{at}f(t)$ | $\tilde{f}(s-a)$              |     | e.g. $\frac{1}{(s+1)^2} \to te^{-t}$ | (shift $\frac{1}{s^2}\to t$)   |
+| $f(t)$ | $\tilde{f}(s)$ | | $f(t)$ | $\tilde{f}(s)$ |
+|--------|---------------|---|--------|---------------|
+| $1$ | $\frac{1}{s}$ | | $e^{at}$ | $\frac{1}{s-a}$ |
+| $t^n$ | $\frac{n!}{s^{n+1}}$ | | $\sin(\omega t)$ | $\frac{\omega}{s^2+\omega^2}$ |
+| $t^p$ | $\frac{\Gamma(p+1)}{s^{p+1}}$ | | $\cos(\omega t)$ | $\frac{s}{s^2+\omega^2}$ |
+| $\sinh(at)$ | $\frac{a}{s^2-a^2}$ | | $\cosh(at)$ | $\frac{s}{s^2-a^2}$ |
+| $y'$ | $s\tilde{y} - y(0)$ | | $y''$ | $s^2\tilde{y} - sy(0) - y'(0)$ |
+| **Shift theorem**: $e^{at}f(t)$ | $\tilde{f}(s-a)$ | | e.g. $\frac{1}{(s+1)^2} \to te^{-t}$ | (shift $\frac{1}{s^2}\to t$) |
 
 ### Key Proofs & Identities
 
@@ -107,9 +107,10 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 		- Write $u = f(\alpha)$ → invert to express $f(\alpha) = \text{(expression in }\alpha\text{)}$.
 		- Substitute back: $u = f\left(\alpha(x,y)\right)$.
 2. **Inhomogeneous** ($C\neq 0$):
-	- Also solve $\frac{dx}{A}=\frac{du}{C}$ (or $\frac{dy}{B}=\frac{du}{C}$) → get $u$ in terms of $x$ (or $y$) and a constant.
-	- Combine with characteristic $\alpha$ to get general solution.
-	- Apply BC to find arbitrary function/constant.
+	- Get $\alpha(x,y)=c_1$ from $\frac{dx}{A}=\frac{dy}{B}$ (same as homogeneous).
+	- Also solve $\frac{dx}{A}=\frac{du}{C}$ → integrate: $\int\frac{1}{A}dx = \int\frac{1}{C}du + c_2$ → rearrange to $\beta(x,u)=c_2$.
+	- General solution: $c_2 = g(c_1)$ → $\beta = g(\alpha)$ for arbitrary $g$.
+	- **Find $g$**: On BC curve, compute $\alpha$ and $\beta$ both in terms of one variable → invert to get $g$.
 3. **Example**: $(x-1)u_x+yu_y=0$, $u=1-\frac{1}{x}$ on $y=x$
 	- Chars: $\frac{dx}{x-1}=\frac{dy}{y}$ → $\ln|y|=\ln|x-1|+c$ → $\alpha=\frac{y}{x-1}=\text{const}$.
 	- General: $u=f(\alpha)=f\left(\frac{y}{x-1}\right)$.
@@ -153,11 +154,15 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 	- Integrate ($x \to s$): $[y']_0^x = \int_0^x f(s)\,ds - \omega^2\int_0^x y(s)\,ds$ → $y' = v_0 + \int_0^x f(s)\,ds - \omega^2\int_0^x y(s)\,ds$.
 	- Integrate again ($x \to t$): $y = v_0 x + \int_0^x\int_0^t f(s)\,ds\,dt - \omega^2\int_0^x\int_0^t y(s)\,ds\,dt$.
 	- Apply lemma: $\boxed{y = v_0 x + \int_0^x(x-z)f(z)\,dz - \omega^2\int_0^x(x-z)y(z)\,dz}$ (Volterra).
-2. **Integral→ODE**: Differentiate using Leibniz rule.
-	- E.g., $y=2x+4\int_0^x(z-x)y\,dz$ → $y'=2-4\int_0^x y\,dz$ → $\boxed{y''=-4y}$.
-	- ICs from evaluating at $x=0$: $y(0)=0$, $y'(0)=2$.
-3. **Volterra with convolution kernel** $K(t-u)$:
-	- Take Laplace → $\tilde{y}=\frac{\tilde{f}}{1-\lambda\tilde{K}}$ → inverse.
+2. **Integral→ODE**: Differentiate using Leibniz rule (see section 0.4).
+	- E.g., $y=2x+4\int_0^x(z-x)y(z)\,dz$:
+	- Leibniz: $y' = 2 + 4\left[\underbrace{(x-x)y(x)\cdot 1}_{=0} + \int_0^x \frac{\partial}{\partial x}(z-x)y(z)\,dz\right] = 2 - 4\int_0^x y(z)\,dz$.
+	- Differentiate again: $y'' = -4y(x)$ → $\boxed{y'' + 4y = 0}$.
+	- ICs: evaluate original equations at $x=0$ → $y(0)=0$, $y'(0)=2$.
+3. **Volterra with convolution kernel** $K(x-z)$:
+	- Form: $y(x) = f(x) + \lambda\int_0^x K(x-z)y(z)\,dz$ — note integral is convolution $K*y$.
+	- Take Laplace: $\tilde{y} = \tilde{f} + \lambda\tilde{K}\tilde{y}$ → rearrange: $\tilde{y}(1-\lambda\tilde{K}) = \tilde{f}$.
+	- Solve: $\tilde{y} = \frac{\tilde{f}}{1-\lambda\tilde{K}}$ → inverse Laplace to get $y(x)$.
 
 ### 10. Calculus of Variations - Euler-Lagrange (8-9 Marks, ~1-2× per paper)
 

@@ -29,8 +29,8 @@
               "type": "markdown",
               "state": {
                 "file": "clear/project/omoikane/mth3006/mth3006 cheat sheet.md",
-                "mode": "source",
-                "source": false,
+                "mode": "preview",
+                "source": true,
                 "backlinks": false
               },
               "icon": "lucide-file",
