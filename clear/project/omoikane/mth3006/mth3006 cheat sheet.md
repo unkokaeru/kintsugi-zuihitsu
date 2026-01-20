@@ -82,17 +82,14 @@
 1. **Method**: Assume $u(x,y)=X(x)Y(y)$ (or $u(x,t)=X(x)T(t)$).
 	- Substitute into PDE, divide by $XY$ to separate.
 	- Each side equals constant → two ODEs. Solve using table above.
-	- Combine: $u = XY$ (absorb one constant). Apply BC to find separation constant.
+	- Combine: $u = CXY$ (constants from $X$, $Y$ merge into $C$). Apply BC → match functional form to find separation constant, match coefficient to find $C$.
 2. **Heat/wave (eigenvalue problems)**: BCs on $X$ determine eigenvalues $\lambda_n$, eigenfunctions $X_n$.
-
-| BCs on $[0,L]$ | Eigenvalues | Eigenfunctions |
-|----------------|-------------|----------------|
-| $X(0)=X(L)=0$ | $\lambda_n=\left(\frac{n\pi}{L}\right)^2$ | $X_n=\sin\frac{n\pi x}{L}$ |
-| $X'(0)=X'(L)=0$ | $\lambda_n=\left(\frac{n\pi}{L}\right)^2$ | $X_n=\cos\frac{n\pi x}{L}$ (incl. $\lambda_0=0$) |
-| $X(0)=X'(L)=0$ | $\lambda_n=\left(\frac{(2n-1)\pi}{2L}\right)^2$ | $X_n=\sin\frac{(2n-1)\pi x}{2L}$ |
-
-- General solution: $u=\sum C_n X_n T_n$. Find $C_n$ via orthogonality/Fourier.
-1. **Example**: $u_x=\beta u_y$, $u(0,y)=e^{-y}$
+	- Start with $X''+\lambda X=0$ → $X=A\cos(\sqrt{\lambda}x)+B\sin(\sqrt{\lambda}x)$.
+	- Apply 1st BC (e.g., $X(0)=0$ → $A=0$).
+	- Apply 2nd BC (e.g., $X(L)=0$ → $\sin(\sqrt{\lambda}L)=0$ → $\sqrt{\lambda}L=n\pi$).
+	- Result: $\lambda_n=\left(\frac{n\pi}{L}\right)^2$, $X_n=\sin\frac{n\pi x}{L}$.
+	- General solution: $u=\sum C_n X_n T_n$. Find $C_n$ via orthogonality/Fourier.
+3. **Example**: $u_x=\beta u_y$, $u(0,y)=e^{-y}$
 	- Separation: $\frac{X'}{X}=\beta\frac{Y'}{Y}=\alpha$ → $X=Ae^{\alpha x}$, $Y=Be^{\alpha y/\beta}$ → $u=Ce^{\alpha x + \alpha y/\beta}$.
 	- Apply BC: $u(0,y)=Ce^{\alpha y/\beta}=e^{-y}$ → $C=1$, $\alpha/\beta=-1$ → $\boxed{u=e^{-\beta x-y}}$.
 
