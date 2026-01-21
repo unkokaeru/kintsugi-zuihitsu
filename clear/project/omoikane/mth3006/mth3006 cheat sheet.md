@@ -230,17 +230,25 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 
 ### 13. Green's Functions (8-9 Marks, ~1× per paper)
 
-**Solution form**: For $Ly=f(x)$ with BCs: $y(x)=\int_a^b G(x,z)f(z)\,dz$ where $z$ is dummy variable.
+**Setup**: For ODE $Ly=f(x)$ where $L$ is the differential operator (e.g., $Ly = y''-\alpha^2 y$ for $y''-\alpha^2 y=f$)
+Yes 
+**Solution form**: $y(x)=\int_a^b G(x,z)f(z)\,dz$ where $z$ is dummy variable.
 - **Limits**: Use domain from BCs. If $G=0$ for $x<z$, integral reduces to $\int_a^x$ (only $z<x$ contributes).
 
 1. **Properties of $G$**:
-	- $LG=0$ for $x≠\xi$.
+	- $LG=0$ for $x\neq z$ (satisfies homogeneous ODE in each region).
 	- $G$ satisfies homogeneous BCs.
-	- $G$ continuous at $\xi$; $\frac{\partial G}{\partial x}$ jumps by $\frac{1}{a_2(\xi)}$ at $x=\xi$.
-2. **Construct $G$**:
-	- Solve $Ly=0$ for independent solutions $\phi_1,\phi_2$.
-	- Write piecewise $G$. Apply BCs. Apply continuity + jump. Solve for coefficients.
-3. **If given $G$**: Just compute $y=\int G(x,\xi)f(\xi)d\xi$.
-4. **Example**: $y''+y=f$, $y(0)=y'(0)=0$
-	- $G=\begin{cases}0&x<\xi\\\sin(x-\xi)&x>\xi\end{cases}$
-	- $y=\int_0^x\sin(x-\xi)f(\xi)d\xi$.
+	- $G$ continuous at $x=z$; $\frac{\partial G}{\partial x}$ jumps by $1$ at $x=z$ (for $y''$ leading term).
+2. **Finding $G$** (step-by-step):
+	- **Step 1**: Solve homogeneous ODE $Ly=0$ → get general solution (e.g., $Ae^{\alpha x}+Be^{-\alpha x}$).
+	- **Step 2**: Write piecewise: $G=\begin{cases}a_1 y_1+b_1 y_2 & x<z \\ a_2 y_1+b_2 y_2 & x>z\end{cases}$
+	- **Step 3**: Apply BCs to the relevant region (e.g., $x=0$ is in $x<z$ region).
+	- **Step 4**: Apply at $x=z$: continuity ($G$ same from both sides) + derivative jump ($G'_{x>z}-G'_{x<z}=1$).
+	- **Step 5**: Solve for remaining coefficients.
+3. **If given $G$**: Just compute $y=\int G(x,z)f(z)\,dz$.
+4. **Example**: $y''-\alpha^2 y=f$, $y(0)=y'(0)=0$
+	- Homogeneous: $y=Ae^{\alpha x}+Be^{-\alpha x}$.
+	- BCs at $x=0$ ($x<z$ region): $G(0)=0$, $G'(0)=0$ → both give $a_1=b_1=0$ → $G=0$ for $x<z$.
+	- At $x=z$: continuity gives $a_2 e^{\alpha z}+b_2 e^{-\alpha z}=0$; jump gives $\alpha a_2 e^{\alpha z}-\alpha b_2 e^{-\alpha z}=1$.
+	- Solve: $a_2=\frac{e^{-\alpha z}}{2\alpha}$, $b_2=-\frac{e^{\alpha z}}{2\alpha}$ → $G=\frac{\sinh\alpha(x-z)}{\alpha}$ for $x>z$.
+	- Solution: $y=\int_0^x\frac{\sinh\alpha(x-z)}{\alpha}f(z)\,dz$.
