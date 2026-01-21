@@ -28,8 +28,16 @@
 4. **Convolution theorem (Fourier)**: $\widetilde{f*g}(\omega) = \sqrt{2\pi}\,\tilde{f}(\omega)\tilde{g}(\omega)$.
 	- Similar: swap order in $\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty}e^{-i\omega t}\left(\int_{-\infty}^{\infty}f(\tau)g(t-\tau)d\tau\right)dt$, sub $u=t-\tau$, separate into product.
 5. **Euler**: $e^{i\theta}=\cos\theta+i\sin\theta$, $\sin\theta=\frac{e^{i\theta}-e^{-i\theta}}{2i}$, $\cos\theta=\frac{e^{i\theta}+e^{-i\theta}}{2}$
-6. **Leibniz rule**: $\frac{d}{dx}\int_{a(x)}^{b(x)} f(x,z)\,dz = f(x,b)b' - f(x,a)a' + \int_{a}^{b} \frac{\partial f}{\partial x}dz$
-7. **Delta function FT**: $\widetilde{\delta(t-a)+\delta(t+a)}(\omega) = \sqrt{\frac{2}{\pi}}\cos(a\omega)$
+	- Trig: $(\tan x)'=\sec^2 x$, $\int\tan x\,dx = -\ln|\cos x|$
+6. **Hyperbolic functions**:
+	- Definitions: $\sinh x=\frac{e^x-e^{-x}}{2}$, $\cosh x=\frac{e^x+e^{-x}}{2}$, $\tanh x=\frac{\sinh x}{\cosh x}$, $\text{sech}\,x=\frac{1}{\cosh x}$
+	- Identity: $\cosh^2 x - \sinh^2 x = 1$
+	- Addition: $\sinh(x\pm y)=\sinh x\cosh y \pm \cosh x\sinh y$, $\cosh(x\pm y)=\cosh x\cosh y \pm \sinh x\sinh y$
+	- Derivatives: $(\sinh x)'=\cosh x$, $(\cosh x)'=\sinh x$, $(\tanh x)'=\text{sech}^2 x$
+	- Integrals: $\int\tanh x\,dx = \ln\cosh x$
+7. **Leibniz rule**: $\frac{d}{dx}\int_{a(x)}^{b(x)} f(x,z)\,dz = f(x,b)b' - f(x,a)a' + \int_{a}^{b} \frac{\partial f}{\partial x}dz$
+8. **Leibniz rule**: $\frac{d}{dx}\int_{a(x)}^{b(x)} f(x,z)\,dz = f(x,b)b' - f(x,a)a' + \int_{a}^{b} \frac{\partial f}{\partial x}dz$
+9. **Delta function FT**: $\widetilde{\delta(t-a)+\delta(t+a)}(\omega) = \sqrt{\frac{2}{\pi}}\cos(a\omega)$
 
 ---
 
