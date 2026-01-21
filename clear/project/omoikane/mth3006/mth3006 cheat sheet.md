@@ -243,7 +243,9 @@ Yes
 	- **Step 1**: Solve homogeneous ODE $Ly=0$ using characteristic equation (see section 0.10) → get general solution $y=Ay_1+By_2$.
 	- **Step 2**: Write piecewise (use different constants $a_1,b_1,a_2,b_2$ in each region; $y_1,y_2$ are the independent solutions from Step 1): $G=\begin{cases}a_1 y_1+b_1 y_2 & x<z \\ a_2 y_1+b_2 y_2 & x>z\end{cases}$
 	- **Step 3**: Apply BCs to the relevant region (e.g., $x=0$ is in $x<z$ region).
-	- **Step 4**: Apply at $x=z$: continuity ($G$ same from both sides) + derivative jump ($G'_{x>z}-G'_{x<z}=1$).
+	- **Step 4**: At $x=z$, apply 2 conditions:
+		- Continuity: $a_1 y_1(z)+b_1 y_2(z) = a_2 y_1(z)+b_2 y_2(z)$ (both pieces equal at $z$).
+		- Derivative jump: $(a_2 y_1'(z)+b_2 y_2'(z)) - (a_1 y_1'(z)+b_1 y_2'(z)) = 1$.
 	- **Step 5**: Solve for remaining coefficients.
 3. **If given $G$**: Just compute $y=\int G(x,z)f(z)\,dz$.
 4. **Example**: $y''-\alpha^2 y=f$, $y(0)=y'(0)=0$
