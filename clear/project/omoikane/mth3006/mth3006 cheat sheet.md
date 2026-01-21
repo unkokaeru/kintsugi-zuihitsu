@@ -113,17 +113,18 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 	- Rearrange to $\alpha(x,y)=c$ (the constant of integration becomes the characteristic constant).
 	- General solution: $u=f(\alpha)$ for arbitrary $f$.
 	- **Find $f$**: On BC curve, compute $\alpha$ and $u$ both in terms of one variable (say $x$).
-		- Write $u = f(\alpha)$ → invert to express $f(\alpha) = \text{(expression in }\alpha\text{)}$.
+		- Rearrange to get that variable in terms of $\alpha$ → substitute into $u$ → gives $f(\alpha)$.
 		- Substitute back: $u = f\left(\alpha(x,y)\right)$.
 2. **Inhomogeneous** ($C\neq 0$):
 	- Get $\alpha(x,y)=c_1$ from $\frac{dx}{A}=\frac{dy}{B}$ (same as homogeneous).
 	- Also solve $\frac{dx}{A}=\frac{du}{C}$ → integrate: $\int\frac{1}{A}dx = \int\frac{1}{C}du + c_2$ → rearrange to $\beta(x,u)=c_2$.
 	- General solution: $c_2 = g(c_1)$ → $\beta = g(\alpha)$ for arbitrary $g$.
 	- **Find $g$**: On BC curve, compute $\alpha$ and $\beta$ both in terms of one variable → invert to get $g$.
-3. **Example**: $(x-1)u_x+yu_y=0$, $u=1-\frac{1}{x}$ on $y=x$
-	- Chars: $\frac{dx}{x-1}=\frac{dy}{y}$ → $\ln|y|=\ln|x-1|+c$ → $\alpha=\frac{y}{x-1}=\text{const}$.
-	- General: $u=f(\alpha)=f\left(\frac{y}{x-1}\right)$.
-	- BC ($y=x$): $\alpha=\frac{x}{x-1}$, $u=1-\frac{1}{x}=\frac{x-1}{x}=\frac{1}{\alpha}$ → $f(\alpha)=\frac{1}{\alpha}$ → $\boxed{u=\frac{x-1}{y}}$.
+3. **Example**: $u_t+e^{-t}u_x=0$, $u=e^{-x}$ on $t=0$
+	- Chars: $\frac{dt}{1}=\frac{dx}{e^{-t}}$ → $dx=e^{-t}dt$ → $x=-e^{-t}+c$ → $\alpha=x+e^{-t}$.
+	- General: $u=f(\alpha)$.
+	- BC ($t=0$): $\alpha=x+1$, $u=e^{-x}$. Rearrange: $x=\alpha-1$ → $u=e^{-(\alpha-1)}=e^{1-\alpha}$ → $f(\alpha)=e^{1-\alpha}$.
+	- Final: $u=f(x+e^{-t})=\boxed{e^{1-x-e^{-t}}}$.
 
 ### 7. PDEs - Change of Variables (8 Marks, ~1× per paper)
 
