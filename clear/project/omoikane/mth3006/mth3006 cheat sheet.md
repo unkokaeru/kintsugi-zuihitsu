@@ -36,7 +36,9 @@
 	- Derivatives: $(\sinh x)'=\cosh x$, $(\cosh x)'=\sinh x$, $(\tanh x)'=\text{sech}^2 x$
 	- Integrals: $\int\tanh x\,dx = \ln\cosh x$
 7. **Leibniz rule**: $\frac{d}{dx}\int_{a(x)}^{b(x)} f(x,z)\,dz = f(x,b)b' - f(x,a)a' + \int_{a}^{b} \frac{\partial f}{\partial x}dz$
-8. **Leibniz rule**: $\frac{d}{dx}\int_{a(x)}^{b(x)} f(x,z)\,dz = f(x,b)b' - f(x,a)a' + \int_{a}^{b} \frac{\partial f}{\partial x}dz$
+8. **U-substitution**: $\int f(g(x))g'(x)\,dx = \int f(u)\,du$ where $u=g(x)$, $du=g'(x)dx$.
+	- For definite integrals: change limits to $u(a)$ and $u(b)$, or back-substitute at end.
+	- E.g. $\int_0^1 x e^{x^2}dx$: let $u=x^2$, $du=2x\,dx$ → $\frac{1}{2}\int_0^1 e^u\,du = \frac{1}{2}(e-1)$.
 9. **Delta function FT**: $\widetilde{\delta(t-a)+\delta(t+a)}(\omega) = \sqrt{\frac{2}{\pi}}\cos(a\omega)$
 
 ---
