@@ -152,6 +152,8 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 
 ### 8. Integral Equations - Separable Kernels (8-9 Marks, ~2× per paper)
 
+**Kernel**: $K(x,z)$ is the function inside the integral that multiplies $y(z)$, e.g., in $y(x)=f(x)+\lambda\int K(x,z)y(z)\,dz$.
+
 | Type | Limits | $y$ appears |
 |------|--------|-------------|
 | Fredholm | Fixed $a,b$ | 2nd kind: inside & outside integral |
@@ -159,12 +161,15 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 
 1. **When**: $K(x,z)=g(x)h(z)$ (or sum of such products).
 2. **Method** for $y(x)=f(x)+\lambda\int_a^b g(x)h(z)y(z)dz$:
-	- Define $c=\int_a^b h(z)y(z)dz$ (a constant).
-	- Then $y(x)=f(x)+\lambda c\cdot g(x)$.
-	- Substitute back: $c=\int_a^b h(z)[f(z)+\lambda c\cdot g(z)]dz$. Solve for $c$.
-3. **Example**: $y=\cosh x-x+\frac{1}{6}\int_0^1 zy\,dz$
-	- Let $c=\int_0^1 zy\,dz$ → $y=\cosh x-x+\frac{c}{6}$.
-	- Substitute, solve: $\boxed{c=\frac{12}{11}(\frac{3}{2}-e^{-1})}$.
+	- Define $c=\int_a^b h(z)y(z)dz$ (a constant — doesn't depend on $x$).
+	- Rewrite equation: $y(x)=f(x)+\lambda c\cdot g(x)$ — this is your solution in terms of $c$.
+	- Substitute $y$ back into definition of $c$: $c=\int_a^b h(z)[f(z)+\lambda c\cdot g(z)]dz$.
+	- Expand and solve algebraically for $c$, then substitute back into $y(x)$.
+3. **Example**: $y=\sin x+\int_0^1 x^2 z\,y(z)\,dz$ (here $g(x)=x^2$, $h(z)=z$, $\lambda=1$)
+	- Let $c=\int_0^1 z\,y(z)\,dz$ → $y=\sin x+cx^2$.
+	- Substitute: $c=\int_0^1 z(\sin z+cz^2)\,dz = \int_0^1 z\sin z\,dz + c\int_0^1 z^3\,dz$.
+	- Evaluate: $c = (\sin 1-\cos 1) + \frac{c}{4}$ → $\frac{3c}{4}=\sin 1-\cos 1$ → $c=\frac{4(\sin 1-\cos 1)}{3}$.
+	- Final: $\boxed{y=\sin x+\frac{4(\sin 1-\cos 1)}{3}x^2}$.
 
 ### 9. Integral Equations - Convert to/from ODE (8-9 marks)
 
