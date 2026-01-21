@@ -231,7 +231,7 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 ### 13. Green's Functions (8-9 Marks, ~1× per paper)
 
 **Setup**: For ODE $Ly=f(x)$ where $L$ is the differential operator (e.g., $Ly = y''-\alpha^2 y$ for $y''-\alpha^2 y=f$)
-Yes 
+Yes
 **Solution form**: $y(x)=\int_a^b G(x,z)f(z)\,dz$ where $z$ is dummy variable.
 - **Limits**: Use domain from BCs. If $G=0$ for $x<z$, integral reduces to $\int_a^x$ (only $z<x$ contributes).
 
@@ -240,8 +240,8 @@ Yes
 	- $G$ satisfies homogeneous BCs.
 	- $G$ continuous at $x=z$; $\frac{\partial G}{\partial x}$ jumps by $1$ at $x=z$ (for $y''$ leading term).
 2. **Finding $G$** (step-by-step):
-	- **Step 1**: Solve homogeneous ODE $Ly=0$ → get general solution (e.g., $Ae^{\alpha x}+Be^{-\alpha x}$).
-	- **Step 2**: Write piecewise: $G=\begin{cases}a_1 y_1+b_1 y_2 & x<z \\ a_2 y_1+b_2 y_2 & x>z\end{cases}$
+	- **Step 1**: Solve homogeneous ODE $Ly=0$ using characteristic equation (see section 0.10) → get general solution $y=Ay_1+By_2$.
+	- **Step 2**: Write piecewise (use different constants $a_1,b_1,a_2,b_2$ in each region; $y_1,y_2$ are the independent solutions from Step 1): $G=\begin{cases}a_1 y_1+b_1 y_2 & x<z \\ a_2 y_1+b_2 y_2 & x>z\end{cases}$
 	- **Step 3**: Apply BCs to the relevant region (e.g., $x=0$ is in $x<z$ region).
 	- **Step 4**: Apply at $x=z$: continuity ($G$ same from both sides) + derivative jump ($G'_{x>z}-G'_{x<z}=1$).
 	- **Step 5**: Solve for remaining coefficients.
