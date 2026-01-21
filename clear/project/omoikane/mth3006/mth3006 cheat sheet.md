@@ -120,7 +120,8 @@
 For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac{du}{C})$.
 
 1. **Homogeneous** ($C=0$):
-	- Solve $\frac{dx}{A}=\frac{dy}{B}$ → cross-multiply, integrate both sides: $\int\frac{1}{A}dx = \int\frac{1}{B}dy + c$.
+	- Solve $\frac{dx}{A}=\frac{dy}{B}$ → cross-multiply to get $B\,dx = A\,dy$, then integrate both sides.
+		- Cross-multiply when $A,B$ are functions of different variables (e.g., $A=A(x)$, $B=B(y)$) to separate.
 	- Rearrange to $\alpha(x,y)=c$ (the constant of integration becomes the characteristic constant).
 	- General solution: $u=f(\alpha)$ for arbitrary $f$.
 	- **Find $f$**: On BC curve, compute $\alpha$ and $u$ both in terms of one variable (say $x$).
