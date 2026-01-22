@@ -16,7 +16,6 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 - Complete notes for [[yatagarasu]] & tasks on the [[yatagarasu]] Kanban board.
 - Complete a Lean proof for [[mth3011]], and any other associated module work before the next meeting with my supervisor - confirm date, too!
 - Make a Kanban board for Kintsugi Zuihitsu, like Yatagarasu (and then maybe an easy way to switch between them) - do so by overhauling Kintsugi Zuihitsu website generation, maybe? Could make it look cooler then, too.
-- Redo budgets (etc.) on Revolut, incl. joint account and new savings/taxes etc.
 - Continue development on [[FFMS]] for [[Kuebiko]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
 
 ```dataviewjs
