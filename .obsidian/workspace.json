@@ -23,18 +23,15 @@
             }
           },
           {
-            "id": "dc043f2e38ac23f4",
+            "id": "686ed3d1fbb0501f",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "release-notes",
               "state": {
-                "file": "clear/project/omoikane/mth3006/mth3006 cheat sheet.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
+                "currentVersion": "1.11.5"
               },
-              "icon": "lucide-file",
-              "title": "mth3006 cheat sheet"
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.11.5"
             }
           }
         ],
@@ -189,8 +186,9 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "dc043f2e38ac23f4",
+  "active": "686ed3d1fbb0501f",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3006/mth3006 cheat sheet.md",
     "clear/project/omoikane/mth3006/mth3006.md",
     "kintsugi zuihitsu.md",
     "cloudy/project/yatagarasu/yatagarasu.md",
@@ -217,7 +215,6 @@
     "clear/project/omoikane/mth3011/guest lectures/week 3 - planetary rings/week 3 - planetary rings.md",
     "clear/project/omoikane/mth3011/guest lectures/week 2 - sphere packing/article outline.md",
     "clear/project/omoikane/mth3011/Guest lecture 2.md",
-    "clear/project/omoikane/mth3011/original notes.md",
     "clear/project/omoikane/mth3011/guest lectures/week 11 - largest telescopes/peer articles",
     "clear/project/omoikane/mth3011/guest lectures/week 9 - jumping random walks/peer articles",
     "clear/project/omoikane/mth3011/guest lectures/week 8 - lotka-volterra systems/peer articles",

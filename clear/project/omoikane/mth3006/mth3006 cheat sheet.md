@@ -1,5 +1,8 @@
 # **MTH3006** Methods of Mathematical Physics, Final Exam Cheat Sheet
 
+> [!TIP] Created by William Fayers
+> Good luck and have fun!! :))
+
 ## 0. Reference Tables & Foundational Material
 
 ### Laplace Transform Table
@@ -41,6 +44,13 @@
 	- For definite integrals: change limits to $u(a)$ and $u(b)$, or back-substitute at end.
 	- E.g. $\int_0^1 x e^{x^2}dx$: let $u=x^2$, $du=2x\,dx$ → $\frac{1}{2}\int_0^1 e^u\,du = \frac{1}{2}(e-1)$.
 9. **Delta function FT**: $\widetilde{\delta(t-a)+\delta(t+a)}(\omega) = \sqrt{\frac{2}{\pi}}\cos(a\omega)$
+10. **2nd order constant-coefficient ODEs**: For $ay''+by'+cy=0$, solve characteristic equation $ar^2+br+c=0$.
+
+| Roots | General solution |
+|-------|------------------|
+| Real distinct $r_1,r_2$ | $Ae^{r_1 x}+Be^{r_2 x}$ |
+| Real repeated $r$ | $(A+Bx)e^{rx}$ |
+| Complex $p\pm qi$ | $e^{px}(A\cos qx+B\sin qx)$ |
 
 ---
 
@@ -94,12 +104,14 @@
 
 ### 5. PDEs - Separation of Variables (8 Marks, ~1× per paper)
 
-| Separated ODE              | General Solution                                                    |
-| -------------------------- | ------------------------------------------------------------------- |
-| $\frac{X'}{X}=g(x)$        | $X=A\exp\left(\int g(x)\,dx\right)$ — integrate directly            |
-| $\frac{X''}{X}=0$          | $X=Ax+B$                                                            |
-| $\frac{X''}{X}=\lambda>0$  | $X=Ae^{\sqrt{\lambda}x}+Be^{-\sqrt{\lambda}x}$ (or $A\cosh+B\sinh$) |
-| $\frac{X''}{X}=-\lambda<0$ | $X=A\cos(\sqrt{\lambda}x)+B\sin(\sqrt{\lambda}x)$                   |
+| Separated ODE | General Solution |
+|---------------|------------------|
+| $\frac{X'}{X}=g(x)$ | $X=A\exp\left(\int g(x)\,dx\right)$ — integrate directly |
+| $\frac{X''}{X}=0$ | $X=Ax+B$ |
+| $\frac{X''}{X}=\lambda>0$ | $X=Ae^{\sqrt{\lambda}x}+Be^{-\sqrt{\lambda}x}$ (or $A\cosh+B\sinh$) |
+| $\frac{X''}{X}=-\lambda<0$ | $X=A\cos(\sqrt{\lambda}x)+B\sin(\sqrt{\lambda}x)$ |
+
+(These follow from section 0.10 — characteristic equation method.)
 
 1. **Method**: Assume $u(x,y)=X(x)Y(y)$ (or $u(x,t)=X(x)T(t)$).
 	- Substitute into PDE, divide by $XY$ to separate.
@@ -181,7 +193,7 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 	- Integrate ($x \to s$): $[y']_0^x = \int_0^x f(s)\,ds - \omega^2\int_0^x y(s)\,ds$ → $y' = v_0 + \int_0^x f(s)\,ds - \omega^2\int_0^x y(s)\,ds$.
 	- Integrate again ($x \to t$): $y = v_0 x + \int_0^x\int_0^t f(s)\,ds\,dt - \omega^2\int_0^x\int_0^t y(s)\,ds\,dt$.
 	- Apply lemma: $\boxed{y = v_0 x + \int_0^x(x-z)f(z)\,dz - \omega^2\int_0^x(x-z)y(z)\,dz}$ (Volterra).
-2. **Integral→ODE**: Differentiate using Leibniz rule (see section 0.4).
+2. **Integral→ODE**: Differentiate using Leibniz rule (see section 0.7).
 	- E.g., $y=2x+4\int_0^x(z-x)y(z)\,dz$:
 	- Leibniz: $y' = 2 + 4\left[\underbrace{(x-x)y(x)\cdot 1}_{=0} + \int_0^x \frac{\partial}{\partial x}(z-x)y(z)\,dz\right] = 2 - 4\int_0^x y(z)\,dz$.
 	- Differentiate again: $y'' = -4y(x)$ → $\boxed{y'' + 4y = 0}$.
@@ -193,10 +205,10 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 
 ### 10. Calculus of Variations - Euler-Lagrange (8-9 Marks, ~1-2× per paper)
 
-**E-L equation**: For $I[y]=\int_{x_1}^{x_2}F(x,y,y')dx$, stationary $y$ satisfies $\frac{\partial F}{\partial y}-\frac{d}{dx}\frac{\partial F}{\partial y'}=0$.
+**E-L equation**: For $I[y]=\int_{x_1}^{x_2}F(x,y,y')dx$, stationary/extreme $y$ satisfies $\frac{\partial F}{\partial y}-\frac{d}{dx}\frac{\partial F}{\partial y'}=0$.
 
 1. **Method**: Compute $\frac{\partial F}{\partial y}$, $\frac{\partial F}{\partial y'}$, $\frac{d}{dx}(\frac{\partial F}{\partial y'})$ → solve ODE → apply BCs.
-	- If asked for stationary value: substitute $y(x)$ back into $I$.
+	- If asked for stationary/extreme **value**: substitute $y(x)$ back into $I$.
 2. **Simplified cases** (reduce to 1st-order ODE):
 	- **No $y$ in $F$**: $\frac{\partial F}{\partial y}=0$ so $\frac{\partial F}{\partial y'}=C$ → solve for $y'$ → integrate.
 	- **No $x$ in $F$**: Beltrami identity $F-y'\frac{\partial F}{\partial y'}=C$ → solve for $y'$.
@@ -209,7 +221,7 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 1. **Isoperimetric**: Extremize $I=\int F\,dx$ subject to $J=\int G\,dx=\ell$.
 	- Apply E-L to $H=F+\lambda G$.
 2. **Lagrange multipliers** (for functions $f(x,y)$ with constraint $g=c$):
-	- Solve $\nabla f+\lambda\nabla g=0$ and $g=c$.
+	- Solve $\nabla f = \lambda\nabla g$ and $g=c$.
 3. **Example**: min $x^2+y^2$ subject to $y+x^2=1$
 	- Equations: $2x+2\lambda x=0$, $2y+\lambda=0$, $y+x^2=1$.
 	- Solution: $\boxed{\min = \frac{3}{4}}$ at $(\pm\frac{1}{\sqrt{2}},\frac{1}{2})$.
@@ -230,13 +242,13 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 
 ### 13. Green's Functions (8-9 Marks, ~1× per paper)
 
-**Setup**: For ODE $Ly=f(x)$ where $L$ is the differential operator (e.g., $Ly = y''-\alpha^2 y$ for $y''-\alpha^2 y=f$)
-Yes
+**Setup**: For ODE $Ly=f(x)$ where $L$ is the differential operator (e.g., $Ly = y''-\alpha^2 y$ for $y''-\alpha^2 y=f$).
+
 **Solution form**: $y(x)=\int_a^b G(x,z)f(z)\,dz$ where $z$ is dummy variable.
 - **Limits**: Use domain from BCs. If $G=0$ for $x<z$, integral reduces to $\int_a^x$ (only $z<x$ contributes).
 
 1. **Properties of $G$**:
-	- $LG=0$ for $x\neq z$ (satisfies homogeneous ODE in each region).
+	- $G$ satisfies homogeneous ODE ($Ly=0$) in each region $x<z$ and $x>z$.
 	- $G$ satisfies homogeneous BCs.
 	- $G$ continuous at $x=z$; $\frac{\partial G}{\partial x}$ jumps by $1$ at $x=z$ (for $y''$ leading term).
 2. **Finding $G$** (step-by-step):
@@ -245,7 +257,7 @@ Yes
 	- **Step 3**: Apply BCs to the relevant region (e.g., $x=0$ is in $x<z$ region).
 	- **Step 4**: At $x=z$, apply 2 conditions:
 		- Continuity: $a_1 y_1(z)+b_1 y_2(z) = a_2 y_1(z)+b_2 y_2(z)$ (both pieces equal at $z$).
-		- Derivative jump: $(a_2 y_1'(z)+b_2 y_2'(z)) - (a_1 y_1'(z)+b_1 y_2'(z)) = 1$.
+		- Derivative jump: $(a_2 y_1'(z)+b_2 y_2'(z)) - (a_1 y_1'(z)+b_1 y_2'(z)) = 1$ (for $y''+…=f$; use $\frac{1}{a(z)}$ if ODE is $a(x)y''+…=f$).
 	- **Step 5**: Solve for remaining coefficients.
 3. **If given $G$**: Just compute $y=\int G(x,z)f(z)\,dz$.
 4. **Example**: $y''-\alpha^2 y=f$, $y(0)=y'(0)=0$
