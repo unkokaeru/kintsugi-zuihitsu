@@ -21,21 +21,8 @@
               "icon": "lucide-file",
               "title": "kintsugi zuihitsu"
             }
-          },
-          {
-            "id": "686ed3d1fbb0501f",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.11.5"
-              },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.11.5"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -186,7 +173,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "686ed3d1fbb0501f",
+  "active": "ccc32f0cded57222",
   "lastOpenFiles": [
     "clear/project/omoikane/mth3006/mth3006 cheat sheet.md",
     "clear/project/omoikane/mth3006/mth3006.md",
