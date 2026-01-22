@@ -1,12 +1,12 @@
-# Method of Characteristics
+﻿# Method of Characteristics
 
-The **Method of Characteristics** is a technique for ==solving first-order partial differential equations (partial differential equations) by reducing them to a system of ordinary differential equations (ODEs) along characteristic curves==.
+The **Method of Characteristics** is a technique for **solving first-order partial differential equations (partial differential equations) by reducing them to a system of ordinary differential equations (ODEs) along characteristic curves**.
 
-The **Method of Characteristics** focuses on ==the case of two independent variables, $u = u(x, y)$==.
+The **Method of Characteristics** focuses on **the case of two independent variables, $u = u(x, y)$**.
 
-Along a characteristic curve in the $(x, y)$ plane, the ==partial differential equation can be integrated directly to give the solution $u$==.
+Along a characteristic curve in the $(x, y)$ plane, the **partial differential equation can be integrated directly to give the solution $u$**.
 
-To use the Method of Characteristics, the ==region on which the partial differential equation is solved must be covered by characteristic curves==.
+To use the Method of Characteristics, the **region on which the partial differential equation is solved must be covered by characteristic curves**.
 
 For a partial differential equation of the form $A(x, y)\frac{\partial u}{\partial x} + B(x, y)\frac{\partial u}{\partial y} = F(x, y)$, the characteristic equations are::
 
@@ -24,15 +24,15 @@ Along a characteristic curve, the solution satisfies::$\frac{du}{ds} = \frac{F}{
 
 ## Homogeneous Case
 
-A partial differential equation is **homogeneous** when ==the function $F(x, y)$ is equal to zero==.
+A partial differential equation is **homogeneous** when **the function $F(x, y)$ is equal to zero**.
 
-For homogeneous equations, $\frac{du}{ds} = 0$, which means the solution $u$ is ==constant along each characteristic curve==.
+For homogeneous equations, $\frac{du}{ds} = 0$, which means the solution $u$ is **constant along each characteristic curve**.
 
 In the homogeneous case, the characteristic equations reduce to::$\frac{dx}{A(x, y)} = \frac{dy}{B(x, y)}$.
 
 For homogeneous partial differential equations, the general solution has the form::$u = f(P)$, where $P$ is a parameter labeling each characteristic curve, and $f$ is determined by boundary conditions.
 
-In the Method of Characteristics, boundary conditions are used to ==fix the form of the function $f$ itself, not just constant values==.
+In the Method of Characteristics, boundary conditions are used to **fix the form of the function $f$ itself, not just constant values**.
 
 ---
 

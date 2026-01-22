@@ -1,8 +1,8 @@
-# Professional Arguments
+﻿# Professional Arguments
 
-A **professional argument** is a ==conversation about the literature/decision== made between readers/colleagues, involving ==cooperation rather than coercion==. It should result in ==trust==, and be fully ==coherent/organised==.
+A **professional argument** is a **conversation about the literature/decision** made between readers/colleagues, involving **cooperation rather than coercion**. It should result in **trust**, and be fully **coherent/organised**.
 
-A **professional argument** should follow as an ==initial claim== paragraph, followed by ==reasons why==, then supported by ==evidence==, finalised by ==an acknowledgement/response==, and finally some ==conclusions==.
+A **professional argument** should follow as an **initial claim** paragraph, followed by **reasons why**, then supported by **evidence**, finalised by **an acknowledgement/response**, and finally some **conclusions**.
 
 It is formed by:
 

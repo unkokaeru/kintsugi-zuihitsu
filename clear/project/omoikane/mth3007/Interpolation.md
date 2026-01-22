@@ -1,6 +1,6 @@
-# Interpolation
+﻿# Interpolation
 
-**Interpolation** is a numerical method for ==estimating values of a function at points between known data points==.
+**Interpolation** is a numerical method for **estimating values of a function at points between known data points**.
 
 ## Definition
 

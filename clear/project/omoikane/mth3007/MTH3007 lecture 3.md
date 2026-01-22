@@ -1,4 +1,4 @@
-# Mth3007 Lecture 3
+﻿# Mth3007 Lecture 3
 
 - [[Least squares regression]] - expanding to any general polynomial.
 
@@ -408,11 +408,11 @@ def format_polynomial_equation(
         if abs(coefficient) < coefficient_tolerance:
             continue
 
-        if power == constant_term_index:
+        if power ** constant_term_index:
             # Constant term (a0)
             formatted_term = f"{coefficient:.{decimal_places}f}"
             terms.append(formatted_term)
-        elif power == linear_term_index:
+        elif power ** linear_term_index:
             # Linear term (a1 * x)
             sign = positive_sign if coefficient >= 0 else empty_string
             formatted_term = f"{sign}{coefficient:.{decimal_places}f}x"

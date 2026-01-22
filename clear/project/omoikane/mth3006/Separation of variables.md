@@ -1,6 +1,6 @@
-# Separation of Variables
+﻿# Separation of Variables
 
-Separation of variables can be applied to ==linear== partial differential equations, using the principle of ==superposition== starting with the assumption that ==$u(x,y)=X(x)Y(y)$==.
+Separation of variables can be applied to **linear** partial differential equations, using the principle of **superposition** starting with the assumption that **$u(x,y)=X(x)Y(y)$**.
 
 1. Assume that the solution is $u=XY$ and hence write the PDE in terms of $X$, $X^{\prime}$, $Y$, and $Y^{\prime}$.
 2. Divide through by $XY$ to isolate $x$ and $y$.

@@ -1,6 +1,6 @@
-# Convolution Theorem
+﻿# Convolution Theorem
 
-The **Convolution Theorem** is derived by ==taking the transform (Fourier or Laplace) of the convolution== to ==transform a more complicated integral into simple multiplication==.
+The **Convolution Theorem** is derived by **taking the transform (Fourier or Laplace) of the convolution** to **transform a more complicated integral into simple multiplication**.
 
 The **Convolution Theorem** is defined for Fourier transforms as::$\mathcal{F}[f(x)\ast g(x)]=\sqrt{ 2\pi } \tilde{f}(k)\tilde{g}(k)$.
 
