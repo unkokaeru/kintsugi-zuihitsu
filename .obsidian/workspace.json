@@ -21,8 +21,24 @@
               "icon": "lucide-file",
               "title": "kintsugi zuihitsu"
             }
+          },
+          {
+            "id": "07399278f6e42718",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "cloudy/project/yatagarasu/help videos.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "help videos"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -173,10 +189,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "ccc32f0cded57222",
+  "active": "07399278f6e42718",
   "lastOpenFiles": [
-    "cloudy/project/yatagarasu/help videos.md",
     "kintsugi zuihitsu.md",
+    "cloudy/project/yatagarasu/help videos.md",
     "clear/project/omoikane/mth3006/Fourier transform.md",
     "clear/project/omoikane/mth3007/Interpolation.md",
     "clear/project/omoikane/mth3006/mth3006 cheat sheet.md",
