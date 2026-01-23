@@ -11,6 +11,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 ## To-Do List
 
 > [[Levels of Organisation]]
+> Remember to draw back on literature more when writing within academia! - practice this?
 
 - Go through previous modules, completing notes and problems sets; perhaps with custom AI agents within VS Code. Then, create/refine their respective cheat sheet(s).
 - Complete notes for [[yatagarasu]] & tasks on the [[yatagarasu]] Kanban board.
