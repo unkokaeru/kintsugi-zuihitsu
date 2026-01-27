@@ -20,4 +20,6 @@
 			- The number of free indices is equal to the rank tensor; i.e., a scalar has no free indices (since it creates just a dot product, the result of which is always a scalar).
 - Converting to suffix notation:
 	- For example, $\mathbf{u}+(\mathbf{a}\cdot \mathbf{b})\mathbf{v}=|\mathbf{a}|^2(\mathbf{b}\cdot \mathbf{v})\mathbf{a}$...
-		1.
+		1. Introduce free index, like $i$: $(\mathbf{u}+(\mathbf{a}\cdot \mathbf{b})\mathbf{v})_{i}=((\mathbf{a}\cdot \mathbf{a})(\mathbf{b}\cdot \mathbf{v})\mathbf{a})_{i}:|\mathbf{a}|:=\sqrt{ \mathbf{a}\cdot \mathbf{a} }$.
+		2. Distribute free index, for each vector.: $u_{i}+(\mathbf{a}\cdot \mathbf{b})v_{i}=(\mathbf{a}\cdot \mathbf{a})(\mathbf{b}\cdot \mathbf{v})a_{i}$.
+		3. Introduce dummy indices, for each scalar: $u_{i}+a_{j}b_{j}v_{i}=a_{k}a_{k}b_{\ell}v_{\ell}a_{i}$
