@@ -27,7 +27,7 @@ The set of all cords, $\text{Cord}=\{ \text{finite partial functions }P\to \Sigm
 
 ## 3. Defining the Valuation Operator
 
-We can then map each cord to a number via the homomorphism $v : \text{Cord}\to \mathbb{N}_{0}$ (the natural numbers excluding 0, i.e. the countable numbers)...
+We can then map each cord to a number via the homomorphism $v : \text{Cord}\to \mathbb{N}_{0}$ (the natural numbers excluding 0, i.e. the countable numbers)…
 
 - The digit function $d:\Sigma\to \{ 0,1,\dots,9 \}$:
 	- $d(\emptyset)=0$,
@@ -40,6 +40,22 @@ This is then well-defined (uniquely decoding) and surjective onto $\mathbb{N}_{0
 
 ## 4. Specifying Operations
 
-Now that we have values, we can operate between them, just as with $\mathbb{N}_{0}$ and $+$/$\times$. Since our set isn't injective, though - as we can have multiple encodings for the same $v$, e.g., $S_{1}=E$ -, we must operate on values...
+Now that we have values, we can operate between them, just as with $\mathbb{N}_{0}$ and $+$/$\times$. Since our set isn't injective, though - as we can have multiple encodings for the same $v$, e.g., $S_{1}=E$ -, we must operate on values or define canonical representatives…
 
-- **Addition**: For C1 and C2, align positions and then merge clusters. That is, sum the digits with carry: e.g., $d_{1}+d_{2} \geq10 → L_{d_{1}+d_{2}-10}\\text{}{ at next pos} + S_1$
+- **Addition ($\oplus$)**: Align positions $j$, compute $d_j = d(C_1(j)) + d(C_2(j))$. If $d_j \geq 10$, carry 1 to $j+1$ and set $d_j \mod 10$; encode as knot cluster (prefer singles for 1-9, long for 2-9). Formally, $v(C_1 \oplus C_2) = v(C_1) + v(C_2)$.
+- **Multiplication ($\otimes$)**: $v(C_1 \otimes C_2) = v(C_1) \times v(C_2)$, with positional shift for partial products (e.g., multiply clusters, sum shifted).
+- This induces a semi-ring $(\text{Cord}, \oplus, \otimes, 0_{\text{cord}}, 1_{\text{cord}})$, where $0_{\text{cord}}$ has all $\emptyset$, $1_{\text{cord}}$ has $S_1$ at $j=0$.
+
+**Extensible**: Later define hierarchy via tensor $\text{Cord} \otimes \text{Cord}$ for pendants/subsidiaries.
+
+## 5. Axioms for Rigour
+
+To ensure the structure is sound and complete:
+
+1. **Encoding completeness**: $\forall n \in \mathbb{N}_0, \exists C \in \text{Cord}: v(C) = n$ (e.g., all $S_1$ unary for small $n$, positional for large).
+2. **Positional invariance**: $v(shift(C,1)) = 10 \cdot v(C)$, where $shift(C,j) = C(j-1)$ for $j \geq 1$.
+3. **Homomorphism**: $v(C_1 \oplus C_2) = v(C_1) + v(C_2)$, $v(C_1 \otimes C_2) = v(C_1) \cdot v(C_2)$.
+4. **Induction principle**: For predicate $\phi: \mathbb{N}_0 \to Prop$, if $\phi(0)$ and $\forall k \, \phi(k) \implies \phi(k+1)$, then $\forall C \, \phi(v(C))$ .
+5. **Knot equivalence**: $d(E) = d(S_1)$, with iso class merging variants.
+
+These mirror Peano axioms, proving uniqueness up to encoding choice.
