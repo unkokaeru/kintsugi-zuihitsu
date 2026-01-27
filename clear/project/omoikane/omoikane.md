@@ -22,7 +22,7 @@ In the context of academic mathematics work, Omoikane embodies the systematic me
 
 ### Semester B
 
-- …
+- [[mth3008]] - Tensor Analysis
 
 ---
 
