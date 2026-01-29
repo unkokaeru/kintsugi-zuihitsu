@@ -4,7 +4,7 @@ Create a function that takes an integer `n` and returns the **factorial of facto
 
 ## Examples
 
-```
+```python
 fact_of_fact(4)
 output = 288
 // 4! * 3! * 2! * 1! = 288

@@ -12,7 +12,7 @@ This means you can afford the item, so return true.
 
 ## Examples
 
-```
+```python
 changeEnough([2, 100, 0, 0], 14.11) ➞ false
 
 changeEnough([0, 0, 20, 5], 0.75) ➞ true

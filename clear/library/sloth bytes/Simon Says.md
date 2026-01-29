@@ -8,7 +8,7 @@ Create a function which evaluates a list of commands (written in plain English) 
 
 ## Examples
 
-```
+```python
 simon_says([
   "Simon says add 4",
   "Simon says add 6",

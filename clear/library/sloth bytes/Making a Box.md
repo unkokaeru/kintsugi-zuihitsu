@@ -4,7 +4,7 @@ Create a function that creates a box based on dimension n.
 
 ## Examples
 
-```
+```python
 makeBox(5) ➞ [
   "#####",
   "#   #",

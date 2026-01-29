@@ -8,7 +8,7 @@ Return `true` if all jobs can be finished, or `false` if there's a circular depe
 
 ## Examples
 
-```
+```python
 finishAll(2, [[1, 0]])
 output = True
 

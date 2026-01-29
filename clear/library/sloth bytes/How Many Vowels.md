@@ -4,7 +4,7 @@ Create a function that takes a string and returns the number (count) of vowels i
 
 ## Examples
 
-```
+```python
 count_vowels("Celebration") ➞ 5 # 5 vowels
 
 count_vowels("Palm") ➞ 1 # 1 vowel

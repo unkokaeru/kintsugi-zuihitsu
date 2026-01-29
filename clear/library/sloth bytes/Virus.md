@@ -4,7 +4,7 @@ Your computer might have been infected by a virus! Create a function that finds 
 
 ## Examples
 
-```
+```python
 remove_virus("PC Files: spotifysetup.exe, virus.exe, dog.jpg")
 output = "PC Files: spotifysetup.exe, dog.jpg"
 

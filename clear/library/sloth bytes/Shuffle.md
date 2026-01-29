@@ -6,7 +6,7 @@ In this case, if **3 or more** numbers appear **consecutively** (ascending or de
 
 ## Examples
 
-```
+```python
 isShuffledWell([1, 2, 3, 5, 8, 6, 9, 10, 7, 4])
 output = false
 # 1, 2, 3 appear consecutively

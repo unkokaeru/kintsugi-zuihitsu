@@ -6,7 +6,7 @@ Return the shortest overlapped word possible.
 
 ## Examples
 
-```
+```python
 overlap("sweden", "denmark")
 output = "swedenmark"
 

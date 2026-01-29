@@ -6,7 +6,7 @@ Write a function that returns the path as a list of `[row, col]` positions, or `
 
 ## Examples
 
-```
+```python
 trace_word_path("BISCUIT", [
   ["B", "I", "T", "R"],
   ["I", "U", "A", "S"],

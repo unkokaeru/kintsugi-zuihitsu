@@ -11,7 +11,7 @@ Create a function that takes encrypted message `str` and returns the decrypted m
 
 ## Examples
 
-```
+```python
 spaceMessage("ABCD")
 output = "ABCD"
 

@@ -8,7 +8,7 @@ Each character must be a digit from `0-9` or an alphabetic character from `A-F`.
 
 ## Examples
 
-```
+```python
 is_valid_hex_code("#CD5C5C")
 output = True
 

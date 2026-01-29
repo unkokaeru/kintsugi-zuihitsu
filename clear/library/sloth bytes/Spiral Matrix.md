@@ -4,7 +4,7 @@ Given a matrix of m * n elements (m rows, n columns), return all elements of the
 
 ## Examples
 
-```
+```python
 spiralOrder([
   [ 1, 2, 3 ],
   [ 4, 5, 6 ],

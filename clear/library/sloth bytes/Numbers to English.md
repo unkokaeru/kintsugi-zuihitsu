@@ -4,7 +4,7 @@ Write a function that accepts a positive integer between `0` and `999` inclusive
 
 ## Examples
 
-```
+```python
 numToEng(0)
 output = "zero"
 

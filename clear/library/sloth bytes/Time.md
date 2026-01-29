@@ -8,7 +8,7 @@ Represent this as an array with the first and second elements representing hours
 
 ## Examples
 
-```
+```python
 timeToEat("2:00 p.m.")
 #5 hours until the next meal, dinner
 output = [5, 0]

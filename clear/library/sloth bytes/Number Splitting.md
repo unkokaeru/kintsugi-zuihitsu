@@ -4,7 +4,7 @@ Create a function that takes a number `num` and returns each place value in the 
 
 ## Examples
 
-```
+```python
 num_split(39)
 output =[30, 9]
 

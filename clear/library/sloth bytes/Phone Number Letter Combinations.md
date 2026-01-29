@@ -10,7 +10,7 @@ You may return the results in any order.
 
 ## Examples
 
-```
+```python
 def letterCombinations("23")
 output = ["ad","ae","af","bd","be","bf","cd","ce","cf"]
 

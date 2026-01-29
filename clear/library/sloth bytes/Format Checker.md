@@ -4,13 +4,13 @@ Create a function that accepts a string and returns `true` if it's in the format
 
 This is what a valid phone number looks like:
 
-```
+```python
 (123) 456-7890
 ```
 
 ## Examples
 
-```
+```python
 isValidPhoneNumber("(123) 456-7890")
 output = True
 

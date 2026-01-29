@@ -16,7 +16,7 @@ Return `true` if and only if you can provide every customer with correct change.
 
 ## Examples
 
-```
+```python
 lemonade([5, 5, 5, 10, 20])
 """ First three customers pay with $5: Now you have three $5 bills
 Fourth customer pays $10: You give $5 change, now have two $5 bills and one $10 bill

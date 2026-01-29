@@ -8,7 +8,7 @@ Given a sentence containing few instances of `"Ctrl + C"` and `"Ctrl + V"`, retu
 
 ## Examples
 
-```
+```python
 #Example 1
 keyboardShortcut("the egg and Ctrl + C Ctrl + V the spoon")
 output = "the egg and the egg and the spoon"

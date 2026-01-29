@@ -8,7 +8,7 @@ Create a function that takes an integer `year` and returns the **next happy year
 
 ## Examples
 
-```
+```python
 happyYear(2017)
 output = 2018
 # 2018 is the next happy year with all numbers being different.

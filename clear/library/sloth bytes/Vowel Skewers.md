@@ -10,7 +10,7 @@ Create a function which returns whether a given vowel skewer is **authentic**.
 
 ## Examples
 
-```
+```python
 is_authentic_skewer("B--A--N--A--N--A--S")
 output = True
 

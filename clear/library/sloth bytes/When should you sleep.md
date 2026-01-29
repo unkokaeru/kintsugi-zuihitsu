@@ -12,7 +12,7 @@ Return the time you should go to bed — in **24-hour format** (`"HH:MM"`).
 
 ## Examples
 
-```
+```python
 bedTime(["07:50", "07:50"])
 output = ["00:00"]
 

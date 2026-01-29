@@ -4,7 +4,7 @@ Create a function that transforms sentences ending with multiple question marks 
 
 ## Examples
 
-```
+```python
 noYelling("What went wrong?????????")
 output = "What went wrong?"
 

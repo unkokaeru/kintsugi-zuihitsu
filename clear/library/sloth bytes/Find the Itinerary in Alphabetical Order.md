@@ -10,7 +10,7 @@ If there are multiple possible routes, return the one that comes **first in alph
 
 ## Examples
 
-```
+```python
 findPath([["C", "F"], ["A", "C"], ["I", "Z"], ["F", "I"]])
 output = ["A", "C", "F", "I", "Z"]
 

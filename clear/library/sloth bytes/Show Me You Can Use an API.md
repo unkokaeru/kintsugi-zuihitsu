@@ -8,7 +8,7 @@ Could be something beginner or advanced, have fun with it.
 
 ## Examples to Get Started
 
-```
+```python
 Weather app (classic) - Example API for it
 
 Cat Fact Generator - Example API for it

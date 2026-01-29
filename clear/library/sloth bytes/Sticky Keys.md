@@ -6,7 +6,7 @@ Determine if the `typed` string has been made from the `original`. Return `true`
 
 ## Examples
 
-```
+```python
 #function: isLongPressed(original, typed)
 isLongPressed("alex", "aaleex")
 output = true

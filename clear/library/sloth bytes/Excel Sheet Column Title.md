@@ -4,7 +4,7 @@ Given a positive integer, return its corresponding column title displayed in Exc
 
 For example:
 
-```
+```python
 1 -> A
 2 -> B
 3 -> C
@@ -17,7 +17,7 @@ For example:
 
 ## Examples
 
-```
+```python
 convert_to_title(1)
 output = "A"
 

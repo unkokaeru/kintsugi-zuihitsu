@@ -4,7 +4,7 @@ Create a function that converts 12-hour time to 24-hour time or vice versa. Retu
 
 ## Examples
 
-```
+```python
 convertTime("12:00 am")
 output = "0:00"
 

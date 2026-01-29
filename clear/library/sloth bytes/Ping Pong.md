@@ -1,4 +1,4 @@
-# Ping Pong!
+# Ping Pong
 
 A game of table tennis almost always sounds like _Ping!_ followed by _Pong!_
 
@@ -11,7 +11,7 @@ Given an array of _Ping!_, create a function that inserts _Pong!_ in between eac
 
 ## Examples
 
-```
+```python
 #Example 1
 pingPong(["Ping!"], True)
 output = ["Ping!", "Pong!"]

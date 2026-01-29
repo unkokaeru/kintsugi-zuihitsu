@@ -8,7 +8,7 @@ There are 0 digits between 0 and 1, there are 9 digits between 0 and 10 and ther
 
 ## Examples
 
-```
+```python
 digits(1)
 output = 0
 

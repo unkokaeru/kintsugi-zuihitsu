@@ -4,7 +4,7 @@ Create a function that returns `true` if two lines **rhyme** and `false` otherwi
 
 ## Examples
 
-```
+```python
 doesRhyme("Sam I am!", "Green eggs and ham.")
 output = True
 

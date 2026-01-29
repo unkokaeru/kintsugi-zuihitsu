@@ -6,7 +6,7 @@ This number line starts at the first value of the array, and increases by 1 to t
 
 ## Examples
 
-```
+```python
 howManyMissing([1, 2, 3, 8, 9])
 output = 4
 # The numbers missing from this line are 4, 5, 6, and 7.

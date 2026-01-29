@@ -8,7 +8,7 @@ Keep repeating this process from **left to right** until no more eating can happ
 
 ## Examples
 
-```
+```python
 nom_nom([5, 3, 7])
 output = [15]
 

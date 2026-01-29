@@ -11,7 +11,7 @@ Given an integer n, return a string array answer (1-indexed) where:
 
 ## Examples
 
-```
+```python
 Input: n = 3
 Output: ["1","2","Fizz"]
 

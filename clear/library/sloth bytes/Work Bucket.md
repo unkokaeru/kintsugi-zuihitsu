@@ -4,7 +4,7 @@ Write a function that divides a phrase into word buckets, with each bucket conta
 
 ## Examples
 
-```
+```python
 split_into_buckets("she sells sea shells by the sea", 10)
 output = ["she sells", "sea shells", "by the sea"]
 

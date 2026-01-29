@@ -14,7 +14,7 @@ Determine which other variable has had the greatest impact on the mood.
 
 ## Examples
 
-```
+```python
 greatestImpact([
   [1, 1, 3, 10],
   [1, 1, 3, 10],

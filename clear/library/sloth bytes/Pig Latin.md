@@ -10,7 +10,7 @@ Rules for converting to pig latin:
 
 ## Examples
 
-```
+```python
 #Example 1
 pigLatinSentence("this is pig latin")
 output = "isthay isway igpay atinlay"

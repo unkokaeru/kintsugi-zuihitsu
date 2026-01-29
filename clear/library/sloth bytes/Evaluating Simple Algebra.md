@@ -6,7 +6,7 @@ You'll only be given equations for simple **addition** and **subtraction**.
 
 ## Examples
 
-```
+```python
 evalAlgebra("2 + x = 19")
 output = 17
 

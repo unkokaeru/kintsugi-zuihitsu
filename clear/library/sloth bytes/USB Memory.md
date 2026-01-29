@@ -4,7 +4,7 @@ Create a function that takes the memory size (`ms`) as an argument and returns t
 
 ## Examples
 
-```
+```python
 actualMemorySize("32GB")
 output = "29.76GB"
 

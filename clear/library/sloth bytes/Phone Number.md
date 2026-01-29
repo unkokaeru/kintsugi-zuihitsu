@@ -4,7 +4,7 @@ Create a function that takes a list of 10 numbers (between 0 and 9) and returns 
 
 ## Examples
 
-```
+```python
 format_phone_number([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])
 output = "(123) 456-7890"
 

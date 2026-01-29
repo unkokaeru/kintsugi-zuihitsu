@@ -6,7 +6,7 @@ Given a string, determine if it is valid. If so, return `"YES"`, otherwise retur
 
 ## Examples
 
-```
+```python
 isValid("abc")
 output = "YES"
 // This is a valid string because frequencies are: {a: 1, b: 1, c: 1}

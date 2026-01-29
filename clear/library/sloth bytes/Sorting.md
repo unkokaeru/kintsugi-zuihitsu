@@ -4,7 +4,7 @@ Implement a algorithm, or create a algorithm that is able to sort a array (small
 
 ## Examples
 
-```
+```python
 [3, 2, 1] -> [1, 2, 3]
 [5, 7, 6] -> [5, 6, 7]
 ```

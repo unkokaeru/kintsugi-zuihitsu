@@ -4,7 +4,7 @@ Write a function that takes time `t1` and time `t2` and returns the number of ho
 
 ## Examples
 
-```
+```python
 hoursPassed("3:00 AM", "9:00 AM")
 output = "6 hours"
 

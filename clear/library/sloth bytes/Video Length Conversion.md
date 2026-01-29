@@ -6,7 +6,7 @@ Create a function that takes the _video length_ and return it in **seconds**.
 
 ## Examples
 
-```
+```python
 minutesToSeconds("01:00") = 60
 
 minutesToSeconds("13:56") = 836

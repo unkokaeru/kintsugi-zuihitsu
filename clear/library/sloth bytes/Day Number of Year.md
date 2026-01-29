@@ -4,7 +4,7 @@ You're given a date string in the format **month/day/year**, based on the **[Gre
 
 ## Examples
 
-```
+```python
 dayOfYear("12/13/2020")
 output = 348
 

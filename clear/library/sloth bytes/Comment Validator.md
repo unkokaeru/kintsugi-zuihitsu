@@ -11,7 +11,7 @@ Create a function that returns `True` if comments are properly formatted, and `F
 
 ## Examples
 
-```
+```python
 comments_correct("//////") 
 output = True
 # 3 single-line comments: ["//", "//", "//"]

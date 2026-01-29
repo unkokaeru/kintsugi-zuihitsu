@@ -14,7 +14,7 @@ Write a function that takes a `key` and a `message`, and returns the encrypted m
 
 ## Examples
 
-```
+```python
 keyword_cipher("keyword", "abchij")
 Output = "keyabc"
 

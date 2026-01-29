@@ -6,7 +6,7 @@ Write a function that takes a string on the digits 0, 6, 9 and returns `true` if
 
 ## Examples
 
-```
+```python
 sameUpsidedown("6090609")
 output = true
 
