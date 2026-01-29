@@ -1,6 +1,6 @@
-> **Challenge Difficulty:** Hard | Estimated completion time: ~50 minutes
-
 # Find the Itinerary in Alphabetical Order
+
+> **Challenge Difficulty:** Hard | Estimated completion time: ~50 minutes
 
 You are given a list of airline tickets, where each ticket is a pair `[from, to]` representing a flight from one airport to another.
 

@@ -23,3 +23,24 @@ output = [90, 85, 34]
 
 - Must return a list.
 - 255 is the max value of a single color channel.
+
+## Solution
+
+```python runnable
+def color_invert(rgb: list[int]) -> list[int]:
+    """Invert the RGB values of a color.
+    
+    Args:
+        rgb: List of three RGB values (0-255)
+        
+    Returns:
+        List of inverted RGB values
+    """
+    return [255 - value for value in rgb]
+
+
+if __name__ == "__main__":
+    print(color_invert([255, 255, 255]))  # [0, 0, 0]
+    print(color_invert([0, 0, 0]))  # [255, 255, 255]
+    print(color_invert([165, 170, 221]))  # [90, 85, 34]
+```

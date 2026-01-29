@@ -1,6 +1,6 @@
-> **Challenge Difficulty:** Hard | Estimated completion time: ~45 minutes
-
 # Phone Number Letter Combinations
+
+> **Challenge Difficulty:** Hard | Estimated completion time: ~45 minutes
 
 Given a string of digits (from `'2'` to `'9'`), return **all possible letter combinations** that the digits could represent, using the mapping on a telephone keypad:
 

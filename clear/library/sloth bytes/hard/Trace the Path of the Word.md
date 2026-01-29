@@ -1,6 +1,6 @@
-> **Challenge Difficulty:** Hard | Estimated completion time: ~50 minutes
-
 # Trace the Path of the Word
+
+> **Challenge Difficulty:** Hard | Estimated completion time: ~50 minutes
 
 Given a grid of letters, check if a word can be traced by moving up, down, left, or right from one letter to the next.
 

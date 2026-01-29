@@ -1,6 +1,6 @@
-> **Challenge Difficulty:** Hard | Estimated completion time: ~45 minutes
-
 # Spiral Matrix
+
+> **Challenge Difficulty:** Hard | Estimated completion time: ~45 minutes
 
 Given a matrix of m * n elements (m rows, n columns), return all elements of the matrix in spiral order.
 

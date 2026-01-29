@@ -1,6 +1,6 @@
-> **Challenge Difficulty:** Hard | Estimated completion time: ~45 minutes
-
 # Keyword Cipher
+
+> **Challenge Difficulty:** Hard | Estimated completion time: ~45 minutes
 
 A **Keyword Cipher** replaces each letter of a message with a letter from a shifted alphabet built using a keyword.
 

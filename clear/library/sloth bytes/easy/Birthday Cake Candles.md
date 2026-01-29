@@ -21,3 +21,28 @@ birthdayCakeCandles([])
 output = 0
 // No candles, so nothing to blow out.
 ```
+
+## Solution
+
+```python runnable
+def birthday_cake_candles(candles: list[int]) -> int:
+    """Count how many candles are the tallest.
+    
+    Args:
+        candles: List of candle heights
+        
+    Returns:
+        Number of candles that have the maximum height
+    """
+    if not candles:
+        return 0
+    
+    max_height = max(candles)
+    return candles.count(max_height)
+
+
+if __name__ == "__main__":
+    print(birthday_cake_candles([4, 4, 1, 3]))  # 2
+    print(birthday_cake_candles([1, 1, 1, 1]))  # 4
+    print(birthday_cake_candles([]))  # 0
+```

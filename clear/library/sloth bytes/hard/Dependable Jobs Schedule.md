@@ -1,6 +1,6 @@
-> **Challenge Difficulty:** Hard | Estimated completion time: ~50 minutes
-
 # Dependable Jobs Schedule
+
+> **Challenge Difficulty:** Hard | Estimated completion time: ~50 minutes
 
 You're given a number of jobs and a list of dependencies.  
 Each job is labeled from `0` to `jobs - 1`.  

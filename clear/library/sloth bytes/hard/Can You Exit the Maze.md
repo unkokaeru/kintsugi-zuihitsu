@@ -1,6 +1,6 @@
-> **Challenge Difficulty:** Hard | Estimated completion time: ~45 minutes
-
 # Can You Exit the Maze
+
+> **Challenge Difficulty:** Hard | Estimated completion time: ~45 minutes
 
 You are given a 2D matrix representing a maze, where `0` is a walkable path and `1` is a wall.
 

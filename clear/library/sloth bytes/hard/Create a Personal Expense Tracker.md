@@ -1,6 +1,6 @@
-> **Challenge Difficulty:** Hard | Estimated completion time: ~3-5 hours
-
 # Create a Personal Expense Tracker
+
+> **Challenge Difficulty:** Hard | Estimated completion time: ~3-5 hours
 
 Create a personal expense tracker to manage your finances efficiently.
 

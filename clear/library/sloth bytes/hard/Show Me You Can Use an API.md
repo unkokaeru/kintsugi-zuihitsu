@@ -1,6 +1,6 @@
-> **Challenge Difficulty:** Hard | Estimated completion time: ~1-2 hours
-
 # Show Me You Can Use an API
+
+> **Challenge Difficulty:** Hard | Estimated completion time: ~1-2 hours
 
 Use this repo and pick any API you'd like and create something with it.
 

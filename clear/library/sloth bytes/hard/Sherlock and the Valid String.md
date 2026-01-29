@@ -1,6 +1,6 @@
-> **Challenge Difficulty:** Hard | Estimated completion time: ~45 minutes
-
 # Sherlock and the Valid String
+
+> **Challenge Difficulty:** Hard | Estimated completion time: ~45 minutes
 
 Sherlock considers a string to be valid if all characters of the string appear the same number of times. It is also valid if he can remove **just one character** at one index in the string `s`, and the remaining characters will occur the same number of times.
 
