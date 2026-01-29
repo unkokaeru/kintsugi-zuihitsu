@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~25 minutes
+
 # Lemonade Stand
 
 At a lemonade stand, each lemonade costs $5.

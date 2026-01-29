@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~15 minutes
+
 # Making a Box
 
 Create a function that creates a box based on dimension n.

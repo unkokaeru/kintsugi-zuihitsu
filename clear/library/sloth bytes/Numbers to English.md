@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~30 minutes
+
 # Numbers to English
 
 Write a function that accepts a positive integer between `0` and `999` inclusive and returns a string representation of that integer written in English.

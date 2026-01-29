@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~15 minutes
+
 # Bridge Shuffle
 
 Create a function to **bridge shuffle** two arrays.

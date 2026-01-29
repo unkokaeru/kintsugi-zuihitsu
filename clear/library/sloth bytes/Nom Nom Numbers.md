@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~25 minutes
+
 # Nom Nom Numbers
 
 A number can **"eat"** the number to its **right** if it's **larger** than that number.

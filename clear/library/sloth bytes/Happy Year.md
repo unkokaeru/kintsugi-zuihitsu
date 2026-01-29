@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~15 minutes
+
 # Next Happy Year
 
 Sloth needs your help to find out the next happy year.

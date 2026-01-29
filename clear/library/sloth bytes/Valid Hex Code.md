@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~15 minutes
+
 # Valid Hex Code
 
 Create a function that determines whether a string is a valid hex code.

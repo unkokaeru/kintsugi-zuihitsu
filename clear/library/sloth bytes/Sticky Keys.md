@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~25 minutes
+
 # Sticky Keys Typing
 
 Someone is typing on the sticky keyboard. Occasionally a key gets stuck and more than intended number of characters of a particular letter is being added into the string. The function input contains `original` and `typed` strings.

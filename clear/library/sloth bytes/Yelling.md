@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Easy | Estimated completion time: ~5 minutes
+
 # No Yelling
 
 Create a function that transforms sentences ending with multiple question marks `?` or exclamation marks `!` into a sentence only ending with one without changing punctuation in the middle of the sentences.

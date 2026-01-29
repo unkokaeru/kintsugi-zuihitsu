@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Easy | Estimated completion time: ~10 minutes
+
 # Sorting
 
 Implement a algorithm, or create a algorithm that is able to sort a array (smallest to largest).

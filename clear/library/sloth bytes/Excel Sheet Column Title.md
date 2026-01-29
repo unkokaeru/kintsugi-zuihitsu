@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~25 minutes
+
 # Excel Sheet Column Title
 
 Given a positive integer, return its corresponding column title displayed in Excel sheets.

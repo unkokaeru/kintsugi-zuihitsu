@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Easy | Estimated completion time: ~5 minutes
+
 # Change Every Letter to the Next Letter
 
 Write a function that changes every letter to the next letter:

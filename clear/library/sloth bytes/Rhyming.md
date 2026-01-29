@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~20 minutes
+
 # Rhyme Time
 
 Create a function that returns `true` if two lines **rhyme** and `false` otherwise. For the purposes of this exercise, two lines rhyme if the **last word** from each sentence contains the **same vowels**.

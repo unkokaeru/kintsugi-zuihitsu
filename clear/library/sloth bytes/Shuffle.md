@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~25 minutes
+
 # Shuffled Properly?
 
 Given an array of _10 numbers_, return whether or not the array is shuffled enough.

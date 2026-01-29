@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~15 minutes
+
 # Censor Words Longer Than Four Characters
 
 Create a function that takes a string and censors words **over four characters** with *.

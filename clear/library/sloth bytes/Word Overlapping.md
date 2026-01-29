@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~20 minutes
+
 # Word Overlapping
 
 Given two words, overlap them in such a way, morphing the last few letters of the first word with the first few letters of the second word.

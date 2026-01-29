@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~20 minutes
+
 # Binary Search Practice
 
 Given a sorted array of integers and a target integer, find the first occurrence of the target and return its index.

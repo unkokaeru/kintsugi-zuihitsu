@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~15 minutes
+
 # Factorial of Factorials
 
 Create a function that takes an integer `n` and returns the **factorial of factorials**. See below examples for a better understanding:

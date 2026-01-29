@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~20 minutes
+
 # Day Number of Year
 
 You're given a date string in the format **month/day/year**, based on the **[Gregorian calendar](https://en.wikipedia.org/wiki/Gregorian_calendar)**. Your task is to return **which day of the year** that date corresponds to (1–365, or 1–366 for leap years).

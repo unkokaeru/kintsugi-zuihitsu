@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Easy | Estimated completion time: ~10 minutes
+
 # Video Length in Seconds
 
 You are given the length of a video in minutes. The format is **mm:ss** (ex: `"02:54"`).

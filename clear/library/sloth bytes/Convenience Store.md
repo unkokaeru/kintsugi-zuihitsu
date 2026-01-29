@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~20 minutes
+
 # Convenience Store
 
 Given **a total due** and **an array** representing **the amount of change in your pocket**, determine **whether or not you are able to pay for the item.**

@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~20 minutes
+
 # Calculator Text
 
 At school, we used to play with our calculators and send each other secret messages. The trick was to enter a special number and turn the calculator upside-down.

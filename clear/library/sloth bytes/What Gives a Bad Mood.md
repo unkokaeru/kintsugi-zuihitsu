@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~30 minutes
+
 # What Gives a Bad Mood
 
 Let's say the greatest impact on someone's mood are: weather, meals, and sleep.

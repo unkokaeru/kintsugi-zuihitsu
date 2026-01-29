@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~20 minutes
+
 # Bingo Check
 
 Create a function that takes a 5x5 2D list and returns `True` if it has at least one Bingo, and `False` If it doesn't.

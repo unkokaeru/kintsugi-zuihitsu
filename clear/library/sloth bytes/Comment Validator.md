@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~25 minutes
+
 # Valid JavaScript Comments
 
 In JavaScript, there are two types of comments:

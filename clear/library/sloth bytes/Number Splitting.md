@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Easy | Estimated completion time: ~10 minutes
+
 # Splitting Up Numbers
 
 Create a function that takes a number `num` and returns each place value in the number.

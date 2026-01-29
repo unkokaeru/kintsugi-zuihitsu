@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~25 minutes
+
 # How Many Digits between 1 and N
 
 Imagine you took all the numbers between 0 and `n` and concatenated them together into a long string.

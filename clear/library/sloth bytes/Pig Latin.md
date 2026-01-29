@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~20 minutes
+
 # Pig Latin
 
 Write a function that converts a sentence into pig latin.

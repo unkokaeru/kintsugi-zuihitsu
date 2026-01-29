@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~20 minutes
+
 # Evaluating Simple Algebra
 
 Given a string containing an algebraic equation, calculate and **return the value of x**.

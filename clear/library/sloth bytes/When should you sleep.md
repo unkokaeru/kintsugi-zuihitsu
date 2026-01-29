@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~25 minutes
+
 # When Should You Go to Sleep?
 
 You're setting an alarm for the next morning and know how long you want to sleep.  

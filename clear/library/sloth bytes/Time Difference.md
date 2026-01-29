@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Easy | Estimated completion time: ~10 minutes
+
 # Amateur Hour
 
 Write a function that takes time `t1` and time `t2` and returns the number of hours passed between the two times.

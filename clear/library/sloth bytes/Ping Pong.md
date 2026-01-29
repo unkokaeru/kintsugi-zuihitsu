@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~15 minutes
+
 # Ping Pong
 
 A game of table tennis almost always sounds like _Ping!_ followed by _Pong!_

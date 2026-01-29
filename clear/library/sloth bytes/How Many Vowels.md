@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Easy | Estimated completion time: ~5 minutes
+
 # How Many Vowels?
 
 Create a function that takes a string and returns the number (count) of vowels in the string.

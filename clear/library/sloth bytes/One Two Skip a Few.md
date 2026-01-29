@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~15 minutes
+
 # One, Two, Skip a Few
 
 Create a function which calculates how many numbers are missing from an **ordered** number line.

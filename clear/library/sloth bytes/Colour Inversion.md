@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Easy | Estimated completion time: ~5 minutes
+
 # Invert Colors
 
 Create a function that inverts the `rgb` values of a given list.

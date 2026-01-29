@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~20 minutes
+
 # Simon Says
 
 Simon asks you to perform operations on a list of numbers that **only he tells you**.

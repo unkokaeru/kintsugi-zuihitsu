@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Easy | Estimated completion time: ~10 minutes
+
 # The Actual Memory Size of Your USB Flash Drive
 
 Create a function that takes the memory size (`ms`) as an argument and returns the actual memory size.

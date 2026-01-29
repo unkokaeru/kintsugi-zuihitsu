@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~25 minutes
+
 # Cinemas
 
 Given an array of seats, return the maximum number of new people which can be seated, as long as there is at least a gap of **2 seats** between people.

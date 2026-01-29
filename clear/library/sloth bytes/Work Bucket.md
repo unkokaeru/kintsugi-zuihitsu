@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~25 minutes
+
 # Word Buckets
 
 Write a function that divides a phrase into word buckets, with each bucket containing `n` or fewer characters. Only include full words inside each bucket.

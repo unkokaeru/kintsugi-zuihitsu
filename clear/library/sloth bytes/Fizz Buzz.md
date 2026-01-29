@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~15 minutes
+
 # Fizz Buzz
 
 This is a classic problem that some companies even use as a warm up before an interview.

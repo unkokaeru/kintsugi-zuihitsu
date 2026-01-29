@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~25 minutes
+
 # Vowel Skewers
 
 An *authentic* vowel skewer is a skewer with a delicious and juicy mix of consonants and vowels. However, the way they are made must be *just right*:

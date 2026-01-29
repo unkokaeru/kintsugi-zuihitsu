@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~20 minutes
+
 # Remove the Computer Virus
 
 Your computer might have been infected by a virus! Create a function that finds the viruses in `files` and removes them from your computer.

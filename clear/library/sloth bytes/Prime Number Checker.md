@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Easy | Estimated completion time: ~10 minutes
+
 # Prime Number Checker
 
 Develop a small program that checks whether a number entered by the user is a prime number or not.

@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~25 minutes
+
 # Pasting
 
 Given a sentence containing few instances of `"Ctrl + C"` and `"Ctrl + V"`, return the sentence after those keyboard shortcuts have been applied!

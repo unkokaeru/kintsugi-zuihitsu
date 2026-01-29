@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Easy | Estimated completion time: ~5 minutes
+
 # How Much is True?
 
 Create a function which returns the number of `true` values there are in an array.

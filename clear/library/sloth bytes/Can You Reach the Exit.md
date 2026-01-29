@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~25 minutes
+
 # Can You Reach the Exit?
 
 You are given a 2D grid where each cell is one of:

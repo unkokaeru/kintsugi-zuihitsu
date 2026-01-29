@@ -1,3 +1,5 @@
+> **Challenge Difficulty:** Medium | Estimated completion time: ~30 minutes
+
 # Message from Space
 
 You have received an encrypted message from space. Your task is to decrypt the message with the following simple rules:
