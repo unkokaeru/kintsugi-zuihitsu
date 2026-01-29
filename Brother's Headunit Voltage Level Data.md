@@ -77,3 +77,114 @@ Think that as battery charges, output voltage from head unit increases
 |       28        |   4.2600   |            |            |       4.2600        |                  |
 |       29        |   5.6100   |            |            |       5.6100        |                  |
 |       30        |   7.1500   |            |            |       7.1500        |                  |
+
+---
+
+Here's my oscilloscope measurements. I think there's about a 1.5V DC offset, but can't remember. So the curve might be similar, but translated.
+
+This is also when I first noticed that battery level affects the output level, so data might be weird:
+
+| App     | Engine Status | Phone Volume Level | Balance | EQ  | Oscilloscope Voltage | Osc. ms | Frequency | Level | RMS        | Clipping Presence | Notes                            |
+| ------- | ------------- | ------------------ | ------- | --- | -------------------- | ------- | --------- | ----- | ---------- | ----------------- | -------------------------------- |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 5       | 30        | 0     | 8.48       | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 5       | 34        | 0     | 8.89       | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 5       | 34        | -5    | 4.97       | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 60        | 0     | 9.25       | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 60        | -5    | 5.28       | No                |                                  |
+| Spotify | On            | Max                | Center  | -7  | 5V                   | 2       | 60        | 0     | 4.85       | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 60        | 0     | 9.25       | No                |                                  |
+| Spotify | On            | Max                | Center  | 0   | 5V                   | 2       | 60        | 0     | 9.95       | Yes               |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 60        | 0     | 9.25       | No                |                                  |
+| Spotify | On            | 14                 | Center  | -1  | 500mV                | 5       | 30        | 0     | 0.935      | No                |                                  |
+| Spotify | On            | 14                 | Center  | -1  | 500mV                | 5       | 32.1      | 0     | 0.965      | No                |                                  |
+| Spotify | On            | 14                 | Center  | -1  | 500mV                | 5       | 34        | 0     | 0.975      | No                |                                  |
+| Spotify | On            | 14                 | Center  | -1  | 500mV                | 5       | 40        | 0     | 0.995      | No                |                                  |
+| Spotify | On            | 14                 | Center  | -1  | 500mV                | 5       | 50        | 0     | 1.005      | No                |                                  |
+| Spotify | On            | 14                 | Center  | -1  | 500mV                | 5       | 60        | 0     | 1.015      | No                |                                  |
+| Spotify | On            | 14                 | Center  | -1  | 500mV                | 5       | 70        | 0     | 1.015      | No                |                                  |
+| Spotify | On            | 14                 | Center  | -1  | 500mV                | 5       | 80        | 0     | 1.025      | No                | Slight FR vibration              |
+| Spotify | On            | 14                 | Center  | -1  | 500mV                | 5       | 90        | 0     | 1.025/1.03 | No                | LF vibration starts, FR v stops? |
+| Spotify | On            | 14                 | Center  | -1  | 500mV                | 5       | 100       | 0     | 1.035      | No                |                                  |
+| Spotify | On            | 14                 | Center  | -1  | 500mV                | 5       | 110       | 0     | 1.045      | No                | F vibration stops                |
+| Spotify | On            | 14                 | Center  | -1  | 500mV                | 5       | 120       | 0     | 1.055      | No                |                                  |
+| Spotify | Off           | 14                 | Center  | -1  | 500mV                | 5       | 30        | 0     | 0.935      | No                |                                  |
+| Spotify | Off           | 14                 | Center  | -1  | 500mV                | 5       | 50        | 0     | 1.005      | No                |                                  |
+| Spotify | Off           | Max                | Center  | -1  | 5V                   | 2       | 60        | 0     | 8.35       | Yes               |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 60        | 0     | 9.25       | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 30        | 0     | 8.545      | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 32.1      | 0     | 8.865      | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 34        | 0     | 8.965      | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 40        | 0     | 9.11       | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 50        | 0     | 9.225      | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 60        | 0     | 9.245      | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 70        | 0     | 9.267      | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 80        | 0     | 9.34       | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 90        | 0     | 9.38       | No                | Jumpy                            |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 100       | 0     | 9.44       | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 30        | 0     | 8.545      | No                |                                  |
+| Spotify | On            | Max                | Rear    | -1  | 5V                   | 2       | 30        | 0     | 8.54/8.56? | No                |                                  |
+| Spotify | On            | Max                | Rear    | -1  | 5V                   | 2       | 60        | 0     | 9.19       | No                |                                  |
+| Spotify | On            | Max                | Rear    | -1  | 5V                   | 2       | 70        | 0     | 9.25       | No                |                                  |
+| Spotify | On            | Max                | Rear    | -1  | 5V                   | 2       | 80        | 0     | 9.34       | No                |                                  |
+| Spotify | On            | Max                | Rear    | -1  | 5V                   | 2       | 40        | 0     | 9.11       | No                |                                  |
+| Spotify | On            | Max                | Rear    | -1  | 5V                   | 2       | 44        | 0     | 8.97       | No                |                                  |
+| Spotify | On            | Max                | Rear    | -1  | 5V                   | 2       | 60        | 0     | 9.25       | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 60        | -5    | 5.25       | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 60        | 0     | 9.25       | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 50        | 0     | 9.215      | No                |                                  |
+| Spotify | On            | Max                | Center  | -1  | 5V                   | 2       | 50        | 0     | 9.215      | No                |                                  |
+
+---
+
+And here's some measurements from my oscilloscope when I noticed that the battery voltage might be affecting things:
+
+Car voltage
+
+13.1, 60hz, 0db, 8.9vrms
+
+13.1, 50hz, 0db, 9.07vrm
+
+34hz, 34hz 0db, 8.94vrms
+
+13.2, 50hz, -5dB, 5.25vrms
+
+14.2, 50hz, 0, 9.22
+14.2, 60hz, 0, 9.25
+
+---
+
+Finally here's some where I used the EQ levels on the HU to change it. Might not scale properly cus the EQ I changed is a low shelf at 110hz, but idk the characteristics of the EQ curve (this is why I measured it)
+
+I have more data as well but it's just raw text and I can't remember what it means yet 🤣
+
+VOL 15, 60HZ
+
+<110Hz EQ VOLUMES
+
+| HU VOL | Gain | Voltage |       |     |
+| ------ | ---- | ------- | ----- | --- |
+| 15     | -1   | 102.7   |       |     |
+|        |      | 101.5   |       |     |
+|        | -2   | 91.5    |       |     |
+|        |      | 81.5    |       |     |
+|        |      | 72.7    |       |     |
+|        |      | 64.5    |       |     |
+|        |      | 57.2    | 57.8  |     |
+|        |      |         | 51.6  |     |
+|        |      |         | 45.9  |     |
+|        | -9   |         | 41.0  |     |
+| 14     | -9   |         | 32.7  |     |
+| 13     |      |         | 26.2  |     |
+|        | -8   |         | 29.3  |     |
+|        | -7   |         | 32.8  |     |
+|        | -6   |         | 36.7  |     |
+|        | -7   |         | 32.9  |     |
+| 15     | -1   |         | 103   |     |
+|        | 0    |         | 117.4 |     |
+|        |      |         | 132.8 |     |
+|        |      |         | 150.5 |     |
+|        |      |         | 172.5 |     |
+|        |      |         | 197.9 |     |
+|        |      |         |       |     |
+
+Oh, divide these gains by 100 I think - These are voltmeter ones so reliable I think
