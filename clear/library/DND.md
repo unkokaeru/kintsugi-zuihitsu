@@ -1,4 +1,4 @@
-# DnD
+# Dungeons & Dragons
 
 ## Luna Butters (Alex)
 
@@ -14,9 +14,9 @@ Originally a farm worker and occasional drinker. Her home village was ransacked 
 - Exceptional prostitute (under illusion)
 - Loves lettuce, avoids anything salty (pretends otherwise)
 
-![[luna human.png]]
+![[luna human.png|250x250]]
 
-![[luna rat.png]]
+![[luna rat.png|250x250]]
 
 ---
 
@@ -34,7 +34,7 @@ Loan shark and pimp. Owes significant debt to mysterious creditors but refuses t
 - Incredibly full of herself
 - Runs Luna Butters as her best worker
 
-![[tinder.png]]
+![[tinder.png|250x250]]
 
 ---
 
@@ -54,11 +54,12 @@ Raised among giants, he genuinely believes he's tall. Insanely addicted to gambl
 - Bounty hunter with a strange pattern of only hunting short people
 - Often tricks the party into helping hunt short people without them knowing
 
-![[mister.png]]
+![[mister.png|250x250]]
 
 ---
 
 ## Slugbert Oozeworth (Tom)
+
 *Originally: Hubert Oxworth*
 
 **Race:** Slug-person (born this way, not cursed)
@@ -75,10 +76,4 @@ Born genuinely disgusting-looking, his royal family told him and the public he w
 - Has DID from trauma of being unable to accept himself as Slugbert
 - Split personality: Hubert (magic swordsman) vs Slugbert (berserker - triggered when called a slug)
 
-![[slugbert.png]]
-
-
-
-
-
-
+![[slugbert.png|250x250]]
