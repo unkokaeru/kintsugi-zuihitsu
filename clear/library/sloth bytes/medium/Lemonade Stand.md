@@ -46,3 +46,45 @@ output = True
 - You don't have any change in hand at first.
 - `bills` is an integer array.
 - `bills[i]` will be either `5`, `10`, or `20`.
+
+## Solution
+
+```python runnable
+def lemonade(bills: list[int]) -> bool:
+    """Check if you can provide correct change to all customers.
+    
+    Args:
+        bills: List of bills customers pay with (5, 10, or 20)
+        
+    Returns:
+        True if all customers can be given correct change
+    """
+    five_count = 0
+    ten_count = 0
+    
+    for bill in bills:
+        if bill == 5:
+            five_count += 1
+        elif bill == 10:
+            if five_count < 1:
+                return False
+            five_count -= 1
+            ten_count += 1
+        elif bill == 20:
+            if ten_count >= 1 and five_count >= 1:
+                ten_count -= 1
+                five_count -= 1
+            elif five_count >= 3:
+                five_count -= 3
+            else:
+                return False
+    
+    return True
+
+
+if __name__ == "__main__":
+    print(lemonade([5, 5, 5, 10, 20]))  # True
+    print(lemonade([5, 5, 10, 10, 20]))  # False
+    print(lemonade([10, 10]))  # False
+    print(lemonade([5, 5, 10]))  # True
+```

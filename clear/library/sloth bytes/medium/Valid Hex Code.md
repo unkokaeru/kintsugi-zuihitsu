@@ -36,3 +36,31 @@ is_valid_hex_code("CD5C5C")
 output = False
 # Missing #
 ```
+
+## Solution
+
+```python runnable
+import re
+
+def is_valid_hex_code(code: str) -> bool:
+    """Check if string is a valid hex color code.
+    
+    Args:
+        code: String to validate
+        
+    Returns:
+        True if valid hex code, False otherwise
+    """
+    pattern = r"^#[0-9A-Fa-f]{6}$"
+    return bool(re.match(pattern, code))
+
+
+if __name__ == "__main__":
+    print(is_valid_hex_code("#CD5C5C"))  # True
+    print(is_valid_hex_code("#EAECEE"))  # True
+    print(is_valid_hex_code("#eaecee"))  # True
+    print(is_valid_hex_code("#CD5C58C"))  # False
+    print(is_valid_hex_code("#CD5C5Z"))  # False
+    print(is_valid_hex_code("#CD5C&C"))  # False
+    print(is_valid_hex_code("CD5C5C"))  # False
+```

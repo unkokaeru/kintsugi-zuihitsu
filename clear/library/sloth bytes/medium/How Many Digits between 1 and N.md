@@ -23,3 +23,30 @@ output = 189
 digits(2020)
 output = 6969
 ```
+
+## Solution
+
+```python runnable
+def digits(number: int) -> int:
+    """Count total digits in all numbers from 1 to number (exclusive).
+    
+    Args:
+        number: Upper bound (exclusive)
+        
+    Returns:
+        Total count of digits
+    """
+    total = 0
+    
+    for value in range(1, number):
+        total += len(str(value))
+    
+    return total
+
+
+if __name__ == "__main__":
+    print(digits(1))  # 0
+    print(digits(10))  # 9
+    print(digits(100))  # 189
+    print(digits(2020))  # 6969
+```

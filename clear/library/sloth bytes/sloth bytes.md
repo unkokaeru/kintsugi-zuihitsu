@@ -16,7 +16,7 @@ id: 517125f5-9cc3-4779-9de8-26c899ca13e4
 folderPath: ""
 title: "{{folderName}} overview"
 showTitle: true
-depth: 2
+depth: 3
 includeTypes:
   - folder
   - markdown
