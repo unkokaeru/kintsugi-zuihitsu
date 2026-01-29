@@ -1,8 +1,84 @@
 # DnD
 
-- **Luna Butters** (Alex) - slug-person were-rat (bitten on the farm), really good at illusion magic to always look human. Really good prostitute (when under their illusion). Loves lettuce, nothing salty (pretends not to though). Farm worker originally, also a bit of a drinker, until bitten and taken in by Tinder Thunderbush. Just wants to be free. Thief - high dexterity and illusion magic. Home village ransacked by were-rats, set upon the village by Tinder Thunderbush to create supply of prostitutes whilst cleaning up some non-paying customers.
-- **Tinder Thunderbush** (Katie) - obnoxiously straight fairy. Loan shark and pimp (of Luna Butters, best worker). Just wants to make money and match people with Luna Butters, her best worker. Owes a lot of money to some mysterious people, but pretends not to because she's really up herself so instead takes out loans to give people even more loans. Fire magic. Fairy born from the concept of capitalism (pretty old, mysterious history).
-- **Mister Skybreaker** (Dan) - dwarf raised by giants, hates short people (under 10 feet, single digiters), thinks he's really tall. Insanely addicted to gambling, so goes to Tinder for loans. Had a great night with Luna Butters in rat form, terrible morning after with her in human form (short scum). Calls all short people pipsqueaks/dwarves, always offended at being called a dwarf. Bounty hunter that has a very strange pattern of only hunting short people - often tricks the party into helping hunt short people without them knowing.
-- **Slugbert Oozeworth** / *Hubert Oxworth, originally* (Tom) - slimy, scaly, smelly. Born disgusting looking like a slug-person, so their royal family told them and the public that he was cursed (because no-one could NATURALLY look that disgusting). Works on a journey to become uncursed and human again, and on the way becomes an enforcer for some shady loan sharks (that end up loaning to Tinder Thunderbush). Eventually discovers he's just really ugly and filled with self-hatred, so changes journey to self-acceptance. Close quarters mage that kills and defiles their enemies (necrophilia). Elemental magic and sword-fighting? Magic monk? Has DID from the trauma of being unable to accept himself as Slugbert, so creates the split personality of Hubert (the magic swordsman) - hence dual-classes as magic swordsman and berserker (goes berserk when called a slug, becomes true Slugbert).
+## Luna Butters (Alex)
 
-![[image.png|Slugbert]]
+**Race:** Slug-person were-rat (bitten on the farm)
+**Class:** Thief - high dexterity and illusion magic
+**Goal:** Freedom
+
+**Background:**
+Originally a farm worker and occasional drinker. Her home village was ransacked by were-rats, sent by Tinder Thunderbush to create a supply of prostitutes while "cleaning up" some non-paying customers. After being bitten, she was taken in by Tinder.
+
+**Traits:**
+- Highly skilled in illusion magic, always appearing human
+- Exceptional prostitute (under illusion)
+- Loves lettuce, avoids anything salty (pretends otherwise)
+
+![[luna human.png]]
+
+![[luna rat.png]]
+
+---
+
+## Tinder Thunderbush (Katie)
+
+**Race:** Fairy (born from the concept of capitalism - ancient, mysterious history)
+**Class:** Fire mage
+**Goal:** Money, and pimping out Luna Butters
+
+**Background:**
+Loan shark and pimp. Owes significant debt to mysterious creditors but refuses to acknowledge it - too proud. Instead, takes out more loans to give people even more loans.
+
+**Traits:**
+- Obnoxiously straight
+- Incredibly full of herself
+- Runs Luna Butters as her best worker
+
+![[tinder.png]]
+
+---
+
+## Mister Skybreaker (Dan)
+
+**Race:** Dwarf (raised by giants)
+**Class:** Bounty hunter
+**Goal:** Unclear - gambling seems to be his main drive
+
+**Background:**
+Raised among giants, he genuinely believes he's tall. Insanely addicted to gambling, which keeps him going to Tinder for loans. Had a great night with Luna Butters in rat form - terrible morning after when she appeared in human form (short scum).
+
+**Traits:**
+- Hates short people (anyone under 10 feet - "single digiters")
+- Calls all short people "pipsqueaks" or "dwarves"
+- Always offended when called a dwarf
+- Bounty hunter with a strange pattern of only hunting short people
+- Often tricks the party into helping hunt short people without them knowing
+
+![[mister.png]]
+
+---
+
+## Slugbert Oozeworth (Tom)
+*Originally: Hubert Oxworth*
+
+**Race:** Slug-person (born this way, not cursed)
+**Class:** Dual-class - Magic swordsman / Berserker
+**Goal:** Originally to become "uncursed" and human - now self-acceptance
+
+**Background:**
+Born genuinely disgusting-looking, his royal family told him and the public he was "cursed" (because surely no-one could NATURALLY look that way). Worked as an enforcer for shady loan sharks (the same ones who loan to Tinder Thunderbush). Eventually discovered he's just really ugly, not cursed - now struggles with self-hatred.
+
+**Traits:**
+- Slimy, scaly, smelly
+- Close quarters mage who kills and defiles enemies (necrophilia)
+- Elemental magic and sword-fighting (magic monk?)
+- Has DID from trauma of being unable to accept himself as Slugbert
+- Split personality: Hubert (magic swordsman) vs Slugbert (berserker - triggered when called a slug)
+
+![[slugbert.png]]
+
+
+
+
+
+

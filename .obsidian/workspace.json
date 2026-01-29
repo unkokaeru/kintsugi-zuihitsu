@@ -90,7 +90,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 424.51103591918945
+    "width": 424.51103591918945,
+    "collapsed": true
   },
   "right": {
     "id": "b91c281c8050caa8",
@@ -192,6 +193,11 @@
   },
   "active": "61d7c00cc2261dfb",
   "lastOpenFiles": [
+    "attached/files/tinder.png",
+    "attached/files/slugbert.png",
+    "attached/files/luna human.png",
+    "attached/files/mister.png",
+    "attached/files/luna rat.png",
     "kintsugi zuihitsu.md",
     "Brother's Headunit Voltage Level Data.md",
     "clear/library/sloth bytes/hard/Pomodoro Timer.md",
@@ -217,7 +223,6 @@
     "clear/library/sloth bytes/Factorial Factorial.md",
     "clear/library/sloth bytes/Excel Sheet Column Title.md",
     "clear/library/sloth bytes/Evaluating Simple Algebra.md",
-    "clear/library/sloth bytes/Day Number of Year.md",
     "clear/library/sloth bytes/hard",
     "clear/library/sloth bytes/medium",
     "clear/library/sloth bytes/easy",
@@ -233,10 +238,6 @@
     "attached/files/image-5.png",
     "attached/files/image-4.png",
     "attached/files/image-3.png",
-    "attached/files/image-2.png",
-    "attached/files/image-1.png",
-    "attached/files/image.png",
-    "attached/files/mth3006 lectures-11.png",
-    "attached/files/dirac delta function.png"
+    "attached/files/image-2.png"
   ]
 }
