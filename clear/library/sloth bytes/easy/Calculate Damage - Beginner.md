@@ -21,18 +21,18 @@ Return "invalid" if damage or speed is negative.
 ## Solution
 
 ```python runnable
-def damage(dmg: int, speed: int, time: str) -> int | str:
+def damage(damage_per_attack: int, speed: int, time: str) -> int | str:
     """Calculate total damage over a time period.
     
     Args:
-        dmg: Damage per attack
+        damage_per_attack: Damage per attack
         speed: Attacks per second
         time: Time unit (second, minute, or hour)
         
     Returns:
         Total damage dealt, or "invalid" if parameters are negative
     """
-    if dmg < 0 or speed < 0:
+    if damage_per_attack < 0 or speed < 0:
         return "invalid"
     
     time_multipliers = {
@@ -41,7 +41,7 @@ def damage(dmg: int, speed: int, time: str) -> int | str:
         "hour": 3600
     }
     
-    return dmg * speed * time_multipliers[time]
+    return damage_per_attack * speed * time_multipliers[time]
 
 
 if __name__ == "__main__":

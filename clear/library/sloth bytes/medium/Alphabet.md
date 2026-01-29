@@ -35,3 +35,46 @@ output = "A"
 - Tests will all be in CAPITALS.
 - Empty inputs should return a capital "A" (as if it were in letter position 0!).
 - Think about the letter "Z" like the number 9 and how it carries over to increment the next letter/digit over.
+
+## Solution
+
+```python runnable
+def next_letters(text: str) -> str:
+    """Return the next letters alphabetically with carry-over.
+    
+    Args:
+        text: String of uppercase letters
+        
+    Returns:
+        Next alphabetical string (like incrementing a number)
+    """
+    if not text:
+        return "A"
+    
+    letters = list(text)
+    carry = True
+    
+    for index in range(len(letters) - 1, -1, -1):
+        if not carry:
+            break
+            
+        if letters[index] == "Z":
+            letters[index] = "A"
+            carry = True
+        else:
+            letters[index] = chr(ord(letters[index]) + 1)
+            carry = False
+    
+    if carry:
+        letters.insert(0, "A")
+    
+    return "".join(letters)
+
+
+if __name__ == "__main__":
+    print(next_letters("A"))  # B
+    print(next_letters("ABC"))  # ABD
+    print(next_letters("Z"))  # AA
+    print(next_letters("CAZ"))  # CBA
+    print(next_letters(""))  # A
+```

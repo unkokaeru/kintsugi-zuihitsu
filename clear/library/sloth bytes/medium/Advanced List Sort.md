@@ -17,3 +17,35 @@ advanced_sort(["b", "a", "b", "a", "c"]) ➞ [["b", "b"], ["a", "a"], ["c"]]
 ## Notes
 
 The sub lists should be returned in the order of each element's first appearance in the given list.
+
+## Solution
+
+```python runnable
+from typing import Any
+
+def advanced_sort(items: list[Any]) -> list[list[Any]]:
+    """Group items by value, preserving first appearance order.
+    
+    Args:
+        items: List of numbers or strings
+        
+    Returns:
+        List of sublists where each sublist contains items of the same value
+    """
+    seen_order: list[Any] = []
+    groups: dict[Any, list[Any]] = {}
+    
+    for item in items:
+        if item not in groups:
+            seen_order.append(item)
+            groups[item] = []
+        groups[item].append(item)
+    
+    return [groups[key] for key in seen_order]
+
+
+if __name__ == "__main__":
+    print(advanced_sort([2, 1, 2, 1]))  # [[2, 2], [1, 1]]
+    print(advanced_sort([5, 4, 5, 5, 4, 3]))  # [[5, 5, 5], [4, 4], [3]]
+    print(advanced_sort(["b", "a", "b", "a", "c"]))  # [["b", "b"], ["a", "a"], ["c"]]
+```

@@ -32,3 +32,38 @@ changeEnough([1, 0, 5, 219], 19.99) ➞ false
 - **dime**= 10 cents / $0.10
 - **nickel** = 5 cents / $0.05
 - **penny** = 1 cent / $0.01
+
+## Solution
+
+```python runnable
+def change_enough(change: list[int], total: float) -> bool:
+    """Check if you have enough change to pay for an item.
+    
+    Args:
+        change: List of [quarters, dimes, nickels, pennies]
+        total: Total amount due in dollars
+        
+    Returns:
+        True if you can afford the item, False otherwise
+    """
+    quarters, dimes, nickels, pennies = change
+    
+    total_cents = (
+        quarters * 25 +
+        dimes * 10 +
+        nickels * 5 +
+        pennies * 1
+    )
+    
+    total_due_cents = round(total * 100)
+    
+    return total_cents >= total_due_cents
+
+
+if __name__ == "__main__":
+    print(change_enough([2, 100, 0, 0], 14.11))  # False
+    print(change_enough([0, 0, 20, 5], 0.75))  # True
+    print(change_enough([30, 40, 20, 5], 12.55))  # True
+    print(change_enough([10, 0, 0, 50], 3.85))  # False
+    print(change_enough([1, 0, 5, 219], 19.99))  # False
+```

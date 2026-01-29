@@ -27,28 +27,28 @@ output = "476MB"
 ## Solution
 
 ```python runnable
-def actual_memory_size(ms: str) -> str:
+def actual_memory_size(memory_size: str) -> str:
     """Calculate the actual memory size after 7% storage loss.
     
     Args:
-        ms: Memory size string (e.g., "32GB" or "512MB")
+        memory_size: Memory size string (e.g., "32GB" or "512MB")
         
     Returns:
         Actual memory size as a string
     """
-    if ms.endswith("GB"):
-        size_gb = float(ms[:-2])
-        size_mb = size_gb * 1000
+    if memory_size.endswith("GB"):
+        size_gigabytes = float(memory_size[:-2])
+        size_megabytes = size_gigabytes * 1000
     else:
-        size_mb = float(ms[:-2])
+        size_megabytes = float(memory_size[:-2])
     
-    actual_mb = size_mb * 0.93
+    actual_megabytes = size_megabytes * 0.93
     
-    if actual_mb >= 1000:
-        actual_gb = actual_mb / 1000
-        return f"{actual_gb:.2f}GB"
+    if actual_megabytes >= 1000:
+        actual_gigabytes = actual_megabytes / 1000
+        return f"{actual_gigabytes:.2f}GB"
     else:
-        return f"{int(actual_mb)}MB"
+        return f"{int(actual_megabytes)}MB"
 
 
 if __name__ == "__main__":

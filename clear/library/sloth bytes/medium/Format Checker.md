@@ -26,3 +26,27 @@ output = False
 ## Notes
 
 Don't forget the space after the closing parenthesis.
+
+## Solution
+
+```python runnable
+import re
+
+def is_valid_phone_number(phone: str) -> bool:
+    """Check if phone number is properly formatted.
+    
+    Args:
+        phone: Phone number string
+        
+    Returns:
+        True if format is (###) ###-####, False otherwise
+    """
+    pattern = r"^\(\d{3}\) \d{3}-\d{4}$"
+    return bool(re.match(pattern, phone))
+
+
+if __name__ == "__main__":
+    print(is_valid_phone_number("(123) 456-7890"))  # True
+    print(is_valid_phone_number("1111)555 2345"))  # False
+    print(is_valid_phone_number("098) 123 4567"))  # False
+```

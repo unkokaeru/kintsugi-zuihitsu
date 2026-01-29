@@ -14,23 +14,23 @@ Implement a algorithm, or create a algorithm that is able to sort a array (small
 ## Solution
 
 ```python runnable
-def bubble_sort(arr: list[int]) -> list[int]:
+def bubble_sort(array: list[int]) -> list[int]:
     """Sort an array using bubble sort algorithm.
     
     Args:
-        arr: List of integers to sort
+        array: List of integers to sort
         
     Returns:
         Sorted list in ascending order
     """
-    result = arr.copy()
-    n = len(result)
+    result = array.copy()
+    length = len(result)
     
-    for i in range(n):
+    for outer_index in range(length):
         swapped = False
-        for j in range(0, n - i - 1):
-            if result[j] > result[j + 1]:
-                result[j], result[j + 1] = result[j + 1], result[j]
+        for inner_index in range(0, length - outer_index - 1):
+            if result[inner_index] > result[inner_index + 1]:
+                result[inner_index], result[inner_index + 1] = result[inner_index + 1], result[inner_index]
                 swapped = True
         if not swapped:
             break

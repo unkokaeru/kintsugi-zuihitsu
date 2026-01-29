@@ -40,3 +40,36 @@ output = [1, 2, 3, 4, 5, 6, 7]
 - Elements in both arrays can be strings or integers.
 - If two arrays are of unequal length, add the additional elements of the longer array to the end of the shuffled array.
 - Always start your shuffle with the first element of Array 1.
+
+## Solution
+
+```python runnable
+from typing import Any
+
+def bridge_shuffle(array1: list[Any], array2: list[Any]) -> list[Any]:
+    """Interleave two arrays, starting with array1.
+    
+    Args:
+        array1: First array (strings or integers)
+        array2: Second array (strings or integers)
+        
+    Returns:
+        Shuffled array with interleaved elements
+    """
+    result: list[Any] = []
+    max_length = max(len(array1), len(array2))
+    
+    for index in range(max_length):
+        if index < len(array1):
+            result.append(array1[index])
+        if index < len(array2):
+            result.append(array2[index])
+    
+    return result
+
+
+if __name__ == "__main__":
+    print(bridge_shuffle(["A", "A", "A"], ["B", "B", "B"]))  # ['A', 'B', 'A', 'B', 'A', 'B']
+    print(bridge_shuffle(["C", "C", "C", "C"], ["D"]))  # ['C', 'D', 'C', 'C', 'C']
+    print(bridge_shuffle([1, 3, 5, 7], [2, 4, 6]))  # [1, 2, 3, 4, 5, 6, 7]
+```

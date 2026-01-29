@@ -45,3 +45,41 @@ output = "HELLO"
 
 - Convert to uppercase words.
 - Ignore dots.
+
+## Solution
+
+```python runnable
+def turn_calc(number: int) -> str:
+    """Convert calculator number to upside-down text.
+    
+    Args:
+        number: Number to convert
+        
+    Returns:
+        Upside-down text representation
+    """
+    mapping = {
+        "0": "O",
+        "1": "I",
+        "2": "Z",
+        "3": "E",
+        "4": "H",
+        "5": "S",
+        "6": "G",
+        "7": "L",
+        "8": "B",
+        "9": "-"
+    }
+    
+    number_string = str(number).replace(".", "")
+    reversed_string = number_string[::-1]
+    
+    return "".join(mapping[digit] for digit in reversed_string)
+
+
+if __name__ == "__main__":
+    print(turn_calc(707))  # LOL
+    print(turn_calc(5508))  # BOSS
+    print(turn_calc(3045))  # SHOE
+    print(turn_calc(7734))  # HELLO
+```

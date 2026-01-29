@@ -27,16 +27,16 @@ output = [90, 85, 34]
 ## Solution
 
 ```python runnable
-def color_invert(rgb: list[int]) -> list[int]:
+def color_invert(color_values: list[int]) -> list[int]:
     """Invert the RGB values of a color.
     
     Args:
-        rgb: List of three RGB values (0-255)
+        color_values: List of three RGB values (0-255)
         
     Returns:
         List of inverted RGB values
     """
-    return [255 - value for value in rgb]
+    return [255 - value for value in color_values]
 
 
 if __name__ == "__main__":

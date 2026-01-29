@@ -20,22 +20,22 @@ output =[100, 0, 0]
 ## Solution
 
 ```python runnable
-def num_split(num: int) -> list[int]:
+def num_split(number: int) -> list[int]:
     """Split a number into its place values.
     
     Args:
-        num: Input number
+        number: Input number
         
     Returns:
         List of place values
     """
-    is_negative = num < 0
-    num = abs(num)
-    num_str = str(num)
+    is_negative = number < 0
+    number_absolute = abs(number)
+    number_string = str(number_absolute)
     result: list[int] = []
     
-    for i, digit in enumerate(num_str):
-        place_value = int(digit) * (10 ** (len(num_str) - i - 1))
+    for index, digit in enumerate(number_string):
+        place_value = int(digit) * (10 ** (len(number_string) - index - 1))
         if is_negative:
             place_value = -place_value
         result.append(place_value)
