@@ -4,7 +4,7 @@ Create a function that takes a 5x5 2D list and returns `True` if it has at least
 
 ## Examples
 
-```
+```python
 bingo_check([
   [45, "x", 31, 74, 87],
   [64, "x", 47, 32, 90],

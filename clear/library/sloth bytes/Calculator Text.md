@@ -10,7 +10,7 @@ Given a number, create a function that converts it into a word by turning the in
 
 ## Examples
 
-```
+```python
 turnCalc(707)
 output = "LOL"
 

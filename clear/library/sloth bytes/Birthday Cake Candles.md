@@ -6,7 +6,7 @@ You are in charge of the cake for a child's birthday. It will have one candle fo
 
 ## Examples
 
-```
+```python
 birthdayCakeCandles([4,4,1,3])
 output = 2
 // The tallest candles are 4. There are 2 candles with this height, so the function should return 2.

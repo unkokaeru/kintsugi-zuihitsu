@@ -12,7 +12,7 @@ and so on ...
 
 ## Examples
 
-```
+```python
 move("hello") ➞ "ifmmp"
 
 move("bye") ➞ "czf"

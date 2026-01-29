@@ -11,7 +11,7 @@ You can move **up, down, left, right** (no diagonals), and you cannot move outsi
 
 ## Examples
 
-```
+```python
 can_reach_exit([
     "@..",
     ".#E",

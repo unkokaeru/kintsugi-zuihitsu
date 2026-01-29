@@ -8,7 +8,7 @@ Given an array of seats, return the maximum number of new people which can be se
 
 ## Examples
 
-```
+```python
 maximumSeating([0, 0, 0, 1, 0, 0, 1, 0, 0, 0])
 output = 2
 # [1, 0, 0, 1, 0, 0, 1, 0, 0, 1] 2 new people were seated!

@@ -10,7 +10,7 @@ You can only move up, down, left and right. **You cannot move diagonally**.
 
 ## Examples
 
-```
+```python
 canExit([
   [0, 1, 1, 1, 1, 1, 1],
   [0, 0, 1, 1, 0, 1, 1],

@@ -4,7 +4,7 @@ Create a function that takes a string and censors words **over four characters**
 
 ## Examples
 
-```
+```python
 censor("The code is fourty")
 output = "The code is ******"
 

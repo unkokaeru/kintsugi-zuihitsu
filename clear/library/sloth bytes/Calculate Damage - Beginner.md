@@ -4,7 +4,7 @@ Create a function that takes damage and speed (attacks per second) and returns t
 
 ## Examples
 
-```
+```python
 damage(40, 5, "second") ➞ 200
 
 damage(100, 1, "minute") ➞ 6000

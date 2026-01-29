@@ -4,7 +4,7 @@ Create a function that inverts the `rgb` values of a given list.
 
 ## Examples
 
-```
+```python
 color_invert([255, 255, 255])
 output = [0, 0, 0]
 # [255, 255, 255] is the color white.

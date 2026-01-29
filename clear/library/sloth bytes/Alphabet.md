@@ -4,7 +4,7 @@ Create a function which returns the next letters alphabetically in a given strin
 
 ## Examples
 
-```
+```python
 next_letters("A")
 output = "B"
 // 'A' becomes 'B' – simple increment.

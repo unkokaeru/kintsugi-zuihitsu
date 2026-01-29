@@ -6,7 +6,7 @@ Return -1 if the target is not in the array.
 
 ## Examples
 
-```
+```python
 #Input:
 arr = [1, 3, 3, 3, 3, 6, 10, 10, 10, 100]
 target = 3
