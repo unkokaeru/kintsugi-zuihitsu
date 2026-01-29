@@ -1,9 +1,42 @@
-# Can You Reach the Exit
+# Can You Reach the Exit?
 
-|                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ## Can You Reach the Exit?                                                                                                                                                                                                                                                                                                                                                                                                         |
-| You are given a 2D grid where each cell is one of:                                                                                                                                                                                                                                                                                                                                                                                 |
-| - `'.'` - empty space (you can walk here)<br>    <br>- `'#'` - wall (you **cannot** walk here)<br>    <br>- `'@'` - starting position<br>    <br>- `'E'` - exit                                                                                                                                                                                                                                                                    |
-| You can move **up, down, left, right** (no diagonals), and you cannot move outside the grid.                                                                                                                                                                                                                                                                                                                                       |
-| ```<br>can_reach_exit([<br>    "@..",<br>    ".#E",<br>    "…"<br>])<br>output = True<br># One path: (0,0)->(0,1)->(0,2)->(1,2) which is 'E'<br><br>can_reach_exit([<br>    "@#E"<br>])<br>output = False<br># Exit is blocked by a wall<br><br>can_reach_exit([<br>    "@.#.",<br>    "..#E",<br>    "####"<br>])<br>output = False<br><br>can_reach_exit([<br>    "@…",<br>    ".###",<br>    "…E"<br>])<br>output = True<br>``` |
+You are given a 2D grid where each cell is one of:
+
+- `'.'` - empty space (you can walk here)
+- `'#'` - wall (you **cannot** walk here)
+- `'@'` - starting position
+- `'E'` - exit
+
+You can move **up, down, left, right** (no diagonals), and you cannot move outside the grid.
+
+## Examples
+
+```
+can_reach_exit([
+    "@..",
+    ".#E",
+    "..."
+])
+output = True
+# One path: (0,0)->(0,1)->(0,2)->(1,2) which is 'E'
+
+can_reach_exit([
+    "@#E"
+])
+output = False
+# Exit is blocked by a wall
+
+can_reach_exit([
+    "@.#.",
+    "..#E",
+    "####"
+])
+output = False
+
+can_reach_exit([
+    "@...",
+    ".###",
+    "...E"
+])
+output = True
+```

@@ -1,9 +1,35 @@
 # Keyword Cipher
 
-|                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A **Keyword Cipher** replaces each letter of a message with a letter from a shifted alphabet built using a keyword.                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| 1. Start with the keyword.<br>    <br>2. Add the remaining letters of the alphabet (A–Z) in order, skipping any that already appeared in the keyword.<br>    <br>    - Example keyword: `"KEYWORD"`<br>        <br>    - Cipher alphabet: `KEYWORDABCFGHIJLMNPQSTUVXZ`<br>        <br>3. Encrypt by replacing each letter in the message with the letter at the same position in the cipher alphabet.<br>    <br>    - Plain alphabet: `ABCDEFGHIJKLMNOPQRSTUVWXYZ`<br>        <br>    - Cipher alphabet: `KEYWORDABCFGHIJLMNPQSTUVXZ` |
-| Write a function that takes a `key` and a `message`, and returns the encrypted message.                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| ### Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ```<br>keyword_cipher("keyword", "abchij")<br>Output = "keyabc"<br><br>keyword_cipher("purplepineapple", "abc")<br>output = "pur"<br><br>keyword_cipher("mubashir", "edabit")<br>output = "samucq"<br><br>keyword_cipher("etaoinshrdlucmfwypvbgkjqxz", "abc")<br>Output = "eta"<br><br>keyword_cipher("etaoinshrdlucmfwypvbgkjqxz", "xyz")<br>Output = "qxz"<br><br>keyword_cipher("etaoinshrdlucmfwypvbgkjqxz", "aeiou")<br>Output = "eirfg"<br>```                                                                                   |
+A **Keyword Cipher** replaces each letter of a message with a letter from a shifted alphabet built using a keyword.
+
+1. Start with the keyword.
+2. Add the remaining letters of the alphabet (A–Z) in order, skipping any that already appeared in the keyword.
+    - Example keyword: `"KEYWORD"`
+    - Cipher alphabet: `KEYWORDABCFGHIJLMNPQSTUVXZ`
+3. Encrypt by replacing each letter in the message with the letter at the same position in the cipher alphabet.
+    - Plain alphabet: `ABCDEFGHIJKLMNOPQRSTUVWXYZ`
+    - Cipher alphabet: `KEYWORDABCFGHIJLMNPQSTUVXZ`
+
+Write a function that takes a `key` and a `message`, and returns the encrypted message.
+
+## Examples
+
+```
+keyword_cipher("keyword", "abchij")
+Output = "keyabc"
+
+keyword_cipher("purplepineapple", "abc")
+output = "pur"
+
+keyword_cipher("mubashir", "edabit")
+output = "samucq"
+
+keyword_cipher("etaoinshrdlucmfwypvbgkjqxz", "abc")
+Output = "eta"
+
+keyword_cipher("etaoinshrdlucmfwypvbgkjqxz", "xyz")
+Output = "qxz"
+
+keyword_cipher("etaoinshrdlucmfwypvbgkjqxz", "aeiou")
+Output = "eirfg"
+```
