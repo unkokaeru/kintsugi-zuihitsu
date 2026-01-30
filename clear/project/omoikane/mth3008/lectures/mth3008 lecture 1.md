@@ -3,6 +3,12 @@
 > [!quote] [Jesus Najera](https://setzeus.com/about), a friend of the lecturer
 > Tensors are mathematical objects that are invariant under a change of coordinates & have components that change in predictable ways.
 
+… *notes to be written in the lecture*
+
+---
+
+## Pre-Lecture Notes from [[mth3008 lecture 1 notes.pdf|University Notes]]
+
 - Tensors generalise vectors, e.g.,
 	- Rank 0 tensor: scalar;
 	- Rank 1 tensor: vector;
@@ -25,3 +31,7 @@
 		3. Introduce dummy indices, for each scalar: $\boxed{u_{i}+a_{j}b_{j}v_{i}=a_{k}a_{k}b_{\ell}v_{\ell}a_{i}}$
 	- Or just an expression: $(\mathbf{a}\cdot \mathbf{b})\mathbf{u}+|\mathbf{c}|^{2}\mathbf{v}=((\mathbf{a}\cdot \mathbf{b})\mathbf{u})_{i}+((\mathbf{c}\cdot \mathbf{c})\mathbf{v})_{i} = (\mathbf{a}\cdot \mathbf{b})u_{i}+(\mathbf{c}\cdot \mathbf{c})v_{i} = \boxed{a_{j}b_{j}u_{i}+c_{k}c_{k}v_{i}}$
 	- Similarly, you can write matrices in this notation: given $A$ and $B$ and $n\times n$ matrices, the entries of $C=AB$ can be written as $C_{ij}=A_{ik}B_{kj}$ - just by multiplying together and simplifying as before.
+		- This can be very useful, for example to prove that (for the matrices before) $\text{Trace}(\mathbf{A}\mathbf{B})=\text{Trace}(\mathbf{B}\mathbf{A})$…
+			- $\text{Tr}(\mathbf{C})=C_{11}+C_{22}+\dots+C_{NN}=C_{jj}$, hence,
+			- $\text{Tr}(\mathbf{A}\mathbf{B})=\text{Tr}(A_{ik}B_{kj})=A_{jk}B_{kj}$ and $\text{Tr}(\mathbf{B}\mathbf{A})=\text{Tr}(B_{kjA_{ik}})=B_{jk}A_{kj}$, where the indices and be re-ordered and re-labelled as discussed before, to then give $\text{Tr}(\mathbf{A}\mathbf{B})$.
+- The Kronecker delta, in this new notation, is defined by $\delta_{ij}=\begin{cases}1 & \text{if }i=j \\ 0 & \text{if }i\neq j\end{cases}$.
