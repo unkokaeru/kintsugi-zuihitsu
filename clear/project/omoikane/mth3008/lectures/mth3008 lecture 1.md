@@ -34,7 +34,7 @@
 		- This can be very useful, for example to prove that (for the matrices before) $\text{Trace}(\mathbf{A}\mathbf{B})=\text{Trace}(\mathbf{B}\mathbf{A})$…
 			- $\text{Tr}(\mathbf{C})=C_{11}+C_{22}+\dots+C_{NN}=C_{jj}$, hence,
 			- $\text{Tr}(\mathbf{A}\mathbf{B})=\text{Tr}(A_{ik}B_{kj})=A_{jk}B_{kj}$ and $\text{Tr}(\mathbf{B}\mathbf{A})=\text{Tr}(B_{kjA_{ik}})=B_{jk}A_{kj}$, where the indices and be re-ordered and re-labelled as discussed before, to then give $\text{Tr}(\mathbf{A}\mathbf{B})$.
-- The Kronecker delta, in this new notation, is defined by $\delta_{ij}=\begin{cases}1 & \text{if }i=j \\ 0 & \text{if }i\neq j\end{cases}$, where $i$ and $j$ can be 1, 2, or 3.
+- The Kronecker delta, in this vector notation, is defined by $\delta_{ij}=\begin{cases}1 & \text{if }i=j \\ 0 & \text{if }i\neq j\end{cases}$, where $i$ and $j$ can be 1, 2, or 3.
 	- Hence, it's really just like the identity matrix: $\delta_{ij}=\begin{bmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix}$.
 	- Similar to the [[Dirac delta-function]], although on discrete domains instead of continuous, this gives it the property that $\delta_{ij}a_{j}=a_{i}$ - absorbing the repeated index.
 	- Sometimes called the substitution tensor, because it replaces the repeated index with the free index.
