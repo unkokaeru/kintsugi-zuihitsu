@@ -2,7 +2,8 @@
 
 *Notes about how hard the questions were and what to watch out for / what recurring methods were used…*
 
-…
+- Converting everything into suffix form by applying free and dummy indices.
+- Using $\mathbf{A}\mathbf{B}=A_{ik}+B_{kj}$ and $(A_{ij})^{T}=A_{ji}$.
 
 ## 1.1. Relate Dot Product and Angle via Suffix Notation
 
