@@ -1,4 +1,4 @@
-# Mth3008 Lecture 1
+# MTH3008 Lecture 1
 
 > [!quote] [Jesus Najera](https://setzeus.com/about), a friend of the lecturer
 > Tensors are mathematical objects that are invariant under a change of coordinates & have components that change in predictable ways.

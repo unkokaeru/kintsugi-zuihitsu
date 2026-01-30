@@ -1,4 +1,4 @@
-# Mth3008 Lecture 2
+# MTH3008 Lecture 2
 
 > [!quote] …
 > …
@@ -31,5 +31,8 @@
 		- Similar to the dot product, we can write $(\mathbf{a}\times \mathbf{b})_{i}=\epsilon_{ijk}a_{j}b_{k}$ - the former meaning the $i$th component of the vector $\mathbf{a}\times \mathbf{b}$, and the latter where $j$ and $k$ are dummy indices indicating sums, and $i$ is a free index indicating the coordinate considered.
 		- As always, this can be found by converting to vector notation, and can hence use the notation to simplify/evaluate expressions like $\mathbf{a}\times \mathbf{b}=-\mathbf{b}\times \mathbf{a}$.
 	- Determinant of $3 \times 3$ matrices.
-		- Using the alternating tensor, we can calculate matrix determinants, again provable using vector notation: $|M|=\epsilon_{ijk}M_{1i}M_{2j}M_{3k}$ using the rows, or $|M|=\epsilon_{ijk}M_{i1}M_{j2}M_{k3}$
-	- The scalar triple product.
+		- Using the alternating tensor, we can calculate matrix determinants, again provable using vector notation: $|M|=\epsilon_{ijk}M_{1i}M_{2j}M_{3k}$ using the rows, or $|M|=\epsilon_{ijk}M_{i1}M_{j2}M_{k3}$ using the columns.
+		- This is importantly related to the formula $\epsilon_{pqr}|M|=\epsilon_{ijk}M_{pi}M_{qj}M_{rk}$.
+	- The scalar triple product: $\mathbf{a}\cdot(\mathbf{b}\times \mathbf{c})$.
+		- Re-writing the product in suffix notation, $(\mathbf{b}\times \mathbf{c})_{i}=\epsilon_{ijk}b_{j}c_{k}$, we can simplify it to instead be $\epsilon_{ijk}a_{i}b_{j}c_{k}$, which could also be used to prove properties of the scalar triple product (using $\epsilon_{ijk}=\epsilon_{kij}$).
+- All then practised in [[mth3008 weekly problems 1|this week's problems]].
