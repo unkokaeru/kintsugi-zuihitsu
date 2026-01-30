@@ -53,7 +53,14 @@
               "icon": "lucide-file",
               "title": "mth3008 lecture 2"
             }
-          },
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "71f99cb4b279a628",
+        "type": "tabs",
+        "children": [
           {
             "id": "73e6786e33d42b9b",
             "type": "leaf",
@@ -67,25 +74,6 @@
               },
               "icon": "lucide-file",
               "title": "mth3008 weekly problems 1"
-            }
-          }
-        ],
-        "currentTab": 3
-      },
-      {
-        "id": "990486cab7347292",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "8d7e6c135353b29e",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/mth3008 weekly problem sheet 1.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "mth3008 weekly problem sheet 1"
             }
           }
         ]
@@ -241,10 +229,10 @@
   },
   "active": "73e6786e33d42b9b",
   "lastOpenFiles": [
-    "attached/files/mth3008 weekly problem sheet 1.pdf",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 1.md",
     "clear/project/omoikane/mth3008/mth3008 weekly problems 1.md",
     "clear/project/omoikane/mth3008/mth3008 lecture 2.md",
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 1.md",
+    "attached/files/mth3008 weekly problem sheet 1.pdf",
     "clear/project/omoikane/mth3008/mth3008.md",
     "attached/files/mth3008 lecture 2 notes.pdf",
     "attached/files/mth3008 lecture 1 notes.pdf",
