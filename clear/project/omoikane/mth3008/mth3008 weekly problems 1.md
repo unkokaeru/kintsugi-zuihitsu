@@ -99,7 +99,7 @@
 ## 1.6. Simplify Kronecker Delta Expression and Rewrite in Vector Form
 
 > [!question]
-> Simplify the suffix notation expression $\delta_{ij} a_{j} b_{\ell ck} \delta_{i\ell}$ and write the result in vector form.
+> Simplify the suffix notation expression $\delta_{ij} a_{j} b_{\ell} c_{k} \delta_{i\ell}$ and write the result in vector form.
 
 …
 

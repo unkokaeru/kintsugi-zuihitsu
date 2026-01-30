@@ -40,18 +40,6 @@
             }
           },
           {
-            "id": "9adf59ffdab947c9",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/mth3008 lecture 1 notes.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "mth3008 lecture 1 notes"
-            }
-          },
-          {
             "id": "49d3b0936d23abfa",
             "type": "leaf",
             "state": {
@@ -65,9 +53,21 @@
               "icon": "lucide-file",
               "title": "mth3008 lecture 2"
             }
+          },
+          {
+            "id": "87dc366b7740971a",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "attached/files/mth3008 lecture 2 notes.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "mth3008 lecture 2 notes"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -244,6 +244,18 @@
                   "icon": "lucide-file",
                   "title": "mth3008 weekly problems 1"
                 }
+              },
+              {
+                "id": "043287c1723de06a",
+                "type": "leaf",
+                "state": {
+                  "type": "pdf",
+                  "state": {
+                    "file": "attached/files/mth3008 weekly problem sheet 1.pdf"
+                  },
+                  "icon": "lucide-file-text",
+                  "title": "mth3008 weekly problem sheet 1"
+                }
               }
             ]
           }
@@ -258,12 +270,12 @@
       }
     ]
   },
-  "active": "73e6786e33d42b9b",
+  "active": "87dc366b7740971a",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 1.md",
-    "clear/project/omoikane/mth3008/mth3008 weekly problems 1.md",
     "clear/project/omoikane/mth3008/mth3008 lecture 2.md",
     "attached/files/mth3008 lecture 1 notes.pdf",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 1.md",
+    "clear/project/omoikane/mth3008/mth3008 weekly problems 1.md",
     "attached/files/mth3008 weekly problem sheet 1.pdf",
     "clear/project/omoikane/mth3008/mth3008.md",
     "attached/files/mth3008 lecture 2 notes.pdf",
