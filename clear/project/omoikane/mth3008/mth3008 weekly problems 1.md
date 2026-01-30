@@ -1,6 +1,6 @@
 # MTH3008 Weekly Problems 1
 
-*Notes about how hard the questions were and what to watch out for / what recurring methods were used…*
+> Fairly low difficulty, just learning how to use new algebraic methods and using new formulae; occasionally deriving them from simple summation properties and hard-to-remember matrix properties.
 
 - Converting everything into suffix form by applying free and dummy indices.
 - Using $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}$, both ways.
@@ -133,3 +133,9 @@
 > in suffix notation.
 
 …
+
+---
+
+## Raw Solutions
+
+![[Week One Problem Solutions.pdf]]

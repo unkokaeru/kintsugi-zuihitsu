@@ -54,7 +54,7 @@ var DebugHelper = class {
       return () => {
       };
     }
-    var qualifiedName = `novel-word-count|${name} (${++this.idCounter})`;
+    const qualifiedName = `novel-word-count|${name} (${++this.idCounter})`;
     console.time(qualifiedName);
     return () => console.timeEnd(qualifiedName);
   }
@@ -1958,7 +1958,7 @@ var NovelWordCountPlugin = class extends import_obsidian5.Plugin {
         await this.updateDisplayedCounts();
       } catch (err) {
         this.debugHelper.debug("Error while updating displayed counts");
-        this.debugHelper.error(err);
+        this.debugHelper.debug(err);
         setTimeout(() => {
           this.initialize(false);
         }, 1e3);
@@ -1981,19 +1981,31 @@ var NovelWordCountPlugin = class extends import_obsidian5.Plugin {
       this.debugHelper.debug("File explorer leaf not found; skipping update.");
       return;
     }
-    this.setContainerClass(fileExplorerLeaf);
+    const vaultCount = this.fileHelper.getCachedDataForPath(
+      this.savedData.cachedCounts,
+      "/"
+    );
+    document.documentElement.style.setProperty("--novel-word-count-opacity", `${this.settings.labelOpacity}`);
+    const drawers = [this.app.workspace.leftSplit, this.app.workspace.rightSplit];
+    let hasMobileDrawer = false;
+    for (const drawer of drawers) {
+      this.setContainerClass(drawer.containerEl);
+      if (!(drawer == null ? void 0 : drawer.fileCountEl)) {
+        continue;
+      }
+      drawer.fileCountEl.setAttribute(
+        "data-novel-word-count-plugin",
+        this.nodeLabelHelper.getNodeLabel(vaultCount)
+      );
+      hasMobileDrawer = true;
+    }
     const fileExplorerView = fileExplorerLeaf.view;
     const fileItems = fileExplorerView.fileItems;
-    if ((_a = fileExplorerView == null ? void 0 : fileExplorerView.headerDom) == null ? void 0 : _a.navButtonsEl) {
-      const counts = this.fileHelper.getCachedDataForPath(
-        this.savedData.cachedCounts,
-        "/"
-      );
+    if (!hasMobileDrawer && ((_a = fileExplorerView == null ? void 0 : fileExplorerView.headerDom) == null ? void 0 : _a.navButtonsEl)) {
       fileExplorerView.headerDom.navButtonsEl.setAttribute(
         "data-novel-word-count-plugin",
-        this.nodeLabelHelper.getNodeLabel(counts)
+        this.nodeLabelHelper.getNodeLabel(vaultCount)
       );
-      document.documentElement.style.setProperty("--novel-word-count-opacity", `${this.settings.labelOpacity}`);
     }
     if (file) {
       const relevantItems = Object.keys(fileItems).filter(
@@ -2030,7 +2042,7 @@ var NovelWordCountPlugin = class extends import_obsidian5.Plugin {
   async getFileExplorerLeaf() {
     return new Promise((resolve, reject) => {
       let foundLeaf = null;
-      this.app.workspace.iterateAllLeaves((leaf) => {
+      this.app.workspace.getLeavesOfType("file-explorer").forEach((leaf) => {
         if (foundLeaf) {
           return;
         }
@@ -2046,8 +2058,11 @@ var NovelWordCountPlugin = class extends import_obsidian5.Plugin {
       }
     });
   }
-  setContainerClass(leaf) {
-    const container = leaf.view.containerEl;
+  setContainerClass(container) {
+    if (!container) {
+      this.debugHelper.debug("No container was passed to setContainerClass");
+      return;
+    }
     container.toggleClass(`novel-word-count--active`, true);
     const notePrefix = `novel-word-count--note-`;
     const folderPrefix = `novel-word-count--folder-`;
@@ -2060,6 +2075,5 @@ var NovelWordCountPlugin = class extends import_obsidian5.Plugin {
     container.toggleClass(folderPrefix + folderAlignment, true);
   }
 };
-
 
 /* nosourcemap */

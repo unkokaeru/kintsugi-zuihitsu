@@ -1151,7 +1151,7 @@ __export(main_exports, {
   default: () => Scrybble
 });
 module.exports = __toCommonJS(main_exports);
-var import_obsidian14 = require("obsidian");
+var import_obsidian15 = require("obsidian");
 
 // src/settings.ts
 var import_obsidian = require("obsidian");
@@ -1711,7 +1711,7 @@ var ScrybbleView = class extends import_obsidian4.ItemView {
       }
     };
     B(x`
-			<scrybble-ui .scrybble="${scrybble}"
+			<sc-ui .scrybble="${scrybble}"
 						 .onViewSwitch="${this.handleViewSwitch.bind(this)}"
 						 .onErrorRefresh="${this.handleErrorRefresh.bind(this)}"
 			/>`, this.contentEl);
@@ -2349,7 +2349,7 @@ __decorateClass([
 var SyncProgressNotice = class {
   constructor(filename) {
     this.notice = new import_obsidian6.Notice("", 0);
-    this.indicator = new SyncProgressIndicator();
+    this.indicator = document.createElement("sc-sync-progress-indicator");
     this.indicator.filename = filename;
     this.indicator.state = "INIT" /* init */;
     this.notice.containerEl.style.whiteSpace = "normal";
@@ -2373,10 +2373,11 @@ var SyncProgressNotice = class {
 
 // src/SyncJob.ts
 var SyncJob = class extends import_typescript_fsm.StateMachine {
-  constructor(key = 0, init = "INIT" /* init */, onStateChange, filename) {
+  constructor(key = 0, init = "INIT" /* init */, onStateChange, filename, rmFileId) {
     super(init, [], console);
     this.onStateChange = onStateChange;
     this.filename = filename;
+    this.rmFileId = rmFileId;
     const notice = new SyncProgressNotice(filename);
     this.onStateChange(this.filename, "INIT" /* init */, this);
     notice.updateState(init);
@@ -2522,7 +2523,7 @@ var RmFile = class extends i4 {
 			<div class="tree-item" @click="${this._handleClick}" aria-label="${`${this.file.name}
 			
 Click to download file to your vault`}">
-				<div class="tree-item-self rm-file is-clickable">
+				<div class="tree-item-self sc-rm-file is-clickable">
 					<span class="tree-item-icon">${this.currentlySyncing ? this.renderSpinner() : (0, import_obsidian7.getIcon)(syncState)}</span>
 					<span class="filename">${this.file.name}</span>
 				</div>
@@ -2607,7 +2608,7 @@ Click to download file to your vault`}">
   }
   _handleClick() {
     this.dispatchEvent(new CustomEvent("rm-click", {
-      detail: { name: this.file.name, path: this.file.path, type: "f" },
+      detail: { name: this.file.name, path: this.file.path, type: "f", id: this.file.id },
       bubbles: true,
       composed: true
     }));
@@ -2652,16 +2653,12 @@ var RmFileTree = class extends i4 {
   render() {
     return x`
 			<div class="scrybble-filetree">
-				<div class="tree-item-self">
-					<div class="tree-item-inner text-normal">Current directory is <b>${this.tree.cwd}</b></div>
-				</div>
-
 				<div class="files">
 					${this.tree.items.map((fileOrDirectory) => {
       if (fileOrDirectory.type === "d") {
-        return x`<rm-dir .directory="${fileOrDirectory}" />`;
+        return x`<sc-rm-dir .directory="${fileOrDirectory}" />`;
       } else if (fileOrDirectory.type === "f") {
-        return x` <rm-file .file="${fileOrDirectory}" />`;
+        return x` <sc-rm-file .file="${fileOrDirectory}" />`;
       }
     })}
 				</div>
@@ -2682,10 +2679,163 @@ __decorateClass([
   n5({ type: String })
 ], RmFileTree.prototype, "cwd", 2);
 
+// src/ui/Components/SearchFilter.ts
+var import_obsidian8 = require("obsidian");
+var SearchFilter = class extends i4 {
+  constructor() {
+    super(...arguments);
+    this.filters = {};
+    this.query = "";
+    this.tag = "";
+    this.starred = false;
+    this.isSearchMode = false;
+    this.loading = false;
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    this.applyFilters(this.filters);
+  }
+  updated(changedProperties) {
+    if (changedProperties.has("filters")) {
+      this.applyFilters(this.filters);
+    }
+  }
+  applyFilters(filters) {
+    this.query = filters.query ?? "";
+    this.tag = filters.tags?.join(", ") ?? "";
+    this.starred = filters.starred ?? false;
+  }
+  render() {
+    return x`
+			<form class="search-filter" @submit="${this.handleSubmit}">
+				<div class="search-filter-fields">
+					<div class="search-filter-field">
+						<label for="search-query">Search filenames</label>
+						<input
+							id="search-query"
+							type="text"
+							placeholder="e.g. .*meeting.*"
+							.value="${this.query}"
+							@input="${this.handleQueryChange}"
+						/>
+					</div>
+					<div class="search-filter-field">
+						<label for="search-tag">Tags</label>
+						<input
+							id="search-tag"
+							type="text"
+							placeholder="e.g. Work, Personal"
+							.value="${this.tag}"
+							@input="${this.handleTagChange}"
+						/>
+					</div>
+					<div class="search-filter-field search-filter-checkbox">
+						<label>
+							<input
+								type="checkbox"
+								.checked="${this.starred}"
+								@change="${this.handleStarredChange}"
+							/>
+							Starred only
+						</label>
+					</div>
+				</div>
+				<div class="search-filter-actions">
+					<button
+						type="submit"
+						class="mod-cta"
+						?disabled="${this.loading || !this.hasFilters()}"
+					>
+						${(0, import_obsidian8.getIcon)("search")}
+						Search
+					</button>
+					${this.isSearchMode ? x`
+						<button
+							type="button"
+							class="mod-warning"
+							@click="${this.handleClear}"
+						>
+							${(0, import_obsidian8.getIcon)("x")}
+							Back to browsing
+						</button>
+					` : E}
+				</div>
+			</form>
+		`;
+  }
+  createRenderRoot() {
+    return this;
+  }
+  handleQueryChange(e7) {
+    this.query = e7.target.value;
+  }
+  handleTagChange(e7) {
+    this.tag = e7.target.value;
+  }
+  handleStarredChange(e7) {
+    this.starred = e7.target.checked;
+  }
+  handleSubmit(e7) {
+    e7.preventDefault();
+    this.handleSearch();
+  }
+  hasFilters() {
+    return this.query.trim() !== "" || this.tag.trim() !== "" || this.starred;
+  }
+  buildFilters() {
+    const filters = {};
+    if (this.query.trim()) {
+      filters.query = this.query.trim();
+    }
+    if (this.tag.trim()) {
+      filters.tags = this.tag.split(",").map((t6) => t6.trim()).filter((t6) => t6);
+    }
+    if (this.starred) {
+      filters.starred = true;
+    }
+    return filters;
+  }
+  handleSearch() {
+    if (!this.hasFilters()) return;
+    this.dispatchEvent(new CustomEvent("search", {
+      detail: this.buildFilters(),
+      bubbles: true,
+      composed: true
+    }));
+  }
+  handleClear() {
+    this.query = "";
+    this.tag = "";
+    this.starred = false;
+    this.dispatchEvent(new CustomEvent("clear-search", {
+      bubbles: true,
+      composed: true
+    }));
+  }
+};
+__decorateClass([
+  n5({ type: Object })
+], SearchFilter.prototype, "filters", 2);
+__decorateClass([
+  r5()
+], SearchFilter.prototype, "query", 2);
+__decorateClass([
+  r5()
+], SearchFilter.prototype, "tag", 2);
+__decorateClass([
+  r5()
+], SearchFilter.prototype, "starred", 2);
+__decorateClass([
+  n5({ type: Boolean })
+], SearchFilter.prototype, "isSearchMode", 2);
+__decorateClass([
+  n5({ type: Boolean })
+], SearchFilter.prototype, "loading", 2);
+
 // src/errorHandling/logging.ts
 var p3 = __toESM(require_browser());
 var storageKey = "scrybble-logs";
-var maxEntries = 200;
+var maxEntries = 500;
 function retrieveScrybbleLogs() {
   return JSON.parse(localStorage.getItem(storageKey) ?? "[]");
 }
@@ -2731,6 +2881,16 @@ var errors = {
     message: x`..`,
     helpAction: x`...`
   }),
+  "COMPONENT_REGISTRATION_ERROR": (e7) => ({
+    title: x`Was unable to initialize the Scrybble plugin`,
+    message: x`...`,
+    helpAction: x`...`
+  }),
+  "ICON_REGISTRATION_ERROR": (e7) => ({
+    title: x`Was unable to define custom icons for the Scrybble plugin`,
+    message: x`...`,
+    helpAction: x`...`
+  }),
   "ZIP_EXTRACT_ERROR": (e7) => ({
     title: x`Unable to extract the downloaded files`,
     message: x`Your file is likely corrupted.`,
@@ -2746,6 +2906,12 @@ var errors = {
     title: x`File loading error`,
     message: x`There's a problem loading your files${formatError(e7)}`,
     helpAction: x`Please try refreshing in a minute or so. ${PERSISTENT_PROBLEM_MESSAGE}`,
+    details: e7
+  }),
+  "SEARCH_ERROR": (e7) => ({
+    title: x`Search error`,
+    message: x`There was a problem searching your files${formatError(e7)}`,
+    helpAction: x`Please try again. ${PERSISTENT_PROBLEM_MESSAGE}`,
     details: e7
   }),
   "SYNC_HISTORY_ERROR": (e7) => ({
@@ -2801,12 +2967,18 @@ var errors = {
     message: x`Could not connect to the Scrybble servers${formatError(e7)}`,
     helpAction: x`Please try again later. ${PERSISTENT_PROBLEM_MESSAGE}`,
     details: e7
+  }),
+  "RESET_CONNECTION_ERROR": (e7) => ({
+    title: x`Failed to reset connection`,
+    message: x`We couldn't reset your reMarkable connection${formatError(e7)}`,
+    helpAction: x`Please try again. ${PERSISTENT_PROBLEM_MESSAGE}`,
+    details: e7
   })
 };
 var Errors = class {
   static handle(error_name, e7) {
     if (e7) {
-      pino.error({ err: e7 }, `Scrybble ${error_name} occurred.`);
+      pino.error({ err: e7, errorMessage: e7?.message, errorStack: e7?.stack, errorName: e7?.constructor.name }, `Scrybble ${error_name} occurred.`);
     } else {
       e7 = new Error("No error specified by caller");
       pino.error(`Scrybble ${error_name} occurred.`);
@@ -2819,11 +2991,14 @@ var Errors = class {
 };
 
 // src/ui/Pages/ScrybbleFileTree.ts
-var import_obsidian8 = require("obsidian");
+var import_obsidian9 = require("obsidian");
 var ScrybbleFileTreeComponent = class extends i4 {
   constructor() {
     super(...arguments);
+    this.items = [];
+    this.mode = "browse";
     this.cwd = "/";
+    this.searchFilters = {};
     this.loading = true;
     this.error = null;
   }
@@ -2832,26 +3007,60 @@ var ScrybbleFileTreeComponent = class extends i4 {
     await this.loadTree();
   }
   async refresh() {
-    await this.loadTree();
+    if (this.mode === "browse") {
+      await this.loadTree();
+    } else {
+      await this.executeSearch(this.searchFilters);
+    }
     this.requestUpdate();
   }
-  async handleClickFileOrFolder({ detail: { path: path3, type } }) {
+  async handleClickFileOrFolder({ detail: { path: path3, type, id, name } }) {
     if (type === "f") {
       try {
-        this.scrybble.sync.requestSync(path3);
+        if (!id) {
+          Errors.handle("REQUEST_FILE_SYNC_ERROR", new Error("File ID is required for sync"));
+          return;
+        }
+        this.scrybble.sync.requestSync(id, path3);
       } catch (e7) {
         Errors.handle("REQUEST_FILE_SYNC_ERROR", e7);
       }
     } else if (type === "d") {
       this.cwd = path3;
+      this.mode = "browse";
       await this.loadTree();
+    }
+  }
+  async handleSearch({ detail: filters }) {
+    this.searchFilters = filters;
+    await this.executeSearch(filters);
+  }
+  async handleClearSearch() {
+    this.mode = "browse";
+    this.searchFilters = {};
+    await this.loadTree();
+  }
+  async executeSearch(filters) {
+    try {
+      this.loading = true;
+      this.requestUpdate();
+      const result = await this.scrybble.api.fetchSearchFiles(filters);
+      this.items = result.items;
+      this.mode = "search";
+      this.error = null;
+    } catch (e7) {
+      this.error = Errors.handle("SEARCH_ERROR", e7);
+    } finally {
+      this.loading = false;
+      this.requestUpdate();
     }
   }
   async loadTree() {
     try {
       this.loading = true;
       this.requestUpdate();
-      this.tree = await this.scrybble.api.fetchFileTree(this.cwd);
+      const tree = await this.scrybble.api.fetchFileTree(this.cwd);
+      this.items = tree.items;
       this.error = null;
     } catch (e7) {
       this.error = Errors.handle("TREE_LOADING_ERROR", e7);
@@ -2860,13 +3069,25 @@ var ScrybbleFileTreeComponent = class extends i4 {
       this.requestUpdate();
     }
   }
+  async setSearchFilters(filters) {
+    this.searchFilters = filters;
+    await this.executeSearch(filters);
+  }
   render() {
-    const error = this.error ? x`
-			<div class="scrybble-error">
-				<h3>${this.error.title}</h3>
-				<p>${this.error.message}</p>
-				<p>${this.error.helpAction}</p>
-			</div>` : E;
+    if (this.error) {
+      return x`
+				<div class="inner-container">
+					<div class="scrybble-header">
+						<h3>reMarkable file tree</h3>
+					</div>
+					<div class="scrybble-error">
+						<h3>${this.error.title}</h3>
+						<p>${this.error.message}</p>
+						<p>${this.error.helpAction}</p>
+					</div>
+				</div>
+			`;
+    }
     const heading = x`
 			<div class="scrybble-header">
 				<h3>reMarkable file tree</h3>
@@ -2875,17 +3096,42 @@ var ScrybbleFileTreeComponent = class extends i4 {
 					@click="${this.refresh.bind(this)}"
 					class="mod-cta scrybble-refresh-button"
 				>
-					<span class="tree-item-icon scrybble-icon">${(0, import_obsidian8.getIcon)("refresh-ccw")}</span>
-					${this.loading ? "Loading..." : "Refresh"}
+					<span class="tree-item-icon scrybble-icon">${(0, import_obsidian9.getIcon)("refresh-ccw")}</span>
+					Refresh
 				</button>
 			</div>`;
-    const tree = !this.error && this.tree ? x`
-			<rm-tree .tree="${this.tree}" @rm-click="${this.handleClickFileOrFolder.bind(this)}"></rm-tree>` : E;
+    const searchFilter = x`
+			<sc-search-filter
+				.filters="${this.searchFilters}"
+				.isSearchMode="${this.mode === "search"}"
+				.loading="${this.loading}"
+				@search="${this.handleSearch.bind(this)}"
+				@clear-search="${this.handleClearSearch.bind(this)}"
+			></sc-search-filter>`;
+    const loadingOverlay = this.loading ? x`
+			<div class="scrybble-loading-overlay">
+				<div class="scrybble-loading-content">
+					<span class="tree-item-icon scrybble-icon scrybble-spinner">${(0, import_obsidian9.getIcon)("loader")}</span>
+					Loading...
+				</div>
+			</div>` : E;
+    const locationIndicator = this.mode === "browse" ? x`<div class="scrybble-location">Current directory is ${this.cwd}</div>` : E;
+    const tree = this.items.length > 0 ? x`
+			<sc-rm-tree .tree="${{ items: this.items, cwd: this.cwd }}" @rm-click="${this.handleClickFileOrFolder.bind(this)}"></sc-rm-tree>` : E;
+    const emptyState = !this.loading && this.items.length === 0 ? x`
+			<div class="scrybble-empty-state">
+				${this.mode === "search" ? "No files match your search criteria." : "This folder is empty."}
+			</div>` : E;
     return x`
 			<div class="inner-container">
 				${heading}
-				${error}
-				${tree}
+				${searchFilter}
+				${locationIndicator}
+				<div class="scrybble-tree-container">
+					${loadingOverlay}
+					${tree}
+					${emptyState}
+				</div>
 			</div>
 		`;
   }
@@ -2899,10 +3145,16 @@ __decorateClass([
 ], ScrybbleFileTreeComponent.prototype, "scrybble", 2);
 __decorateClass([
   r5()
-], ScrybbleFileTreeComponent.prototype, "tree", 2);
+], ScrybbleFileTreeComponent.prototype, "items", 2);
+__decorateClass([
+  r5()
+], ScrybbleFileTreeComponent.prototype, "mode", 2);
 __decorateClass([
   r5()
 ], ScrybbleFileTreeComponent.prototype, "cwd", 2);
+__decorateClass([
+  r5()
+], ScrybbleFileTreeComponent.prototype, "searchFilters", 2);
 __decorateClass([
   r5()
 ], ScrybbleFileTreeComponent.prototype, "loading", 2);
@@ -2943,7 +3195,7 @@ __decorateClass([
 ], ErrorComponent.prototype, "actions", 2);
 
 // src/ui/Pages/ScrybbleUI.ts
-var import_obsidian9 = require("obsidian");
+var import_obsidian10 = require("obsidian");
 
 // src/Authentication.ts
 var import_typescript_fsm2 = __toESM(require_stateMachine());
@@ -3096,6 +3348,10 @@ var Authentication = class extends import_typescript_fsm2.StateMachine {
   isAuthenticated() {
     return this.getState() === "AUTHENTICATED" /* AUTHENTICATED */;
   }
+  async refreshUserInfo() {
+    this.user = await this.api.fetchGetUser();
+    this.broadcastStateChange();
+  }
   async fetchAndSetUser(attemptRefreshOnFailure = true) {
     try {
       this.user = await this.api.fetchGetUser();
@@ -3231,7 +3487,7 @@ var ScrybbleUI = class extends i4 {
   render() {
     const { error } = this;
     const errorTemplate = error ? x`
-            <error-view .error="${error}" .actions="${[x`
+            <sc-error-view .error="${error}" .actions="${[x`
                 <button class="retry" @click="${() => this.handleErrorRefresh()}">Refresh</button>`]}"/>` : E;
     return x`
 			${this.renderNavigation()}
@@ -3251,21 +3507,21 @@ var ScrybbleUI = class extends i4 {
 							class="clickable-icon nav-action-button ${currentView === "file_tree" /* FILE_TREE */ ? "is-active" : ""}"
 							aria-label="${this.shouldDisableNavButton() ? "Complete setup first" : "File tree"}"
 							@click="${() => this.switchView("file_tree" /* FILE_TREE */)}">
-						<span>${(0, import_obsidian9.getIcon)("folder")}</span>
+						<span>${(0, import_obsidian10.getIcon)("folder")}</span>
 						<span>Files</span>
 					</button>
 					<button style="display: flex; flex-direction: column"
 							class="clickable-icon nav-action-button ${currentView === "support" /* SUPPORT */ ? "is-active" : ""}"
 							aria-label="Support"
 							@click="${() => this.switchView("support" /* SUPPORT */)}">
-						<span>${(0, import_obsidian9.getIcon)("badge-help")}</span>
+						<span>${(0, import_obsidian10.getIcon)("badge-help")}</span>
 						<span>Support</span>
 					</button>
 					<button style="display: flex; flex-direction: column"
 							class="clickable-icon nav-action-button ${currentView === "login" /* ACCOUNT */ ? "is-active" : ""}"
 							aria-label="Account"
 							@click="${() => this.switchView("login" /* ACCOUNT */)}">
-						<span>${(0, import_obsidian9.getIcon)("user")}</span>
+						<span>${(0, import_obsidian10.getIcon)("user")}</span>
 						<span>Account</span>
 					</button>
 				</div>
@@ -3276,13 +3532,13 @@ var ScrybbleUI = class extends i4 {
     const { currentView } = this;
     switch (currentView) {
       case "file_tree" /* FILE_TREE */:
-        return x`<scrybble-file-tree/>`;
+        return x`<sc-file-tree/>`;
       case "support" /* SUPPORT */:
-        return x`<scrybble-support/>`;
+        return x`<sc-support/>`;
       case "login" /* ACCOUNT */:
-        return x`<scrybble-account/>`;
+        return x`<sc-account/>`;
       case "onboarding" /* ONBOARDING */:
-        return x`<scrybble-onboarding 
+        return x`<sc-onboarding 
 					.onboardingReady="${this.requestUpdate.bind(this)}"
 				/>`;
       default:
@@ -3311,7 +3567,7 @@ __decorateClass([
 ], ScrybbleUI.prototype, "onErrorRefresh", 2);
 
 // src/ui/Pages/SupportPage.ts
-var import_obsidian10 = require("obsidian");
+var import_obsidian11 = require("obsidian");
 var SupportPage = class extends i4 {
   render() {
     return x`
@@ -3323,9 +3579,9 @@ var SupportPage = class extends i4 {
 				<!-- Contact Section -->
 				<div class="contact-section">
 					<h4>Get Help</h4>
-					<p><strong>${(0, import_obsidian10.getIcon)("mail")} Email</strong> <a
+					<p><strong>${(0, import_obsidian11.getIcon)("mail")} Email</strong> <a
 						href="mailto:mail@scrybble.ink">mail@scrybble.ink</a></p>
-					<p><strong>${(0, import_obsidian10.getIcon)("message-circle")} Discord</strong> <a
+					<p><strong>${(0, import_obsidian11.getIcon)("message-circle")} Discord</strong> <a
 						href="https://discord.gg/zPrAUzNuSN" target="_blank">Join our community</a> - other users can help too!</p>
 				</div>
 
@@ -3353,7 +3609,7 @@ var SupportPage = class extends i4 {
 							Show Logs
 						</button>
 						<button class="button button-secondary download-logs" @click=${this.downloadLogs}>
-							${(0, import_obsidian10.getIcon)("download")} Download Logs
+							${(0, import_obsidian11.getIcon)("download")} Download Logs
 						</button>
 					</div>
 					<div class="logs-container" id="logs-container"></div>
@@ -3447,13 +3703,15 @@ __decorateClass([
 ], SupportPage.prototype, "scrybble", 2);
 
 // src/ui/Pages/AccountPage.ts
-var import_obsidian11 = require("obsidian");
+var import_obsidian12 = require("obsidian");
 var AccountPage = class extends i4 {
   constructor() {
     super(...arguments);
     this.authState = "INIT" /* INIT */;
     this.error = null;
     this.copySuccess = false;
+    this.isResettingConnection = false;
+    this.showResetConfirmation = false;
     this.stateChangeHandler = (newState) => {
       this.authState = newState;
       this.requestUpdate();
@@ -3469,10 +3727,10 @@ var AccountPage = class extends i4 {
   }
   render() {
     const errorTemplate = this.error ? x`
-			<error-view .error="${this.error}" .actions="${[
+			<sc-error-view .error="${this.error}" .actions="${[
       x`
 					<button class="retry" @click="${() => this.handleErrorRetry()}">Retry</button>`
-    ]}"></error-view>
+    ]}"></sc-error-view>
 		` : E;
     return x`
 			<div class="account-container">
@@ -3518,6 +3776,25 @@ var AccountPage = class extends i4 {
   async handleLogout() {
     await this.scrybble.authentication.logout();
   }
+  showResetConnectionConfirmation() {
+    this.showResetConfirmation = true;
+  }
+  cancelResetConnection() {
+    this.showResetConfirmation = false;
+  }
+  async handleResetConnection() {
+    pino.info("Resetting reMarkable connection");
+    this.isResettingConnection = true;
+    this.showResetConfirmation = false;
+    try {
+      await this.scrybble.api.deleteRemarkableConnection();
+      await this.scrybble.authentication.refreshUserInfo();
+    } catch (error) {
+      this.error = Errors.handle("RESET_CONNECTION_ERROR", error);
+    } finally {
+      this.isResettingConnection = false;
+    }
+  }
   async handleErrorRetry() {
     pino.info("Retrying after error");
     this.error = null;
@@ -3552,7 +3829,7 @@ var AccountPage = class extends i4 {
 			<div class="account-card">
 				<div class="loading-container">
 					<div class="spinner">
-						${(0, import_obsidian11.getIcon)("loader-2")}
+						${(0, import_obsidian12.getIcon)("loader-2")}
 					</div>
 					<p>${message}</p>
 				</div>
@@ -3581,7 +3858,7 @@ var AccountPage = class extends i4 {
 							<button
 								class="verification-url-button"
 								@click="${this.openVerificationUrl}">
-								<div class="button-icon">${(0, import_obsidian11.getIcon)("external-link")}</div>
+								<div class="button-icon">${(0, import_obsidian12.getIcon)("external-link")}</div>
 								<span>Open Authorization Page</span>
 							</button>
 							<div class="url-display">
@@ -3603,9 +3880,9 @@ var AccountPage = class extends i4 {
 										@click="${this.copyUserCode}"
 										title="Copy verification code">
 										${this.copySuccess ? x`
-												<div class="button-icon">${(0, import_obsidian11.getIcon)("check")}</div>
+												<div class="button-icon">${(0, import_obsidian12.getIcon)("check")}</div>
 												<span>Copied!</span>` : x`
-												<div class="button-icon">${(0, import_obsidian11.getIcon)("copy")}</div><span>Copy Code</span>`}
+												<div class="button-icon">${(0, import_obsidian12.getIcon)("copy")}</div><span>Copy Code</span>`}
 									</button>
 								</div>
 								<p class="code-hint">This code expires in ${Math.floor(deviceAuth.expires_in / 60)}
@@ -3617,7 +3894,7 @@ var AccountPage = class extends i4 {
 					<div class="step ${isPolling ? "step-active" : ""}">
 						<div class="step-number">
 							${isPolling ? x`
-								<div class="step-spinner">${(0, import_obsidian11.getIcon)("loader-circle")}</div>` : "3"}
+								<div class="step-spinner">${(0, import_obsidian12.getIcon)("loader-circle")}</div>` : "3"}
 						</div>
 						<div class="step-content">
 							<h3>${isPolling ? "Waiting for authorization..." : "Return here"}</h3>
@@ -3636,7 +3913,7 @@ var AccountPage = class extends i4 {
 					<button
 						class="cancel-button"
 						@click="${this.cancelDeviceFlow}">
-						<div class="button-icon">${(0, import_obsidian11.getIcon)("x")}</div>
+						<div class="button-icon">${(0, import_obsidian12.getIcon)("x")}</div>
 						<span>Cancel</span>
 					</button>
 				</div>
@@ -3671,7 +3948,7 @@ var AccountPage = class extends i4 {
 					<button
 						class="primary-button"
 						@click="${this.startDeviceFlow}">
-						${(0, import_obsidian11.getIcon)("log-in")}
+						${(0, import_obsidian12.getIcon)("log-in")}
 						<span>Sign in with Scrybble</span>
 					</button>
 				</div>
@@ -3707,7 +3984,7 @@ var AccountPage = class extends i4 {
 					<div class="info-grid">
 						<div class="info-item">
 							<div class="info-label">
-								${(0, import_obsidian11.getIcon)("user")}
+								${(0, import_obsidian12.getIcon)("user")}
 								<span>Name</span>
 							</div>
 							<div class="info-value">${userInfo.user.name}</div>
@@ -3715,7 +3992,7 @@ var AccountPage = class extends i4 {
 
 						<div class="info-item">
 							<div class="info-label">
-								${(0, import_obsidian11.getIcon)("mail")}
+								${(0, import_obsidian12.getIcon)("mail")}
 								<span>Email</span>
 							</div>
 							<div class="info-value">${userInfo.user.email}</div>
@@ -3723,7 +4000,7 @@ var AccountPage = class extends i4 {
 
 						<div class="info-item">
 							<div class="info-label">
-								${(0, import_obsidian11.getIcon)("sunrise")}
+								${(0, import_obsidian12.getIcon)("sunrise")}
 								<span>Member since</span>
 							</div>
 							<div class="info-value">${this.formatDate(userInfo.user.created_at)}</div>
@@ -3731,7 +4008,7 @@ var AccountPage = class extends i4 {
 
 						<div class="info-item">
 							<div class="info-label">
-								${(0, import_obsidian11.getIcon)("bird")}
+								${(0, import_obsidian12.getIcon)("bird")}
 								<span>Onboarding status</span>
 							</div>
 							<div class="info-value">${userInfo.onboarding_state}</div>
@@ -3739,7 +4016,7 @@ var AccountPage = class extends i4 {
 
 						<div class="info-item">
 							<div class="info-label">
-								${(0, import_obsidian11.getIcon)("crown")}
+								${(0, import_obsidian12.getIcon)("crown")}
 								<span>Subscription 
 									${userInfo.subscription_status?.exists ? x`<a href="${this.formatGumroadSubscriptionManageUrl()}" target="_blank">Manage</a>` : E}
 								</span>
@@ -3759,7 +4036,7 @@ var AccountPage = class extends i4 {
 					<div class="stats-grid">
 						<div class="stat-item">
 							<div class="stat-icon">
-								${(0, import_obsidian11.getIcon)("file-text")}
+								${(0, import_obsidian12.getIcon)("file-text")}
 							</div>
 							<div class="stat-content">
 								<div class="stat-number">${userInfo.total_syncs}</div>
@@ -3769,12 +4046,46 @@ var AccountPage = class extends i4 {
 					</div>
 				</div>
 
-				<button
-					class="logout-button"
-					@click="${this.handleLogout}"
-					title="Sign out">
-					${(0, import_obsidian11.getIcon)("log-out")} Log out
-				</button>
+				<div class="account-actions-section">
+					<h3>Account Actions</h3>
+
+					${this.showResetConfirmation ? x`
+						<div class="reset-confirmation">
+							<p class="reset-warning">
+								${(0, import_obsidian12.getIcon)("alert-triangle")}
+								<strong>Are you sure?</strong> This will disconnect your reMarkable account and delete all sync history. You'll need to re-authenticate with reMarkable to continue syncing.
+							</p>
+							<div class="reset-confirmation-buttons">
+								<button
+									class="reset-confirm-button"
+									@click="${this.handleResetConnection}"
+									?disabled="${this.isResettingConnection}">
+									${this.isResettingConnection ? x`${(0, import_obsidian12.getIcon)("loader-2")} Resetting...` : x`${(0, import_obsidian12.getIcon)("trash-2")} Yes, reset connection`}
+								</button>
+								<button
+									class="reset-cancel-button"
+									@click="${this.cancelResetConnection}"
+									?disabled="${this.isResettingConnection}">
+									Cancel
+								</button>
+							</div>
+						</div>
+					` : x`
+						<button
+							class="reset-connection-button"
+							@click="${this.showResetConnectionConfirmation}"
+							title="Disconnect reMarkable and clear sync history">
+							${(0, import_obsidian12.getIcon)("unlink")} Reset reMarkable connection
+						</button>
+					`}
+
+					<button
+						class="logout-button"
+						@click="${this.handleLogout}"
+						title="Sign out">
+						${(0, import_obsidian12.getIcon)("log-out")} Log out
+					</button>
+				</div>
 			</div>
 		`;
   }
@@ -3792,6 +4103,12 @@ __decorateClass([
 __decorateClass([
   r5()
 ], AccountPage.prototype, "copySuccess", 2);
+__decorateClass([
+  r5()
+], AccountPage.prototype, "isResettingConnection", 2);
+__decorateClass([
+  r5()
+], AccountPage.prototype, "showResetConfirmation", 2);
 
 // src/ui/Pages/OnboardingPage.ts
 var ScrybbleOnboarding = class extends i4 {
@@ -3848,7 +4165,7 @@ var ScrybbleOnboarding = class extends i4 {
 						${this.feedback}
 					</div>
 				` : ""}
-				<error-view .error=${this.error}></error-view>
+				<sc-error-view .error=${this.error}></sc-error-view>
 				 
 				${view}
 			</div>`;
@@ -4093,45 +4410,56 @@ __decorateClass([
 ], ScrybbleOnboarding.prototype, "feedback", 2);
 
 // src/ui/loadComponents.ts
-var import_obsidian12 = require("obsidian");
+var import_obsidian13 = require("obsidian");
 function loadLitComponents() {
-  if (!window.customElements.get("rm-tree")) {
-    window.customElements.define("rm-tree", RmFileTree);
+  try {
+    if (!window.customElements.get("sc-rm-tree")) {
+      window.customElements.define("sc-rm-tree", RmFileTree);
+    }
+    if (!window.customElements.get("sc-rm-file")) {
+      window.customElements.define("sc-rm-file", RmFile);
+    }
+    if (!window.customElements.get("sc-rm-dir")) {
+      window.customElements.define("sc-rm-dir", RmDir);
+    }
+    if (!window.customElements.get("sc-search-filter")) {
+      window.customElements.define("sc-search-filter", SearchFilter);
+    }
+    if (!window.customElements.get("sc-file-tree")) {
+      window.customElements.define("sc-file-tree", ScrybbleFileTreeComponent);
+    }
+    if (!window.customElements.get("sc-error-view")) {
+      window.customElements.define("sc-error-view", ErrorComponent);
+    }
+    if (!window.customElements.get("sc-sync-progress-indicator")) {
+      window.customElements.define("sc-sync-progress-indicator", SyncProgressIndicator);
+    }
+    if (!window.customElements.get("sc-ui")) {
+      window.customElements.define("sc-ui", ScrybbleUI);
+    }
+    if (!window.customElements.get("sc-support")) {
+      window.customElements.define("sc-support", SupportPage);
+    }
+    if (!window.customElements.get("sc-account")) {
+      window.customElements.define("sc-account", AccountPage);
+    }
+    if (!window.customElements.get("sc-onboarding")) {
+      window.customElements.define("sc-onboarding", ScrybbleOnboarding);
+    }
+  } catch (e7) {
+    Errors.handle("COMPONENT_REGISTRATION_ERROR", e7);
   }
-  if (!window.customElements.get("rm-file")) {
-    window.customElements.define("rm-file", RmFile);
-  }
-  if (!window.customElements.get("rm-dir")) {
-    window.customElements.define("rm-dir", RmDir);
-  }
-  if (!window.customElements.get("scrybble-file-tree")) {
-    window.customElements.define("scrybble-file-tree", ScrybbleFileTreeComponent);
-  }
-  if (!window.customElements.get("error-view")) {
-    window.customElements.define("error-view", ErrorComponent);
-  }
-  if (!window.customElements.get("sync-progress-indicator")) {
-    window.customElements.define("sync-progress-indicator", SyncProgressIndicator);
-  }
-  if (!window.customElements.get("scrybble-ui")) {
-    window.customElements.define("scrybble-ui", ScrybbleUI);
-  }
-  if (!window.customElements.get("scrybble-support")) {
-    window.customElements.define("scrybble-support", SupportPage);
-  }
-  if (!window.customElements.get("scrybble-account")) {
-    window.customElements.define("scrybble-account", AccountPage);
-  }
-  if (!window.customElements.get("scrybble-onboarding")) {
-    window.customElements.define("scrybble-onboarding", ScrybbleOnboarding);
-  }
-  if ((0, import_obsidian12.getIcon)("file-x-2") == null) {
-    (0, import_obsidian12.addIcon)("file-x-2", `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-x2-icon lucide-file-x-2"><path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m8 12.5-5 5"/><path d="m3 12.5 5 5"/></svg>`);
+  try {
+    if ((0, import_obsidian13.getIcon)("file-x-2") == null) {
+      (0, import_obsidian13.addIcon)("file-x-2", `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-x2-icon lucide-file-x-2"><path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m8 12.5-5 5"/><path d="m3 12.5 5 5"/></svg>`);
+    }
+  } catch (e7) {
+    Errors.handle("ICON_REGISTRATION_ERROR", e7);
   }
 }
 
 // src/SyncQueue.ts
-var import_obsidian13 = require("obsidian");
+var import_obsidian14 = require("obsidian");
 
 // node_modules/fflate/esm/browser.js
 var ch2 = {};
@@ -4759,9 +5087,6 @@ var SyncQueue = class {
       const maxActiveJobs = 3;
       let busy = this.countBusyJobs();
       for (let job of this.syncJobs) {
-        if (job.getState() === "DOWNLOADING" /* downloading */ || job.getState() === "AWAITING_PROCESSING" /* awaiting_processing */) {
-          busy += 1;
-        }
         if (busy < maxActiveJobs) {
           if (job.getState() === "INIT" /* init */) {
             await this.requestFileToBeSynced(job);
@@ -4799,12 +5124,16 @@ var SyncQueue = class {
     this.syncJobStateChangeListeners.delete(path3);
   }
   async downloadProcessedFile(filename, download_url, sync_id) {
+    pino.info(`Creating sync job for file '${filename}' from the sync delta`);
     const syncJob = new SyncJob(0, "INIT" /* init */, this.syncjobStateChangeListener.bind(this), filename);
+    pino.info(`Sync job for file '${filename}' from sync delta is successfully created, will now be queued`);
     await syncJob.readyToDownload(download_url, sync_id);
     this.syncJobs.push(syncJob);
   }
-  requestSync(filename) {
-    const job = new SyncJob(0, "INIT" /* init */, this.syncjobStateChangeListener.bind(this), filename);
+  requestSync(rmFileId, name) {
+    pino.info(`Creating sync job for file '${name}' (id: ${rmFileId}) requested by the user`);
+    const job = new SyncJob(0, "INIT" /* init */, this.syncjobStateChangeListener.bind(this), name, rmFileId);
+    pino.info(`Sync job for file '${name}' requested by the user is successfully created, will now be queued`);
     this.syncJobs.push(job);
   }
   countBusyJobs() {
@@ -4814,10 +5143,7 @@ var SyncQueue = class {
     try {
       this.onStartDownloadFile(job);
       await job.startDownload();
-      return await (0, import_obsidian13.requestUrl)({
-        method: "GET",
-        url: job.download_url
-      }).arrayBuffer;
+      return this.api.downloadSyncedDocument(job.download_url);
     } catch (e7) {
       this.onFinishedDownloadFile(job, false, e7);
       Errors.handle("FILE_DOWNLOAD_ERROR", e7);
@@ -4856,7 +5182,7 @@ var SyncQueue = class {
       } catch {
         throw new Error(`Scrybble: Was unable to write file ${filePath}, reference = 104`);
       }
-    } else if (file instanceof import_obsidian13.TFile) {
+    } else if (file instanceof import_obsidian14.TFile) {
       try {
         await vault.modifyBinary(file, data);
       } catch {
@@ -4896,7 +5222,10 @@ var SyncQueue = class {
   async requestFileToBeSynced(job) {
     try {
       await job.syncRequestSent();
-      const response = await this.api.fetchRequestFileToBeSynced(job.filename);
+      if (!job.rmFileId) {
+        throw new Error("rmFileId is required for sync requests");
+      }
+      const response = await this.api.fetchRequestFileToBeSynced(job.rmFileId, job.filename);
       await job.syncRequestConfirmed(response.sync_id);
     } catch (e7) {
     }
@@ -4904,6 +5233,7 @@ var SyncQueue = class {
   async checkProcessingState(job) {
     await job.sentProcessingRequest();
     const state = await this.api.fetchSyncState(job.sync_id);
+    console.log(state);
     if (state.completed) {
       await job.readyToDownload(state.download_url, state.id);
     } else if (state.error) {
@@ -4961,8 +5291,46 @@ var SettingsImpl = class {
 };
 
 // main.ts
-loadLitComponents();
-var Scrybble = class extends import_obsidian14.Plugin {
+var InputModal = class extends import_obsidian15.Modal {
+  constructor(app, title, placeholder, onSubmit) {
+    super(app);
+    this.result = "";
+    this.title = title;
+    this.placeholder = placeholder;
+    this.onSubmit = onSubmit;
+  }
+  onOpen() {
+    const { contentEl } = this;
+    contentEl.createEl("h3", { text: this.title });
+    new import_obsidian15.Setting(contentEl).setName("Value").addText((text) => {
+      text.setPlaceholder(this.placeholder).onChange((value) => {
+        this.result = value;
+      });
+      text.inputEl.addEventListener("keydown", (e7) => {
+        if (e7.key === "Enter") {
+          this.close();
+          this.onSubmit(this.result || null);
+        }
+      });
+    });
+    new import_obsidian15.Setting(contentEl).addButton(
+      (btn) => btn.setButtonText("Search").setCta().onClick(() => {
+        this.close();
+        this.onSubmit(this.result || null);
+      })
+    ).addButton(
+      (btn) => btn.setButtonText("Cancel").onClick(() => {
+        this.close();
+        this.onSubmit(null);
+      })
+    );
+  }
+  onClose() {
+    const { contentEl } = this;
+    contentEl.empty();
+  }
+};
+var Scrybble = class extends import_obsidian15.Plugin {
   get access_token() {
     return this.settings.access_token ?? null;
   }
@@ -4971,6 +5339,8 @@ var Scrybble = class extends import_obsidian14.Plugin {
   }
   async onload() {
     pino.info("Loading Scrybble plugin");
+    pino.info("Loading lit components");
+    loadLitComponents();
     this.settings = new SettingsImpl(await this.loadData(), async () => {
       await this.saveData(this.settings);
     });
@@ -5002,6 +5372,33 @@ var Scrybble = class extends import_obsidian14.Plugin {
       name: "Browse your reMarkable files",
       callback: this.showScrybbleFiletree.bind(this)
     });
+    this.addCommand({
+      id: "search-by-name",
+      name: "Search files by name",
+      callback: async () => {
+        const query = await this.promptForInput("Enter name pattern (regex)", "e.g. .*meeting.*");
+        if (query) {
+          await this.openWithSearchFilters({ query });
+        }
+      }
+    });
+    this.addCommand({
+      id: "search-by-tag",
+      name: "Search files by tag",
+      callback: async () => {
+        const tag = await this.promptForInput("Enter tag name", "e.g. Work");
+        if (tag) {
+          await this.openWithSearchFilters({ tags: [tag] });
+        }
+      }
+    });
+    this.addCommand({
+      id: "show-starred-files",
+      name: "Show starred files",
+      callback: async () => {
+        await this.openWithSearchFilters({ starred: true });
+      }
+    });
     this.app.workspace.onLayoutReady(this.checkAccountStatus.bind(this));
   }
   async showScrybbleFiletree() {
@@ -5014,12 +5411,13 @@ var Scrybble = class extends import_obsidian14.Plugin {
       leaf = workspace.getRightLeaf(false);
       await leaf?.setViewState({ type: SCRYBBLE_VIEW, active: true });
     }
-    if (leaf instanceof import_obsidian14.WorkspaceLeaf) {
+    if (leaf instanceof import_obsidian15.WorkspaceLeaf) {
       await workspace.revealLeaf(leaf);
     }
+    return leaf;
   }
   async authenticatedRequest(url, options = {}) {
-    return (0, import_obsidian14.requestUrl)({
+    return (0, import_obsidian15.requestUrl)({
       ...options,
       url,
       headers: {
@@ -5059,6 +5457,17 @@ var Scrybble = class extends import_obsidian14.Plugin {
     });
     return response.json;
   }
+  async fetchSearchFiles(filters) {
+    const response = await this.authenticatedRequest(`${this.settings.endpoint}/api/sync/search`, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(filters)
+    });
+    return response.json;
+  }
   async fetchSyncState(sync_id) {
     const response = await this.authenticatedRequest(`${this.settings.endpoint}/api/sync/status`, {
       method: "POST",
@@ -5070,7 +5479,7 @@ var Scrybble = class extends import_obsidian14.Plugin {
     });
     return response.json;
   }
-  async fetchRequestFileToBeSynced(filePath) {
+  async fetchRequestFileToBeSynced(rmFileId, name) {
     const response = await this.authenticatedRequest(`${this.settings.endpoint}/api/sync/file`, {
       method: "POST",
       headers: {
@@ -5078,7 +5487,8 @@ var Scrybble = class extends import_obsidian14.Plugin {
         "accept": "application/json"
       },
       body: JSON.stringify({
-        file: filePath
+        rmFileId,
+        name
       })
     });
     return response.json;
@@ -5103,7 +5513,7 @@ var Scrybble = class extends import_obsidian14.Plugin {
     return { ...response.json };
   }
   async fetchDeviceCode() {
-    const response = await (0, import_obsidian14.requestUrl)({
+    const response = await (0, import_obsidian15.requestUrl)({
       url: `${this.settings.endpoint}/oauth/device/code`,
       method: "POST",
       headers: {
@@ -5122,7 +5532,7 @@ var Scrybble = class extends import_obsidian14.Plugin {
     return data;
   }
   async fetchPollForDeviceToken(deviceCode) {
-    const response = await (0, import_obsidian14.requestUrl)({
+    const response = await (0, import_obsidian15.requestUrl)({
       url: `${this.settings.endpoint}/oauth/token`,
       method: "POST",
       headers: {
@@ -5147,7 +5557,7 @@ var Scrybble = class extends import_obsidian14.Plugin {
       refresh_token: this.refresh_token,
       scope: ""
     });
-    const response = await (0, import_obsidian14.requestUrl)({
+    const response = await (0, import_obsidian15.requestUrl)({
       url: `${this.settings.endpoint}/oauth/token`,
       method: "POST",
       headers: {
@@ -5187,6 +5597,37 @@ var Scrybble = class extends import_obsidian14.Plugin {
       },
       body: JSON.stringify(details)
     });
+  }
+  async downloadSyncedDocument(downloadUrl) {
+    const res = await this.authenticatedRequest(downloadUrl, {
+      method: "GET"
+    });
+    return res.arrayBuffer;
+  }
+  async deleteRemarkableConnection() {
+    const response = await this.authenticatedRequest(`${this.settings.endpoint}/api/sync/remarkable-connection`, {
+      method: "DELETE",
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+    return response.json;
+  }
+  async promptForInput(title, placeholder) {
+    return new Promise((resolve) => {
+      const modal = new InputModal(this.app, title, placeholder, resolve);
+      modal.open();
+    });
+  }
+  async openWithSearchFilters(filters) {
+    const leaf = await this.showScrybbleFiletree();
+    if (!leaf) return;
+    setTimeout(() => {
+      const fileTreeComponent = leaf.view.containerEl.querySelector("sc-file-tree");
+      if (fileTreeComponent && typeof fileTreeComponent.setSearchFilters === "function") {
+        fileTreeComponent.setSearchFilters(filters);
+      }
+    }, 100);
   }
   async checkAccountStatus() {
     await this.authentication.initializeAuth();

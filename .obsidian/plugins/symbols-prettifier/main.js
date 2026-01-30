@@ -34,14 +34,14 @@ var import_obsidian3 = require("obsidian");
 // src/editor/state.ts
 var import_language = require("@codemirror/language");
 var import_state = require("@codemirror/state");
-var SymbolsPosition = class extends import_state.RangeValue {
+var SymbolsPosition = class _SymbolsPosition extends import_state.RangeValue {
   constructor(symbol, prettified) {
     super();
     this.symbol = symbol;
     this.prettified = prettified;
   }
   eq(other) {
-    return other instanceof SymbolsPosition && other.symbol === this.symbol && other.prettified === this.prettified;
+    return other instanceof _SymbolsPosition && other.symbol === this.symbol && other.prettified === this.prettified;
   }
 };
 var allowedTypes = [
@@ -60,7 +60,12 @@ var allowedTypes = [
   "hmd-footref2",
   "footref"
 ];
-var excludedTypes = ["formatting", "comment-start", "comment-end"];
+var excludedTypes = [
+  "formatting",
+  "comment-start",
+  "comment-end",
+  "inline-code"
+];
 function iterateSymbolsRanges(state, from, to, addToRange) {
   const saveToRange = (from2, to2) => {
     var _a, _b;
@@ -68,11 +73,19 @@ function iterateSymbolsRanges(state, from, to, addToRange) {
     if (!text.trim()) {
       return;
     }
-    for (const { 0: symbol, index: offset } of text.matchAll(getCharacterRegex())) {
+    for (const { 0: symbol, index: offset } of text.matchAll(
+      getCharacterRegex()
+    )) {
       const prettified = (_b = (_a = characterMap[symbol]) == null ? void 0 : _a.transform) != null ? _b : symbol;
-      addToRange(from2 + (offset != null ? offset : 0), from2 + (offset != null ? offset : 0) + symbol.length, new SymbolsPosition(symbol, prettified));
+      addToRange(
+        from2 + (offset != null ? offset : 0),
+        from2 + (offset != null ? offset : 0) + symbol.length,
+        new SymbolsPosition(symbol, prettified)
+      );
     }
   };
+  const allowedTypesSet = new Set(allowedTypes);
+  const excludedTypesSet = new Set(excludedTypes);
   let prevTo = from;
   (0, import_language.syntaxTree)(state).iterate({
     from: from - 1,
@@ -90,7 +103,9 @@ function iterateSymbolsRanges(state, from, to, addToRange) {
         return;
       }
       const props = new Set(nodeProps == null ? void 0 : nodeProps.split(" "));
-      if (excludedTypes.every((t) => !props.has(t)) && allowedTypes.some((t) => props.has(t))) {
+      const hasExcluded = [...props].some((p) => excludedTypesSet.has(p));
+      const hasAllowed = [...props].some((p) => allowedTypesSet.has(p));
+      if (!hasExcluded && hasAllowed) {
         saveToRange(from2, to2);
       }
     }
@@ -103,7 +118,12 @@ function getSymbolsPositionField(plugin) {
   return import_state.StateField.define({
     create: (state) => {
       const rangeSet = new import_state.RangeSetBuilder();
-      iterateSymbolsRanges(state, 0, state.doc.length, rangeSet.add.bind(rangeSet));
+      iterateSymbolsRanges(
+        state,
+        0,
+        state.doc.length,
+        rangeSet.add.bind(rangeSet)
+      );
       return rangeSet.finish();
     },
     update: (value, transaction) => {
@@ -145,14 +165,14 @@ var import_view2 = require("@codemirror/view");
 
 // src/editor/widget.ts
 var import_view = require("@codemirror/view");
-var SymbolWidget = class extends import_view.WidgetType {
+var SymbolWidget = class _SymbolWidget extends import_view.WidgetType {
   constructor(symbol, plugin) {
     super();
     this.symbol = symbol;
     this.plugin = plugin;
   }
   eq(other) {
-    return other instanceof SymbolWidget && other.symbol === this.symbol;
+    return other instanceof _SymbolWidget && other.symbol === this.symbol;
   }
   toDOM(view) {
     const wrapper = createSpan({
@@ -175,15 +195,20 @@ function symbols(view, plugin) {
   for (const { from, to } of view.visibleRanges) {
     symbolsField.between(from, to, (from2, to2, { symbol, prettified }) => {
       const isNearCursor = cursor >= from2 && cursor <= to2;
-      const widget = new SymbolWidget(isNearCursor ? symbol : prettified, plugin);
+      const widget = new SymbolWidget(
+        isNearCursor ? symbol : prettified,
+        plugin
+      );
       const spec = { widget, side: -1 };
       if (view.state.field(import_obsidian.editorLivePreviewField)) {
         if (isNearCursor) {
           for (let i = 0; i < symbol.length; i++) {
-            decorations.push(import_view2.Decoration.replace({
-              widget: new SymbolWidget(symbol[i], plugin),
-              inclusive: true
-            }).range(from2 + i, from2 + i + 1));
+            decorations.push(
+              import_view2.Decoration.replace({
+                widget: new SymbolWidget(symbol[i], plugin),
+                inclusive: true
+              }).range(from2 + i, from2 + i + 1)
+            );
           }
         } else {
           decorations.push(import_view2.Decoration.replace(spec).range(from2, to2));
@@ -254,7 +279,10 @@ function symbolsPostProcessor(plugin) {
             continue;
           }
           if (textNode.textContent) {
-            textNode.textContent = textNode.textContent.replace(pattern, symbol);
+            textNode.textContent = textNode.textContent.replace(
+              pattern,
+              symbol
+            );
           }
         }
       }
@@ -273,10 +301,14 @@ var characterMap = {
   "=>": { transform: "\u21D2" },
   "--": { transform: "\u2013" },
   "!=": { transform: "\u2260" },
-  "===": { transform: "\u2261" }
+  "===": { transform: "\u2261" },
+  "=<": { transform: "\u2264" },
+  ">=": { transform: "\u2265" },
+  "+-": { transform: "\xB1" },
+  "-+": { transform: "\u2213" }
 };
 function getCharacterRegex() {
-  return new RegExp("(->|<-|<->|<=>|<=|=>|--|!=|===)", "g");
+  return new RegExp("(<->|->|<-|<=>|<=|=>|--|!=|===|=<|>=|\\+\\-|\\-\\+)", "g");
 }
 var SymbolsPrettifier3 = class extends import_obsidian3.Plugin {
   constructor() {
@@ -295,5 +327,6 @@ var SymbolsPrettifier3 = class extends import_obsidian3.Plugin {
     console.log("unloading symbols prettifier");
   }
 };
+
 
 /* nosourcemap */
