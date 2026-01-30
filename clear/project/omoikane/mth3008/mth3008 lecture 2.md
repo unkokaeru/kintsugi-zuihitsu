@@ -27,6 +27,6 @@
 		- $\epsilon_{ijk}$ is changed if any two of the suffices are interchanged, i.e., $\epsilon_{ijk}=-\epsilon_{jik}$; that is, the alternating tensor is anti-symmetric.
 	- Similar to before, we can evaluate expressions involving this tensor by converting to vector notation: $\epsilon_{ijk}\epsilon_{ijk}=\sum_{i=1}^{3}\sum_{j=1}^{3}\sum_{k=1}^{3}\epsilon_{ijk}\epsilon_{ijk}=\sum_{i=1}^{3}\sum_{j=1}^{3}\sum_{k=1}^{3}\epsilon_{ijk}^{2}$, which gives a total of $3 \times {3} \times {3}=27$ terms, where only six are actually nonzero. After trivially calculating this, you hence get 6.
 - Alternating tensors are naturally related to:
-	- Cross product of two vectors.
+	- Cross product of two vectors: 
 	- Determinant of $3 \times 3$ matrices.
 	- The scalar triple product.
