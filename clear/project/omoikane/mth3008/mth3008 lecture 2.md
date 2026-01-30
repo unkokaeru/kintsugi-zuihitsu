@@ -1,7 +1,7 @@
 # Mth3008 Lecture 2
 
-> [!quote] ...
-> ...
+> [!quote] …
+> …
 
 … *notes to be written in the lecture*
 
@@ -9,4 +9,7 @@
 
 ## Pre-Lecture Notes from [[mth3008 lecture 2 notes.pdf|University Notes]]
 
-- ...
+- First, recapped the [[mth3008 lecture 1|last lecture]]:
+	- Assume all vectors are three dimensional.
+	- [[Suffix Notation]] (definition, nomenclature, conversion steps, and examples).
+	- [[Kronecker Delta]] (definition and key property)

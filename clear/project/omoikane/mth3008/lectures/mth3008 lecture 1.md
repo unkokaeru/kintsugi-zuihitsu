@@ -39,3 +39,4 @@
 	- Similar to the [[Dirac delta-function]], although on discrete domains instead of continuous, this gives it the property that $\delta_{ij}a_{j}=a_{i}$ - absorbing the repeated index.
 	- Sometimes called the substitution tensor, because it replaces the repeated index with the free index.
 	- Naturally, this is symmetrical for $\delta_{ji}a_{i}=a_{j}$, due to the re-ordering/re-labelling rules, and can be proved trivially.
+	- Further touched on in [[mth3008 lecture 2|the next lecture]].

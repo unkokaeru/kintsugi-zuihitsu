@@ -71,6 +71,24 @@
           }
         ],
         "currentTab": 3
+      },
+      {
+        "id": "1f89af5f3ec33ca2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "202934290bad0725",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "attached/files/mth3008 lecture 2 notes.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "mth3008 lecture 2 notes"
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -223,10 +241,10 @@
   },
   "active": "49d3b0936d23abfa",
   "lastOpenFiles": [
-    "attached/files/mth3008 lecture 2 notes.pdf",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 1.md",
     "clear/project/omoikane/mth3008/mth3008 lecture 2.md",
     "clear/project/omoikane/mth3008/mth3008.md",
+    "attached/files/mth3008 lecture 2 notes.pdf",
     "attached/files/mth3008 lecture 1 notes.pdf",
     "kintsugi zuihitsu.md",
     "clear/library/Levels of Organisation.md",
@@ -263,7 +281,6 @@
     "clear/project/omoikane/mth3008/revision/portfolio associated questions",
     "clear/project/omoikane/mth3008/revision",
     "clear/project/omoikane/mth3008/notes",
-    "clear/project/omoikane/mth3008/weekly problems",
     "attached/files/chillin sushi guy.svg",
     "attached/files/image-6.png",
     "attached/files/image-5.png",
