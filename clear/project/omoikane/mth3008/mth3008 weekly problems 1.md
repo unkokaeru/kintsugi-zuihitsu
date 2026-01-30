@@ -3,7 +3,9 @@
 *Notes about how hard the questions were and what to watch out for / what recurring methods were used…*
 
 - Converting everything into suffix form by applying free and dummy indices.
+- Using $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}$, both ways.
 - Using $\mathbf{A}\mathbf{B}=A_{ik}+B_{kj}$ and $(A_{ij})^{T}=A_{ji}$.
+- Using $\delta_{ij}a_{j}=a_{i}$.
 
 ## 1.1. Relate Dot Product and Angle via Suffix Notation
 
