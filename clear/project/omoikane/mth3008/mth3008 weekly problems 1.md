@@ -7,6 +7,8 @@
 - Using $\mathbf{A}\mathbf{B}=A_{ik}+B_{kj}$ and $(A_{ij})^{T}=A_{ji}$.
 - Using $\delta_{ij}a_{j}=a_{i}$.
 - Using the definition that $\epsilon_{ijk}=\begin{cases}0 & \text{if any of }i,j,k \text{ are equal} \\ +1 & \text{if }(i,j,k)=(1,2,3),(2,3,1), \text{or }(3,1,2) \\ -1 & \text{if }(i,j,k)=(1,3,2),(2,1,3), \text{or }(3,2,1)\end{cases}$, i.e., 1 if $(i,j,k)$ is an even permutation of $(1,2,3)$, -1 if it's an odd permutation, or 0 if any.
+- Using $\mathbf{a}\times \mathbf{b}=\epsilon_{ijk}a_{j}b_{k}$.
+- Using the property of $\epsilon_{ijk}$ that you can swap two indices to switch its polarity between $+1$ and $-1$.
 
 ## 1.1. Relate Dot Product and Angle via Suffix Notation
 
