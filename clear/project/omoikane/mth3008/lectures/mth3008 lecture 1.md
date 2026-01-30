@@ -23,3 +23,10 @@
 		1. Introduce free index, like $i$: $(\mathbf{u}+(\mathbf{a}\cdot \mathbf{b})\mathbf{v})_{i}=((\mathbf{a}\cdot \mathbf{a})(\mathbf{b}\cdot \mathbf{v})\mathbf{a})_{i}:|\mathbf{a}|:=\sqrt{ \mathbf{a}\cdot \mathbf{a} }$.
 		2. Distribute free index, for each vector.: $u_{i}+(\mathbf{a}\cdot \mathbf{b})v_{i}=(\mathbf{a}\cdot \mathbf{a})(\mathbf{b}\cdot \mathbf{v})a_{i}$.
 		3. Introduce dummy indices, for each scalar: $u_{i}+a_{j}b_{j}v_{i}=a_{k}a_{k}b_{\ell}v_{\ell}a_{i}$
+	- Or again,
+
+$$
+\begin{align}
+(\mathbf{a}\cdot \mathbf{b})\mathbf{u}+|\mathbf{c}|^{2}\mathbf{v}=
+\end{align}
+$$
