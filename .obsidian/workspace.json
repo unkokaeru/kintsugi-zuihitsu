@@ -23,40 +23,6 @@
               "icon": "lucide-file",
               "title": "kintsugi zuihitsu"
             }
-          },
-          {
-            "id": "124eed6dfa2b8cd9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3008/mth3008 weekly problems 1.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "mth3008 weekly problems 1"
-            }
-          }
-        ],
-        "currentTab": 1
-      },
-      {
-        "id": "cf5ac29f89669f9f",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "9d4ff7f01b56f89b",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/remarkable notes/Omoikane/MTH3008 Tensor Analysis/Weekly Problems/Week One Problem Solutions.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "Week One Problem Solutions"
-            }
           }
         ]
       }
@@ -170,9 +136,19 @@
               "icon": "bot-message-square",
               "title": "Copilot Chat"
             }
+          },
+          {
+            "id": "50da4115e50c98ab",
+            "type": "leaf",
+            "state": {
+              "type": "sync",
+              "state": {},
+              "icon": "refresh-ccw",
+              "title": "Sync changes"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
@@ -199,12 +175,12 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "124eed6dfa2b8cd9",
+  "active": "07f30dca9d8058db",
   "lastOpenFiles": [
-    "attached/remarkable notes/Omoikane/MTH3008 Tensor Analysis/Weekly Problems/Week One Problem Solutions.pdf",
     "clear/project/omoikane/mth3008/mth3008 weekly problems 1.md",
-    "clear/project/omoikane/mth3008/mth3008 lecture 2.md",
     "kintsugi zuihitsu.md",
+    "attached/remarkable notes/Omoikane/MTH3008 Tensor Analysis/Weekly Problems/Week One Problem Solutions.pdf",
+    "clear/project/omoikane/mth3008/mth3008 lecture 2.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 1.md",
     "attached/remarkable notes/Omoikane/MTH3008 Tensor Analysis/Weekly Problems/Week One Problem Solutions.md",
     "attached/remarkable notes/Omoikane/MTH3008 Tensor Analysis/Weekly Problems",

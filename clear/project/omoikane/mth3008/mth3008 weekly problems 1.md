@@ -1,26 +1,54 @@
 # MTH3008 Weekly Problems 1
 
-> Fairly low difficulty, just learning how to use new algebraic methods and using new formulae; occasionally deriving them from simple summation properties and hard-to-remember matrix properties.
-
-- Converting everything into suffix form by applying free and dummy indices.
-- Using $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}$, both ways.
-- Using $\mathbf{A}\mathbf{B}=A_{ik}+B_{kj}$ and $(A_{ij})^{T}=A_{ji}$.
-- Using $\delta_{ij}a_{j}=a_{i}$.
-- Using the definition that $\epsilon_{ijk}=\begin{cases}0 & \text{if any of }i,j,k \text{ are equal} \\ +1 & \text{if }(i,j,k)=(1,2,3),(2,3,1), \text{or }(3,1,2) \\ -1 & \text{if }(i,j,k)=(1,3,2),(2,1,3), \text{or }(3,2,1)\end{cases}$, i.e., 1 if $(i,j,k)$ is an even permutation of $(1,2,3)$, -1 if it's an odd permutation, or 0 if any.
-- Using $\mathbf{a}\times \mathbf{b}=\epsilon_{ijk}a_{j}b_{k}$.
-- Using the property of $\epsilon_{ijk}$ that you can swap two indices to switch its polarity between $+1$ and $-1$.
+> **Original Documents**: [[mth3008 weekly problem sheet 1.pdf|Problem Sheet]] / [[Week One Problem Solutions.pdf|My Handwritten Solutions]]
+>
+> **Vibes**: Fairly low difficulty, just learning how to use new algebraic methods and using new formulae; occasionally deriving them from simple summation properties and hard-to-remember matrix properties.
+>
+> **Used Techniques**:
+> 	- Converting everything into suffix form by applying free and dummy indices.
+> 	- Using $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}$, both ways.
+> 	- Using $\mathbf{A}\mathbf{B}=A_{ik}+B_{kj}$ and $(A_{ij})^{T}=A_{ji}$.
+> 	- Using $\delta_{ij}a_{j}=a_{i}$.
+> 	- Using the definition that $\epsilon_{ijk}=\begin{cases}0 & \text{if any of }i,j,k \text{ are equal} \\ +1 & \text{if }(i,j,k)=(1,2,3),(2,3,1), \text{or }(3,1,2) \\ -1 & \text{if }(i,j,k)=(1,3,2),(2,1,3), \text{or }(3,2,1)\end{cases}$, i.e., 1 if $(i,j,k)$ is an even permutation of $(1,2,3)$, -1 if it's an odd permutation, or 0 if any.
+> 	- Using $\mathbf{a}\times \mathbf{b}=\epsilon_{ijk}a_{j}b_{k}$.
+> 	- Using the property of $\epsilon_{ijk}$ that you can swap two indices to switch its polarity between $+1$ and $-1$.
 
 ## 1.1. Relate Dot Product and Angle via Suffix Notation
+
+> [!question]
+> Write in suffix notation:
+> $\cos \theta = \dfrac{\mathbf{a}\cdot \mathbf{b}}{|\mathbf{a}||\mathbf{b}|}$
 
 $$
 \cos \theta
 = \frac{\mathbf{a} \cdot \mathbf{b}}{\lvert \mathbf{a} \rvert \lvert \mathbf{b} \rvert}
-= \frac{a_i b_i}{\sqrt{a_k a_k}\,\sqrt{b_k b_k}}.
+= \boxed{\frac{a_i b_i}{\sqrt{a_k a_k}\,\sqrt{b_k b_k}}}.
 $$
 
 ---
 
 ## 1.2. Verify Matrix Product Components Using Suffix Notation
+
+> [!question]
+> Consider the $3 \times 3$ matrix $\mathbf{C}$ given by the product $\mathbf{C} = \mathbf{A}\mathbf{B}$, where
+>
+> $$
+> \mathbf{A} =
+> \begin{pmatrix}
+> a_{11} & a_{12} & a_{13} \\
+> a_{21} & a_{22} & a_{23} \\
+> a_{31} & a_{32} & a_{33}
+> \end{pmatrix},
+> \quad
+> \mathbf{B} =
+> \begin{pmatrix}
+> b_{11} & b_{12} & b_{13} \\
+> b_{21} & b_{22} & b_{23} \\
+> b_{31} & b_{32} & b_{33}
+> \end{pmatrix}.
+> $$  
+>
+> Verify that $C_{ij} = A_{ik} B_{kj}$.
 
 Let
 
@@ -46,7 +74,7 @@ $$
 C_{ij}
 = A_{i1} B_{1j} + A_{i2} B_{2j} + \dots + A_{in} B_{nj}
 = \sum_{k=1}^{n} A_{ik} B_{kj}
-= A_{ik} B_{kj}
+= \boxed{A_{ik} B_{kj}}
 $$
 
 in suffix notation.
@@ -54,6 +82,27 @@ in suffix notation.
 ---
 
 ## 1.3. Demonstrate Non-Commutativity of Matrix Multiplication via Suffix Notation
+
+> [!question]
+> Let $\mathbf{A}$ and $\mathbf{B}$ be the $3 \times 3$ matrices
+>
+> $$
+> \mathbf{A} =
+> \begin{pmatrix}
+> a_{11} & a_{12} & a_{13} \\
+> a_{21} & a_{22} & a_{23} \\
+> a_{31} & a_{32} & a_{33}
+> \end{pmatrix},
+> \quad
+> \mathbf{B} =
+> \begin{pmatrix}
+> b_{11} & b_{12} & b_{13} \\
+> b_{21} & b_{22} & b_{23} \\
+> b_{31} & b_{32} & b_{33}
+> \end{pmatrix}.
+> $$
+>
+> Show, using suffix notation, that $\mathbf{A}\mathbf{B} \neq \mathbf{B}\mathbf{A}$, i.e. matrix multiplication does not commute.
 
 Let
 
@@ -94,12 +143,33 @@ Thus
 
 $$
 AB = A_{ik} B_{kj} \neq A_{kj} B_{ik} = BA
-\quad \because\quad ik \neq kj,\; kj \neq ik.
+\quad \because\quad ik \neq kj,\; kj \neq ik.\boxed{}
 $$
 
 ---
 
 ## 1.4. Prove Transpose of a Product Using Suffix Notation
+
+> [!question]
+> Let $\mathbf{A}$ and $\mathbf{B}$ be the $3 \times 3$ matrices
+>
+> $$
+> \mathbf{A} =
+> \begin{pmatrix}
+> a_{11} & a_{12} & a_{13} \\
+> a_{21} & a_{22} & a_{23} \\
+> a_{31} & a_{32} & a_{33}
+> \end{pmatrix},
+> \quad
+> \mathbf{B} =
+> \begin{pmatrix}
+> b_{11} & b_{12} & b_{13} \\
+> b_{21} & b_{22} & b_{23} \\
+> b_{31} & b_{32} & b_{33}
+> \end{pmatrix}.
+> $$
+>
+> Show, using suffix notation, that $(\mathbf{A}\mathbf{B})^{T} = \mathbf{B}^{T} \mathbf{A}^{T}$, where $\mathbf{A}^{T}$ is the transpose of $\mathbf{A}$.
 
 Let
 
@@ -148,12 +218,16 @@ $$
 so
 
 $$
-(AB)^T = B^T A^T.
+(AB)^T = B^T A^T.\boxed{}
 $$
 
 ---
 
 ## 1.5. Prove Transpose of Triple Matrix Product via Suffix Notation
+
+> [!question]
+> Let $\mathbf{L}$, $\mathbf{M}$ and $\mathbf{N}$ be three $3 \times 3$ matrices. Show, using suffix notation, that
+> $(\mathbf{L}\mathbf{M}\mathbf{N})^{T} = \mathbf{N}^{T} \mathbf{M}^{T} \mathbf{L}^{T}$.
 
 Let $L, M, N$ be $3 \times 3$ matrices. Then
 
@@ -195,6 +269,9 @@ $$
 
 ## 1.6. Simplify Kronecker Delta Expression and Rewrite in Vector Form
 
+> [!question]
+> Simplify the suffix notation expression $\delta_{ij} a_{j} b_{\ell} c_{k} \delta_{i\ell}$ and write the result in vector form.
+
 $$
 \delta_{ij} a_j b_\ell c_k \delta_{i\ell}
 = a_i b_\ell c_k \delta_{i\ell}
@@ -217,6 +294,12 @@ $$
 
 ## 1.7. Evaluate Alternating Tensor Components
 
+> [!question]
+> Recall the alternating tensor $\varepsilon_{ijk}$. Evaluate the following in vector notation.
+> 1. $\varepsilon_{122}$
+> 2. $\varepsilon_{321}$
+> 3. $\varepsilon_{223} + \varepsilon_{111}$
+
 For $\varepsilon_{ijk}$:
 
 $$
@@ -230,6 +313,9 @@ $$
 ---
 
 ## 1.8. Prove Antisymmetry of the Cross Product Using Suffix Notation
+
+> [!question]
+> Use suffix notation to show that $\mathbf{a} \times \mathbf{b} = -\,\mathbf{b} \times \mathbf{a}$.
 
 LHS:
 
@@ -267,6 +353,11 @@ $$
 
 ## 1.9. Convert Dot–Cross Vector Equation to Suffix Notation
 
+> [!question]
+> Write the vector equation
+> $\mathbf{a} \times \mathbf{b} + (\mathbf{a} \cdot \mathbf{d}) \mathbf{c} = \mathbf{e}$
+> in suffix notation.
+
 $$
 \mathbf{a} \times \mathbf{b} + (\mathbf{a} \cdot \mathbf{d})\, \mathbf{c} = \mathbf{e}.
 $$
@@ -290,9 +381,3 @@ so
 $$
 \boxed{\varepsilon_{ijk} a_j b_k + a_j d_j c_i = e_i}.
 $$
-
----
-
-## Raw Solutions
-
-![[Week One Problem Solutions.pdf]]
