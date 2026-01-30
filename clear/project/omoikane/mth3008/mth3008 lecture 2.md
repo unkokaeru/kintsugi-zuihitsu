@@ -19,4 +19,5 @@
 	- We can also hence simplify expressions with the function by using the vector conversion, like $\delta_{ij}\delta_{jk}\to \sum_{j=1}^{3}\delta_{ij}\delta_{jk}=\delta_{i1}\delta_{1k}+\delta_{i2}\delta_{2k}+\delta_{i3}\delta_{3k}\to \dots \to \delta_{ik}$; that is, the repeated index is absorbed.
 	- Other expressions could be simplified, like $\delta_{\ell \ell}\delta_{mn}\delta_{pp}\delta_{nq}$ or $\delta_{ij}a_{j}b_{\ell}c_{k}\delta_{i \ell}$.
 - Hence, the Kronecker delta (substitution tensor) can be used to define the dot product. Similarly, the alternating tensor can define the cross product.
-	- 
+	- Alternative tensor $\epsilon_{ijk}$ is defined by $\epsilon_{ijk}=\begin{cases}0 & \text{if any of }i,j,k \text{ are equal} \\ +1 & \text{if }(i,j,k)=(1,2,3),(2,3,1), \text{or }(3,1,2) \\ -1 & \text{if }(i,j,k)=(1,3,2),(2,1,3), \text{or }(3,2,1)\end{cases}$.
+	- This can be visualised as three layers of matrices
