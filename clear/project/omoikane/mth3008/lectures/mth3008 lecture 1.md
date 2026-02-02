@@ -47,9 +47,17 @@ For more complex conversions, we can follow a step-by-step method. For example, 
 
 Using this conversion, we can pick up on a few patterns with vectors and matrices.
 
-For instance, $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}$.
+- For vectors, **$\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}$**, as shown earlier: $\mathbf{a}\cdot \mathbf{b}=a_{1}b_{1}+a_{2}b_{2}+a_{3}b_{3}=\sum_{i=1}^{3}a_{i}b_{i}\to \boxed{a_{i}b_{i}}$, by the definition of a dot product.
+- For matrices, **$\mathbf{A}\mathbf{B}=A_{ik}+B_{kj}$** and **$(A_{ij})^{T}=A_{ji}$**, both of which can be directly proven using vector notation and sums, but are also observable by the definitions of matrix multiplication and the transpose of a matrix.
 
-Or for matrices, $\mathbf{A}\mathbf{B}=A_{ik}+B_{kj}$ and $(A_{ij})^{T}=A_{ji}$.
+> [!example] Example (trace of a matrix)
+> Be definition, $\text{Tr}(\mathbf{C})=C_{jj}$ (only the elements on the leading diagonal), and hence we can simplify $\text{Tr}(\mathbf{A}\mathbf{B})=\text{Tr}(A_{ik}B_{kj})=A_{jk}B_{kj}$, or equivalently $\text{Tr}(\mathbf{B}\mathbf{A})$ (by similarly evaluating and then reordering and relabelling such that the indices align).
+
+Similarly, we'll find a few tensors later that will be useful whilst evaluating expressions: the [[Kronecker Delta]] (substitution tensor) and the [[Alternating Tensor]]. First, the former…
+
+## Kronecker Delta
+
+…
 
 ---
 
