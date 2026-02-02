@@ -5,6 +5,16 @@
 
 … *notes to be written in the lecture*
 
+- Assume all vectors are three dimensional.
+- [[Suffix Notation]] (definition, nomenclature, conversion steps, and examples).
+- [[Kronecker Delta]] (definition and key property).
+- [[Alternating Tensor]].
+
+- Converting everything into suffix form by applying free and dummy indices.
+- Using $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}$, both ways.
+- Using $\mathbf{A}\mathbf{B}=A_{ik}+B_{kj}$ and $(A_{ij})^{T}=A_{ji}$.
+- Using $\delta_{ij}a_{j}=a_{i}$.
+
 ---
 
 ## Pre-Lecture Notes from [[mth3008 lecture 1 notes.pdf|University Notes]]
