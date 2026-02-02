@@ -66,7 +66,17 @@ Similarly, we'll find a few tensors later that will be useful whilst evaluating 
 
 ## Kronecker Delta
 
-…
+The **[[Kronecker delta]]**, or **substitution tensor**, is very similar to the [[Dirac delta-function]], just over a discrete domain rather than a continuous domain. It has the definition that $\delta_{ij}=\begin{cases}1 & \text{if }i=j \\ 0 & \text{if }i\neq j\end{cases}$, where $i$ and $j$ can be 1, 2, or 3, which can be thought of as the identity matrix:
+
+$$
+\delta_{ij}=\begin{bmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix}
+$$
+
+Effectively, it can pick out specific indices and replace them - it replaces the repeated index with the free index. This important property can be mathematically represented as the following…
+
+$$
+\delta_{ij}a_{j}=a_{i}\quad \text{or}\quad \delta_{ji}a_{i}=a_{j}
+$$
 
 ---
 
