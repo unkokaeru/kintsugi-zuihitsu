@@ -50,19 +50,23 @@ Using this conversion, we can pick up on a few patterns with vectors and matrice
 - For vectors, **$\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}$**, as shown earlier: $\mathbf{a}\cdot \mathbf{b}=a_{1}b_{1}+a_{2}b_{2}+a_{3}b_{3}=\sum_{i=1}^{3}a_{i}b_{i}\to \boxed{a_{i}b_{i}}$, by the definition of a dot product.
 - For matrices, **$\mathbf{A}\mathbf{B}=A_{ik}+B_{kj}$** and **$(A_{ij})^{T}=A_{ji}$**, both of which can be directly proven using vector notation and sums, but are also observable by the definitions of matrix multiplication and the transpose of a matrix.
 
-> [!example] Example (trace of a matrix)
+> [!example] In-Lecture Example (commutative trace of a matrix)
 > Be definition, $\text{Tr}(\mathbf{C})=C_{jj}$ (only the elements on the leading diagonal), and hence we can simplify $\text{Tr}(\mathbf{A}\mathbf{B})=\text{Tr}(A_{ik}B_{kj})=A_{jk}B_{kj}$, or equivalently $\text{Tr}(\mathbf{B}\mathbf{A})$ (by similarly evaluating and then reordering and relabelling such that the indices align).
+
+> [!example] [[mth3008 weekly problems 1#1.4. Prove Transpose of a Product Using Suffix Notation|Weekly Problem 1.4]] (transpose of a matrix)
+> Let $A = \begin{pmatrix}a_{11} & a_{12} & a_{13} \\a_{21} & a_{22} & a_{23} \\a_{31} & a_{32} & a_{33}\end{pmatrix}, B =\begin{pmatrix}b_{11} & b_{12} & b_{13} \\b_{21} & b_{22} & b_{23} \\b_{31} & b_{32} & b_{33}\end{pmatrix}$, such that we can have $(\mathbf{A}\mathbf{B})^{T} = \mathbf{B}^{T} \mathbf{A}^{T}$.
+>
+> If we first take the left-hand side, we have $(AB)^T = ((AB)_{ji})$, so $(AB)^T_{ij} = (AB)_{ji} = A_{jk} B_{ki}$.
+>
+> On the right-hand side, we have $(B^T A^T)_{ij} = (B^T)_{ik} (A^T)_{kj} = B_{ki} A_{jk} = A_{jk} B_{ki}$.
+>
+> Therefore, $(AB)^T_{ij} = A_{jk} B_{ki} = (B^T A^T)_{ij}$, so $(AB)^T = B^T A^T$. $\quad\boxed{}$
 
 Similarly, we'll find a few tensors later that will be useful whilst evaluating expressions: the [[Kronecker Delta]] (substitution tensor) and the [[Alternating Tensor]]. First, the former…
 
 ## Kronecker Delta
 
 …
-
----
-
-- [[Kronecker Delta]] (definition and key property).
-	- Using $\delta_{ij}a_{j}=a_{i}$.
 
 ---
 
