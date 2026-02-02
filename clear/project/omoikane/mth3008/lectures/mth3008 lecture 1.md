@@ -3,17 +3,37 @@
 > [!quote] [Jesus Najera](https://setzeus.com/about), a friend of the lecturer
 > Tensors are mathematical objects that are invariant under a change of coordinates & have components that change in predictable ways.
 
-… *notes to be written in the lecture*
+Tensors are generalisations of vectors, with a rank corresponding to different quantities:
 
-- Assume all vectors are three dimensional.
+- Rank 0 tensor: scalar,
+- Rank 1 tensor: vector,
+- Rank 2 tensor: matrix,
+- *Etc. (in higher dimensions)*.
+
+Our convention will be keeping vectors three-dimensional, just for conceptual simplicity, i.e., $\mathbf{v}=(v_{1,v_{2},v_{3}}\in\mathbb{R}^3)=v_{1}\mathbf{i}+v_{2}\mathbf{j}+v_{3}\mathbf{k}$ - either notation is fine, but normally we use a completely different notation…
+
+## [[Suffix Notation]]
+
+Suffix notation, or index notation, is simply when write a sum without $\Sigma$, e.g.,
+
+$$
+\mathbf{a}\cdot \mathbf{b}=a_{1}b_{1}+a_{2}b_{2}+a_{3}b_{3}=\sum_{j=1}^{3}a_{j}b_{j}\to \boxed{a_{j}b_{j}}
+$$
+
+Naturally, the index chosen has no impact on the result, 
+
+This simplifies notation considerably, especially for more complex expressions involving multiple sums, like $(\mathbf{a}\cdot \mathbf{b})(\mathbf{c}\cdot \mathbf{d})=a_{j}b_{j}c_{k}d_{k}$.
+
+---
+
 - [[Suffix Notation]] (definition, nomenclature, conversion steps, and examples).
+	- Converting everything into suffix form by applying free and dummy indices.
+	- Using $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}$, both ways.
+	- Using $\mathbf{A}\mathbf{B}=A_{ik}+B_{kj}$ and $(A_{ij})^{T}=A_{ji}$.
 - [[Kronecker Delta]] (definition and key property).
+	- Using $\delta_{ij}a_{j}=a_{i}$.
 - [[Alternating Tensor]].
-
-- Converting everything into suffix form by applying free and dummy indices.
-- Using $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}$, both ways.
-- Using $\mathbf{A}\mathbf{B}=A_{ik}+B_{kj}$ and $(A_{ij})^{T}=A_{ji}$.
-- Using $\delta_{ij}a_{j}=a_{i}$.
+	- Using the definition that $\epsilon_{ijk}=\begin{cases}0 & \text{if any of }i,j,k \text{ are equal} \\ +1 & \text{if }(i,j,k)=(1,2,3),(2,3,1), \text{or }(3,1,2) \\ -1 & \text{if }(i,j,k)=(1,3,2),(2,1,3), \text{or }(3,2,1)\end{cases}$, i.e., 1 if $(i,j,k)$ is an even permutation of $(1,2,3)$, -1 if it's an odd permutation, or 0 if any.
 
 ---
 
