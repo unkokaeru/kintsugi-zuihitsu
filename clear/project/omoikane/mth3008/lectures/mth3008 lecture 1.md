@@ -12,24 +12,24 @@ Tensors are generalisations of vectors, with a rank corresponding to different q
 
 Our convention will be keeping vectors three-dimensional, just for conceptual simplicity, i.e., $\mathbf{v}=(v_{1,v_{2},v_{3}}\in\mathbb{R}^3)=v_{1}\mathbf{i}+v_{2}\mathbf{j}+v_{3}\mathbf{k}$ - either notation is fine, but normally we use a completely different notation…
 
-## [[Suffix Notation]]
+## Suffix Notation
 
-Suffix notation, or index notation, is simply when write a sum without $\Sigma$, e.g.,
+**[[Suffix Notation]]**, or **Index Notation**, is simply when write a sum without $\Sigma$, e.g.,
 
 $$
 \mathbf{a}\cdot \mathbf{b}=a_{1}b_{1}+a_{2}b_{2}+a_{3}b_{3}=\sum_{j=1}^{3}a_{j}b_{j}\to \boxed{a_{j}b_{j}}
 $$
 
-Naturally, the index chosen has no impact on the result, 
-
 This simplifies notation considerably, especially for more complex expressions involving multiple sums, like $(\mathbf{a}\cdot \mathbf{b})(\mathbf{c}\cdot \mathbf{d})=a_{j}b_{j}c_{k}d_{k}$.
+
+### Types of Index
+
+The index that appears in the sum (exactly twice for each distinctly summed term), is called a **dummy index**. These can be **any variable** without changing the result, in **any order**, as they don't show up when evaluated.
+
+Alternatively, **free indices** only show up once. These represent the **components within the tensors**, like the $i$th component of a vector: $(\lambda \mathbf{v})_{i}=v_{i}$.
 
 ---
 
-- [[Suffix Notation]] (definition, nomenclature, conversion steps, and examples).
-	- Converting everything into suffix form by applying free and dummy indices.
-	- Using $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}$, both ways.
-	- Using $\mathbf{A}\mathbf{B}=A_{ik}+B_{kj}$ and $(A_{ij})^{T}=A_{ji}$.
 - [[Kronecker Delta]] (definition and key property).
 	- Using $\delta_{ij}a_{j}=a_{i}$.
 - [[Alternating Tensor]].
