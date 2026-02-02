@@ -10,6 +10,8 @@ Tensors are generalisations of vectors, with a rank corresponding to different q
 - Rank 2 tensor: matrix,
 - *Etc. (in higher dimensions)*.
 
+> [!note] This will be formally defined in later lectures
+
 Our convention will be keeping vectors three-dimensional, just for conceptual simplicity, i.e., $\mathbf{v}=(v_{1,v_{2},v_{3}}\in\mathbb{R}^3)=v_{1}\mathbf{i}+v_{2}\mathbf{j}+v_{3}\mathbf{k}$ - either notation is fine, but normally we use a completely different notation…
 
 ## Suffix Notation
@@ -34,12 +36,20 @@ We can convert from vector notation to suffix notation by simply writing out the
 
 For more complex conversions, we can follow a step-by-step method. For example, for a vector equation, $\mathbf{u}+(\mathbf{a}\cdot \mathbf{b})\mathbf{v}=|\mathbf{a}|^2(\mathbf{b}\cdot \mathbf{v})\mathbf{a}$…
 
-1. Introduce free index, like $i$: $(\mathbf{u}+(\mathbf{a}\cdot \mathbf{b})\mathbf{v})_{i}=((\mathbf{a}\cdot \mathbf{a})(\mathbf{b}\cdot \mathbf{v})\mathbf{a})_{i}:|\mathbf{a}|:=\sqrt{ \mathbf{a}\cdot \mathbf{a} }$.
-2. Distribute free index, for each vector.: $u_{i}+(\mathbf{a}\cdot \mathbf{b})v_{i}=(\mathbf{a}\cdot \mathbf{a})(\mathbf{b}\cdot \mathbf{v})a_{i}$.
-3. Introduce dummy indices, for each scalar: $\boxed{u_{i}+a_{j}b_{j}v_{i}=a_{k}a_{k}b_{\ell}v_{\ell}a_{i}}$
+1. Introduce free index, like $i$: $(\mathbf{u}+(\mathbf{a}\cdot \mathbf{b})\mathbf{v})_{i}=((\mathbf{a}\cdot \mathbf{a})(\mathbf{b}\cdot \mathbf{v})\mathbf{a})_{i}:|\mathbf{a}|:=\sqrt{ \mathbf{a}\cdot \mathbf{a} }$;
+2. Distribute free index, for each vector.: $u_{i}+(\mathbf{a}\cdot \mathbf{b})v_{i}=(\mathbf{a}\cdot \mathbf{a})(\mathbf{b}\cdot \mathbf{v})a_{i}$;
+3. Introduce dummy indices, for each scalar: $\boxed{u_{i}+a_{j}b_{j}v_{i}=a_{k}a_{k}b_{\ell}v_{\ell}a_{i}}$.
 
 > [!example] Example (simple expression)
 > $(\mathbf{a}\cdot \mathbf{b})\mathbf{u}+|\mathbf{c}|^{2}\mathbf{v}=((\mathbf{a}\cdot \mathbf{b})\mathbf{u})_{i}+((\mathbf{c}\cdot \mathbf{c})\mathbf{v})_{i} = (\mathbf{a}\cdot \mathbf{b})u_{i}+(\mathbf{c}\cdot \mathbf{c})v_{i} = \boxed{a_{j}b_{j}u_{i}+c_{k}c_{k}v_{i}}$
+
+### Useful Patterns
+
+Using this conversion, we can pick up on a few patterns with vectors and matrices.
+
+For instance, $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}$.
+
+Or for matrices, $\mathbf{A}\mathbf{B}=A_{ik}+B_{kj}$ and $(A_{ij})^{T}=A_{ji}$.
 
 ---
 
@@ -69,7 +79,7 @@ For more complex conversions, we can follow a step-by-step method. For example, 
 	- For example, for a vector equation, $\mathbf{u}+(\mathbf{a}\cdot \mathbf{b})\mathbf{v}=|\mathbf{a}|^2(\mathbf{b}\cdot \mathbf{v})\mathbf{a}$…
 		1. Introduce free index, like $i$: $(\mathbf{u}+(\mathbf{a}\cdot \mathbf{b})\mathbf{v})_{i}=((\mathbf{a}\cdot \mathbf{a})(\mathbf{b}\cdot \mathbf{v})\mathbf{a})_{i}:|\mathbf{a}|:=\sqrt{ \mathbf{a}\cdot \mathbf{a} }$.
 		2. Distribute free index, for each vector.: $u_{i}+(\mathbf{a}\cdot \mathbf{b})v_{i}=(\mathbf{a}\cdot \mathbf{a})(\mathbf{b}\cdot \mathbf{v})a_{i}$.
-		3. Introduce dummy indices, for each scalar: $\boxed{u_{i}+a_{j}b_{j}v_{i}=a_{k}a_{k}b_{\ell}v_{\ell}a_{i}}$
+		3. Introduce dummy indices, for each scalar: $\boxed{u_{i}+a_{j}b_{j}v_{i}=a_{k}a_{k}b_{\ell}v_{\ell}a_{i}}$.
 	- Or just an expression: $(\mathbf{a}\cdot \mathbf{b})\mathbf{u}+|\mathbf{c}|^{2}\mathbf{v}=((\mathbf{a}\cdot \mathbf{b})\mathbf{u})_{i}+((\mathbf{c}\cdot \mathbf{c})\mathbf{v})_{i} = (\mathbf{a}\cdot \mathbf{b})u_{i}+(\mathbf{c}\cdot \mathbf{c})v_{i} = \boxed{a_{j}b_{j}u_{i}+c_{k}c_{k}v_{i}}$
 	- Similarly, you can write matrices in this notation: given $A$ and $B$ and $n\times n$ matrices, the entries of $C=AB$ can be written as $C_{ij}=A_{ik}B_{kj}$ - just by multiplying together and simplifying as before.
 		- This can be very useful, for example to prove that (for the matrices before) $\text{Trace}(\mathbf{A}\mathbf{B})=\text{Trace}(\mathbf{B}\mathbf{A})$…
