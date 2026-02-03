@@ -3,7 +3,20 @@
 > [!quote] A.J. Rushworth
 > *Labubuuuuuuuuu*
 
-…
+Using the content of the previous lecture, namely [[Suffix Notation]] and the [[Kronecker Delta]], we can explore the dot product and cross product. First, the dot product…
+
+> [!warning] Vector vs Suffix notation
+> It should always be specified what is being worked in, as the difference in notation can lead to completely different answers. For example, in vector notation we specify all values at once, so $\delta_{ij}=1$, but in suffix notation we evaluate sums, so $\delta_{ij}=3$.
+>
+> This is because it'll sum over the repeated index, for example in vector notation, $\sum_{j=1}^{3}\delta_{jj}=\delta_{11}+\delta_{22}+\delta_{33}=3$ (summing $j=1..3$ by our convention).
+>
+> We hence normally use vector notation as an in-between to simplify suffix notation directly, such as to prove properties or expressions from "first principles".
+
+## Using Vector Notation to Simplify Suffix Notation
+
+As mentioned, we can use vector notation to simplify expressions in suffix notation, directly. For example, to show that $\delta_{ij}\delta_{jk}\to \sum_{j=1}^{3}\delta_{ij}\delta_{jk}=\delta_{i1}\delta_{1k}+\delta_{i2}\delta_{2k}+\delta_{i3}\delta_{3k}\to \dots \to \delta_{ik}$; that is, the repeated index is absorbed.
+
+> [!example] 
 
 ---
 
