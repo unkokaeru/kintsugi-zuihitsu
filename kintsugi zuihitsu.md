@@ -13,6 +13,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 > [[Levels of Organisation]]
 > Remember to draw back on literature more when writing within academia! - practice this?
 
+- CATCH UP [[MTH3003]] NOTES and [[MTH3007B]] NOTES.
 - Analyse my [[Brother's Headunit Voltage Level Data]].
 - Complete notes for [[yatagarasu]], tasks on the [[yatagarasu]] Kanban board, and complete the [[help videos]]. **DEADLINE: MID FEBRUARY, GO SEMI-LIVE END OF FEBRUARY**.
 - Complete a Lean proof for [[mth3011]], and any other associated module work before the next meeting with my supervisor - confirm date, too!
