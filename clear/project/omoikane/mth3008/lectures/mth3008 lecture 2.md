@@ -16,7 +16,11 @@ Using the content of the previous lecture, namely [[Suffix Notation]] and the [[
 
 As mentioned, we can use vector notation to simplify expressions in suffix notation, directly. For example, to show that $\delta_{ij}\delta_{jk}\to \sum_{j=1}^{3}\delta_{ij}\delta_{jk}=\delta_{i1}\delta_{1k}+\delta_{i2}\delta_{2k}+\delta_{i3}\delta_{3k}\to \dots \to \delta_{ik}$; that is, the repeated index is absorbed.
 
-> [!example] 
+> [!example] In-Lecture Example (simplifying Kronecker delta expressions)
+> To simplify $\delta_{\ell \ell}\delta_{mn}\delta_{pp}\delta_{nq}$, we first rearrange due to its commutativity to get $\delta_{\ell \ell}\delta_{mn}\delta_{nq}\delta_{pp}=\delta_{\ell \ell}\delta_{mq}\delta_{pp}$ and then directly evaluate over three dimensions to get $9\delta_{mq}$
+
+> [!example] [[mth3008 weekly problems 1#1.6. Simplify Kronecker Delta Expression and Rewrite in Vector Form|Weekly Problem 1.6]] (simplifying to vector notation)
+> To simplify $\delta_{ij}a_{j}b_{\ell}c_{k}\delta_{i \ell}$, we rearrange using commutativity to get $\delta_{ij}a_{j}\delta_{i \ell}b_{\ell}c_{k}=a_{i}b_{i}c_{k}=(\mathbf{a}\cdot \mathbf{b})\mathbf{c}$.
 
 ---
 
