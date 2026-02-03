@@ -1330,24 +1330,24 @@
         "type": "split",
         "children": [
           {
-            "id": "2f55d774b78dc3c2",
+            "id": "9f2569095043d7f7",
             "type": "tabs",
             "children": [
               {
-                "id": "ee721624282a1f5d",
+                "id": "f0b662e20b83453d",
                 "type": "leaf",
                 "pinned": true,
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "kintsugi zuihitsu.md",
+                    "file": "clear/project/omoikane/mth3003/mth3003.md",
                     "mode": "source",
                     "source": false,
                     "backlinks": false
                   },
                   "pinned": true,
                   "icon": "lucide-file",
-                  "title": "kintsugi zuihitsu"
+                  "title": "mth3003"
                 }
               }
             ]
@@ -1501,9 +1501,9 @@
           "templater-obsidian:Templater": false
         }
       },
-      "active": "ee721624282a1f5d",
-      "mtime": "2026-02-03T13:37:05+00:00"
+      "active": "f0b662e20b83453d",
+      "mtime": "2026-02-03T13:54:32+00:00"
     }
   },
-  "active": "mth3003"
+  "active": "mth3008"
 }

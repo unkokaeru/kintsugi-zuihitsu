@@ -4,41 +4,64 @@
     "type": "split",
     "children": [
       {
-        "id": "9f2569095043d7f7",
+        "id": "2f55d774b78dc3c2",
         "type": "tabs",
         "children": [
           {
-            "id": "8aa69f7fc0a8d1c9",
+            "id": "3ab194dcb86201f9",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/omoikane.md",
+                "file": "clear/project/omoikane/mth3008/mth3008.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
+              "pinned": true,
               "icon": "lucide-file",
-              "title": "omoikane"
+              "title": "mth3008"
             }
           },
           {
-            "id": "f0b662e20b83453d",
+            "id": "ccd5f68fd532a66c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3003/mth3003.md",
+                "file": "clear/project/omoikane/mth3008/lectures/mth3008 lecture 2.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "mth3003"
+              "title": "mth3008 lecture 2"
             }
           }
         ],
         "currentTab": 1
+      },
+      {
+        "id": "24b76390f4a28db1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8d12a6db68e3ced7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "Kronecker Delta"
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -88,7 +111,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 424.51103591918945
+    "width": 424.51103591918945,
+    "collapsed": true
   },
   "right": {
     "id": "b91c281c8050caa8",
@@ -188,26 +212,27 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "01979b291b095c37",
+  "active": "ccd5f68fd532a66c",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 2.md",
+    "clear/project/omoikane/mth3003/mth3003.md",
+    "clear/project/omoikane/omoikane.md",
+    "clear/project/omoikane/mth3008/revision/final exam cheat sheet.md",
+    "clear/project/omoikane/mth3008/revision/portfolio associated questions/portfolio associated questions.md",
+    "clear/project/omoikane/mth3008/revision/Portfolio cheat sheet.md",
     "clear/project/omoikane/mth3003/weekly problems",
     "clear/project/omoikane/mth3003/revision",
     "clear/project/omoikane/mth3003/notes",
     "clear/project/omoikane/mth3003/lectures",
     "clear/project/omoikane/mth3008/mth3008.md",
-    "clear/project/omoikane/mth3003/mth3003.md",
-    "clear/project/omoikane/omoikane.md",
     "clear/project/omoikane/mth3011/mth3011.md",
     "clear/project/omoikane/mth3003",
     "kintsugi zuihitsu.md",
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 2.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 1.md",
     "clear/project/omoikane/mth3006/mth3006 lecture 1.md",
-    "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
     "clear/project/omoikane/mth3008/notes/Suffix Notation.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 1.md",
-    "clear/project/omoikane/mth3008/revision/Portfolio cheat sheet.md",
-    "clear/project/omoikane/mth3008/revision/portfolio associated questions/portfolio associated questions.md",
     "clear/clear.md",
     "clear/project/omoikane/mth3007a/mth3007a.md",
     "clear/project/omoikane/mth3007b/mth3007b.md",
@@ -225,7 +250,6 @@
     "attached/files/example project 2.pdf",
     "attached/remarkable notes/Omoikane/MTH3008 Tensor Analysis/Weekly Problems/Week One Problem Solutions.pdf",
     "attached/remarkable notes/Omoikane/MTH3008 Tensor Analysis/Weekly Problems",
-    "attached/remarkable notes/Omoikane/MTH3008 Tensor Analysis",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",
     "attached/files/luna human.png",
