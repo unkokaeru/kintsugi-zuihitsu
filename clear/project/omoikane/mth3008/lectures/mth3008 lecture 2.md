@@ -1,9 +1,9 @@
 # MTH3008 Lecture 2
 
-> [!quote] …
-> …
+> [!quote] A.J. Rushworth
+> *Labubuuuuuuuuu*
 
-… *notes to be written in the lecture*
+## 
 
 ---
 
