@@ -37,6 +37,18 @@ Directly from the definition, we can observe the following properties:
 
 We can then use these properties to simplify calculations, such as $\epsilon_{ijk}\epsilon_{ijk}$ - which would normally be 27 terms. However, as most terms are zero then we can just focus on what is nonzero, i.e., the six cases where the tensor is either $-1$ or $1$. Hence, the answer is just $6\times1=6$.
 
+### Relations to Other Operations
+
+We can use this definition of the **Alternating Tensor** to define the **cross product of two vectors**, the **determinant of $3\times3$ matrices**, and the **scalar triple product**.
+
+We get these by substituting in the alternating tensor to allow for the $+/-$ patterns in each operation…
+
+1. $(\mathbf{a}\times \mathbf{b})_{i}=\epsilon_{ijk}a_{j}b_{k}$,
+2. $\epsilon_{pqr}|M|=\epsilon_{ijk}M_{pi}M_{qj}M_{rk}$,
+3. $\mathbf{a}\cdot(\mathbf{b}\times \mathbf{c})=\epsilon_{ijk}a_{i}b_{j}c_{k}$.
+
+These are then very useful for speeding up proofs, for instance showing that $\mathbf{a}\times \mathbf{b}=-\mathbf{b}\times \mathbf{a}$, proven in this week's problems ([[mth3008 weekly problems 1#1.8. Prove Antisymmetry of the Cross Product Using Suffix Notation|Weekly Problem 1.8]]).
+
 ---
 
 ## Pre-Lecture Notes from [[mth3008 lecture 2 notes.pdf|University Notes]]
