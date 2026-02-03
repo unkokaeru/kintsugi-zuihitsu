@@ -4,24 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "2f55d774b78dc3c2",
+        "id": "9f2569095043d7f7",
         "type": "tabs",
         "children": [
           {
-            "id": "3ab194dcb86201f9",
+            "id": "f0b662e20b83453d",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3008/mth3008.md",
+                "file": "clear/project/omoikane/mth3003/mth3003.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "mth3008"
+              "title": "mth3003"
             }
           }
         ]
@@ -74,7 +74,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 424.51103591918945
+    "width": 424.51103591918945,
+    "collapsed": true
   },
   "right": {
     "id": "b91c281c8050caa8",
@@ -174,11 +175,11 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "3ab194dcb86201f9",
+  "active": "f0b662e20b83453d",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3008/mth3008.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 2.md",
     "clear/project/omoikane/mth3008/revision/revision.md",
-    "clear/project/omoikane/mth3008/mth3008.md",
     "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
     "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 1.md",
