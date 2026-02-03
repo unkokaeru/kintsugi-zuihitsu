@@ -3,7 +3,7 @@
 > [!quote] A.J. Rushworth
 > *Labubuuuuuuuuu*
 
-## 
+…
 
 ---
 
