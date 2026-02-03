@@ -22,6 +22,21 @@ As mentioned, we can use vector notation to simplify expressions in suffix notat
 > [!example] [[mth3008 weekly problems 1#1.6. Simplify Kronecker Delta Expression and Rewrite in Vector Form|Weekly Problem 1.6]] (simplifying to vector notation)
 > To simplify $\delta_{ij}a_{j}b_{\ell}c_{k}\delta_{i \ell}$, we rearrange using commutativity to get $\delta_{ij}a_{j}\delta_{i \ell}b_{\ell}c_{k}=a_{i}b_{i}c_{k}=(\mathbf{a}\cdot \mathbf{b})\mathbf{c}$.
 
+This hence allows us to define the **dot product** as $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}=a_{i}(\delta_{ij}b_{j})=\delta_{ij}a_{i}b_{j}$, and vice versa. Next, the cross product…
+
+## The Alternating Tensor
+
+The **[[Alternating Tensor]]** is defined as $\epsilon_{ijk}=\begin{cases}0 & \text{if any of }i,j,k \text{ are equal} \\ +1 & \text{if }(i,j,k)=(1,2,3),(2,3,1), \text{or }(3,1,2) \\ -1 & \text{if }(i,j,k)=(1,3,2),(2,1,3), \text{or }(3,2,1)\end{cases}$, i.e., 1 if $(i,j,k)$ is an even permutation of $(1,2,3)$, -1 if it's an odd permutation, or 0 if any - *note: this is given in **vector notation***.
+
+This can also hence be visualised as **three layers of matrices**, $\left[\epsilon_{ij1} =\begin{bmatrix}0 & 0 & 0 \\0 & 0 & 1 \\0 & -1 & 0\end{bmatrix},\quad\epsilon_{ij2} =\begin{bmatrix}0 & 0 & -1 \\0 & 0 & 0 \\1 & 0 & 0\end{bmatrix},\quad\epsilon_{ij3} =\begin{bmatrix}0 & 1 & 0 \\-1 & 0 & 0 \\0 & 0 & 0\end{bmatrix}\right]$.
+
+Directly from the definition, we can observe the following properties:
+
+- $\epsilon_{ijk}$ is unchanged if indices are reordered by a cyclic permutation, i.e., $\epsilon_{ijk}=\epsilon_{jki}=\epsilon_{kij}$.
+- $\epsilon_{ijk}$ is changed if any two of the suffices are interchanged, i.e., $\epsilon_{ijk}=-\epsilon_{jik}$; that is, the alternating tensor is anti-symmetric.
+
+We can then use these properties to simplify calculations, such as $\epsilon_{ijk}\epsilon_{ijk}$ - which would normally be 27 terms. However, as most terms are zero then we can just focus on what is nonzero, i.e., the six cases where the tensor is either $-1$ or $1$. Hence, the answer is just $6\times1=6$.
+
 ---
 
 ## Pre-Lecture Notes from [[mth3008 lecture 2 notes.pdf|University Notes]]
