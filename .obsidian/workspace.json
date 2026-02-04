@@ -4,24 +4,69 @@
     "type": "split",
     "children": [
       {
-        "id": "2f55d774b78dc3c2",
+        "id": "9f2569095043d7f7",
         "type": "tabs",
         "children": [
           {
-            "id": "ee721624282a1f5d",
+            "id": "f0b662e20b83453d",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "kintsugi zuihitsu.md",
+                "file": "clear/project/omoikane/mth3003/mth3003.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "kintsugi zuihitsu"
+              "title": "mth3003"
+            }
+          },
+          {
+            "id": "df4bf5661ea7f445",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3003/lectures/mth3003 lecture 1.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "mth3003 lecture 1"
+            }
+          },
+          {
+            "id": "e21c1c8b777c6bfb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3003/lectures/mth3003 lecture 2.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "mth3003 lecture 2"
+            }
+          },
+          {
+            "id": "6c4928cd16612693",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 1.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "mth3003 weekly problems 1"
             }
           }
         ]
@@ -113,8 +158,8 @@
             "state": {
               "type": "folder-overview-view",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "folder-overview-view"
+              "icon": "settings",
+              "title": "Folder Overview settings"
             }
           },
           {
@@ -148,7 +193,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -175,9 +220,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "ee721624282a1f5d",
+  "active": "f0b662e20b83453d",
   "lastOpenFiles": [
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 1.md",
+    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 2.md",
     "attached/files/mth3003 rough-lecture 2.pdf",
     "attached/files/mth3003 rough-lecture 1.pdf",
