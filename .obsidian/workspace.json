@@ -4,6 +4,24 @@
     "type": "split",
     "children": [
       {
+        "id": "500dc6a30c762b42",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "db614a9526b36d77",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "attached/files/mth3003 lecture notes 1.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "mth3003 lecture notes 1"
+            }
+          }
+        ]
+      },
+      {
         "id": "9f2569095043d7f7",
         "type": "tabs",
         "children": [
@@ -67,6 +85,25 @@
               },
               "icon": "lucide-file",
               "title": "mth3003 weekly problems 1"
+            }
+          }
+        ],
+        "currentTab": 2
+      },
+      {
+        "id": "254b06700cf162a0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e407d788313764bf",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "attached/files/mth3003 rough-lecture 1.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "mth3003 rough-lecture 1"
             }
           }
         ]
@@ -220,20 +257,20 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "f0b662e20b83453d",
+  "active": "e21c1c8b777c6bfb",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 1.md",
-    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 2.md",
-    "attached/files/mth3003 rough-lecture 2.pdf",
+    "attached/files/mth3003 lecture notes 1.pdf",
+    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 1.md",
     "attached/files/mth3003 rough-lecture 1.pdf",
+    "clear/project/omoikane/mth3003/mth3003.md",
+    "kintsugi zuihitsu.md",
+    "attached/files/mth3003 rough-lecture 2.pdf",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 1.md",
     "attached/files/mth3003 weekly problem sheet 1.pdf",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problem sheet 1.pdf.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 1.md",
-    "attached/files/mth3003 lecture notes 1.pdf",
     "attached/files/mth3003 lecture notes 2.pdf",
-    "clear/project/omoikane/mth3003/mth3003.md",
     "attached/remarkable notes/Omoikane/MTH3005 Group Theory/Rough Notes.pdf",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 2.md",
     "attached/remarkable notes/Omoikane/MTH3005 Group Theory/Rough Notes.md",
@@ -257,7 +294,6 @@
     "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
     "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
     "clear/project/omoikane/omoikane.md",
-    "clear/project/omoikane/mth3011/mth3011.md",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",
     "attached/files/luna human.png",

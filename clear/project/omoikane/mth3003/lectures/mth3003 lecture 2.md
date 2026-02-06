@@ -1,13 +1,19 @@
 # MTH3003 Lecture 2
 
-> [!quote] …
-> …
+> [!quote] Simon Smith
+> Six Seven
 
 …
 
 ## …
 
 …
+
+---
+
+- Permutation definition
+- Permutation notation & conventions
+- Products of permutations
 
 ---
 
