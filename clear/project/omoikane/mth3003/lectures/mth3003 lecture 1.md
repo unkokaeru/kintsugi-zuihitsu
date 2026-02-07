@@ -34,7 +34,7 @@ $$
 \end{matrix}
 $$
 
-Into the following three [[disjoint cycles]]...
+Into the following three [[disjoint cycle]]s…
 
 ```tikz
 \begin{document}
@@ -68,8 +68,7 @@ Into the following three [[disjoint cycles]]...
 \end{document}
 ```
 
-
-Again, this is quite large notation, even if it's more useful, but we can take this and simplify it even further, just: $(1)(1\,4)$
+Again, this is quite large notation, even if it's more useful, but we can take this and simplify it even further, just: $\sigma=(1)(2\,4\,3\,6\,7)(5)$, for the permutation $\sigma$. As mentioned before however, if we know that $\sigma \in S_{7}$ then we can exclude the **one-cycles** for simplicity: $\sigma=(2\,4\,3\,6\,7)$.
 
 ---
 
