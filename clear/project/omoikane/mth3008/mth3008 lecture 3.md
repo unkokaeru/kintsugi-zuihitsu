@@ -1,0 +1,16 @@
+# MTH3008 Lecture 3
+
+> [!quote] …
+> …
+
+…
+
+## …
+
+…
+
+---
+
+## Pre-Lecture Notes from [[mth3008 lecture 3 notes.pdf|University Notes]]
+
+- …

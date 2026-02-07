@@ -14,8 +14,8 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 > Remember to draw back on literature more when writing within academia! - practice this?
 
 - Complete [[mth3003 weekly problems 1]].
-- Complete [[mth3007b Weekly Problems 1]].
-- 
+- Complete [[mth3007b Weekly Problems 1]], using VS Code (and the mth3007 repo), too.
+- Rewrite my [[Rituals]] with the [[Levels of Organisation]] in mind.
 - Complete [[mth3011]] Lean proof and other project work.
 - Finish analysing my [[Brother's Headunit Voltage Level Data]].
 - Complete tasks/notes for [[yatagarasu]].
