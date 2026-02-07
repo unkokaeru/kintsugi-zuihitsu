@@ -99,6 +99,9 @@ Normally, we do this process mentally, too, so it looks a lot like just writing 
 
 > [!note] Products of permutations are not commutative - this is provable the same way as function composition - unless disjoint, as this is like the identity element; unchanging.
 
+> [!important] The Order of a Permutation
+> The **Order of a Permutation** $g \in \text{Sym}(X)$, denoted $o(g)$, is the smallest $n \in \mathbb{N}$ such that $g^n=e$, the identity element, if such an $n$ exists; if not then the order of $g$ is infinite.
+
 ---
 
 ## Rough-Lecture Notes from [[mth3003 lecture notes 1.pdf|University Notes]]
