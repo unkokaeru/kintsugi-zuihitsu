@@ -3,7 +3,7 @@
 > [!quote] Simon Smith
 > Waggle your eyebrows
 
-A **[[Permutation]]** of a set $X$ is simply a **bijection** (injective and surjective / one-to-one and onto) from $X$ to $X$ - a **rearrangement of itself**.
+A **[[Permutation]]** of a set $X$ is simply a **[[bijection]]** from $X$ to $X$ - a **rearrangement of itself**.
 
 Interestingly, we can use these to describe all groups, and hence all of group theory, but not without some simplified notation…
 
@@ -19,7 +19,12 @@ x_{2} & x_{3} & x_{1}
 \end{matrix}
 $$
 
-However, this notation is needlessly complicated, and takes out an important property of permutations: **permutations can always decompose into cycles**. If we used that notation instead, we can convert our arrow-mapping notation:
+We can then denote the set (later proven to be a group) of all permutations of one of these sets, i.e. $X$, as $\text{Sym}(X)$. If $X$ is just $\{ 1,2,3,\dots,n \}$ then we write **$S_{n}$** by convention - important to remember, as it'll tell us how what elements are in the set.
+
+> [!note] What is the size of $\text{Sym}(X)$?
+> By understanding that we initially have $n$ choices to rearrange the set, and then $n-1$ after that choice, and so on, we can prove inductively that the modulus of the set (for finite $X$) $|\text{Sym}(X)|=|X|!$.
+
+However, this notation is needlessly complicated, and takes out an important property of permutations: **permutations can always decompose into cycles**. If we used that notation instead - **cycle notation** -, we can convert our arrow-mapping notation:
 
 $$
 \begin{matrix}
@@ -29,7 +34,7 @@ $$
 \end{matrix}
 $$
 
-
+Into the following three [[disjoint cycles]]...
 
 ```tikz
 \begin{document}
@@ -63,6 +68,8 @@ $$
 \end{document}
 ```
 
+
+Again, this is quite large notation, even if it's more useful, but we can take this and simplify it even further, just: $(1)(1\,4)$
 
 ---
 
