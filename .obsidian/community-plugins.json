@@ -48,5 +48,6 @@
   "typewriter-mode",
   "obsidian-wakatime",
   "autofit-tabs",
-  "janitor"
+  "janitor",
+  "obsidian-tikzjax"
 ]

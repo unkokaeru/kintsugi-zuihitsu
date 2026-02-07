@@ -26,8 +26,43 @@ $$
 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
 \downarrow & \downarrow & \downarrow & \downarrow & \downarrow & \downarrow & \downarrow \\
 1 & 4 & 6 & 3 & 5 & 7 & 2
-\end{matrix}\implies\above{
+\end{matrix}
 $$
+
+
+
+```tikz
+\begin{document}
+\begin{tikzpicture}[
+  every node/.style={circle, draw, thick, minimum size=7mm},
+  every path/.style={->, thick}
+]
+
+% Left 1-cycle
+\node (one) at (-3,0) {1};
+\draw (-3,0.6) arc[start angle=90,end angle=450,radius=0.6];
+
+% Right 5-cycle
+\node (five) at (3,0) {5};
+\draw[->] (3,0.6) arc[start angle=90,end angle=450,radius=0.6];
+
+% Middle 5-cycle (2 4 3 6 7)
+\node (two) at (0,1.8)  {2};
+\node (four) at (-1,0.9){4};
+\node (three) at (-0.6,-0.9){3};
+\node (six) at (0.6,-0.9){6};
+\node (seven) at (1,0.9){7};
+
+\draw[->,bend left=15] (two)   to (four);
+\draw[->,bend left=15] (four)  to (three);
+\draw[->,bend left=15] (three) to (six);
+\draw[->,bend left=15] (six)   to (seven);
+\draw[->,bend left=15] (seven) to (two);
+
+\end{tikzpicture}
+\end{document}
+```
+
 
 ---
 
