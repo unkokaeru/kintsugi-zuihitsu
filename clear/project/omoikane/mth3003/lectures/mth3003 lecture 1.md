@@ -71,13 +71,26 @@ Into the following three [[disjoint cycle]]s…
 Again, this is quite large notation, even if it's more useful, but we can take this and simplify it even further, just: $\sigma=(1)(2\,4\,3\,6\,7)(5)$, for the permutation $\sigma$. As mentioned before however, if we know that $\sigma \in S_{7}$ then we can exclude the **one-cycles** for simplicity: $\sigma=(2\,4\,3\,6\,7)$. Note that this is exactly the same as if shifted the cycle along by one in the brackets, but we normally start with the lowest number by convention to make comparison easier.
 
 > [!important] Formal Definition
-> Let $a_{1},a_{2},\dots,a_{r}$ be distinct elements of a set $X$. Then, $\sigma=(a_{1}\,a_{2}\,\dots\,a_{r})$ is the permutation of $X$ sending $a_{1}\to a_{2},a_{2}\to a_{3},\dots,a_{r}\to a_{1}$, and fixing all elements in $X\setminus \{  \}$
+> Let $a_{1},a_{2},\dots,a_{r}$ be distinct elements of a set $X$. Then, $\sigma=(a_{1}\,a_{2}\,\dots\,a_{r})$ is the permutation of $X$ sending $a_{1}\to a_{2},a_{2}\to a_{3},\dots,a_{r}\to a_{1}$, and fixing all elements in $X\setminus \{ a_{1},a_{2},\dots,a_{r} \}$. Such a permutation is called an **$r$-cycle**, or a **cycle of length $r$**.
 
 Reading this **cycle notation**, we read **right to left**, just like **function composition**. This will be useful for the next step - finding the products of permutations!
 
 ## Products of Permutations
 
-First, a **product of permutations** is almost identical to a function composition (or other bijections), except we use notation $\sigma x$ instead of $\sigma(x)$ to differentiate the two.
+First, a **product of permutations** is almost identical to a function composition (or other bijections), except we use notation $\sigma x$ instead of $\sigma(x)$ to differentiate the two. Just like a function composition, as previously stated, we read **right to left**.
+
+This means, for the product of permutations $\sigma$ and $\rho$, $\sigma \rho$, then we first calculate $\rho$ and then $\sigma$. Some mathematicians follow different convention (the complete opposite!), but this is the commonest.
+
+> [!todo] Maybe explore this difference in convention? Is there a pattern to who uses which convention?
+
+Calculating these products is quite simple, too. For example, if we have $\sigma=(1\,2\,3)$ and $\rho=(1\,5\,3\,4)$ in $S_{6}$, then we can iterate the elements in $S_{6}=\{ 1,2,3,4,5,6 \}$ first through $\rho$, and then through $\sigma$, to find all the new mapping cycles:
+
+$$
+\begin{align}
+\sigma \rho 1 &= (1\,2\,3)(1\,5\,3\,4)(1)&=(1\,2\,3)(5) \\
+\sigma \rho 
+\end{align}
+$$
 
 ---
 
