@@ -16,7 +16,7 @@ This can be proven directly.
 
 ## Groups
 
-If we want to prove that the set $\text{Sym}(X)$ is a group, then we must recall the definition of a group...
+If we want to prove that the set $\text{Sym}(X)$ is a group, then we must recall the definition of a group…
 
 A **group** is a set $G$ together with an operation $*$ on $G$ such that each of the following holds:
 
@@ -29,6 +29,15 @@ A **group** is a set $G$ together with an operation $*$ on $G$ such that each of
 Usually however, we don't write the operation $*$, instead $g*h$ would be written as $gh$. By definition, $g^0:=e_{G}$ for all $g\in G$.
 
 Recall also that a **subgroup** $H$ of a group $G$ is just a subset of $G$ that is also a group under the operation of $G$. Also recall that if $G$ and $H$ are groups, then their direct product, or Cartesian product, $G\times H$ is also a group, where each element is operated on each other piecewise.
+
+Given that a group $G$ follows these axioms for all $g\in G$, then that also gives the group six properties:
+
+1. $G$ has only one identity.
+2. $g$ has only one inverse.
+3. $(g^{-1})^{-1}=g$.
+4. Let $h_{1},h_{2}\in G$. If $gh_{1}=gh_{2}$ or $h_{1}g=h_{2}g$ then $h_{1}=h_{2}$.
+5. $(h_{1}h_{2})^{-1}=h_{2}^{-1}h_{1}^{-1}$.
+6. $(g^n)^{-1}=g^{-n}$.
 
 ---
 
