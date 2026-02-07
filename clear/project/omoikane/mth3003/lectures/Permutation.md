@@ -45,3 +45,15 @@ There are various notations to show permutations, but we'll use three main ways:
 
 > [!note] What is the size of $\text{Sym}(X)$?
 > By understanding that we initially have $n$ choices to rearrange the set, and then $n-1$ after that choice, and so on, we can prove inductively that the modulus of the set (for finite $X$) $|\text{Sym}(X)|=|X|!$.
+
+> [!important] The Order of a Permutation
+> The **Order of a Permutation** $g \in \text{Sym}(X)$, denoted $o(g)$, is the smallest $n \in \mathbb{N}$ such that $g^n=e$, the identity element, if such an $n$ exists; if not then the order of $g$ is infinite.
+
+## Quick Inverse Proposition
+
+Let $X$ be a set and suppose $\sigma \in \text{Sym}(X)$. We know that we can write $\sigma$ as a product of disjoint cycles, $\sigma=c_{1} c_{2} \dots c_{n}$, hence:
+
+1. The inverse of any cycle $(x_{1}\,x_{2}\,\dots\,x_{m})$ is $(x_{m}\,x_{m-1}\,\dots\,x_{1})$, and
+2. $\sigma^{-1}=c_{1}^{-1}c_{2}^{-1}\dots c_{n}^{-1}$.
+
+This can be proven directly.

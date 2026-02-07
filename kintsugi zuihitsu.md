@@ -13,12 +13,12 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 > [[Levels of Organisation]]
 > Remember to draw back on literature more when writing within academia! - practice this?
 
-- CATCH UP [[MTH3003]] NOTES and [[MTH3007B]] NOTES.
-- Analyse my [[Brother's Headunit Voltage Level Data]].
-- Complete notes for [[yatagarasu]], tasks on the [[yatagarasu]] Kanban board, and complete the [[help videos]]. **DEADLINE: MID FEBRUARY, GO SEMI-LIVE END OF FEBRUARY**.
-- Complete a Lean proof for [[mth3011]], and any other associated module work before the next meeting with my supervisor - confirm date, too!
-- Continue development on [[FFMS]] for [[kuebiko]] & combine with a schedule generator (that objectively scores/weights daily activities to optimise).
-- Go through previous modules, completing notes and problems sets; perhaps with custom AI agents within VS Code. Then, create/refine their respective cheat sheet(s).
+- Complete [[mth3003 weekly problems 1]].
+- Complete [[mth3011]] Lean proof and other project work.
+- Finish analysing my [[Brother's Headunit Voltage Level Data]].
+- Complete tasks/notes for [[yatagarasu]].
+- Complete tasks for [[yatagarasu]], such as recording the [[help videos]].
+- Rewrite all [[omoikane]] notes and finish the below incomplete references.
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
