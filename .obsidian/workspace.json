@@ -84,25 +84,6 @@
               "title": "mth3007b Weekly Problems 1"
             }
           }
-        ],
-        "currentTab": 3
-      },
-      {
-        "id": "e12040cea1d158ca",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "fe67baa4a9aa5fba",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/mth3007b lecture 1 notes.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "mth3007b lecture 1 notes"
-            }
-          }
         ]
       }
     ],
@@ -254,14 +235,14 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "b35e764b27492ff6",
+  "active": "ee721624282a1f5d",
   "lastOpenFiles": [
+    "clear/library/Rituals.md",
     "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 1.md",
-    "clear/project/omoikane/mth3007b/mth3007b.md",
     "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 1.md",
+    "clear/project/omoikane/mth3007b/mth3007b.md",
     "attached/files/mth3007b lecture 1 notes.pdf",
     "clear/library/Levels of Organisation.md",
-    "clear/library/Rituals.md",
     "attached/files/mth3007b weekly problem sheet 1.pdf",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 1.md",
     "kintsugi zuihitsu.md",

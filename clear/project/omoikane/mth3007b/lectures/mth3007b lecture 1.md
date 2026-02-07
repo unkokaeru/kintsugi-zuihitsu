@@ -54,15 +54,66 @@ $$
 
 This is called the **explicit Euler method**, or the **forward Euler method**, and we can calculate the total number of integration steps as $N_{\text{int}}=\frac{|x_{\text{end}}-x_{\text{start}}|}{\Delta x}$ and hence $x_{\text{end}}=xN_{\text{int}}=x_{0}+N_{\text{int}}\Delta x$. A smaller $\Delta x$ we hence naturally improve the accuracy, but at a computational cost.
 
+> [!note] Explore the rest of the notes separate to the lecture notes, or hope he recaps - the lecture notes aren't very well-written from this point.
+
 However, this also introduces new types of error that we can quantise. For instance, the **local truncation error**: the error after **one integration step** due to truncating a function, for instance a Taylor series. Similarly, the **global truncation error** is the error due to integrating over the whole interval.
 
 Both of these errors can be calculated directly using the "Big O" notation from before, and can then give us the **order of a method**: how the global truncation error varies with integration step. For instance, the Euler method is a **first order algorithm**.
 
-> [!note] Explore this error and integration step stuff more, as it's pretty badly covered in the notes.
-
 If we wanted to program this, then we could use the following Python code:
 
-...
+```python runnable
+def explicit_euler_method(
+    derivative_function: callable,
+    initial_value: float,
+    time_start: float,
+    time_end: float,
+    time_step: float,
+) -> tuple[list[float], list[float]]:
+    """Solve an ODE using the explicit Euler method.
+
+    The explicit Euler method uses the approximation:
+    y_{n+1} = y_n + h * f(t_n, y_n)
+
+    Args:
+        derivative_function: Function f(t, y) that computes dy/dt.
+        initial_value: Initial condition y(t_0).
+        time_start: Starting time t_0.
+        time_end: Ending time t_max.
+        time_step: Time step size h (Delta t).
+
+    Returns:
+        Tuple of (time_values, solution_values) lists.
+    """
+    number_of_steps = int((time_end - time_start) / time_step)
+    time_values = [
+        time_start + i * (time_end - time_start) / number_of_steps
+        for i in range(number_of_steps + 1)
+    ]
+    solution_values = [0.0] * (number_of_steps + 1)
+    solution_values[0] = initial_value
+
+    for step_index in range(number_of_steps):
+        current_time = time_values[step_index]
+        current_value = solution_values[step_index]
+        derivative = derivative_function(current_time, current_value)
+        solution_values[step_index + 1] = current_value + time_step * derivative
+
+    return time_values, solution_values
+
+
+# dy/dt = -2y, y(0) = 1  →  exact solution: y = e^(-2t)
+time, y = explicit_euler_method(
+    derivative_function=lambda t, y: -2 * y,
+    initial_value=1.0,
+    time_start=0.0,
+    time_end=1.0,
+    time_step=0.1,
+)
+
+for t_i, y_i in zip(time, y):
+    print(f"t={t_i:f}  y≈{y_i:f}")
+```
 
 After using this algorithm however, you may observe that it becomes **unstable** for $a \Delta t>2$ and shows **oscillatory behaviour** for $a \Delta t>1$; it isn't great for large timesteps!
 
@@ -78,25 +129,11 @@ $$
 
 This is again a **finite difference**, but a **backward difference approximation (BDA)** instead of a **forward difference approximation (FDA)**.
 
-For implicit relations, this can give rise to the **implicit Euler method**, or aptly named **backward Euler method**, similar to before (just shifting time forwards slightly to neaten the formula)...
+For implicit relations, this can give rise to the **implicit Euler method**, or aptly named **backward Euler method**, similar to before (just shifting time forwards slightly to neaten the formula)…
 
 $$
 \frac{y(t)-y(t-\Delta t)}{\Delta t}\approx g(t,y(t))\implies\boxed{y(t+\Delta t)_{\text{approx}}\approx y(t)+\Delta t \cdot g(t+\Delta t,y(t+\Delta t))}
 $$
-
----
-
-- Finite Difference Method:
-	- Comparison derivative vs finite difference.
-- Explicit Euler Method:
-	- Explicit Euler method for initial value problem.
-	- Error in approximation due to truncation; local error.
-	- Error in approximation; global truncation error.
-	- Result error explicit Euler method.
-- Implicit Euler Method:
-	- Implicit vs explicit.
-	- Precursor.
-	- Algorithm implicit Euler method for IVP.
 
 ---
 
