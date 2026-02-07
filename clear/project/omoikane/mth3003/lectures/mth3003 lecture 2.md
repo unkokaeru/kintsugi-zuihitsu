@@ -24,10 +24,11 @@ A **group** is a set $G$ together with an operation $*$ on $G$ such that each of
 2. **Existence of an identity element**: $\exists e_{G} \in G$ such that for all $g \in G$, $g*e_{G}=e_{G}*g=g$.
 3. **Existence of inverse elements**: For all $g \in G$ there exists an inverse element $g^{-1}\in G$ such that $g*g^{-1}=g^{-1}*g=e_{G}$.
 4. **Associativity**: for all $g,h,k\in G$, $g*(h*k)=(g*h)*k$.
+5. *Rarely, if Abelian, **Commutativity**: for all $g,h\in G$, $g*h=h*g$.*
 
 Usually however, we don't write the operation $*$, instead $g*h$ would be written as $gh$. By definition, $g^0:=e_{G}$ for all $g\in G$.
 
-Recall also that a **subgroup** $H$ of a group $G$ is just a subset of $G$ that is also a group under the operation of $G$. Also recall that if $G$ and $H$ are groups, then their direct product, or Cartesian product, $G\times H$ is also a group, where $$
+Recall also that a **subgroup** $H$ of a group $G$ is just a subset of $G$ that is also a group under the operation of $G$. Also recall that if $G$ and $H$ are groups, then their direct product, or Cartesian product, $G\times H$ is also a group, where each element is operated on each other piecewise.
 
 ---
 
