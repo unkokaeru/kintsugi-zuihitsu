@@ -49,8 +49,22 @@ Using this **Finite Difference Method**, we can solve Ordinary Differential Equa
 For an **initial value problem**, the ODE can be written as:
 
 $$
-\frac{f(x+\Delta x)-f(x)}{\Delta x}\approx g(x,f(x))\implies\boxed{f(x+\Delta x)_{\text{approx}}\approx f()}
+\frac{f(x+\Delta x)-f(x)}{\Delta x}\approx g(x,f(x))\implies\boxed{f(x+\Delta x)_{\text{approx}}\approx f(x)+\Delta x \cdot g(x,f(x))}
 $$
+
+This is called the **explicit Euler method**, or the **forward Euler method**, and we can calculate the total number of integration steps as $N_{\text{int}}=\frac{|x_{\text{end}}-x_{\text{start}}|}{\Delta x}$ and hence $x_{\text{end}}=xN_{\text{int}}=x_{0}+N_{\text{int}}\Delta x$. A smaller $\Delta x$ we hence naturally improve the accuracy, but at a computational cost.
+
+However, this also introduces new types of error that we can quantise. For instance, the **local truncation error**: the error after **one integration step** due to truncating a function, for instance a Taylor series. Similarly, the **global truncation error** is the error due to integrating over the whole interval.
+
+Both of these errors can be calculated directly using the "Big O" notation from before, and can then give us the **order of a method**: how the global truncation error varies with integration step. For instance, the Euler method is a **first order algorithm**.
+
+> [!note] Explore this error and integration step stuff more, as it's pretty badly covered in the notes.
+
+If we wanted to program this, then we could use the following Python code:
+
+...
+
+
 
 ---
 
