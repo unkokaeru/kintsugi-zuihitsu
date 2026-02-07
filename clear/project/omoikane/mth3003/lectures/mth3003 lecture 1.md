@@ -77,7 +77,7 @@ Reading this **cycle notation**, we read **right to left**, just like **function
 
 ## Products of Permutations
 
-First, a **product of permutations** is almost identical to a function composition (or other bijections), except we use notation $\sigma x$ instead of $\sigma(x)$ to differentiate the two. Just like a function composition, as previously stated, we read **right to left**.
+First, a **[[Product of Permutations]]** is almost identical to a function composition (or other bijections), except we use notation $\sigma x$ instead of $\sigma(x)$ to differentiate the two. Just like a function composition, as previously stated, we read **right to left**.
 
 This means, for the product of permutations $\sigma$ and $\rho$, $\sigma \rho$, then we first calculate $\rho$ and then $\sigma$. Some mathematicians follow different convention (the complete opposite!), but this is the commonest.
 

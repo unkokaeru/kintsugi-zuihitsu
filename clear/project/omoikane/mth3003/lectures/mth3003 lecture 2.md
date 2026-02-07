@@ -1,7 +1,7 @@
 # MTH3003 Lecture 2
 
-> [!quote] …
-> …
+> [!quote] Simon Smith
+> I accidentally finished
 
 As discussed briefly in the [[mth3003 lecture 1|last lecture]], the set of all permutations of a set is a [[Group]], albeit not an Abelian (commutative) one, unless disjoint. To show these, we need to understand what the inverse of a cycle is…
 
@@ -18,7 +18,7 @@ This can be proven directly.
 
 If we want to prove that the set $\text{Sym}(X)$ is a group, then we must recall the definition of a group…
 
-A **group** is a set $G$ together with an operation $*$ on $G$ such that each of the following holds:
+A **[[Group]]** is a set $G$ together with an operation $*$ on $G$ such that each of the following holds:
 
 1. **Closure**: for all $\forall g,h\in G$, $g*h\in G$.
 2. **Existence of an identity element**: $\exists e_{G} \in G$ such that for all $g \in G$, $g*e_{G}=e_{G}*g=g$.
