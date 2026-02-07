@@ -42,7 +42,7 @@ $$
 
 Essentially, this is the difference between a tangent (the perfect analytical solution, touching the function at only one point) and a secant (the approximated numerical solution, touching the function at two points - preferably very close together, if accurate).
 
-## Explicit / Implicit Euler Method
+## Explicit Euler Method
 
 Using this **Finite Difference Method**, we can solve Ordinary Differential Equations (ODEs). For example with the Euler method, where we first replace the derivatives with finite differences.
 
@@ -64,7 +64,25 @@ If we wanted to program this, then we could use the following Python code:
 
 ...
 
+After using this algorithm however, you may observe that it becomes **unstable** for $a \Delta t>2$ and shows **oscillatory behaviour** for $a \Delta t>1$; it isn't great for large timesteps!
 
+## Implicit Euler Method
+
+Aside from this explicit method, we may also have an implicit relation where a dependent variable is not isolated in the equation; sometimes we can convert between the two, but this is not always possible.
+
+In these cases, we can write the definition of a derivative slightly differently, replacing $h$ with $-h$. This creates a completely different equation, but one that is evaluated identically under the limit:
+
+$$
+\frac{df(x)}{dx}=\lim_{ h \to 0 } \frac{f(x)-f(x-h)}{h}\approx \frac{f(x)-f(x-\Delta x)}{\Delta x}
+$$
+
+This is again a **finite difference**, but a **backward difference approximation (BDA)** instead of a **forward difference approximation (FDA)**.
+
+For implicit relations, this can give rise to the **implicit Euler method**, or aptly named **backward Euler method**, similar to before (just shifting time forwards slightly to neaten the formula)...
+
+$$
+\frac{y(t)-y(t-\Delta t)}{\Delta t}\approx g(t,y(t))\implies\boxed{y(t+\Delta t)_{\text{approx}}\approx y(t)+\Delta t \cdot g(t+\Delta t,y(t+\Delta t))}
+$$
 
 ---
 
