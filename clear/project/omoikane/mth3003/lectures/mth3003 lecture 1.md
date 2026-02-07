@@ -87,15 +87,17 @@ Calculating these products is quite simple, too. For example, if we have $\sigma
 
 $$
 \begin{align}
-\sigma \rho 1 &= (1\,2\,3)(1\,5\,3\,4)(1)&=(1\,2\,3)(5) \\
-\sigma \rho 
+\sigma \rho 1 &= (1\,2\,3)(1\,5\,3\,4)(1)&=(1\,2\,3)(5)&=(5) \\
+\rightarrow \sigma \rho 5 &= (1\,2\,3)(1\,5\,3\,4)(5)&=(1\,2\,3)(3)&=(1) \\
+\rightarrow \dots
 \end{align}
 $$
 
----
+And so on, until you complete a cycle, then you continue with the next smallest number. In this example, you would get $(1\,5)(2\,3\,4)(6)$ - try it yourself!
 
-- Permutation notation & conventions
-- Products of permutations
+Normally, we do this process mentally, too, so it looks a lot like just writing out the answer immediately - just feed the numbers through the cycles.
+
+> [!note] Products of permutations are not commutative - this is provable the same way as function composition - unless disjoint, as this is like the identity element; unchanging.
 
 ---
 

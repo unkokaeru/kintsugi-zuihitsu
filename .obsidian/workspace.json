@@ -4,19 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "500dc6a30c762b42",
+        "id": "d29bf25dfd127da7",
         "type": "tabs",
         "children": [
           {
-            "id": "db614a9526b36d77",
+            "id": "05bdbd377b53bc2f",
             "type": "leaf",
             "state": {
               "type": "pdf",
               "state": {
-                "file": "attached/files/mth3003 lecture notes 1.pdf"
+                "file": "attached/files/mth3003 lecture notes 2.pdf"
               },
               "icon": "lucide-file-text",
-              "title": "mth3003 lecture notes 1"
+              "title": "mth3003 lecture notes 2"
             }
           }
         ]
@@ -88,22 +88,22 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       },
       {
-        "id": "254b06700cf162a0",
+        "id": "5dfc2e84d98f7ea1",
         "type": "tabs",
         "children": [
           {
-            "id": "e407d788313764bf",
+            "id": "5ace8e1aed4e2701",
             "type": "leaf",
             "state": {
               "type": "pdf",
               "state": {
-                "file": "attached/files/mth3003 rough-lecture 1.pdf"
+                "file": "attached/files/mth3003 rough-lecture 2.pdf"
               },
               "icon": "lucide-file-text",
-              "title": "mth3003 rough-lecture 1"
+              "title": "mth3003 rough-lecture 2"
             }
           }
         ]
@@ -257,21 +257,21 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "df4bf5661ea7f445",
+  "active": "e21c1c8b777c6bfb",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 2.md",
-    "clear/project/omoikane/mth3003/lectures/disjoint cycle.md",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 1.md",
-    "attached/files/mth3003 lecture notes 1.pdf",
+    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 2.md",
+    "attached/files/mth3003 lecture notes 2.pdf",
     "clear/project/omoikane/mth3003/mth3003.md",
-    "attached/files/mth3003 rough-lecture 1.pdf",
-    "kintsugi zuihitsu.md",
     "attached/files/mth3003 rough-lecture 2.pdf",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 1.md",
+    "clear/project/omoikane/mth3003/lectures/disjoint cycle.md",
+    "attached/files/mth3003 lecture notes 1.pdf",
+    "attached/files/mth3003 rough-lecture 1.pdf",
+    "kintsugi zuihitsu.md",
     "attached/files/mth3003 weekly problem sheet 1.pdf",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problem sheet 1.pdf.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 1.md",
-    "attached/files/mth3003 lecture notes 2.pdf",
     "attached/remarkable notes/Omoikane/MTH3005 Group Theory/Rough Notes.pdf",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 2.md",
     "attached/remarkable notes/Omoikane/MTH3005 Group Theory/Rough Notes.md",
@@ -294,7 +294,6 @@
     "clear/project/omoikane/mth3003/revision",
     "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
     "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
-    "clear/project/omoikane/omoikane.md",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",
     "attached/files/luna human.png",
