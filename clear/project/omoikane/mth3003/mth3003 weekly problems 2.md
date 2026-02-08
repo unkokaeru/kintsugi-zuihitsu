@@ -1,1 +1,35 @@
-# Mth3003 Weekly Problems 2
+# MTH3003 Weekly Problems 2
+
+> **Original Documents**: [[mth3003 weekly problem sheet 2.pdf|Problem Sheet]] / [[My Handwritten Solutions]]
+>
+> **Vibes**: …
+>
+> **Used Techniques**:
+>   - …
+
+---
+
+## 1.1. …
+
+> [!question]
+> …
+
+…
+
+---
+
+## 1.2. …
+
+> [!question]
+> …
+
+…
+
+---
+
+## 1.3. …
+
+> [!question]
+> …
+
+…

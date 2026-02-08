@@ -1,78 +1,33 @@
-# MTH3008 Weekly Problems 1
+<%*
+const fileName = tp.file.title.toLowerCase();
+const parts = fileName.split(" ");
 
-> **Original Documents**: [[mth3008 weekly problem sheet 1.pdf|Problem Sheet]] / [[My Handwritten Solutions]]
+const moduleCode = parts[0].toUpperCase();
+const weekNumber = parts[3];
+
+let totalQuestions = await tp.system.prompt("How many questions are there?", "8");
+totalQuestions = parseInt(totalQuestions, 10);
+if (isNaN(totalQuestions) || totalQuestions < 1) {
+  totalQuestions = 8;
+}
+%>
+# <% moduleCode %> Weekly Problems <% weekNumber %>
+
+> **Original Documents**: [[<% moduleCode.toLowerCase() %> weekly problem sheet <% weekNumber %>.pdf|Problem Sheet]] / [[My Handwritten Solutions]]
 >
 > **Vibes**: …
 >
 > **Used Techniques**:
-> 	- …
+>   - …
 
-## 1.1. …
-
-> [!question]
-> …
-
-…
-
+<%* for (let questionIndex = 1; questionIndex <= totalQuestions; questionIndex++) { %>
 ---
 
-## 1.2. …
+## 1.<% questionIndex %>. …
 
 > [!question]
 > …
 
 …
 
----
-
-## 1.3. …
-
-> [!question]
-> …
-
-…
-
----
-
-## 1.4. …
-
-> [!question]
-> …
-
-…
-
----
-
-## 1.5. …
-
-> [!question]
-> …
-
-…
-
----
-
-## 1.6. …
-
-> [!question]
-> …
-
-…
-
----
-
-## 1.7. …
-
-> [!question]
-> …
-
-…
-
----
-
-## 1.8. …
-
-> [!question]
-> …
-
-…
+<%* } %>
