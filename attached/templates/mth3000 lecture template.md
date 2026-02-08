@@ -1,16 +1,28 @@
-# Mth3000 Lecture Template
+<%*
 
-- `[[Definition of a topic]]`
-- `[[Another definition of some theorem]]`
+const fileName = tp.file.title.toLowerCase(); // e.g. "mth3003 lecture 3"
 
-## What is an Active Question about part of the Lecture?
+const parts = fileName.split(" ");
+
+const moduleCode = parts[0].toUpperCase(); // "MTH3003"
+
+const lectureNumber = parts[2]; // "3"
+
+-%>
+
+# <%= moduleCode %> Lecture <%= lectureNumber %>
+
+> [!quote] …
+> …
 
 …
 
-## Another Question that Can Be Answered to Learn More?
+## …
 
 …
 
 ---
 
-`![[mth3000 lectures.pdf#page=lecturenum]]`
+## Pre-Lecture Notes from [[<%= moduleCode.toLowerCase() %> lecture notes <%= lectureNumber %>.pdf|University Notes]]
+
+- …

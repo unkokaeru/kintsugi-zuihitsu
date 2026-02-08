@@ -1,0 +1,78 @@
+# MTH3008 Weekly Problems 1
+
+> **Original Documents**: [[mth3008 weekly problem sheet 1.pdf|Problem Sheet]] / [[My Handwritten Solutions]]
+>
+> **Vibes**: …
+>
+> **Used Techniques**:
+> 	- …
+
+## 1.1. …
+
+> [!question]
+> …
+
+…
+
+---
+
+## 1.2. …
+
+> [!question]
+> …
+
+…
+
+---
+
+## 1.3. …
+
+> [!question]
+> …
+
+…
+
+---
+
+## 1.4. …
+
+> [!question]
+> …
+
+…
+
+---
+
+## 1.5. …
+
+> [!question]
+> …
+
+…
+
+---
+
+## 1.6. …
+
+> [!question]
+> …
+
+…
+
+---
+
+## 1.7. …
+
+> [!question]
+> …
+
+…
+
+---
+
+## 1.8. …
+
+> [!question]
+> …
+
+…
