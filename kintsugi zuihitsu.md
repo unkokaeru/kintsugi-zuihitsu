@@ -14,15 +14,16 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 > Remember to draw back on literature more when writing within academia! - practice this?
 
 - Review [[yatagarasu]] work order logic, then record a video (or put together some other content) summarising it.
-- Complete pre-lecture notes for [[mth3008 lecture 3]] and [[mth3008 lecture 4]].
 - Complete [[mth3003 weekly problems 1]].
 - Complete [[mth3007b Weekly Problems 1]], using VS Code (and the mth3007 repo), too.
+- Complete pre-lecture notes for [[mth3008 lecture 3]] and [[mth3008 lecture 4]].
+- …
 - Complete [[mth3008 weekly problems 2]].
-- Rewrite my [[Rituals]] with the [[Levels of Organisation]] in mind.
 - Complete [[mth3011]] Lean proof and other project work.
 - Finish analysing my [[Brother's Headunit Voltage Level Data]].
 - Complete tasks/notes for [[yatagarasu]].
 - Complete tasks for [[yatagarasu]], such as recording the [[help videos]].
+- Rewrite my [[Rituals]] with the [[Levels of Organisation]] in mind.
 - Rewrite all [[omoikane]] notes and finish the below incomplete references.
 
 ```dataviewjs
