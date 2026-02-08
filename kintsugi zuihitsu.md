@@ -13,18 +13,22 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 > [[Levels of Organisation]]
 > Remember to draw back on literature more when writing within academia! - practice this?
 
-- Review [[yatagarasu]] work order logic, then record a video (or put together some other content) summarising it.
-- Complete [[mth3003 weekly problems 1]].
-- Complete [[mth3007b Weekly Problems 1]], using VS Code (and the mth3007 repo), too.
-- Complete pre-lecture notes for [[mth3008 lecture 3]] and [[mth3008 lecture 4]].
-- [[mth3003]]
-- Complete [[mth3008 weekly problems 2]].
-- Complete [[mth3011]] Lean proof and other project work.
+- Continuously work on [[yatagarasu]] work:
+	- Create some visual media to summarise the work order logic (after first checking it over and finalising it, including any associated modals etc.).
+	- Complete and test the enquiry form, including building in required company logic - saving to Google Form Spreadsheet dupe, autogenerating PDFs of the answers, and maybe pushing to MCI, too.
+	- Review current functionality, filling in gaps and completing features (like note writing).
+	- Record and complete the [[help videos]].
+- Complete [[omoikane]] work:
+	- Complete [[mth3003 weekly problems 1]].
+	- Complete [[mth3007b Weekly Problems 1]], using VS Code (and the mth3007 repo), too.
+	- Complete pre-lecture notes for [[mth3008 lecture 3]] and [[mth3008 lecture 4]].
+	- Complete pre-lecture notes for [[mth3003 lecture 3]] and [[mth3003 lecture 4]].
+	- Complete [[mth3008 weekly problems 2]].
+	- Complete [[mth3003 weekly problems 2]].
+	- Complete [[mth3011]] Lean proof and plan other project work.
+	- *Rewrite all [[omoikane]] notes and finish the below incomplete references.*
 - Finish analysing my [[Brother's Headunit Voltage Level Data]].
-- Complete tasks/notes for [[yatagarasu]].
-- Complete tasks for [[yatagarasu]], such as recording the [[help videos]].
-- Rewrite my [[Rituals]] with the [[Levels of Organisation]] in mind.
-- Rewrite all [[omoikane]] notes and finish the below incomplete references.
+- *Rewrite my [[Rituals]] with the [[Levels of Organisation]] in mind.*
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
