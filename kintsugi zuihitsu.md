@@ -14,15 +14,14 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 > Remember to draw back on literature more when writing within academia! - practice this?
 
 - Continuously work on [[yatagarasu]] work:
-	- Create some visual media to summarise the work order logic (after first checking it over and finalising it, including any associated modals etc.).
+	- ==Create some visual media to summarise the work order logic (after first checking it over and finalising it, including any associated modals etc.).==
 	- Complete and test the enquiry form, including building in required company logic - saving to Google Form Spreadsheet dupe, autogenerating PDFs of the answers, and maybe pushing to MCI, too.
-	- Review current functionality, filling in gaps and completing features (like note writing).
-	- Record and complete the [[help videos]].
+	- Record the [[help videos]], comprehensively testing and completing the platform as I go.
 - Complete [[omoikane]] work:
-	- Complete [[mth3003 weekly problems 1]].
-	- Complete [[mth3007b Weekly Problems 1]], using VS Code (and the mth3007 repo), too.
-	- Complete pre-lecture notes for [[mth3008 lecture 3]] and [[mth3008 lecture 4]].
-	- Complete pre-lecture notes for [[mth3003 lecture 3]] and [[mth3003 lecture 4]].
+	- ==Complete [[mth3003 weekly problems 1]].==
+	- ==Complete [[mth3007b Weekly Problems 1]], using VS Code (and the mth3007 repo), too.==
+	- ==Complete pre-lecture notes for [[mth3008 lecture 3]] and [[mth3008 lecture 4]].==
+	- ==Complete pre-lecture notes for [[mth3003 lecture 3]] and [[mth3003 lecture 4]].==
 	- Complete [[mth3008 weekly problems 2]].
 	- Complete [[mth3003 weekly problems 2]].
 	- Complete [[mth3011]] Lean proof and plan other project work.
