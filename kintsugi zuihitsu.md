@@ -13,8 +13,10 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 > [[Levels of Organisation]]
 > Remember to draw back on literature more when writing within academia! - practice this?
 
+- Complete pre-lecture notes for [[mth3008 lecture 3]] and [[mth3008 lecture 4]].
 - Complete [[mth3003 weekly problems 1]].
 - Complete [[mth3007b Weekly Problems 1]], using VS Code (and the mth3007 repo), too.
+- Complete [[mth3008 weekly problems 2]].
 - Rewrite my [[Rituals]] with the [[Levels of Organisation]] in mind.
 - Complete [[mth3011]] Lean proof and other project work.
 - Finish analysing my [[Brother's Headunit Voltage Level Data]].
