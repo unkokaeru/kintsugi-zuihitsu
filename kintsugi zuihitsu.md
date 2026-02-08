@@ -13,6 +13,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 > [[Levels of Organisation]]
 > Remember to draw back on literature more when writing within academia! - practice this?
 
+- Review [[yatagarasu]] work order logic, then record a video (or put together some other content) summarising it.
 - Complete pre-lecture notes for [[mth3008 lecture 3]] and [[mth3008 lecture 4]].
 - Complete [[mth3003 weekly problems 1]].
 - Complete [[mth3007b Weekly Problems 1]], using VS Code (and the mth3007 repo), too.
