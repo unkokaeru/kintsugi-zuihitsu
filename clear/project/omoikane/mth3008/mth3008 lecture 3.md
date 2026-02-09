@@ -1,7 +1,7 @@
 # MTH3008 Lecture 3
 
-> [!quote] …
-> …
+> [!quote] Tom Ward
+> *nothing, he wasn't there :(*
 
 We'll now use that [[Suffix Notation]] throughout tensor analysis, along with the definitions:
 
