@@ -22,11 +22,17 @@ First, the **[[gradient]] of a scalar field** is $\nabla f=\left( \frac{\partial
 > [!example]
 > Find the gradient $\nabla \phi$ of $\phi(x_{1},x_{2},x_{3})= \frac{1}{2}x_{2}^2x_{3}^3-3x_{1}x_{2}+x_{2}^5x_{3}+1$ at the point $P=(3,1,0)$…
 >
-> First, the general gradient is $\nabla \phi=\left( -3x_{2},x_{2}x_{3}^3-3x_{1}+6x_{2}^4x_{3}, \frac{3}{2}x_{2}^2x_{3}^2+x_{2}^5 \right)$, by finding the partial derivatives for each component. Then, at the point $P$, we find that $\nabla \phi=(-3,-9,1)=\boxed{-3\mathbf{i}-9\mathbf{j}+\mathbf{k}}$.
+> First, the general gradient is $\nabla \phi=\left( -3x_{2},x_{2}x_{3}^3-3x_{1}+6x_{2}^4x_{3}, \frac{3}{2}x_{2}^2x_{3}^2+x_{2}^5 \right)$, by finding the partial derivatives for each component. Then, at the point $P$, we find that $\nabla \phi\big|_{P}=(-3,-9,1)=\boxed{-3\mathbf{i}-9\mathbf{j}+\mathbf{k}}$.
 
 Second, the **[[divergence]] of a vector field $\mathbf{u}$** is $\nabla \cdot \mathbf{u} = \frac{\partial u_{1}}{\partial x_{1}}+ \frac{\partial u_{2}}{\partial x_{2}}+ \frac{\partial u_{3}}{\partial x_{3}}= \frac{\partial u_{j}}{\partial x_{j}}=\nabla_{i}u_{i}$. Note the dummy index $j$ for the summation $j=1,2,3$, and the complete lack of free indices (as the divergence of a vector is a scalar quantity). If positive, it indicates a **source**, if negative, it indicates a **sink**.
 
 > [!example]
+> …
+
+Third, the [[curl]] of a vector field $\mathbf{u}$ is …. Or, alternatively using the alternating tensor, ….
+
+> [!example]
+> …
 
 ---
 
