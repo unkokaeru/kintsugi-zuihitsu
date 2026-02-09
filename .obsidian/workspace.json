@@ -39,6 +39,25 @@
               "title": "mth3008 lecture 3"
             }
           }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "13d34de7f4033a21",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a046ac5d07b40096",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "attached/files/mth3008 lecture 3 notes.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "mth3008 lecture 3 notes"
+            }
+          }
         ]
       }
     ],
@@ -190,8 +209,9 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "ee721624282a1f5d",
+  "active": "878f559ad5b357e8",
   "lastOpenFiles": [
+    "attached/files/mth3008 lecture 3 notes.pdf",
     "clear/project/omoikane/mth3008/mth3008 lecture 3.md",
     "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3003/mth3003 lecture 3.md",
@@ -199,7 +219,6 @@
     "attached/files/mth3003 weekly problem sheet 1 handwritten solutions.pdf",
     "attached/templates/mth3000 weekly problems template.md",
     "attached/files/mth3003 lecture notes 3.pdf",
-    "attached/files/mth3008 lecture 3 notes.pdf",
     "attached/files/mth3008 lecture 4 notes.pdf",
     "clear/project/omoikane/mth3008/mth3008 lecture 4.md",
     "attached/files/mth3003 weekly problem sheet 1 solutions.pdf",
