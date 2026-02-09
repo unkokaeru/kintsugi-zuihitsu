@@ -1,7 +1,7 @@
 # MTH3003 Lecture 4
 
-> [!quote] …
-> …
+> [!quote] Simon Smith
+> Lucky for you, humans can't do very much of this.
 
 …
 
