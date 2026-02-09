@@ -1,11 +1,13 @@
 # MTH3007b Weekly Problems 1
 
-> **Original Documents**: [[mth3007b weekly problem sheet 1.pdf|Problem Sheet]]
+> **Original Documents**: [[mth3007b weekly problem sheet 1.pdf|Problem Sheet]] / [GitHub Solutions](https://github.com/unkokaeru/mth3007/blob/main/semester%20b/sessions/session%201%20-%20introduction/solutions.py)
 >
-> **Vibes**: …
+> **Vibes**: Just quick definitions then the two methods outlined in the lecture - pretty simple!
 >
 > **Used Techniques**:
-> 	- …
+> 	- Error/relation definitions.
+> 	- Implementing explicit/implicit Euler methods.
+> 	- Error calculations.
 
 ## 1.1. Definitions
 
