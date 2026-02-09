@@ -39,25 +39,6 @@
               "title": "mth3003 weekly problems 1"
             }
           }
-        ],
-        "currentTab": 1
-      },
-      {
-        "id": "3b1bd7fd68c0433c",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "b0cec9966664f120",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/mth3003 weekly problem sheet 1.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "mth3003 weekly problem sheet 1"
-            }
-          }
         ]
       }
     ],
@@ -209,11 +190,12 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "550e39fef62b5084",
+  "active": "ee721624282a1f5d",
   "lastOpenFiles": [
-    "attached/files/mth3003 weekly problem sheet 1.pdf",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 1.md",
+    "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 1.md",
     "kintsugi zuihitsu.md",
+    "attached/files/mth3003 weekly problem sheet 1.pdf",
     "clear/project/omoikane/mth3003/mth3003 lecture 4.md",
     "clear/project/omoikane/mth3003/mth3003 weekly problems 2.md",
     "clear/project/omoikane/mth3003/mth3003 lecture 3.md",
@@ -233,7 +215,6 @@
     "attached/files/mth3008 lecture 4 notes.pdf",
     "attached/files/mth3008 lecture 3 notes.pdf",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 1.md",
-    "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 1.md",
     "attached/files/mth3007b weekly problem sheet 1.pdf",
     "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 1.md",
     "clear/library/Rituals.md",
@@ -246,7 +227,6 @@
     "clear/project/omoikane/mth3007b/revision/mth3007b final exam cheat sheet.md",
     "clear/project/omoikane/mth3007b/revision/revision.md",
     "clear/project/omoikane/mth3007b/revision/portfolio associated questions",
-    "clear/project/omoikane/mth3007b/revision/final exam associated questions",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",
     "attached/files/luna human.png",
