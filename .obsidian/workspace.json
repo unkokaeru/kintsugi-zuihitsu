@@ -55,34 +55,18 @@
             }
           },
           {
-            "id": "259ffc9732da2d49",
+            "id": "217915d50cc3f5dd",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.11.7"
+                "file": "clear/project/omoikane/mth3008/mth3008.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
               },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.11.7"
-            }
-          }
-        ],
-        "currentTab": 3
-      },
-      {
-        "id": "7fe60b0587905b18",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "7d531f16b4eabd6c",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/mth3008 lecture 3 notes.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "mth3008 lecture 3 notes"
+              "icon": "lucide-file",
+              "title": "mth3008"
             }
           }
         ]
@@ -236,12 +220,16 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "259ffc9732da2d49",
+  "active": "ee721624282a1f5d",
   "lastOpenFiles": [
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 1.md",
-    "kintsugi zuihitsu.md",
-    "attached/files/mth3008 lecture 3 notes.pdf",
     "clear/project/omoikane/mth3008/mth3008 lecture 3.md",
+    "clear/project/omoikane/mth3008/mth3008.md",
+    "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
+    "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
+    "clear/project/omoikane/mth3008/Levi-Civita Symbol.md",
+    "attached/files/mth3008 lecture 3 notes.pdf",
+    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 2.md",
     "clear/project/omoikane/mth3007b/mth3007b.md",
     "clear/project/omoikane/mth3007b/mth3007b lecture 2.md",
@@ -260,7 +248,6 @@
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 1.md",
     "clear/project/omoikane/mth3003/mth3003.md",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 1.md",
-    "clear/project/omoikane/mth3008/mth3008.md",
     "clear/project/omoikane/mth3008/mth3008 weekly problems 2.md",
     "clear/project/omoikane/mth3008/mth3008 lecture 4.md",
     "attached/files/mth3008 weekly problem sheet 2.pdf",
@@ -271,8 +258,6 @@
     "attached/files/mth3007b lecture 1 notes.pdf",
     "clear/library/Levels of Organisation.md",
     "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 1 notes.pdf.md",
-    "clear/project/omoikane/mth3007b/notes/notes.md",
-    "clear/project/omoikane/mth3007b/revision/final exam associated questions/final exam associated questions.md",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",
     "attached/files/luna human.png",

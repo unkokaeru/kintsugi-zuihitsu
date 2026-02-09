@@ -13,3 +13,5 @@ $$
 The **Kronecker delta** hence has properties like its **continuous** equivalent, the **[[Dirac delta-function]]**::It replaces the repeated index with the free index, $\delta_{ij}a_{j}=a_{i}$, or symmetrically (using relabelling/reordering), $\delta_{ji}a_{i}=a_{j}$.
 
 This hence allows us to define the dot product as $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}=a_{i}(\delta_{ij}b_{j})=\delta_{ij}a_{i}b_{j}$, and vice versa.
+
+Relates to the **[[Alternating Tensor]]** through the relationship $\epsilon_{ijk}\epsilon_{k \ell m}=\delta_{i \ell}\delta_{jm}-\delta_{im}\delta_{j \ell}$.
