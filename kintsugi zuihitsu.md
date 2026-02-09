@@ -22,6 +22,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 	- ==Complete pre-lecture notes for [[mth3003 lecture 3]]
 	- Complete [[mth3007b Weekly Problems 1]], using VS Code (and the mth3007 repo), too.
 	- Complete pre-lecture notes for [[mth3007b lecture 2]].
+	- Finish lecture notes for [[mth3008 lecture 3]].
 	- Complete pre-lecture notes for [[mth3003 lecture 4]].
 	- Complete pre-lecture notes for [[mth3008 lecture 4]].
 	- Complete [[mth3008 weekly problems 2]].
