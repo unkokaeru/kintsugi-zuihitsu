@@ -13,7 +13,7 @@ if (isNaN(totalQuestions) || totalQuestions < 1) {
 %>
 # <% moduleCode %> Weekly Problems <% weekNumber %>
 
-> **Original Documents**: [[<% moduleCode.toLowerCase() %> weekly problem sheet <% weekNumber %>.pdf|Problem Sheet]] / [[My Handwritten Solutions]] / [[<% moduleCode.toLowerCase() %> weekly problem sheet<% weekNumber %> solutions.pdf|Provided Solutions]]
+> **Original Documents**: [[<% moduleCode.toLowerCase() %> weekly problem sheet <% weekNumber %>.pdf|Problem Sheet]] / [[[[<% moduleCode.toLowerCase() %> weekly problem sheet <% weekNumber %> handwritten solutions.pdf|My Handwritten Solutions]] / [[<% moduleCode.toLowerCase() %> weekly problem sheet<% weekNumber %> solutions.pdf|Provided Solutions]]
 >
 > **Vibes**: …
 >
