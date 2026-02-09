@@ -9,9 +9,9 @@ Various techniques can be used to find numerical solutions to analytical problem
 
 There are three main ways to measure error:
 
-1. **Order of magnitude**: defined as a non-negative function $g(h)$ for a function $f(h)$ as $h\to 0$, where $\lim_{ h \to 0 } \frac{f(h)}{g(h)}=\text{finite constant}$; also written in "big O" notation as $f(h)=O(g(h)):h\to0$.
-2. **Absolute error**: defined as $\epsilon=|v-v_{\text{approx}}|$ for some approximation $v_{\text{approx}}$ of a quantity $v$.
-3. **Relative error**: defined for nonzero values of $v$, $\eta= \frac{|v-v_{\text{approx}}|}{|v|}=\frac{\epsilon}{|v|}$.
+1. **[[Order of magnitude]]**: defined as a non-negative function $g(h)$ for a function $f(h)$ as $h\to 0$, where $\lim_{ h \to 0 } \frac{f(h)}{g(h)}=\text{finite constant}$; also written in "big O" notation as $f(h)=O(g(h)):h\to0$.
+2. **[[Absolute error]]**: defined as $\epsilon=|v-v_{\text{approx}}|$ for some approximation $v_{\text{approx}}$ of a quantity $v$.
+3. **[[Relative error]]**: defined for nonzero values of $v$, $\eta= \frac{|v-v_{\text{approx}}|}{|v|}=\frac{\epsilon}{|v|}$.
 
 > [!example] Order of Magnitude (Taylor series of $\cos(x)$ around $x=0$)
 > We define the Taylor series of cosine as $\cos(x)=1-\frac{1}{2}x^2+\frac{1}{24}x^4+\dots+\frac{(-1)^n}{(2n)!}x^{2n}+\dots$.
@@ -34,7 +34,7 @@ Often these equations will have families of solutions with parameter(s), not jus
 
 ## Finite Difference Method
 
-We can then estimate ordinary derivatives by using their analytical formula, and approximating it with **finite differences**:
+We can then estimate ordinary derivatives by using their analytical formula, and approximating it with **[[finite differences]]**:
 
 $$
 \frac{df(x)}{dx}=\lim_{ h \to 0 } \frac{f(x+h)-f(x)}{h}\approx \frac{f(x+\Delta x)-f(x)}{\Delta x}
@@ -52,7 +52,7 @@ $$
 \frac{f(x+\Delta x)-f(x)}{\Delta x}\approx g(x,f(x))\implies\boxed{f(x+\Delta x)_{\text{approx}}\approx f(x)+\Delta x \cdot g(x,f(x))}
 $$
 
-This is called the **explicit Euler method**, or the **forward Euler method**, and we can calculate the total number of integration steps as $N_{\text{int}}=\frac{|x_{\text{end}}-x_{\text{start}}|}{\Delta x}$ and hence $x_{\text{end}}=xN_{\text{int}}=x_{0}+N_{\text{int}}\Delta x$. A smaller $\Delta x$ we hence naturally improve the accuracy, but at a computational cost.
+This is called the **[[explicit Euler method]]**, or the **forward Euler method**, and we can calculate the total number of integration steps as $N_{\text{int}}=\frac{|x_{\text{end}}-x_{\text{start}}|}{\Delta x}$ and hence $x_{\text{end}}=xN_{\text{int}}=x_{0}+N_{\text{int}}\Delta x$. A smaller $\Delta x$ we hence naturally improve the accuracy, but at a computational cost.
 
 > [!note] Explore the rest of the notes separate to the lecture notes, or hope he recaps - the lecture notes aren't very well-written from this point.
 
@@ -129,7 +129,7 @@ $$
 
 This is again a **finite difference**, but a **backward difference approximation (BDA)** instead of a **forward difference approximation (FDA)**.
 
-For implicit relations, this can give rise to the **implicit Euler method**, or aptly named **backward Euler method**, similar to before (just shifting time forwards slightly to neaten the formula)…
+For implicit relations, this can give rise to the **[[implicit Euler method]]**, or aptly named **backward Euler method**, similar to before (just shifting time forwards slightly to neaten the formula)…
 
 $$
 \frac{y(t)-y(t-\Delta t)}{\Delta t}\approx g(t,y(t))\implies\boxed{y(t+\Delta t)_{\text{approx}}\approx y(t)+\Delta t \cdot g(t+\Delta t,y(t+\Delta t))}

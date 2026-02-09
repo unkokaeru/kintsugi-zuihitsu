@@ -18,7 +18,6 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 	- Complete and test the enquiry form, including building in required company logic - saving to Google Form Spreadsheet dupe, autogenerating PDFs of the answers, and maybe pushing to MCI, too.
 	- Record the [[help videos]], comprehensively testing and completing the platform as I go.
 - Complete [[omoikane]] work:
-	- ==Complete pre-lecture notes for [[mth3007b lecture 2]].==
 	- ==Complete pre-lecture notes for [[mth3003 lecture 4]].==
 	- ==Complete pre-lecture notes for [[mth3008 lecture 4]].==
 	- Complete [[mth3008 weekly problems 2]].
