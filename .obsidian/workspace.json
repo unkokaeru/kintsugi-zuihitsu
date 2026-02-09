@@ -40,6 +40,18 @@
             }
           },
           {
+            "id": "e374c3a00c03cbf6",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "attached/files/mth3003 weekly problem sheet 1 solutions.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "mth3003 weekly problem sheet 1 solutions"
+            }
+          },
+          {
             "id": "0cb5f0362383ea2f",
             "type": "leaf",
             "state": {
@@ -55,7 +67,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -206,13 +218,14 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "f3c8a1bfddb98a75",
+  "active": "0cb5f0362383ea2f",
   "lastOpenFiles": [
-    "attached/files/mth3003 weekly problem sheet 1 solutions.pdf",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 1.md",
+    "attached/files/mth3003 weekly problem sheet 1 solutions.pdf",
     "clear/project/omoikane/mth3008/mth3008 lecture 3.md",
-    "attached/templates/mth3000 weekly problems template.md",
+    "clear/project/omoikane/mth3003/notes/Permutation.md",
     "kintsugi zuihitsu.md",
+    "attached/templates/mth3000 weekly problems template.md",
     "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
     "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
     "clear/project/omoikane/mth3008/mth3008.md",
@@ -242,7 +255,6 @@
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 1.md",
     "attached/files/mth3007b weekly problem sheet 1.pdf",
     "clear/library/Rituals.md",
-    "clear/library/Levels of Organisation.md",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",
     "attached/files/luna human.png",
