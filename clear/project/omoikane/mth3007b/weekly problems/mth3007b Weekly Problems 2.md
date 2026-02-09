@@ -12,9 +12,10 @@
 ## 1.1. Predicting Error in Different Methods
 
 > [!question]
-> Assume you solve a differential equation, $y^{\prime} (t)=g(t,y(t))$, using the [[forward Euler method]] using a step size of $\Delta t=0.01$.
-> 
-> Assume the (global) error is exactly as in the linear regime and the error in $y(t_{\text{max}})=0.04$.
+> Assume you solve a differential equation, $y^{\prime} (t)=g(t,y(t))$, using the [[forward Euler method]] using a step size of $\Delta t=0.01$. Also assume the (global) error is exactly as in the linear regime and the error in $y(t_{\text{max}})$ is $0.04$.
+>
+> 1. What would the error be if $\Delta t=0.005$?
+> 2. What would the error be if $\Delta t=0.005$ and Ralston is used, instead? Assume an error of $0.03$ for $\Delta t=0.01$.
 
 …
 

@@ -23,7 +23,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 	- Complete [[mth3008 weekly problems 2]].
 	- Complete [[mth3003 weekly problems 2]].
 	- Write up [[mth3007b Weekly Problems 1]].
-	- Complete [[mth3007b Weekly Problems 2]] (find them first! Blackboard & lecture notes?).
+	- Complete [[mth3007b Weekly Problems 2]].
 	- Complete [[mth3011]] Lean proof and plan other project work; follow up on scheduling email, too.
 	- *Rewrite all [[omoikane]] notes and finish the below incomplete references.*
 - Finish analysing my [[Brother's Headunit Voltage Level Data]].

@@ -13,4 +13,4 @@
 
 ## Pre-Lecture Notes from [[mth3003 lecture notes 4.pdf|University Notes]]
 
-- …
+- We can expand the definition of a cyclic group to have more than one generator; for example, 
