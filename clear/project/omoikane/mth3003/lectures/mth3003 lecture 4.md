@@ -13,4 +13,4 @@
 
 ## Pre-Lecture Notes from [[mth3003 lecture notes 4.pdf|University Notes]]
 
-- We can expand the definition of a cyclic group to have more than one generator; for example, 
+- We can expand the definition of a cyclic group to have more than one generator; for example, $\langle g_{1},g_{2}\rangle$ - but this can be extended indefinitely. Basically it.
