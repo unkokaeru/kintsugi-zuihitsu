@@ -40,18 +40,6 @@
             }
           },
           {
-            "id": "e374c3a00c03cbf6",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/mth3003 weekly problem sheet 1 solutions.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "mth3003 weekly problem sheet 1 solutions"
-            }
-          },
-          {
             "id": "0cb5f0362383ea2f",
             "type": "leaf",
             "state": {
@@ -67,7 +55,25 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
+      },
+      {
+        "id": "48d9b490dfb9197c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "86072854ef5d75da",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "attached/files/mth3008 lecture 3 notes.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "mth3008 lecture 3 notes"
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -220,17 +226,17 @@
   },
   "active": "0cb5f0362383ea2f",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
+    "attached/files/mth3008 lecture 3 notes.pdf",
     "clear/project/omoikane/mth3008/mth3008 lecture 3.md",
-    "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
     "attached/files/mth3003 weekly problem sheet 1 solutions.pdf",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 1.md",
+    "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
+    "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
     "clear/project/omoikane/mth3003/notes/Permutation.md",
     "kintsugi zuihitsu.md",
     "attached/templates/mth3000 weekly problems template.md",
     "clear/project/omoikane/mth3008/mth3008.md",
     "clear/project/omoikane/mth3008/Levi-Civita Symbol.md",
-    "attached/files/mth3008 lecture 3 notes.pdf",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 2.md",
     "clear/project/omoikane/mth3007b/mth3007b.md",
     "clear/project/omoikane/mth3007b/mth3007b lecture 2.md",
