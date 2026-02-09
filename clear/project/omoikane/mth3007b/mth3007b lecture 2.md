@@ -1,0 +1,16 @@
+# MTH3007b Lecture 2
+
+> [!quote] …
+> …
+
+…
+
+## …
+
+…
+
+---
+
+## Pre-Lecture Notes from [[mth3007b lecture notes 2.pdf|University Notes]]
+
+- …
