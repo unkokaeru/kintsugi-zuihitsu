@@ -13,9 +13,9 @@ We'll now use that [[Suffix Notation]] throughout tensor analysis, along with th
 
 We'll consider three differential operators in these fields, each of which can be expressed in suffix notation:
 
-1. The [[gradient]],
-2. The [[divergence]], and
-3. The [[curl]].
+1. The [[gradient]] (multiplied with $\nabla$),
+2. The [[divergence]] (dot product with $\nabla$), and
+3. The [[curl]] (cross product with $\nabla$).
 
 First, the **[[gradient]] of a scalar field** is $\nabla f=\left( \frac{\partial f}{\partial x_{1}} ,\frac{\partial f}{\partial x_{2}},\frac{\partial f}{\partial x_{3}}\right)$, where the $i$-th component of the gradient is the partial derivative with respect to $x_{i}$, hence in **suffix notation** is $[\nabla f]_{i}= \frac{\partial f}{\partial x_{i}}$. Practically, to find these gradients then you simply calculate each component, often then specifying a value at a specific point.
 
@@ -29,7 +29,7 @@ Second, the **[[divergence]] of a vector field $\mathbf{u}$** is $\nabla \cdot \
 > [!example]
 > Find $\nabla \cdot \mathbf{A}$ at the point $Q=(2,1,2)$ for $\mathbf{A}= \frac{1}{2}x_{1}^3x_{2}\mathbf{i}-(4x_{1}x_{2}^5+1)\mathbf{j}+x_{2}x_{3}^3\mathbf{k}$…
 >
-> $\nabla \cdot \mathbf{A}= \boxed{\frac{3}{2}x_{1}^2x_{2} + 20x_{1}x_{2}^4 + 3x_{2}x_{3}^2}$.
+> $\nabla \cdot \mathbf{A}= \frac{3}{2}x_{1}^2x_{2} + 20x_{1}x_{2}^4 + 3x_{2}x_{3}^2:\nabla \cdot \mathbf{A}\big|_{(2,1,2)}=6+40+12=\boxed{58}$.
 
 Third, the **[[curl]] of a vector field** $\mathbf{u}$ is…
 
@@ -39,6 +39,8 @@ Or, alternatively using the alternating tensor to represent the **[[curl]]**, ea
 
 > [!example]
 > …
+
+> [!note] $\nabla_{j}$ is just the partial derivative of the $j$-th component (of the following function).
 
 ---
 
