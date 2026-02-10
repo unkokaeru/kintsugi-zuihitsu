@@ -23,39 +23,8 @@
               "icon": "lucide-file",
               "title": "kintsugi zuihitsu"
             }
-          },
-          {
-            "id": "22f50c25e8a4febb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3008/lectures/mth3008 lecture 3.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "mth3008 lecture 3"
-            }
-          },
-          {
-            "id": "bdcd350290d51022",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3008/lectures/mth3008 lecture 4.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "mth3008 lecture 4"
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -206,11 +175,11 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "bdcd350290d51022",
+  "active": "ee721624282a1f5d",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 3.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 4.md",
     "kintsugi zuihitsu.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 3.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 2.md",
     "attached/files/mth3003 weekly problem sheet 2.pdf",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 4.md",
