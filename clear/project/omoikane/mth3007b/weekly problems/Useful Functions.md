@@ -109,3 +109,25 @@ def implicit_euler_method(
     return time_values, solution_values
 ```
 
+## Error Computation
+
+```python runnable
+def compute_error(
+    numerical_solution: npt.NDArray[np.float64],
+    analytical_solution_values: npt.NDArray[np.float64],
+) -> tuple[npt.NDArray[np.float64], float, float]:
+    """Compute the error between numerical and analytical solutions.
+
+    Args:
+        numerical_solution: Numerical solution values.
+        analytical_solution_values: Analytical solution values.
+
+    Returns:
+        Tuple of (absolute_error, max_absolute_error, root_mean_square_error).
+    """
+    absolute_error = np.abs(numerical_solution - analytical_solution_values)
+    max_absolute_error = np.max(absolute_error)
+    root_mean_square_error = np.sqrt(np.mean(absolute_error**2))
+
+    return absolute_error, max_absolute_error, root_mean_square_error
+```
