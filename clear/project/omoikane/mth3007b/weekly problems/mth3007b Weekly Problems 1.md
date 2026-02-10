@@ -8,6 +8,7 @@
 > 	- Error/relation definitions.
 > 	- Implementing explicit/implicit Euler methods.
 > 	- Error calculations.
+> 	- [[Useful Functions]].
 
 ## 1.1. Definitions
 
