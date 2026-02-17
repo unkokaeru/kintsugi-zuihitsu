@@ -25,18 +25,18 @@
             }
           },
           {
-            "id": "527d826989128eab",
+            "id": "b0a2f168c144ce3e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 2.md",
+                "file": "clear/project/omoikane/mth3008/mth3008.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "mth3003 weekly problems 2"
+              "title": "mth3008"
             }
           }
         ],
@@ -191,10 +191,14 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "527d826989128eab",
+  "active": "b0a2f168c144ce3e",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3003/mth3003 weekly problems 3.md",
+    "kintsugi zuihitsu.md",
+    "clear/project/omoikane/mth3008/mth3008.md",
+    "attached/templates/mth3000 weekly problems template.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 2.md",
+    "attached/files/mth3003 weekly problem sheet 2 solutions.pdf",
+    "clear/project/omoikane/mth3003/mth3003 weekly problems 3.md",
     "attached/files/mth3003 weekly problem sheet 3.pdf",
     "clear/project/omoikane/mth3003/mth3003.md",
     "clear/project/omoikane/mth3003/mth3003 lecture 6.md",
@@ -202,7 +206,6 @@
     "attached/files/mth3003 lecture notes 6.pdf",
     "attached/files/mth3003 lecture notes 5.pdf",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 4.md",
-    "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 2.md",
     "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 1.md",
     "clear/project/omoikane/mth3007b/mth3007b.md",
@@ -220,10 +223,7 @@
     "attached/files/mth3007b lecture notes 2.pdf",
     "attached/files/mth3007b weekly problem sheet 2.pdf",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 3.md",
-    "attached/files/mth3003 lecture notes 3.pdf",
-    "clear/project/omoikane/mth3008/mth3008.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 1.md",
-    "attached/templates/mth3000 weekly problems template.md",
     "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
     "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
     "clear/project/omoikane/mth3003/notes/Permutation.md",
