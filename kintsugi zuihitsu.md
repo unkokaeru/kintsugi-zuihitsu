@@ -16,7 +16,7 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 - Continuously work on [[yatagarasu]] work:
 	- ==Create some visual media to summarise the work order logic (after first checking it over and finalising it, including any associated modals etc.).==
 		- [[Clinical Work Order Lifecycle]].
-	- Complete and test the enquiry form, including building in required company logic - saving to Google Form Spreadsheet dupe, autogenerating PDFs of the answers, and maybe pushing to MCI, too.
+		- Complete and test the enquiry form, including building in required company logic - saving to Google Form Spreadsheet dupe, autogenerating PDFs of the answers, and maybe pushing to MCI, too.
 	- Record the [[help videos]], comprehensively testing and completing the platform as I go.
 - Complete [[omoikane]] work:
 	- Catch-up with MTH3007 lectures - [[mth3007b lecture 2]], [[mth3007b lecture 3]].
