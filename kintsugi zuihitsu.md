@@ -14,9 +14,9 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 > Remember to draw back on literature more when writing within academia! - practice this?
 
 - Continuously work on [[yatagarasu]] work:
-	- Complete and test the enquiry form, including building in required company logic - saving to Google Form Spreadsheet dupe, autogenerating PDFs of the answers, and maybe pushing to MCI, too. Then, [[update the website]].
 	- Record the [[help videos]], comprehensively testing and completing the platform as I go.
 	- Complete creating some visual media to summarise the work order logic (after first checking it over and finalising it, including any associated modals etc.): [[Clinical Work Order Lifecycle]].
+	- Complete and test the enquiry form, including building in required company logic - saving to Google Form Spreadsheet dupe, autogenerating PDFs of the answers, and maybe pushing to MCI, too. Then, [[update the website]].
 - Complete [[omoikane]] work:
 	- Catch-up with MTH3007 lectures - [[mth3007b lecture 2]], [[mth3007b lecture 3]].
 	- Catch-up with MTH3007 problems - [[mth3007b Weekly Problems 1]], [[mth3007b Weekly Problems 2]], [[mth3007b Weekly Problems 3]].
