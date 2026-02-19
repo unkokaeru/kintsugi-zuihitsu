@@ -18,7 +18,12 @@ First, notice that the $\frac{\partial x_{1}}{\partial x_{1}}=1$ but $\frac{\par
 Using this, and writing everything in index notation, we can derive each thing following their definitions to find…
 
 - **Gradient of vector position**, $\nabla \underline{r}=\left[ \frac{\mathbf{r}}{\underline{r}} \right]_{i}$.
-- **Divergence of vector position**, $\nabla \cdot \mathbf{r}=\frac{\partial r_{i}}{\partial x_{i}}=\frac{\partial x_{i}}{\partial x_{i}}=\delta$
+- **Divergence of vector position**, $\nabla \cdot \mathbf{r}=\frac{\partial r_{i}}{\partial x_{i}}=\frac{\partial x_{i}}{\partial x_{i}}=\delta_{ii}=3$, by our convention.
+- **Curl of vector position**, $(\mathbf{0})_{i}$ based on the definition of the [[Alternating Tensor]].
+
+## Combinations of Grad, Div, and Curl
+
+There are only five combinations 
 
 ---
 
