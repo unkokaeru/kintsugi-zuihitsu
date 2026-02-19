@@ -8,7 +8,6 @@
 > 	- Error/relation definitions.
 > 	- Implementing explicit/implicit Euler methods.
 > 	- Error calculations.
-> 	- [[Useful Functions]].
 
 ## 1.1. Definitions
 
@@ -19,7 +18,10 @@
 > 3. Order of an algorithm.
 > 4. Finite difference method.
 
-…
+- **Local Truncation Error**: …
+- **Global Truncation Error**: …
+- **Order of an Algorithm**: …
+- **Finite Difference Method**: …
 
 ---
 
