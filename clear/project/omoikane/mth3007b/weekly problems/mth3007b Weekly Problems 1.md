@@ -124,24 +124,19 @@ def derivative_function(time: float, solution_value: float) -> float:
 Which allows us to finally get the two solutions!
 
 ```python runnable
-time_values, small_explicit_solution_values = explicit_euler_method(
+_, small_explicit_solution_values = explicit_euler_method(
     derivative_function, initial_value, time_start, time_end, small_time_step
 )
-
-print(f"Numerical solution using 0.01 as the timestep: {small_explicit_solution_values[-1]}")
-```
-
-Which for the smaller timestep gives us approximately $0.043$. We can then repeat for the larger timestep…
-
-```python runnable
-time_values, solution_values = explicit_euler_method(
-    derivative_function, initial_value, time_start, time_end, 0.1  # Timestep of 0.1
+_, big_explicit_solution_values = explicit_euler_method(
+    derivative_function, initial_value, time_start, time_end, big_time_step
 )
 
-print(f"Numerical solution using 0.01 as the timestep: {solution_values[-1]}")
+print(small_explicit_solution_values[-1])
+
+print(big_explicit_solution_values[-1])
 ```
 
-A substantially different answer of approximately $6.2$.
+Resulting in two very different answers: approximately 0.043 and 6.2, respectively.
 
 ---
 
@@ -220,27 +215,22 @@ def implicit_euler_method(
     return time_values, solution_values
 ```
 
-Which is quite a bit more mathematical than the last, given the implicit relation. Then we can specify each of the timesteps…
+Which is quite a bit more mathematical than the last, given the implicit relation. This time, we can jump straight to the two solutions…
 
 ```python runnable
-time_values, solution_values = explicit_euler_method(
-    derivative_function, initial_value, time_start, time_end, 0.01  # Timestep of 0.01
+_, small_implicit_solution_values = implicit_euler_method(
+    derivative_function, initial_value, time_start, time_end, small_time_step
+)
+_, big_implicit_solution_values = implicit_euler_method(
+    derivative_function, initial_value, time_start, time_end, big_time_step
 )
 
-print(f"Numerical solution using 0.01 as the timestep: {solution_values[-1]}")
+print(small_implicit_solution_values[-1])
+
+print(big_implicit_solution_values[-1])
 ```
 
-Which for the smaller timestep gives us approximately $0.043$, again. We can then repeat for the larger timestep…
-
-```python runnable
-time_values, solution_values = explicit_euler_method(
-    derivative_function, initial_value, time_start, time_end, 0.1  # Timestep of 0.1
-)
-
-print(f"Numerical solution using 0.01 as the timestep: {solution_values[-1]}")
-```
-
-An again substantially different answer of approximately $6.2$.
+Resulting in two very similar answers, rounding to 0.43.
 
 ---
 
@@ -307,3 +297,70 @@ def compute_error(
     return absolute_error, max_absolute_error, root_mean_square_error
 ```
 
+Now we need to compute the time values for our numerical solutions and the analytical solution:
+
+```python runnable
+small_time_values = np.linspace(time_start, time_end, len(small_explicit_solution_values))
+big_time_values = np.linspace(time_start, time_end, len(big_explicit_solution_values))
+
+small_analytical_values = analytical_solution(
+    small_time_values, initial_value, coefficient_a, coefficient_b
+)
+big_analytical_values = analytical_solution(
+    big_time_values, initial_value, coefficient_a, coefficient_b
+)
+```
+
+We can now compute the errors for all methods:
+
+```python runnable
+(
+    small_error_explicit,
+    small_max_error_explicit,
+    small_rmse_explicit,
+) = compute_error(small_explicit_solution_values, small_analytical_values)
+
+(
+    small_error_implicit,
+    small_max_error_implicit,
+    small_rmse_implicit,
+) = compute_error(small_implicit_solution_values, small_analytical_values)
+
+(
+    big_error_explicit,
+    big_max_error_explicit,
+    big_rmse_explicit,
+) = compute_error(big_explicit_solution_values, big_analytical_values)
+
+(
+    big_error_implicit,
+    big_max_error_implicit,
+    big_rmse_implicit,
+) = compute_error(big_implicit_solution_values, big_analytical_values)
+```
+
+Let's now display the error stats...
+
+```python runnable
+print("=" * 70)
+print("ERROR ANALYSIS")
+print("=" * 70)
+
+print(f"\nWith Δt = {small_time_step}:")
+print("  Explicit Euler:")
+print(f"    Max Absolute Error: {small_max_error_explicit:e}")
+print(f"    RMSE: {small_rmse_explicit:e}")
+print("  Implicit Euler:")
+print(f"    Max Absolute Error: {small_max_error_implicit:e}")
+print(f"    RMSE: {small_rmse_implicit:e}")
+
+print(f"\nWith Δt = {big_time_step}:")
+print("  Explicit Euler:")
+print(f"    Max Absolute Error: {big_max_error_explicit:e}")
+print(f"    RMSE: {big_rmse_explicit:e}")
+print("  Implicit Euler:")
+print(f"    Max Absolute Error: {big_max_error_implicit:e}")
+print(f"    RMSE: {big_rmse_implicit:e}")
+```
+
+Already, we can see a difference between the implicit and explicit methods, as expected.
