@@ -24,7 +24,7 @@ $$
 y_{i+1}\approx y_{i}+\Delta t\cdot g\left( t_{i}+\frac{\Delta t}{2},y_{i}+g(t_{i},y_{i})\frac{\Delta t}{2} \right)
 $$
 
-Alternatively, we can use a modified version of this evaluating two-thirds through the interval instead of halfway. This is called **[[Ralston's method]]**:
+Alternatively, we can use a modified version of this evaluating two-thirds through the interval instead of halfway. This is called the **[[Ralston method]]**:
 
 $$
 y_{i+1}\approx y_{i}+\Delta t\cdot \left( \frac{1}{4}g(t_{i},y_{i}) + \frac{3}{4}g\left( t_{i}+ \frac{2}{3}\Delta t,y_{i}+ \frac{2}{3}g(t_{i},y_{i})\Delta t \right) \right)

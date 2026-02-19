@@ -10,7 +10,7 @@ $$
 
 This is again a **finite difference**, but a **backward difference approximation (BDA)** instead of a **forward difference approximation (FDA)**.
 
-For implicit relations, this can give rise to the **[[implicit Euler method]]**, or aptly named **backward Euler method**, similar to before (just shifting time forwards slightly to neaten the formula)…
+For implicit relations, this can give rise to the **implicit Euler method**, or aptly named **backward Euler method**, similar to before (just shifting time forwards slightly to neaten the formula)…
 
 $$
 \frac{y(t)-y(t-\Delta t)}{\Delta t}\approx g(t,y(t))\implies\boxed{y(t+\Delta t)_{\text{approx}}\approx y(t)+\Delta t \cdot g(t+\Delta t,y(t+\Delta t))}
