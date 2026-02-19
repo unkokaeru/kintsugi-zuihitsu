@@ -304,7 +304,7 @@ For $\varepsilon_{ijk}$:
 
 $$
 \begin{aligned}
-1.\;& \varepsilon_{123} = \boxed{1}, \\
+1.\;& \varepsilon_{122} = \boxed{0}, \\
 2.\;& \varepsilon_{321} = \boxed{-1}, \\
 3.\;& \varepsilon_{112} + \varepsilon_{122} = 0 + 0 = \boxed{0}.
 \end{aligned}

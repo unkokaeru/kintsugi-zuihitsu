@@ -61,7 +61,7 @@ Each entry is computed from the two entries to its left and upper-left.
 2. **Truncation**: Polynomial can be truncated at any term
 3. **Error estimation**: Next term provides error estimate
 4. **Symmetry**: $f[x_0, x_1, \ldots, x_k]$ is independent of the order of arguments
-5. **Connection to derivatives**: Related to higher-order terms in [[Taylor Series]]
+5. **Connection to derivatives**: Related to higher-order terms in Taylor Series
 
 ## Relationship to Taylor Series
 
