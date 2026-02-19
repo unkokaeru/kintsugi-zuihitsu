@@ -1,6 +1,6 @@
 # Newton Divided Difference
 
-**Newton's Divided Difference Interpolation** is a method for constructing [[Polynomial Interpolation|interpolating polynomials]] using recursively computed divided differences.
+**Newton's Divided Difference Interpolation** is a method for constructing interpolating polynomials using recursively computed divided differences.
 
 ## Divided Differences
 
@@ -165,4 +165,3 @@ def newton_polynomial(x_value, x_data, divided_diff_table):
 
 - [[Lagrange Interpolation]]: Alternative polynomial form
 - [[Spline Interpolation]]: Piecewise alternative
-- [[Taylor Series]]: Local polynomial approximation

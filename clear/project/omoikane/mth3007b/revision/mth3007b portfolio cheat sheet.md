@@ -1,3 +1,0 @@
-# MTH3007b Portfolio Cheat Sheet
-
-…

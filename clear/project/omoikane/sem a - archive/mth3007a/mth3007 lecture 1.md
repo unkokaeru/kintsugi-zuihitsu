@@ -4,7 +4,7 @@
 
 ## How Can We Derive the Formula for Least Squares Regression?
 
-…
+… *to be done at some point*
 
 ## How Do We Program Least Squares Regression?
 

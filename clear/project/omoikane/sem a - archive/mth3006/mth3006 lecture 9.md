@@ -4,7 +4,7 @@
 
 ## How Do We Apply the Method of Characteristics?
 
-…
+… *to be done at some point*
 
 ---
 

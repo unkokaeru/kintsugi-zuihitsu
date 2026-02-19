@@ -6,7 +6,7 @@ The method of characteristics for inhomogeneous equations can also be used when 
 
 ### Solution
 
-…
+… *to be done at some point*
 
 ## Question Two
 
@@ -14,7 +14,7 @@ Solve $x \frac{\partial u}{\partial x} - y \frac{\partial u}{\partial y} = u$ su
 
 ### Solution
 
-…
+… *to be done at some point*
 
 ## Question Three
 
@@ -118,7 +118,7 @@ Show that transforming to the characteristic coordinates $\xi = x + 2y \qquad \t
 
 ### Solution
 
-…
+… *to be done at some point*
 
 ## Question Five
 
@@ -126,4 +126,4 @@ Confirm that $u(x, t) = \exp(-Dk^2 t) \exp[i k (x - \gamma t)]$ is a solution of
 
 ### Solution
 
-…
+… *to be done at some point*

@@ -1,6 +1,8 @@
 # Mth3007 Lecture 2
 
+```text
 - [[Solving systems of equations]]
+```
 
 ## How Do We Program a Systems of Equations Solver?
 

@@ -41,7 +41,7 @@ $$
 
 #### Solution
 
-…
+… *to be done at some point*
 
 ## Question Two
 
@@ -49,4 +49,4 @@ Referencing the method used to solve the differential equation for under-damped 
 
 ### Solution
 
-…
+… *to be done at some point*

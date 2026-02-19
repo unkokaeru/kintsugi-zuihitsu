@@ -25,7 +25,7 @@ $$
 
 #### Solution
 
-…
+… *to be done at some point*
 
 ### Part B
 
@@ -33,7 +33,7 @@ Use the convolution theorem to calculate $\tilde{h}(k)$, the Fourier transform o
 
 #### Solution
 
-…
+… *to be done at some point*
 
 ## Question Two
 
@@ -43,7 +43,7 @@ Find the Fourier transform of the function $f(t) = \exp(-|t|)$. Before starting 
 
 #### Solution
 
-…
+… *to be done at some point*
 
 ### Part B
 
@@ -55,7 +55,7 @@ $$
 
 #### Solution
 
-…
+… *to be done at some point*
 
 ## Question Three
 
@@ -77,7 +77,7 @@ Calculate the Fourier transform of $f(t) = e^{-at}H(t)$, where $a > 0$ is a real
 
 #### Solution
 
-…
+… *to be done at some point*
 
 ### Part B
 
@@ -87,4 +87,4 @@ Use your result, together with the convolution theorem, to evaluate the inverse 
 
 #### Solution
 
-…
+… *to be done at some point*
