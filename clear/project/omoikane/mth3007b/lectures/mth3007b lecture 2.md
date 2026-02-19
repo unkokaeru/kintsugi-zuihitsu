@@ -10,7 +10,7 @@ After finishing that off, we dived into actual numerical methods: higher order i
 
 ## Runge-Kutta Methods
 
-For each Euler method, their global error is $O(\Delta t)$ and order is one. We can generalise these however, to get the [[Runge-Kutta methods:]]
+For each Euler method, their global error is $O(\Delta t)$ and order is one. We can generalise these however, to get the [[Runge-Kutta methods]]:
 
 $$
 y_{i+1}\approx y_{i}+\Delta t\cdot \phi(t_{i},y_{i},\Delta t)

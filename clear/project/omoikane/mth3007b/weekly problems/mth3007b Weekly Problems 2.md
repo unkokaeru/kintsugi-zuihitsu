@@ -2,10 +2,11 @@
 
 > **Original Documents**: [[mth3007b weekly problem sheet 2.pdf|Problem Sheet]]
 >
-> **Vibes**: Pretty chill, basically just 
+> **Vibes**: Pretty chill, basically just the same as last week and scaling errors.
 >
 > **Used Techniques**:
->   - …
+>   - Scaling errors.
+>   - Implementing Euler methods.
 
 ---
 

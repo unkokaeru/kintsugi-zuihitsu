@@ -25,6 +25,28 @@
             }
           },
           {
+            "id": "1777065c2a898120",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3007b/mth3007b Weekly Problems 3.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "mth3007b Weekly Problems 3"
+            }
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "c59abfb5c7c6db50",
+        "type": "tabs",
+        "children": [
+          {
             "id": "aa92933ceff6656e",
             "type": "leaf",
             "state": {
@@ -37,43 +59,6 @@
               },
               "icon": "lucide-file",
               "title": "mth3007b lecture 3"
-            }
-          },
-          {
-            "id": "11c42df9fcb59bc5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 1.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "mth3007b Weekly Problems 1"
-            }
-          }
-        ],
-        "currentTab": 2
-      },
-      {
-        "id": "6c03f2558aec2e3f",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "be786275f37af099",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 2.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "mth3007b Weekly Problems 2"
             }
           }
         ]
@@ -227,15 +212,17 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "be786275f37af099",
+  "active": "1777065c2a898120",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 1.md",
-    "clear/project/omoikane/mth3007b/mth3007b lecture 3.md",
-    "attached/files/mth3007b lecture notes 3.pdf",
-    "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 2.md",
-    "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 2.md",
-    "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 1.md",
     "kintsugi zuihitsu.md",
+    "clear/project/omoikane/mth3007b/mth3007b Weekly Problems 3.md",
+    "clear/project/omoikane/mth3007b/mth3007b.md",
+    "clear/project/omoikane/mth3007b/mth3007b lecture 3.md",
+    "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 2.md",
+    "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 1.md",
+    "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 2.md",
+    "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 1.md",
+    "attached/files/mth3007b lecture notes 3.pdf",
     "attached/files/mth3007b lecture notes 2.pdf",
     "attached/files/mth3007b lecture 1 notes.pdf",
     "clear/project/omoikane/mth3007a/mth3007 lecture 1.md",
@@ -263,7 +250,6 @@
     "clear/project/omoikane/mth3003/mth3003 weekly problems 3.md",
     "clear/project/omoikane/mth3003/mth3003.md",
     "clear/project/omoikane/mth3003/mth3003 lecture 6.md",
-    "clear/project/omoikane/mth3007b/mth3007b.md",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",
     "attached/files/luna human.png",

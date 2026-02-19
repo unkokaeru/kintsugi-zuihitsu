@@ -20,11 +20,10 @@ The structure separates [[clear|transparent knowledge]] that can be shared publi
 - Complete [[omoikane]] work:
 	- Catch-up with MTH3003 lectures - [[mth3003 lecture 4]], [[mth3003 lecture 5]], [[mth3003 lecture 6]].
 	- Catch-up with MTH3003 problems - [[mth3003 weekly problems 2]], [[mth3003 weekly problems 3]].
-	- Catch-up with MTH3007 lectures - [[mth3007b lecture 3]].
-	- Catch-up with MTH3007 problems - [[mth3007b Weekly Problems 3]].
 	- Catch-up with MTH3008 lectures - [[mth3008 lecture 3]], [[mth3008 lecture 4]], [[mth3008 lecture 5]], [[mth3008 lecture 6]].
 	- Catch-up with MTH3008 problems - [[mth3008 weekly problems 2]], [[mth3008 weekly problems 3]]
 	- Complete [[mth3011]] Lean proof and plan other project work.
+	- Complete [[mth3007b]] refined notes.
 	- *Rewrite all [[omoikane]] notes and finish the below incomplete references.*
 - Finish analysing my [[Brother's Headunit Voltage Level Data]].
 - *Rewrite my [[Rituals]] with the [[Levels of Organisation]] in mind.*
