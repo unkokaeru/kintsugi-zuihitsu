@@ -8,9 +8,13 @@ Again, this session began with recap. Then, we generalised the Runge-Kutta metho
 
 ## Second Order Runge-Kutta Methods
 
-…
+…l
 
 ## General Order Runge-Kutta Methods
+
+…
+
+## Symmetric Methods
 
 …
 
