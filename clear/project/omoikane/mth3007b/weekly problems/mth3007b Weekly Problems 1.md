@@ -44,7 +44,7 @@
 > 1. $\Delta t=0.01$
 > 2. $\Delta t=0.1$
 
-First, we can write a function to act as the ODE...
+First, we should do all required imports.
 
 ```python runnable
 import micropip
@@ -53,8 +53,24 @@ await micropip.install("numpy")
 from collections.abc import Callable
 import numpy as np
 import numpy.typing as npt
+```
 
+Then we can write our ODE as a Python function, just to make things a bit neater…
 
+```python runnable
+def general_derivative_function(
+    time: float,
+    solution_value: float,
+    coefficient_a: float,
+    coefficient_b: float,
+) -> float:
+    """Compute the derivative dy/dt = b*t - a*y."""
+    return coefficient_b * time - coefficient_a * solution_value
+```
+
+Then actually implement the Explicit Euler method…
+
+```python runnable
 def explicit_euler_method(
     derivative_function: Callable[[float, float], float],
     initial_value: float,
@@ -89,6 +105,30 @@ def explicit_euler_method(
 
     return time_values, solution_values
 ```
+
+Then we can specify each of the variables for our specific ODE...
+
+```python runnable
+coefficient_a = 22.0
+coefficient_b = 1.0
+initial_value = 1.0
+time_start = 0.0
+time_end = 1.0
+time_step = 0.01
+
+def derivative_function(time: float, solution_value: float) -> float:
+    return general_derivative_function(time, solution_value, coefficient_a, coefficient_b)
+
+time_values, solution_values = explicit_euler_method(
+    derivative_function, initial_value, time_start, time_end, time_step
+)
+
+print(f"Numerical solution using 0.01 as the timestep: {solution_values[-1]}")
+```
+
+Which for the smaller timestep gives us approximately $0.043$. We can then repeat for the larger timestep...
+
+
 
 ---
 
