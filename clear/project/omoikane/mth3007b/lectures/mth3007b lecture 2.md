@@ -2,7 +2,7 @@
 
 > [!quote] Me, in the lecture
 >
-> > zzzzz…
+> zzzzz…
 
 The beginning of this lecture started with a lot of recap of the last lecture and basic programming; like using integers for countable numbers and floats for non-countable numbers. Then, we quickly covered round-off errors - exactly what you'd assume, errors that occur due to rounding.
 

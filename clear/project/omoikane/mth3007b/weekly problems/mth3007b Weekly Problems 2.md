@@ -57,8 +57,10 @@ $$
 > [!question]
 > What is the maximum timestep $\Delta t$ for Ralston's method to achieve the $0.001$ accuracy in $y(t_{\text{max}})$, with one significant figure accuracy?
 
-Using the quadratic error scaling of Ralston with the known error at $\Delta t=0.01$...
+Using the quadratic error scaling of Ralston with the known error at $\Delta t=0.01$…
 
 $$
 \Delta t_{\text{max}}=\Delta t \cdot \sqrt{ \frac{0.001}{E(\Delta t)} }=0.01\times \sqrt{ \frac{0.001}{1.226\times 10^{-5}} }\approx \boxed{0.09}
 $$
+
+> [!note] This is apparently incorrect - naive scaling?
