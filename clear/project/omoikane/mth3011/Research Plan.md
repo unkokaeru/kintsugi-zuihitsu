@@ -134,7 +134,7 @@ The project spans approximately 30 weeks from 23 October 2025 to the final deadl
 
 ### Phase 3: Practical Implementation (Weeks 18-23, 26 Feb – 01 Apr 2026)
 
-- formalise selected mathematical theorems in Lean 4 as primary project deliverable
+- Formalise selected mathematical theorems in Lean 4 as primary project deliverable
 - Document formalisation process, including debugging and proof strategy decisions
 - Develop secondary Coq formalisation for comparison and learning
 - Create comprehensive code documentation with inline comments explaining proof structures
