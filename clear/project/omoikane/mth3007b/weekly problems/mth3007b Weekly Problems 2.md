@@ -1,6 +1,6 @@
 # MTH3007B Weekly Problems 2
 
-> **Original Documents**: [[mth3007b weekly problem sheet 2.pdf|Problem Sheet]] / [[[[mth3007b weekly problem sheet 2 handwritten solutions.pdf|My Handwritten Solutions]] / [[mth3007b weekly problem sheet2 solutions.pdf|Provided Solutions]]
+> **Original Documents**: [[mth3007b weekly problem sheet 2.pdf|Problem Sheet]]
 >
 > **Vibes**: â€¦
 >
@@ -24,7 +24,7 @@ The global error scales with the timestep according to the order of the methodâ€
 
 ---
 
-## 1.2. â€¦
+## 1.2. Numerical Solutions of an ODE
 
 > [!question]
 > Consider the ordinary differential equation, $\frac{dy(t)}{dt}=bt-ay(t)$ with $a=8$, $b=1$, and $y(0)=4$.
@@ -32,7 +32,8 @@ The global error scales with the timestep according to the order of the methodâ€
 > 1. By using a numerical algorithm, solve the ODE till $t_\mathrm{max}=1$, then compare $y(t_\mathrm{max})$ with the analytical solution $y(t)=\exp(-at)\left(y(0)+b/a^2\right)+bt/a-b/a^2$.
 > 2. What is $y(t_\mathrm{max})$ for the Ralston method for $\Delta t=0.01$?
 
-â€¦
+1. Using the [[explicit Euler method]], the solution is $0.1103355852$. Analytically, the solution is approximately $0.1107220921$ - a max error of $6.11\times 10^{-2}$.
+2. Instead, using the [[Ralston method]], the solution is instead $0.1107343545$, giving a sm max error of 1.67e-03
 
 ---
 
@@ -43,7 +44,7 @@ The global error scales with the timestep according to the order of the methodâ€
 >
 > What is the maximum timestep $\Delta t$ for the [[explicit Euler method]] to achieve the $0.001$ accuracy in $y(t_{\text{max}})$, with one significant figure accuracy?
 
-Using the linear error scaling for Euler with the known error at $\Delta t=0.01$...
+Using the linear error scaling for Euler with the known error at $\Delta t=0.01$â€¦
 
 $$
 \Delta t_{\text{max}}=\Delta t\cdot \frac{0.001}{E(\Delta t)}=0.01\times \frac{0.001}{3.865\times 10^{-4}}\approx \boxed{0.03}
