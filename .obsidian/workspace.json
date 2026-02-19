@@ -23,8 +23,19 @@
               "icon": "lucide-file",
               "title": "kintsugi zuihitsu"
             }
+          },
+          {
+            "id": "f3ec744094d6a94d",
+            "type": "leaf",
+            "state": {
+              "type": "planner-release-notes",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Day Planner Release 0.28.0"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -175,7 +186,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "ee721624282a1f5d",
+  "active": "f3ec744094d6a94d",
   "lastOpenFiles": [
     "clear/project/omoikane/mth3011/mth3011.md",
     "clear/project/omoikane/mth3011/Research Plan.md",
