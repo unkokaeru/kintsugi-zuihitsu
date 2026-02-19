@@ -1,6 +1,6 @@
 # Lagrange Interpolation
 
-**Lagrange interpolation** is a method for [[Polynomial Interpolation]] that constructs a unique polynomial passing through a given set of points using Lagrange basis polynomials.
+**Lagrange interpolation** is a method for Polynomial Interpolation that constructs a unique polynomial passing through a given set of points using Lagrange basis polynomials.
 
 ## Formula
 
@@ -156,5 +156,4 @@ def lagrange_polynomial(x_value, x_data, y_data):
 
 - [[Newton Divided Difference]]: Alternative polynomial form
 - [[Spline Interpolation]]: Piecewise alternative avoiding high-degree polynomials
-- [[Polynomial Interpolation]]: General category
 - [[Linear Interpolation]]: Special case with two points

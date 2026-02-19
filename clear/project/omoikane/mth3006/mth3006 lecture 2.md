@@ -7,11 +7,11 @@
 
 ## How Do You Derive the Fourier Cosine Transform and Its Inverse?
 
-…
+… *to be done at some point*
 
 ## How Do You Derive the Fourier Sine Transform and Its Inverse?
 
-…
+… *to be done at some point*
 
 ---
 

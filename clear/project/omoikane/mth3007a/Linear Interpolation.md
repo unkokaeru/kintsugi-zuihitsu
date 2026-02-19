@@ -97,5 +97,4 @@ def linear_interpolation(x, x0, y0, x1, y1):
 
 - [[Bilinear Interpolation]]: Linear interpolation in 2D
 - [[Spline Interpolation]]: Piecewise smooth alternative
-- [[Polynomial Interpolation]]: Higher-order alternative
 - [[Newton Divided Difference]]: Generalization to higher orders

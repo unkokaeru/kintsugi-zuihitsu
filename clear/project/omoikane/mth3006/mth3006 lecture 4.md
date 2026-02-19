@@ -7,11 +7,11 @@
 
 > [!important] This one is one you have to remember for exams!
 
-…
+… *to be done at some point*
 
 ## How Do You Derive the Flipped Convolution Theorem?
 
-…
+… *to be done at some point*
 
 ---
 

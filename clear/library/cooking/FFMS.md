@@ -1,6 +1,6 @@
 # FFMS
 
-```
+```python
 Mon, Tues, Weds: William cooks
 Thurs, Fri, Sun: Maicey cooks
 Sat: BOTH OF US :) (couple cookbook split recipes?)
@@ -30,7 +30,7 @@ Make this referenced correctly by [[cooking]], too.
 
 ## Database Design
 
-…
+… *project halfway*
 
 Look over the projects my brother sent me, starting with [sds](C:/Users/wills/Documents/Programs%20by%20my%20brother/sds/) before looking at [acm_2](C:/Users/wills/Documents/Programs%20by%20my%20brother/acm_2/).
 

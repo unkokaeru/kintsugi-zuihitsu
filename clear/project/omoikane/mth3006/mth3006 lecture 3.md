@@ -5,7 +5,7 @@
 
 ## How Do You Prove the Scaling Property of Fourier Transforms?
 
-…
+… *to be done at some point*
 
 ## How Do You Prove the Differentiation Property of Fourier Transforms?
 
@@ -25,11 +25,11 @@ Applying again, we find that $\mathcal{F}[f^{\prime\prime} (t)]=i \omega \mathca
 
 ## How Do You Prove the Translation Property of Fourier Transforms?
 
-…
+… *to be done at some point*
 
 ## How Do You Prove the Exponential Multiplication Property of Fourier Transforms?
 
-…
+… *to be done at some point*
 
 ## What is De-Convolution?
 

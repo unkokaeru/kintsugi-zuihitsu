@@ -6,7 +6,7 @@
 - [[Lagrange Interpolation]]
 - [[Spline Interpolation]]
 - [[Bilinear Interpolation]]
-- [[Taylor Series]]
+- Taylor Series
 
 ## What is Interpolation?
 
@@ -295,7 +295,3 @@ print(f"Error: {abs(interpolated - actual):f}")
 ```
 
 **Note:** For $f(x, y) = xy$, bilinear interpolation produces **exact results** since the function is bilinear.
-
----
-
-![[nm_worksheet_wk5.pdf]]
