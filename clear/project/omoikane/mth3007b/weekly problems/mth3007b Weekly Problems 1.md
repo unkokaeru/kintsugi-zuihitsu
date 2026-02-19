@@ -18,10 +18,10 @@
 > 3. Order of an algorithm.
 > 4. Finite difference method.
 
-- **Local Truncation Error**: …
-- **Global Truncation Error**: …
-- **Order of an Algorithm**: …
-- **Finite Difference Method**: …
+- **Local Truncation Error**: The difference between the numerical and analytical solution after a single timestep.
+- **Global Truncation Error**: The difference between the numerical and analytical solution after all timesteps.
+- **Order of an Algorithm**: How the global truncation error varies with the integration step; for order $p$, then halving the step size $h$ reduces error by a factor of $2^p$.
+- **Finite Difference Method**: Approximating a derivative by setting a value for $\Delta x$, instead of integrating.
 
 ---
 
@@ -30,7 +30,8 @@
 > [!question]
 > What is the difference between an implicit and explicit relation?
 
-…
+- An **explicit relation** has an isolated dependent variable.
+- An **implicit relation** does not have an isolated dependent variable.
 
 ---
 
