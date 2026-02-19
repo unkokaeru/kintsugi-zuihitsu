@@ -221,11 +221,11 @@
             "currentTab": 1
           },
           {
-            "id": "4c88e0ae7a06fbcb",
+            "id": "b1b4e8ed171c1f17",
             "type": "tabs",
             "children": [
               {
-                "id": "c82c721970e54755",
+                "id": "6d8a9b99c7f5f88e",
                 "type": "leaf",
                 "state": {
                   "type": "pdf",
@@ -249,14 +249,14 @@
       }
     ]
   },
-  "active": "c82c721970e54755",
+  "active": "786ccce181be5c28",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 2.md",
     "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 1.md",
+    "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 2.md",
+    "attached/files/mth3007b lecture notes 2.pdf",
     "kintsugi zuihitsu.md",
     "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 1.md",
     "attached/files/mth3007b lecture 1 notes.pdf",
-    "attached/files/mth3007b lecture notes 2.pdf",
     "clear/project/omoikane/mth3007a/mth3007 lecture 1.md",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 1.md",
     "clear/project/omoikane/mth3007b/weekly problems/Useful Functions.md",
