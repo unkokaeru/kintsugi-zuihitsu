@@ -23,6 +23,58 @@
               "icon": "lucide-file",
               "title": "kintsugi zuihitsu"
             }
+          },
+          {
+            "id": "6b277fc0da75c87d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 1.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "mth3007b lecture 1"
+            }
+          },
+          {
+            "id": "786ccce181be5c28",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 2.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "mth3007b lecture 2"
+            }
+          }
+        ],
+        "currentTab": 2
+      },
+      {
+        "id": "6c03f2558aec2e3f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "be786275f37af099",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 2.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "mth3007b Weekly Problems 2"
+            }
           }
         ]
       }
@@ -174,83 +226,6 @@
       "size-history:Vault size history": false,
       "templater-obsidian:Templater": false
     }
-  },
-  "floating": {
-    "id": "51919b45ec96c280",
-    "type": "floating",
-    "children": [
-      {
-        "id": "34b2b763f18a8087",
-        "type": "window",
-        "children": [
-          {
-            "id": "21ff7a26cb3c6939",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "6b277fc0da75c87d",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 1.md",
-                    "mode": "source",
-                    "source": false,
-                    "backlinks": false
-                  },
-                  "icon": "lucide-file",
-                  "title": "mth3007b lecture 1"
-                }
-              },
-              {
-                "id": "786ccce181be5c28",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 2.md",
-                    "mode": "source",
-                    "source": false,
-                    "backlinks": false
-                  },
-                  "icon": "lucide-file",
-                  "title": "mth3007b lecture 2"
-                }
-              }
-            ],
-            "currentTab": 1
-          },
-          {
-            "id": "214dbf8e1584d8ee",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "be786275f37af099",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 2.md",
-                    "mode": "source",
-                    "source": false,
-                    "backlinks": false
-                  },
-                  "icon": "lucide-file",
-                  "title": "mth3007b Weekly Problems 2"
-                }
-              }
-            ]
-          }
-        ],
-        "direction": "vertical",
-        "x": -458,
-        "y": -1104,
-        "width": 757,
-        "height": 933,
-        "maximize": true,
-        "zoom": 0.5
-      }
-    ]
   },
   "active": "be786275f37af099",
   "lastOpenFiles": [
