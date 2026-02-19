@@ -95,7 +95,8 @@ def explicit_euler_method(
     """
     number_of_steps = int((time_end - time_start) / time_step)
     time_values = np.linspace(time_start, time_end, number_of_steps + 1)
-    solution_values = np.concatenate(([initial_value], np.zeros(number_of_steps)))
+    solution_values = np.zeros(number_of_steps + 1)
+    solution_values[0] = initial_value
 
     for step_index in range(number_of_steps):
         current_time = time_values[step_index]
@@ -339,7 +340,7 @@ We can now compute the errors for all methods:
 ) = compute_error(big_implicit_solution_values, big_analytical_values)
 ```
 
-Let's now display the error stats...
+Let's now display the error stats…
 
 ```python runnable
 print("=" * 70)
@@ -363,4 +364,108 @@ print(f"    Max Absolute Error: {big_max_error_implicit:e}")
 print(f"    RMSE: {big_rmse_implicit:e}")
 ```
 
-Already, we can see a difference between the implicit and explicit methods, as expected.
+Already, we can see a difference between the implicit and explicit methods, as expected. Let's now plot everything to confirm, first importing the relevant plotting libraries:
+
+```python runnable
+await micropip.install("matplotlib")
+import matplotlib.pyplot as plt
+```
+
+Then creating our plotting functions:
+
+```python runnable
+def plot_solutions(
+    small_time: npt.NDArray[np.float64],
+    small_explicit: npt.NDArray[np.float64],
+    small_implicit: npt.NDArray[np.float64],
+    small_analytical: npt.NDArray[np.float64],
+    big_time: npt.NDArray[np.float64],
+    big_explicit: npt.NDArray[np.float64],
+    big_implicit: npt.NDArray[np.float64],
+    big_analytical: npt.NDArray[np.float64],
+) -> None:
+    """Plot and compare numerical and analytical solutions."""
+    fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+
+    axes[0].plot(small_time, small_analytical, "k-", linewidth=2, label="Analytical")
+    axes[0].plot(small_time, small_explicit, "b--", linewidth=1.5, label="Explicit Euler")
+    axes[0].plot(small_time, small_implicit, "r:", linewidth=1.5, label="Implicit Euler")
+    axes[0].set_xlabel("Time t")
+    axes[0].set_ylabel("Solution y(t)")
+    axes[0].set_title(f"Solution with Δt = {small_time_step}")
+    axes[0].legend()
+    axes[0].grid(True, alpha=0.3)
+
+    axes[1].plot(big_time, big_analytical, "k-", linewidth=2, label="Analytical")
+    axes[1].plot(big_time, big_explicit, "b--", linewidth=1.5, label="Explicit Euler")
+    axes[1].plot(big_time, big_implicit, "r:", linewidth=1.5, label="Implicit Euler")
+    axes[1].set_xlabel("Time t")
+    axes[1].set_ylabel("Solution y(t)")
+    axes[1].set_title(f"Solution with Δt = {big_time_step}")
+    axes[1].legend()
+    axes[1].grid(True, alpha=0.3)
+
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_errors(
+    small_time: npt.NDArray[np.float64],
+    small_error_explicit: npt.NDArray[np.float64],
+    small_error_implicit: npt.NDArray[np.float64],
+    big_time: npt.NDArray[np.float64],
+    big_error_explicit: npt.NDArray[np.float64],
+    big_error_implicit: npt.NDArray[np.float64],
+) -> None:
+    """Plot error comparison for different methods and time steps."""
+    fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+
+    axes[0].semilogy(small_time, small_error_explicit, "b-", linewidth=1.5, label="Explicit Euler")
+    axes[0].semilogy(small_time, small_error_implicit, "r-", linewidth=1.5, label="Implicit Euler")
+    axes[0].set_xlabel("Time t")
+    axes[0].set_ylabel("Absolute Error")
+    axes[0].set_title(f"Error with Δt = {small_time_step}")
+    axes[0].legend()
+    axes[0].grid(True, alpha=0.3)
+
+    axes[1].semilogy(big_time, big_error_explicit, "b-", linewidth=1.5, label="Explicit Euler")
+    axes[1].semilogy(big_time, big_error_implicit, "r-", linewidth=1.5, label="Implicit Euler")
+    axes[1].set_xlabel("Time t")
+    axes[1].set_ylabel("Absolute Error")
+    axes[1].set_title(f"Error with Δt = {big_time_step}")
+    axes[1].legend()
+    axes[1].grid(True, alpha=0.3)
+
+    plt.tight_layout()
+    plt.show()
+```
+
+Finally, we can now generate the plots:
+
+```python runnable
+print("\nGenerating solution comparison plots…")
+plot_solutions(
+    small_time_values,
+    small_explicit_solution_values,
+    small_implicit_solution_values,
+    small_analytical_values,
+    big_time_values,
+    big_explicit_solution_values,
+    big_implicit_solution_values,
+    big_analytical_values,
+)
+
+print("Generating error comparison plots…")
+plot_errors(
+    small_time_values,
+    small_error_explicit,
+    small_error_implicit,
+    big_time_values,
+    big_error_explicit,
+    big_error_implicit,
+)
+
+print("=" * 70)
+```
+
+These plots clearly demonstrate how the **implicit Euler method is more stable** with larger timesteps, while the **explicit Euler method becomes inaccurate** with the coarser discretization ($\Delta t = 0.1$). The implicit method's superior stability is crucial for stiff ODEs like this one.

@@ -56,9 +56,9 @@ This is called the **[[explicit Euler method]]**, or the **forward Euler method*
 
 > [!note] Explore the rest of the notes separate to the lecture notes, or hope he recaps - the lecture notes aren't very well-written from this point.
 
-However, this also introduces new types of error that we can quantise. For instance, the **local truncation error**: the error after **one integration step** due to truncating a function, for instance a Taylor series. Similarly, the **global truncation error** is the error due to integrating over the whole interval.
+However, this also introduces new types of error that we can quantise. For instance, the **[[local truncation error]]**: the error after **one integration step** due to truncating a function, for instance a Taylor series. Similarly, the **[[global truncation error]]** is the error due to integrating over the whole interval.
 
-Both of these errors can be calculated directly using the "Big O" notation from before, and can then give us the **order of a method**: how the global truncation error varies with integration step. For instance, the Euler method is a **first order algorithm**.
+Both of these errors can be calculated directly using the "Big O" notation from before, and can then give us the **[[order of a method]]**: how the global truncation error varies with integration step. For instance, the Euler method is a **first order algorithm**.
 
 If we wanted to program this, then we could use the following Python code:
 
