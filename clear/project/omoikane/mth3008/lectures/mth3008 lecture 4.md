@@ -23,7 +23,13 @@ Using this, and writing everything in index notation, we can derive each thing f
 
 ## Combinations of Grad, Div, and Curl
 
-There are only five combinations 
+There are only five combinations that we can have, due to domain/range mismatches:
+
+1. Div grad, $\nabla^2f$ (the Laplacian operator).
+2. Curl grad, $\mathbf{0}$.
+3. Grad div, $\frac{\partial^2u_{j}}{\partial x_{i} \partial x_{j}}$.
+4. Div curl, $-\epsilon_{ijk} \frac{\partial}{\partial x_{i}} \frac{\partial u_{k}}{\partial x_{j}}$.
+5. Curl curl.
 
 ---
 
