@@ -2,7 +2,7 @@
 
 > **Original Documents**: [[mth3007b weekly problem sheet 2.pdf|Problem Sheet]]
 >
-> **Vibes**: …
+> **Vibes**: Pretty chill, basically just 
 >
 > **Used Techniques**:
 >   - …
