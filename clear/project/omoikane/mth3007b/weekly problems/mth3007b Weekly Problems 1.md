@@ -106,7 +106,7 @@ def explicit_euler_method(
     return time_values, solution_values
 ```
 
-Then we can specify each of the variables for our specific ODE...
+Then we can specify each of the variables for our specific ODE…
 
 ```python runnable
 coefficient_a = 22.0
@@ -114,21 +114,34 @@ coefficient_b = 1.0
 initial_value = 1.0
 time_start = 0.0
 time_end = 1.0
-time_step = 0.01
+small_time_step = 0.01
+big_time_step = 0.1
 
 def derivative_function(time: float, solution_value: float) -> float:
     return general_derivative_function(time, solution_value, coefficient_a, coefficient_b)
+```
 
+Which allows us to finally get the two solutions!
+
+```python runnable
+time_values, small_explicit_solution_values = explicit_euler_method(
+    derivative_function, initial_value, time_start, time_end, small_time_step
+)
+
+print(f"Numerical solution using 0.01 as the timestep: {small_explicit_solution_values[-1]}")
+```
+
+Which for the smaller timestep gives us approximately $0.043$. We can then repeat for the larger timestep…
+
+```python runnable
 time_values, solution_values = explicit_euler_method(
-    derivative_function, initial_value, time_start, time_end, time_step
+    derivative_function, initial_value, time_start, time_end, 0.1  # Timestep of 0.1
 )
 
 print(f"Numerical solution using 0.01 as the timestep: {solution_values[-1]}")
 ```
 
-Which for the smaller timestep gives us approximately $0.043$. We can then repeat for the larger timestep...
-
-
+A substantially different answer of approximately $6.2$.
 
 ---
 
@@ -137,7 +150,97 @@ Which for the smaller timestep gives us approximately $0.043$. We can then repea
 > [!question]
 > Implement the implicit Euler method in Python to solve the ODE from the [[#1.3. Formula Implementation (Explicit Euler Method)|previous question]].
 
-…
+Using the same cached code from the previous question, we can jump straight into the new method function…
+
+```python runnable
+def implicit_euler_method(
+    derivative_function: Callable[[float, float], float],
+    initial_value: float,
+    time_start: float,
+    time_end: float,
+    time_step: float,
+    max_iterations: int = 100,
+    tolerance: float = 1e-10,
+) -> tuple[npt.NDArray[np.float64], npt.NDArray[np.float64]]:
+    """Solve an ODE using the implicit Euler method.
+
+    The implicit Euler method uses the approximation:
+    y_{n+1} = y_n + h * f(t_{n+1}, y_{n+1})
+
+    This requires solving a nonlinear equation at each step using
+    fixed-point iteration.
+
+    Args:
+        derivative_function: Function f(t, y) that computes dy/dt.
+        initial_value: Initial condition y(t_0).
+        time_start: Starting time t_0.
+        time_end: Ending time t_max.
+        time_step: Time step size h (Delta t).
+        max_iterations: Maximum iterations for fixed-point solver.
+        tolerance: Convergence tolerance for fixed-point solver.
+
+    Returns:
+        Tuple of (time_values, solution_values) arrays.
+    """
+    number_of_steps = int((time_end - time_start) / time_step)
+    time_values = np.linspace(time_start, time_end, number_of_steps + 1)
+    solution_values = np.zeros(number_of_steps + 1)
+    solution_values[0] = initial_value
+
+    for step_index in range(number_of_steps):
+        current_time = time_values[step_index + 1]
+        previous_value = solution_values[step_index]
+
+        next_value_guess = previous_value
+        for _ in range(max_iterations):
+            residual = (
+                next_value_guess
+                - previous_value
+                - time_step * derivative_function(current_time, next_value_guess)
+            )
+            perturbation = 1e-8 * max(abs(next_value_guess), 1.0)
+            derivative_approx = (
+                1.0
+                - time_step
+                * (
+                    derivative_function(
+                        current_time, next_value_guess + perturbation
+                    )
+                    - derivative_function(current_time, next_value_guess)
+                )
+                / perturbation
+            )
+            correction = residual / derivative_approx
+            next_value_guess -= correction
+            if abs(correction) < tolerance:
+                break
+
+        solution_values[step_index + 1] = next_value_guess
+
+    return time_values, solution_values
+```
+
+Which is quite a bit more mathematical than the last, given the implicit relation. Then we can specify each of the timesteps…
+
+```python runnable
+time_values, solution_values = explicit_euler_method(
+    derivative_function, initial_value, time_start, time_end, 0.01  # Timestep of 0.01
+)
+
+print(f"Numerical solution using 0.01 as the timestep: {solution_values[-1]}")
+```
+
+Which for the smaller timestep gives us approximately $0.043$, again. We can then repeat for the larger timestep…
+
+```python runnable
+time_values, solution_values = explicit_euler_method(
+    derivative_function, initial_value, time_start, time_end, 0.1  # Timestep of 0.1
+)
+
+print(f"Numerical solution using 0.01 as the timestep: {solution_values[-1]}")
+```
+
+An again substantially different answer of approximately $6.2$.
 
 ---
 
@@ -150,4 +253,57 @@ Which for the smaller timestep gives us approximately $0.043$. We can then repea
 > y(t)=e^{-at}\left( y_{0}+ \frac{b}{a^2} \right)+ \frac{bt}{a}- \frac{b}{a^2}
 > $$
 
-…
+We can now develop a function to find the analytical solution, directly from the question…
+
+```python runnable
+def analytical_solution(
+    time: float | npt.NDArray[np.float64],
+    initial_value: float,
+    coefficient_a: float,
+    coefficient_b: float,
+) -> npt.NDArray[np.float64]:
+    """Compute the analytical solution to dy/dt = b*t - a*y.
+
+    The analytical solution is:
+    y(t) = exp(-a*t) * (y_0 + b/a^2) + b*t/a - b/a^2
+
+    Args:
+        time: Time value(s) at which to evaluate the solution.
+        initial_value: Initial condition y(0).
+        coefficient_a: Coefficient a in the ODE.
+        coefficient_b: Coefficient b in the ODE.
+
+    Returns:
+        Analytical solution value(s) at the given time(s).
+    """
+    exponential_term = np.exp(-coefficient_a * time)
+    constant_term = initial_value + coefficient_b / (coefficient_a**2)
+    linear_term = coefficient_b * time / coefficient_a
+    offset_term = coefficient_b / (coefficient_a**2)
+
+    return exponential_term * constant_term + linear_term - offset_term
+```
+
+Hence, we may then create a function to compute the error across all solutions:
+
+```python runnable
+def compute_error(
+    numerical_solution: npt.NDArray[np.float64],
+    analytical_solution_values: npt.NDArray[np.float64],
+) -> tuple[npt.NDArray[np.float64], float, float]:
+    """Compute the error between numerical and analytical solutions.
+
+    Args:
+        numerical_solution: Numerical solution values.
+        analytical_solution_values: Analytical solution values.
+
+    Returns:
+        Tuple of (absolute_error, max_absolute_error, root_mean_square_error).
+    """
+    absolute_error = np.abs(numerical_solution - analytical_solution_values)
+    max_absolute_error = np.max(absolute_error)
+    root_mean_square_error = np.sqrt(np.mean(absolute_error**2))
+
+    return absolute_error, max_absolute_error, root_mean_square_error
+```
+
