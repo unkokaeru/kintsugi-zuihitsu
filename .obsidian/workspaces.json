@@ -307,20 +307,20 @@
             "type": "tabs",
             "children": [
               {
-                "id": "ee721624282a1f5d",
+                "id": "fc7d9a3b8186fcb9",
                 "type": "leaf",
                 "pinned": true,
                 "state": {
                   "type": "markdown",
                   "state": {
-                    "file": "kintsugi zuihitsu.md",
+                    "file": "To-Do List.md",
                     "mode": "source",
                     "source": false,
                     "backlinks": false
                   },
                   "pinned": true,
                   "icon": "lucide-file",
-                  "title": "kintsugi zuihitsu"
+                  "title": "To-Do List"
                 }
               }
             ]
@@ -447,7 +447,7 @@
                 }
               }
             ],
-            "currentTab": 5
+            "currentTab": 1
           }
         ],
         "direction": "horizontal",
@@ -474,8 +474,8 @@
           "templater-obsidian:Templater": false
         }
       },
-      "active": "ee721624282a1f5d",
-      "mtime": "2026-02-02T10:05:08+00:00"
+      "active": "fc7d9a3b8186fcb9",
+      "mtime": "2026-02-19T21:47:41+00:00"
     },
     "yatagarasu": {
       "main": {
