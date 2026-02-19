@@ -33,7 +33,7 @@ The global error scales with the timestep according to the order of the methodâ€
 > 1. By using a numerical algorithm, solve the ODE till $t_\mathrm{max}=1$, then compare $y(t_\mathrm{max})$ with the analytical solution $y(t)=\exp(-at)\left(y(0)+b/a^2\right)+bt/a-b/a^2$.
 > 2. What is $y(t_\mathrm{max})$ for the Ralston method for $\Delta t=0.01$?
 
-1. Using the [[explicit Euler method]], the solution is $\boxed{0.1103355852}$. Analytically, the solution is approximately $0.1107220921$ - a difference of about $3.865\times 10^{-4}$
+1. Using the [[Explicit Euler method]], the solution is $\boxed{0.1103355852}$. Analytically, the solution is approximately $0.1107220921$ - a difference of about $3.865\times 10^{-4}$
 2. Instead, using the [[Ralston method]], the solution is instead $\boxed{0.1107343545}$, giving a smaller max error of $1.226\times 10^{-5}$.
 
 ---
@@ -43,7 +43,7 @@ The global error scales with the timestep according to the order of the methodâ€
 > [!question]
 > Assume you want to have an accuracy in the final solution of $0.001$, such that the numerical result of $y(t_{\text{max}})$ can deviate at most $0.001$ from the analytical solution.
 >
-> What is the maximum timestep $\Delta t$ for the [[explicit Euler method]] to achieve the $0.001$ accuracy in $y(t_{\text{max}})$, with one significant figure accuracy?
+> What is the maximum timestep $\Delta t$ for the [[Explicit Euler method]] to achieve the $0.001$ accuracy in $y(t_{\text{max}})$, with one significant figure accuracy?
 
 Using the linear error scaling for Euler with the known error at $\Delta t=0.01$â€¦
 

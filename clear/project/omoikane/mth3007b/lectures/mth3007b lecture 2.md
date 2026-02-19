@@ -18,7 +18,7 @@ $$
 
 Where $\phi$ is called the **increment function**, and the simplest case of this is $\phi(t_{i},y_{i},\Delta t)=g(t_{i},y_{i})$ - the forward Euler method.
 
-The second order Runge-Kutta method, also called the **[[midpoint method]]**, which evaluates a function $g$ at each midpoint between timesteps:
+The second order Runge-Kutta method, also called the **[[Midpoint method]]**, which evaluates a function $g$ at each midpoint between timesteps:
 
 $$
 y_{i+1}\approx y_{i}+\Delta t\cdot g\left( t_{i}+\frac{\Delta t}{2},y_{i}+g(t_{i},y_{i})\frac{\Delta t}{2} \right)

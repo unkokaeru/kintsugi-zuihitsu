@@ -34,7 +34,7 @@ Often these equations will have families of solutions with parameter(s), not jus
 
 ## Finite Difference Method
 
-We can then estimate ordinary derivatives by using their analytical formula, and approximating it with **[[finite differences]]**:
+We can then estimate ordinary derivatives by using their analytical formula, and approximating it with **[[Finite differences]]**:
 
 $$
 \frac{df(x)}{dx}=\lim_{ h \to 0 } \frac{f(x+h)-f(x)}{h}\approx \frac{f(x+\Delta x)-f(x)}{\Delta x}
@@ -52,13 +52,13 @@ $$
 \frac{f(x+\Delta x)-f(x)}{\Delta x}\approx g(x,f(x))\implies\boxed{f(x+\Delta x)_{\text{approx}}\approx f(x)+\Delta x \cdot g(x,f(x))}
 $$
 
-This is called the **[[explicit Euler method]]**, or the **forward Euler method**, and we can calculate the total number of integration steps as $N_{\text{int}}=\frac{|x_{\text{end}}-x_{\text{start}}|}{\Delta x}$ and hence $x_{\text{end}}=xN_{\text{int}}=x_{0}+N_{\text{int}}\Delta x$. A smaller $\Delta x$ we hence naturally improve the accuracy, but at a computational cost.
+This is called the **[[Explicit Euler method]]**, or the **forward Euler method**, and we can calculate the total number of integration steps as $N_{\text{int}}=\frac{|x_{\text{end}}-x_{\text{start}}|}{\Delta x}$ and hence $x_{\text{end}}=xN_{\text{int}}=x_{0}+N_{\text{int}}\Delta x$. A smaller $\Delta x$ we hence naturally improve the accuracy, but at a computational cost.
 
 > [!note] Explore the rest of the notes separate to the lecture notes, or hope he recaps - the lecture notes aren't very well-written from this point.
 
-However, this also introduces new types of error that we can quantise. For instance, the **[[local truncation error]]**: the error after **one integration step** due to truncating a function, for instance a Taylor series. Similarly, the **[[global truncation error]]** is the error due to integrating over the whole interval.
+However, this also introduces new types of error that we can quantise. For instance, the **[[Local truncation error]]**: the error after **one integration step** due to truncating a function, for instance a Taylor series. Similarly, the **[[Global truncation error]]** is the error due to integrating over the whole interval.
 
-Both of these errors can be calculated directly using the "Big O" notation from before, and can then give us the **[[order of a method]]**: how the global truncation error varies with integration step. For instance, the Euler method is a **first order algorithm**.
+Both of these errors can be calculated directly using the "Big O" notation from before, and can then give us the **[[Order of a method]]**: how the global truncation error varies with integration step. For instance, the Euler method is a **first order algorithm**.
 
 If we wanted to program this, then we could use the following Python code:
 
@@ -129,7 +129,7 @@ $$
 
 This is again a **finite difference**, but a **backward difference approximation (BDA)** instead of a **forward difference approximation (FDA)**.
 
-For implicit relations, this can give rise to the **[[implicit Euler method]]**, or aptly named **backward Euler method**, similar to before (just shifting time forwards slightly to neaten the formula)…
+For implicit relations, this can give rise to the **[[Implicit Euler method]]**, or aptly named **backward Euler method**, similar to before (just shifting time forwards slightly to neaten the formula)…
 
 $$
 \frac{y(t)-y(t-\Delta t)}{\Delta t}\approx g(t,y(t))\implies\boxed{y(t+\Delta t)_{\text{approx}}\approx y(t)+\Delta t \cdot g(t+\Delta t,y(t+\Delta t))}

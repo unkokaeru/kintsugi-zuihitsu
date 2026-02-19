@@ -25,7 +25,7 @@ This will give various solutions, as there are then only three equations to solv
 | Midpoint | $1$   | $0$   | $1/2$          |
 | Ralston  | $3/4$ | $1/4$ | $2/3$          |
 
-This method can be generalised to any order, but the most common is the **[[fourth order Runge-Kutta]]**:
+This method can be generalised to any order, but the most common is the **[[Fourth order Runge-Kutta]]**:
 
 $$
 y_{i+1} \approx y_i + \frac{\Delta t}{6}(k_1 + 2k_2 + 2k_3 + k_4):\begin{cases}

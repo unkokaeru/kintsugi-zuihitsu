@@ -38,7 +38,9 @@ $\nabla \times \mathbf{u}=\begin{vmatrix}\mathbf{i} & \mathbf{j} & \mathbf{k} \\
 Or, alternatively using the alternating tensor to represent the **[[curl]]**, each component is then $[\nabla \times \mathbf{u}]_{i}=\epsilon_{ijk}\nabla_{j}u_{k}=\epsilon_{ijk} \frac{\partial u_{k}}{\partial x_{j}}$. Here, we can see the two dummy indices $j$ and $k$ indicating a double sum, and the free index $i$ indicating that the result is a **vector quantity**.
 
 > [!example]
-> …
+> Find $\nabla \times \mathbf{A}$ at the point $Q=(1,1,1)$ for $\mathbf{A}=x_{1}^2x_{3}^2\mathbf{i}-2x_{2}^2x_{3}^2\mathbf{j}+x_{1}x_{2}x_{3}\mathbf{k}$…
+>
+> By direct evaluation, $(x_{1}x_{3}+4x_{2}^2x_{3},2x_{1}^2x_{3}-x_{2}x_{3},0)$, which evaluates at point $Q$ to $(5,1,0)$.
 
 > [!note] $\nabla_{j}$ is just the partial derivative of the $j$-th component (of the following function).
 
