@@ -32,8 +32,8 @@ The global error scales with the timestep according to the order of the methodâ€
 > 1. By using a numerical algorithm, solve the ODE till $t_\mathrm{max}=1$, then compare $y(t_\mathrm{max})$ with the analytical solution $y(t)=\exp(-at)\left(y(0)+b/a^2\right)+bt/a-b/a^2$.
 > 2. What is $y(t_\mathrm{max})$ for the Ralston method for $\Delta t=0.01$?
 
-1. Using the [[explicit Euler method]], the solution is $0.1103355852$. Analytically, the solution is approximately $0.1107220921$ - a max error of $6.11\times 10^{-2}$.
-2. Instead, using the [[Ralston method]], the solution is instead $0.1107343545$, giving a sm max error of 1.67e-03
+1. Using the [[explicit Euler method]], the solution is $\boxed{0.1103355852}$. Analytically, the solution is approximately $0.1107220921$ - a difference of about $3.865\times 10^{-4}$
+2. Instead, using the [[Ralston method]], the solution is instead $\boxed{0.1107343545}$, giving a smaller max error of $1.226\times 10^{-5}$.
 
 ---
 
@@ -57,4 +57,8 @@ $$
 > [!question]
 > What is the maximum timestep $\Delta t$ for Ralston's method to achieve the $0.001$ accuracy in $y(t_{\text{max}})$, with one significant figure accuracy?
 
-â€¦
+Using the quadratic error scaling of Ralston with the known error at $\Delta t=0.01$...
+
+$$
+\Delta t_{\text{max}}=\Delta t \cdot \sqrt{ \frac{0.001}{E(\Delta t)} }=0.01\times \sqrt{ \frac{0.001}{1.226\times 10^{-5}} }\approx \boxed{0.09}
+$$
