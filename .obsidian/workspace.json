@@ -38,9 +38,16 @@
               "icon": "lucide-file",
               "title": "mth3008 weekly problems 2"
             }
-          },
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "e4db366a32ff2447",
+        "type": "tabs",
+        "children": [
           {
-            "id": "d2429bbceda44264",
+            "id": "db20787f2ad74d5a",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -55,7 +62,7 @@
             }
           },
           {
-            "id": "fd15d5299d4c9b12",
+            "id": "fd5efd8374c24573",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -69,8 +76,7 @@
               "title": "Kronecker Delta"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -258,12 +264,12 @@
       }
     ]
   },
-  "active": "15cb81b5ab5c44bb",
+  "active": "5e470bb5f497db7b",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
     "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
-    "clear/project/omoikane/mth3008/mth3008.md",
+    "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 2.md",
+    "clear/project/omoikane/mth3008/mth3008.md",
     "clear/project/omoikane/sem a - archive/mth3007a/mth3007 lecture 3.md",
     "clear/project/omoikane/mth3008/notes/Curl.md",
     "clear/project/omoikane/mth3008/notes/Gradient.md",

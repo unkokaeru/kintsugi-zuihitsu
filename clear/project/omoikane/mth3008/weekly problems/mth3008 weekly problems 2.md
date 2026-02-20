@@ -27,7 +27,7 @@ First and fourth, by using input/output properties of [[Curl]] (vector -> vector
 > [!question]
 > Translate the suffix notation equation, $\delta_{ij}c_{j}+\epsilon_{kji}a_{k}b_{j}=d_{\ell}e_{m}c_{i}b_{\ell}c_{m}$, into ordinary vector notation.
 
-…
+Using the properties of the [[Alternating Tensor]] and [[Kronecker Delta]], as well as basic [[Suffix Notation]], we can determine that $\boxed{\mathbf{c}+(\mathbf{a}+\mathbf{b})=\mathbf{c}(\mathbf{b}\cdot \mathbf{d})(\mathbf{c}\cdot \mathbf{e})}$.
 
 ---
 
