@@ -38,7 +38,7 @@ Using the properties of the [[Alternating Tensor]] and [[Kronecker Delta]], as w
 >
 > Write your final answer in vector notation. Provide all steps of your workings.
 
-…
+Slowly going through the expression, converting to [[Suffix Notation]], and then simplifying using the properties of the [[Alternating Tensor]] and then [[Kronecker Delta]] after relation, yields $\boxed{(\mathbf{u}\cdot \mathbf{w})(\mathbf{v}\cdot \mathbf{z})-(\mathbf{u}\cdot \mathbf{v})(\mathbf{w}\cdot \mathbf{z})}$.
 
 ---
 
