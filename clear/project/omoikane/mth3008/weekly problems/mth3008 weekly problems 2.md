@@ -9,7 +9,20 @@
 
 ---
 
-## 1.1. …
+## 2.1. Validity of Differential Operator Combinations
+
+> [!question]
+> Which of the following combinations of vector differential operators are valid?
+> 1. Curl curl, curl grad, div grad.
+> 2. Div grad, div curl, div div.
+> 3. Grad div, curl grad, curl curl, grad grad, div curl.
+> 4. Div grad, div curl, curl grad, div curl.
+
+…
+
+---
+
+## 2.2. …
 
 > [!question]
 > …
@@ -18,7 +31,7 @@
 
 ---
 
-## 1.2. …
+## 2.3. …
 
 > [!question]
 > …
@@ -27,7 +40,7 @@
 
 ---
 
-## 1.3. …
+## 2.4. …
 
 > [!question]
 > …
@@ -36,7 +49,7 @@
 
 ---
 
-## 1.4. …
+## 2.5. …
 
 > [!question]
 > …
@@ -45,7 +58,7 @@
 
 ---
 
-## 1.5. …
+## 2.6. …
 
 > [!question]
 > …
@@ -54,7 +67,7 @@
 
 ---
 
-## 1.6. …
+## 2.7. …
 
 > [!question]
 > …
@@ -63,16 +76,7 @@
 
 ---
 
-## 1.7. …
-
-> [!question]
-> …
-
-…
-
----
-
-## 1.8. …
+## 2.8. …
 
 > [!question]
 > …
