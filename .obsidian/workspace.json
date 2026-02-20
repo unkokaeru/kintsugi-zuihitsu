@@ -38,57 +38,35 @@
               "icon": "lucide-file",
               "title": "mth3008 weekly problems 2"
             }
-          }
-        ],
-        "currentTab": 1
-      },
-      {
-        "id": "1d84e18823919506",
-        "type": "tabs",
-        "children": [
+          },
           {
-            "id": "a710904ac43c7ca9",
+            "id": "d2429bbceda44264",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3008/notes/Divergence.md",
+                "file": "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Divergence"
+              "title": "Alternating Tensor"
             }
           },
           {
-            "id": "aa0220350421482e",
+            "id": "fd15d5299d4c9b12",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3008/notes/Gradient.md",
+                "file": "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "Gradient"
-            }
-          },
-          {
-            "id": "dc03acd9dc7c7354",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3008/notes/Curl.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "Curl"
+              "title": "Kronecker Delta"
             }
           }
         ],
@@ -280,16 +258,19 @@
       }
     ]
   },
-  "active": "aa0220350421482e",
+  "active": "15cb81b5ab5c44bb",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3008/notes/Curl.md",
-    "clear/project/omoikane/mth3008/notes/Divergence.md",
-    "clear/project/omoikane/mth3008/notes/Gradient.md",
+    "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
+    "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
+    "clear/project/omoikane/mth3008/mth3008.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 2.md",
+    "clear/project/omoikane/sem a - archive/mth3007a/mth3007 lecture 3.md",
+    "clear/project/omoikane/mth3008/notes/Curl.md",
+    "clear/project/omoikane/mth3008/notes/Gradient.md",
+    "clear/project/omoikane/mth3008/notes/Divergence.md",
     "attached/files/mth3008 weekly problem sheet 2 solutions.pdf",
     "attached/files/mth3008 lecture 4 notes.pdf",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 4.md",
-    "clear/project/omoikane/mth3008/mth3008.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 3.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 5.md",
     "attached/files/mth3008 lecture 3 notes.pdf",
@@ -314,8 +295,6 @@
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 3.md",
     "attached/files/mth3003 lecture notes 4.pdf",
     "attached/remarkable notes/Omoikane/MTH3008 Tensor Analysis/Weekly Problems/Week One Problem Solutions.pdf",
-    "clear/project/omoikane/sem a - archive/mth3007a/Newton Divided Difference.md",
-    "clear/library/Rituals.md",
     "clear/project/omoikane/sem a - archive",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",

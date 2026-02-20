@@ -18,7 +18,7 @@
 > 3. Grad div, curl grad, curl curl, grad grad, div curl.
 > 4. Div grad, div curl, curl grad, div curl.
 
-…
+First and fourth, by using input/output properties of [[Curl]] (vector -> vector), [[Divergence]] (vector -> scalar), and [[Gradient]] (scalar -> gradient), as well as composition of functions working right -> left.
 
 ---
 
