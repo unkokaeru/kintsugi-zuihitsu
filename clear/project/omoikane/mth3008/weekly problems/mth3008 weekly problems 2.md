@@ -51,7 +51,7 @@ Slowly going through the expression, converting to [[Suffix Notation]], and then
 > 2. Use item (1) to show that $[\mathbf{u}\times(\nabla \times \mathbf{v})+\mathbf{v}\times(\nabla\times \mathbf{u})]_{i}=u_{j} \frac{\partial v_{j}}{\partial x_{j}} - u_{j} \frac{\partial u_{i}}{\partial x_{j}} + v_{j} \frac{\partial u_{j}}{\partial x_{j}} - v_{j} \frac{\partial v_{i}}{\partial x_{j}}$.
 > 3. Conclude that $\nabla(\mathbf{u}\cdot \mathbf{v})=\mathbf{u}\times(\nabla \times \mathbf{v})+\mathbf{v}\times(\nabla\times \mathbf{u})+(\mathbf{u}\cdot \nabla)\mathbf{v}+(\mathbf{v}\cdot \nabla)\mathbf{u}$.
 
-…
+Loads of effort, but basically convert to [[Suffix Notation]] then simplify with the [[Alternating Tensor]] then [[Kronecker Delta]] through their relation, as always. Then convert to using [[Gradient]], [[Divergence]], and [[Gradient]], all within vector notation, and rearrange to give the final answer.
 
 ---
 
@@ -63,7 +63,7 @@ Slowly going through the expression, converting to [[Suffix Notation]], and then
 > 1. $i=1,j=2,k=3,\ell=1,m=2$,
 > 2. $i=2,j=1,k=3,\ell=2,m=1$.
 
-…
+Substitute then use the definitions of [[Alternating Tensor]] for the left side, then [[Kronecker Delta]] for the righ
 
 ---
 
