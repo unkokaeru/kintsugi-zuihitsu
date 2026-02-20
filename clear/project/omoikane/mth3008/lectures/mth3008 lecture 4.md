@@ -23,6 +23,8 @@ Using this, and writing everything in index notation, we can derive each thing f
 
 ## Combinations of Grad, Div, and Curl
 
+> [!todo] check this
+
 There are only five combinations that we can have, due to domain/range mismatches:
 
 1. Div grad, $\nabla^2f$ (the Laplacian operator).
