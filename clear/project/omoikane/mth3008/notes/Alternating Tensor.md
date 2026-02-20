@@ -19,3 +19,6 @@ The Alternating Tensor can then be used to write multiple operations, for instan
 3. The scalar triple product, $\mathbf{a}\cdot(\mathbf{b}\times \mathbf{c})$, using the Alternating Tensor::$\mathbf{a}\cdot(\mathbf{b}\times \mathbf{c})=\epsilon_{ijk}a_{i}b_{j}c_{k}$.
 
 Relates to the **[[Kronecker delta]]** through the relationship $\epsilon_{ijk}\epsilon_{k \ell m}=\delta_{i \ell}\delta_{jm}-\delta_{im}\delta_{j \ell}$.
+
+> To remember: first/second X second/third, first/third X second/second, i.e.,
+> 110/011, 101/020

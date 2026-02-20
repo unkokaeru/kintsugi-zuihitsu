@@ -122,7 +122,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -312,10 +312,11 @@
   },
   "active": "15cb81b5ab5c44bb",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
     "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
-    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 2.md",
+    "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
     "clear/project/omoikane/mth3008/notes/Gradient.md",
+    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 1.md",
+    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 2.md",
     "clear/project/omoikane/mth3008/notes/Curl.md",
     "clear/project/omoikane/mth3008/notes/Divergence.md",
     "attached/files/mth3008 weekly problem sheet 2 solutions.pdf",
@@ -334,7 +335,6 @@
     "To-Do List.md",
     "clear/project/omoikane/mth3011/MTH3011 Project Checklist and Progress.md",
     "clear/project/omoikane/mth3011/Research Plan.md",
-    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 1.md",
     "clear/project/omoikane/mth3008/mth3008 lecture 7.md",
     "attached/files/mth3008 lecture notes 7.pdf",
     "attached/remarkable notes/Lectures/Year 3/mth3011/Logbook.pdf",

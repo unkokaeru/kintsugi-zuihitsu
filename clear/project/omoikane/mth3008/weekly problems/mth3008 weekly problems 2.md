@@ -63,7 +63,7 @@ Loads of effort, but basically convert to [[Suffix Notation]] then simplify with
 > 1. $i=1,j=2,k=3,\ell=1,m=2$,
 > 2. $i=2,j=1,k=3,\ell=2,m=1$.
 
-Substitute then use the definitions of [[Alternating Tensor]] for the left side, then [[Kronecker Delta]] for the righ
+Substitute then use the definitions of [[Alternating Tensor]] for the left side, then [[Kronecker Delta]] for the right. Valid for both cases.
 
 ---
 
@@ -72,12 +72,16 @@ Substitute then use the definitions of [[Alternating Tensor]] for the left side,
 > [!question]
 > Simplify the following suffix notation expressions…
 >
-> 1. $\delta_{ij}\epsilon_{ijk}$ (*note that this is a vector*),
+> 1. $\delta_{ij}\epsilon_{ijk}$,
 > 2. $\epsilon_{ijk}\epsilon_{i\ell m}$,
 > 3. $\epsilon_{ijk}\epsilon_{ijm}$,
 > 4. $\epsilon_{ijk}\epsilon_{ijk}$.
+> 
+> *Note: these are all vectors.*
 
-…
+1. Use [[Kronecker Delta]] to substitute which then creates a duplicated index in [[Alternating Tensor]], hence gives $\boxed{\mathbf{0}}$.
+2. Use the relation between the [[Alternating Tensor]] and [[Kronecker Delta]] to give $\delta_{i\ell}\delta_{jm}-\delta_{im}\delta_{j\ell}$.
+3. Use the relation between the [[Alternating Tensor]] and [[Kronecker Delta]], then simpl
 
 ---
 
