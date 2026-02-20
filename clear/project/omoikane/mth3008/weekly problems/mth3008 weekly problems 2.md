@@ -42,49 +42,63 @@
 
 ---
 
-## 2.4. …
+## 2.4. Find the Gradient of a Dot Product
 
 > [!question]
 > Compute the gradient of a dot product, i.e. $\nabla(\mathbf{u}\cdot \mathbf{v})$, that is…
-> 
+>
 > 1. Show that $[\mathbf{u}\times(\nabla\times \mathbf{v})]_{i}=u_{j} \frac{\partial v_{j}}{\partial x_{j}} - u_{j} \frac{\partial v_{i}}{\partial x_{j}}$.
 > 2. Use item (1) to show that $[\mathbf{u}\times(\nabla \times \mathbf{v})+\mathbf{v}\times(\nabla\times \mathbf{u})]_{i}=u_{j} \frac{\partial v_{j}}{\partial x_{j}} - u_{j} \frac{\partial u_{i}}{\partial x_{j}} + v_{j} \frac{\partial u_{j}}{\partial x_{j}} - v_{j} \frac{\partial v_{i}}{\partial x_{j}}$.
-> 3. Conclude that 
+> 3. Conclude that $\nabla(\mathbf{u}\cdot \mathbf{v})=\mathbf{u}\times(\nabla \times \mathbf{v})+\mathbf{v}\times(\nabla\times \mathbf{u})+(\mathbf{u}\cdot \nabla)\mathbf{v}+(\mathbf{v}\cdot \nabla)\mathbf{u}$.
 
 …
 
 ---
 
-## 2.5. …
+## 2.5. Check Relations Involving Tensors
 
 > [!question]
-> …
+> Recall the relation $\epsilon_{ijk}\epsilon_{k\ell m}=\delta_{i\ell}\delta_{jm}-\delta_{im}\delta_{j\ell}$ and check it for the following cases…
+>
+> 1. $i=1,j=2,k=3,\ell=1,m=2$,
+> 2. $i=2,j=1,k=3,\ell=2,m=1$.
 
 …
 
 ---
 
-## 2.6. …
+## 2.6. Simplify Suffix Notation Expressions
 
 > [!question]
-> …
+> Simplify the following suffix notation expressions…
+>
+> 1. $\delta_{ij}\epsilon_{ijk}$ (*note that this is a vector*),
+> 2. $\epsilon_{ijk}\epsilon_{i\ell m}$,
+> 3. $\epsilon_{ijk}\epsilon_{ijm}$,
+> 4. $\epsilon_{ijk}\epsilon_{ijk}$.
 
 …
 
 ---
 
-## 2.7. …
+## 2.7. Prove Matrix Relations
 
 > [!question]
-> …
+> Use the formula, $\epsilon_{pqr}|M|=\epsilon_{ijk}M_{\pi}M_{qj}M_{rk}$, to show that…
+>
+> 1. $6|M|=\epsilon_{pqr}\epsilon_{ijk}M_{pi}M_{qj}M_{rk}$,
+> 2. $|M^T|=|M|$,
+> 3. $|MN|=|M||N|$.
 
 …
 
 ---
 
-## 2.8. …
+## 2.8. Find the Gradient of a Function
 
 > [!question]
-> …
+> Show that $\nabla f(r)=f^{\prime}(r)\frac{\mathbf{r}}{r}$, where $\mathbf{r}$ is the position vector $\mathbf{r}=(x_{1},x_{2},x_{3})$ and $r=|\mathbf{r}|$.
+>
+> *Hint: recall that $f^{\prime}(r)= \frac{\partial f}{\partial r}$, then get to a step involving the expression $\frac{\partial r}{\partial x_{i}}$, and along the way write out an equation for $r$ in terms of $x_{1},x_{2},x_{3}$ (in suffix notation).*
 
 …

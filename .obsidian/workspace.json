@@ -204,18 +204,6 @@
             "type": "tabs",
             "children": [
               {
-                "id": "eb018005edae0b66",
-                "type": "leaf",
-                "state": {
-                  "type": "pdf",
-                  "state": {
-                    "file": "attached/files/mth3008 weekly problem sheet 2.pdf"
-                  },
-                  "icon": "lucide-file-text",
-                  "title": "mth3008 weekly problem sheet 2"
-                }
-              },
-              {
                 "id": "5e470bb5f497db7b",
                 "type": "leaf",
                 "state": {
@@ -240,10 +228,14 @@
       }
     ]
   },
-  "active": "15cb81b5ab5c44bb",
+  "active": "5e470bb5f497db7b",
   "lastOpenFiles": [
     "attached/files/mth3008 weekly problem sheet 2.pdf",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 2.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 4.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 3.md",
+    "clear/project/omoikane/mth3008/mth3008.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 5.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 3.md",
     "attached/templates/mth3000 weekly problems template.md",
     "attached/files/mth3008 weekly problem sheet 2 solutions.pdf",
@@ -253,7 +245,6 @@
     "clear/project/omoikane/mth3011/MTH3011 Project Checklist and Progress.md",
     "clear/project/omoikane/mth3011/Research Plan.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 1.md",
-    "clear/project/omoikane/mth3008/mth3008.md",
     "clear/project/omoikane/mth3008/mth3008 lecture 7.md",
     "attached/files/mth3008 lecture notes 7.pdf",
     "attached/remarkable notes/Lectures/Year 3/mth3011/Logbook.pdf",
@@ -266,12 +257,9 @@
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 3.md",
     "attached/files/mth3003 lecture notes 4.pdf",
     "attached/remarkable notes/Omoikane/MTH3008 Tensor Analysis/Weekly Problems/Week One Problem Solutions.pdf",
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 4.md",
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 3.md",
     "clear/project/omoikane/sem a - archive/mth3007a/Newton Divided Difference.md",
     "clear/library/Rituals.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 6.md",
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 5.md",
     "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 2.md",
     "clear/project/omoikane/mth3007b/weekly problems/forward Euler method.md",
     "clear/project/omoikane/sem a - archive",
