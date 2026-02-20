@@ -1,4 +1,3 @@
-
 # MTH3008 Lecture 7
 
 > [!quote] …
