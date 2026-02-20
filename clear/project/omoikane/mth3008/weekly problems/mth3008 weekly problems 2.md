@@ -89,7 +89,7 @@ Substitute then use the definitions of [[Alternating Tensor]] for the left side,
 ## 2.7. Prove Matrix Relations
 
 > [!question]
-> Use the formula, $\epsilon_{pqr}|M|=\epsilon_{ijk}M_{\pi}M_{qj}M_{rk}$, to show that…
+> Use the formula, $\epsilon_{pqr}|M|=\epsilon_{ijk}M_{pi}M_{qj}M_{rk}$, to show that…
 >
 > 1. $6|M|=\epsilon_{pqr}\epsilon_{ijk}M_{pi}M_{qj}M_{rk}$,
 > 2. $|M^T|=|M|$,
