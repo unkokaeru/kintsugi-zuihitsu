@@ -95,7 +95,9 @@ Substitute then use the definitions of [[Alternating Tensor]] for the left side,
 > 2. $|M^T|=|M|$,
 > 3. $|MN|=|M||N|$.
 
-…
+1. Use the given formula, rearrange, and simplify using the [[Alternating Tensor]].
+2. Relabel showing equivalency.
+3. Same vibes.
 
 ---
 
