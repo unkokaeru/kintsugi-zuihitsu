@@ -80,9 +80,9 @@ Substitute then use the definitions of [[Alternating Tensor]] for the left side,
 > *Note: these are all vectors.*
 
 1. Use [[Kronecker Delta]] to substitute which then creates a duplicated index in [[Alternating Tensor]], hence gives $\boxed{\mathbf{0}}$.
-2. Use the relation between the [[Alternating Tensor]] and [[Kronecker Delta]] to give $\delta_{i\ell}\delta_{jm}-\delta_{im}\delta_{j\ell}$.
-3. Use the relation between the [[Alternating Tensor]] and [[Kronecker Delta]], then simplifying using each definition to get $\boxed{-2\delta_{im}}$.
-4. Use the relation between the [[Alternating Tensor]] and [[Kronecker Delta]], then simplifying using each definition to get $\boxed{-2\delta_{ik}}$.
+2. Use the relation between the [[Alternating Tensor]] (making sure the repeated indices are touching) and [[Kronecker Delta]] to give $\delta_{j\ell}\delta_{km}-\delta_{jm}\delta_{k\ell}$.
+3. Use the relation between the [[Alternating Tensor]] (making sure the repeated indices are touching) and [[Kronecker Delta]], then simplifying using each definition to get $\boxed{2\delta_{km}}$.
+4. Use the relation between the [[Alternating Tensor]] (making sure the repeated indices are touching) and [[Kronecker Delta]], then simplifying using each definition to get $\boxed{6}$.
 
 ---
 
