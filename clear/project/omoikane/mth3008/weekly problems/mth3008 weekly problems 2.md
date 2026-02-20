@@ -2,10 +2,13 @@
 
 > **Original Documents**: [[mth3008 weekly problem sheet 2.pdf|Problem Sheet]] / [[mth3008 weekly problem sheet 2 handwritten solutions.pdf|My Handwritten Solutions]] / [[mth3008 weekly problem sheet 2 solutions.pdf|Provided Solutions]]
 >
-> **Vibes**: …
+> **Vibes**: Lots of repetition and using the basic definitions in fun ways - pretty cool little practical.
 >
 > **Used Techniques**:
->   - …
+>   - Definition/properties of [[Curl]], [[Divergence]], and [[Gradient]].
+>   - Converting/simplifying [[Suffix Notation]] and vector notation using the [[Kronecker Delta]] and [[Alternating Tensor]].
+>   - Using the fact that $r=(x_{j}x_{j})^{1/2}$.
+>   - Partial differentiation of [[suffix notation]].
 
 ---
 
@@ -108,4 +111,4 @@ Substitute then use the definitions of [[Alternating Tensor]] for the left side,
 >
 > *Hint: recall that $f^{\prime}(r)= \frac{\partial f}{\partial r}$, then get to a step involving the expression $\frac{\partial r}{\partial x_{i}}$, and along the way write out an equation for $r$ in terms of $x_{1},x_{2},x_{3}$ (in suffix notation).*
 
-…
+Use the definition of [[Gradient]], then basic properties of position and partial derivatives, simplifying using [[Kronecker Delta]] to get the final answer.
