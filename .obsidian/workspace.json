@@ -25,33 +25,33 @@
             }
           },
           {
-            "id": "7b5a47dc26a902dc",
+            "id": "d51962781df74126",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3008/lectures/mth3008 lecture 5.md",
+                "file": "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 3.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "mth3008 lecture 5"
+              "title": "mth3003 weekly problems 3"
             }
           },
           {
-            "id": "c04a78e81bc20879",
+            "id": "3f87a3386e988044",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3008/lectures/mth3008 lecture 6.md",
+                "file": "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 3.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "mth3008 lecture 6"
+              "title": "mth3008 weekly problems 3"
             }
           }
         ],
@@ -206,11 +206,17 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "c04a78e81bc20879",
+  "active": "d51962781df74126",
   "lastOpenFiles": [
-    "To-Do List.md",
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 5.md",
+    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 3.md",
+    "clear/library/sloth bytes/sloth bytes.md",
+    "clear/library/sloth bytes/easy/Find the Missing Number.md",
+    "clear/library/sloth bytes/easy/Birthday Cake Candles.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 3.md",
+    "To-Do List.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 6.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 5.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 4.md",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 6.md",
     "attached/files/mth3003 lecture notes 6.pdf",
     "attached/files/mth3003 weekly problem sheet 3 solutions.pdf",
@@ -227,23 +233,17 @@
     "attached/remarkable notes/Omoikane/MTH3003 Group Theory/Weekly Problems",
     "attached/remarkable notes/Omoikane/MTH3003 Group Theory",
     "attached/files/mth3003 weekly problem sheet 2.pdf",
-    "clear/project/omoikane/mth3003/mth3003 weekly problems 4.md",
+    "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 4.md",
     "attached/files/mth3003 weekly problem sheet 4.pdf",
-    "clear/project/omoikane/mth3003/mth3003 lecture 8.md",
-    "clear/project/omoikane/mth3003/mth3003 lecture 7.md",
+    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 8.md",
+    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 7.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 2.md",
     "attached/remarkable notes/Omoikane/MTH3008 Tensor Analysis/Weekly Problems/mth3008 weekly problem sheet 2 handwritten solutions.md",
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 4.md",
     "clear/project/omoikane/mth3008/notes/Gradient.md",
     "clear/project/omoikane/mth3008/mth3008.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 3.md",
-    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 3.md",
     "clear/project/omoikane/mth3008/notes/Curl.md",
     "clear/project/omoikane/mth3008/notes/Divergence.md",
-    "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
-    "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
-    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 1.md",
-    "clear/project/omoikane/sem a - archive/mth3007a/mth3007 lecture 3.md",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",
     "attached/files/luna human.png",
