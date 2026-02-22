@@ -2,6 +2,7 @@
 scrybble_filename: Weekly Problems 2
 scrybble_timestamp: 1771770674
 ---
+
 # Weekly Problems 2
 
 > [!WARNING] **Do not modify** this file
@@ -11,5 +12,3 @@ scrybble_timestamp: 1771770674
 ## Pages
 
 ### [[Weekly Problems 2.pdf#page=1|Weekly Problems 2, page 1]]
-
-

@@ -92,19 +92,19 @@
         "type": "tabs",
         "children": [
           {
-            "id": "21fa49574b12a159",
+            "id": "991f13d50b17eb5a",
             "type": "leaf",
             "state": {
               "type": "pdf",
               "state": {
-                "file": "attached/files/mth3003 weekly problem sheet 2.pdf"
+                "file": "attached/remarkable notes/Omoikane/MTH3003 Group Theory/Weekly Problems/Weekly Problems 2.pdf"
               },
               "icon": "lucide-file-text",
-              "title": "mth3003 weekly problem sheet 2"
+              "title": "Weekly Problems 2"
             }
           },
           {
-            "id": "e531d3a7cb928d88",
+            "id": "1a24e314589e2881",
             "type": "leaf",
             "state": {
               "type": "pdf",
@@ -151,7 +151,8 @@
               "title": "mth3003 weekly problem sheet 3 solutions"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -304,20 +305,21 @@
   },
   "active": "99bd9b1ea8058060",
   "lastOpenFiles": [
-    "attached/remarkable notes/Omoikane/MTH3003 Group Theory/Weekly Problems/Weekly Problems 2.pdf",
+    "attached/files/mth3003 weekly problem sheet 2 solutions.pdf",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 2.md",
+    "attached/remarkable notes/Omoikane/MTH3003 Group Theory/Weekly Problems/Weekly Problems 2.pdf",
     "attached/remarkable notes/Omoikane/MTH3003 Group Theory/Weekly Problems/Weekly Problems 2.md",
+    "attached/files/mth3003 lecture notes 5.pdf",
+    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 5.md",
+    "clear/project/omoikane/mth3003/weekly problems/Untitled.md",
+    "To-Do List.md",
+    "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 3.md",
+    "attached/files/mth3003 weekly problem sheet 3.pdf",
+    "attached/files/mth3003 lecture notes 6.pdf",
     "attached/remarkable notes/Omoikane/MTH3003 Group Theory/Weekly Problems",
     "attached/remarkable notes/Omoikane/MTH3003 Group Theory",
     "attached/files/mth3003 weekly problem sheet 2.pdf",
-    "attached/files/mth3003 weekly problem sheet 2 solutions.pdf",
-    "attached/files/mth3003 lecture notes 5.pdf",
-    "To-Do List.md",
     "attached/files/mth3003 weekly problem sheet 3 solutions.pdf",
-    "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 3.md",
-    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 5.md",
-    "attached/files/mth3003 weekly problem sheet 3.pdf",
-    "attached/files/mth3003 lecture notes 6.pdf",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 6.md",
     "clear/project/omoikane/mth3003/mth3003 weekly problems 4.md",
     "clear/project/omoikane/mth3003/mth3003.md",
@@ -338,7 +340,6 @@
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 1.md",
     "clear/project/omoikane/sem a - archive/mth3007a/mth3007 lecture 3.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 5.md",
-    "attached/templates/mth3000 weekly problems template.md",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",
     "attached/files/luna human.png",
