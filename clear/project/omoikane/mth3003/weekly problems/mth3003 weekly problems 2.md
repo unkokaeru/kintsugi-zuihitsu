@@ -9,7 +9,7 @@
 
 ---
 
-## 1.1. …
+## 1.1. Prove a Group Equality
 
 > [!question]
 > …
@@ -18,7 +18,7 @@
 
 ---
 
-## 1.2. …
+## 1.2. Prove properties of groups
 
 > [!question]
 > …
