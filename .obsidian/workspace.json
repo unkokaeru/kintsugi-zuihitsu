@@ -54,8 +54,7 @@
               "title": "mth3008 weekly problems 3"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -206,15 +205,17 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "d51962781df74126",
+  "active": "fc7d9a3b8186fcb9",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 3.md",
+    "clear/project/omoikane/mth3008/lectures/lectures.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 6.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 7.md",
+    "To-Do List.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 3.md",
     "clear/library/sloth bytes/sloth bytes.md",
     "clear/library/sloth bytes/easy/Find the Missing Number.md",
     "clear/library/sloth bytes/easy/Birthday Cake Candles.md",
-    "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 3.md",
-    "To-Do List.md",
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 6.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 5.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 4.md",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 6.md",
@@ -242,8 +243,6 @@
     "clear/project/omoikane/mth3008/notes/Gradient.md",
     "clear/project/omoikane/mth3008/mth3008.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 3.md",
-    "clear/project/omoikane/mth3008/notes/Curl.md",
-    "clear/project/omoikane/mth3008/notes/Divergence.md",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",
     "attached/files/luna human.png",
