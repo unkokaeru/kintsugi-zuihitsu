@@ -10,7 +10,7 @@
 
 ---
 
-## 1.1. Scaling Error in Different Methods
+## 2.1. Scaling Error in Different Methods
 
 > [!question]
 > Assume you solve a differential equation, $y^{\prime} (t)=g(t,y(t))$, using the [[Explicit Euler method]] using a step size of $\Delta t=0.01$. Also assume the (global) error is exactly as in the linear regime and the error in $y(t_{\text{max}})$ is $0.04$.
@@ -25,7 +25,7 @@ The global error scales with the timestep according to the order of the methodâ€
 
 ---
 
-## 1.2. Numerical Solutions of an ODE
+## 2.2. Numerical Solutions of an ODE
 
 > [!question]
 > Consider the ordinary differential equation, $\frac{dy(t)}{dt}=bt-ay(t)$ with $a=8$, $b=1$, and $y(0)=4$.
@@ -38,7 +38,7 @@ The global error scales with the timestep according to the order of the methodâ€
 
 ---
 
-## 1.3. Finding Maximum Timestep for a Given Error in Euler
+## 2.3. Finding Maximum Timestep for a Given Error in Euler
 
 > [!question]
 > Assume you want to have an accuracy in the final solution of $0.001$, such that the numerical result of $y(t_{\text{max}})$ can deviate at most $0.001$ from the analytical solution.
@@ -53,7 +53,7 @@ $$
 
 ---
 
-## 1.4. Finding Maximum Timestep for a Given Error in Ralston
+## 2.4. Finding Maximum Timestep for a Given Error in Ralston
 
 > [!question]
 > What is the maximum timestep $\Delta t$ for Ralston's method to achieve the $0.001$ accuracy in $y(t_{\text{max}})$, with one significant figure accuracy?
