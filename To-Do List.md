@@ -8,6 +8,9 @@
 	- Complete creating some visual media to summarise the work order logic (after first checking it over and finalising it, including any associated modals etc.): [[Clinical Work Order Lifecycle]].
 	- Complete and test the enquiry form, including building in required company logic - saving to Google Form Spreadsheet dupe, autogenerating PDFs of the answers, and maybe pushing to MCI, too. Then, [[update the website]].
 - Continuously work on [[omoikane]] work…
+	- Update [[mth3007b Weekly Problems 4]] with my GitHub solutions.
+	- Complete [[mth3003]] this week (and last week's problems).
+	- Complete [[mth3008]] this week (and last week's problems).
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
