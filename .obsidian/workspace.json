@@ -40,18 +40,6 @@
             }
           },
           {
-            "id": "1077a013a4d2ab86",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/mth3007b lecture notes 4.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "mth3007b lecture notes 4"
-            }
-          },
-          {
             "id": "7bfacbc5acb2822f",
             "type": "leaf",
             "state": {
@@ -64,6 +52,25 @@
               },
               "icon": "lucide-file",
               "title": "mth3007b Weekly Problems 4"
+            }
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "e5af04a16c757b96",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1077a013a4d2ab86",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "attached/files/mth3007b lecture notes 4.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "mth3007b lecture notes 4"
             }
           }
         ]
@@ -217,8 +224,9 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "fc7d9a3b8186fcb9",
+  "active": "05aaa2c7b25bafe9",
   "lastOpenFiles": [
+    "To-Do List.md",
     "clear/project/omoikane/mth3007b/mth3007b lecture 4.md",
     "attached/files/mth3007b lecture notes 4.pdf",
     "clear/project/omoikane/mth3007b/mth3007b Weekly Problems 4.md",
@@ -234,7 +242,6 @@
     "clear/project/omoikane/mth3007b/Stability of a method.md",
     "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 3.md",
     "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 3.md",
-    "To-Do List.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 3.md",
     "clear/project/omoikane/mth3008/lectures/lectures.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 6.md",
