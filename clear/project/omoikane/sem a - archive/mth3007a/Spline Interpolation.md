@@ -35,12 +35,14 @@ The simplest splines are **linear splines**, which connect consecutive points wi
 ### Quadratic Splines
 
 **Quadratic splines** use parabolic segments:
+
 - **Degree**: 2
 - **Continuity**: Typically $C^1$ (continuous first derivative)
 
 ### Cubic Splines
 
 **Cubic splines** are the most commonly used:
+
 - **Degree**: 3
 - **Continuity**: $C^2$ (continuous second derivative)
 - **Properties**: Smooth appearance, minimum curvature
@@ -183,6 +185,5 @@ y_interpolated = spline(x_new)
 ## Related Concepts
 
 - [[Interpolation]]: General concept
-- [[Polynomial Interpolation]]: Alternative approach
 - [[Lagrange Interpolation]]: Single polynomial method
 - [[Linear Interpolation]]: Simplest spline case

@@ -1,4 +1,4 @@
-﻿# Interpolation
+# Interpolation
 
 **Interpolation** is a numerical method for **estimating values of a function at points between known data points**.
 
@@ -33,7 +33,7 @@ When selecting an interpolation method, consider:
 ## Types of Interpolation
 
 - **[[Linear Interpolation]]**: Connect points with straight lines
-- **[[Polynomial Interpolation]]**: Fit a polynomial through points
+- **Polynomial Interpolation**: Fit a polynomial through points
 	- [[Newton Divided Difference]]
 	- [[Lagrange Interpolation]]
 - **[[Spline Interpolation]]**: Piecewise polynomial fitting
