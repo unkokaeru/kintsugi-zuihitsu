@@ -3,6 +3,7 @@
 > [[Levels of Organisation]]
 > Remember to draw back on literature more when writing within academia! - practice this?
 
+- Return my Amazon package to the Post Office next to the high street.
 - Continuously work on [[yatagarasu]] work:
 	- Complete and test the enquiry form, including building in required company logic - saving to Google Form Spreadsheet dupe, autogenerating PDFs of the answers, and maybe pushing to MCI, too. Then, [[update the website]].
 	- Complete work order logic using the shared document, alongside the updated [[reasons to cancel work orders]].
@@ -11,11 +12,10 @@
 	- Update collected statistics using the shared stats spreadsheet.
 	- Look into alternate site hosting options for the main site.
 - Continuously work on [[omoikane]] work…
-	- Weekly problems.
-	- Lecture pre-notes.
 	- Project work - send a summary to Yuri of progress so far; report should've begun!
 	- Choose which paper to present a critical review on.
-- Return my Amazon package to the Post Office next to the high street.
+
+## Incomplete Notes/Links
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;
