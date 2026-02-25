@@ -3709,7 +3709,13 @@ var Chessboard = /** @class */ (function () {
         if (ply !== undefined) {
             // Get detailed move history with verbose: true
             var history_1 = chessboard.chessboard.history({ verbose: true });
-            chessboard.chessboard.reset();
+            var headers = chessboard.chessboard.getHeaders();
+            if (headers.SetUp === "1" && headers.FEN) {
+                chessboard.chessboard.load(headers.FEN);
+            }
+            else {
+                chessboard.chessboard.reset();
+            }
             // If ply is 0, show starting position (already reset)
             if (ply === 0) {
                 return chessboard;
@@ -4316,46 +4322,83 @@ function parseCodeBlock(input) {
 var PGNGameState = /** @class */ (function () {
     function PGNGameState(pgnString, initialPly, showMove) {
         if (showMove === void 0) { showMove = "none"; }
-        this.pgnString = pgnString;
         this.showMove = showMove;
         this.chess = new Chess();
         // Load and parse PGN
         this.chess.loadPgn(pgnString);
+        // Capture starting FEN from headers (must do this before any position changes)
+        var headers = this.chess.getHeaders();
+        this.startingFEN =
+            headers.SetUp === "1" && headers.FEN ? headers.FEN : undefined;
         this.moveHistory = this.chess.history({ verbose: true });
         // Start at initial ply or beginning
-        this.currentPly = initialPly !== undefined ? Math.min(initialPly, this.moveHistory.length) : 0;
-        // Reset to starting position and replay moves
-        this._updatePosition();
+        this.currentPly =
+            initialPly !== undefined
+                ? Math.min(initialPly, this.moveHistory.length)
+                : 0;
+        // Reset to starting position and replay moves to initial ply
+        this._resetToStart();
+        this.chessPly = 0;
+        this._ensurePosition(this.currentPly);
     }
-    PGNGameState.prototype._updatePosition = function () {
-        this.chess.reset();
-        for (var i = 0; i < this.currentPly; i++) {
-            this.chess.move(this.moveHistory[i].san);
+    /**
+     * Resets the chess instance to the starting position.
+     */
+    PGNGameState.prototype._resetToStart = function () {
+        if (this.startingFEN) {
+            this.chess.load(this.startingFEN);
+        }
+        else {
+            this.chess.reset();
+        }
+    };
+    /**
+     * Efficiently moves the chess instance to the target ply.
+     * Uses undo/move to minimize work instead of replaying from scratch.
+     */
+    PGNGameState.prototype._ensurePosition = function (targetPly) {
+        if (this.chessPly === targetPly) {
+            return; // Already at the right position
+        }
+        // If we need to go back
+        if (targetPly < this.chessPly) {
+            var stepsBack = this.chessPly - targetPly;
+            for (var i = 0; i < stepsBack; i++) {
+                this.chess.undo();
+            }
+            this.chessPly = targetPly;
+        }
+        // If we need to go forward
+        else if (targetPly > this.chessPly) {
+            for (var i = this.chessPly; i < targetPly; i++) {
+                this.chess.move(this.moveHistory[i].san);
+            }
+            this.chessPly = targetPly;
         }
     };
     PGNGameState.prototype.goToStart = function () {
         this.currentPly = 0;
-        this._updatePosition();
+        this._ensurePosition(this.currentPly);
     };
     PGNGameState.prototype.goToPrevious = function () {
         if (this.currentPly > 0) {
             this.currentPly--;
-            this._updatePosition();
+            this._ensurePosition(this.currentPly);
         }
     };
     PGNGameState.prototype.goToNext = function () {
         if (this.currentPly < this.moveHistory.length) {
             this.currentPly++;
-            this._updatePosition();
+            this._ensurePosition(this.currentPly);
         }
     };
     PGNGameState.prototype.goToEnd = function () {
         this.currentPly = this.moveHistory.length;
-        this._updatePosition();
+        this._ensurePosition(this.currentPly);
     };
     PGNGameState.prototype.goToPly = function (ply) {
         this.currentPly = Math.max(0, Math.min(ply, this.moveHistory.length));
-        this._updatePosition();
+        this._ensurePosition(this.currentPly);
     };
     PGNGameState.prototype.getCurrentPly = function () {
         return this.currentPly;

@@ -3,6 +3,7 @@
   "cssTheme": "Typomagical",
   "enabledCssSnippets": [
     "hide_html_comments",
-    "mermaid_styling"
+    "mermaid_styling",
+    "prevent_over_escaping"
   ]
 }

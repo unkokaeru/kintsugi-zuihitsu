@@ -4,11 +4,18 @@
 > Remember to draw back on literature more when writing within academia! - practice this?
 
 - Continuously work on [[yatagarasu]] work:
-	- Record the [[help videos]], comprehensively testing and completing the platform as I go.
-	- Complete creating some visual media to summarise the work order logic (after first checking it over and finalising it, including any associated modals etc.): [[Clinical Work Order Lifecycle]].
 	- Complete and test the enquiry form, including building in required company logic - saving to Google Form Spreadsheet dupe, autogenerating PDFs of the answers, and maybe pushing to MCI, too. Then, [[update the website]].
+	- Complete work order logic using the shared document, alongside the updated [[reasons to cancel work orders]].
+	- Review the entire codebase - estimate time taken after a few hours of progress.
+	- Record the [[help videos]], comprehensively testing and completing the platform as I go.
+	- Update collected statistics using the shared stats spreadsheet.
+	- Look into alternate site hosting options for the main site.
 - Continuously work on [[omoikane]] work…
-	- Update [[mth3007b Weekly Problems 4]] with my GitHub solutions.
+	- Weekly problems.
+	- Lecture pre-notes.
+	- Project work - send a summary to Yuri of progress so far; report should've begun!
+	- Choose which paper to present a critical review on.
+- Return my Amazon package to the Post Office next to the high street.
 
 ```dataviewjs
 const unresolvedLinksMap = app.metadataCache.unresolvedLinks;

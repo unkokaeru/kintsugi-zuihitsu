@@ -1,6 +1,7 @@
 {
   "nodePath": "\"C:\\Program Files\\nodejs\\node.exe\"",
   "nodePathUpdatedToNode20": false,
+  "nodePathUpdatedToNode22": false,
   "enabled": false,
   "hotkeys": {
     "accept": "Tab",
@@ -34,5 +35,6 @@
   },
   "systemPrompt": "You are GitHub Copilot, an AI assistant. You are helping the user with their tasks in Obsidian.",
   "invertEnterSendBehavior": false,
-  "extraCACerts": ""
+  "extraCACerts": "",
+  "enableMarkdownRendering": true
 }
