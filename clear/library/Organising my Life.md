@@ -2,18 +2,30 @@
 
 ## Schedule
 
+To add in: red light therapy mask, gym/run/walk, journaling, piano practice, dailies, …
+
 - Monday - Friday.
 	- 06:30 - 09:00 Morning Routine.
 		- Drink a glass of water, open curtains for natural light.
-		- Head to the bathroom...
+		- Head to the bathroom…
 			- If needed, shave.
-			- Get in shower (low pressure)...
+			- Get in shower (low pressure)…
 				- *Every other day, use shampoo, then rinse.*
 				- Use conditioner, letting it sit.
 				- Use body wash, letting it sit.
 				- Brush teeth whilst waiting.
 				- Rinse everything out thoroughly.
-			- Get out of shower, pat skin dry.
+				- Wash face using just a water-based cleanse.
+			- Get out of shower, pat skin dry, then put on clean dressing gown.
+			- Use salt spray and blow dry hair, styling as needed.
+			- Apply roll-on deodorant, letting it dry fully.
+			- Massage minoxidil into clean, dry scalp, then use dermaroller.
+			- Floss, tongue scrape, and use mouthwash.
+			- Apply hand cream.
+		- Head back to bedroom…
+			- Put on any laundry if needed.
+			- 20-30 minutes of yoga, ending in savasana - focus on breathing, and allow minoxidil to absorb.
+			- Get dressed, vacuum if needed.
 			- 
 	- 09:00 - 12:30 Omoikane/Yatagarasu.
 	- 12:30 - 13:00 Lunch.
@@ -29,29 +41,8 @@
 
 ### Morning Routine
 
-#### 3. Post-Shower Prep
-
-- [ ] Apply salt spray to damp hair.
-- [ ] Blow dry hair (*with room temperature air; style as needed*).
-- [ ] Put on dressing gown.
-- [ ] Apply roll-on deodorant (*let dry fully*).
-
-#### 4. Scalp Care
-
-- [ ] Massage minoxidil into clean, dry scalp (*let absorb 30+ mins pre-skincare*).
-
-#### 5. Oral & Body Care
-
-- [ ] Brush teeth, floss, and tongue scrape.
-- [ ] Apply hand cream (*White Company, Noir*).
-
-#### 6. Movement & Mindfulness
-
-- [ ] 20-25 min yoga, ending in savasana (*focus on breathwork; allows minoxidil absorption*).
-
 #### 7. Skincare Routine (*Beauty of Joseon; Let Each Layer absorb*)
 
-- [ ] Water-based cleanser (*single cleanse; avoid over-stripping the skin*).
 - [ ] Toner -> serum.
 - [ ] Moisturiser -> eye cream -> SPF 50+ (*face/neck/hands*).
 
