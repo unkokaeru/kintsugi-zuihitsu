@@ -2,27 +2,28 @@
 
 ## Schedule
 
+- Monday - Friday.
+	- 06:30 - 09:00 Morning Routine.
+	- 09:00 - 12:30 Omoikane/Yatagarasu.
+	- 12:30 - 13:00 Lunch.
+	- 13:00 - 15:30 Omoikane/Yatagarasu.
+- Saturday - Sunday.
+	- 08:00 - 11:00 Morning Routine.
+
+…
+
 - ├── `IF Weekday (Mon-Fri)`
-  │ ├── [ ] 06:00 - 10:00 **Morning Routine**.
   │ ├── [ ] 10:00 - 13:00 Lectures/study (*adjust based on actual schedule*).
   │ ├── [ ] 13:00 - 14:00 Lunch.
   │ ├── [ ] 14:00 - 17:00 Lectures/study (*adjust based on actual schedule*).
   │ ├── [ ] 17:00 - 18:00 Software development.
-  │ ├── [ ] 18:00 - 19:00 Online tutoring:
-  │ │ ├── `Monday` ➔ (*C.S. - GCSE Maths (Foundation)*)
-  │ │ ├── `Tuesday` ➔ (*I.S. - GCSE Maths (Foundation)*)
-  │ │ ├── `Wednesday` ➔ (*P.R. - A-Level Maths (AQA)*)
-  │ │ ├── `Thursday` ➔ (*O.F. - GCSE Maths (Foundation)*)
-  │ │ └── `Friday` ➔ (*summary/question writing*)
   │ ├── [ ] 19:00 - 20:00 Dinner (*with some Crunchyroll/YouTube*).
   │ └── [ ] 20:00 - 22:00 **Evening Routine**.
   ├── `IF Saturday`
-  │ ├── [ ] 07:00 - 11:00 **Morning Routine** (*can sleep in slightly*).
   │ ├── [ ] 11:00 - 12:00 Laundry/errands (e.g. groceries).
   │ ├── [ ] 12:00 - 20:00 Date time (*flexible*) and/or software development.
   │ └── [ ] 20:00 - 22:00 **Evening Routine** (*relaxed*).
   └── `IF Sunday`
-	  ├── [ ] 07:00 - 11:00 **Morning Routine** (*can sleep in slightly*).
 	  ├── [ ] 11:00 - 13:00 Software development.
 	  ├── [ ] 13:00 - 14:00 Lunch.
 	  ├── [ ] 14:00 - 17:00 D&D session (*if scheduled*) or software development.
