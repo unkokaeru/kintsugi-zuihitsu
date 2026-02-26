@@ -4,59 +4,30 @@
 
 - Monday - Friday.
 	- 06:30 - 09:00 Morning Routine.
+		- Drink a glass of water, open curtains for natural light.
+		- Head to the bathroom...
+			- If needed, shave.
+			- Get in shower (low pressure)...
+				- *Every other day, use shampoo, then rinse.*
+				- Use conditioner, letting it sit.
+				- Use body wash, letting it sit.
+				- Brush teeth whilst waiting.
+				- Rinse everything out thoroughly.
+			- Get out of shower, pat skin dry.
+			- 
 	- 09:00 - 12:30 Omoikane/Yatagarasu.
 	- 12:30 - 13:00 Lunch.
-	- 13:00 - 15:30 Omoikane/Yatagarasu.
+	- 13:00 - 16:00 Omoikane/Yatagarasu.
+	- 16:00 - 21:00 Evening Routine.
 - Saturday - Sunday.
 	- 08:00 - 11:00 Morning Routine.
-
-…
-
-- ├── `IF Weekday (Mon-Fri)`
-  │ ├── [ ] 10:00 - 13:00 Lectures/study (*adjust based on actual schedule*).
-  │ ├── [ ] 13:00 - 14:00 Lunch.
-  │ ├── [ ] 14:00 - 17:00 Lectures/study (*adjust based on actual schedule*).
-  │ ├── [ ] 17:00 - 18:00 Software development.
-  │ ├── [ ] 19:00 - 20:00 Dinner (*with some Crunchyroll/YouTube*).
-  │ └── [ ] 20:00 - 22:00 **Evening Routine**.
-  ├── `IF Saturday`
-  │ ├── [ ] 11:00 - 12:00 Laundry/errands (e.g. groceries).
-  │ ├── [ ] 12:00 - 20:00 Date time (*flexible*) and/or software development.
-  │ └── [ ] 20:00 - 22:00 **Evening Routine** (*relaxed*).
-  └── `IF Sunday`
-	  ├── [ ] 11:00 - 13:00 Software development.
-	  ├── [ ] 13:00 - 14:00 Lunch.
-	  ├── [ ] 14:00 - 17:00 D&D session (*if scheduled*) or software development.
-	  ├── [ ] 17:00 - 18:00 Weekly review; meal prep basics, confirm next week's schedule, etc.
-	  ├── [ ] 18:00 - 19:00 Dinner (*with some Crunchyroll/YouTube*).
-	  └── [ ] 19:00 - 22:00 **Evening Routine** (*super relaxed!*).
+	- 11:00 - 12:00 Raise [[#Levels of Organisation]].
+	- 12:00 - 16:00 Date with Wifey/Weekly Prep.
+	- 16:00 - 21:00 Evening Routine.
 
 ---
 
 ### Morning Routine
-
-> [!IMPORTANT] Approx. 3-4 hours.
-
-#### 1. Hydration & Activation
-
-- [ ] Drink a glass of lemon water (*about 500ml and a squeeze of lemon*).
-- [ ] Open curtains for natural light.
-
-#### 2. Shower Routine (*Gentle Water Pressure; Pat Skin Dry after*)
-
-- [ ] Shave (*if needed*).
-- ├── `IF Tue, Thu, Sun`
-  │ ├── [ ] **Shampoo**.
-  │ ├── [ ] **Conditioner** (*apply, let sit while washing body*).
-  │ ├── [ ] **Body wash** (*no sponge*).
-  │ └── [ ] Rinse conditioner thoroughly.
-  ├── `IF Monday`
-  │ ├── [ ] **Body wash** (*no sponge*).
-  │ └── [ ] Rinse conditioner thoroughly.
-  ├── `IF Wed, Fri`
-  │ └── [ ] **Body wash** (*with sponge*).
-  └── `IF Saturday`
-	  └── [ ] **Body wash** (*no sponge*).
 
 #### 3. Post-Shower Prep
 
