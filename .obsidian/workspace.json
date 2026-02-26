@@ -23,19 +23,8 @@
               "icon": "lucide-file",
               "title": "To-Do List"
             }
-          },
-          {
-            "id": "b197ab96cdd982a8",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -196,9 +185,12 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "b197ab96cdd982a8",
+  "active": "fc7d9a3b8186fcb9",
   "lastOpenFiles": [
+    "cloudy/project/yatagarasu/temp old.md",
     "To-Do List.md",
+    "cloudy/project/yatagarasu/ASAP TO INTEGRATE.md",
+    "cloudy/project/yatagarasu/yatagarasu.md",
     "cloudy/project/yatagarasu/reasons to cancel work orders.md",
     "clear/library/Organising my Life.md",
     "clear/library/sloth bytes/sloth bytes.md",
@@ -222,11 +214,8 @@
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 5.md",
     "attached/files/mth3008 weekly problem sheet 5.pdf",
     "clear/project/omoikane/mth3008/mth3008.md",
-    "clear/project/omoikane/mth3011/Untitled 1.md",
     "attached/files/mth3008 lecture notes 10.pdf",
     "attached/files/mth3008 lecture notes 9.pdf",
-    "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 3.md",
-    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 3.md",
     "attached/files/mth3003 weekly problem sheet 3.pdf",
     "attached/files/mth3003 weekly problem sheet 4.pdf",
     "attached/files/mth3008 lecture notes 8.pdf",
