@@ -5,28 +5,33 @@
 To add in: red light therapy mask, gym/run/walk, journaling, piano practice, dailies, …
 
 - Monday - Friday.
-	- 06:30 - 09:00 Morning Routine.
-		- Drink a glass of water, open curtains for natural light.
-		- Head to the bathroom…
-			- If needed, shave.
-			- Get in shower (low pressure)…
-				- *Every other day, use shampoo, then rinse.*
-				- Use conditioner, letting it sit.
-				- Use body wash, letting it sit.
-				- Brush teeth whilst waiting.
-				- Rinse everything out thoroughly.
-				- Wash face using just a water-based cleanse.
-			- Get out of shower, pat skin dry, then put on clean dressing gown.
-			- Use salt spray and blow dry hair, styling as needed.
-			- Apply roll-on deodorant, letting it dry fully.
-			- Massage minoxidil into clean, dry scalp, then use dermaroller.
-			- Floss, tongue scrape, and use mouthwash.
-			- Apply hand cream.
-		- Head back to bedroom…
-			- Put on any laundry if needed.
-			- 20-30 minutes of yoga, ending in savasana - focus on breathing, and allow minoxidil to absorb.
-			- Get dressed, vacuum if needed.
-			- 
+	- Drink a glass of water, open curtains for natural light.
+	- 06:30 - 07:00 Head to the bathroom…
+		- If needed, shave.
+		- Get in shower (low pressure)…
+			- *Every other day, use shampoo, then rinse.*
+			- Use conditioner, letting it sit.
+			- Use body wash, letting it sit.
+			- Brush teeth whilst waiting.
+			- Rinse everything out thoroughly.
+			- Wash face using just a water-based cleanse.
+		- Get out of shower, pat skin dry, then put on clean dressing gown.
+		- Use salt spray and blow dry hair, styling as needed.
+		- Apply roll-on deodorant, letting it dry fully.
+		- Massage minoxidil into clean, dry scalp, then use dermaroller.
+		- Floss, tongue scrape, and use mouthwash.
+		- Apply hand cream.
+	- 07:00 - 07:30 Head back to bedroom…
+		- Put on any laundry if needed.
+		- 20 minutes of yoga, ending in savasana - focus on breathing, and allow minoxidil to absorb.
+		- Get dressed, vacuum if needed.
+		- Complete skincare: toner -> serum -> moisturiser -> eye cream -> SPF 50+, letting each layer absorb.
+		- Take Omega-3 supplements.
+	- 07:30 - 07:50 Head to the lounge…
+		- Have some breakfast; anything works.
+		- Journal a bit, scheduling out the day and writing down thoughts.
+		- Process actionable emails and catch-up with news sources like the FT/Economist.
+	- 07:50 - 09:00 Go for a drive
 	- 09:00 - 12:30 Omoikane/Yatagarasu.
 	- 12:30 - 13:00 Lunch.
 	- 13:00 - 16:00 Omoikane/Yatagarasu.
@@ -40,27 +45,6 @@ To add in: red light therapy mask, gym/run/walk, journaling, piano practice, dai
 ---
 
 ### Morning Routine
-
-#### 7. Skincare Routine (*Beauty of Joseon; Let Each Layer absorb*)
-
-- [ ] Toner -> serum.
-- [ ] Moisturiser -> eye cream -> SPF 50+ (*face/neck/hands*).
-
-#### 8. Nourishment & Planning
-
-- [ ] Mindful breakfast (*porridge + berries; no screens*).
-- [ ] Take Omega-3 supplements.
-- [ ] Schedule day's priorities (*time-block tasks*).
-
-#### 9. Catch-Up (*15 Mins max*)
-
-- [ ] Process [actionable emails](https://mail.google.com/mail/u/0/#inbox).
-- [ ] Read [Financial Times](https://ft.pressreader.com/) and other politically-aligned news sources.
-
-#### 10. Final Prep
-
-- [ ] Reapply SPF to exposed skin (*face/neck/hands*).
-- [ ] Get dressed (*outfit pre-selected if possible*).
 
 #### 11. Outdoor Ritual
 
