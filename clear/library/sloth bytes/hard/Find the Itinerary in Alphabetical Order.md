@@ -29,5 +29,5 @@ output = ["A", "D", "A", "R", "Y", "L"]
 
 - Every ticket must be used exactly once.
 - There will always be at least one valid route.
-- When comparing routes alphabetically, for example:  
-    `["A", "B"]` < `["A", "C"]`.
+- When comparing routes alphabetically, for example:
+	`["A", "B"]` < `["A", "C"]`.
