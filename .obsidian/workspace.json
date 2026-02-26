@@ -23,8 +23,19 @@
               "icon": "lucide-file",
               "title": "To-Do List"
             }
+          },
+          {
+            "id": "b197ab96cdd982a8",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -185,10 +196,11 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "fc7d9a3b8186fcb9",
+  "active": "b197ab96cdd982a8",
   "lastOpenFiles": [
-    "clear/library/Organising my Life.md",
     "To-Do List.md",
+    "cloudy/project/yatagarasu/reasons to cancel work orders.md",
+    "clear/library/Organising my Life.md",
     "clear/library/sloth bytes/sloth bytes.md",
     "clear/library/sloth bytes/easy/Calculate Damage - Beginner.md",
     "clear/library/sloth bytes/easy/Birthday Cake Candles.md",
@@ -213,7 +225,6 @@
     "clear/project/omoikane/mth3011/Untitled 1.md",
     "attached/files/mth3008 lecture notes 10.pdf",
     "attached/files/mth3008 lecture notes 9.pdf",
-    "cloudy/project/yatagarasu/reasons to cancel work orders.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 3.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 3.md",
     "attached/files/mth3003 weekly problem sheet 3.pdf",
