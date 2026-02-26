@@ -31,57 +31,35 @@ To add in: red light therapy mask, gym/run/walk, journaling, piano practice, dai
 		- Have some breakfast; anything works.
 		- Journal a bit, scheduling out the day and writing down thoughts.
 		- Process actionable emails and catch-up with news sources like the FT/Economist.
-	- 07:50 - 09:00 Go for a drive
+	- 07:50 - 09:00 Go for a drive (drop-off wifey if needed, or maybe go to campus).
 	- 09:00 - 12:30 Omoikane/Yatagarasu.
 	- 12:30 - 13:00 Lunch.
 	- 13:00 - 16:00 Omoikane/Yatagarasu.
-	- 16:00 - 21:00 Evening Routine.
+	- 16:00 - 17:00 Read a book, pick up wifey if needed.
+	- 17:00 - 17:15 Quick final email replies, dim lights, and put on some ambient music.
+	- 17:15 - 17:30 Quick double cleanse, oil-based cleanser -> water-based cleanser, rinsing face afterwards.
 - Saturday - Sunday.
 	- 08:00 - 11:00 Morning Routine.
 	- 11:00 - 12:00 Raise [[#Levels of Organisation]].
-	- 12:00 - 16:00 Date with Wifey/Weekly Prep.
-	- 16:00 - 21:00 Evening Routine.
+	- 12:00 - 17:00 Date with Wifey/Weekly Prep.
+	- 17:00 - 21:00 Evening Routine.
 
 ---
 
-### Morning Routine
-
-#### 11. Outdoor Ritual
-
-- [ ] Walk to café: Enjoy coffee + read book (*20-30 mins*).
-- [ ] Walk to library: Complete Anki/[WaniKani](https://www.wanikani.com/) flashcards (*focus session*).
-
----
-
-### Evening Routine
-
-> [!IMPORTANT] Approx. 2-3 hours.
-
-#### 1. Transition Ritual
-
-- [ ] Dim lights, play ambient music.
-- [ ] Drink herbal tea (*e.g. chamomile*).
-
-#### 2. Digital Cleanse
-
-- [ ] 10-min inbox sweep (*no replies; defer to tomorrow*).
-- [ ] Enable blue light filter on devices.
-- [ ] Enforce screen curfew 1 hour before bed.
-
-#### 3. Pre-Skincare Prep
+### 3. Pre-Skincare Prep
 
 - [ ] Oil-based cleanser -> water-based cleanser (*double cleanse, remove SPF*).
 - [ ] Rinse hair/body (*at the sink, or quick shower if sweaty/dirty*), pat dry.
 - [ ] Massage minoxidil into dry scalp (*let absorb 30+ mins*).
 
-#### 4. Wind-Down Activities
+### 4. Wind-Down Activities
 
 - [ ] Brush teeth, floss, and tongue scrape.
 - [ ] 10-min restorative yoga or stretching.
 - [ ] Journal: 3 points of gratitude + 1 win.
 - [ ] Confirm tomorrow's schedule; lay out clothes.
 
-#### 5. Skincare Routine
+### 5. Skincare Routine
 
 - ├── `IF Mon, Tue, Thu, Fri, Sat`
   │ ├── [ ] Toner -> serum.
@@ -91,7 +69,7 @@ To add in: red light therapy mask, gym/run/walk, journaling, piano practice, dai
 	  ├── [ ] Hydrating mist (*post-mask*).
 	  └── [ ] Moisturiser -> eye cream.
 
-#### 6. Final Wind-Down
+### 6. Final Wind-Down
 
 - [ ] Read physical book or practice kanji (*no screens*).
 - [ ] Silk pillowcase + white noise machine.
