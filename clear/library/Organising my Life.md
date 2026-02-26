@@ -1,7 +1,5 @@
 # Daily Routine
 
-To add in: red light therapy mask, piano practice, dailies, …
-
 ## Monday - Friday
 
 - Drink a glass of water, open curtains for natural light.

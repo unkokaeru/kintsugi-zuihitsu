@@ -23,24 +23,8 @@
               "icon": "lucide-file",
               "title": "To-Do List"
             }
-          },
-          {
-            "id": "295155b58e5ee8a5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/library/Organising my Life.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "Organising my Life"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -201,7 +185,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "295155b58e5ee8a5",
+  "active": "fc7d9a3b8186fcb9",
   "lastOpenFiles": [
     "clear/library/Organising my Life.md",
     "To-Do List.md",
