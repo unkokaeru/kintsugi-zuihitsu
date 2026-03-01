@@ -3,7 +3,6 @@
 > [[Organising my Life]]
 > Remember to draw back on literature more when writing within academia! - practice this?
 
-- Return my Amazon package to the Post Office next to the high street.
 - Continuously work on [[yatagarasu]] work:
 	- Complete and test the enquiry form, including building in required company logic - saving to Google Form Spreadsheet dupe, autogenerating PDFs of the answers, and maybe pushing to MCI, too. Then, [[update the website]]. *Ensure it sends email notifications to `adminstaff@…`, too*.
 	- Complete work order logic using the shared document, alongside the updated [[reasons to cancel work orders]].
