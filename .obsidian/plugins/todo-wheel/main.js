@@ -1,513 +1,749 @@
 "use strict";
 
 /*
- * To-Do Wheel — Obsidian Plugin
+ * To-Do Wheel - Obsidian Plugin
  *
- * Parses bullet lists under a configurable heading and renders
- * an interactive spinning picker wheel.
+ * Parses bullet lists under a configurable heading into
+ * an interactive two-stage spinning picker wheel.
  *
- * Usage: place a ```todo-wheel``` code block in the same note.
- * Optionally pass  heading: My Heading  inside the code block.
+ * Embed with a ```todo-wheel``` code block in any note.
+ * Override the heading: heading: Custom Text
  */
 
 const { Plugin, PluginSettingTab, Setting, Notice } = require("obsidian");
 
-/* ═══════════════════════════════════════════
-   Constants
-   ═══════════════════════════════════════════ */
+/* =============================================
+   User-facing labels (single source for i18n)
+   ============================================= */
 
-const DEFAULT_SETTINGS = { heading: "To-Do List" };
+const LABELS = {
+    PLUGIN_TITLE:           "To-Do Wheel",
+    SPIN_PROMPT:            "Spin to choose a project",
+    CHOOSING_PROJECT:       "Choosing a project...",
+    CHOOSING_TASK:          "Choosing a task...",
+    PROJECT_CHOSEN_HEADER:  "Project chosen",
+    PICK_TASK_BUTTON:       "Now pick a task",
+    DONE:                   "Done",
+    YOUR_TASK:              "Your task",
+    TRY_AGAIN:              "Try again",
+    BACK_TO_PROJECTS:       "Back to projects",
+    NOTHING_TO_SPIN:        "Nothing to spin",
+    SPIN_BUTTON:            "SPIN",
+    SPINNING_INDICATOR:     "...",
+    FILE_READ_ERROR:        "Could not read this file.",
+    SETTINGS_TITLE:         "To-Do Wheel",
+    SETTING_HEADING_NAME:   "Target heading",
+    SETTING_HEADING_DESC:   "Bullet lists under headings matching this text will be parsed. Case-insensitive.",
 
-const COLORS = [
+    projectLabel:           (name) => "Project: " + name,
+    chooseTaskFrom:         (name) => 'Choose a task from "' + name + '"',
+    noTasksFound:           (heading) => 'No tasks found under a "' + heading + '" heading. Add a matching heading with bullet points beneath it.',
+    noticeProjectChosen:    (name) => "Project chosen: " + name,
+    noticeStandaloneTask:   (name) => "Your task: " + name,
+    noticeTask:             (name, description) => "Task: " + name + (description ? " - " + description : ""),
+    resultHeader:           (project) => project,
+};
+
+/* =============================================
+   Default settings
+   ============================================= */
+
+const DEFAULT_HEADING_TEXT = "To-Do List";
+const DEFAULT_SETTINGS     = { heading: DEFAULT_HEADING_TEXT };
+
+/* =============================================
+   Layout dimensions
+   ============================================= */
+
+const CANVAS_PIXEL_SIZE              = 420;
+const WHEEL_RADIUS                   = 175;
+const CENTER_X                       = CANVAS_PIXEL_SIZE / 2;
+const CENTER_Y                       = CANVAS_PIXEL_SIZE / 2;
+const CENTER_BUTTON_RADIUS           = 36;
+const LABEL_INNER_OFFSET             = 14;
+const LABEL_OUTER_MARGIN             = 28;
+
+/* =============================================
+   Animation parameters
+   ============================================= */
+
+const SPIN_DURATION_MS               = 4500;
+const EASING_EXPONENT                = 3;
+const MINIMUM_EXTRA_FULL_ROTATIONS   = 5;
+const EXTRA_ROTATION_VARIANCE        = 5;
+const LANDING_JITTER_FACTOR          = 0.6;
+const LANDING_CENTER_OFFSET          = 0.5;
+
+/* =============================================
+   Angle constants
+   ============================================= */
+
+const FULL_CIRCLE                    = 2 * Math.PI;
+const HALF_CIRCLE                    = Math.PI;
+const QUARTER_CIRCLE                 = Math.PI / 2;
+const THREE_QUARTER_CIRCLE           = 3 * Math.PI / 2;
+const POINTER_ANGLE                  = -QUARTER_CIRCLE;
+
+/* =============================================
+   Pointer triangle geometry
+   ============================================= */
+
+const POINTER_HEIGHT                 = 16;
+const POINTER_GAP_FROM_WHEEL         = 2;
+const POINTER_WIDTH_RATIO            = 0.7;
+const POINTER_TIP_EXTENSION          = 2;
+const POINTER_BASE_INSET             = 4;
+const POINTER_STROKE_WIDTH           = 2;
+
+/* =============================================
+   Typography
+   ============================================= */
+
+const SYSTEM_FONT_STACK              = "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+const FONT_SIZE_MANY_SEGMENTS        = 11;
+const FONT_SIZE_MODERATE_SEGMENTS    = 12;
+const FONT_SIZE_FEW_SEGMENTS         = 14;
+const FONT_SIZE_CENTER_BUTTON        = 16;
+const FONT_SIZE_EMPTY_STATE          = 16;
+const MANY_SEGMENTS_THRESHOLD        = 12;
+const MODERATE_SEGMENTS_THRESHOLD    = 6;
+
+/* =============================================
+   Segment color palette
+   ============================================= */
+
+const SEGMENT_COLOR_PALETTE = [
     "#E74C3C", "#3498DB", "#2ECC71", "#F39C12",
     "#9B59B6", "#1ABC9C", "#E67E22", "#2980B9",
     "#27AE60", "#D35400", "#8E44AD", "#16A085",
     "#C0392B", "#2C3E50", "#F1C40F", "#7F8C8D"
 ];
 
-const CANVAS_SIZE  = 420;
-const WHEEL_RADIUS = 175;
-const CX           = CANVAS_SIZE / 2;
-const CY           = CANVAS_SIZE / 2;
-const BTN_R        = 36;
-const SPIN_MS      = 4500;
-const POINTER_ANG  = -Math.PI / 2;          // 12-o'clock
+/* =============================================
+   Rendering colors
+   ============================================= */
 
-/* ═══════════════════════════════════════════
-   Utility helpers
-   ═══════════════════════════════════════════ */
+const SEGMENT_BORDER_COLOR           = "rgba(255,255,255,0.55)";
+const SEGMENT_BORDER_WIDTH           = 2;
+const WINNER_HIGHLIGHT_COLOR         = "#FFD700";
+const WINNER_HIGHLIGHT_STROKE_WIDTH  = 5;
+const WINNER_HIGHLIGHT_SHADOW_BLUR   = 14;
+const OUTER_RING_COLOR               = "rgba(0,0,0,0.15)";
+const OUTER_RING_WIDTH               = 4;
+const BUTTON_GRADIENT_START_COLOR    = "#ffffff";
+const BUTTON_GRADIENT_END_COLOR      = "#dcdcdc";
+const BUTTON_GRADIENT_VERTICAL_SHIFT = 4;
+const BUTTON_BORDER_COLOR            = "#bbb";
+const BUTTON_BORDER_WIDTH            = 2;
+const BUTTON_TEXT_COLOR              = "#333";
+const POINTER_FILL_COLOR             = "#E74C3C";
+const POINTER_BORDER_COLOR           = "#C0392B";
+const EMPTY_STATE_TEXT_COLOR         = "#888";
+const DARK_TEXT_ON_BRIGHT_SEGMENT    = "#1a1a1a";
+const LIGHT_TEXT_ON_DARK_SEGMENT     = "#ffffff";
 
-function stripMd(text) {
+/* =============================================
+   Luminance calculation (ITU-R BT.601 weights)
+   ============================================= */
+
+const LUMINANCE_RED_WEIGHT           = 0.299;
+const LUMINANCE_GREEN_WEIGHT         = 0.587;
+const LUMINANCE_BLUE_WEIGHT          = 0.114;
+const LUMINANCE_FULL_SCALE           = 255;
+const BRIGHTNESS_THRESHOLD           = 0.55;
+
+/* =============================================
+   Hex color component parse offsets
+   ============================================= */
+
+const HEX_RED_START                  = 1;
+const HEX_RED_END                    = 3;
+const HEX_GREEN_START                = 3;
+const HEX_GREEN_END                  = 5;
+const HEX_BLUE_START                 = 5;
+const HEX_BLUE_END                   = 7;
+const HEX_RADIX                      = 16;
+
+/* =============================================
+   Parsing
+   ============================================= */
+
+const TAB_WIDTH_IN_SPACES            = 4;
+const TOP_LEVEL_INDENT               = 0;
+
+/* =============================================
+   Wheel state values
+   ============================================= */
+
+const PROJECT_SELECTION_STAGE        = 1;
+const TASK_SELECTION_STAGE           = 2;
+const NO_HIGHLIGHT_INDEX             = -1;
+const DEFAULT_DEVICE_PIXEL_RATIO     = 1;
+const CANVAS_RENDERING_CONTEXT_TYPE  = "2d";
+
+/* =============================================
+   Ellipsis character for truncated labels
+   ============================================= */
+
+const ELLIPSIS = "\u2026";
+
+/* =============================================
+   Strip markdown formatting from raw text
+   ============================================= */
+
+function stripMarkdownFormatting(text) {
     return text
-        .replace(/\[\[([^\]]*?\|)([^\]]*?)\]\]/g, "$2")   // [[x|display]]
-        .replace(/\[\[([^\]]*?)\]\]/g, "$1")               // [[link]]
-        .replace(/\*\*(.+?)\*\*/g, "$1")                   // bold
-        .replace(/\*(.+?)\*/g, "$1")                       // italic
-        .replace(/`(.+?)`/g, "$1")                         // inline code
+        .replace(/\[\[([^\]]*?\|)([^\]]*?)\]\]/g, "$2")
+        .replace(/\[\[([^\]]*?)\]\]/g, "$1")
+        .replace(/\*\*(.+?)\*\*/g, "$1")
+        .replace(/\*(.+?)\*/g, "$1")
+        .replace(/`(.+?)`/g, "$1")
         .trim();
 }
 
-function splitColon(text) {
-    const m = text.match(/^(.+?):\s+(.+)$/);
-    if (m) return [m[1].trim(), m[2].trim()];
+/* =============================================
+   Split "Name: description" at the first colon
+   ============================================= */
+
+function splitAtFirstColon(text) {
+    const colonMatch = text.match(/^(.+?):\s+(.+)$/);
+    if (colonMatch) return [colonMatch[1].trim(), colonMatch[2].trim()];
     return [text.replace(/[:…]+\s*$/, "").replace(/\.{2,}\s*$/, "").trim(), null];
 }
 
-function parseTodoSection(content, headingText) {
-    const lines      = content.split("\n");
-    let   inSection   = false;
-    let   sectionLvl  = 0;
-    const bullets     = [];
+/* =============================================
+   Parse bullet lists under a target heading
+   into a project-to-tasks map
+   ============================================= */
+
+function parseTodoSection(noteContent, targetHeadingText) {
+    const lines         = noteContent.split("\n");
+    let   insideSection = false;
+    let   sectionLevel  = 0;
+    const sectionLines  = [];
 
     for (const line of lines) {
-        const hm = line.match(/^(#{1,6})\s+(.+)$/);
-        if (hm) {
-            const lvl = hm[1].length;
-            if (inSection && lvl <= sectionLvl) break;
-            if (hm[2].trim().toLowerCase().includes(headingText.toLowerCase())) {
-                inSection  = true;
-                sectionLvl = lvl;
+        const headingMatch = line.match(/^(#{1,6})\s+(.+)$/);
+        if (headingMatch) {
+            const headingLevel = headingMatch[1].length;
+            if (insideSection && headingLevel <= sectionLevel) break;
+            if (headingMatch[2].trim().toLowerCase().includes(targetHeadingText.toLowerCase())) {
+                insideSection = true;
+                sectionLevel  = headingLevel;
                 continue;
             }
         }
-        if (inSection) bullets.push(line);
+        if (insideSection) sectionLines.push(line);
     }
 
-    const todos = {};
-    let curProject = null;
+    const todosByProject     = {};
+    let   currentProjectName = null;
 
-    for (const line of bullets) {
-        const bm = line.match(/^(\s*)([-*+])\s+(.+)$/);
-        if (!bm) continue;
+    for (const line of sectionLines) {
+        const bulletMatch = line.match(/^(\s*)([-*+])\s+(.+)$/);
+        if (!bulletMatch) continue;
 
-        const raw    = stripMd(bm[3]);
-        const indent = bm[1].replace(/\t/g, "    ").length;
-        const [name, desc] = splitColon(raw);
+        const strippedText = stripMarkdownFormatting(bulletMatch[3]);
+        const indentSpaces = bulletMatch[1].replace(/\t/g, " ".repeat(TAB_WIDTH_IN_SPACES)).length;
+        const [taskName, taskDescription] = splitAtFirstColon(strippedText);
 
-        if (indent === 0) {
-            curProject = name;
-            todos[curProject] = {};
-        } else if (curProject) {
-            todos[curProject][name] = desc;
+        if (indentSpaces === TOP_LEVEL_INDENT) {
+            currentProjectName = taskName;
+            todosByProject[currentProjectName] = {};
+        } else if (currentProjectName) {
+            todosByProject[currentProjectName][taskName] = taskDescription;
         }
     }
-    return todos;                              // { project: { task: desc|null } }
+    return todosByProject;
 }
 
-function truncText(ctx, text, maxW) {
-    if (ctx.measureText(text).width <= maxW) return text;
-    let t = text;
-    while (t.length > 1 && ctx.measureText(t + "\u2026").width > maxW) t = t.slice(0, -1);
-    return t + "\u2026";
+/* =============================================
+   Truncate text to fit within a pixel width,
+   appending ellipsis if needed
+   ============================================= */
+
+function truncateTextToFit(renderingContext, text, maximumWidth) {
+    if (renderingContext.measureText(text).width <= maximumWidth) return text;
+    let truncated = text;
+    while (truncated.length > 1 && renderingContext.measureText(truncated + ELLIPSIS).width > maximumWidth) {
+        truncated = truncated.slice(0, -1);
+    }
+    return truncated + ELLIPSIS;
 }
 
-function winnerIndex(rotation, n) {
-    const seg = (2 * Math.PI) / n;
-    let a = (POINTER_ANG - rotation) % (2 * Math.PI);
-    if (a < 0) a += 2 * Math.PI;
-    return Math.floor(a / seg) % n;
+/* =============================================
+   Determine which segment the pointer rests on
+   after the wheel stops spinning
+   ============================================= */
+
+function calculateWinnerIndex(currentRotation, itemCount) {
+    const segmentAngle = FULL_CIRCLE / itemCount;
+    let normalizedAngle = (POINTER_ANGLE - currentRotation) % FULL_CIRCLE;
+    if (normalizedAngle < 0) normalizedAngle += FULL_CIRCLE;
+    return Math.floor(normalizedAngle / segmentAngle) % itemCount;
 }
 
-function calcSpin(curRot, n) {
-    const seg    = (2 * Math.PI) / n;
-    const winner = Math.floor(Math.random() * n);
-    const target = POINTER_ANG - (winner + 0.5) * seg + (Math.random() - 0.5) * seg * 0.6;
-    let delta    = ((target - curRot) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
-    delta       += (5 + Math.floor(Math.random() * 5)) * 2 * Math.PI;
-    return delta;
+/* =============================================
+   Compute total rotation delta for a fair
+   random spin with extra full rotations
+   ============================================= */
+
+function calculateSpinDelta(currentRotation, itemCount) {
+    const segmentAngle   = FULL_CIRCLE / itemCount;
+    const winnerSegment  = Math.floor(Math.random() * itemCount);
+    const targetAngle    = POINTER_ANGLE
+        - (winnerSegment + LANDING_CENTER_OFFSET) * segmentAngle
+        + (Math.random() - LANDING_CENTER_OFFSET) * segmentAngle * LANDING_JITTER_FACTOR;
+    let rotationDelta    = ((targetAngle - currentRotation) % FULL_CIRCLE + FULL_CIRCLE) % FULL_CIRCLE;
+    rotationDelta       += (MINIMUM_EXTRA_FULL_ROTATIONS + Math.floor(Math.random() * EXTRA_ROTATION_VARIANCE)) * FULL_CIRCLE;
+    return rotationDelta;
 }
 
-function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+/* =============================================
+   Cubic ease-out curve for natural deceleration
+   ============================================= */
 
-function contrastOn(hex) {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return (0.299 * r + 0.587 * g + 0.114 * b) / 255 > 0.55 ? "#1a1a1a" : "#ffffff";
+function cubicEaseOut(progress) {
+    return 1 - Math.pow(1 - progress, EASING_EXPONENT);
 }
 
-/* ═══════════════════════════════════════════
-   WheelRenderer — builds & drives the wheel
-   ═══════════════════════════════════════════ */
+/* =============================================
+   Choose readable text color (dark or light)
+   for a given background hex color
+   ============================================= */
+
+function readableTextColorForBackground(hexColor) {
+    const redComponent   = parseInt(hexColor.slice(HEX_RED_START, HEX_RED_END), HEX_RADIX);
+    const greenComponent = parseInt(hexColor.slice(HEX_GREEN_START, HEX_GREEN_END), HEX_RADIX);
+    const blueComponent  = parseInt(hexColor.slice(HEX_BLUE_START, HEX_BLUE_END), HEX_RADIX);
+    const perceivedBrightness =
+        (LUMINANCE_RED_WEIGHT * redComponent
+            + LUMINANCE_GREEN_WEIGHT * greenComponent
+            + LUMINANCE_BLUE_WEIGHT * blueComponent)
+        / LUMINANCE_FULL_SCALE;
+    return perceivedBrightness > BRIGHTNESS_THRESHOLD
+        ? DARK_TEXT_ON_BRIGHT_SEGMENT
+        : LIGHT_TEXT_ON_DARK_SEGMENT;
+}
+
+/* =============================================
+   Choose font size based on segment count
+   ============================================= */
+
+function segmentFontSize(itemCount) {
+    if (itemCount > MANY_SEGMENTS_THRESHOLD)     return FONT_SIZE_MANY_SEGMENTS;
+    if (itemCount > MODERATE_SEGMENTS_THRESHOLD)  return FONT_SIZE_MODERATE_SEGMENTS;
+    return FONT_SIZE_FEW_SEGMENTS;
+}
+
+/* =============================================
+   WheelRenderer - builds and drives the wheel
+   ============================================= */
 
 class WheelRenderer {
-    constructor(root, todos, app) {
-        this.app        = app;
-        this.todos      = todos;
-        this.stage      = 1;
-        this.project    = null;
-        this.rotation   = Math.random() * 2 * Math.PI;
-        this.spinning   = false;
-        this.highlight  = -1;           // index to highlight after spin
-        this.frameId    = null;
+    constructor(rootElement, todosByProject, application) {
+        this.application          = application;
+        this.todosByProject       = todosByProject;
+        this.currentStage         = PROJECT_SELECTION_STAGE;
+        this.selectedProjectName  = null;
+        this.currentRotation      = Math.random() * FULL_CIRCLE;
+        this.isSpinning           = false;
+        this.highlightedIndex     = NO_HIGHLIGHT_INDEX;
+        this.animationFrameId     = null;
 
-        this._build(root);
-        this._draw();
+        this._buildLayout(rootElement);
+        this._drawWheel();
     }
 
-    /* ── DOM scaffold ── */
+    _buildLayout(rootElement) {
+        rootElement.empty();
+        rootElement.classList.add("todo-wheel-container");
 
-    _build(root) {
-        root.empty();
-        root.classList.add("todo-wheel-container");
+        const headerContainer = rootElement.createDiv({ cls: "todo-wheel-header" });
+        headerContainer.createEl("h3", { text: LABELS.PLUGIN_TITLE });
+        this.stageIndicator = headerContainer.createEl("p", {
+            text: LABELS.SPIN_PROMPT,
+            cls: "todo-wheel-stage"
+        });
 
-        // header
-        const hdr      = root.createDiv({ cls: "todo-wheel-header" });
-        hdr.createEl("h3", { text: "\uD83C\uDFA1 To-Do Wheel" });
-        this.stageEl   = hdr.createEl("p", { text: "Click SPIN to pick a project", cls: "todo-wheel-stage" });
+        const canvasWrapper = rootElement.createDiv({ cls: "todo-wheel-canvas-wrapper" });
+        this.wheelCanvas    = canvasWrapper.createEl("canvas", { cls: "todo-wheel-canvas" });
 
-        // canvas
-        const wrap     = root.createDiv({ cls: "todo-wheel-canvas-wrapper" });
-        this.canvas    = wrap.createEl("canvas", { cls: "todo-wheel-canvas" });
-        const dpr      = window.devicePixelRatio || 1;
-        this.canvas.width        = CANVAS_SIZE * dpr;
-        this.canvas.height       = CANVAS_SIZE * dpr;
-        this.canvas.style.width  = CANVAS_SIZE + "px";
-        this.canvas.style.height = CANVAS_SIZE + "px";
-        this.ctx = this.canvas.getContext("2d");
-        this.ctx.scale(dpr, dpr);
+        const devicePixelRatio         = window.devicePixelRatio || DEFAULT_DEVICE_PIXEL_RATIO;
+        this.wheelCanvas.width         = CANVAS_PIXEL_SIZE * devicePixelRatio;
+        this.wheelCanvas.height        = CANVAS_PIXEL_SIZE * devicePixelRatio;
+        this.wheelCanvas.style.width   = CANVAS_PIXEL_SIZE + "px";
+        this.wheelCanvas.style.height  = CANVAS_PIXEL_SIZE + "px";
+        this.renderingContext          = this.wheelCanvas.getContext(CANVAS_RENDERING_CONTEXT_TYPE);
+        this.renderingContext.scale(devicePixelRatio, devicePixelRatio);
 
-        this.canvas.addEventListener("click",     e => this._onClick(e));
-        this.canvas.addEventListener("mousemove", e => this._onMove(e));
+        this.wheelCanvas.addEventListener("click",     (event) => this._handleCanvasClick(event));
+        this.wheelCanvas.addEventListener("mousemove", (event) => this._handleCanvasMouseMove(event));
 
-        // result area
-        this.resultEl  = root.createDiv({ cls: "todo-wheel-result" });
-        this.resultEl.style.display = "none";
+        this.resultContainer = rootElement.createDiv({ cls: "todo-wheel-result" });
+        this.resultContainer.style.display = "none";
 
-        // action buttons
-        this.actionsEl = root.createDiv({ cls: "todo-wheel-actions" });
+        this.actionsContainer = rootElement.createDiv({ cls: "todo-wheel-actions" });
     }
 
-    /* ── items for current stage ── */
-
-    _items() {
-        if (this.stage === 1) return Object.keys(this.todos);
-        if (this.stage === 2 && this.project) return Object.keys(this.todos[this.project]);
+    _currentItems() {
+        if (this.currentStage === PROJECT_SELECTION_STAGE) {
+            return Object.keys(this.todosByProject);
+        }
+        if (this.currentStage === TASK_SELECTION_STAGE && this.selectedProjectName) {
+            return Object.keys(this.todosByProject[this.selectedProjectName]);
+        }
         return [];
     }
 
-    /* ── input handlers ── */
-
-    _canvasXY(e) {
-        const r = this.canvas.getBoundingClientRect();
-        return [e.clientX - r.left - CX, e.clientY - r.top - CY];
+    _canvasOffsetFromCenter(event) {
+        const canvasRect = this.wheelCanvas.getBoundingClientRect();
+        return [
+            event.clientX - canvasRect.left - CENTER_X,
+            event.clientY - canvasRect.top  - CENTER_Y
+        ];
     }
 
-    _onClick(e) {
-        if (this.spinning) return;
-        const [x, y] = this._canvasXY(e);
-        if (Math.hypot(x, y) <= BTN_R) this._spin();
+    _handleCanvasClick(event) {
+        if (this.isSpinning) return;
+        const [offsetX, offsetY] = this._canvasOffsetFromCenter(event);
+        if (Math.hypot(offsetX, offsetY) <= CENTER_BUTTON_RADIUS) this._startSpin();
     }
 
-    _onMove(e) {
-        const [x, y] = this._canvasXY(e);
-        this.canvas.style.cursor = Math.hypot(x, y) <= BTN_R ? "pointer" : "default";
+    _handleCanvasMouseMove(event) {
+        const [offsetX, offsetY] = this._canvasOffsetFromCenter(event);
+        this.wheelCanvas.style.cursor =
+            Math.hypot(offsetX, offsetY) <= CENTER_BUTTON_RADIUS ? "pointer" : "default";
     }
 
-    /* ── spin logic ── */
+    _startSpin() {
+        const items = this._currentItems();
+        if (items.length === 0 || this.isSpinning) return;
 
-    _spin() {
-        const items = this._items();
-        if (items.length === 0 || this.spinning) return;
+        this.isSpinning       = true;
+        this.highlightedIndex = NO_HIGHLIGHT_INDEX;
+        this.resultContainer.style.display = "none";
+        this.actionsContainer.empty();
+        this.stageIndicator.setText(
+            this.currentStage === PROJECT_SELECTION_STAGE
+                ? LABELS.CHOOSING_PROJECT
+                : LABELS.CHOOSING_TASK
+        );
 
-        this.spinning  = true;
-        this.highlight = -1;
-        this.resultEl.style.display = "none";
-        this.actionsEl.empty();
-        this.stageEl.setText(this.stage === 1 ? "Spinning for a project\u2026" : "Spinning for a task\u2026");
+        const totalDelta           = calculateSpinDelta(this.currentRotation, items.length);
+        const rotationAtSpinStart  = this.currentRotation;
+        const spinStartTimestamp   = performance.now();
 
-        const delta = calcSpin(this.rotation, items.length);
-        const start = this.rotation;
-        const t0    = performance.now();
+        const animationTick = () => {
+            if (!this.wheelCanvas.isConnected) return;
 
-        const tick = () => {
-            if (!this.canvas.isConnected) return;       // cleanup guard
-            const p = Math.min((performance.now() - t0) / SPIN_MS, 1);
-            this.rotation = start + delta * easeOut(p);
-            this._draw();
-            if (p < 1) {
-                this.frameId = requestAnimationFrame(tick);
+            const elapsedProgress = Math.min(
+                (performance.now() - spinStartTimestamp) / SPIN_DURATION_MS,
+                1
+            );
+            this.currentRotation = rotationAtSpinStart + totalDelta * cubicEaseOut(elapsedProgress);
+            this._drawWheel();
+
+            if (elapsedProgress < 1) {
+                this.animationFrameId = requestAnimationFrame(animationTick);
             } else {
-                this.spinning = false;
-                this.highlight = winnerIndex(this.rotation, items.length);
-                this._draw();
-                this._announce(items);
+                this.isSpinning       = false;
+                this.highlightedIndex = calculateWinnerIndex(this.currentRotation, items.length);
+                this._drawWheel();
+                this._announceResult(items);
             }
         };
-        this.frameId = requestAnimationFrame(tick);
+        this.animationFrameId = requestAnimationFrame(animationTick);
     }
 
-    /* ── result announcement ── */
+    _announceResult(items) {
+        const winningItemName = items[this.highlightedIndex];
 
-    _announce(items) {
-        const idx    = this.highlight;
-        const winner = items[idx];
+        if (this.currentStage === PROJECT_SELECTION_STAGE) {
+            const projectTasks = this.todosByProject[winningItemName];
+            const taskNames    = Object.keys(projectTasks);
 
-        if (this.stage === 1) {
-            const tasks    = this.todos[winner];
-            const taskKeys = Object.keys(tasks);
+            if (taskNames.length > 0) {
+                this.stageIndicator.setText(LABELS.projectLabel(winningItemName));
+                this._displayResult(LABELS.PROJECT_CHOSEN_HEADER, winningItemName, null);
 
-            if (taskKeys.length > 0) {
-                this.stageEl.setText("Project: " + winner);
-                this._showResult("\uD83C\uDFAF Selected Project", winner, null);
-
-                const next = this.actionsEl.createEl("button", {
-                    text: "\uD83C\uDFB2 Spin for a task \u2192",
+                const pickTaskButton = this.actionsContainer.createEl("button", {
+                    text: LABELS.PICK_TASK_BUTTON,
                     cls: "todo-wheel-btn todo-wheel-primary"
                 });
-                next.addEventListener("click", () => {
-                    this.project   = winner;
-                    this.stage     = 2;
-                    this.highlight = -1;
-                    this.resultEl.style.display = "none";
-                    this.actionsEl.empty();
-                    this.stageEl.setText('Stage 2: Pick a task from "' + winner + '"');
-                    this.rotation = Math.random() * 2 * Math.PI;
-                    this._draw();
+                pickTaskButton.addEventListener("click", () => {
+                    this.selectedProjectName = winningItemName;
+                    this.currentStage        = TASK_SELECTION_STAGE;
+                    this.highlightedIndex    = NO_HIGHLIGHT_INDEX;
+                    this.resultContainer.style.display = "none";
+                    this.actionsContainer.empty();
+                    this.stageIndicator.setText(LABELS.chooseTaskFrom(winningItemName));
+                    this.currentRotation = Math.random() * FULL_CIRCLE;
+                    this._drawWheel();
                 });
 
-                this._addRespin();
-                new Notice("\uD83C\uDFAF Project: " + winner);
+                this._addTryAgainButton();
+                new Notice(LABELS.noticeProjectChosen(winningItemName));
             } else {
-                this.stageEl.setText("Result!");
-                this._showResult("\uD83C\uDF89 Your task", winner, null);
-                this._addReset();
-                new Notice("\uD83C\uDF89 Your task: " + winner);
+                this.stageIndicator.setText(LABELS.DONE);
+                this._displayResult(LABELS.YOUR_TASK, winningItemName, null);
+                this._addResetButtons();
+                new Notice(LABELS.noticeStandaloneTask(winningItemName));
             }
         } else {
-            const desc = this.todos[this.project][winner];
-            this.stageEl.setText("Result!");
-            this._showResult("\uD83C\uDF89 " + this.project, winner, desc);
-            this._addReset();
-            new Notice("\uD83C\uDF89 Task: " + winner + (desc ? " \u2014 " + desc : ""));
+            const taskDescription = this.todosByProject[this.selectedProjectName][winningItemName];
+            this.stageIndicator.setText(LABELS.DONE);
+            this._displayResult(
+                LABELS.resultHeader(this.selectedProjectName),
+                winningItemName,
+                taskDescription
+            );
+            this._addResetButtons();
+            new Notice(LABELS.noticeTask(winningItemName, taskDescription));
         }
     }
 
-    _showResult(label, text, desc) {
-        this.resultEl.empty();
-        this.resultEl.style.display = "block";
-        this.resultEl.createEl("div", { text: label, cls: "todo-wheel-result-label" });
-        this.resultEl.createEl("div", { text: text,  cls: "todo-wheel-result-text"  });
-        if (desc) this.resultEl.createEl("div", { text: desc, cls: "todo-wheel-result-desc" });
+    _displayResult(labelText, mainText, descriptionText) {
+        this.resultContainer.empty();
+        this.resultContainer.style.display = "block";
+        this.resultContainer.createEl("div", { text: labelText,   cls: "todo-wheel-result-label" });
+        this.resultContainer.createEl("div", { text: mainText,    cls: "todo-wheel-result-text"  });
+        if (descriptionText) {
+            this.resultContainer.createEl("div", { text: descriptionText, cls: "todo-wheel-result-desc" });
+        }
     }
 
-    _addRespin() {
-        const btn = this.actionsEl.createEl("button", { text: "\u21BB Re-spin", cls: "todo-wheel-btn" });
-        btn.addEventListener("click", () => {
-            this.highlight = -1;
-            this.resultEl.style.display = "none";
-            this.actionsEl.empty();
-            this._spin();
+    _addTryAgainButton() {
+        const tryAgainButton = this.actionsContainer.createEl("button", {
+            text: LABELS.TRY_AGAIN,
+            cls: "todo-wheel-btn"
+        });
+        tryAgainButton.addEventListener("click", () => {
+            this.highlightedIndex = NO_HIGHLIGHT_INDEX;
+            this.resultContainer.style.display = "none";
+            this.actionsContainer.empty();
+            this._startSpin();
         });
     }
 
-    _addReset() {
-        this.actionsEl.empty();
+    _addResetButtons() {
+        this.actionsContainer.empty();
 
-        const back = this.actionsEl.createEl("button", { text: "\u2190 Back to Projects", cls: "todo-wheel-btn" });
-        back.addEventListener("click", () => {
-            this.stage     = 1;
-            this.project   = null;
-            this.highlight = -1;
-            this.resultEl.style.display = "none";
-            this.actionsEl.empty();
-            this.stageEl.setText("Click SPIN to pick a project");
-            this.rotation = Math.random() * 2 * Math.PI;
-            this._draw();
+        const backButton = this.actionsContainer.createEl("button", {
+            text: LABELS.BACK_TO_PROJECTS,
+            cls: "todo-wheel-btn"
+        });
+        backButton.addEventListener("click", () => {
+            this.currentStage        = PROJECT_SELECTION_STAGE;
+            this.selectedProjectName = null;
+            this.highlightedIndex    = NO_HIGHLIGHT_INDEX;
+            this.resultContainer.style.display = "none";
+            this.actionsContainer.empty();
+            this.stageIndicator.setText(LABELS.SPIN_PROMPT);
+            this.currentRotation = Math.random() * FULL_CIRCLE;
+            this._drawWheel();
         });
 
-        this._addRespin();
+        this._addTryAgainButton();
     }
 
-    /* ── canvas drawing ── */
+    _drawWheel() {
+        const context   = this.renderingContext;
+        const items     = this._currentItems();
+        const itemCount = items.length;
 
-    _draw() {
-        const ctx   = this.ctx;
-        const items = this._items();
-        const n     = items.length;
+        context.clearRect(0, 0, CANVAS_PIXEL_SIZE, CANVAS_PIXEL_SIZE);
 
-        ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-
-        if (n === 0) {
-            ctx.fillStyle = "#888";
-            ctx.font      = "16px sans-serif";
-            ctx.textAlign = "center";
-            ctx.fillText("No items", CX, CY);
+        if (itemCount === 0) {
+            context.fillStyle = EMPTY_STATE_TEXT_COLOR;
+            context.font      = FONT_SIZE_EMPTY_STATE + "px sans-serif";
+            context.textAlign = "center";
+            context.fillText(LABELS.NOTHING_TO_SPIN, CENTER_X, CENTER_Y);
             return;
         }
 
-        const seg = (2 * Math.PI) / n;
-        const fontSize = n > 12 ? 11 : n > 6 ? 12 : 14;
+        const segmentAngle      = FULL_CIRCLE / itemCount;
+        const fontSize           = segmentFontSize(itemCount);
+        const maximumLabelWidth  = WHEEL_RADIUS - CENTER_BUTTON_RADIUS - LABEL_OUTER_MARGIN;
 
-        /* segments */
-        for (let i = 0; i < n; i++) {
-            const a0   = this.rotation + i * seg;
-            const a1   = a0 + seg;
-            const col  = COLORS[i % COLORS.length];
+        for (let segmentIndex = 0; segmentIndex < itemCount; segmentIndex++) {
+            const segmentStartAngle = this.currentRotation + segmentIndex * segmentAngle;
+            const segmentEndAngle   = segmentStartAngle + segmentAngle;
+            const segmentColor      = SEGMENT_COLOR_PALETTE[segmentIndex % SEGMENT_COLOR_PALETTE.length];
 
-            // fill
-            ctx.beginPath();
-            ctx.moveTo(CX, CY);
-            ctx.arc(CX, CY, WHEEL_RADIUS, a0, a1);
-            ctx.closePath();
-            ctx.fillStyle = col;
-            ctx.fill();
+            context.beginPath();
+            context.moveTo(CENTER_X, CENTER_Y);
+            context.arc(CENTER_X, CENTER_Y, WHEEL_RADIUS, segmentStartAngle, segmentEndAngle);
+            context.closePath();
+            context.fillStyle   = segmentColor;
+            context.fill();
+            context.strokeStyle = SEGMENT_BORDER_COLOR;
+            context.lineWidth   = SEGMENT_BORDER_WIDTH;
+            context.stroke();
 
-            // border
-            ctx.strokeStyle = "rgba(255,255,255,0.55)";
-            ctx.lineWidth   = 2;
-            ctx.stroke();
-
-            // highlight winner
-            if (i === this.highlight) {
-                ctx.save();
-                ctx.beginPath();
-                ctx.moveTo(CX, CY);
-                ctx.arc(CX, CY, WHEEL_RADIUS, a0, a1);
-                ctx.closePath();
-                ctx.strokeStyle = "#FFD700";
-                ctx.lineWidth   = 5;
-                ctx.shadowColor = "#FFD700";
-                ctx.shadowBlur  = 14;
-                ctx.stroke();
-                ctx.restore();
+            if (segmentIndex === this.highlightedIndex) {
+                context.save();
+                context.beginPath();
+                context.moveTo(CENTER_X, CENTER_Y);
+                context.arc(CENTER_X, CENTER_Y, WHEEL_RADIUS, segmentStartAngle, segmentEndAngle);
+                context.closePath();
+                context.strokeStyle = WINNER_HIGHLIGHT_COLOR;
+                context.lineWidth   = WINNER_HIGHLIGHT_STROKE_WIDTH;
+                context.shadowColor = WINNER_HIGHLIGHT_COLOR;
+                context.shadowBlur  = WINNER_HIGHLIGHT_SHADOW_BLUR;
+                context.stroke();
+                context.restore();
             }
 
-            // text
-            const mid  = a0 + seg / 2;
-            const norm = ((mid % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
-            const maxW = WHEEL_RADIUS - BTN_R - 28;
+            const segmentMidAngle    = segmentStartAngle + segmentAngle / 2;
+            const normalizedMidAngle = ((segmentMidAngle % FULL_CIRCLE) + FULL_CIRCLE) % FULL_CIRCLE;
 
-            ctx.save();
-            ctx.translate(CX, CY);
-            ctx.rotate(mid);
-            ctx.font      = "bold " + fontSize + "px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
-            ctx.fillStyle = contrastOn(col);
+            context.save();
+            context.translate(CENTER_X, CENTER_Y);
+            context.rotate(segmentMidAngle);
+            context.font      = "bold " + fontSize + "px " + SYSTEM_FONT_STACK;
+            context.fillStyle = readableTextColorForBackground(segmentColor);
 
-            if (norm > Math.PI / 2 && norm < 3 * Math.PI / 2) {
-                ctx.rotate(Math.PI);
-                ctx.textAlign    = "right";
-                ctx.textBaseline = "middle";
-                ctx.fillText(truncText(ctx, items[i], maxW), -(BTN_R + 14), 0);
+            if (normalizedMidAngle > QUARTER_CIRCLE && normalizedMidAngle < THREE_QUARTER_CIRCLE) {
+                context.rotate(HALF_CIRCLE);
+                context.textAlign    = "right";
+                context.textBaseline = "middle";
+                context.fillText(
+                    truncateTextToFit(context, items[segmentIndex], maximumLabelWidth),
+                    -(CENTER_BUTTON_RADIUS + LABEL_INNER_OFFSET),
+                    0
+                );
             } else {
-                ctx.textAlign    = "left";
-                ctx.textBaseline = "middle";
-                ctx.fillText(truncText(ctx, items[i], maxW), BTN_R + 14, 0);
+                context.textAlign    = "left";
+                context.textBaseline = "middle";
+                context.fillText(
+                    truncateTextToFit(context, items[segmentIndex], maximumLabelWidth),
+                    CENTER_BUTTON_RADIUS + LABEL_INNER_OFFSET,
+                    0
+                );
             }
-            ctx.restore();
+            context.restore();
         }
 
-        /* outer ring */
-        ctx.beginPath();
-        ctx.arc(CX, CY, WHEEL_RADIUS, 0, 2 * Math.PI);
-        ctx.strokeStyle = "rgba(0,0,0,0.15)";
-        ctx.lineWidth   = 4;
-        ctx.stroke();
+        context.beginPath();
+        context.arc(CENTER_X, CENTER_Y, WHEEL_RADIUS, 0, FULL_CIRCLE);
+        context.strokeStyle = OUTER_RING_COLOR;
+        context.lineWidth   = OUTER_RING_WIDTH;
+        context.stroke();
 
-        /* center button */
-        const grad = ctx.createRadialGradient(CX, CY - 4, 0, CX, CY, BTN_R);
-        grad.addColorStop(0, "#ffffff");
-        grad.addColorStop(1, "#dcdcdc");
-        ctx.beginPath();
-        ctx.arc(CX, CY, BTN_R, 0, 2 * Math.PI);
-        ctx.fillStyle   = grad;
-        ctx.fill();
-        ctx.strokeStyle = "#bbb";
-        ctx.lineWidth   = 2;
-        ctx.stroke();
+        const buttonGradient = context.createRadialGradient(
+            CENTER_X, CENTER_Y - BUTTON_GRADIENT_VERTICAL_SHIFT, 0,
+            CENTER_X, CENTER_Y, CENTER_BUTTON_RADIUS
+        );
+        buttonGradient.addColorStop(0, BUTTON_GRADIENT_START_COLOR);
+        buttonGradient.addColorStop(1, BUTTON_GRADIENT_END_COLOR);
+        context.beginPath();
+        context.arc(CENTER_X, CENTER_Y, CENTER_BUTTON_RADIUS, 0, FULL_CIRCLE);
+        context.fillStyle   = buttonGradient;
+        context.fill();
+        context.strokeStyle = BUTTON_BORDER_COLOR;
+        context.lineWidth   = BUTTON_BORDER_WIDTH;
+        context.stroke();
 
-        ctx.fillStyle    = "#333";
-        ctx.font         = "bold 16px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
-        ctx.textAlign    = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(this.spinning ? "\u2022\u2022\u2022" : "SPIN", CX, CY);
+        context.fillStyle    = BUTTON_TEXT_COLOR;
+        context.font         = "bold " + FONT_SIZE_CENTER_BUTTON + "px " + SYSTEM_FONT_STACK;
+        context.textAlign    = "center";
+        context.textBaseline = "middle";
+        context.fillText(
+            this.isSpinning ? LABELS.SPINNING_INDICATOR : LABELS.SPIN_BUTTON,
+            CENTER_X,
+            CENTER_Y
+        );
 
-        /* pointer triangle */
-        const ps = 16;
-        const py = CY - WHEEL_RADIUS - 2;
-        ctx.beginPath();
-        ctx.moveTo(CX, py + ps + 2);
-        ctx.lineTo(CX - ps * 0.7, py - 4);
-        ctx.lineTo(CX + ps * 0.7, py - 4);
-        ctx.closePath();
-        ctx.fillStyle   = "#E74C3C";
-        ctx.strokeStyle = "#C0392B";
-        ctx.lineWidth   = 2;
-        ctx.fill();
-        ctx.stroke();
+        const pointerBaseY = CENTER_Y - WHEEL_RADIUS - POINTER_GAP_FROM_WHEEL;
+        context.beginPath();
+        context.moveTo(CENTER_X, pointerBaseY + POINTER_HEIGHT + POINTER_TIP_EXTENSION);
+        context.lineTo(CENTER_X - POINTER_HEIGHT * POINTER_WIDTH_RATIO, pointerBaseY - POINTER_BASE_INSET);
+        context.lineTo(CENTER_X + POINTER_HEIGHT * POINTER_WIDTH_RATIO, pointerBaseY - POINTER_BASE_INSET);
+        context.closePath();
+        context.fillStyle   = POINTER_FILL_COLOR;
+        context.strokeStyle = POINTER_BORDER_COLOR;
+        context.lineWidth   = POINTER_STROKE_WIDTH;
+        context.fill();
+        context.stroke();
     }
 
     destroy() {
-        if (this.frameId) cancelAnimationFrame(this.frameId);
+        if (this.animationFrameId) cancelAnimationFrame(this.animationFrameId);
     }
 }
 
-/* ═══════════════════════════════════════════
+/* =============================================
    Settings tab
-   ═══════════════════════════════════════════ */
+   ============================================= */
 
 class TodoWheelSettingTab extends PluginSettingTab {
-    constructor(app, plugin) {
-        super(app, plugin);
+    constructor(application, plugin) {
+        super(application, plugin);
         this.plugin = plugin;
     }
+
     display() {
         const { containerEl } = this;
         containerEl.empty();
-        containerEl.createEl("h2", { text: "To-Do Wheel Settings" });
+        containerEl.createEl("h2", { text: LABELS.SETTINGS_TITLE });
 
         new Setting(containerEl)
-            .setName("Heading text")
-            .setDesc("Bullet lists under headings containing this text will be used (case-insensitive).")
-            .addText(t =>
-                t.setPlaceholder("To-Do List")
-                 .setValue(this.plugin.settings.heading)
-                 .onChange(async v => {
-                     this.plugin.settings.heading = v || "To-Do List";
-                     await this.plugin.saveSettings();
-                 })
+            .setName(LABELS.SETTING_HEADING_NAME)
+            .setDesc(LABELS.SETTING_HEADING_DESC)
+            .addText((textInput) =>
+                textInput
+                    .setPlaceholder(DEFAULT_HEADING_TEXT)
+                    .setValue(this.plugin.settings.heading)
+                    .onChange(async (value) => {
+                        this.plugin.settings.heading = value || DEFAULT_HEADING_TEXT;
+                        await this.plugin.saveSettings();
+                    })
             );
     }
 }
 
-/* ═══════════════════════════════════════════
+/* =============================================
    Plugin entry point
-   ═══════════════════════════════════════════ */
+   ============================================= */
 
 class TodoWheelPlugin extends Plugin {
     async onload() {
         this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
         this.addSettingTab(new TodoWheelSettingTab(this.app, this));
 
-        this.registerMarkdownCodeBlockProcessor("todo-wheel", async (source, el, ctx) => {
-            // parse optional overrides from code-block body
-            const opts = {};
+        this.registerMarkdownCodeBlockProcessor("todo-wheel", async (source, containerElement, processorContext) => {
+            const codeBlockOptions = {};
             for (const line of source.trim().split("\n")) {
-                const m = line.match(/^(\w[\w-]*)\s*:\s*(.+)$/);
-                if (m) opts[m[1].trim().toLowerCase()] = m[2].trim();
+                const optionMatch = line.match(/^(\w[\w-]*)\s*:\s*(.+)$/);
+                if (optionMatch) {
+                    codeBlockOptions[optionMatch[1].trim().toLowerCase()] = optionMatch[2].trim();
+                }
             }
 
-            const heading = opts.heading || this.settings.heading;
+            const headingText = codeBlockOptions.heading || this.settings.heading;
 
-            const file = this.app.vault.getAbstractFileByPath(ctx.sourcePath);
-            if (!file) {
-                el.createEl("p", { text: "Error: could not read file.", cls: "todo-wheel-empty" });
-                return;
-            }
-
-            const content = await this.app.vault.cachedRead(file);
-            const todos   = parseTodoSection(content, heading);
-
-            if (Object.keys(todos).length === 0) {
-                el.createEl("p", {
-                    text: 'No to-do items found under a heading containing "' + heading + '". '
-                        + "Add a markdown heading with that text and bullet points below it.",
+            const sourceFile = this.app.vault.getAbstractFileByPath(processorContext.sourcePath);
+            if (!sourceFile) {
+                containerElement.createEl("p", {
+                    text: LABELS.FILE_READ_ERROR,
                     cls: "todo-wheel-empty"
                 });
                 return;
             }
 
-            new WheelRenderer(el, todos, this.app);
+            const fileContent    = await this.app.vault.cachedRead(sourceFile);
+            const todosByProject = parseTodoSection(fileContent, headingText);
+
+            if (Object.keys(todosByProject).length === 0) {
+                containerElement.createEl("p", {
+                    text: LABELS.noTasksFound(headingText),
+                    cls: "todo-wheel-empty"
+                });
+                return;
+            }
+
+            new WheelRenderer(containerElement, todosByProject, this.app);
         });
     }
 
@@ -516,7 +752,7 @@ class TodoWheelPlugin extends Plugin {
     }
 }
 
-/* ── module export (esbuild CJS convention) ── */
+/* Module export (CJS convention) */
 var _exports = {};
 Object.defineProperty(_exports, "__esModule", { value: true });
 Object.defineProperty(_exports, "default", { get: () => TodoWheelPlugin, enumerable: true });
