@@ -384,6 +384,32 @@ function accentPointerColors(accentRgb) {
 }
 
 /* =============================================
+   Extract the first bold phrase from raw
+   markdown text, or return null if none found
+   ============================================= */
+
+function extractFirstBoldPhrase(rawText) {
+    const boldMatch = rawText.match(/\*\*(.+?)\*\*/);
+    if (boldMatch) return stripMarkdownFormatting(boldMatch[1]);
+    return null;
+}
+
+/* =============================================
+   Fix capitalisation for display text.
+   - Capitalises the first letter if lowercase
+   - Preserves capitalisation of all other words
+     (keeps acronyms, proper nouns, etc. intact)
+   - Strips trailing punctuation that looks like
+     a mid-sentence fragment (colon, comma, semicolon)
+   ============================================= */
+
+function fixCapitalisation(text) {
+    let cleaned = text.replace(/[,:;]+\s*$/, "").trim();
+    if (cleaned.length === 0) return cleaned;
+    return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+}
+
+/* =============================================
    Strip markdown formatting from raw text
    ============================================= */
 
@@ -433,24 +459,30 @@ function parseTodoSection(noteContent, targetHeadingText) {
     }
 
     const todosByProject     = {};
+    const fullNameForLabel   = {};
     let   currentProjectName = null;
 
     for (const line of sectionLines) {
         const bulletMatch = line.match(/^(\s*)([-*+])\s+(.+)$/);
         if (!bulletMatch) continue;
 
-        const strippedText = stripMarkdownFormatting(bulletMatch[3]);
-        const indentSpaces = bulletMatch[1].replace(/\t/g, " ".repeat(TAB_WIDTH_IN_SPACES)).length;
+        const strippedText   = stripMarkdownFormatting(bulletMatch[3]);
+        const boldLabel      = extractFirstBoldPhrase(bulletMatch[3]);
+        const indentSpaces   = bulletMatch[1].replace(/\t/g, " ".repeat(TAB_WIDTH_IN_SPACES)).length;
         const [taskName, taskDescription] = splitAtFirstColon(strippedText);
+        const wheelLabel     = fixCapitalisation(boldLabel || taskName);
+        const fullName       = fixCapitalisation(taskName);
 
         if (indentSpaces === TOP_LEVEL_INDENT) {
-            currentProjectName = taskName;
+            currentProjectName = wheelLabel;
             todosByProject[currentProjectName] = {};
+            fullNameForLabel[wheelLabel] = fullName;
         } else if (currentProjectName) {
-            todosByProject[currentProjectName][taskName] = taskDescription;
+            todosByProject[currentProjectName][wheelLabel] = taskDescription;
+            fullNameForLabel[wheelLabel] = fullName;
         }
     }
-    return todosByProject;
+    return { todosByProject, fullNameForLabel };
 }
 
 /* =============================================
@@ -537,9 +569,10 @@ function segmentFontSize(itemCount) {
    ============================================= */
 
 class WheelRenderer {
-    constructor(rootElement, todosByProject, application, accentRgb) {
+    constructor(rootElement, todosByProject, fullNameForLabel, application, accentRgb) {
         this.application          = application;
         this.todosByProject       = todosByProject;
+        this.fullNameForLabel     = fullNameForLabel;
         this.accentRgb            = accentRgb;
         this.currentStage         = PROJECT_SELECTION_STAGE;
         this.selectedProjectName  = null;
@@ -654,49 +687,51 @@ class WheelRenderer {
     }
 
     _announceResult(items) {
-        const winningItemName = items[this.highlightedIndex];
+        const winningWheelLabel = items[this.highlightedIndex];
+        const winningFullName   = this.fullNameForLabel[winningWheelLabel] || winningWheelLabel;
 
         if (this.currentStage === PROJECT_SELECTION_STAGE) {
-            const projectTasks = this.todosByProject[winningItemName];
+            const projectTasks = this.todosByProject[winningWheelLabel];
             const taskNames    = Object.keys(projectTasks);
 
             if (taskNames.length > 0) {
-                this.stageIndicator.setText(LABELS.projectLabel(winningItemName));
-                this._displayResult(LABELS.PROJECT_CHOSEN_HEADER, winningItemName, null);
+                this.stageIndicator.setText(LABELS.projectLabel(winningFullName));
+                this._displayResult(LABELS.PROJECT_CHOSEN_HEADER, winningFullName, null);
 
                 const pickTaskButton = this.actionsContainer.createEl("button", {
                     text: LABELS.PICK_TASK_BUTTON,
                     cls: "todo-wheel-btn todo-wheel-primary"
                 });
                 pickTaskButton.addEventListener("click", () => {
-                    this.selectedProjectName = winningItemName;
+                    this.selectedProjectName = winningWheelLabel;
                     this.currentStage        = TASK_SELECTION_STAGE;
                     this.highlightedIndex    = NO_HIGHLIGHT_INDEX;
                     this.resultContainer.style.display = "none";
                     this.actionsContainer.empty();
-                    this.stageIndicator.setText(LABELS.chooseTaskFrom(winningItemName));
+                    this.stageIndicator.setText(LABELS.chooseTaskFrom(winningFullName));
                     this.currentRotation = Math.random() * FULL_CIRCLE;
                     this._drawWheel();
                 });
 
                 this._addTryAgainButton();
-                new Notice(LABELS.noticeProjectChosen(winningItemName));
+                new Notice(LABELS.noticeProjectChosen(winningFullName));
             } else {
                 this.stageIndicator.setText(LABELS.DONE);
-                this._displayResult(LABELS.YOUR_TASK, winningItemName, null);
+                this._displayResult(LABELS.YOUR_TASK, winningFullName, null);
                 this._addResetButtons();
-                new Notice(LABELS.noticeStandaloneTask(winningItemName));
+                new Notice(LABELS.noticeStandaloneTask(winningFullName));
             }
         } else {
-            const taskDescription = this.todosByProject[this.selectedProjectName][winningItemName];
+            const taskDescription     = this.todosByProject[this.selectedProjectName][winningWheelLabel];
+            const selectedProjectFull = this.fullNameForLabel[this.selectedProjectName] || this.selectedProjectName;
             this.stageIndicator.setText(LABELS.DONE);
             this._displayResult(
-                LABELS.resultHeader(this.selectedProjectName),
-                winningItemName,
+                LABELS.resultHeader(selectedProjectFull),
+                winningFullName,
                 taskDescription
             );
             this._addResetButtons();
-            new Notice(LABELS.noticeTask(winningItemName, taskDescription));
+            new Notice(LABELS.noticeTask(winningFullName, taskDescription));
         }
     }
 
@@ -932,7 +967,7 @@ class TodoWheelPlugin extends Plugin {
             }
 
             const fileContent    = await this.app.vault.cachedRead(sourceFile);
-            const todosByProject = parseTodoSection(fileContent, headingText);
+            const { todosByProject, fullNameForLabel } = parseTodoSection(fileContent, headingText);
 
             if (Object.keys(todosByProject).length === 0) {
                 containerElement.createEl("p", {
@@ -949,7 +984,7 @@ class TodoWheelPlugin extends Plugin {
             if (!accentRgb) {
                 accentRgb = await readAccentColorFromVault(this.app.vault.adapter);
             }
-            new WheelRenderer(containerElement, todosByProject, this.app, accentRgb);
+            new WheelRenderer(containerElement, todosByProject, fullNameForLabel, this.app, accentRgb);
         });
     }
 

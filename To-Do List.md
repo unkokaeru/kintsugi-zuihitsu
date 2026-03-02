@@ -11,7 +11,7 @@
 	- **Statistics**: checked shared stats spreadsheet for what should be actively collected.
 - Continuously work on **[[omoikane]]** work…
 	- **Project work** - send a summary to Yuri of progress so far; report should've begun!
-	- Read [[The Ergodicity Problem in Economics.pdf|this paper]] to **draft a critical review** to then present.
+	- Read [[The Ergodicity Problem in Economics.pdf|this paper]] to draft a **critical review** to then present.
 	- Complete any unfinished **notes/problems** (below).
 
 ```todo-wheel
