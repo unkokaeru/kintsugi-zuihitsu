@@ -27,7 +27,32 @@
   "pluginVersion": "0.28.0",
   "showCompletedTasks": true,
   "showSubtasksInTaskBlocks": true,
-  "icals": [],
+  "icals": [
+    {
+      "name": "",
+      "email": "",
+      "url": "",
+      "color": "#ffffff"
+    },
+    {
+      "name": "",
+      "email": "",
+      "url": "",
+      "color": "#ffffff"
+    },
+    {
+      "name": "",
+      "email": "",
+      "url": "",
+      "color": "#ffffff"
+    },
+    {
+      "name": "",
+      "email": "",
+      "url": "",
+      "color": "#ffffff"
+    }
+  ],
   "colorOverrides": [],
   "releaseNotes": true,
   "taskStatusOnCreation": " ",
