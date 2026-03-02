@@ -109,15 +109,20 @@ const MANY_SEGMENTS_THRESHOLD        = 12;
 const MODERATE_SEGMENTS_THRESHOLD    = 6;
 
 /* =============================================
-   Segment color palette
+   Accent-based palette generation
    ============================================= */
 
-const SEGMENT_COLOR_PALETTE = [
-    "#E74C3C", "#3498DB", "#2ECC71", "#F39C12",
-    "#9B59B6", "#1ABC9C", "#E67E22", "#2980B9",
-    "#27AE60", "#D35400", "#8E44AD", "#16A085",
-    "#C0392B", "#2C3E50", "#F1C40F", "#7F8C8D"
-];
+const DEFAULT_ACCENT_COLOR           = "#7b6cd9";
+const SHADE_LIGHTNESS_MIN            = 28;
+const SHADE_LIGHTNESS_MAX            = 72;
+const SHADE_SATURATION_MIN           = 35;
+const SHADE_SATURATION_MAX           = 70;
+const SHADE_HUE_NUDGE_DEGREES        = 8;
+const HUE_DEGREES_FULL_CIRCLE        = 360;
+const PERCENT_SCALE                  = 100;
+const HSL_HUE_SECTOR_SIZE            = 60;
+const HSL_MAX_CHANNEL_FLOAT          = 1.0;
+const POINTER_DARKENING_AMOUNT       = 15;
 
 /* =============================================
    Rendering colors
@@ -136,8 +141,6 @@ const BUTTON_GRADIENT_VERTICAL_SHIFT = 4;
 const BUTTON_BORDER_COLOR            = "#bbb";
 const BUTTON_BORDER_WIDTH            = 2;
 const BUTTON_TEXT_COLOR              = "#333";
-const POINTER_FILL_COLOR             = "#E74C3C";
-const POINTER_BORDER_COLOR           = "#C0392B";
 const EMPTY_STATE_TEXT_COLOR         = "#888";
 const DARK_TEXT_ON_BRIGHT_SEGMENT    = "#1a1a1a";
 const LIGHT_TEXT_ON_DARK_SEGMENT     = "#ffffff";
@@ -186,6 +189,199 @@ const CANVAS_RENDERING_CONTEXT_TYPE  = "2d";
    ============================================= */
 
 const ELLIPSIS = "\u2026";
+
+/* =============================================
+   Parse any CSS color string into [r, g, b]
+   each in 0-255 range. Handles #hex, #shorthand,
+   rgb(), and rgba() formats.
+   ============================================= */
+
+function parseCssColorToRgb(colorString) {
+    const trimmed = colorString.trim();
+
+    const rgbMatch = trimmed.match(/^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+    if (rgbMatch) {
+        return [parseInt(rgbMatch[1], 10), parseInt(rgbMatch[2], 10), parseInt(rgbMatch[3], 10)];
+    }
+
+    const hexLongMatch = trimmed.match(/^#([0-9a-fA-F]{6})$/);
+    if (hexLongMatch) {
+        const hexDigits = hexLongMatch[1];
+        return [
+            parseInt(hexDigits.slice(0, 2), HEX_RADIX),
+            parseInt(hexDigits.slice(2, 4), HEX_RADIX),
+            parseInt(hexDigits.slice(4, 6), HEX_RADIX)
+        ];
+    }
+
+    const hexShortMatch = trimmed.match(/^#([0-9a-fA-F]{3})$/);
+    if (hexShortMatch) {
+        const shortDigits = hexShortMatch[1];
+        return [
+            parseInt(shortDigits[0] + shortDigits[0], HEX_RADIX),
+            parseInt(shortDigits[1] + shortDigits[1], HEX_RADIX),
+            parseInt(shortDigits[2] + shortDigits[2], HEX_RADIX)
+        ];
+    }
+
+    return null;
+}
+
+/* =============================================
+   Read Obsidian's accent color from CSS vars,
+   returning [r, g, b] in 0-255 range
+   ============================================= */
+
+const APPEARANCE_CONFIG_PATH         = ".obsidian/appearance.json";
+const APPEARANCE_ACCENT_KEY          = "accentColor";
+
+/* =============================================
+   Read accent color with multiple fallbacks:
+   1. appearance.json from vault (most reliable)
+   2. CSS variable --accent-h/s/l (Obsidian HSL)
+   3. CSS variable --interactive-accent
+   4. Hardcoded default
+   Returns [r, g, b] in 0-255 range.
+   ============================================= */
+
+async function readAccentColorFromVault(vaultAdapter) {
+    try {
+        const configText = await vaultAdapter.read(APPEARANCE_CONFIG_PATH);
+        const config = JSON.parse(configText);
+        if (config[APPEARANCE_ACCENT_KEY]) {
+            const parsed = parseCssColorToRgb(config[APPEARANCE_ACCENT_KEY]);
+            if (parsed) return parsed;
+        }
+    } catch (_ignored) { /* file missing or unreadable, try next fallback */ }
+
+    const bodyStyles = getComputedStyle(document.body);
+
+    const accentHue        = bodyStyles.getPropertyValue("--accent-h").trim();
+    const accentSaturation = bodyStyles.getPropertyValue("--accent-s").trim();
+    const accentLightness  = bodyStyles.getPropertyValue("--accent-l").trim();
+    if (accentHue && accentSaturation && accentLightness) {
+        const hue = parseFloat(accentHue);
+        const sat = parseFloat(accentSaturation);
+        const lit = parseFloat(accentLightness);
+        if (!isNaN(hue) && !isNaN(sat) && !isNaN(lit)) {
+            const hex = hslToHex(hue, sat, lit);
+            const parsed = parseCssColorToRgb(hex);
+            if (parsed) return parsed;
+        }
+    }
+
+    const accentValue = bodyStyles.getPropertyValue("--interactive-accent").trim();
+    if (accentValue) {
+        const parsed = parseCssColorToRgb(accentValue);
+        if (parsed) return parsed;
+    }
+
+    return parseCssColorToRgb(DEFAULT_ACCENT_COLOR);
+}
+
+/* =============================================
+   Convert [r, g, b] (0-255 each) to HSL
+   [h, s, l] where h is 0-360, s and l are 0-100
+   ============================================= */
+
+function rgbToHsl(redByte, greenByte, blueByte) {
+    const redNormalized   = redByte / LUMINANCE_FULL_SCALE;
+    const greenNormalized = greenByte / LUMINANCE_FULL_SCALE;
+    const blueNormalized  = blueByte / LUMINANCE_FULL_SCALE;
+
+    const channelMax = Math.max(redNormalized, greenNormalized, blueNormalized);
+    const channelMin = Math.min(redNormalized, greenNormalized, blueNormalized);
+    const delta      = channelMax - channelMin;
+    const lightness  = (channelMax + channelMin) / 2;
+
+    if (delta === 0) return [0, 0, Math.round(lightness * PERCENT_SCALE)];
+
+    const saturation = delta / (1 - Math.abs(2 * lightness - HSL_MAX_CHANNEL_FLOAT));
+    let hue = 0;
+
+    if (channelMax === redNormalized) {
+        hue = HSL_HUE_SECTOR_SIZE * (((greenNormalized - blueNormalized) / delta) % 6);
+    } else if (channelMax === greenNormalized) {
+        hue = HSL_HUE_SECTOR_SIZE * ((blueNormalized - redNormalized) / delta + 2);
+    } else {
+        hue = HSL_HUE_SECTOR_SIZE * ((redNormalized - greenNormalized) / delta + 4);
+    }
+
+    if (hue < 0) hue += HUE_DEGREES_FULL_CIRCLE;
+    return [
+        Math.round(hue),
+        Math.round(saturation * PERCENT_SCALE),
+        Math.round(lightness * PERCENT_SCALE)
+    ];
+}
+
+/* =============================================
+   Convert HSL back to hex (#rrggbb)
+   ============================================= */
+
+function hslToHex(hue, saturationPercent, lightnessPercent) {
+    const saturation = saturationPercent / PERCENT_SCALE;
+    const lightness  = lightnessPercent / PERCENT_SCALE;
+    const chroma     = (1 - Math.abs(2 * lightness - HSL_MAX_CHANNEL_FLOAT)) * saturation;
+    const hueSector  = hue / HSL_HUE_SECTOR_SIZE;
+    const secondary  = chroma * (1 - Math.abs(hueSector % 2 - HSL_MAX_CHANNEL_FLOAT));
+    const lightnessOffset = lightness - chroma / 2;
+
+    let redPrime = 0, greenPrime = 0, bluePrime = 0;
+    if      (hueSector < 1) { redPrime = chroma; greenPrime = secondary; }
+    else if (hueSector < 2) { redPrime = secondary; greenPrime = chroma; }
+    else if (hueSector < 3) { greenPrime = chroma; bluePrime = secondary; }
+    else if (hueSector < 4) { greenPrime = secondary; bluePrime = chroma; }
+    else if (hueSector < 5) { redPrime = secondary; bluePrime = chroma; }
+    else                    { redPrime = chroma; bluePrime = secondary; }
+
+    const redByte   = Math.round((redPrime + lightnessOffset) * LUMINANCE_FULL_SCALE);
+    const greenByte = Math.round((greenPrime + lightnessOffset) * LUMINANCE_FULL_SCALE);
+    const blueByte  = Math.round((bluePrime + lightnessOffset) * LUMINANCE_FULL_SCALE);
+
+    return "#"
+        + redByte.toString(HEX_RADIX).padStart(2, "0")
+        + greenByte.toString(HEX_RADIX).padStart(2, "0")
+        + blueByte.toString(HEX_RADIX).padStart(2, "0");
+}
+
+/* =============================================
+   Generate shades and tints of the accent color.
+   Keeps the same hue family with a small
+   alternating nudge for visual separation.
+   ============================================= */
+
+function generatePaletteFromAccent(segmentCount, accentRgb) {
+    const [accentHue] = rgbToHsl(accentRgb[0], accentRgb[1], accentRgb[2]);
+    const palette = [];
+
+    for (let index = 0; index < segmentCount; index++) {
+        const interpolation = segmentCount === 1
+            ? 0.5
+            : index / (segmentCount - 1);
+        const lightness  = Math.round(
+            SHADE_LIGHTNESS_MIN + interpolation * (SHADE_LIGHTNESS_MAX - SHADE_LIGHTNESS_MIN)
+        );
+        const saturation = Math.round(
+            SHADE_SATURATION_MAX - interpolation * (SHADE_SATURATION_MAX - SHADE_SATURATION_MIN)
+        );
+        const hueNudgeDirection = index % 2 === 0 ? 1 : -1;
+        const hue = (accentHue + hueNudgeDirection * SHADE_HUE_NUDGE_DEGREES + HUE_DEGREES_FULL_CIRCLE) % HUE_DEGREES_FULL_CIRCLE;
+        palette.push(hslToHex(hue, saturation, lightness));
+    }
+    return palette;
+}
+
+/* =============================================
+   Derive pointer colors from the accent
+   ============================================= */
+
+function accentPointerColors(accentRgb) {
+    const [hue, saturation, lightness] = rgbToHsl(accentRgb[0], accentRgb[1], accentRgb[2]);
+    const fillColor   = hslToHex(hue, saturation, lightness);
+    const borderColor = hslToHex(hue, saturation, Math.max(0, lightness - POINTER_DARKENING_AMOUNT));
+    return { fillColor, borderColor };
+}
 
 /* =============================================
    Strip markdown formatting from raw text
@@ -341,9 +537,10 @@ function segmentFontSize(itemCount) {
    ============================================= */
 
 class WheelRenderer {
-    constructor(rootElement, todosByProject, application) {
+    constructor(rootElement, todosByProject, application, accentRgb) {
         this.application          = application;
         this.todosByProject       = todosByProject;
+        this.accentRgb            = accentRgb;
         this.currentStage         = PROJECT_SELECTION_STAGE;
         this.selectedProjectName  = null;
         this.currentRotation      = Math.random() * FULL_CIRCLE;
@@ -565,11 +762,12 @@ class WheelRenderer {
         const segmentAngle      = FULL_CIRCLE / itemCount;
         const fontSize           = segmentFontSize(itemCount);
         const maximumLabelWidth  = WHEEL_RADIUS - CENTER_BUTTON_RADIUS - LABEL_OUTER_MARGIN;
+        const segmentPalette     = generatePaletteFromAccent(itemCount, this.accentRgb);
 
         for (let segmentIndex = 0; segmentIndex < itemCount; segmentIndex++) {
             const segmentStartAngle = this.currentRotation + segmentIndex * segmentAngle;
             const segmentEndAngle   = segmentStartAngle + segmentAngle;
-            const segmentColor      = SEGMENT_COLOR_PALETTE[segmentIndex % SEGMENT_COLOR_PALETTE.length];
+            const segmentColor      = segmentPalette[segmentIndex];
 
             context.beginPath();
             context.moveTo(CENTER_X, CENTER_Y);
@@ -655,14 +853,15 @@ class WheelRenderer {
             CENTER_Y
         );
 
-        const pointerBaseY = CENTER_Y - WHEEL_RADIUS - POINTER_GAP_FROM_WHEEL;
+        const pointerColors = accentPointerColors(this.accentRgb);
+        const pointerBaseY  = CENTER_Y - WHEEL_RADIUS - POINTER_GAP_FROM_WHEEL;
         context.beginPath();
         context.moveTo(CENTER_X, pointerBaseY + POINTER_HEIGHT + POINTER_TIP_EXTENSION);
         context.lineTo(CENTER_X - POINTER_HEIGHT * POINTER_WIDTH_RATIO, pointerBaseY - POINTER_BASE_INSET);
         context.lineTo(CENTER_X + POINTER_HEIGHT * POINTER_WIDTH_RATIO, pointerBaseY - POINTER_BASE_INSET);
         context.closePath();
-        context.fillStyle   = POINTER_FILL_COLOR;
-        context.strokeStyle = POINTER_BORDER_COLOR;
+        context.fillStyle   = pointerColors.fillColor;
+        context.strokeStyle = pointerColors.borderColor;
         context.lineWidth   = POINTER_STROKE_WIDTH;
         context.fill();
         context.stroke();
@@ -743,7 +942,14 @@ class TodoWheelPlugin extends Plugin {
                 return;
             }
 
-            new WheelRenderer(containerElement, todosByProject, this.app);
+            let accentRgb = null;
+            if (codeBlockOptions.accent) {
+                accentRgb = parseCssColorToRgb(codeBlockOptions.accent);
+            }
+            if (!accentRgb) {
+                accentRgb = await readAccentColorFromVault(this.app.vault.adapter);
+            }
+            new WheelRenderer(containerElement, todosByProject, this.app, accentRgb);
         });
     }
 
