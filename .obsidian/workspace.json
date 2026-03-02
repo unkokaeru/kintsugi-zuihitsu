@@ -86,6 +86,18 @@
         "type": "tabs",
         "children": [
           {
+            "id": "e740177996037401",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "planner-timeline",
+              "state": {},
+              "pinned": true,
+              "icon": "calendar-with-checkmark",
+              "title": "Timeline"
+            }
+          },
+          {
             "id": "8ce44f015bb7a3eb",
             "type": "leaf",
             "pinned": true,
@@ -96,59 +108,8 @@
               "icon": "pencil-line",
               "title": "Scrybble"
             }
-          },
-          {
-            "id": "afcad0befa459ca7",
-            "type": "leaf",
-            "state": {
-              "type": "folder-overview-view",
-              "state": {},
-              "icon": "lucide-ghost",
-              "title": "folder-overview-view"
-            }
-          },
-          {
-            "id": "2575761af96fe8bc",
-            "type": "leaf",
-            "state": {
-              "type": "github-copilot-chat-view",
-              "state": {},
-              "icon": "bot-message-square",
-              "title": "Copilot Chat"
-            }
-          },
-          {
-            "id": "50da4115e50c98ab",
-            "type": "leaf",
-            "state": {
-              "type": "sync",
-              "state": {},
-              "icon": "refresh-ccw",
-              "title": "Sync changes"
-            }
-          },
-          {
-            "id": "ce68e427bfbc1f29",
-            "type": "leaf",
-            "state": {
-              "type": "git-view",
-              "state": {},
-              "icon": "git-pull-request",
-              "title": "Source Control"
-            }
-          },
-          {
-            "id": "e740177996037401",
-            "type": "leaf",
-            "state": {
-              "type": "planner-timeline",
-              "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Timeline"
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "horizontal",
@@ -177,6 +138,7 @@
   },
   "active": "fc7d9a3b8186fcb9",
   "lastOpenFiles": [
+    "cloudy/project/yatagarasu/notes from meetings.md",
     "To-Do List.md",
     "2026-03-02.md",
     "attached/files/The Ergodicity Problem in Economics.pdf",
@@ -208,7 +170,6 @@
     "clear/library/sloth bytes/easy/Find the Missing Number.md",
     "clear/library/sloth bytes/easy/Seven Boom.md",
     "clear/project/omoikane/sem a - archive/mth3007a/Interpolation.md",
-    "kintsugi zuihitsu.md",
     "attached/files/mth3008 weekly problem sheet 5.pdf",
     "attached/files/mth3008 lecture notes 10.pdf",
     "attached/files/mth3008 lecture notes 9.pdf",
