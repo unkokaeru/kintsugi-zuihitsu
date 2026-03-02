@@ -12,28 +12,14 @@ $$
 
 By definition, $(ds)^2 = |d\mathbf{r}|^2 = d\mathbf{r} \cdot d\mathbf{r}$. We can write this in three different ways depending on our choice of components:
 
-1. Using purely contravariant components:
-
-$$
-(ds)^2 = (\mathbf{e}_i dx^i) \cdot (\mathbf{e}_k dx^k) = (\mathbf{e}_i \cdot \mathbf{e}_k) dx^i dx^k = g_{ik} dx^i dx^k
-$$
-
-1. Using purely covariant components:
-
-$$
-(ds)^2 = (\mathbf{e}^i dx_i) \cdot (\mathbf{e}^k dx_k) = (\mathbf{e}^i \cdot \mathbf{e}^k) dx_i dx_k = g^{ik} dx_i dx_k
-$$
-
-1. Using mixed components:
-
-$$
-(ds)^2 = (\mathbf{e}^i dx_i) \cdot (\mathbf{e}_k dx^k) = (\mathbf{e}^i \cdot \mathbf{e}_k) dx_i dx^k = g^i_{\;k} dx_i dx^k = dx_i dx^i
-$$
+1. Using purely contravariant components: $(ds)^2 = (\mathbf{e}_i dx^i) \cdot (\mathbf{e}_k dx^k) = (\mathbf{e}_i \cdot \mathbf{e}_k) dx^i dx^k = g_{ik} dx^i dx^k$
+2. Using purely covariant components: $(ds)^2 = (\mathbf{e}^i dx_i) \cdot (\mathbf{e}^k dx_k) = (\mathbf{e}^i \cdot \mathbf{e}^k) dx_i dx_k = g^{ik} dx_i dx_k$
+3. Using mixed components: $(ds)^2 = (\mathbf{e}^i dx_i) \cdot (\mathbf{e}_k dx^k) = (\mathbf{e}^i \cdot \mathbf{e}_k) dx_i dx^k = g^i_{;k} dx_i dx^k = dx_i dx^i$
 
 > [!warning] Vector vs Suffix Notation
 > Be careful when writing arc length elements! A common pitfall is confusing an upper index with a power. For instance, in $dx^i$, $i$ is a contravariant index, whereas in $(ds)^2$, the $2$ is an exponent.
 
-These expressions rely on the **[[metric tensor]]**, which determines the metric of our given space:
+These expressions rely on the **metric tensor**, which determines the metric of our given space:
 
 - $g_{ik}$: covariant metric tensor
 - $g^{ik}$: contravariant metric tensor
@@ -91,23 +77,9 @@ $$
 
 We can now determine the metric tensor $g_{ij}$ explicitly.
 
-1. Introduce the free indices $i$ and $j$ for the basis vectors:
-
-$$
-g_{ij} = \mathbf{e}_i \cdot \mathbf{e}_j
-$$
-
-1. Distribute across the partial derivatives of the position vector:
-
-$$
-g_{ij} = \frac{\partial \mathbf{r}}{\partial x^i} \cdot \frac{\partial \mathbf{r}}{\partial x^j}
-$$
-
-1. Introduce a dummy index $\ell$ to represent the Cartesian components of $\mathbf{r}$:
-
-$$
-\boxed{g_{ij} = \frac{\partial r^\ell}{\partial x^i} \frac{\partial r^\ell}{\partial x^j}}
-$$
+1. Introduce the free indices $i$ and $j$ for the basis vectors: $g_{ij} = \mathbf{e}_i \cdot \mathbf{e}_j$
+2. Distribute across the partial derivatives of the position vector: $g_{ij} = \frac{\partial \mathbf{r}}{\partial x^i} \cdot \frac{\partial \mathbf{r}}{\partial x^j}$
+3. Introduce a dummy index $\ell$ to represent the Cartesian components of $\mathbf{r}$: $\boxed{g_{ij} = \frac{\partial r^\ell}{\partial x^i} \frac{\partial r^\ell}{\partial x^j}}$
 
 > [!example] Cylindrical Coordinates
 > For coordinates $(r, \theta, z)$, $\mathbf{r} = r \cos \theta \, \mathbf{i}_1 + r \sin \theta \, \mathbf{i}_2 + z \, \mathbf{i}_3$.
@@ -118,12 +90,12 @@ $$
 > Taking dot products gives $g_{11} = 1$, $g_{22} = r^2$, and $g_{33} = 1$. The metric coefficients are $h_1 = 1, h_2 = r, h_3 = 1$.
 > $\displaystyle (ds)^2 = (dr)^2 + (r \, d\theta)^2 + (dz)^2$
 
-> [!todo]
-> Find the basis vectors and metric coefficients for spherical coordinates. (See [[mth3008 weekly problems 9#Spherical Coordinate Metric|Weekly Problem 9.1]]).
+> [!question]
+> Find the basis vectors and metric coefficients for spherical coordinates.
 
 ## Introduction to Tensors
 
-Scalars and vectors are special cases of **[[tensors|tensor]]** objects.
+Scalars and vectors are special cases of **tensor** objects.
 
 - Rank 0: Scalar ($3^0 = 1$ component)
 - Rank 1: Vector ($3^1 = 3$ components)

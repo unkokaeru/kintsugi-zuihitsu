@@ -4,7 +4,7 @@ Following our exploration of normal subgroups, we now look at how to use them to
 
 ## Quotient Groups
 
-Suppose we have a subgroup $H \le G$. We want to construct a new group by "dividing" $G$ by $H$, forming a set of cosets $G/H$. However, this set is not always a group! It only forms a valid group when $H$ is a **[[normal subgroup]]** ($H \unlhd G$). When this condition is met, the resulting structure is called a **[[quotient group]]**.
+Suppose we have a subgroup $H \le G$. We want to construct a new group by "dividing" $G$ by $H$, forming a set of cosets $G/H$. However, this set is not always a group! It only forms a valid group when $H$ is a **normal subgroup** ($H \unlhd G$). When this condition is met, the resulting structure is called a **quotient group**.
 
 > [!important] Definition: Quotient Group
 > Suppose $N \unlhd G$. The quotient group $G/N$ is the set of cosets of $N$ in $G$ with the operation defined for all $aN, bN \in G/N$ as:
@@ -42,7 +42,7 @@ $$
 
 > [!important] Definition: Homomorphism
 > A **[[homomorphism]]** is a map $\theta: G \to H$ between two groups that preserves the group operation:
-> $\displaystyle \boxed{\theta(g_1 g_2) = \theta(g_1)\theta(g_2)}$
+> $\boxed{\theta(g_1 g_2) = \theta(g_1)\theta(g_2)}$
 > (where the operation on the left is in $G$, and on the right is in $H$).
 
 > [!example] Modular Arithmetic Homomorphism
