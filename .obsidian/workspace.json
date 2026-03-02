@@ -86,16 +86,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "faa7f536c65eba58",
-            "type": "leaf",
-            "state": {
-              "type": "planner-timeline",
-              "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Timeline"
-            }
-          },
-          {
             "id": "8ce44f015bb7a3eb",
             "type": "leaf",
             "pinned": true,
@@ -115,16 +105,6 @@
               "state": {},
               "icon": "lucide-ghost",
               "title": "folder-overview-view"
-            }
-          },
-          {
-            "id": "1e131c0a8304a7fb",
-            "type": "leaf",
-            "state": {
-              "type": "planner-timeline",
-              "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Timeline"
             }
           },
           {
@@ -156,9 +136,19 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
+          },
+          {
+            "id": "e740177996037401",
+            "type": "leaf",
+            "state": {
+              "type": "planner-timeline",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Timeline"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",

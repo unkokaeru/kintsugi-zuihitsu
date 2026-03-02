@@ -13,7 +13,6 @@
   "obsidian-chessboard",
   "code-emitter",
   "dataview",
-  "obsidian-day-planner",
   "emoji-shortcodes",
   "obsidian-excalidraw-plugin",
   "OA-file-hider",
@@ -51,5 +50,6 @@
   "janitor",
   "obsidian-tikzjax",
   "folders2graph",
-  "todo-wheel"
+  "todo-wheel",
+  "obsidian-day-planner"
 ]

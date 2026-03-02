@@ -29,28 +29,88 @@
   "showSubtasksInTaskBlocks": true,
   "icals": [
     {
-      "name": "",
-      "email": "",
-      "url": "",
-      "color": "#ffffff"
+      "name": "General",
+      "email": "wills@fayers.com",
+      "url": "https://calendar.google.com/calendar/ical/wills%40fayers.com/private-60149c6c42b754d0c98bbcfc72cc47ef/basic.ics",
+      "color": "#667F6C"
     },
     {
-      "name": "",
-      "email": "",
-      "url": "",
-      "color": "#ffffff"
+      "name": "Daikokuten",
+      "email": "wills@fayers.com",
+      "url": "https://calendar.google.com/calendar/ical/c_04859610d44afa91fa34fbafd40168f21ecaa60d0bc539e74cf345358a02925a%40group.calendar.google.com/private-1b3700d1f7dc2b5efb7fa8080b5f84f4/basic.ics",
+      "color": "#B8A67D"
     },
     {
-      "name": "",
-      "email": "",
-      "url": "",
-      "color": "#ffffff"
+      "name": "Doosojin",
+      "email": "wills@fayers.com",
+      "url": "https://calendar.google.com/calendar/ical/c_14d3811ce2784b5fb2c940e98dbb217f1c0bbf3cfa2419659584e0d996171d92%40group.calendar.google.com/private-31ba29726b9061c1c6def11073c134ba/basic.ics",
+      "color": "#7D9B76"
     },
     {
-      "name": "",
-      "email": "",
-      "url": "",
-      "color": "#ffffff"
+      "name": "Hachiman",
+      "email": "wills@fayers.com",
+      "url": "https://calendar.google.com/calendar/ical/c_9dc9fb4915b3d333a5a6d860126e7533b5fa7bbda817b280e7dde73652633e7b%40group.calendar.google.com/private-d5e7b769e0d3f007631fac5e9dd598b6/basic.ics",
+      "color": "#8B7A99"
+    },
+    {
+      "name": "Inari",
+      "email": "wills@fayers.com",
+      "url": "https://calendar.google.com/calendar/ical/c_61d17e68a671aac75203905734caefc03860600b9c1b4c89760280ce6170b465%40group.calendar.google.com/private-844e9d77935c32860b4dffbadf58b9c4/basic.ics",
+      "color": "#C99A6E"
+    },
+    {
+      "name": "Kagaseo",
+      "email": "wills@fayers.com",
+      "url": "https://calendar.google.com/calendar/ical/c_f8e33b184ab64287c90392bab9e10d62f62867efcc62fdb86ab08d5828f3041e%40group.calendar.google.com/private-b57decb475715c2020b9e1d037e657ec/basic.ics",
+      "color": "#6B8FA8"
+    },
+    {
+      "name": "Kuebiko",
+      "email": "wills@fayers.com",
+      "url": "https://calendar.google.com/calendar/ical/c_5b2d5df0d31d0b13905f8ba539371efde62075bfa3fbac073dae724b0cebe98c%40group.calendar.google.com/private-70a639a2d350a0890a86ef7e3f02d278/basic.ics",
+      "color": "#9DB3A8"
+    },
+    {
+      "name": "Omoikane",
+      "email": "wills@fayers.com",
+      "url": "https://calendar.google.com/calendar/ical/c_3fir7of7stgtbfeskhi48860ls%40group.calendar.google.com/private-6e203c07b70246de5a62028ab8f7a5d2/basic.ics",
+      "color": "#8FA0B3"
+    },
+    {
+      "name": "Omoikane - Deadlines",
+      "email": "wills@fayers.com",
+      "url": "https://calendar.google.com/calendar/ical/mtblg82kbslgseu2gpil21ir2tqrhppr%40import.calendar.google.com/public/basic.ics",
+      "color": "#AE4848"
+    },
+    {
+      "name": "Omoikane - Timetable",
+      "email": "27378661@students.lincoln.ac.uk",
+      "url": "https://calendar.google.com/calendar/ical/0ar4m7jc3j6f5mteurhf6ftvk0j8bih6%40import.calendar.google.com/public/basic.ics",
+      "color": "#6B8A9A"
+    },
+    {
+      "name": "Susanoo",
+      "email": "wills@fayers.com",
+      "url": "https://calendar.google.com/calendar/ical/c_f57cf9a156de5bb1e62508aa3ef5be6d9e80eb79ab93958eb5adf2d4b256ace7%40group.calendar.google.com/private-d08a493c29aacd7ace80790bc3758bdf/basic.ics",
+      "color": "#C97676"
+    },
+    {
+      "name": "Tsukuyomi",
+      "email": "wills@fayers.com",
+      "url": "https://calendar.google.com/calendar/ical/c_542042927101de445ba76a773ac0d5e29942b70322e8ded7f73fc12b719ee6a9%40group.calendar.google.com/private-67be7476214485d7504d39ebe893912c/basic.ics",
+      "color": "#868B87"
+    },
+    {
+      "name": "Wifey",
+      "email": "wills@fayers.com",
+      "url": "https://calendar.google.com/calendar/ical/c_a84f69f3936b09e077bd58d4b538aeadceda27e8065d71e5d4c3843cf708f03f%40group.calendar.google.com/private-dccd23414c9e9624daf6aafc5b723861/basic.ics",
+      "color": "#B08A7D"
+    },
+    {
+      "name": "Yatagarasu",
+      "email": "wills@fayers.com",
+      "url": "https://calendar.google.com/calendar/ical/c_12a744f731200050f65d632159a4f6a31e6d391f582f51ccfbe0ac7b49602974%40group.calendar.google.com/private-11f494218875ceed4bcb11300f4a45fb/basic.ics",
+      "color": "#9678A8"
     }
   ],
   "colorOverrides": [],
