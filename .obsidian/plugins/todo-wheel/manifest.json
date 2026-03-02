@@ -1,0 +1,9 @@
+{
+	"id": "todo-wheel",
+	"name": "To-Do Wheel",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Parse bullet-point to-do lists and spin an interactive wheel to randomly pick a project or task.",
+	"author": "willi",
+	"isDesktopOnly": false
+}

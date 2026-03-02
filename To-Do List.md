@@ -9,11 +9,13 @@
 	- Codebase review: methodically go through everything, eliminating inconsistencies.
 	- Platform testing: Record the [[help videos]] for each feature of the platform.
 	- Statistics: checked shared stats spreadsheet for what should be actively collected.
-	- Site hosting: alternatives for the main site, break down price against performance.
 - Continuously work on [[omoikane]] work…
 	- Project work - send a summary to Yuri of progress so far; report should've begun!
 	- Read [[The Ergodicity Problem in Economics.pdf|this paper]] and draft notes critically reviewing it to prepare for the presentation.
 	- Complete the notes/problems below.
+
+```todo-wheel
+```
 
 ## Incomplete Notes/Links
 
