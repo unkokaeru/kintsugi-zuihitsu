@@ -12136,7 +12136,7 @@
       "embedCount": 0,
       "aliases": null,
       "createdDate": 1772446180623,
-      "modifiedDate": 1772446185845,
+      "modifiedDate": 1772446203028,
       "sizeInBytes": 150,
       "sessionStart": {
         "noteCount": 0,
@@ -12165,6 +12165,33 @@
       "createdDate": 1772446197084,
       "modifiedDate": 1772446197089,
       "sizeInBytes": 595385,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
+      }
+    },
+    "attached/files/The Ergodicity Problem in Economics.pdf": {
+      "isCountable": false,
+      "targetNodeType": "file",
+      "noteCount": 0,
+      "wordCount": 0,
+      "wordCountTowardGoal": 0,
+      "wordGoal": 0,
+      "pageCount": 0,
+      "characterCount": 0,
+      "nonWhitespaceCharacterCount": 0,
+      "newlineCount": 0,
+      "readingTimeInMinutes": 0,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": [],
+      "createdDate": 1772446745452,
+      "modifiedDate": 1772446745500,
+      "sizeInBytes": 4539496,
       "sessionStart": {
         "noteCount": 0,
         "pageCount": 0,

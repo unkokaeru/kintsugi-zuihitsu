@@ -12,7 +12,7 @@
 	- Site hosting: alternatives for the main site, break down price against performance.
 - Continuously work on [[omoikane]] work…
 	- Project work - send a summary to Yuri of progress so far; report should've begun!
-	- Choose which paper to present a critical review on.
+	- Read [[The Ergodicity Problem in Economics.pdf|this paper]] and draft notes critically reviewing it to prepare for the presentation.
 	- Complete the notes/problems below.
 
 ## Incomplete Notes/Links
