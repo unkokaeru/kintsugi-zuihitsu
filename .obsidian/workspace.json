@@ -53,42 +53,9 @@
               "icon": "lucide-file",
               "title": "mth3008 weekly problems 4"
             }
-          },
-          {
-            "id": "be703a2eb87fd9fb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 3.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "mth3008 weekly problems 3"
-            }
           }
         ],
-        "currentTab": 3
-      },
-      {
-        "id": "487dee4e1416ed72",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "b74e4293cdc99744",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/mth3008 weekly problem sheet 3 solutions.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "mth3008 weekly problem sheet 3 solutions"
-            }
-          }
-        ]
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -200,21 +167,21 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "be703a2eb87fd9fb",
+  "active": "7a161a832054a528",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 5.md",
+    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 4.md",
+    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 3.md",
     "attached/files/mth3008 weekly problem sheet 3 solutions.pdf",
     "clear/project/omoikane/mth3008/notes/Gradient.md",
     "attached/files/mth3008 lecture notes 7.pdf",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 7.md",
     "attached/files/mth3008 lecture notes 6.pdf",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 6.md",
-    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 3.md",
     "attached/files/mth3008 weekly problem sheet 3.pdf",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 2.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 1.md",
-    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 5.md",
     "clear/project/omoikane/mth3008/weekly problems/weekly problems.md",
-    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 4.md",
     "To-Do List.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 5.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 10.md",

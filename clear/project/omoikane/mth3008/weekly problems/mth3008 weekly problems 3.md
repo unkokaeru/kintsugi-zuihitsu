@@ -58,7 +58,7 @@ Differentiating directly, $\partial L_{ij} / \partial x'^i = \partial^2 x'^i / (
 > $e_i = a_{i1} e_1' + a_{i2} e_2' + a_{i3} e_3'$.
 > Find expressions for the coefficients $a_{ij}$ in terms of the inner products of $e_i$ and $e_j'$.
 
-From $e_i = a_{ik} e'_k$, take the inner product of both sides with $e'_j$: $e_i \cdot e'_j = a_{ik} (e'_k \cdot e'_j) = a_{ik} \delta_{kj} = a_{ij}$. Hence $a_{ij} = e_i \cdot e'_j$.
+From $e_i = a_{ik} e'_k$, take the inner product of both sides with $e'_j$: $e_i \cdot e'_j = a_{ik} (e'_k \cdot e'_j) = a_{ik} \delta_{kj} = a_{ij}$. Hence, $a_{ij} = e_i \cdot e'_j$.
 
 ***
 
@@ -70,7 +70,7 @@ From $e_i = a_{ik} e'_k$, take the inner product of both sides with $e'_j$: $e_i
 > Using suffix (index) notation, show that $\nabla \times u = 0$.
 > *Hint:* You may use the result from Exercise 2.8 that $\nabla h(r) = h'(r)\, r / r$.
 
-The $i$th component of $\nabla \times u$ is $\epsilon^{ijk} \partial_j u_k = \epsilon^{ijk} \partial_j (h x_k)$. By the product rule and the hint, $\epsilon^{ijk} \partial_j (h x_k) = \epsilon^{ijk} [(h'/r) x_j x_k + h \delta_{jk}]$. The second term gives $h \epsilon^{ijk} \delta_{jk} = h \epsilon^{ijj} = 0$. For the first term, $x_j x_k$ is symmetric in $j, k$ while $\epsilon^{ijk}$ is antisymmetric in $j, k$, so $\epsilon^{ijk} x_j x_k = 0$. Hence $\nabla \times u = 0$.
+The $i$th component of $\nabla \times u$ is $\epsilon^{ijk} \partial_j u_k = \epsilon^{ijk} \partial_j (h x_k)$. By the product rule and the hint, $\epsilon^{ijk} \partial_j (h x_k) = \epsilon^{ijk} [(h'/r) x_j x_k + h \delta_{jk}]$. The second term gives $h \epsilon^{ijk} \delta_{jk} = h \epsilon^{ijj} = 0$. For the first term, $x_j x_k$ is symmetric in $j, k$ while $\epsilon^{ijk}$ is antisymmetric in $j, k$, so $\epsilon^{ijk} x_j x_k = 0$. Hence, $\nabla \times u = 0$.
 
 ***
 
@@ -96,6 +96,6 @@ The $i$th component of $\nabla \times u$ is $\epsilon^{ijk} \partial_j u_k = \ep
 > 1. Show, using suffix (index) notation, that $\nabla \\times (f \\nabla f) = 0$.
 > 2. Simplify the expression $\\nabla \\cdot (g \\nabla g)$ to an equivalent expression involving just a single differential operator acting on a single scalar field.
 
-**1.** The $i$th component is $\epsilon^{ijk} \partial_j (f \partial_k f)$. Applying the product rule: $\epsilon^{ijk} [(\partial_j f)(\partial_k f) + f \partial_j \partial_k f]$. The second term vanishes since $\partial_j \partial_k f$ is symmetric in $j, k$. For the first term, $(\partial_j f)(\partial_k f)$ is also symmetric in $j, k$, so contraction with $\epsilon^{ijk}$ gives zero. Hence $\nabla \times (f \nabla f) = 0$.
+**1.** The $i$th component is $\epsilon^{ijk} \partial_j (f \partial_k f)$. Applying the product rule: $\epsilon^{ijk} [(\partial_j f)(\partial_k f) + f \partial_j \partial_k f]$. The second term vanishes since $\partial_j \partial_k f$ is symmetric in $j, k$. For the first term, $(\partial_j f)(\partial_k f)$ is also symmetric in $j, k$, so contraction with $\epsilon^{ijk}$ gives zero. Hence, $\nabla \times (f \nabla f) = 0$.
 
 **2.** $\nabla \cdot (g \nabla g) = \partial_i (g \partial_i g) = (\partial_i g)(\partial_i g) + g \partial_i \partial_i g = |\nabla g|^2 + g \nabla^2 g$. Recognising that $(\partial_i g)(\partial_i g) = |\nabla g|^2 = \frac{1}{2} \nabla^2(g^2) - g \nabla^2 g$ is not simpler, the cleanest form is $\nabla \cdot (g \nabla g) = \frac{1}{2} \nabla^2(g^2)$, since $\partial_i \partial_i (g^2) = \partial_i (2g \partial_i g) = 2(\partial_i g)^2 + 2g \partial_i \partial_i g = 2|\nabla g|^2 + 2g\nabla^2 g$.
