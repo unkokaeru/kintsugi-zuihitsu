@@ -1,6 +1,6 @@
 # MTH3003 Weekly Problems 5
 
-> **Original Documents**: [[mth3003 weekly problem sheet 5.pdf|Problem Sheet]] / [[mth3003 weekly problem sheet 5 handwritten solutions.pdf|My Handwritten Solutions]] / [[mth3003 weekly problem sheet 5 solutions.pdf|Provided Solutions]]
+> **Original Documents**: [[mth3003 weekly problem sheet 5.pdf|Problem Sheet]] / [[mth3003 weekly problem sheet 5 handwritten solutions.pdf|My Handwritten Solutions]]
 >
 > **Vibes**: …
 >
