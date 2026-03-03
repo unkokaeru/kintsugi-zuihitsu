@@ -71,6 +71,24 @@
           }
         ],
         "currentTab": 3
+      },
+      {
+        "id": "487dee4e1416ed72",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b74e4293cdc99744",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "attached/files/mth3008 weekly problem sheet 3 solutions.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "mth3008 weekly problem sheet 3 solutions"
+            }
+          }
+        ]
       }
     ],
     "direction": "vertical"
@@ -182,11 +200,17 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "be703a2eb87fd9fb",
+  "active": "b74e4293cdc99744",
   "lastOpenFiles": [
+    "attached/files/mth3008 lecture notes 7.pdf",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 7.md",
+    "attached/files/mth3008 lecture notes 6.pdf",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 6.md",
+    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 3.md",
+    "attached/files/mth3008 weekly problem sheet 3.pdf",
+    "attached/files/mth3008 weekly problem sheet 3 solutions.pdf",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 2.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 1.md",
-    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 3.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 5.md",
     "clear/project/omoikane/mth3008/weekly problems/weekly problems.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 4.md",
@@ -207,19 +231,13 @@
     "group homomorphism.md",
     "clear/project/omoikane/mth3011/MTH3011 Project Checklist and Progress.md",
     "clear/project/omoikane/mth3003/lectures/isomorphic groups.md",
-    "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 5.md",
-    "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 5.md",
     "attached/files/mth3007b lecture notes 5.pdf",
-    "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 1.md",
     "attached/files/mth3008 weekly problem sheet 4 solutions.pdf",
     "attached/files/The Ergodicity Problem in Economics.pdf",
     "attached/files/mth3003 weekly problem sheet 4 solutions.pdf",
     "attached/files/mth3003 weekly problem sheet 5.pdf",
     "attached/files/mth3003 lecture notes 10.pdf",
     "attached/files/mth3003 lecture notes 9.pdf",
-    "attached/files/mth3008 weekly problem sheet 5.pdf",
-    "attached/files/mth3008 lecture notes 10.pdf",
-    "attached/files/mth3008 lecture notes 9.pdf",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",
     "attached/files/luna human.png",
