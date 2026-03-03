@@ -42,7 +42,7 @@ $$
 > [!important] Initial Value Problem
 > To solve this ODE, we need an initial condition. Since the integral from $a$ to $a$ represents an area of zero, our initial condition is naturally $\displaystyle F(a) = 0$.
 
-Once formulated this way, we can use any of our standard numerical methods - such as the [[explicit Euler method]], **[[Trapezoidal Rule]]**, or **[[Runge-Kutta Methods|RK4]]** - to find the value of the integral by marching forward in $z$.
+Once formulated this way, we can use any of our standard numerical methods - such as the **[[explicit Euler method]]**, **[[Implicit Trapezoid Method]]**, or **[[Runge-Kutta Methods|RK4]]** - to find the value of the integral by marching forward in $z$.
 
 ---
 
@@ -73,7 +73,7 @@ $$
 \boxed{z_n' = g(t, z_1, z_2, \dots, z_n)}
 $$
 
-> [!example] Reducing a Second-Order ODE
+> [!example] [[Reducing a Second-Order ODE]]
 > Suppose we have the specific second-order equation:
 > $\displaystyle \frac{d^2y}{dt^2} + \frac{dy}{dt} = (1 + 4t)\sqrt{y}$
 >
