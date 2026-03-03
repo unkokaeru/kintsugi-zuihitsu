@@ -45,3 +45,14 @@
 	- Dot product -> divergence (div).
 	- Cross product -> curl (curl).
 	- Validity of combinations of the above using their domain/ranges.
+	- Operations with various scalar/vector functions.
+- Coordinate transformations.
+	- Rotation/transformation matrix; compact with index notation, definitions, and properties.
+		- In 2d, basic definition.
+		- In 3d, formerly defining scalars and vectors.
+	- Dual bases: definition and how to find.
+		- Transformation rule.
+	- Contravariant and covariant components.
+		- Their relations.
+		- Applications for dot products, angles between vectors, and cross products.
+		- Arc length and the matrix tensor; finding basis vectors and metric coefficients for coordinate systems.

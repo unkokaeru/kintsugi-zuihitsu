@@ -1,8 +1,5 @@
 # MTH3008 Lecture 8
 
-> [!quote] Paula Lins
-> …
-
 This week, we build directly on last lecture's dual bases and covariant/contravariant components. How do these components change when we switch between two different coordinate systems, and how can we convert between the covariant and contravariant components of the same vector within the same system?
 
 ## The Transformation Rule
@@ -55,7 +52,7 @@ To relate $A_i$ and $A^i$ within the same system, we introduce the **metric tens
 
 - $g_{ik} = g_{ki} = e_i \cdot e_k$ (from the original basis)
 - $g^{ik} = g^{ki} = e^i \cdot e^k$ (from the dual basis)
-- $g^{\phantom{i}k}_i = e^i \cdot e_k = \delta^k_i$ (the cross term — just the Kronecker delta, from the dual basis definition)
+- $g^{\phantom{i}k}_i = e^i \cdot e_k = \delta^k_i$ (the cross term - just the Kronecker delta, from the dual basis definition)
 
 Taking the dot product of the expansions $A = A^k e_k$ and $A = A_k e^k$ with $e^i$ and $e_i$ respectively, and substituting this notation, we arrive at the index-raising and lowering formulas:
 
@@ -105,7 +102,7 @@ Where $(i, j, k)$ is a cyclic permutation of $(1, 2, 3)$.
 - **Metric tensors** relate covariant and contravariant components within a system:
   - $g_{ik} = e_i \cdot e_k$ (original basis), $g^{ik} = e^i \cdot e^k$ (dual basis), $g^{\phantom{i}k}_i = \delta^k_i$ (cross term).
   - $A_i = g_{ik} A^k$ lowers an index; $A^i = g^{ik} A_k$ raises one.
-- Applications — expressing standard operations in generalised coordinates:
+- Applications - expressing standard operations in generalised coordinates:
   - Dot product: $A \cdot B = A^i B_i = A_i B^i = g_{ik} A^i B^k$.
   - Angle: $\cos(A, B) = A^i B_i / (\sqrt{A^i A_i}\sqrt{B^i B_i})$.
   - Cross product: $C^i = (A^j B^k - A^k B^j) V$, for $(i, j, k)$ a cyclic permutation of $(1, 2, 3)$.

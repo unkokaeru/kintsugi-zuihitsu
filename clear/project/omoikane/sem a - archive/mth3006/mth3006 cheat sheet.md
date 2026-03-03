@@ -92,6 +92,7 @@
 **Formula**: $(f*g)(t)=\int_0^t f(\tau)g(t-\tau)d\tau$
 
 **Properties**:
+
 - $f*g=g*f$ (commutative) - choose whichever order makes the integral easier.
 - $f*(g+h)=f*g+f*h$ (distributive) - expand sums before convolving.
 - $f(t)*\delta(t-a) = f(t-a)$ (shifting) - delta functions just shift the argument.
@@ -153,6 +154,7 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 ### 7. PDEs - Change of Variables (8 Marks, ~1× per paper)
 
 **Chain rule formulas** for new variables $\xi(x,y)$, $\eta(x,y)$:
+
 - $u_x=u_\xi\xi_x+u_\eta\eta_x$, $\quad u_y=u_\xi\xi_y+u_\eta\eta_y$
 - $u_{xx}=u_{\xi\xi}\xi_x^2+2u_{\xi\eta}\xi_x\eta_x+u_{\eta\eta}\eta_x^2 \;(+u_\xi\xi_{xx}+u_\eta\eta_{xx}$ if $\xi,\eta$ nonlinear$)$
 - $u_{yy}=u_{\xi\xi}\xi_y^2+2u_{\xi\eta}\xi_y\eta_y+u_{\eta\eta}\eta_y^2$
@@ -245,6 +247,7 @@ For $Au_x+Bu_y=C$, write characteristic system $\frac{dx}{A}=\frac{dy}{B}(=\frac
 **Setup**: For ODE $Ly=f(x)$ where $L$ is the differential operator (e.g., $Ly = y''-\alpha^2 y$ for $y''-\alpha^2 y=f$).
 
 **Solution form**: $y(x)=\int_a^b G(x,z)f(z)\,dz$ where $z$ is dummy variable.
+
 - **Limits**: Use domain from BCs. If $G=0$ for $x<z$, integral reduces to $\int_a^x$ (only $z<x$ contributes).
 
 1. **Properties of $G$**:
