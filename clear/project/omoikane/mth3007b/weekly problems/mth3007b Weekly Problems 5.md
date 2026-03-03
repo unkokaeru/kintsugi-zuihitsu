@@ -1,11 +1,11 @@
 # MTH3007B Weekly Problems 5
 
-> **Vibes**: …
+> **Vibes**: Pretty chill, a natural extension of last week's work.
 >
 > **Used Techniques**:
 >   - …
 
-***
+---
 
 ## 5.1. Forward Euler for Second-Order ODE IVP
 

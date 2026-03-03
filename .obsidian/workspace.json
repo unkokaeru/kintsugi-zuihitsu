@@ -55,7 +55,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -167,9 +167,12 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "64b713803c915fe5",
+  "active": "46f557b0a635bd51",
   "lastOpenFiles": [
     "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 5.md",
+    "clear/project/project.md",
+    "clear/project/omoikane/mth3011/mth3011.md",
+    "clear/project/omoikane/mth3007b/weekly problems/mth3007b Weekly Problems 4.md",
     "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 5.md",
     "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 3.md",
     "clear/project/omoikane/mth3007b/mth3007b.md",
@@ -193,11 +196,8 @@
     "cloudy/project/yatagarasu/notes from meetings.md",
     "2026-03-02.md",
     "attached/files/The Ergodicity Problem in Economics.pdf",
-    "clear/project/omoikane/mth3011/mth3011.md",
     "attached/files/mth3007b lecture notes 5.pdf",
     "clear/library/Organising my Life.md",
-    "cloudy/project/yatagarasu/update the website.md",
-    "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 5.md",
     "attached/files/mth3003 weekly problem sheet 4 solutions.pdf",
     "attached/files/mth3003 weekly problem sheet 5.pdf",
     "attached/files/mth3003 lecture notes 10.pdf",
