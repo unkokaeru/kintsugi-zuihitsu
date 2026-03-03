@@ -9,12 +9,8 @@
 	- **Codebase review**: methodically go through everything, eliminating inconsistencies.
 	- **Platform testing**: Record the [[help videos]] for each feature of the platform.
 	- **Statistics**: checked shared stats spreadsheet for what should be actively collected.
-- Continuously work on **[[omoikane]]** work…
-	- **Project work** - send a summary to Yuri of progress so far; report should've begun!
-	- Read [[The Ergodicity Problem in Economics.pdf|this paper]] to draft a **critical review** to then present.
-	- Write a cheat sheet for [[mth3008|tensor analysis]].
-	- Complete any unfinished **notes/problems** (below).
 - Chill out and play some **Factorio**, hehe.
+- Do some **[[Omoikane]]** work - below.
 
 ```todo-wheel
 ```

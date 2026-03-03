@@ -3,7 +3,7 @@
 > [!quote] Simon Smith
 > …
 
-This lecture pushes further into **[[clear/project/omoikane/mth3003/lectures/isomorphism|isomorphisms]]**, treating them as the right notion of "sameness" for groups and then using that perspective to classify groups of prime order. We also see concrete examples and a full proof that any group of prime order is **[[cyclic group|cyclic]]** and hence isomorphic to a familiar model.
+This lecture pushes further into **[[isomorphism|isomorphisms]]**, treating them as the right notion of "sameness" for groups and then using that perspective to classify groups of prime order. We also see concrete examples and a full proof that any group of prime order is **[[cyclic group|cyclic]]** and hence isomorphic to a familiar model.
 
 ## Isomorphisms
 
@@ -112,7 +112,7 @@ We end with an important structural classification result.
 
 1. Choose a non identity element $g \in G$.
 2. Consider the **subgroup** $H = \langle g \rangle$.
-3. By **[[Lagrange's theorem|Lagrange’s Theorem]]**, the order $\lvert H \rvert$ divides $\lvert G \rvert = p$.
+3. By **Lagrange's theorem**, the order $\lvert H \rvert$ divides $\lvert G \rvert = p$.
    Since $p$ is prime, we must have $\lvert H \rvert = 1$ or $\lvert H \rvert = p$.
 4. The case $\lvert H \rvert = 1$ would mean $H = \langle e_{G} \rangle$, but $g \neq e_{G}$, so this is impossible.
    Therefore, $\lvert H \rvert = p$.

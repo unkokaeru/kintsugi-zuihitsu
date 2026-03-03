@@ -7,7 +7,7 @@ This lecture continues Chapter 4, building directly on last time's introduction 
 
 ## Tensors: Rank and Transformation Law
 
-A **[[tensor]]** in an orthogonal coordinate system is defined by how its components transform under a coordinate rotation $L_{ij}$. The general rule is one factor of $L$ per free index:
+A **tensor** in an orthogonal coordinate system is defined by how its components transform under a coordinate rotation $L_{ij}$. The general rule is one factor of $L$ per free index:
 
 $$
 T'_{ij} = L_{im} L_{jn} T_{mn}, \qquad T'_{ijk} = L_{im} L_{jn} L_{kp} T_{mnp}, \qquad \text{etc.}
@@ -26,7 +26,7 @@ $$
 L_{ik} L_{jm} \delta_{km} = L_{ik} L_{jk} = \delta_{ij}.
 $$
 
-Since $\delta_{ij}$ is defined identically in every coordinate system, $\delta'_{ij} = \delta_{ij}$, so the law holds. $\blacksquare$
+Since $\delta_{ij}$ is defined identically in every coordinate system, $\delta'_{ij} = \delta_{ij}$, so the law holds. $\boxed{}$
 
 ### Example: Gradient of a Vector is a Rank-2 Tensor
 
@@ -56,7 +56,7 @@ $$
 \boxed{\frac{\partial u'_i}{\partial x'_j} = L_{ik} L_{j\ell} \frac{\partial u_k}{\partial x_\ell}}
 $$
 
-So $\nabla \mathbf{u} = \partial u_i / \partial x_j$ is a rank-2 tensor. $\blacksquare$
+So $\nabla \mathbf{u} = \partial u_i / \partial x_j$ is a rank-2 tensor. $\boxed{}$
 
 > [!warning] $L_{ij}$ constant - Cartesian coordinates only
 > The step $\partial L_{ik}/\partial x'_j = 0$ relies on $L$ being a *constant* rotation matrix. In curvilinear coordinates the analogous "transformation matrix" varies with position, so this argument completely breaks down - Chapter 5 exists precisely to handle this.
@@ -113,8 +113,8 @@ Confirming $T_{ij}$ is a rank-2 tensor. $\boxed{}$
 
 > [!important] Symmetry Definitions
 > A second-rank tensor $T_{ij}$ is:
-> - **[[symmetric tensor|symmetric]]** if $T_{ij} = T_{ji}$,
-> - **[[antisymmetric tensor|antisymmetric]]** (skew-symmetric) if $T_{ij} = -T_{ji}$.
+> - **Symmetric** if $T_{ij} = T_{ji}$,
+> - **Antisymmetric** (skew-symmetric) if $T_{ij} = -T_{ji}$.
 > 
 > For higher-rank tensors, symmetry is defined *with respect to a chosen pair of indices*, e.g. $\varepsilon_{ijk} = -\varepsilon_{jik}$.
 
@@ -138,15 +138,15 @@ The identical argument (with a sign flip) proves antisymmetry is also frame-inde
 > [!important] Decomposition Theorem
 > Any rank-2 tensor decomposes uniquely as $T_{ik} = S_{ik} + A_{ik}$, where
 >
-> $S_{ik} = \dfrac{1}{2}(T_{ik} + T_{ki})$ - the **[[symmetrisation|symmetric part]]** of $T_{ik}$,
+> $S_{ik} = \dfrac{1}{2}(T_{ik} + T_{ki})$ - the **symmetric part** of $T_{ik}$,
 >
-> $A_{ik} = \dfrac{1}{2}(T_{ik} - T_{ki})$ - the **[[antisymmetrisation|antisymmetric part]]** of $T_{ik}$.
+> $A_{ik} = \dfrac{1}{2}(T_{ik} - T_{ki})$ - the **antisymmetric part** of $T_{ik}$.
 
 The decomposition is verified directly: $S_{ik} + A_{ik} = \tfrac{1}{2}(T_{ik}+T_{ki}) + \tfrac{1}{2}(T_{ik}-T_{ki}) = T_{ik}$. Uniqueness follows because if $T_{ik} = S_{ik} + A_{ik} = S'_{ik} + A'_{ik}$ then $S_{ik} - S'_{ik} = A'_{ik} - A_{ik}$ is simultaneously symmetric and antisymmetric, hence zero.
 
 ### Example: $\varepsilon_{ijk} T_{jk} = 0 \Rightarrow T_{ij}$ Symmetric
 
-Fix $i = 1$ and expand - only terms where $(j,k)$ give non-zero $\varepsilon_{1jk}$ contribute:
+Fix $i = 1$ and expand - only terms where $(j,k)$ give nonzero $\varepsilon_{1jk}$ contribute:
 
 $$
 \varepsilon_{1jk} T_{jk} = \varepsilon_{123} T_{23} + \varepsilon_{132} T_{32} = T_{23} - T_{32} = 0 \implies T_{23} = T_{32}.

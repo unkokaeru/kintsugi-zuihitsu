@@ -1,3 +1,8 @@
 # Isomorphism
 
-When a homomorphism is bijective (both one-to-one and onto), we call it an **isomorphism**, denoted $G \cong H$. This means the groups are structurally identical.
+A function $\theta \colon G \to H$ between groups $(G,\ast)$ and $(H,\circ)$ is called an **isomorphism** if:
+
+- $\theta$ is a **homomorphism**, i.e. $\theta(g_{1} \ast g_{2}) = \theta(g_{1}) \circ \theta(g_{2})$ for all $g_{1}, g_{2} \in G$,
+- $\theta$ is **[[bijection|bijective]]** (one-to-one and onto).
+
+In this case we say $G$ and $H$ are **isomorphic** and write $G \cong H$.
