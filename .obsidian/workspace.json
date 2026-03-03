@@ -23,8 +23,54 @@
               "icon": "lucide-file",
               "title": "To-Do List"
             }
+          },
+          {
+            "id": "4bce4d389ead6db0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3008/lectures/mth3008 lecture 10.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "mth3008 lecture 10"
+            }
+          },
+          {
+            "id": "ac53279ed9528ce8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3003/mth3003 lecture 10.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "mth3003 lecture 10"
+            }
+          },
+          {
+            "id": "d3cea24c4c71c335",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3007b/mth3007b lecture 5.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "mth3007b lecture 5"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -136,10 +182,13 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "fc7d9a3b8186fcb9",
+  "active": "4bce4d389ead6db0",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 9.md",
+    "clear/project/omoikane/mth3007b/mth3007b lecture 5.md",
+    "clear/project/omoikane/mth3003/mth3003 lecture 10.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 10.md",
     "To-Do List.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 9.md",
     "clear/project/omoikane/mth3003/mth3003 lecture 9.md",
     "clear/project/omoikane/mth3003/isomorphism.md",
     "clear/project/omoikane/mth3003/image.md",
@@ -150,7 +199,6 @@
     "attached/files/The Ergodicity Problem in Economics.pdf",
     "clear/project/omoikane/mth3011/mth3011.md",
     "clear/project/omoikane/mth3007b/mth3007b.md",
-    "clear/project/omoikane/mth3007b/mth3007b lecture 5.md",
     "attached/files/mth3007b lecture notes 5.pdf",
     "clear/library/Organising my Life.md",
     "cloudy/project/yatagarasu/update the website.md",
@@ -159,7 +207,6 @@
     "attached/files/mth3003 weekly problem sheet 4 solutions.pdf",
     "clear/project/omoikane/mth3003/mth3003.md",
     "attached/files/mth3003 weekly problem sheet 5.pdf",
-    "clear/project/omoikane/mth3003/mth3003 lecture 10.md",
     "attached/files/mth3003 lecture notes 10.pdf",
     "attached/files/mth3003 lecture notes 9.pdf",
     "cloudy/project/yatagarasu/temp old.md",
@@ -169,7 +216,6 @@
     "cloudy/project/yatagarasu/reasons to cancel work orders.md",
     "clear/library/sloth bytes/sloth bytes.md",
     "clear/library/sloth bytes/easy/Calculate Damage - Beginner.md",
-    "clear/library/sloth bytes/easy/Birthday Cake Candles.md",
     "attached/files/mth3008 weekly problem sheet 5.pdf",
     "attached/files/mth3008 lecture notes 10.pdf",
     "attached/files/mth3008 lecture notes 9.pdf",
