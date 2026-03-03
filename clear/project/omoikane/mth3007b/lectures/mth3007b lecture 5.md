@@ -42,7 +42,7 @@ $$
 > [!important] Initial Value Problem
 > To solve this ODE, we need an initial condition. Since the integral from $a$ to $a$ represents an area of zero, our initial condition is naturally $\displaystyle F(a) = 0$.
 
-Once formulated this way, we can use any of our standard numerical methods—such as the explicit Euler method, **[[Trapezoidal Rule]]**, or **[[Runge-Kutta Methods|RK4]]**—to find the value of the integral by marching forward in $z$.
+Once formulated this way, we can use any of our standard numerical methods - such as the explicit Euler method, **[[Trapezoidal Rule]]**, or **[[Runge-Kutta Methods|RK4]]** - to find the value of the integral by marching forward in $z$.
 
 ---
 
