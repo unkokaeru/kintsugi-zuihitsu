@@ -8,7 +8,7 @@ We can evaluate the stability of our numerical schemes by applying them to a sta
 
 ### Explicit (Forward) Euler
 
-The explicit **[[Euler Method]]** is only conditionally stable. When applied to the test equation, the numerical scheme becomes:
+The **[[explicit Euler Method]]** is only conditionally stable. When applied to the test equation, the numerical scheme becomes:
 
 $$
 \boxed{y(t + \Delta t) = (1 - a\Delta t)y(t)}
@@ -31,7 +31,7 @@ Since $a > 0$ and $\Delta t > 0$, the denominator $1 + a\Delta t$ is always stri
 
 ## Numerical Evaluation of Integrals
 
-We can compute a definite integral numerically by differentiating it and solving the associated **[[Ordinary Differential Equation]]** (ODE).
+We can compute a definite integral numerically by differentiating it and solving the associated **Ordinary Differential Equation** (ODE).
 
 If we want to evaluate an integral of the form $F(z) = \int_a^z f(x) \, dx$, we can differentiate both sides with respect to $z$ to obtain a first-order ODE:
 
@@ -42,7 +42,7 @@ $$
 > [!important] Initial Value Problem
 > To solve this ODE, we need an initial condition. Since the integral from $a$ to $a$ represents an area of zero, our initial condition is naturally $\displaystyle F(a) = 0$.
 
-Once formulated this way, we can use any of our standard numerical methods - such as the explicit Euler method, **[[Trapezoidal Rule]]**, or **[[Runge-Kutta Methods|RK4]]** - to find the value of the integral by marching forward in $z$.
+Once formulated this way, we can use any of our standard numerical methods - such as the [[explicit Euler method]], **[[Trapezoidal Rule]]**, or **[[Runge-Kutta Methods|RK4]]** - to find the value of the integral by marching forward in $z$.
 
 ---
 
