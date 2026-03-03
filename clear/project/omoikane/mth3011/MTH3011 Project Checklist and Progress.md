@@ -4,6 +4,32 @@
 
 > Use [[Research Plan]], [[Logbook.pdf]], and this [Perplexity Space](https://www.perplexity.ai/search/create-an-actionable-checklist-PvZE7bYWSkiMk754JCJEpw), to populate a checklist of what to do!
 
+I've said that I've…
+
+```markdown
+Good afternoon!
+
+Just realised I never sent the progress update email, so here it is. I don't think I have many questions either (I mostly just need to finish the work so far), so not actually sure if a meeting today is necessary - let me know after reading through the update. 
+
+My work so far is split into three areas: reading, practice, and writing…
+
+	1. For reading, I've been going through various books and online resources to understand proof assistants and their underlying logic. So that I don't forget what I've learned so far (and for the logbook), I've been writing down everything I'm learning in sort of a textbook format.
+	2. For practice, I've been using tools like [this](https://adam.math.hhu.de/#/g/leanprover-community/nng4) to interactively learn, as well as going through random theorems from first/second year and proving those in Lean, within VS Code.
+	3. For writing, I've been focusing on tracking everything in my logbook (including references), but have now made a skeleton document for the report ready for me to start outlining sections with bullet points, just so I don't have to worry about formatting etc. down the line - just content.
+
+For next steps, I'm not reading as much anymore - just specific bits that come up elsewhere - and focusing more on organising the work I've done so far to fit the structure of the final report, and I might now try to make my own proof assistant, too.
+
+I'm planning that by April I'll have part of the report completed, and ready to flesh out the rest of the report before May, so I can spend that month just refining and redrafting.
+
+
+Kind regards,
+
+William Fayers
+3rd Year
+BSc Mathematics Undergraduate (27378661)
+University of Lincoln
+```
+
 ## Pre-Project
 
 - [x] Submit completed research plan to supervisor (deadline: **22 Oct 2025**)
