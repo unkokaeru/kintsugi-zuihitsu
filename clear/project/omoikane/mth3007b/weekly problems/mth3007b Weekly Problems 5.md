@@ -39,22 +39,18 @@
 ```python runnable
 """Solutions for Session 5 - Higher Order ODEs."""
 
-import logging
-from pathlib import Path
-from typing import Callable
+import micropip
+await micropip.install('matplotlib')
+await micropip.install('numpy')
 
-import matplotlib
-import matplotlib.pyplot as plt
+import logging
+from typing import Callable
 import numpy as np
 import numpy.typing as npt
-
-matplotlib.use("Agg")
+import matplotlib.pyplot as plt
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-SCRIPT_DIR = Path(__file__).resolve().parent
-FIGURES_DIR = SCRIPT_DIR / "figures"
 
 
 def explicit_euler_system(
@@ -66,22 +62,7 @@ def explicit_euler_system(
     time_end: float,
     time_step: float,
 ) -> tuple[npt.NDArray[np.float64], npt.NDArray[np.float64]]:
-    """Solve a system of ODEs using the explicit Euler method.
-
-    The explicit Euler method for systems uses the vector approximation:
-    y_{n+1} = y_n + h * g(t_n, y_n)
-
-    Args:
-        derivative_function: Function g(t, y) that computes dy/dt as a vector.
-        initial_values: Initial condition vector y(t_0).
-        time_start: Starting time t_0.
-        time_end: Ending time t_max.
-        time_step: Time step size h (Delta t).
-
-    Returns:
-        Tuple of (time_values, solution_values) where solution_values has
-        shape (number_of_steps + 1, number_of_equations).
-    """
+    """Solve a system of ODEs using the explicit Euler method."""
     number_of_steps = int((time_end - time_start) / time_step)
     time_values = np.linspace(time_start, time_end, number_of_steps + 1)
     number_of_equations = len(initial_values)
@@ -106,26 +87,7 @@ def rk4_system(
     time_end: float,
     time_step: float,
 ) -> tuple[npt.NDArray[np.float64], npt.NDArray[np.float64]]:
-    """Solve a system of ODEs using the classical fourth-order Runge-Kutta method.
-
-    The RK4 method for systems uses:
-    k1 = f(t_n, y_n)
-    k2 = f(t_n + h/2, y_n + h/2 * k1)
-    k3 = f(t_n + h/2, y_n + h/2 * k2)
-    k4 = f(t_n + h, y_n + h * k3)
-    y_{n+1} = y_n + (h/6) * (k1 + 2*k2 + 2*k3 + k4)
-
-    Args:
-        derivative_function: Function g(t, y) that computes dy/dt as a vector.
-        initial_values: Initial condition vector y(t_0).
-        time_start: Starting time t_0.
-        time_end: Ending time t_max.
-        time_step: Time step size h (Delta t).
-
-    Returns:
-        Tuple of (time_values, solution_values) where solution_values has
-        shape (number_of_steps + 1, number_of_equations).
-    """
+    """Solve a system of ODEs using the classical fourth-order Runge-Kutta method."""
     number_of_steps = int((time_end - time_start) / time_step)
     time_values = np.linspace(time_start, time_end, number_of_steps + 1)
     number_of_equations = len(initial_values)
@@ -158,12 +120,7 @@ def system_derivatives(
     _time: float,
     state: npt.NDArray[np.float64],
 ) -> npt.NDArray[np.float64]:
-    """Compute derivatives for the system form of y'' + 6y = 0.
-
-    With y1 = y and y2 = y', the system is:
-        dy1/dt = y2
-        dy2/dt = -6 * y1
-    """
+    """Compute derivatives for the system form of y'' + 6y = 0."""
     y1, y2 = state
     return np.array([y2, -6.0 * y1])
 
@@ -174,12 +131,29 @@ def exact_solution(time_values: npt.NDArray[np.float64]) -> npt.NDArray[np.float
     return -(sqrt6 / 2) * np.sin(sqrt6 * time_values) + 2 * np.cos(sqrt6 * time_values)
 
 
-def main() -> None:
+def plot_comparison(time_values, exact_y, euler_y, rk4_y, time_step):
+    """Create comparison plot of all methods."""
+    fig, ax = plt.subplots(figsize=(12, 8))
+    ax.plot(time_values, exact_y, "k-", linewidth=3, label="Exact")
+    ax.plot(time_values, euler_y, "b--", linewidth=2, label="Forward Euler")
+    ax.plot(time_values, rk4_y, "r-.", linewidth=2, label="RK4")
+    ax.set_xlabel("Time t", fontsize=14)
+    ax.set_ylabel("y(t)", fontsize=14)
+    ax.set_title(f"Forward Euler vs RK4 vs Exact Solution (Δt = {time_step})", fontsize=16)
+    ax.legend(fontsize=12)
+    ax.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.show()
+
+
+def main():
     """Entry point for Session 5 solutions."""
     initial_values = np.array([2.0, -3.0])
     time_start = 0.0
     time_end = 5.0
     time_step = 0.1
+
+    print("=== Session 5 - Higher Order ODEs Solutions ===\n")
 
     # Q5.1: Forward Euler
     time_values, euler_solution = explicit_euler_system(
@@ -194,21 +168,19 @@ def main() -> None:
 
     print(f"Q5.1.3: Forward Euler y(5) = {euler_y_at_5:f}")
     print(f"        Exact y(5)         = {exact_y_at_5:f}")
-    print(f"        Error at t=5       = {euler_error:f}")
+    print(f"        Error at t=5       = {euler_error:e}\n")
 
-    # Q5.1.4: Euler vs exact plot
-    fig, ax = plt.subplots(figsize=(10, 6))
-    ax.plot(time_values, exact_y, "k-", linewidth=2, label="Exact")
-    ax.plot(time_values, euler_y, "b--", linewidth=1.5, label="Forward Euler")
-    ax.set(xlabel="Time t", ylabel="y(t)")
-    ax.set_title(f"Forward Euler vs Exact Solution (Δt = {time_step})")
-    ax.legend()
-    ax.grid(True, alpha=0.3)
+    # Euler vs Exact plot
+    fig1, ax1 = plt.subplots(figsize=(10, 6))
+    ax1.plot(time_values, exact_y, "k-", linewidth=2, label="Exact")
+    ax1.plot(time_values, euler_y, "b--", linewidth=1.5, label="Forward Euler")
+    ax1.set_xlabel("Time t")
+    ax1.set_ylabel("y(t)")
+    ax1.set_title(f"Forward Euler vs Exact Solution (Δt = {time_step})")
+    ax1.legend()
+    ax1.grid(True, alpha=0.3)
     plt.tight_layout()
-    FIGURES_DIR.mkdir(exist_ok=True)
-    plt.savefig(FIGURES_DIR / "euler_vs_exact.png", dpi=300, bbox_inches="tight")
-    plt.close(fig)
-    logger.info("Saved figures/euler_vs_exact.png")
+    plt.show()
 
     # Q5.2: RK4
     _, rk4_solution = rk4_system(
@@ -219,24 +191,12 @@ def main() -> None:
     rk4_error = abs(rk4_y_at_5 - exact_y_at_5)
 
     print(f"Q5.2.2: RK4 y(5)          = {rk4_y_at_5:f}")
-    print(f"        Error at t=5       = {rk4_error:f}")
-    print(f"Q5.2.4: Euler/RK4 ratio    = {euler_error / rk4_error:f}")
+    print(f"        Error at t=5       = {rk4_error:e}")
+    print(f"Q5.2.4: Euler/RK4 ratio    = {euler_error / rk4_error:e}\n")
 
-    # Q5.2.3: All methods plot
-    fig, ax = plt.subplots(figsize=(10, 6))
-    ax.plot(time_values, exact_y, "k-", linewidth=2, label="Exact")
-    ax.plot(time_values, euler_y, "b--", linewidth=1.5, label="Forward Euler")
-    ax.plot(time_values, rk4_y, "r-.", linewidth=1.5, label="RK4")
-    ax.set(xlabel="Time t", ylabel="y(t)")
-    ax.set_title(f"Forward Euler vs RK4 vs Exact Solution (Δt = {time_step})")
-    ax.legend()
-    ax.grid(True, alpha=0.3)
-    plt.tight_layout()
-    plt.savefig(FIGURES_DIR / "all_methods_comparison.png", dpi=300, bbox_inches="tight")
-    plt.close(fig)
-    logger.info("Saved figures/all_methods_comparison.png")
+    # All methods comparison
+    plot_comparison(time_values, exact_y, euler_y, rk4_y, time_step)
 
 
-if __name__ == "__main__":
-    main()
+main()
 ```
