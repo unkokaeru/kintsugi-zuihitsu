@@ -40,52 +40,37 @@
             }
           },
           {
-            "id": "37ebbcaf6c739005",
+            "id": "f3e42df411f256a0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 5.md",
+                "file": "clear/project/omoikane/mth3008/lectures/lectures.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "mth3008 weekly problems 5"
+              "title": "lectures"
             }
           },
           {
-            "id": "21e479e111a3b227",
+            "id": "5d4201257c954da5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3008/weekly problems/weekly problems.md",
+                "file": "clear/project/omoikane/mth3008/lectures/mth3008 lecture 5.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "weekly problems"
-            }
-          },
-          {
-            "id": "8d8fc4d25babf963",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 1.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "mth3008 weekly problems 1"
+              "title": "mth3008 lecture 5"
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -197,15 +182,23 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "8d8fc4d25babf963",
+  "active": "5d4201257c954da5",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3008/weekly problems/weekly problems.md",
-    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 5.md",
+    "clear/project/omoikane/mth3008/lectures/lectures.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 4.md",
     "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
-    "To-Do List.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 3.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 2.md",
+    "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 1.md",
+    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 5.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 4.md",
-    "attached/files/mth3008 weekly problem sheet 4 solutions.pdf",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 3.md",
+    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 2.md",
+    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 1.md",
+    "clear/project/omoikane/mth3008/weekly problems/weekly problems.md",
+    "To-Do List.md",
+    "attached/files/mth3008 weekly problem sheet 4 solutions.pdf",
     "attached/files/mth3008 weekly problem sheet 3 solutions.pdf",
     "clear/project/omoikane/mth3008/notes/Gradient.md",
     "attached/files/mth3008 lecture notes 7.pdf",
@@ -213,8 +206,6 @@
     "attached/files/mth3008 lecture notes 6.pdf",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 6.md",
     "attached/files/mth3008 weekly problem sheet 3.pdf",
-    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 2.md",
-    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 1.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 5.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 10.md",
     "clear/project/omoikane/mth3007b/lectures/lectures.md",
@@ -224,11 +215,6 @@
     "clear/project/omoikane/mth3003/notes/isomorphism.md",
     "clear/project/omoikane/mth3008/notes/rank.md",
     "clear/project/omoikane/mth3008/mth3008.md",
-    "clear/project/omoikane/mth3008/revision/portfolio associated questions/portfolio associated questions.md",
-    "clear/project/omoikane/mth3011/mth3011.md",
-    "clear/project/omoikane/mth3011/Critical Review on the Ergodicity Problem in Economics.md",
-    "group homomorphism.md",
-    "clear/project/omoikane/mth3011/MTH3011 Project Checklist and Progress.md",
     "attached/files/mth3007b lecture notes 5.pdf",
     "attached/files/The Ergodicity Problem in Economics.pdf",
     "attached/files/mth3003 weekly problem sheet 4 solutions.pdf",
