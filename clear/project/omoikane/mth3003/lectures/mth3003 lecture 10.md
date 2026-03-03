@@ -3,18 +3,18 @@
 > [!quote] Simon Smith
 > …
 
-This lecture pushes further into **[[group isomorphism|isomorphisms]]**, treating them as the right notion of "sameness" for groups and then using that perspective to classify groups of prime order. We also see concrete examples and a full proof that any group of prime order is **[[cyclic group|cyclic]]** and hence isomorphic to a familiar model.
+This lecture pushes further into **[[clear/project/omoikane/mth3003/lectures/isomorphism|isomorphisms]]**, treating them as the right notion of "sameness" for groups and then using that perspective to classify groups of prime order. We also see concrete examples and a full proof that any group of prime order is **[[cyclic group|cyclic]]** and hence isomorphic to a familiar model.
 
 ## Isomorphisms
 
 We now formalise when two groups "are the same" from a structural point of view.
 
 > [!important] Definition — Isomorphism
-> A function $\theta \colon G \to H$ between groups $(G,\ast)$ and $(H,\circ)$ is called an **[[group isomorphism|isomorphism]]** if:
-> - $\theta$ is a **[[group homomorphism|homomorphism]]**, i.e. $\theta(g_{1} \ast g_{2}) = \theta(g_{1}) \circ \theta(g_{2})$ for all $g_{1}, g_{2} \in G$,
+> A function $\theta \colon G \to H$ between groups $(G,\ast)$ and $(H,\circ)$ is called an **[[isomorphism]]** if:
+> - $\theta$ is a **[[homomorphism]]**, i.e. $\theta(g_{1} \ast g_{2}) = \theta(g_{1}) \circ \theta(g_{2})$ for all $g_{1}, g_{2} \in G$,
 > - $\theta$ is **[[bijection|bijective]]** (one-to-one and onto).
 > 
-> In this case we say $G$ and $H$ are **[[isomorphic groups|isomorphic]]** and write $G \cong H$.
+> In this case we say $G$ and $H$ are **isomorphic** and write $G \cong H$.
 
 The slogan is: isomorphic groups have the same group structure, but may use different "labels" for their elements.
 
@@ -45,7 +45,7 @@ We now move to two important families of examples.
 Let $n \in \mathbb{N}$. We have:
 
 - The **[[cyclic group|cyclic group]]** $C_{n} = \langle \rho \rangle$ where $\rho$ is the $n$-cycle $(1\\,\dots\,n)$, operation is composition.
-- The **[[integers modulo n|integers modulo $n$]]** $Z_{n} = \langle [1]_{n} \rangle$, operation is $\oplus$ (addition modulo $n$).
+- The **integers modulo $n$** $Z_{n} = \langle [1]_{n} \rangle$, operation is $\oplus$ (addition modulo $n$).
 
 Every element of $C_{n}$ can be written as $\rho^{m}$ for some integer $m$, and every element of $Z_{n}$ can be written as a multiple of $[1]_{n}$.
 
@@ -111,7 +111,7 @@ We end with an important structural classification result.
 **Proof sketch.**
 
 1. Choose a non identity element $g \in G$.
-2. Consider the **[[cyclic subgroup|subgroup]]** $H = \langle g \rangle$.
+2. Consider the **subgroup** $H = \langle g \rangle$.
 3. By **[[Lagrange's theorem|Lagrange’s Theorem]]**, the order $\lvert H \rvert$ divides $\lvert G \rvert = p$.
    Since $p$ is prime, we must have $\lvert H \rvert = 1$ or $\lvert H \rvert = p$.
 4. The case $\lvert H \rvert = 1$ would mean $H = \langle e_{G} \rangle$, but $g \neq e_{G}$, so this is impossible.
@@ -147,7 +147,7 @@ $$
    \varphi(g^{n} g^{m}) = \varphi(g^{n+m}) = \rho^{n+m} = \rho^{n} \rho^{m} = \varphi(g^{n}) \varphi(g^{m}).
 
 $$
-   Hence $\varphi$ is an isomorphism.
+   Hence, $\varphi$ is an isomorphism.
 
 Therefore, every group of prime order $p$ is isomorphic to the standard cyclic group $C_{p}$, and there is only one such group up to isomorphism.
 
@@ -155,7 +155,7 @@ Therefore, every group of prime order $p$ is isomorphic to the standard cyclic g
 
 ## Pre-Lecture Notes from [[mth3003 lecture notes 10.pdf|University Notes]]
 
-- Defined **[[group isomorphism|isomorphism]]** as a bijective homomorphism $\theta \colon G \to H$, wrote $G \cong H$, and emphasised "same structure, different labels".
+- Defined **[[isomorphism]]** as a bijective homomorphism $\theta \colon G \to H$, wrote $G \cong H$, and emphasised "same structure, different labels".
 - Noted that isomorphic finite groups have the same order; more generally, isomorphisms preserve structural properties like being cyclic or Abelian.
 - Gave examples:
   - $\operatorname{Sym}(\{a,b,c\}) \cong \operatorname{Sym}(\{1,2,3\})$ via relabelling of symbols.

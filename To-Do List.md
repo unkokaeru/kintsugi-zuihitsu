@@ -12,6 +12,7 @@
 - Continuously work on **[[omoikane]]** work…
 	- **Project work** - send a summary to Yuri of progress so far; report should've begun!
 	- Read [[The Ergodicity Problem in Economics.pdf|this paper]] to draft a **critical review** to then present.
+	- Write a cheat sheet for [[mth3008|tensor analysis]].
 	- Complete any unfinished **notes/problems** (below).
 - Chill out and play some **Factorio**, hehe.
 

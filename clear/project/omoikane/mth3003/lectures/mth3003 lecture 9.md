@@ -71,7 +71,7 @@ There are several fundamental properties that hold for any homomorphism $\theta:
 > [!note] Subgroup Status
 > Notice that while the kernel is always a normal subgroup of $G$, the image is generally just a subgroup of $H$ (not necessarily normal).
 
-When a homomorphism is bijective (both one-to-one and onto), we call it an **[[isomorphism]]**, denoted $G \cong H$. This means the groups are structurally identical.
+When a homomorphism is bijective (both one-to-one and onto), we call it an **[[clear/project/omoikane/mth3003/notes/isomorphism]]**, denoted $G \cong H$. This means the groups are structurally identical.
 
 > [!example] Homomorphism from $S_3$ to $S_2$
 > Define $\phi: S_3 \to S_2$ where $\phi$ sends 3-cycles to $e$, and all 2-cycles to $(1\,2)$.
