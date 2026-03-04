@@ -30,7 +30,7 @@
 	- Definition: $\epsilon_{ijk}=\begin{cases}0 & \text{if any of }i,j,k \text{ are equal} \\ +1 & \text{if }(i,j,k)=(1,2,3),(2,3,1), \text{or }(3,1,2)\text{ - even permutation} \\ -1 & \text{if }(i,j,k)=(1,3,2),(2,1,3), \text{or }(3,2,1)\text{ - odd permutation}\end{cases}$.
 	- Permutations: $\epsilon_{ijk} = \epsilon_{jki} = \epsilon_{kij}$ (cyclic, keep sign). $\epsilon_{ijk} = -\epsilon_{jik}$ (swap two, flip sign).
 4. **The $\delta-\epsilon$ Identity**:
-	- $\epsilon_{ijk}\epsilon_{klm} = \delta_{il}\delta_{jm} - \delta_{im}\delta_{jl}$
+	- $\epsilon_{ijk}\epsilon_{klm} = \delta_{il}\delta_{jm} - \delta_{im}\delta_{jl}$; (first/second X second/third, first/third X second/second)
 	- *Always cyclically permute so the shared dummy index is in the 3rd position before applying.*
 5. **The Kill Rule**: Symmetric $\times$ Antisymmetric $= 0$.
 	- If $S_{jk} = S_{kj}$, then $\epsilon_{ijk}S_{jk} = 0$.
