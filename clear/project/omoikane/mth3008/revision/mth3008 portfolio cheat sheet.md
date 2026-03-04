@@ -98,14 +98,19 @@
 	- Coordinate transform: $x'_i = L_{ij}x_j$. Inverse: $x_i = L_{ji}x'_j$.
 	- Rotation matrix properties: $L_{ij}L_{kj} = \delta_{ik}$ and $L_{ji}L_{jk} = \delta_{ik}$.
 	- Chain rule: $\frac{\partial}{\partial x'_i} = L_{ji} \frac{\partial}{\partial x_j}$.
+	- Product rule: $\frac{\partial}{\partial x}(fg) = f\frac{\partial g}{\partial x} + g\frac{\partial f}{\partial x}$.
 2. **Method**:
 	- Write the primed quantity (e.g., $(a \cdot b)' = a'_i b'_i$).
 	- Substitute the transformation law for each piece (e.g., $a'_i = L_{ij}a_j$).
+	- Simplify if possible (e.g., with partial differentiation like product rule or chain rule).
 	- Group the $L$ matrices together.
-	- Collapse $L_{ij}L_{kj}$ into $\delta_{ik}$.
+	- Collapse $L_{ij}L_{kj}$ into $\delta_{ik}$ if possible.
 	- Use $\delta_{ik}$ to collapse dummy indices and recover the unprimed quantity.
 3. **Contraction reduces rank**:
 	- If $T_{ij}$ is a rank-2 tensor, $T_{ii}$ is a scalar. Proof: $T'_{ii} = L_{ia}L_{ib}T_{ab} = \delta_{ab}T_{ab} = T_{aa}$.
+4. **Outcome:**
+	- Single term with $n$ $L$s for $n$ free indices? Rank-$n$ tensor.
+	- Extra terms that don't cancel? Not a tensor.
 
 ### 5. $\nabla$ Operator Identities & Radial Functions
 
