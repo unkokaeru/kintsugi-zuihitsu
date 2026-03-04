@@ -53,24 +53,9 @@
               "icon": "lucide-file",
               "title": "draft portfolio cheat sheet"
             }
-          },
-          {
-            "id": "2cb9d2126443c5b5",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/sem a - archive/mth3006/mth3006 cheat sheet.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "mth3006 cheat sheet"
-            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -182,12 +167,12 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "2cb9d2126443c5b5",
+  "active": "91606e7e2b494658",
   "lastOpenFiles": [
+    "clear/project/omoikane/sem a - archive/mth3006/mth3006 cheat sheet.md",
     "clear/project/omoikane/mth3008/revision/draft portfolio cheat sheet.md",
     "To-Do List.md",
     "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
-    "clear/project/omoikane/sem a - archive/mth3006/mth3006 cheat sheet.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 10.md",
     "clear/project/omoikane/mth3008/lectures/lectures.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 9.md",

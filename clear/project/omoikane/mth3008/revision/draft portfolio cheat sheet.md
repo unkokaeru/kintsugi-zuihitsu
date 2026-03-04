@@ -1,153 +1,144 @@
-# **MTH3008** Tensor Analysis, Portfolio Cheat Sheet
+# **MTH3008** Tensor Analysis, Final Exam Cheat Sheet
 
 > [!TIP] Created by William Fayers
-> Have fun!
+> Good luck and have fun!! :))
 
-## 1. Suffix Notation
+## 0. Reference Tables & Foundational Material
 
-### Core Rules (dummy Vs free)
+### Suffix Notation Dictionary
 
-- Repeated indices are summed over $1,2,3$ (summation convention).
-- Dummy indices appear **exactly twice** in a term, and not more than twice.
-- Free indices appear once; every term in an equation must have the same free indices.
-- Scalars have 0 free indices; vectors have 1 free index; "matrix-like objects" have 2 free indices (intuition).
+| Vector/Matrix form | Suffix form | Notes |
+| :--- | :--- | :--- |
+| Dot product \(a \cdot b\) | \(a_j b_j\) | Scalar (0 free indices) |
+| Cross product \((a \times b)_i\) | \(\epsilon_{ijk} a_j b_k\) | Vector (1 free index, \(i\)) |
+| Matrix mult. \((AB)_{ij}\) | \(A_{ik} B_{kj}\) | Rank-2 (2 free indices, \(i,j\)) |
+| Transpose \((A^T)_{ij}\) | \(A_{ji}\) | Swap indices |
+| Trace \(\text{Tr}(A)\) | \(A_{ii}\) | Sum over diagonal |
+| Gradient \([\nabla f]_i\) | \(\partial f / \partial x_i\) | Vector |
+| Divergence \(\nabla \cdot u\) | \(\partial u_j / \partial x_j\) | Scalar |
+| Curl \([\nabla \times u]_i\) | \(\epsilon_{ijk} \partial u_k / \partial x_j\) | Vector |
 
-### Dot Products + Matrices
+### Key Rules & Identities
+1. **Index Counting**: Dummy indices appear exactly twice per term (summed over 1 to 3). Free indices appear exactly once per term. Every term in an equation must have the exact same free indices.
+2. **Kronecker Delta \(\delta_{ij}\)**: 
+	- Definition: \(1\) if \(i=j\), \(0\) otherwise.
+	- Substitution: \(\delta_{ij}a_j = a_i\). 
+	- Collapse: \(\delta_{ij}\delta_{jk} = \delta_{ik}\).
+	- Trace: \(\delta_{ii} = 3\).
+3. **Alternating Tensor \(\epsilon_{ijk}\)**:
+	- Definition: \(+1\) for even permutations of \((1,2,3)\), \(-1\) for odd, \(0\) if any index repeats.
+	- Permutations: \(\epsilon_{ijk} = \epsilon_{jki} = \epsilon_{kij}\) (cyclic, keep sign). \(\epsilon_{ijk} = -\epsilon_{jik}\) (swap two, flip sign).
+4. **The \(\delta-\epsilon\) Identity**:
+	- \(\epsilon_{ijk}\epsilon_{klm} = \delta_{il}\delta_{jm} - \delta_{im}\delta_{jl}\)
+	- *Always cyclically permute so the shared dummy index is in the 3rd position before applying.*
+5. **The Kill Rule**: Symmetric \(\times\) Antisymmetric \(= 0\).
+	- If \(S_{jk} = S_{kj}\), then \(\epsilon_{ijk}S_{jk} = 0\).
+	- Example: mixed partials commute (\(\partial_j\partial_k = \partial_k\partial_j\)), so \(\epsilon_{ijk}\partial_j\partial_k f = 0\).
 
-- Dot product: $a\cdot b = a_j b_j$.
-- Matrix product entries: if $C=AB$ then $C_{ij}=A_{ik}B_{kj}$.
-- Trace: $\mathrm{Tr}(C)=C_{jj}$, and $\mathrm{Tr}(AB)=\mathrm{Tr}(BA)$ by relabelling dummy indices.
+***
 
-### Kronecker Delta $\delta_{ij}$
+## Question Topics (ordered by frequency × marks)
 
-- Definition: $\delta_{ij}=1$ if $i=j$, $0$ otherwise (identity-matrix components).
-- Substitution ("absorbs the sum"): $\delta_{ij}a_j=a_i$ (and similarly $\delta_{ji}a_i=a_j$).
-- Useful collapse: $\delta_{ij}\delta_{jk}=\delta_{ik}$.
+### 1. Dual Bases & Components (Covariant/Contravariant)
 
-### Alternating Tensor $\epsilon_{ijk}$ (Levi–Civita in 3D)
+**Given**: A basis \(e_1, e_2, e_3\).
+1. **Method (Find Dual Basis \(e^1, e^2, e^3\))**:
+	- Compute the three cross products: \(e_2 \times e_3\), \(e_3 \times e_1\), \(e_1 \times e_2\).
+	- Compute volume \(V = e_1 \cdot (e_2 \times e_3)\).
+	- Divide each cross product by \(V\): \(e^1 = \frac{e_2 \times e_3}{V}\), \(e^2 = \frac{e_3 \times e_1}{V}\), \(e^3 = \frac{e_1 \times e_2}{V}\).
+2. **Method (Find Covariant Components \(A_i\))**:
+	- Use formula: \(A_i = A \cdot e_i\) (dot with the *original* basis).
+3. **Method (Find Contravariant Components \(A^i\))**:
+	- Use formula: \(A^i = A \cdot e^i\) (dot with the *dual* basis).
+4. **Raising/Lowering via Metric**:
+	- Covariant metric \(g_{ij} = e_i \cdot e_j\).
+	- Contravariant metric \(g^{ij} = e^i \cdot e^j\) (this is the matrix inverse of \(g_{ij}\)).
+	- Raise/lower: \(A_i = g_{ij}A^j\), \(A^i = g^{ij}A_j\).
+	- *Orthogonal shortcut*: If \(g_{ij}=0\) for \(i \neq j\), then \(A_i = g_{ii}A^i\) and \(g^{ii} = 1/g_{ii}\).
 
-- Definition: $\epsilon_{ijk}=0$ if any indices repeat; $+1$ for even permutations of $(1,2,3)$; $-1$ for odd permutations.
-- Cyclic permutations keep sign, swapping two indices flips sign (antisymmetry).
+### 2. Suffix Algebra ("Show that…")
 
-### Cross Product, Determinants, Triple Products
+**Goal**: Prove vector or matrix identities (e.g., \((AB)^T = B^TA^T\), \(a \times b = -b \times a\)).
+1. **Method**:
+	- Convert LHS into suffix notation. Assign one free index (e.g., \(i\)) for vectors, two (\(i,j\)) for matrices.
+	- Convert RHS into suffix notation.
+	- Relabel dummy indices in LHS to match RHS (you can change any \(j\) to \(k\) as long as you change both copies in the term).
+	- Reorder scalar variables freely to group them properly.
+	- Convert back to vector/matrix notation.
+2. **Example (\(C_{ik} = A_iB_k - A_kB_i\) is antisymmetric)**:
+	- Evaluate transpose/swap: \(C_{ki} = A_kB_i - A_iB_k\).
+	- Factor minus sign: \(= -(A_iB_k - A_kB_i) = -C_{ik}\).
 
-- Cross product: $(a\times b)_i=\epsilon_{ijk}a_j b_k$.
-- Scalar triple product: $a\cdot(b\times c)=\epsilon_{ijk}a_i b_j c_k$.
-- Determinant formulas (row/column versions): $|M|=\epsilon_{ijk}M_{1i}M_{2j}M_{3k}=\epsilon_{ijk}M_{i1}M_{j2}M_{k3}$.
+### 3. Simplifying \(\delta\) and \(\epsilon\) Expressions
 
-### Delta–epsilon Identity (the workhorse)
+**Goal**: Reduce nasty suffix expressions like \(\epsilon_{ijk}\epsilon_{klm}\) or \(\delta_{ij}\epsilon_{ijk}\).
+1. **Method**:
+	- **Repeated \(\epsilon\) index**: If an \(\epsilon\) has two identical indices (e.g. \(\delta_{ij}\epsilon_{ijk} = \epsilon_{iik}\)), the term equals \(0\).
+	- **Product of two \(\epsilon\)s**:
+		1. Identify the shared dummy index (e.g., \(k\)).
+		2. Use \(\epsilon_{ijk} = \epsilon_{jki} = \epsilon_{kij}\) to move \(k\) to the far right of both \(\epsilon\) terms.
+		3. Substitute \(\epsilon_{ijk}\epsilon_{lmk} = \delta_{il}\delta_{jm} - \delta_{im}\delta_{jl}\).
+		4. Expand brackets.
+	- **Collapsing \(\delta\)s**: Apply \(\delta_{ab}c_b = c_a\) to absorb indices. Apply \(\delta_{aa} = 3\).
+2. **Standard deductions**:
+	- \(\epsilon_{ijk}\epsilon_{ilm} = \delta_{jl}\delta_{km} - \delta_{jm}\delta_{kl}\)
+	- \(\epsilon_{ijk}\epsilon_{ijm} = 2\delta_{km}\)
+	- \(\epsilon_{ijk}\epsilon_{ijk} = 6\)
 
-- $\epsilon_{ijk}\epsilon_{k\ell m}=\delta_{i\ell}\delta_{jm}-\delta_{im}\delta_{j\ell}$.
-- Standard example: $a\times(b\times c)=(a\cdot c)b-(a\cdot b)c$ (proved by inserting the identity above).
+### 4. Proving Tensor/Vector Character via Transformation Law
 
-## 1. $\nabla$, grad/div/curl (Chapter 2)
+**Goal**: Prove \(Q\) is a scalar, vector, or tensor under coordinate rotation.
+1. **Transformation Rules**:
+	- Coordinate transform: \(x'_i = L_{ij}x_j\). Inverse: \(x_i = L_{ji}x'_j\).
+	- Rotation matrix properties: \(L_{ij}L_{kj} = \delta_{ik}\) and \(L_{ji}L_{jk} = \delta_{ik}\).
+	- Chain rule: \(\frac{\partial}{\partial x'_i} = L_{ji} \frac{\partial}{\partial x_j}\).
+2. **Method**:
+	- Write the primed quantity (e.g., \((a \cdot b)' = a'_i b'_i\)).
+	- Substitute the transformation law for each piece (e.g., \(a'_i = L_{ij}a_j\)).
+	- Group the \(L\) matrices together.
+	- Collapse \(L_{ij}L_{kj}\) into \(\delta_{ik}\).
+	- Use \(\delta_{ik}\) to collapse dummy indices and recover the unprimed quantity.
+3. **Contraction reduces rank**:
+	- If \(T_{ij}\) is a rank-2 tensor, \(T_{ii}\) is a scalar. Proof: \(T'_{ii} = L_{ia}L_{ib}T_{ab} = \delta_{ab}T_{ab} = T_{aa}\).
 
-### Definitions in Cartesian $(x_1,x_2,x_3)$
+### 5. \(\nabla\) Operator Identities & Radial Functions
 
-- Gradient of scalar $f$: $[ \nabla f ]_i=\partial f/\partial x_i$.
-- Divergence of vector $u$: $\nabla\cdot u=\partial u_j/\partial x_j$ (a scalar: no free indices).
-- Curl of vector $u$: $[ \nabla\times u ]_i=\epsilon_{ijk}\,\partial u_k/\partial x_j$.
+**Goal**: Prove complex vector calculus identities using suffix.
+1. **Method**:
+	- Write the expression fully in suffix form.
+	- Use the product rule on derivatives: \(\partial_i(A_j B_k) = (\partial_i A_j)B_k + A_j(\partial_i B_k)\).
+	- If you hit \(\epsilon_{ijk}\partial_j\partial_k f\), it immediately equals \(0\) (kill rule).
+2. **Radial Functions \(f(r)\)**:
+	- Definition: \(r = (x_j x_j)^{1/2}\).
+	- Derivative of \(r\): \(\frac{\partial r}{\partial x_i} = \frac{x_i}{r}\).
+	- Derivative of \(f(r)\): \([\nabla f(r)]_i = f'(r) \frac{x_i}{r}\).
 
-### Position Vector + a Common Radial Trick
+### 6. Metric Tensor, Basis Vectors & Arc Length
 
-- In these lectures the position vector is $r=(x_1,x_2,x_3)$ and its magnitude is also denoted $r=|r|$.
-- A standard result used in Practical 2: if $r=(x_jx_j)^{1/2}$, then $\nabla f(r)=f'(r)\,r/r$.
+**Goal**: Find metric components and scale factors from coordinate definitions.
+1. **Method (Find Basis \(e_i\))**:
+	- Write position vector \(r\) strictly in terms of the new coordinates \((x^1, x^2, x^3)\) and Cartesian unit vectors \(i_1, i_2, i_3\).
+	- Differentiate to get bases: \(e_1 = \frac{\partial r}{\partial x^1}\), \(e_2 = \frac{\partial r}{\partial x^2}\), \(e_3 = \frac{\partial r}{\partial x^3}\).
+2. **Method (Find Metric Tensor \(g_{ij}\))**:
+	- Compute dot products: \(g_{ij} = e_i \cdot e_j\).
+	- Give answer as a \(3 \times 3\) matrix. If all off-diagonals are \(0\), the basis is orthogonal.
+3. **Method (Arc Length & Scale Factors)**:
+	- Scale factors: \(h_i = \sqrt{g_{ii}}\) (or \(h_i = |e_i|\)).
+	- Arc length element (orthogonal case): \(ds^2 = h_1^2(dx^1)^2 + h_2^2(dx^2)^2 + h_3^2(dx^3)^2\).
 
-### Operator Combinations (know what is Always 0)
+### 7. Expansion Coefficients / Finding \(L^n_{m'}\)
 
-- $\nabla\cdot(\nabla f)=\nabla^2 f=\partial^2 f/(\partial x_j\partial x_j)$.
-- $\nabla\times(\nabla f)=0$.
-- $\nabla\cdot(\nabla\times u)=0$.
-- Vector Laplacian identity: $\nabla^2 u=\nabla(\nabla\cdot u)-\nabla\times(\nabla\times u)$.
+**Goal**: Find the coefficients to transform between bases directly.
+1. **Method**:
+	- You are given new basis vectors \(e'_m\) in terms of Cartesian \(i_n\).
+	- The expansion coefficient is \(L^n_{m'} = e'_m \cdot i_n\).
+	- Just take the dot product! This simply extracts the \(n\)-th component of \(e'_m\).
+	- Transform covariant components of a vector \(B\) into the new frame: \(B'_i = L^j_{i'} B_j\).
 
-### Product / "vector Calculus identity" Templates
+### 8. Determinant Identities
 
-- $\nabla(fg)=f\,\nabla g+g\,\nabla f$.
-- $\nabla\cdot(fu)=(\nabla f)\cdot u+f(\nabla\cdot u)$.
-- $\nabla\times(fu)=\nabla f\times u+f(\nabla\times u)$.
-- $\nabla\cdot(u\times v)=(\nabla\times u)\cdot v-(\nabla\times v)\cdot u$.
-- $\nabla\times(u\times v)=u(\nabla\cdot v)+(v\cdot\nabla)u-(u\cdot\nabla)v-v(\nabla\cdot u)$, with $u\cdot\nabla=u_j\partial/\partial x_j$.
-- $\nabla(u\cdot v)=u\times(\nabla\times v)+v\times(\nabla\times u)+(u\cdot\nabla)v+(v\cdot\nabla)u$.
-
-## 2. Local Coordinates, Metric, Arc Length (Chapter 3)
-
-### Arc Length + Metric Tensors
-
-- For a local coordinate system with basis $\{e_1,e_2,e_3\}$ and coordinates $x_i$, the line element satisfies $ds^2=dr\cdot dr$.
-- The lectures write $ds^2=g_{ik}\,dx_i\,dx_k$ and also $ds^2=g^{ik}\,dx_i\,dx_k$, where $g_{ik}$ is the covariant metric tensor and $g^{ik}$ the contravariant metric tensor.
-- In an orthogonal basis, $ds^2=\sum_{i=1}^3 h_i^2 (dx_i)^2$ where $h_i=\sqrt{g_{ii}}$ are the metric coefficients.
-
-### Basis Vectors from the Position Vector
-
-- The basis vectors can be computed from the position vector $r$ via $e_i=\partial r/\partial x_i$.
-- Then $g_{ij}=e_i\cdot e_j=(\partial r/\partial x_i)\cdot(\partial r/\partial x_j)$.
-
-### Orthogonal Bases: raising/lowering Gets Easy
-
-- In an orthogonal basis, $g_{ik}=0$ for $i\neq k$, so the relationship between covariant/contravariant components reduces to diagonal scaling.
-- The slides derive $g^{11}=1/g_{11}$, $g^{22}=1/g_{22}$, $g^{33}=1/g_{33}$ (and similarly for each diagonal entry).
-
-### Cylindrical Coordinates Worked Pattern (must Be fluent)
-
-- For cylindrical $(x_1,x_2,x_3)=(r,\theta,z)$, the position vector is $r=r\cos\theta\,i_1+r\sin\theta\,i_2+z\,i_3$.
-- The basis vectors are $e_1=\cos\theta\,i_1+\sin\theta\,i_2$, $e_2=r\sin\theta\,i_1+r\cos\theta\,i_2$, $e_3=i_3$, and the system is orthogonal.
-- The metric coefficients are $g_{11}=1$, $g_{22}=r^2$, $g_{33}=1$, so $ds^2=dr^2+r^2 d\theta^2+dz^2$ and $(h_1,h_2,h_3)=(1,r)$.
-
-## 3. Coordinate Transforms + Tensors (Chapters 3–4)
-
-### Rotation / Transformation Matrix Facts Used Everywhere
-
-- A (Cartesian) vector transforms as $v'_i=L_{ij}v_j$.
-- The rotation matrix satisfies $L^T=L^{-1}$, which implies identities like $L_{ij}L_{kj}=\delta_{ik}$ ("two $L$'s give a delta").
-
-### Gradient Transforms as a Vector (template proof)
-
-- Practical 3 shows how to prove $\nabla$ is a vector using the chain rule and $x'_i=L_{ij}x_j$.
-- The key move is $\partial/\partial x'_i = (\partial x_j/\partial x'_i)\,\partial/\partial x_j$, giving the correct $L$-factors.
-
-### Tensor Definition + Rank
-
-- In an orthogonal coordinate system, a quantity is a tensor if each free suffix transforms with the appropriate $L$ factors (e.g. rank-2: $T'_{ij}=L_{im}L_{jn}T_{mn}$).
-- The rank (order) of a tensor is the number of free indices.
-
-### Quotient Rule (how You Actually Prove "this is a tensor")
-
-- Lemma (quotient rule): if a quantity $T_{ij}$ has the property that for **any** vector $b_j$, the contraction $a_i=T_{ij}b_j$ is a vector in every rotated frame, then $T_{ij}$ is a (rank-2) tensor.
-- The proof compares the transformed expression for $a_i$ using (i) "$a$ is a vector" and (ii) "$a=T b$" in both coordinate systems, then uses arbitrariness of $b$ to deduce the tensor transform law for $T$.
-
-### Symmetric / Antisymmetric Tensors
-
-- A rank-2 tensor is symmetric if $T_{ij}=T_{ji}$ and antisymmetric if $T_{ij}=-T_{ji}$.
-- Any rank-2 tensor decomposes as $T_{ik}=S_{ik}+A_{ik}$ with $S_{ik}=\tfrac12(T_{ik}+T_{ki})$ and $A_{ik}=\tfrac12(T_{ik}-T_{ki})$.
-- Example technique: conditions like $\epsilon_{ijk}T_{jk}=0$ force symmetry by isolating components (the lecture works through the $i=1,2,3$ cases).
-
-### Contraction Gives Lower Rank (trace idea)
-
-- Practical 5 explicitly asks you to show: if $Q_{ijkl}$ is rank 4 then $Q_{ijjj}$ is rank 2 (contraction reduces rank).
-- It also asks: if $T_{ij}$ is a tensor, then $T_{ii}$ is a scalar (full contraction).
-
-## 4. Reusable "exam recipes" (what to Do when You See X)
-
-### A. Convert Vector ↔ Suffix Quickly
-
-1. Introduce the free index first (decide what object you want: scalar/vector/matrix).
-2. Replace dot/cross with $\delta,\epsilon$: $a\cdot b=a_jb_j$, $(a\times b)_i=\epsilon_{ijk}a_jb_k$.
-3. Check dummy-index hygiene: no dummy index appears more than twice; relabel dummies as needed.
-
-### B. Simplify $\delta,\epsilon$ Expressions (pattern)
-
-- Use $\delta_{ij}a_j=a_i$ to collapse sums early, and $\delta_{ij}\delta_{jk}=\delta_{ik}$ to compress chains.
-- When you see $\epsilon\epsilon$, immediately try $\epsilon_{ijk}\epsilon_{k\ell m}=\delta_{i\ell}\delta_{jm}-\delta_{im}\delta_{j\ell}$.
-- If a symmetric pair is contracted against an antisymmetric $\epsilon$, expect zero (this is the mechanism behind many "curl of radial field is 0" style results).
-
-### C. Prove "it's a scalar/vector" under Rotation
-
-1. Write the quantity in suffix notation with explicit free indices.
-2. Apply known transform laws (e.g. $v'_i=L_{ij}v_j$) and the chain rule for derivatives.
-3. Use $L_{ij}L_{kj}=\delta_{ik}$ (orthogonality) to collapse, then compare with the required form.
-
-### D. Metric/arc-length Computations in New Coordinates
-
-1. Write $r$ in terms of the coordinates $x_i$.
-2. Compute $e_i=\partial r/\partial x_i$ and then $g_{ij}=e_i\cdot e_j$.
-3. If orthogonal, read off $h_i=\sqrt{g_{ii}}$ and use $ds^2=\sum h_i^2 (dx_i)^2$.
+**Goal**: Prove matrix determinant rules using the alternating tensor.
+1. **Formula**: \(\epsilon_{pqr}|M| = \epsilon_{ijk}M_{pi}M_{qj}M_{rk}\).
+2. **Method**:
+	- To get \(6|M|\): Multiply both sides by \(\epsilon_{pqr}\). The LHS becomes \(\epsilon_{pqr}\epsilon_{pqr}|M| = 6|M|\).
+	- To prove \(|M^T| = |M|\): Write out the formula for \(|M^T|\), swap the indices on the \(M\)s, then relabel the dummy indices to match the original formula.
