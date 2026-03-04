@@ -14,3 +14,13 @@
 > 	3. Prove that the quantity $\displaystyle A_{ik} = \frac{\partial T_i}{\partial x^k} - \frac{\partial T_k}{\partial x^i}$ transforms as a second-rank tensor. *(You may use the result stated in part 2.1 even if you have not shown it.)*
 
 … *won't publish answers until everything has been handed in, sorry!*
+
+$$
+\begin{align*}
+T'_i &= L_{im} T_m, \quad L_{im} = \frac{\partial x_m}{\partial x'_i} \quad\text{(tensor transform law)} \\
+\left( \frac{\partial T'_i}{\partial x'_k} \right) &= \frac{\partial}{\partial x'_k} (L_{im} T_m) \quad\text{(product rule)} \\
+&= \left( \frac{\partial L_{im}}{\partial x'_k} \right) T_m + L_{im} \frac{\partial T_m}{\partial x'_k} \\
+&= \frac{\partial^2 x_m}{\partial x'_i \partial x'_k} T_m + L_{im} \left( L_{kn} \frac{\partial T_m}{\partial x_n} \right) \\
+&= \frac{\partial^2 x_m}{\partial x'_i \partial x'_k} T_m + L_{im} L_{kn} \frac{\partial T_m}{\partial x_n} \quad\text{(chain rule: }\frac{\partial}{\partial x'_k} = L_{kn} \frac{\partial}{\partial x_n}\text{)}.
+\end{align*}
+$$
