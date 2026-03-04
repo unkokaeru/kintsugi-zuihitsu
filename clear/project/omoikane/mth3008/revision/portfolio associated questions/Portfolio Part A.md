@@ -13,4 +13,4 @@
 > 	2. State the transformation rule that $\displaystyle \frac{\partial T_i}{\partial x^k}$ must satisfy to be considered a tensor. Using the result from the previous part, explain why this derivative is not a tensor. *(You may use the result from part 2.1 even if you have not shown it.)*
 > 	3. Prove that the quantity $\displaystyle A_{ik} = \frac{\partial T_i}{\partial x^k} - \frac{\partial T_k}{\partial x^i}$ transforms as a second-rank tensor. *(You may use the result stated in part 2.1 even if you have not shown it.)*
 
-… *won't publish answers until everything has been handed in, sorry!*
+![[mth3008 portfolio solutions.pdf]]

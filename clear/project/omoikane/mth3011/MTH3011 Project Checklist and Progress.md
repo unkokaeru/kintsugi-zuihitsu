@@ -30,6 +30,27 @@ BSc Mathematics Undergraduate (27378661)
 University of Lincoln
 ```
 
+And his response…
+
+```markdown
+Hi William,
+
+Thanks for the report! Good work so far. No problem, we can skip the meeting.
+
+Here are some comments that I hope should be useful for your further progress:
+
+	- For reading and learning, you are more than welcome to use any source you can find. I am highly supportive of this. However, once you have gone through a particular topic and have to/want to cite particular things about it (and therefore have to add them to your bibliography in the thesis), make sure to only use sources that are 100% reliable. This means, for us in maths: your sources have to be from professional mathematicians (or other scientists that work in our topics), such as textbooks from trusted publishers, peer-reviewed research papers, and/or tech sources (e.g., digital lecture notes, videos, computer programmes, etc) created and offered trained mathematicians (e.g., research groups from universities, lecturers (with doctorate) from all over, etc). 
+
+	- Excellent idea going through the theorems you have been exposed to but in Lean! Just keep in mind, though, that while you should display your coding and Lean proofs in the thesis, they do not always count towards the full page count of your thesis. For instance, if you reproduce some particular (existing) Lean proof in the thesis without clear purpose, this wouldn't count towards your actual work and page count. (And maybe shouldn't be done.) On the other hand, if you need to reproduce some existing Lean proof to explain to the reader a particular technicality about using Lean or how/why it works, that would be a welcome addition. But more importantly: all the examples/proofs that you did yourself in Lean should be displayed. You can put some main parts/snippets in the main body of your thesis, and remaining parts or 'lengthy details' as appendices.
+
+	- Do get to typing as quickly as possible. This is really important because many people underestimate the amount of time that typing up takes!
+
+Having April as an overall deadline is good, but I have an important additional suggestion: sending to me a PDF copy of what you have of your thesis draft before we enter the spring break (so by the end of Week 26). I know this is more work/extra pressure, but it is important to keep track of your progress and, let's say, 'fire yourself up' to give some extra boost at a crucial stage.
+
+Best wishes,
+Yuri
+```
+
 ## Pre-Project
 
 - [x] Submit completed research plan to supervisor (deadline: **22 Oct 2025**)
