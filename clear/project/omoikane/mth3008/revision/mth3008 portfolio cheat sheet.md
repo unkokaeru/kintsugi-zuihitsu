@@ -109,7 +109,7 @@
 3. **Contraction reduces rank**:
 	- If $T_{ij}$ is a rank-2 tensor, $T_{ii}$ is a scalar. Proof: $T'_{ii} = L_{ia}L_{ib}T_{ab} = \delta_{ab}T_{ab} = T_{aa}$.
 4. **Outcome:**
-	- Single term with $n$ $L$s for $n$ free indices? Rank-$n$ tensor, i.e., follows above "tensor laws".
+	- Single term with $n$ $L$s for $n$ free indices? Rank-$n$ tensor.
 	- Extra terms that don't cancel? Not a tensor.
 
 ### 5. $\nabla$ Operator Identities & Radial Functions
