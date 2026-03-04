@@ -55,7 +55,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -167,11 +167,16 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "29ff069d2cdc3feb",
+  "active": "22909c55b38ffd69",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 2.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 3.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 5.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 4.md",
+    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 4.md",
+    "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
     "clear/project/omoikane/mth3008/revision/portfolio associated questions/Portfolio Part A.md",
     "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
-    "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
     "clear/project/omoikane/mth3003/revision/portfolio associated questions/portfolio associated questions.md",
     "clear/project/omoikane/mth3008/revision/draft portfolio cheat sheet.md",
     "clear/project/omoikane/mth3008/revision/portfolio associated questions/portfolio associated questions.md",
@@ -179,7 +184,6 @@
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 5.md",
     "attached/files/mth3008 weekly problem sheet 5 solutions.pdf",
     "attached/files/mth3008 weekly problem sheet 5.pdf",
-    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 4.md",
     "clear/project/omoikane/sem a - archive/mth3006/mth3006 cheat sheet.md",
     "To-Do List.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 10.md",
@@ -188,10 +192,6 @@
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 8.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 7.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 6.md",
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 5.md",
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 4.md",
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 3.md",
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 2.md",
     "clear/project/omoikane/mth3008/notes/Kronecker Delta.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 1.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 3.md",
