@@ -1,0 +1,16 @@
+# MTH3008 Lecture 11
+
+> [!quote] …
+> …
+
+…
+
+## …
+
+…
+
+---
+
+## Pre-Lecture Notes from [[mth3008 lecture notes 11.pdf|University Notes]]
+
+- …
