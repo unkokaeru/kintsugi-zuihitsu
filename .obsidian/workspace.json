@@ -25,37 +25,67 @@
             }
           },
           {
-            "id": "6d60ec5c5c0cd8ef",
+            "id": "a029fb750ec06557",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3003/mth3003 weekly problems 6.md",
+                "file": "clear/project/omoikane/mth3008/revision/final exam associated questions/final exam associated questions.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "mth3003 weekly problems 6"
+              "title": "final exam associated questions"
             }
           },
           {
-            "id": "af1f02891cf66882",
+            "id": "29387bc04d3d1414",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3008/mth3008.md",
+                "file": "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2022-23.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "icon": "lucide-file",
-              "title": "mth3008"
+              "title": "MTH3008 Final Exam 2022-23"
+            }
+          },
+          {
+            "id": "d7a8a9b6287fd53a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2023-24.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "MTH3008 Final Exam 2023-24"
+            }
+          },
+          {
+            "id": "b02d78591dab2a4d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2024-25.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "MTH3008 Final Exam 2024-25"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -167,43 +197,44 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "6d60ec5c5c0cd8ef",
+  "active": "b02d78591dab2a4d",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2023-24.md",
+    "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2024-25.md",
+    "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2022-23.md",
+    "attached/files/mth3008 final exam 2023-24 solutions.pdf",
+    "attached/files/mth3008 final exam 2023-24.pdf",
+    "attached/files/mth3008 final exam 2022-23 solutions.pdf",
+    "attached/files/mth3008 final exam 2022-23.pdf",
+    "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 2.md",
+    "clear/project/omoikane/mth3008/revision/final exam associated questions/final exam associated questions.md",
+    "To-Do List.md",
     "clear/project/omoikane/mth3008/mth3008.md",
+    "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 6.md",
     "clear/project/omoikane/mth3008/mth3008 lecture 11.md",
     "attached/files/mth3008 lecture notes 11.pdf",
-    "clear/project/omoikane/mth3003/mth3003 weekly problems 6.md",
     "clear/project/omoikane/mth3003/mth3003.md",
     "attached/files/mth3003 weekly problem sheet 6.pdf",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 5.md",
     "attached/files/mth3003 weekly problem sheet 5 solutions.pdf",
-    "clear/project/omoikane/mth3003/mth3003 lecture 12.md",
-    "clear/project/omoikane/mth3003/mth3003 lecture 11.md",
+    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 12.md",
+    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 11.md",
     "attached/files/mth3003 lecture notes 12.pdf",
     "attached/files/mth3003 lecture notes 11.pdf",
-    "To-Do List.md",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 10.md",
     "attached/files/mth3003 lecture notes 10.pdf",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 4.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 3.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 1.md",
-    "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 2.md",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 3.md",
     "clear/project/omoikane/mth3011/MTH3011 Project Checklist and Progress.md",
     "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
     "clear/project/omoikane/mth3008/revision/portfolio associated questions/Portfolio Part A.md",
-    "attached/files/mth3008 portfolio solutions.pdf",
     "clear/project/omoikane/mth3008/notes/rank.md",
     "Untitled.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 2.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 3.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 5.md",
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 4.md",
-    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 4.md",
-    "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
-    "attached/files/mth3008 coursework.pdf",
-    "attached/files/mth3008 weekly problem sheet 5 solutions.pdf",
-    "attached/files/mth3008 weekly problem sheet 5.pdf",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",
     "attached/files/luna human.png",
