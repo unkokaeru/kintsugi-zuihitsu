@@ -45,7 +45,11 @@
 **Given**: A basis $e_1, e_2, e_3$.
 
 $$
-
+\begin{pmatrix}a \\ b \\ c\end{pmatrix}\times\begin{pmatrix}d \\ e \\ f\end{pmatrix} = \begin{pmatrix}
+\begin{vmatrix}b & e \\ c & f\end{vmatrix} \\
+-\begin{vmatrix}a & d \\ c & f\end{vmatrix} \\
+\begin{vmatrix}a & d \\ b & e\end{vmatrix}
+\end{pmatrix}
 $$
 
 1. **Method (Find Dual Basis $e^1, e^2, e^3$)**:
