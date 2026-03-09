@@ -50,12 +50,15 @@
             "id": "49c1677c25c1b0e1",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "attached/files/mth3008 final exam 2022-23 solutions.pdf"
+                "file": "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2022-23.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
               },
-              "icon": "lucide-file-text",
-              "title": "mth3008 final exam 2022-23 solutions"
+              "icon": "lucide-file",
+              "title": "MTH3008 Final Exam 2022-23"
             }
           },
           {
@@ -73,7 +76,8 @@
               "title": "Portfolio Part A"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -185,15 +189,15 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "49c1677c25c1b0e1",
+  "active": "d0bc0fce2bf39fda",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
-    "clear/project/omoikane/mth3008/revision/portfolio associated questions/Portfolio Part A.md",
-    "attached/files/mth3008 coursework.pdf",
+    "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2022-23.md",
     "attached/files/mth3008 final exam 2022-23 solutions.pdf",
+    "clear/project/omoikane/mth3008/revision/portfolio associated questions/Portfolio Part A.md",
+    "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
+    "attached/files/mth3008 coursework.pdf",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 5.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 4.md",
-    "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2022-23.md",
     "To-Do List.md",
     "attached/files/mth3008 portfolio solutions.pdf",
     "clear/project/omoikane/mth3008/notes/Alternating Tensor.md",
