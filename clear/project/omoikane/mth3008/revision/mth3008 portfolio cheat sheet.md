@@ -44,18 +44,9 @@
 
 **Given**: A basis $e_1, e_2, e_3$.
 
-$$
-\begin{pmatrix}a \\ b \\ c\end{pmatrix}\times\begin{pmatrix}d \\ e \\ f\end{pmatrix} = \begin{pmatrix}
-\begin{vmatrix}b & e \\ c & f\end{vmatrix} \\
--\begin{vmatrix}a & d \\ c & f\end{vmatrix} \\
-\begin{vmatrix}a & d \\ b & e\end{vmatrix}
-\end{pmatrix}
-$$
-
 1. **Method (Find Dual Basis $e^1, e^2, e^3$)**:
 	- Compute the three cross products: $e_2 \times e_3$, $e_3 \times e_1$, $e_1 \times e_2$.
-		- ! TO-DO: Add a method for calculating the cross product
-		- …
+		- Cross product, $\begin{pmatrix}a \\ b \\ c\end{pmatrix}\times\begin{pmatrix}d \\ e \\f\end{pmatrix} = \begin{pmatrix}\begin{vmatrix}b & e \\ c & f\end{vmatrix} \\-\begin{vmatrix}a & d \\ c & f\end{vmatrix} \\\begin{vmatrix}a & d \\ b & e\end{vmatrix}\end{pmatrix}$, i.e., cover 1st, 2nd (but neg.), 3rd.
 	- Compute volume $V = e_1 \cdot (e_2 \times e_3)$.
 	- Divide each cross product by $V$: $e^1 = \frac{e_2 \times e_3}{V}$, $e^2 = \frac{e_3 \times e_1}{V}$, $e^3 = \frac{e_1 \times e_2}{V}$.
 2. **Method (Find Covariant Components $A_i$)**:
