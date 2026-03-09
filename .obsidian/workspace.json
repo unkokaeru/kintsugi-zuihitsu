@@ -38,19 +38,9 @@
               "icon": "lucide-file",
               "title": "mth3008 portfolio cheat sheet"
             }
-          },
-          {
-            "id": "ed75faf98131398b",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -162,8 +152,9 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "ed75faf98131398b",
+  "active": "01d270e304c73451",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 4.md",
     "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
     "clear/project/omoikane/mth3008/revision/mth3008 final exam cheat sheet.md",
     "To-Do List.md",
@@ -199,7 +190,6 @@
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 3.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 1.md",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 3.md",
-    "clear/project/omoikane/mth3011/MTH3011 Project Checklist and Progress.md",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",
     "attached/files/luna human.png",
