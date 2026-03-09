@@ -96,7 +96,7 @@
 
 1. **Transformation Rules**:
 	- Coordinate transform: $x'_i = L_{ij}x_j$. Inverse: $x_i = L_{ji}x'_j$.
-		- Generally, $T'_{i_1\cdots i_n} = L_{i_1 j_1} \cdots L_{i_n j_n} T_{j_1 \cdots j_n}$ (one $L$ per free index).
+		- Generally, $T'_{i_1\cdots i_n} = L_{i^{\prime}_1 j_1} \cdots L_{i^{\prime}_n j_n} T_{j_1 \cdots j_n}$ (one $L$ per free index).
 	- Rotation matrix properties: $L_{ij}L_{kj} = \delta_{ik}$ and $L_{ji}L_{jk} = \delta_{ik}$.
 	- Chain rule: $\frac{\partial}{\partial x'_i} = L_{ji} \frac{\partial}{\partial x_j}$.
 2. **Method**:
