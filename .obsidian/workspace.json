@@ -25,7 +25,7 @@
             }
           },
           {
-            "id": "2659b11e512c27db",
+            "id": "01d270e304c73451",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -38,9 +38,19 @@
               "icon": "lucide-file",
               "title": "mth3008 portfolio cheat sheet"
             }
+          },
+          {
+            "id": "ed75faf98131398b",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -152,15 +162,16 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "2659b11e512c27db",
+  "active": "ed75faf98131398b",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3003/revision/mth3003 portfolio cheat sheet.md",
+    "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
+    "clear/project/omoikane/mth3008/revision/mth3008 final exam cheat sheet.md",
     "To-Do List.md",
+    "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2022-23.md",
+    "clear/project/omoikane/mth3003/revision/mth3003 portfolio cheat sheet.md",
     "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2024-25.md",
     "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2023-24.md",
-    "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2022-23.md",
     "attached/files/mth3008 final exam 2022-23.pdf",
-    "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
     "clear/project/omoikane/mth3008/mth3008 lecture 11.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 10.md",
     "attached/files/mth3008 lecture notes 11.pdf",
@@ -189,7 +200,6 @@
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 1.md",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 3.md",
     "clear/project/omoikane/mth3011/MTH3011 Project Checklist and Progress.md",
-    "clear/project/omoikane/mth3008/revision/portfolio associated questions/Portfolio Part A.md",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",
     "attached/files/luna human.png",
