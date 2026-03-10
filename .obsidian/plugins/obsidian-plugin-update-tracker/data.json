@@ -4,13 +4,7 @@
     "obsidian-git": {
       "pluginId": "obsidian-git",
       "pluginRepoPath": "Vinzent03/obsidian-git",
-      "dismissedVersions": [
-        {
-          "versionNumber": "2.37.1",
-          "versionName": "2.37.1",
-          "publishedAt": "2026-02-15T19:32:27Z"
-        }
-      ]
+      "dismissedVersions": []
     }
   },
   "showIconOnMobile": true,

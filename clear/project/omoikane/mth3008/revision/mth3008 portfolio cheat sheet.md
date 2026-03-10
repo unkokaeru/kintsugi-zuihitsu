@@ -7,16 +7,16 @@
 
 ### Suffix Notation Dictionary
 
-| Vector/Matrix form | Suffix form | Notes |
-| :--- | :--- | :--- |
-| Dot product $a \cdot b$ | $a_j b_j$ | Scalar (0 free indices) |
-| Cross product $(a \times b)_i$ | $\epsilon_{ijk} a_j b_k$ | Vector (1 free index, $i$) |
-| Matrix mult. $(AB)_{ij}$ | $A_{ik} B_{kj}$ | Rank-2 (2 free indices, $i,j$) |
-| Transpose $(A^T)_{ij}$ | $A_{ji}$ | Swap indices |
-| Trace $\text{Tr}(A)$ | $A_{ii}$ | Sum over diagonal |
-| Gradient $[\nabla f]_i$ | $\partial f / \partial x_i$ | Vector |
-| Divergence $\nabla \cdot u$ | $\partial u_j / \partial x_j$ | Scalar |
-| Curl $[\nabla \times u]_i$ | $\epsilon_{ijk} \partial u_k / \partial x_j$ | Vector |
+| Vector/Matrix form             | Suffix form                                  | Notes                          |
+| :----------------------------- | :------------------------------------------- | :----------------------------- |
+| Dot product $a \cdot b$        | $a_j b_j$                                    | Scalar (0 free indices)        |
+| Cross product $(a \times b)_i$ | $\epsilon_{ijk} a_j b_k$                     | Vector (1 free index, $i$)     |
+| Matrix mult. $(AB)_{ij}$       | $A_{ik} B_{kj}$                              | Rank-2 (2 free indices, $i,j$) |
+| Transpose $(A^T)_{ij}$         | $A_{ji}$                                     | Swap indices                   |
+| Trace $\text{Tr}(A)$           | $A_{ii}$                                     | Sum over diagonal              |
+| Gradient $[\nabla f]_i$        | $\partial f / \partial x_i$                  | Vector                         |
+| Divergence $\nabla \cdot u$    | $\partial u_j / \partial x_j$                | Scalar                         |
+| Curl $[\nabla \times u]_i$     | $\epsilon_{ijk} \partial u_k / \partial x_j$ | Vector                         |
 
 ### Key Rules & Identities
 
@@ -96,7 +96,7 @@
 
 1. **Transformation Rules**:
 	- Coordinate transform: $x'_i = L_{ij}x_j$. Inverse: $x_i = L_{ji}x'_j$.
-		- Generally, $T'_{i_1\cdots i_n} = L_{i^{\prime}_1 j_1} \cdots L_{i^{\prime}_n j_n} T_{j_1 \cdots j_n}$ (one $L$ per free index).
+		- Generally, $T'_{i_1\cdots i_n} = L_{i_1 j_1} \cdots L_{i_n j_n} T_{j_1 \cdots j_n}$ (one $L$ per free index).
 	- Rotation matrix properties: $L_{ij}L_{kj} = \delta_{ik}$ and $L_{ji}L_{jk} = \delta_{ik}$.
 	- Chain rule: $\frac{\partial}{\partial x'_i} = L_{ji} \frac{\partial}{\partial x_j}$.
 2. **Method**:

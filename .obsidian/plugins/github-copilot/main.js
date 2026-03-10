@@ -201860,7 +201860,7 @@ var LSP = class {
         character: args.character
       },
       context: {
-        triggerKind: 2
+        triggerKind: 1
       },
       formattingOptions: {
         tabSize: args.indentSize || 4,
@@ -202423,30 +202423,60 @@ var acceptSuggestion = (view) => {
   }
 };
 var partialAcceptSuggestion = (view) => {
-  var _a58, _b2, _c2;
+  var _a58, _b2;
   const suggestionField = view.state.field(inlineSuggestionField);
   if (suggestionField) {
     const currentSuggestion = (_a58 = suggestionField.suggestions) == null ? void 0 : _a58[suggestionField.index];
     if (currentSuggestion) {
-      const parts = ((_b2 = currentSuggestion.insertText) == null ? void 0 : _b2.trim().split(/\s+/)) || [];
-      const word = parts[0];
-      const newSuggestionField = {
-        ...suggestionField,
-        suggestions: (_c2 = suggestionField.suggestions) == null ? void 0 : _c2.map((suggestion) => ({
-          ...suggestion,
-          insertText: suggestion.insertText.replace(word, "").trim()
-        }))
-      };
+      const cursorPos = view.state.selection.main.head;
+      let remainingText = currentSuggestion.insertText;
+      if (currentSuggestion.range) {
+        const [from2] = convertLSPRangeToOffsets(
+          view.state.doc,
+          currentSuggestion.range
+        );
+        const existingText = view.state.doc.sliceString(
+          from2,
+          cursorPos
+        );
+        if (remainingText.startsWith(existingText)) {
+          remainingText = remainingText.slice(existingText.length);
+        }
+      }
+      const match2 = remainingText.match(/^(\S+\s?)/);
+      if (!match2)
+        return;
+      const wordChunk = match2[1];
+      const afterAccept = remainingText.slice(wordChunk.length);
       view.dispatch({
         ...createInsertSuggestionTransaction(
           view.state,
-          word + " ",
-          view.state.selection.main.from,
-          view.state.selection.main.to
+          wordChunk,
+          cursorPos,
+          cursorPos
         )
       });
+      if (!afterAccept.trim()) {
+        cancelSuggestion(view);
+        return;
+      }
+      const newSuggestions = (_b2 = suggestionField.suggestions) == null ? void 0 : _b2.map(
+        (suggestion, i3) => {
+          if (i3 === suggestionField.index) {
+            return {
+              ...suggestion,
+              insertText: afterAccept,
+              range: void 0
+            };
+          }
+          return suggestion;
+        }
+      );
       view.dispatch({
-        effects: InlineSuggestionEffect.of(newSuggestionField)
+        effects: InlineSuggestionEffect.of({
+          ...suggestionField,
+          suggestions: newSuggestions
+        })
       });
     }
   }
@@ -203289,7 +203319,8 @@ var DEFAULT_SETTINGS = {
   systemPrompt: "You are GitHub Copilot, an AI assistant. You are helping the user with their tasks in Obsidian.",
   invertEnterSendBehavior: false,
   extraCACerts: "",
-  enableMarkdownRendering: true
+  enableMarkdownRendering: true,
+  openChatOnStartup: true
 };
 var CopilotPluginSettingTab = class extends import_obsidian9.PluginSettingTab {
   constructor(app, plugin22) {
@@ -203301,7 +203332,7 @@ var CopilotPluginSettingTab = class extends import_obsidian9.PluginSettingTab {
   display() {
     const { containerEl } = this;
     containerEl.empty();
-    containerEl.createEl("h1", { text: "Inline Copilot Settings" });
+    new import_obsidian9.Setting(containerEl).setName("Inline Copilot Settings").setHeading();
     new import_obsidian9.Setting(containerEl).setName("Enable Copilot").setDesc(
       "Enable or disable the inline copilot. This will also start the copilot server."
     ).addToggle(
@@ -203535,11 +203566,19 @@ var CopilotPluginSettingTab = class extends import_obsidian9.PluginSettingTab {
         });
       })
     );
-    containerEl.createEl("h1", { text: "Copilot Chat Settings" });
+    new import_obsidian9.Setting(containerEl).setName("Copilot Chat Settings").setHeading();
     containerEl.createEl("p", {
       text: "When authenticating in Copilot Chat, a personal token will be encrypted and stored as a file in the plugin folder. This file is called `secure-credentials.dat`. It is only decrytable by your machine but you should never share it with anyone.",
       cls: "copilot-settings-warning"
     });
+    new import_obsidian9.Setting(containerEl).setName("Open chat on startup").setDesc(
+      "Open the Copilot Chat sidebar automatically when Obsidian loads. Default is true."
+    ).addToggle(
+      (toggle) => toggle.setValue(this.plugin.settings.openChatOnStartup).onChange(async (value2) => {
+        this.plugin.settings.openChatOnStartup = value2;
+        await this.saveSettings();
+      })
+    );
     new import_obsidian9.Setting(containerEl).setName("Enable markdown rendering").setDesc(
       "Enable or disable markdown rendering in chat messages. When disabled, messages will be displayed as plain text with basic formatting."
     ).addToggle(
@@ -203708,7 +203747,20 @@ function inlineSuggestionDecoration(view, display_suggestion) {
     return import_view.Decoration.none;
   }
   const suggestionObject = display_suggestion.suggestions[display_suggestion.index];
-  const suggestionText = suggestionObject.insertText;
+  let suggestionText = suggestionObject.insertText;
+  if (suggestionObject.range) {
+    const [from2] = convertLSPRangeToOffsets(
+      view.state.doc,
+      suggestionObject.range
+    );
+    const existingText = view.state.doc.sliceString(from2, post2);
+    if (suggestionText.startsWith(existingText)) {
+      suggestionText = suggestionText.slice(existingText.length);
+    }
+  }
+  if (!suggestionText) {
+    return import_view.Decoration.none;
+  }
   try {
     const widget = new InlineSuggestionWidget(
       suggestionText,
@@ -203732,22 +203784,16 @@ var InlineSuggestionWidget = class extends import_view.WidgetType {
     this.currentIndex = currentIndex;
     this.nbSuggestions = nbSuggestions;
     this.view = view;
-    this.display_suggestion = display_suggestion;
-    this.view = view;
   }
   eq(other) {
-    return other.display_suggestion == this.display_suggestion;
+    return other.display_suggestion === this.display_suggestion;
   }
   toDOM() {
     const span = document.createElement("span");
     span.textContent = this.display_suggestion;
     span.className = "copilot-inline-suggestion";
-    span.onclick = () => {
-      cancelSuggestion(this.view);
-    };
-    span.onselect = () => {
-      cancelSuggestion(this.view);
-    };
+    span.onclick = () => cancelSuggestion(this.view);
+    span.onselect = () => cancelSuggestion(this.view);
     if (this.nbSuggestions > 1) {
       const box = document.createElement("div");
       box.textContent = `${this.currentIndex + 1} / ${this.nbSuggestions}`;
@@ -221893,7 +221939,7 @@ var github_default = {
 var CopilotPlugin = class extends import_obsidian19.Plugin {
   constructor() {
     super(...arguments);
-    this.version = "1.406.0";
+    this.version = "1.434.0";
     this.tabSize = Vault_default.DEFAULT_TAB_SIZE;
   }
   async onload() {
@@ -221956,7 +222002,9 @@ var CopilotPlugin = class extends import_obsidian19.Plugin {
       );
     }
     this.registerView(CHAT_VIEW_TYPE, (leaf) => new ChatView(leaf, this));
-    this.activateView();
+    if (this.settings.openChatOnStartup) {
+      this.activateView();
+    }
     this.addCommand({
       id: "open-copilot-chat",
       name: "Open Copilot Chat",
@@ -222106,5 +222154,3 @@ mermaid/dist/mermaid.core.mjs:
    * Wait for document loaded before starting the execution
    *)
 */
-
-/* nosourcemap */
