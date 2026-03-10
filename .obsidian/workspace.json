@@ -25,30 +25,6 @@
             }
           },
           {
-            "id": "353aacf5ad0d9699",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/mth3008 portfolio solutions.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "mth3008 portfolio solutions"
-            }
-          },
-          {
-            "id": "0f53885561e46aba",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/mth3008 coursework.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "mth3008 coursework"
-            }
-          },
-          {
             "id": "22f3b0efeadbbb60",
             "type": "leaf",
             "state": {
@@ -176,7 +152,7 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "353aacf5ad0d9699",
+  "active": "22f3b0efeadbbb60",
   "lastOpenFiles": [
     "attached/files/mth3008 coursework.pdf",
     "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
