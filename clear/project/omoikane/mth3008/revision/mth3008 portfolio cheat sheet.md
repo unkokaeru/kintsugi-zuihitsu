@@ -33,6 +33,7 @@ Identity: $\nabla \times (\nabla \times u) = \nabla(\nabla \cdot u) - \nabla^2 u
 	- Substitution: $\delta_{ij}a_j = a_i$.
 	- Collapse: $\delta_{ij}\delta_{jk} = \delta_{ik}$.
 	- Trace: $\delta_{ii} = 3$.
+	- Partial derivative of coordinates: $\frac{\partial x_j}{\partial x_i} = \delta_{ij}$ (Cartesian coords are independent).
 3. **Alternating Tensor $\epsilon_{ijk}$**:
 	- Definition: $\epsilon_{ijk}=\begin{cases}0 & \text{if any of }i,j,k \text{ are equal} \\ +1 & \text{if }(i,j,k)=(1,2,3),(2,3,1), \text{or }(3,1,2)\text{ - even permutation} \\ -1 & \text{if }(i,j,k)=(1,3,2),(2,1,3), \text{or }(3,2,1)\text{ - odd permutation}\end{cases}$.
 	- Permutations: $\epsilon_{ijk} = \epsilon_{jki} = \epsilon_{kij}$ (cyclic, keep sign). $\epsilon_{ijk} = -\epsilon_{jik}$ (swap two, flip sign).
