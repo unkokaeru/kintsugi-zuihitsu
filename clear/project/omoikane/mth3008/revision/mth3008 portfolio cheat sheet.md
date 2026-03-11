@@ -1,4 +1,4 @@
-# **MTH3008** Tensor Analysis, Final Exam Cheat Sheet
+# **MTH3008** Tensor Analysis, Portfolio Cheat Sheet
 
 > [!TIP] Created by William Fayers
 > Good luck and have fun!! :))
