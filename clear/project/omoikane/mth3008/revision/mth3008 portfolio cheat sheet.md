@@ -14,9 +14,16 @@
 | Matrix mult. $(AB)_{ij}$       | $A_{ik} B_{kj}$                              | Rank-2 (2 free indices, $i,j$) |
 | Transpose $(A^T)_{ij}$         | $A_{ji}$                                     | Swap indices                   |
 | Trace $\text{Tr}(A)$           | $A_{ii}$                                     | Sum over diagonal              |
-| Gradient $[\nabla f]_i$        | $\partial f / \partial x_i$                  | Vector                         |
-| Divergence $\nabla \cdot u$    | $\partial u_j / \partial x_j$                | Scalar                         |
-| Curl $[\nabla \times u]_i$     | $\epsilon_{ijk} \partial u_k / \partial x_j$ | Vector                         |
+| Gradient $[\nabla f]_i$        | $\partial f / \partial x_i$                  | Scalar → Vector                |
+| Divergence $\nabla \cdot u$    | $\partial u_j / \partial x_j$                | Vector → Scalar                |
+| Curl $[\nabla \times u]_i$     | $\epsilon_{ijk} \partial u_k / \partial x_j$ | Vector → Vector                |
+| Laplacian $\nabla^2 f$                       | $\partial^2 f / \partial x_j \partial x_j$                                         | Scalar → Scalar (= $\nabla \cdot \nabla f$) |
+| $[\nabla \times (\nabla f)]_i = 0$           | $\epsilon_{ijk} \partial^2 f / \partial x_j \partial x_k = 0$                      | Scalar → Vector (always $0$, kill rule)      |
+| $[\nabla(\nabla \cdot u)]_i$                 | $\partial^2 u_j / \partial x_i \partial x_j$                                       | Vector → Vector                              |
+| $\nabla \cdot (\nabla \times u) = 0$         | $\epsilon_{ijk} \partial^2 u_k / \partial x_j \partial x_i = 0$                    | Vector → Scalar (always $0$, kill rule)      |
+| $[\nabla \times (\nabla \times u)]_i$        | $\epsilon_{ijk} \epsilon_{klm} \partial^2 u_m / \partial x_j \partial x_l$         | Vector → Vector                              |
+
+Identity: $\nabla \times (\nabla \times u) = \nabla(\nabla \cdot u) - \nabla^2 u$, i.e. $\nabla^2 u_i = \partial^2 u_i / \partial x_j \partial x_j$.
 
 ### Key Rules & Identities
 
@@ -32,7 +39,8 @@
 4. **The $\delta-\epsilon$ Identity**:
 	- $\epsilon_{ijk}\epsilon_{klm} = \delta_{il}\delta_{jm} - \delta_{im}\delta_{jl}$; (first/second X second/third, first/third X second/second)
 	- *Always cyclically permute so the shared dummy index is in the 3rd position before applying.*
-5. **The Kill Rule**: Symmetric $\times$ Antisymmetric $= 0$.
+5. **Symmetry**: $S_{ij} = S_{ji}$ (symmetric), $A_{ij} = -A_{ji}$ (antisymmetric). If neither holds, it is neither. For example, $\epsilon_{ijk}$ is always antisymmetric and mixed partials are always symmetric.
+6. **The Kill Rule**: Symmetric $\times$ Antisymmetric $= 0$.
 	- If $S_{jk} = S_{kj}$, then $\epsilon_{ijk}S_{jk} = 0$.
 	- Example: mixed partials commute ($\partial_j\partial_k = \partial_k\partial_j$), so $\epsilon_{ijk}\partial_j\partial_k f = 0$.
 
@@ -122,7 +130,10 @@
 
 **Goal**: Prove matrix determinant rules using the alternating tensor.
 
-**Formula**: $\epsilon_{pqr}|M| = \epsilon_{ijk}M_{pi}M_{qj}M_{rk}$.
+**Formula**: $\epsilon_{pqr}|M| = \epsilon_{ijk}M_{pi}M_{qj}M_{rk}$, where $p,q,r$ index rows and $i,j,k$ index columns of $M$.
+
+- **Row expansion** (set $(p,q,r)=(1,2,3)$): $|M| = \epsilon_{ijk}M_{1i}M_{2j}M_{3k}$.
+- **Column expansion** (set $(i,j,k)=(1,2,3)$): $\epsilon_{pqr}|M| = M_{p1}M_{q2}M_{r3}$.
 
 **Method**:
 
