@@ -52,7 +52,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -175,10 +175,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "433e2bc8de751597",
+  "active": "602f6109a5ec6a76",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
     "attached/files/mth3008 final exam 2024-25 solutions.pdf",
+    "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
     "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2024-25.md",
     "To-Do List.md",
     "attached/files/mth3008 final exam 2022-23 solutions.pdf",
