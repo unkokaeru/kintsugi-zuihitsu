@@ -32,7 +32,7 @@
 > 
 > Finally, let $A$ be a $3 \times 3$ real matrix.
 >
-> 1. Using suffix notation, show that if $A$ has two identical rows, then its determinant $\lvert A \rvert$ is zero. You must give a suffix–notation proof; general linear algebra arguments (e.g. "row operations" reasoning) are not accepted.
+> 2. Using suffix notation, show that if $A$ has two identical rows, then its determinant $\lvert A \rvert$ is zero. You must give a suffix–notation proof; general linear algebra arguments (e.g. "row operations" reasoning) are not accepted.
 
 …
 
@@ -88,7 +88,7 @@
 > 
 > Finally, let $\mathbf{r} = (x_1, x_2, x_3)$ denote the position vector in some coordinate system on $\mathbb{R}^3$, let $r = \lvert \mathbf{r} \rvert$, and let $f$ be a scalar field depending only on $r$. Let $\nabla$ denote the gradient operator.
 >
-> 1. Show that
+> 2. Show that
 > $\displaystyle \nabla f(r) = f'(r)\, \frac{\mathbf{r}}{r}.$
 > You may use the fact that $f'(r) = \dfrac{\partial f}{\partial r}$, but you must derive the gradient expression explicitly from the chain rule and the relationship between $r$ and the Cartesian coordinates.
 
