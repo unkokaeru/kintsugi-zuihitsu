@@ -43,13 +43,15 @@
 **Goal**: Prove $Q$ is a scalar, vector, or rank-$n$ tensor under coordinate rotation.
 
 **Transformation Rules**:
+
 - Coordinate transform: $x'_i = L_{ij}x_j$. Inverse: $x_i = L_{ji}x'_j$.
 	- Rotation (Cartesian): $T'_{i_1\cdots i_n} = L_{i_1 j_1} \cdots L_{i_n j_n} T_{j_1 \cdots j_n}$ (one $L$ per free index).
-	- General coordinates: each contravariant (upper) index transforms with $\frac{\partial x'^{i'}}{\partial x^j}$ and each covariant (lower) index with $\frac{\partial x^j}{\partial x'^{i'}}$. E.g. a mixed rank-2 tensor: $T'^{i'}{}_{j'} = \frac{\partial x'^{i'}}{\partial x^k} \frac{\partial x^l}{\partial x'^{j'}} T^k{}_l$.
+	- General coordinates: $T'^{i'_1 \cdots i'_p}{}_{j'_1 \cdots j'_q} = L^{i'_1}{}_{k_1} \cdots L^{i'_p}{}_{k_p}\, L^{l_1}{}_{j'_1} \cdots L^{l_q}{}_{j'_q}\, T^{k_1 \cdots k_p}{}_{l_1 \cdots l_q}$, where $L^{i'}{}_{j} = \frac{\partial x'^{i'}}{\partial x^j}$ (contravariant) and $L^{j}{}_{i'} = \frac{\partial x^j}{\partial x'^{i'}}$ (covariant).
 - Rotation matrix properties: $L_{ij}L_{kj} = \delta_{ik}$ and $L_{ji}L_{jk} = \delta_{ik}$.
 - Chain rule: $\frac{\partial}{\partial x'_i} = L_{ji} \frac{\partial}{\partial x_j}$.
 
 **Method**:
+
 1. Write the primed quantity (e.g., $(a \cdot b)' = a'_i b'_i$).
 2. Substitute the transformation law for each piece (e.g., $a'_i = L_{ij}a_j$).
 3. Simplify if possible (e.g., with chain rule or partial differentiation like product rule).
@@ -58,6 +60,7 @@
 6. Use $\delta_{ik}$ to collapse dummy indices and recover the unprimed quantity.
 
 **Key Results**:
+
 - **Contraction reduces rank**: If $T_{ij}$ is a rank-2 tensor, $T_{ii}$ is a scalar. Proof: $T'_{ii} = L_{ia}L_{ib}T_{ab} = \delta_{ab}T_{ab} = T_{aa}$.
 - **Outcome**: Single term with $n$ $L$s for $n$ free indices → rank-$n$ tensor. Extra terms that don't cancel → not a tensor.
 
@@ -70,6 +73,7 @@
 **Goal**: Reduce suffix expressions like $\epsilon_{ijk}\epsilon_{klm}$ or $\delta_{ij}\epsilon_{ijk}$.
 
 **Method**:
+
 - **Repeated $\epsilon$ index**: If an $\epsilon$ has two identical indices (e.g. $\delta_{ij}\epsilon_{ijk} = \epsilon_{iik}$), the term equals $0$.
 - **Product of two $\epsilon$s**:
 	1. Identify the shared dummy index (e.g., $k$).
@@ -86,6 +90,7 @@
 **Goal**: Prove vector/matrix identities (e.g., $(AB)^T = B^TA^T$, $a \times b = -b \times a$) or symmetry properties.
 
 **Method**:
+
 1. Convert LHS into suffix notation. Assign one free index (e.g., $i$) for vectors, two ($i,j$) for matrices.
 2. Convert RHS into suffix notation.
 3. Relabel dummy indices in LHS to match RHS (you can change any $j$ to $k$ as long as you change both copies in the term).
@@ -93,6 +98,7 @@
 5. Convert back to vector/matrix notation.
 
 **Example ($C_{ik} = A_iB_k - A_kB_i$ is antisymmetric)**:
+
 - Evaluate transpose/swap: $C_{ki} = A_kB_i - A_iB_k$.
 - Factor minus sign: $= -(A_iB_k - A_kB_i) = -C_{ik}$.
 
@@ -101,11 +107,13 @@
 **Goal**: Prove vector calculus identities using suffix notation.
 
 **Method**:
+
 1. Write the expression fully in suffix form (see dictionary in §0).
 2. Use the product rule on derivatives: $\partial_i(A_j B_k) = (\partial_i A_j)B_k + A_j(\partial_i B_k)$.
 3. If you hit $\epsilon_{ijk}\partial_j\partial_k f$, it immediately equals $0$ (kill rule, Rule 5 in §0).
 
 **Radial Functions $f(r)$**:
+
 - Definition: $r = (x_j x_j)^{1/2}$.
 - Derivative of $r$: $\frac{\partial r}{\partial x_i} = \frac{x_i}{r}$.
 - Derivative of $f(r)$: $[\nabla f(r)]_i = f'(r) \frac{x_i}{r}$.
@@ -117,6 +125,7 @@
 **Formula**: $\epsilon_{pqr}|M| = \epsilon_{ijk}M_{pi}M_{qj}M_{rk}$.
 
 **Method**:
+
 - To get $6|M|$: Multiply both sides by $\epsilon_{pqr}$. The LHS becomes $\epsilon_{pqr}\epsilon_{pqr}|M| = 6|M|$.
 - To prove $|M^T| = |M|$: Write out the formula for $|M^T|$, swap the indices on the $M$s, then relabel the dummy indices to match the original formula.
 
@@ -129,16 +138,19 @@
 **Given**: A basis $e_1, e_2, e_3$.
 
 **Find Dual Basis $e^1, e^2, e^3$**:
+
 1. Compute the three cross products: $e_2 \times e_3$, $e_3 \times e_1$, $e_1 \times e_2$.
 	- Cross product: $\begin{pmatrix}a \\ b \\ c\end{pmatrix}\times\begin{pmatrix}d \\ e \\f\end{pmatrix} = \begin{pmatrix}\begin{vmatrix}b & e \\ c & f\end{vmatrix} \\-\begin{vmatrix}a & d \\ c & f\end{vmatrix} \\\begin{vmatrix}a & d \\ b & e\end{vmatrix}\end{pmatrix}$ (cover 1st, 2nd but neg., 3rd).
 2. Compute volume $V = e_1 \cdot (e_2 \times e_3)$.
 3. Divide: $e^1 = \frac{e_2 \times e_3}{V}$, $e^2 = \frac{e_3 \times e_1}{V}$, $e^3 = \frac{e_1 \times e_2}{V}$.
 
 **Find Components**:
+
 - Covariant: $A_i = A \cdot e_i$ (dot with the *original* basis).
 - Contravariant: $A^i = A \cdot e^i$ (dot with the *dual* basis).
 
 **Raising/Lowering via Metric**:
+
 - Covariant metric $g_{ij} = e_i \cdot e_j$. Contravariant metric $g^{ij} = e^i \cdot e^j$ (matrix inverse of $g_{ij}$).
 - Raise/lower: $A_i = g_{ij}A^j$, $A^i = g^{ij}A_j$.
 - *Orthogonal shortcut*: If $g_{ij}=0$ for $i \neq j$, then $A_i = g_{ii}A^i$ and $g^{ii} = 1/g_{ii}$.
@@ -148,13 +160,16 @@
 **Goal**: Find metric components and scale factors from coordinate definitions.
 
 **Find Basis $e_i$**:
+
 1. Write position vector $r$ in terms of the new coordinates $(x^1, x^2, x^3)$ and Cartesian unit vectors $i_1, i_2, i_3$.
 2. Differentiate: $e_1 = \frac{\partial r}{\partial x^1}$, $e_2 = \frac{\partial r}{\partial x^2}$, $e_3 = \frac{\partial r}{\partial x^3}$.
 
 **Find Metric Tensor $g_{ij}$**:
+
 - Compute $g_{ij} = e_i \cdot e_j$ as a $3 \times 3$ matrix. Off-diagonals all $0$ → orthogonal.
 
 **Arc Length & Scale Factors**:
+
 - Scale factors: $h_i = \sqrt{g_{ii}}$ (or $h_i = |e_i|$).
 - Arc length element (orthogonal): $ds^2 = h_1^2(dx^1)^2 + h_2^2(dx^2)^2 + h_3^2(dx^3)^2$.
 
@@ -163,6 +178,7 @@
 **Goal**: Find the coefficients to transform between bases.
 
 **Method**:
+
 - Given new basis vectors $e'_m$ in terms of Cartesian $i_n$.
 - The expansion coefficient is $L^n_{m'} = e'_m \cdot i_n$ (just extract the $n$-th component of $e'_m$).
 - Transform covariant components: $B'_i = L^j_{i'} B_j$.
