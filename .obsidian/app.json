@@ -9,7 +9,7 @@
     "pageSize": "A5",
     "landscape": false,
     "margin": "2",
-    "downscalePercent": 66
+    "downscalePercent": 64
   },
   "spellcheck": false,
   "userIgnoreFilters": [

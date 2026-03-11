@@ -10,8 +10,7 @@
 	- **Platform testing**: Record the [[help videos]] for each feature of the platform.
 	- **Statistics**: checked shared stats spreadsheet for what should be actively collected.
 - Chill out and play some **Factorio**, hehe.
-- Do some **[[Omoikane]]** work - below. Also try the past papers to revise for MTH3008…
-	- [[MTH3008 Final Exam 2024-25]].
+- Do some **[[Omoikane]]** work - below.
 
 ```todo-wheel
 ```

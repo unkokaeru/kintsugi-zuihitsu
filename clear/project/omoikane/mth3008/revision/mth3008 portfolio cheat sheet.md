@@ -187,6 +187,8 @@ Identity: $\nabla \times (\nabla \times u) = \nabla(\nabla \cdot u) - \nabla^2 u
 - Scale factors: $h_i = \sqrt{g_{ii}}$ (or $h_i = |e_i|$).
 - Arc length element (orthogonal): $ds^2 = h_1^2(dx^1)^2 + h_2^2(dx^2)^2 + h_3^2(dx^3)^2$.
 
+*Note: write both of these if asked to "describe the arc length element in terms of the metric coefficients", or similar*.
+
 ### 3c. Expansion Coefficients / Finding $L^n_{m'}$
 
 **Goal**: Find the coefficients to transform between bases.
