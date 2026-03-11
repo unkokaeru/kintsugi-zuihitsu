@@ -105,6 +105,8 @@ Identity: $\nabla \times (\nabla \times u) = \nabla(\nabla \cdot u) - \nabla^2 u
 4. Reorder scalar variables freely to group them properly.
 5. Convert back to vector/matrix notation.
 
+**Factoring scalars**: In suffix form, any sub-expression that is already a scalar (no free indices, e.g. $a_k c_k = \mathbf{a} \cdot \mathbf{c}$) can be factored out of a term freely.
+
 **Example ($C_{ik} = A_iB_k - A_kB_i$ is antisymmetric)**:
 
 - Evaluate transpose/swap: $C_{ki} = A_kB_i - A_iB_k$.
