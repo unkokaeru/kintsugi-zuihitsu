@@ -28,15 +28,12 @@
             "id": "433e2bc8de751597",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2024-25.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
+                "file": "attached/files/mth3008 final exam 2024-25 solutions.pdf"
               },
-              "icon": "lucide-file",
-              "title": "MTH3008 Final Exam 2024-25"
+              "icon": "lucide-file-text",
+              "title": "mth3008 final exam 2024-25 solutions"
             }
           }
         ],
@@ -165,8 +162,8 @@
   },
   "active": "433e2bc8de751597",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
     "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2024-25.md",
+    "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
     "To-Do List.md",
     "attached/files/mth3008 final exam 2022-23 solutions.pdf",
     "clear/project/omoikane/mth3008/revision/final exam associated questions/MTH3008 Final Exam 2022-23.md",
