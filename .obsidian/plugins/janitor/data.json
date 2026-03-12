@@ -7,11 +7,13 @@
   "defaultOperation": "trash",
   "expiredAttribute": "expires",
   "expiredDateFormat": "YYYY-MM-DD",
-  "sizeLimitKb": 1024,
+  "sizeLimitKb": 8192,
   "processOrphans": true,
   "processEmpty": true,
   "processExpired": true,
   "processBig": true,
   "honorObsidianExcludedFiles": true,
-  "excludedFilesFilters": []
+  "excludedFilesFilters": [
+    "attached/files/chillin sushi guy.svg"
+  ]
 }
