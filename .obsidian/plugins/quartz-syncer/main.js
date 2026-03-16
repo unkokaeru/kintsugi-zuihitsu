@@ -33348,6 +33348,20 @@ function svgToData(svgElement) {
   const encodedData = btoa(unescape(encodeURIComponent(svgString)));
   return `data:image/svg+xml;base64,${encodedData}`;
 }
+async function batchParallel(items, fn, concurrency = 10, onProgress) {
+  const results = [];
+  const total = items.length;
+  for (let i = 0; i < total; i += concurrency) {
+    const chunk = items.slice(i, i + concurrency);
+    const chunkResults = await Promise.all(chunk.map(fn));
+    results.push(...chunkResults);
+    if (onProgress) {
+      onProgress(Math.min(i + concurrency, total), total);
+    }
+    await new Promise((resolve) => setTimeout(resolve, 0));
+  }
+  return results;
+}
 
 // src/publishFile/Validator.ts
 init_esbuild_buffer_shim();
@@ -40282,11 +40296,17 @@ var PublishFile = class {
   /**
    * Returns the type of the file based on its extension.
    *
-   * @returns The file type: "excalidraw" or "markdown".
+   * @returns The file type: "excalidraw", "base", "canvas", or "markdown".
    */
   getType() {
     if (this.file.name.endsWith(".excalidraw")) {
       return "excalidraw";
+    }
+    if (this.file.extension === "base") {
+      return "base";
+    }
+    if (this.file.extension === "canvas") {
+      return "canvas";
     }
     return "markdown";
   }
@@ -40296,6 +40316,12 @@ var PublishFile = class {
    * @returns true if the file should be published, false otherwise.
    */
   shouldPublish() {
+    if (this.file.extension === "base") {
+      return this.settings.useBases;
+    }
+    if (this.file.extension === "canvas") {
+      return this.settings.useCanvas;
+    }
     return hasPublishFlag(
       this.settings.publishFrontmatterKey,
       this.frontmatter,
@@ -40445,6 +40471,9 @@ var IntegrationRegistry = class {
   }
   getAll() {
     return [...this.integrations];
+  }
+  getByCategory(category) {
+    return this.integrations.filter((i) => i.category === category);
   }
   getEnabled(settings) {
     return this.integrations.filter((i) => settings[i.settingKey] && i.isAvailable()).sort((a, b) => a.priority - b.priority);
@@ -40682,6 +40711,7 @@ var DataviewIntegration = {
   name: "Dataview",
   settingKey: "useDataview",
   priority: 100,
+  category: "community",
   assets: {},
   isAvailable() {
     return !!getDataviewApi();
@@ -41269,6 +41299,7 @@ var DatacoreIntegration = {
   name: "Datacore",
   settingKey: "useDatacore",
   priority: 100,
+  category: "community",
   assets: {
     scss: datacoreScss
   },
@@ -41417,6 +41448,7 @@ var ExcalidrawIntegration = {
   name: "Excalidraw",
   settingKey: "useExcalidraw",
   priority: 50,
+  category: "community",
   assets: {
     scss: excalidrawScss
   },
@@ -41926,6 +41958,7 @@ var FantasyStatblocksIntegration = {
   name: "Fantasy Statblocks",
   settingKey: "useFantasyStatblocks",
   priority: 100,
+  category: "community",
   assets: {
     scss: fantasyStatblocksScss
   },
@@ -42175,6 +42208,7 @@ var AutoCardLinkIntegration = {
   name: "Auto Card Link",
   settingKey: "useAutoCardLink",
   priority: 100,
+  category: "community",
   assets: {
     scss: autoCardLinkScss
   },
@@ -42225,12 +42259,70 @@ var AutoCardLinkIntegration = {
   }
 };
 
+// src/compiler/integrations/bases.ts
+init_esbuild_buffer_shim();
+function isBasesPluginEnabled() {
+  const internalPlugins = app?.internalPlugins;
+  if (!internalPlugins) {
+    return false;
+  }
+  const basesPlugin = internalPlugins.getPluginById("bases");
+  return basesPlugin?.enabled ?? false;
+}
+var BasesIntegration = {
+  id: "bases",
+  name: "Bases",
+  settingKey: "useBases",
+  priority: 200,
+  category: "core",
+  assets: {},
+  isAvailable() {
+    return isBasesPluginEnabled();
+  },
+  getPatterns() {
+    return [];
+  },
+  async compile(match2) {
+    return match2.fullMatch;
+  }
+};
+
+// src/compiler/integrations/canvas.ts
+init_esbuild_buffer_shim();
+function isCanvasPluginEnabled() {
+  const internalPlugins = app?.internalPlugins;
+  if (!internalPlugins) {
+    return false;
+  }
+  const canvasPlugin = internalPlugins.getPluginById("canvas");
+  return canvasPlugin?.enabled ?? false;
+}
+var CanvasIntegration = {
+  id: "canvas",
+  name: "Canvas",
+  settingKey: "useCanvas",
+  priority: 200,
+  category: "core",
+  assets: {},
+  isAvailable() {
+    return isCanvasPluginEnabled();
+  },
+  getPatterns() {
+    return [];
+  },
+  async compile(match2) {
+    return match2.fullMatch;
+  }
+};
+
 // src/compiler/integrations/index.ts
 integrationRegistry.register(AutoCardLinkIntegration);
 integrationRegistry.register(DataviewIntegration);
 integrationRegistry.register(DatacoreIntegration);
 integrationRegistry.register(ExcalidrawIntegration);
 integrationRegistry.register(FantasyStatblocksIntegration);
+integrationRegistry.register(BasesIntegration);
+integrationRegistry.register(CanvasIntegration);
 
 // src/compiler/PluginCompiler.ts
 var PluginCompiler = class {
@@ -42316,6 +42408,14 @@ var SyncerPageCompiler = class {
   getFilesMarkedForPublishing;
   rewriteRule;
   datastore;
+  /**
+   * Request-scoped cache for files marked for publishing.
+   * Populated once per compile cycle via `cacheFilesMarkedForPublishing()`,
+   * cleared after the cycle via `clearPublishCache()`.
+   * Avoids redundant O(N) vault scans during transclusion resolution.
+   */
+  cachedPublishFiles = null;
+  cachedPublishFilesByPath = null;
   constructor(app2, vault, settings, metadataCache, datastore, getFilesMarkedForPublishing) {
     this.app = app2;
     this.vault = vault;
@@ -42324,6 +42424,48 @@ var SyncerPageCompiler = class {
     this.datastore = datastore;
     this.getFilesMarkedForPublishing = getFilesMarkedForPublishing;
     this.rewriteRule = getRewriteRules(this.settings.vaultPath);
+  }
+  /**
+   * Populates the request-scoped cache with files marked for publishing.
+   * Call once before a batch of compile operations, then call `clearPublishCache()`
+   * when the batch is complete.
+   */
+  async cacheFilesMarkedForPublishing() {
+    const { notes } = await this.getFilesMarkedForPublishing();
+    this.cachedPublishFiles = notes;
+    this.cachedPublishFilesByPath = new Map(
+      notes.map((f) => [f.getPath(), f])
+    );
+  }
+  /**
+   * Clears the request-scoped publish file cache.
+   * Call after a batch of compile operations is complete.
+   */
+  clearPublishCache() {
+    this.cachedPublishFiles = null;
+    this.cachedPublishFilesByPath = null;
+  }
+  /**
+   * Returns the cached publish files, or fetches them if not cached.
+   * Prefer calling `cacheFilesMarkedForPublishing()` before compile batches.
+   */
+  async getCachedPublishFiles() {
+    if (this.cachedPublishFiles) {
+      return this.cachedPublishFiles;
+    }
+    const { notes } = await this.getFilesMarkedForPublishing();
+    return notes;
+  }
+  /**
+   * Returns the cached publish files map (path → file), or builds one if not cached.
+   * Prefer calling `cacheFilesMarkedForPublishing()` before compile batches.
+   */
+  async getCachedPublishFilesByPath() {
+    if (this.cachedPublishFilesByPath) {
+      return this.cachedPublishFilesByPath;
+    }
+    const { notes } = await this.getFilesMarkedForPublishing();
+    return new Map(notes.map((f) => [f.getPath(), f]));
   }
   /**
    * Runs the compiler steps on the given text.
@@ -42352,6 +42494,12 @@ var SyncerPageCompiler = class {
    */
   async generateMarkdown(file) {
     const vaultFileText = await file.cachedRead();
+    if (file.getType() === "base") {
+      return [vaultFileText, { blobs: [] }];
+    }
+    if (file.getType() === "canvas") {
+      return [vaultFileText, { blobs: [] }];
+    }
     if (this.settings.useExcalidraw) {
       if (file.file.name.endsWith(".excalidraw.md")) {
         console.warn("Excalidraw files are not supported yet.");
@@ -42542,7 +42690,7 @@ var SyncerPageCompiler = class {
     if (!this.settings.applyEmbeds) {
       return text2;
     }
-    const { notes: publishedFiles } = await this.getFilesMarkedForPublishing();
+    const publishedFilesByPath = await this.getCachedPublishFilesByPath();
     let transcludedText = text2;
     const transcludedRegex = /!\[\[(.+?)\]\]/g;
     const transclusionMatches = text2.match(transcludedRegex);
@@ -42622,9 +42770,7 @@ var SyncerPageCompiler = class {
             fileText
           );
           fileText = fileText.replace(BLOCKREF_REGEX, "");
-          const publishedFilesContainsLinkedFile = publishedFiles.find(
-            (f) => f.getPath() == linkedFile.path
-          );
+          const publishedFilesContainsLinkedFile = publishedFilesByPath.has(linkedFile.path);
           if (publishedFilesContainsLinkedFile) {
             const permalink = metadata?.frontmatter && metadata.frontmatter["permalink"];
             const quartzPathFull = permalink ? sanitizePermalink(permalink) : sanitizePermalink(
@@ -43053,9 +43199,8 @@ var RepositoryConnection = class {
       }
       if (this.auth.type === "bearer") {
         return {
-          headers: {
-            Authorization: `Bearer ${this.auth.secret}`
-          }
+          username: "x-access-token",
+          password: this.auth.secret || ""
         };
       }
       return {
@@ -43063,6 +43208,34 @@ var RepositoryConnection = class {
         password: this.auth.secret || ""
       };
     };
+  }
+  /**
+   * Pushes to remote with exponential backoff retry on auth/transient errors.
+   * Retries up to 3 times with delays of 1s, 2s, 4s.
+   */
+  async pushWithRetry(maxRetries = 3) {
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        await import_isomorphic_git.default.push({
+          ...this.getGitConfig(),
+          url: this.remoteUrl,
+          remote: "origin",
+          ref: this.branch
+        });
+        return;
+      } catch (error) {
+        const isRetryable = error instanceof Error && (error.message.includes("401") || error.message.includes("403") || error.message.includes("429") || error.message.includes("5"));
+        if (!isRetryable || attempt === maxRetries) {
+          throw error;
+        }
+        const delay = Math.pow(2, attempt) * 1e3;
+        logger.warn(
+          `Push attempt ${attempt + 1} failed, retrying in ${delay}ms...`,
+          error
+        );
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      }
+    }
   }
   getGitConfig() {
     const config = {
@@ -43203,6 +43376,52 @@ var RepositoryConnection = class {
       );
     }
   }
+  /**
+   * Bulk-reads all blob contents from the repository in a single tree walk.
+   * Uses git.walk with TREE walker to avoid per-file HTTP round-trips.
+   * Returns a Map of filepath → decoded UTF-8 content.
+   *
+   * @param filterPrefix - Only include blobs whose path starts with this prefix.
+   * @returns A Map of filepath → content string.
+   */
+  async getAllBlobContents(filterPrefix) {
+    try {
+      await this.ensureRepoInitialized();
+      const ref = `origin/${this.branch}`;
+      const contents = /* @__PURE__ */ new Map();
+      await import_isomorphic_git.default.walk({
+        ...this.getGitConfig(),
+        trees: [import_isomorphic_git.default.TREE({ ref })],
+        map: async (filepath, [entry]) => {
+          if (!entry) return void 0;
+          if (filepath === ".") return void 0;
+          const type = await entry.type();
+          if (type === "tree") {
+            if (filterPrefix && !filterPrefix.startsWith(filepath) && !filepath.startsWith(filterPrefix)) {
+              return void 0;
+            }
+            return filepath;
+          }
+          if (type !== "blob") return void 0;
+          if (filterPrefix && !filepath.startsWith(filterPrefix)) {
+            return void 0;
+          }
+          const data = await entry.content();
+          if (data) {
+            const text2 = new TextDecoder().decode(data);
+            contents.set(filepath, text2);
+          }
+          return filepath;
+        }
+      });
+      return contents;
+    } catch (error) {
+      logger.error("Could not bulk-read blob contents", error);
+      throw new Error(
+        `Could not bulk-read blob contents from repository ${this.getRepositoryName()}`
+      );
+    }
+  }
   async getFile(path, _branch) {
     path = this.setRepositoryPath(
       this.getVaultPath(this.getRepositoryPath(path))
@@ -43299,7 +43518,7 @@ var RepositoryConnection = class {
       return void 0;
     }
   }
-  async deleteFiles(filePaths) {
+  async deleteFiles(filePaths, onProgress) {
     if (filePaths.length === 0) return;
     try {
       await this.ensureRepoInitialized();
@@ -43309,6 +43528,15 @@ var RepositoryConnection = class {
         ref: this.branch,
         singleBranch: true
       });
+      const normalizeFilePath = (path) => {
+        let previous;
+        do {
+          previous = path;
+          path = path.replace(/\.\.\//g, "");
+        } while (path !== previous);
+        path = this.getVaultPath(path);
+        return path.startsWith("/") ? `${this.contentFolder}${path}` : `${this.contentFolder}/${path}`;
+      };
       const remoteCommit = await import_isomorphic_git.default.resolveRef({
         ...this.getGitConfig(),
         ref: `origin/${this.branch}`
@@ -43328,23 +43556,16 @@ var RepositoryConnection = class {
         ...this.getGitConfig(),
         ref: this.branch
       });
-      const normalizeFilePath = (path) => {
-        let previous;
-        do {
-          previous = path;
-          path = path.replace(/\.\.\//g, "");
-        } while (path !== previous);
-        path = this.getVaultPath(path);
-        return path.startsWith("/") ? `${this.contentFolder}${path}` : `${this.contentFolder}/${path}`;
-      };
-      for (const filePath of filePaths) {
-        const normalizedPath = normalizeFilePath(filePath);
+      const cache = {};
+      for (let i = 0; i < filePaths.length; i++) {
+        const normalizedPath = normalizeFilePath(filePaths[i]);
         const fullPath = `${this.dir}/${normalizedPath}`;
         try {
           await this.getFs().promises.unlink(fullPath);
           await import_isomorphic_git.default.remove({
             ...this.getGitConfig(),
-            filepath: normalizedPath
+            filepath: normalizedPath,
+            cache
           });
         } catch (error) {
           logger.warn(
@@ -43352,27 +43573,29 @@ var RepositoryConnection = class {
             error
           );
         }
+        if (onProgress) {
+          await onProgress(i + 1, filePaths.length);
+        }
+        if (i % 50 === 49) {
+          await new Promise((resolve) => setTimeout(resolve, 0));
+        }
       }
       await import_isomorphic_git.default.commit({
         ...this.getGitConfig(),
-        message: "Deleted multiple files",
+        message: `Deleted ${filePaths.length} file${filePaths.length === 1 ? "" : "s"}`,
         author: {
           name: "Quartz Syncer",
-          email: "quartz-syncer@obsidian.md"
-        }
+          email: "268450573+quartz-syncer-publisher[bot]@users.noreply.github.com"
+        },
+        cache
       });
-      await import_isomorphic_git.default.push({
-        ...this.getGitConfig(),
-        url: this.remoteUrl,
-        remote: "origin",
-        ref: this.branch
-      });
+      await this.pushWithRetry();
     } catch (error) {
       logger.error("Failed to delete files", error);
       throw error;
     }
   }
-  async updateFiles(files, rawFiles, rawFilesToDelete) {
+  async updateFiles(files, rawFiles, rawFilesToDelete, onProgress) {
     const hasContent = files.length > 0;
     const hasRawFiles = rawFiles && rawFiles.size > 0;
     const hasRawFilesToDelete = rawFilesToDelete && rawFilesToDelete.length > 0;
@@ -43427,16 +43650,17 @@ var RepositoryConnection = class {
           }
         }
       };
+      const cache = {};
+      const allFilepathsToStage = [];
+      const totalItems = files.length;
+      let completed = 0;
       for (const file of files) {
         const [text2, metadata] = file.compiledFile;
         const normalizedPath = normalizeFilePath(file.getPath());
         const fullPath = `${this.dir}/${normalizedPath}`;
         await ensureDirectory(normalizedPath);
         await this.getFs().promises.writeFile(fullPath, text2);
-        await import_isomorphic_git.default.add({
-          ...this.getGitConfig(),
-          filepath: normalizedPath
-        });
+        allFilepathsToStage.push(normalizedPath);
         for (const asset of metadata.blobs) {
           const assetPath = normalizeFilePath(asset.path);
           const assetFullPath = `${this.dir}/${assetPath}`;
@@ -43449,38 +43673,47 @@ var RepositoryConnection = class {
             assetFullPath,
             binaryContent
           );
-          await import_isomorphic_git.default.add({
-            ...this.getGitConfig(),
-            filepath: assetPath
-          });
+          allFilepathsToStage.push(assetPath);
+        }
+        completed++;
+        if (onProgress) {
+          await onProgress(completed, totalItems);
+        }
+        if (totalItems <= 100 || completed % 50 === 0) {
+          await new Promise(
+            (resolve) => requestAnimationFrame(resolve)
+          );
         }
       }
+      if (allFilepathsToStage.length > 0) {
+        await import_isomorphic_git.default.add({
+          ...this.getGitConfig(),
+          filepath: allFilepathsToStage,
+          cache
+        });
+      }
       if (rawFiles && rawFiles.size > 0) {
-        await this.stageRawFiles(rawFiles);
+        await this.stageRawFiles(rawFiles, cache);
       }
       if (rawFilesToDelete && rawFilesToDelete.length > 0) {
-        await this.stageRawFileDeletions(rawFilesToDelete);
+        await this.stageRawFileDeletions(rawFilesToDelete, cache);
       }
       await import_isomorphic_git.default.commit({
         ...this.getGitConfig(),
-        message: "Published multiple files",
+        message: `Published ${files.length} file${files.length === 1 ? "" : "s"}`,
         author: {
           name: "Quartz Syncer",
-          email: "quartz-syncer@obsidian.md"
-        }
+          email: "268450573+quartz-syncer-publisher[bot]@users.noreply.github.com"
+        },
+        cache
       });
-      await import_isomorphic_git.default.push({
-        ...this.getGitConfig(),
-        url: this.remoteUrl,
-        remote: "origin",
-        ref: this.branch
-      });
+      await this.pushWithRetry();
     } catch (error) {
       logger.error("Failed to update files", error);
       throw error;
     }
   }
-  async stageRawFiles(files) {
+  async stageRawFiles(files, cache = {}) {
     if (files.size === 0) return;
     const ensureDirectory = async (filePath) => {
       const parts = filePath.split("/");
@@ -43496,17 +43729,22 @@ var RepositoryConnection = class {
         }
       }
     };
+    const filepaths = [];
     for (const [filepath, content] of files) {
       const fullPath = `${this.dir}/${filepath}`;
       await ensureDirectory(filepath);
       await this.getFs().promises.writeFile(fullPath, content);
+      filepaths.push(filepath);
+    }
+    if (filepaths.length > 0) {
       await import_isomorphic_git.default.add({
         ...this.getGitConfig(),
-        filepath
+        filepath: filepaths,
+        cache
       });
     }
   }
-  async stageRawFileDeletions(filePaths) {
+  async stageRawFileDeletions(filePaths, cache = {}) {
     if (filePaths.length === 0) return;
     for (const filepath of filePaths) {
       const fullPath = `${this.dir}/${filepath}`;
@@ -43514,7 +43752,8 @@ var RepositoryConnection = class {
         await this.getFs().promises.unlink(fullPath);
         await import_isomorphic_git.default.remove({
           ...this.getGitConfig(),
-          filepath
+          filepath,
+          cache
         });
       } catch (error) {
         logger.debug(`Could not delete file ${filepath}`, error);
@@ -43556,15 +43795,10 @@ var RepositoryConnection = class {
         message: "Updated integration styles",
         author: {
           name: "Quartz Syncer",
-          email: "quartz-syncer@obsidian.md"
+          email: "268450573+quartz-syncer-publisher[bot]@users.noreply.github.com"
         }
       });
-      await import_isomorphic_git.default.push({
-        ...this.getGitConfig(),
-        url: this.remoteUrl,
-        remote: "origin",
-        ref: this.branch
-      });
+      await this.pushWithRetry();
     } catch (error) {
       logger.error("Failed to write raw files", error);
       throw error;
@@ -43604,9 +43838,8 @@ var RepositoryConnection = class {
       }
       if (auth.type === "bearer") {
         return () => ({
-          headers: {
-            Authorization: `Bearer ${auth.secret}`
-          }
+          username: "x-access-token",
+          password: auth.secret || ""
         });
       }
       return () => ({
@@ -43674,6 +43907,12 @@ var Publisher = class {
    * @returns true if the file should be published, false otherwise.
    */
   shouldPublish(file) {
+    if (file.extension === "base") {
+      return this.settings.useBases;
+    }
+    if (file.extension === "canvas") {
+      return this.settings.useCanvas;
+    }
     const frontMatter = this.metadataCache.getCache(file.path)?.frontmatter;
     return hasPublishFlag(
       this.settings.publishFrontmatterKey,
@@ -43688,9 +43927,16 @@ var Publisher = class {
    */
   async getFilesMarkedForPublishing() {
     const vaultIsRoot = this.settings.vaultPath === "/";
-    const files = this.vault.getMarkdownFiles().filter(
+    const markdownFiles = this.vault.getMarkdownFiles().filter(
       (file) => vaultIsRoot || file.path.startsWith(this.settings.vaultPath)
     );
+    const baseFiles = this.settings.useBases ? this.vault.getFiles().filter(
+      (file) => file.extension === "base" && (vaultIsRoot || file.path.startsWith(this.settings.vaultPath))
+    ) : [];
+    const canvasFiles = this.settings.useCanvas ? this.vault.getFiles().filter(
+      (file) => file.extension === "canvas" && (vaultIsRoot || file.path.startsWith(this.settings.vaultPath))
+    ) : [];
+    const files = [...markdownFiles, ...baseFiles, ...canvasFiles];
     const notesToPublish = [];
     const blobsToPublish = /* @__PURE__ */ new Set();
     for (const file of files) {
@@ -43718,22 +43964,30 @@ var Publisher = class {
     };
   }
   /**
+   * Creates a RepositoryConnection that can be shared across operations.
+   * Reusing a connection avoids redundant clone/fetch cycles.
+   */
+  createConnection() {
+    return new RepositoryConnection({
+      gitSettings: this.plugin.getGitSettingsWithSecret(),
+      contentFolder: this.settings.contentFolder,
+      vaultPath: this.settings.vaultPath
+    });
+  }
+  /**
    * Deletes a batch of files from the repository.
    *
    * @param filePaths - An array of file paths to delete.
+   * @param connection - Optional shared RepositoryConnection to reuse.
    * @returns A promise that resolves to true if the deletion was successful, false otherwise.
    */
-  async deleteBatch(filePaths) {
+  async deleteBatch(filePaths, connection, onProgress) {
     if (filePaths.length === 0) {
       return true;
     }
     try {
-      const userQuartzConnection = new RepositoryConnection({
-        gitSettings: this.plugin.getGitSettingsWithSecret(),
-        contentFolder: this.settings.contentFolder,
-        vaultPath: this.settings.vaultPath
-      });
-      await userQuartzConnection.deleteFiles(filePaths);
+      const userQuartzConnection = connection ?? this.createConnection();
+      await userQuartzConnection.deleteFiles(filePaths, onProgress);
       if (this.settings.useCache) {
         for (const filePath of filePaths) {
           await this.datastore.dropFile(filePath);
@@ -43745,29 +43999,32 @@ var Publisher = class {
       return false;
     }
   }
-  async publishBatch(files) {
-    const filesToPublish = files.filter(
-      (f) => isPublishFrontmatterValid(
+  async publishBatch(files, connection, onProgress) {
+    const filesToPublish = files.filter((f) => {
+      if (f.file.extension === "base") {
+        return this.settings.useBases;
+      }
+      if (f.file.extension === "canvas") {
+        return this.settings.useCanvas;
+      }
+      return isPublishFrontmatterValid(
         this.settings.publishFrontmatterKey,
         f.frontmatter,
         this.settings.allNotesPublishableByDefault
-      )
-    );
+      );
+    });
     if (filesToPublish.length === 0) {
       return true;
     }
     try {
-      const userQuartzConnection = new RepositoryConnection({
-        gitSettings: this.plugin.getGitSettingsWithSecret(),
-        contentFolder: this.settings.contentFolder,
-        vaultPath: this.settings.vaultPath
-      });
+      const userQuartzConnection = connection ?? this.createConnection();
       const assetSyncer = new AssetSyncer(this.settings);
       const assetResult = await assetSyncer.collectAssets(userQuartzConnection);
       await userQuartzConnection.updateFiles(
         filesToPublish,
         assetResult.filesToStage,
-        assetResult.filesToDelete
+        assetResult.filesToDelete,
+        onProgress
       );
       if (this.settings.useCache) {
         for (const file of filesToPublish) {
@@ -44135,6 +44392,10 @@ function schedule_update() {
     update_scheduled = true;
     resolved_promise.then(flush);
   }
+}
+function tick() {
+  schedule_update();
+  return resolved_promise;
 }
 function add_render_callback(fn) {
   render_callbacks.push(fn);
@@ -44731,13 +44992,23 @@ function create_if_block_5(ctx) {
   );
   let t3;
   let t4;
+  let t5;
+  let t6;
   let current;
   let mounted;
   let dispose;
   icon = new Icon_default({ props: { name: "file" } });
   let if_block0 = !/*readOnly*/
-  ctx[1] && create_if_block_7(ctx);
+  ctx[1] && create_if_block_9(ctx);
   let if_block1 = (
+    /*tree*/
+    ctx[0].fileType === "base" && create_if_block_8(ctx)
+  );
+  let if_block2 = (
+    /*tree*/
+    ctx[0].fileType === "canvas" && create_if_block_7(ctx)
+  );
+  let if_block3 = (
     /*enableShowDiff*/
     ctx[2] && create_if_block_6(ctx)
   );
@@ -44754,6 +45025,10 @@ function create_if_block_5(ctx) {
       t3 = text(t3_value);
       t4 = space();
       if (if_block1) if_block1.c();
+      t5 = space();
+      if (if_block2) if_block2.c();
+      t6 = space();
+      if (if_block3) if_block3.c();
       attr(span0, "class", "no-arrow");
     },
     m(target, anchor) {
@@ -44768,6 +45043,10 @@ function create_if_block_5(ctx) {
       append(span1, t3);
       append(span2, t4);
       if (if_block1) if_block1.m(span2, null);
+      append(span2, t5);
+      if (if_block2) if_block2.m(span2, null);
+      append(span2, t6);
+      if (if_block3) if_block3.m(span2, null);
       current = true;
       if (!mounted) {
         dispose = listen(
@@ -44785,7 +45064,7 @@ function create_if_block_5(ctx) {
         if (if_block0) {
           if_block0.p(ctx2, dirty);
         } else {
-          if_block0 = create_if_block_7(ctx2);
+          if_block0 = create_if_block_9(ctx2);
           if_block0.c();
           if_block0.m(span2, t2);
         }
@@ -44797,25 +45076,53 @@ function create_if_block_5(ctx) {
       1) && t3_value !== (t3_value = /*tree*/
       ctx2[0].name + "")) set_data(t3, t3_value);
       if (
+        /*tree*/
+        ctx2[0].fileType === "base"
+      ) {
+        if (if_block1) {
+        } else {
+          if_block1 = create_if_block_8(ctx2);
+          if_block1.c();
+          if_block1.m(span2, t5);
+        }
+      } else if (if_block1) {
+        if_block1.d(1);
+        if_block1 = null;
+      }
+      if (
+        /*tree*/
+        ctx2[0].fileType === "canvas"
+      ) {
+        if (if_block2) {
+        } else {
+          if_block2 = create_if_block_7(ctx2);
+          if_block2.c();
+          if_block2.m(span2, t6);
+        }
+      } else if (if_block2) {
+        if_block2.d(1);
+        if_block2 = null;
+      }
+      if (
         /*enableShowDiff*/
         ctx2[2]
       ) {
-        if (if_block1) {
-          if_block1.p(ctx2, dirty);
+        if (if_block3) {
+          if_block3.p(ctx2, dirty);
           if (dirty & /*enableShowDiff*/
           4) {
-            transition_in(if_block1, 1);
+            transition_in(if_block3, 1);
           }
         } else {
-          if_block1 = create_if_block_6(ctx2);
-          if_block1.c();
-          transition_in(if_block1, 1);
-          if_block1.m(span2, null);
+          if_block3 = create_if_block_6(ctx2);
+          if_block3.c();
+          transition_in(if_block3, 1);
+          if_block3.m(span2, null);
         }
-      } else if (if_block1) {
+      } else if (if_block3) {
         group_outros();
-        transition_out(if_block1, 1, 1, () => {
-          if_block1 = null;
+        transition_out(if_block3, 1, 1, () => {
+          if_block3 = null;
         });
         check_outros();
       }
@@ -44823,12 +45130,12 @@ function create_if_block_5(ctx) {
     i(local) {
       if (current) return;
       transition_in(icon.$$.fragment, local);
-      transition_in(if_block1);
+      transition_in(if_block3);
       current = true;
     },
     o(local) {
       transition_out(icon.$$.fragment, local);
-      transition_out(if_block1);
+      transition_out(if_block3);
       current = false;
     },
     d(detaching) {
@@ -44838,6 +45145,8 @@ function create_if_block_5(ctx) {
       destroy_component(icon);
       if (if_block0) if_block0.d();
       if (if_block1) if_block1.d();
+      if (if_block2) if_block2.d();
+      if (if_block3) if_block3.d();
       mounted = false;
       dispose();
     }
@@ -44969,7 +45278,7 @@ function create_if_block(ctx) {
     }
   };
 }
-function create_if_block_7(ctx) {
+function create_if_block_9(ctx) {
   let input;
   let input_data_label_value;
   let input_checked_value;
@@ -45022,6 +45331,42 @@ function create_if_block_7(ctx) {
       }
       mounted = false;
       dispose();
+    }
+  };
+}
+function create_if_block_8(ctx) {
+  let span;
+  return {
+    c() {
+      span = element("span");
+      span.textContent = "BASE";
+      attr(span, "class", "quartz-syncer-file-badge quartz-syncer-badge-base");
+    },
+    m(target, anchor) {
+      insert(target, span, anchor);
+    },
+    d(detaching) {
+      if (detaching) {
+        detach(span);
+      }
+    }
+  };
+}
+function create_if_block_7(ctx) {
+  let span;
+  return {
+    c() {
+      span = element("span");
+      span.textContent = "CANVAS";
+      attr(span, "class", "quartz-syncer-file-badge quartz-syncer-badge-canvas");
+    },
+    m(target, anchor) {
+      insert(target, span, anchor);
+    },
+    d(detaching) {
+      if (detaching) {
+        detach(span);
+      }
     }
   };
 }
@@ -45770,12 +46115,12 @@ var TreeView_default = TreeView;
 // src/views/PublicationCenter/PublicationCenter.svelte
 function get_each_context2(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[30] = list[i];
+  child_ctx[29] = list[i];
   return child_ctx;
 }
 function get_each_context_1(ctx, list, i) {
   const child_ctx = ctx.slice();
-  child_ctx[33] = list[i];
+  child_ctx[32] = list[i];
   return child_ctx;
 }
 function create_if_block_10(ctx) {
@@ -45824,7 +46169,7 @@ function create_else_block2(ctx) {
   let dispose;
   let if_block = (
     /*failedPublish*/
-    ctx[18].length > 0 && create_if_block_9(ctx)
+    ctx[18].length > 0 && create_if_block_92(ctx)
   );
   let each_value_1 = ensure_array_like(
     /*unpublishedToPublish*/
@@ -46288,7 +46633,7 @@ function create_if_block2(ctx) {
     }
   };
 }
-function create_if_block_9(ctx) {
+function create_if_block_92(ctx) {
   let div;
   return {
     c() {
@@ -46334,7 +46679,7 @@ function create_else_block_2(ctx) {
     }
   };
 }
-function create_if_block_8(ctx) {
+function create_if_block_82(ctx) {
   let icon;
   let current;
   icon = new Icon_default({ props: { name: "cross" } });
@@ -46444,7 +46789,7 @@ function create_each_block_1(ctx) {
   let t0;
   let t1_value = (
     /*note*/
-    ctx[33].file.name + ""
+    ctx[32].file.name + ""
   );
   let t1;
   let t2;
@@ -46452,11 +46797,11 @@ function create_each_block_1(ctx) {
     /*publishedPaths*/
     ctx[6].includes(
       /*note*/
-      ctx[33].getVaultPath()
+      ctx[32].getVaultPath()
     )
   );
   let current;
-  const if_block_creators = [create_if_block_62, create_if_block_72, create_if_block_8, create_else_block_2];
+  const if_block_creators = [create_if_block_62, create_if_block_72, create_if_block_82, create_else_block_2];
   const if_blocks = [];
   function select_block_type_1(ctx2, dirty) {
     if (dirty[0] & /*processingPaths, unpublishedToPublish, changedToPublish*/
@@ -46468,19 +46813,19 @@ function create_each_block_1(ctx) {
     if (show_if_1 == null) show_if_1 = !!/*processingPaths*/
     ctx2[10].includes(
       /*note*/
-      ctx2[33].getVaultPath()
+      ctx2[32].getVaultPath()
     );
     if (show_if_1) return 0;
     if (show_if_2 == null) show_if_2 = !!/*publishedPaths*/
     ctx2[6].includes(
       /*note*/
-      ctx2[33].getVaultPath()
+      ctx2[32].getVaultPath()
     );
     if (show_if_2) return 1;
     if (show_if_3 == null) show_if_3 = !!/*failedPublish*/
     ctx2[18].includes(
       /*note*/
-      ctx2[33].getVaultPath()
+      ctx2[32].getVaultPath()
     );
     if (show_if_3) return 2;
     return 3;
@@ -46530,12 +46875,12 @@ function create_each_block_1(ctx) {
       }
       if ((!current || dirty[0] & /*unpublishedToPublish, changedToPublish*/
       24) && t1_value !== (t1_value = /*note*/
-      ctx2[33].file.name + "")) set_data(t1, t1_value);
+      ctx2[32].file.name + "")) set_data(t1, t1_value);
       if (dirty[0] & /*publishedPaths, unpublishedToPublish, changedToPublish*/
       88) show_if = /*publishedPaths*/
       ctx2[6].includes(
         /*note*/
-        ctx2[33].getVaultPath()
+        ctx2[32].getVaultPath()
       );
       if (show_if) {
         if (if_block1) {
@@ -46676,7 +47021,7 @@ function create_each_block2(ctx) {
   let t0;
   let t1_value = (
     /*path*/
-    ctx[30].split("/").last() + ""
+    ctx[29].split("/").last() + ""
   );
   let t1;
   let t2;
@@ -46684,7 +47029,7 @@ function create_each_block2(ctx) {
     /*publishedPaths*/
     ctx[6].includes(
       /*path*/
-      ctx[30]
+      ctx[29]
     )
   );
   let current;
@@ -46698,13 +47043,13 @@ function create_each_block2(ctx) {
     if (show_if_1 == null) show_if_1 = !!/*processingPaths*/
     ctx2[10].includes(
       /*path*/
-      ctx2[30]
+      ctx2[29]
     );
     if (show_if_1) return 0;
     if (show_if_2 == null) show_if_2 = !!/*publishedPaths*/
     ctx2[6].includes(
       /*path*/
-      ctx2[30]
+      ctx2[29]
     );
     if (show_if_2) return 1;
     return 2;
@@ -46754,12 +47099,12 @@ function create_each_block2(ctx) {
       }
       if ((!current || dirty[0] & /*pathsToDelete*/
       32) && t1_value !== (t1_value = /*path*/
-      ctx2[30].split("/").last() + "")) set_data(t1, t1_value);
+      ctx2[29].split("/").last() + "")) set_data(t1, t1_value);
       if (dirty[0] & /*publishedPaths, pathsToDelete*/
       96) show_if = /*publishedPaths*/
       ctx2[6].includes(
         /*path*/
-        ctx2[30]
+        ctx2[29]
       );
       if (show_if) {
         if (if_block1) {
@@ -46880,6 +47225,44 @@ function create_fragment4(ctx) {
     }
   };
 }
+function getFileTypeFromPath(filePath) {
+  if (filePath.endsWith(".base")) return "base";
+  if (filePath.endsWith(".canvas")) return "canvas";
+  if (filePath.endsWith(".excalidraw") || filePath.endsWith(".excalidraw.md")) return "excalidraw";
+  if (filePath.endsWith(".md")) return "markdown";
+  return "unknown";
+}
+function insertIntoTree(tree, filePath, deletedPathsSet, childrenIndex, fileType) {
+  let currentNode = tree;
+  const pathComponents = filePath.split("/");
+  const isRemoteOnlyFile = deletedPathsSet.has(filePath);
+  for (let i = 0; i < pathComponents.length; i++) {
+    const part = pathComponents[i];
+    if (!currentNode.children) {
+      currentNode.children = [];
+    }
+    let index = childrenIndex.get(currentNode);
+    if (!index) {
+      index = /* @__PURE__ */ new Map();
+      childrenIndex.set(currentNode, index);
+    }
+    let childNode = index.get(part);
+    const isLeaf = i === pathComponents.length - 1;
+    if (!childNode) {
+      childNode = {
+        name: part,
+        isRoot: false,
+        path: pathComponents.slice(0, i + 1).join("/"),
+        indeterminate: false,
+        checked: isRemoteOnlyFile,
+        fileType: isLeaf ? fileType ?? getFileTypeFromPath(filePath) : "folder"
+      };
+      currentNode.children.push(childNode);
+      index.set(part, childNode);
+    }
+    currentNode = childNode;
+  }
+}
 function instance4($$self, $$props, $$invalidate) {
   let publishedNotesTree;
   let changedNotesTree;
@@ -46900,29 +47283,6 @@ function instance4($$self, $$props, $$invalidate) {
     $$invalidate(2, publishStatus = await publishStatusManager.getPublishStatus(controller));
   }
   onMount(getPublishStatus);
-  function insertIntoTree(tree, filePath) {
-    let currentNode = tree;
-    const pathComponents = filePath.split("/");
-    const isRemoteOnlyFile = publishStatus.deletedNotePaths.some((note) => note.path === filePath);
-    for (let i = 0; i < pathComponents.length; i++) {
-      const part = pathComponents[i];
-      if (!currentNode.children) {
-        currentNode.children = [];
-      }
-      let childNode = currentNode.children.find((child) => child.name === part);
-      if (!childNode) {
-        childNode = {
-          name: part,
-          isRoot: false,
-          path: pathComponents.slice(0, i + 1).join("/"),
-          indeterminate: false,
-          checked: isRemoteOnlyFile
-        };
-        currentNode.children.push(childNode);
-      }
-      currentNode = childNode;
-    }
-  }
   function filePathsToTree(filePaths, rootName = "root") {
     const root = {
       name: rootName,
@@ -46931,8 +47291,10 @@ function instance4($$self, $$props, $$invalidate) {
       indeterminate: false,
       checked: false
     };
+    const deletedPathsSet = new Set(publishStatus?.deletedNotePaths?.map((p) => p.path) ?? []);
+    const childrenIndex = /* @__PURE__ */ new WeakMap();
     for (const filePath of filePaths) {
-      insertIntoTree(root, filePath);
+      insertIntoTree(root, filePath, deletedPathsSet, childrenIndex);
     }
     return root;
   }
@@ -47006,19 +47368,33 @@ function instance4($$self, $$props, $$invalidate) {
     const blobsToDelete = pathsToDelete.filter((path) => publishStatus.deletedBlobPaths.some((p) => p.path === path));
     $$invalidate(3, unpublishedToPublish = publishStatus.unpublishedNotes.filter((note) => unpublishedPaths.includes(note.getVaultPath())) ?? []);
     $$invalidate(4, changedToPublish = publishStatus?.changedNotes.filter((note) => changedPaths.includes(note.getVaultPath())) ?? []);
-    $$invalidate(7, showPublishingView = true);
     const allNotesToPublish = unpublishedToPublish.concat(changedToPublish);
-    $$invalidate(10, processingPaths = [...allNotesToPublish.map((note) => note.getVaultPath())]);
-    await publisher.publishBatch(allNotesToPublish);
-    $$invalidate(6, publishedPaths = [...processingPaths]);
-    $$invalidate(10, processingPaths = []);
+    $$invalidate(7, showPublishingView = true);
+    await tick();
+    const sharedConnection = publisher.createConnection();
+    const allPublishPaths = allNotesToPublish.map((note) => note.getVaultPath());
     const allPathsToDelete = [...notesToDelete, ...blobsToDelete];
+    const allPaths = [...allPublishPaths, ...allPathsToDelete];
+    $$invalidate(10, processingPaths = [...allPaths]);
+    if (allNotesToPublish.length > 0) {
+      await publisher.publishBatch(allNotesToPublish, sharedConnection, async (completed, _total) => {
+        $$invalidate(6, publishedPaths = allPublishPaths.slice(0, completed));
+        $$invalidate(10, processingPaths = [...allPublishPaths.slice(completed), ...allPathsToDelete]);
+        await tick();
+      });
+    }
+    const publishedAddPaths = [...allPublishPaths];
+    $$invalidate(6, publishedPaths = [...publishedAddPaths]);
     if (allPathsToDelete.length > 0) {
       $$invalidate(10, processingPaths = [...allPathsToDelete]);
-      await publisher.deleteBatch(allPathsToDelete);
-      $$invalidate(6, publishedPaths = [...publishedPaths, ...allPathsToDelete]);
-      $$invalidate(10, processingPaths = []);
+      await publisher.deleteBatch(allPathsToDelete, sharedConnection, async (completed, _total) => {
+        $$invalidate(6, publishedPaths = [...publishedAddPaths, ...allPathsToDelete.slice(0, completed)]);
+        $$invalidate(10, processingPaths = allPathsToDelete.slice(completed));
+        await tick();
+      });
     }
+    $$invalidate(6, publishedPaths = [...allPaths]);
+    $$invalidate(10, processingPaths = []);
   };
   const emptyNode = {
     name: "",
@@ -48581,8 +48957,9 @@ var PublishStatusManager = class {
     throw new Error("Method not implemented.");
   }
   generateDeletedContentPaths(remoteNoteHashes, marked) {
+    const markedSet = new Set(marked);
     const isJsFile = (key) => key.endsWith(".js");
-    const isMarkedForPublish = (key) => marked.find((f) => f === key);
+    const isMarkedForPublish = (key) => markedSet.has(key);
     const deletedPaths = Object.keys(remoteNoteHashes).filter(
       (key) => !isJsFile(key) && !isMarkedForPublish(key)
     );
@@ -48618,32 +48995,42 @@ var PublishStatusManager = class {
     const remoteNoteHashes = await this.siteManager.getNoteHashes(contentTree);
     const remoteBlobHashes = await this.siteManager.getBlobHashes(contentTree);
     const remoteBlobHashesArray = Object.entries(remoteBlobHashes);
-    const numberOfEntries = Object.entries(remoteNoteHashes).length;
-    const padLength = numberOfEntries.toString().length;
-    let index = 0;
     if (this.publisher.settings.useCache) {
-      for (const [path, sha] of remoteBlobHashesArray) {
-        if (!sha) {
-          continue;
+      await this.publisher.datastore.preloadCache();
+      const entriesToProcess = remoteBlobHashesArray.filter(
+        ([path, sha]) => {
+          if (!sha) return false;
+          const isPublishableFile = path.endsWith(".md") || this.publisher.settings.useBases && path.endsWith(".base") || this.publisher.settings.useCanvas && path.endsWith(".canvas");
+          return isPublishableFile;
         }
-        const hash = await this.publisher.datastore.loadRemoteHash(path);
-        if ((!hash || hash !== sha) && path.endsWith(".md")) {
+      );
+      const syncTotal = entriesToProcess.length;
+      const syncPadLength = syncTotal.toString().length;
+      let syncIndex = 0;
+      const allNoteContents = await this.siteManager.getAllNoteContents();
+      await batchParallel(
+        entriesToProcess,
+        async ([path, sha]) => {
+          syncIndex++;
           if (controller) {
-            index++;
             controller.setProgress(
-              Math.floor(index / numberOfEntries * 100)
+              Math.floor(syncIndex / syncTotal * 100)
             );
             controller.setIndexText(
-              `Notes processed: ${index.toString().padStart(padLength)}/${numberOfEntries}`
+              `Syncing remote cache: ${syncIndex.toString().padStart(syncPadLength)}/${syncTotal}`
             );
             controller.setText(`Processing ${path}...`);
           }
-          if (!this.publisher.vault.getFileByPath(path)) {
-            continue;
+          const hash = await this.publisher.datastore.loadRemoteHash(path);
+          if (hash && hash === sha) {
+            return;
           }
-          const remoteContent = await this.siteManager.getNoteContent(path);
+          if (!this.publisher.vault.getFileByPath(path)) {
+            return;
+          }
+          const remoteContent = allNoteContents.get(path) ?? "";
           if (!remoteContent) {
-            continue;
+            return;
           }
           const timestamp = await this.publisher.datastore.getTime(path) ?? Date.now();
           await this.publisher.datastore.storeRemoteFile(
@@ -48656,11 +49043,17 @@ var PublishStatusManager = class {
             timestamp,
             sha
           );
-        }
+        },
+        10
+      );
+      if (controller) {
+        controller.setText("Syncing cache to disk...");
+        controller.setProgress(0);
       }
+      await this.publisher.datastore.flushCache(controller);
     }
     if (controller) {
-      controller.setText("Finishing up...");
+      controller.setText("Loading published notes...");
       controller.setProgress(100);
     }
     const marked = await this.publisher.getFilesMarkedForPublishing();
@@ -48672,20 +49065,54 @@ var PublishStatusManager = class {
         await this.publisher.plugin.compareDataToCache();
       }
     }
-    for (const file of marked.notes) {
-      const compiledFile = await file.compile();
-      const [content, _] = compiledFile.getCompiledFile();
-      const localHash = generateBlobHash(content);
-      const remoteHash = remoteNoteHashes[file.getVaultPath()];
-      if (!remoteHash) {
-        unpublishedNotes.push(compiledFile);
-      } else if (remoteHash === localHash) {
-        compiledFile.setRemoteHash(remoteHash);
-        publishedNotes.push(compiledFile);
-      } else {
-        compiledFile.setRemoteHash(remoteHash);
-        changedNotes.push(compiledFile);
+    await this.publisher.compiler.cacheFilesMarkedForPublishing();
+    if (controller) {
+      controller.setText("Compiling notes...");
+      controller.setProgress(0);
+    }
+    const compileTotal = marked.notes.length;
+    const compilePadLength = compileTotal.toString().length;
+    let compileIndex = 0;
+    try {
+      await batchParallel(
+        marked.notes,
+        async (file) => {
+          compileIndex++;
+          if (controller) {
+            controller.setProgress(
+              Math.floor(compileIndex / compileTotal * 100)
+            );
+            controller.setIndexText(
+              `Compiling: ${compileIndex.toString().padStart(compilePadLength)}/${compileTotal}`
+            );
+            controller.setText(
+              `Compiling ${file.getVaultPath()}...`
+            );
+          }
+          const compiledFile = await file.compile();
+          const [content, _] = compiledFile.getCompiledFile();
+          const localHash = generateBlobHash(content);
+          const remoteHash = remoteNoteHashes[file.getVaultPath()];
+          if (!remoteHash) {
+            unpublishedNotes.push(compiledFile);
+          } else if (remoteHash === localHash) {
+            compiledFile.setRemoteHash(remoteHash);
+            publishedNotes.push(compiledFile);
+          } else {
+            compiledFile.setRemoteHash(remoteHash);
+            changedNotes.push(compiledFile);
+          }
+        },
+        10
+      );
+    } finally {
+      if (controller) {
+        controller.setText("Saving compiled cache to disk...");
+        controller.setProgress(0);
       }
+      await this.publisher.datastore.flushCache(controller);
+      this.publisher.compiler.clearPublishCache();
+      this.publisher.datastore.clearMemoryCache();
     }
     deletedNotePaths.push(
       ...this.generateDeletedContentPaths(
@@ -48696,7 +49123,6 @@ var PublishStatusManager = class {
     deletedBlobPaths.push(
       ...this.generateDeletedContentPaths(remoteBlobHashes, marked.blobs)
     );
-    publishedNotes.sort((a, b) => a.compare(b));
     publishedNotes.sort((a, b) => a.compare(b));
     changedNotes.sort((a, b) => a.compare(b));
     deletedNotePaths.sort((a, b) => a.path.localeCompare(b.path));
@@ -49010,6 +49436,27 @@ var QuartzSyncerSiteManager = class {
     return content;
   }
   /**
+   * Bulk-reads all note contents from the remote repository in a single tree walk.
+   * This avoids per-file HTTP round-trips by reading all blobs at once.
+   *
+   * @returns A Map of vault-relative path → decoded content string.
+   */
+  async getAllNoteContents() {
+    const rawContents = await this.userSyncerConnection.getAllBlobContents(
+      this.settings.contentFolder
+    );
+    const vaultContents = /* @__PURE__ */ new Map();
+    const prefix = this.settings.contentFolder;
+    for (const [fullPath, content] of rawContents) {
+      let vaultPath = fullPath.replace(prefix, "");
+      if (vaultPath.startsWith("/")) {
+        vaultPath = vaultPath.substring(1);
+      }
+      vaultContents.set(vaultPath, content);
+    }
+    return vaultContents;
+  }
+  /**
    * Extracts note hashes from the repository content tree.
    *
    * @param contentTree - The repository content tree.
@@ -49017,8 +49464,9 @@ var QuartzSyncerSiteManager = class {
    */
   async getNoteHashes(contentTree) {
     const files = contentTree.tree;
+    const isPublishableFile = (path) => path.endsWith(".md") || this.settings.useBases && path.endsWith(".base") || this.settings.useCanvas && path.endsWith(".canvas");
     const notes = files.filter(
-      (x) => typeof x.path === "string" && x.path.startsWith(this.settings.contentFolder) && x.type === "blob" && x.path.endsWith(".md")
+      (x) => typeof x.path === "string" && x.path.startsWith(this.settings.contentFolder) && x.type === "blob" && isPublishableFile(x.path)
     );
     const hashes = {};
     for (const note of notes) {
@@ -49934,19 +50382,30 @@ var IntegrationSettings = class extends import_obsidian20.PluginSettingTab {
   display() {
     this.settingsRootElement.empty();
     this.settingsRootElement.addClass("quartz-syncer-github-settings");
-    this.initializePluginIntegrationHeader();
-    for (const integration of integrationRegistry.getAll()) {
-      this.initializeIntegrationSetting(integration);
+    const coreIntegrations = integrationRegistry.getByCategory("core");
+    const communityIntegrations = integrationRegistry.getByCategory("community");
+    if (coreIntegrations.length > 0) {
+      this.initializeCorePluginHeader();
+      for (const integration of coreIntegrations) {
+        this.initializeIntegrationSetting(integration);
+      }
+    }
+    if (communityIntegrations.length > 0) {
+      this.initializeCommunityPluginHeader();
+      for (const integration of communityIntegrations) {
+        this.initializeIntegrationSetting(integration);
+      }
     }
     this.initializeStylesHeader();
     this.initializeManageSyncerStylesSetting();
     this.settings.settings.lastUsedSettingsTab = "integration";
     this.settings.plugin.saveSettings();
   }
-  initializePluginIntegrationHeader() {
-    new import_obsidian20.Setting(this.settingsRootElement).setName("Plugin integration").setDesc(
-      "Quartz Syncer will use these Obsidian plugins with your Quartz notes."
-    ).setHeading();
+  initializeCorePluginHeader() {
+    new import_obsidian20.Setting(this.settingsRootElement).setName("Core plugins").setDesc("Integrations for Obsidian's built-in core plugins.").setHeading();
+  }
+  initializeCommunityPluginHeader() {
+    new import_obsidian20.Setting(this.settingsRootElement).setName("Community plugins").setDesc("Integrations for third-party community plugins.").setHeading();
   }
   initializeIntegrationSetting(integration) {
     const isAvailable = integration.isAvailable();
@@ -49967,7 +50426,9 @@ var IntegrationSettings = class extends import_obsidian20.PluginSettingTab {
       datacore: "Converts Datacore queries into Quartz-compatible markdown. Currently experimental.",
       excalidraw: "Converts Excalidraw drawings into Quartz-compatible format.",
       "fantasy-statblocks": "Converts Fantasy Statblocks queries into Quartz-compatible format.",
-      "auto-card-link": "Converts Auto Card Link queries into Quartz-compatible markdown."
+      "auto-card-link": "Converts Auto Card Link queries into Quartz-compatible markdown.",
+      bases: "Publishes Obsidian Bases (.base files) to Quartz. Processing is delegated to Quartz.",
+      canvas: "Publishes JSON Canvas (.canvas files) to Quartz. Processing is delegated to Quartz."
     };
     return descriptions[integrationId] ?? `Enables ${integrationId} integration.`;
   }
@@ -50486,6 +50947,89 @@ var DataStore = class {
   }
   persister;
   /**
+   * In-memory cache for bulk-preloaded entries.
+   * When populated via `preloadCache()`, all read methods serve from memory
+   * instead of making individual IndexedDB round-trips.
+   * Write methods update only the in-memory cache (write-back).
+   * Call `flushCache()` to persist dirty entries to IndexedDB.
+   */
+  memoryCache = null;
+  /**
+   * Tracks keys that have been modified in the in-memory cache
+   * and need to be flushed to IndexedDB.
+   */
+  dirtyKeys = /* @__PURE__ */ new Set();
+  /**
+   * Bulk-preload all cache entries from IndexedDB into memory.
+   * After this call, all read methods serve from the in-memory Map,
+   * eliminating per-file IndexedDB round-trips.
+   * Call `clearMemoryCache()` when the batch operation is complete.
+   */
+  async preloadCache() {
+    const cache = /* @__PURE__ */ new Map();
+    await this.persister.iterate((value, key) => {
+      if (key.startsWith("file:")) {
+        cache.set(key, value);
+      }
+    });
+    this.memoryCache = cache;
+  }
+  /**
+   * Clear the in-memory cache.
+   * Call after a batch operation to free memory.
+   */
+  clearMemoryCache() {
+    this.memoryCache = null;
+    this.dirtyKeys.clear();
+  }
+  /**
+   * Flush all dirty in-memory cache entries to IndexedDB.
+   * Call this after a batch operation completes to persist changes.
+   * Writes are done sequentially to avoid IndexedDB transaction contention.
+   */
+  async flushCache(controller) {
+    if (!this.memoryCache || this.dirtyKeys.size === 0) {
+      return;
+    }
+    const total = this.dirtyKeys.size;
+    let flushed = 0;
+    for (const key of this.dirtyKeys) {
+      const data = this.memoryCache.get(key);
+      if (data) {
+        await this.persister.setItem(key, data);
+      }
+      flushed++;
+      if (controller) {
+        controller.setProgress(Math.floor(flushed / total * 100));
+        controller.setIndexText(`Saving: ${flushed}/${total}`);
+      }
+    }
+    this.dirtyKeys.clear();
+  }
+  /**
+   * Get a cache entry from memory (if preloaded) or IndexedDB.
+   * This is the single read path used by all accessor methods.
+   */
+  async getCacheEntry(path) {
+    const key = this.fileKey(path);
+    if (this.memoryCache) {
+      return this.memoryCache.get(key) ?? null;
+    }
+    return await this.persister.getItem(key);
+  }
+  /**
+   * Store a cache entry to IndexedDB and update the in-memory cache if active.
+   */
+  async setCacheEntry(path, data) {
+    const key = this.fileKey(path);
+    if (this.memoryCache) {
+      this.memoryCache.set(key, data);
+      this.dirtyKeys.add(key);
+      return;
+    }
+    await this.persister.setItem(key, data);
+  }
+  /**
    * Drop the entire cache instance and re-create a new fresh instance.
    *
    * @returns A promise that resolves when the cache is recreated.
@@ -50526,9 +51070,7 @@ var DataStore = class {
    * @returns A promise that resolves to true if the local file is outdated, false otherwise.
    */
   async isLocalFileOutdated(path, timestamp) {
-    const data = await this.persister.getItem(
-      this.fileKey(path)
-    );
+    const data = await this.getCacheEntry(path);
     if (data && data.localData) {
       if (data.hasDynamicContent) {
         return true;
@@ -50544,9 +51086,7 @@ var DataStore = class {
    * @returns A promise that resolves to true if the file has dynamic content, false otherwise.
    */
   async hasDynamicContentFlag(path) {
-    const data = await this.persister.getItem(
-      this.fileKey(path)
-    );
+    const data = await this.getCacheEntry(path);
     return data?.hasDynamicContent ?? false;
   }
   /**
@@ -50556,9 +51096,7 @@ var DataStore = class {
    * @returns A promise that resolves to true if the remote file is outdated, false otherwise.
    */
   async isRemoteFileOutdated(path) {
-    const data = await this.persister.getItem(
-      this.fileKey(path)
-    );
+    const data = await this.getCacheEntry(path);
     if (data && data.remoteData) {
       return data.version !== this.version;
     }
@@ -50571,9 +51109,7 @@ var DataStore = class {
    * @returns A promise that resolves to true if they are identical, false otherwise.
    */
   async areLocalAndRemoteIdentical(path) {
-    const data = await this.persister.getItem(
-      this.fileKey(path)
-    );
+    const data = await this.getCacheEntry(path);
     if (data && data.localData && data.remoteData) {
       return data.localHash === data.remoteHash && data.version === this.version;
     }
@@ -50586,9 +51122,7 @@ var DataStore = class {
    * @returns A promise that resolves to the local file data, or null if not found.
    */
   async loadLocalFile(path) {
-    const data = await this.persister.getItem(
-      this.fileKey(path)
-    );
+    const data = await this.getCacheEntry(path);
     if (data && data.localData) {
       return data.localData;
     }
@@ -50601,9 +51135,7 @@ var DataStore = class {
    * @returns A promise that resolves to the remote file data, or null if not found.
    */
   async loadRemoteFile(path) {
-    const data = await this.persister.getItem(
-      this.fileKey(path)
-    );
+    const data = await this.getCacheEntry(path);
     if (data && data.remoteData) {
       return data.remoteData;
     }
@@ -50618,10 +51150,8 @@ var DataStore = class {
    * @param hasDynamicContent - Whether the file contains dynamic content (Dataview, Datacore, etc.).
    */
   async storeLocalFile(path, timestamp, data, hasDynamicContent2) {
-    const existingData = await this.persister.getItem(
-      this.fileKey(path)
-    );
-    await this.persister.setItem(this.fileKey(path), {
+    const existingData = await this.getCacheEntry(path);
+    await this.setCacheEntry(path, {
       version: this.version,
       time: timestamp ?? Date.now(),
       localData: data,
@@ -50641,10 +51171,8 @@ var DataStore = class {
    * @param data - The remote file data to store.
    */
   async storeRemoteFile(path, timestamp, data) {
-    const existingData = await this.persister.getItem(
-      this.fileKey(path)
-    );
-    await this.persister.setItem(this.fileKey(path), {
+    const existingData = await this.getCacheEntry(path);
+    await this.setCacheEntry(path, {
       version: this.version,
       time: timestamp ?? Date.now(),
       localData: existingData?.localData ?? null,
@@ -50665,9 +51193,7 @@ var DataStore = class {
    * @returns A promise that resolves to the local hash, or null if not found.
    */
   async loadLocalHash(path) {
-    const data = await this.persister.getItem(
-      this.fileKey(path)
-    );
+    const data = await this.getCacheEntry(path);
     if (data && data.localHash) {
       return data.localHash;
     }
@@ -50680,9 +51206,7 @@ var DataStore = class {
    * @returns A promise that resolves to the remote hash, or null if not found.
    */
   async loadRemoteHash(path) {
-    const data = await this.persister.getItem(
-      this.fileKey(path)
-    );
+    const data = await this.getCacheEntry(path);
     if (data && data.remoteHash) {
       return data.remoteHash;
     }
@@ -50696,10 +51220,8 @@ var DataStore = class {
    * @param hash - The hash of the local file.
    */
   async storeLocalHash(path, timestamp, hash) {
-    const existingData = await this.persister.getItem(
-      this.fileKey(path)
-    );
-    await this.persister.setItem(this.fileKey(path), {
+    const existingData = await this.getCacheEntry(path);
+    await this.setCacheEntry(path, {
       version: this.version,
       time: timestamp ?? Date.now(),
       localData: existingData?.localData ?? null,
@@ -50722,10 +51244,8 @@ var DataStore = class {
    * @returns A promise that resolves when the remote hash is stored.
    */
   async storeRemoteHash(path, timestamp, hash) {
-    const existingData = await this.persister.getItem(
-      this.fileKey(path)
-    );
-    await this.persister.setItem(this.fileKey(path), {
+    const existingData = await this.getCacheEntry(path);
+    await this.setCacheEntry(path, {
       version: this.version,
       time: timestamp ?? Date.now(),
       localData: existingData?.localData ?? null,
@@ -50746,9 +51266,7 @@ var DataStore = class {
    * @returns A promise that resolves to the cached time in milliseconds, or null if not found.
    */
   async getTime(path) {
-    const data = await this.persister.getItem(
-      this.fileKey(path)
-    );
+    const data = await this.getCacheEntry(path);
     if (data) {
       return data.time;
     }
@@ -50761,7 +51279,7 @@ var DataStore = class {
    * @returns A promise that resolves to the cached metadata for the file, or null if not found.
    */
   async loadFile(path) {
-    return this.persister.getItem(this.fileKey(path)).then((raw) => {
+    return this.getCacheEntry(path).then((raw) => {
       return raw;
     });
   }
@@ -50972,6 +51490,20 @@ var DEFAULT_SETTINGS = {
    * Fantasy Statblocks documentation: {@link https://plugins.javalent.com/statblocks}
    */
   useFantasyStatblocks: false,
+  /**
+   * Enable Bases integration.
+   * This will allow the plugin to publish Obsidian Bases (.base files) to Quartz.
+   *
+   * Bases documentation: {@link https://help.obsidian.md/bases}
+   */
+  useBases: false,
+  /**
+   * Enable Canvas integration.
+   * This will allow the plugin to publish JSON Canvas (.canvas files) to Quartz.
+   *
+   * Canvas documentation: {@link https://jsoncanvas.org/}
+   */
+  useCanvas: false,
   manageSyncerStyles: true,
   /** Themes settings */
   /**
