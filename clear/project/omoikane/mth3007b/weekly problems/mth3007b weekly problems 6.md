@@ -1,7 +1,5 @@
 # MTH3007B Weekly Problems 6
 
-> **Original Documents**: [[mth3007b weekly problem sheet 6 solutions.pdf|Provided Solutions]]
->
 > **Vibes**: …
 >
 > **Used Techniques**:
