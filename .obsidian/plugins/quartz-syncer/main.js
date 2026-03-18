@@ -33465,17 +33465,23 @@ ${frontMatterString}---
         );
       }
       if (baseFrontMatter["aliases"] || baseFrontMatter["alias"]) {
-        publishedFrontMatter["aliases"] = "";
+        const aliases = [];
         if (typeof baseFrontMatter["aliases"] === "string") {
-          publishedFrontMatter["aliases"] = baseFrontMatter["aliases"].split(/,?\s*/).join(" ");
-        }
-        if (Array.isArray(baseFrontMatter["aliases"])) {
-          publishedFrontMatter["aliases"] = baseFrontMatter["aliases"].join(" ");
+          aliases.push(
+            ...baseFrontMatter["aliases"].split(/,\s*/).filter(Boolean)
+          );
+        } else if (Array.isArray(baseFrontMatter["aliases"])) {
+          aliases.push(...baseFrontMatter["aliases"]);
         }
         if (typeof baseFrontMatter["alias"] === "string") {
-          publishedFrontMatter["aliases"] += ` ${baseFrontMatter["alias"]}`;
+          aliases.push(
+            ...baseFrontMatter["alias"].split(/,\s*/).filter(Boolean)
+          );
         } else if (Array.isArray(baseFrontMatter["alias"])) {
-          publishedFrontMatter["aliases"] += ` ${baseFrontMatter["alias"].join(" ")}`;
+          aliases.push(...baseFrontMatter["alias"]);
+        }
+        if (aliases.length > 0) {
+          publishedFrontMatter["aliases"] = [...new Set(aliases)];
         }
       }
     }
@@ -33508,7 +33514,7 @@ ${frontMatterString}---
   addTags(fileFrontMatter, publishedFrontMatterWithoutTags) {
     const publishedFrontMatter = { ...publishedFrontMatterWithoutTags };
     if (fileFrontMatter) {
-      const tags = (typeof fileFrontMatter["tags"] === "string" ? fileFrontMatter["tags"].split(/,?\s*/) : fileFrontMatter["tags"]) || [];
+      const tags = (typeof fileFrontMatter["tags"] === "string" ? fileFrontMatter["tags"].split(/,\s*/).filter(Boolean) : fileFrontMatter["tags"]) || [];
       if (tags.length > 0) {
         publishedFrontMatter["tags"] = tags;
       }
@@ -33516,7 +33522,7 @@ ${frontMatterString}---
         if (typeof fileFrontMatter["tag"] === "string") {
           publishedFrontMatter["tags"] = [
             ...publishedFrontMatter["tags"] ?? [],
-            fileFrontMatter["tag"]
+            ...fileFrontMatter["tag"].split(/,\s*/).filter(Boolean)
           ];
         } else if (Array.isArray(fileFrontMatter["tag"])) {
           publishedFrontMatter["tags"] = [
@@ -33525,42 +33531,39 @@ ${frontMatterString}---
           ];
         }
       }
+      if (publishedFrontMatter["tags"]) {
+        publishedFrontMatter["tags"] = [
+          ...new Set(publishedFrontMatter["tags"])
+        ];
+      }
     }
     return publishedFrontMatter;
   }
   addCSSClasses(baseFrontMatter, newFrontMatter) {
     const publishedFrontMatter = { ...newFrontMatter };
-    publishedFrontMatter["cssclasses"] = publishedFrontMatter["cssclasses"] ?? "";
+    const cssclasses = [];
     if (baseFrontMatter) {
       if (baseFrontMatter["cssclasses"] !== void 0) {
         if (typeof baseFrontMatter["cssclasses"] === "string") {
-          publishedFrontMatter["cssclasses"] += baseFrontMatter["cssclasses"];
+          cssclasses.push(
+            ...baseFrontMatter["cssclasses"].split(/\s+/).filter(Boolean)
+          );
         } else if (Array.isArray(baseFrontMatter["cssclasses"])) {
-          publishedFrontMatter["cssclasses"] += baseFrontMatter["cssclasses"].join(" ");
+          cssclasses.push(...baseFrontMatter["cssclasses"]);
         }
       }
       if (baseFrontMatter["cssclass"] !== void 0) {
         if (typeof baseFrontMatter["cssclass"] === "string") {
-          publishedFrontMatter["cssclasses"] += baseFrontMatter["cssclass"];
+          cssclasses.push(
+            ...baseFrontMatter["cssclass"].split(/\s+/).filter(Boolean)
+          );
         } else if (Array.isArray(baseFrontMatter["cssclass"])) {
-          publishedFrontMatter["cssclasses"] += baseFrontMatter["cssclass"].join(" ");
+          cssclasses.push(...baseFrontMatter["cssclass"]);
         }
       }
     }
-    if (publishedFrontMatter["cssclasses"]) {
-      if (typeof publishedFrontMatter["cssclasses"] === "string") {
-        publishedFrontMatter["cssclasses"] = publishedFrontMatter["cssclasses"].split(" ");
-      }
-      if (Array.isArray(publishedFrontMatter["cssclasses"])) {
-        publishedFrontMatter["cssclasses"] = [
-          ...new Set(publishedFrontMatter["cssclasses"])
-        ];
-      }
-    }
-    if (typeof publishedFrontMatter["cssclasses"] !== "string") {
-      if (Array.isArray(publishedFrontMatter["cssclasses"])) {
-        publishedFrontMatter["cssclasses"] = publishedFrontMatter["cssclasses"].join(" ");
-      }
+    if (cssclasses.length > 0) {
+      publishedFrontMatter["cssclasses"] = [...new Set(cssclasses)];
     }
     return publishedFrontMatter;
   }
