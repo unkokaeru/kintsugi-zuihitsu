@@ -4,7 +4,6 @@
 > Remember to draw back on literature more when writing within academia! - practice this?
 
 - Continuously work on **[[yatagarasu]]** work (incl. [[notes from meetings]]):
-	- **Enquiry form**: final tests & review.
 	- **Work orders**: check coverage/functionality, match shared document and implement [[reasons to cancel work orders]].
 	- **Codebase review**: methodically go through everything, eliminating inconsistencies.
 	- **Platform testing**: Record the [[help videos]] for each feature of the platform.
