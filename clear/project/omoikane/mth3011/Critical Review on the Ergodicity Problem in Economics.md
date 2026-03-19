@@ -1,3 +1,3 @@
-# Critical Review on the Ergodicity Problem in Economics
+# Critical Review on [[The Ergodicity Problem in Economics.pdf|the Ergodicity Problem in Economics]]
 
 …
