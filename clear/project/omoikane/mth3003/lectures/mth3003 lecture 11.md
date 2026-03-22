@@ -1,16 +1,293 @@
 # MTH3003 Lecture 11
 
-> [!quote] …
-> …
+Last time we built up the machinery of quotients $G/N$ and saw how kernels of homomorphisms naturally give rise to factor groups. In this lecture we make that story precise via the **First isomorphism theorem**, then add two further structural results (the **Second isomorphism theorem** and **Third isomorphism theorem**) that let us shuffle subgroups and quotients around safely. We finish by introducing **cycle shape** in $\mathrm{S}_{n}$, setting up the **signature** map and the **alternating group** for the next lecture.
 
-…
+## The First Isomorphism Theorem
 
-## …
+We start with the fundamental relationship between a homomorphism, its kernel, and its image.
 
-…
+> [!important] First isomorphism theorem
+> Let **group homomorphism** $\varphi \colon G \to H$ have **kernel** $K = \ker \varphi$ and **image** $I = \operatorname{Im}\varphi$.
+> If $K \trianglelefteq G$ then the **quotient group** $G/K$ is a group and there is an isomorphism
+> $\theta \colon G/K \to I$ given by $\theta(gK) = \varphi(g)$.
+> In particular, we obtain a canonical group isomorphism
+>
+> $$
+> \boxed{\,G/K \;\cong\; \operatorname{Im}\varphi\,}.
+> $$
+
+We already know that if $K = \ker \varphi$ then $K \trianglelefteq G$, so $G/K$ exists as a group of cosets. The real work is to show that the formula $\theta(gK) = \varphi(g)$ does not depend on the choice of representative $g$ and that $\theta$ is an isomorphism onto the image.
+
+### Proof Structure and "well-defined"
+
+1. **Well-definedness.**
+   Suppose $g_{1}K = g_{2}K$. Then $g_{1}^{-1}g_{2} \in K$, so $\varphi(g_{1}^{-1}g_{2}) = e_{H}$. By the homomorphism property,
+
+   $$
+
+\varphi(g_{1}^{-1}g_{2}) = \varphi(g_{1})^{-1}\varphi(g_{2}) = e_{H} \implies \varphi(g_{1}) = \varphi(g_{2}).
+
+$$
+   Hence $\theta(g_{1}K) = \theta(g_{2}K)$, so $\theta$ is a genuine function on cosets.
+
+2. **Homomorphism property.**  
+   For $g_{1}, g_{2} \in G$ we have
+   
+$$
+
+\theta\bigl((g_{1}K)(g_{2}K)\bigr) = \theta((g_{1}g_{2})K) = \varphi(g_{1}g_{2}) = \varphi(g_{1})\varphi(g_{2}) = \theta(g_{1}K)\,\theta(g_{2}K).
+
+$$
+3. **Surjectivity onto $I$.**  
+   Every element of $I$ has the form $\varphi(g)$ for some $g \in G$, and $\varphi(g) = \theta(gK)$, so $\theta$ is onto $I$.
+
+4. **Injectivity.**  
+   If $\theta(g_{1}K) = \theta(g_{2}K)$ then $\varphi(g_{1}) = \varphi(g_{2})$, so $\varphi(g_{1}^{-1}g_{2}) = e_{H}$ and hence $g_{1}^{-1}g_{2} \in K$. This is equivalent to $g_{1}K = g_{2}K$.
+
+Putting this together, $\theta$ is a bijective homomorphism $G/K \to I$, hence an isomorphism.
+
+> [!note] Canonical homomorphism
+> Given $N \trianglelefteq G$, the map $\pi \colon G \to G/N$ defined by $\pi(g) = gN$ is a surjective homomorphism with $\ker \pi = N$.
+> It is often called the **canonical projection|canonical homomorphism**.
+
+From the first isomorphism theorem, any homomorphism $\varphi \colon G \to H$ with kernel $K$ factors through the quotient $G/K$ as
+$$
+
+G \xrightarrow{\pi} G/K \xrightarrow[\cong]{\theta} \operatorname{Im}\varphi \leq H,
+
+$$
+where $\pi$ is the canonical projection and $\theta$ is an isomorphism.
+
+### Example: $\mathbb{Z}/n\mathbb{Z} \cong \mathbb{Z}_{n}$
+
+Consider the homomorphism $\varphi \colon \mathbb{Z} \to \mathbb{Z}_{n}$ defined by
+$$
+
+\varphi(m) = [m]*{n}.
+
+$$
+We know:
+- $\ker \varphi = n\mathbb{Z}$, the set of all multiples of $n$.
+- $\operatorname{Im}\varphi = \mathbb{Z}_{n}$ (the map is surjective).
+
+By the first isomorphism theorem we obtain
+$$
+
+\boxed{\,\mathbb{Z}/n\mathbb{Z} \;\cong\; \mathbb{Z}*{n}\,}.
+
+$$
+This recovers our earlier explicit isomorphism (for example when $n = 3$) in a single conceptual statement valid for all $n \in \mathbb{N}$.
 
 ---
 
-## Pre-Lecture Notes from [[mth3003 lecture notes 11.pdf|University Notes]]
+## The Second Isomorphism Theorem
 
-- …
+The second isomorphism theorem shows how a subgroup $H$ and a normal subgroup $N$ combine inside $G$.
+
+> [!important] Second isomorphism theorem
+> Let $G$ be a group with $H \leq G$ and $N \trianglelefteq G$. Then:
+> - The product $HN = \{hn \colon h \in H, n \in N\}$ is a subgroup of $G$.
+> - The intersection $H \cap N$ is a normal subgroup of $H$.
+> - There is an isomorphism
+>   
+$$
+
+> \boxed{\,H/(H \cap N) \;\cong\; (HN)/N\,}.
+>
+>   $$
+
+### Proof via the First Isomorphism Theorem
+
+Define $\varphi \colon H \to (HN)/N$ by
+
+$$
+\varphi(h) = hN.
+$$
+
+1. **Homomorphism.**
+   For $h_{1}, h_{2} \in H$ we have
+
+$$
+\varphi(h_{1}h_{2}) = (h_{1}h_{2})N = h_{1}h_{2}N = h_{1}N \cdot h_{2}N = \varphi(h_{1})\varphi(h_{2}),
+$$
+
+   because multiplication of cosets in $(HN)/N$ is inherited from $G$ and $N \trianglelefteq G$.
+
+1. **Kernel.**
+   The kernel is
+
+$$
+\ker \varphi = \{h \in H \colon hN = N\} = \{h \in H \colon h \in N\} = H \cap N.
+$$
+
+1. **Image.**
+   Any element of $(HN)/N$ has the form $hnN = hN$ with $h \in H$ and $n \in N$, so
+
+$$
+\operatorname{Im}\varphi = (HN)/N.
+$$
+
+By the first isomorphism theorem,
+
+$$
+H/(H \cap N) \;\cong\; (HN)/N.
+$$
+
+This is extremely useful when you want to compare the "copy of $H$ modulo its intersection with $N$" with the "chunk of $G$ generated by $H$ and $N$, modulo $N$".
+
+---
+
+## The Third Isomorphism Theorem ("Fool's Cancellation")
+
+The third isomorphism theorem formalises what looks like cancellation in a tower of quotients. The warning is that you can only "cancel" when the relevant subgroups are normal in the right groups.
+
+> [!important] Third isomorphism theorem
+> Let $G$ be a group and let $N \trianglelefteq G$. Suppose $M$ is another normal subgroup with
+
+$$
+> N \leq M \leq G,\quad M \trianglelefteq G.
+> 
+$$
+
+> Then:
+> - The subgroup $M/N$ is normal in $G/N$.
+> - There is an isomorphism
+> 
+> $$
+>   \boxed{\, (G/N)/(M/N) \;\cong\; G/M\,}.
+>   $$
+
+People sometimes write this heuristically as
+
+$$
+(G/N)/(M/N) \;\cong\; G/M \quad\text{"so we can cancel $/N$".}
+$$
+
+The whole point of the theorem is that this is **not** true in general unless the normality conditions are satisfied.
+
+> [!warning] Why "Fool's Cancellation"?
+> You cannot cancel arbitrary subgroups the way you cancel numbers.
+> The theorem only works when $N \trianglelefteq G$ and $M \trianglelefteq G$ with $N \leq M$.
+> If you try to imitate this when normality fails, the quotient groups may not even make sense.
+
+### Proof via the First Isomorphism Theorem
+
+Define $\varphi \colon G/N \to G/M$ by
+
+$$
+\varphi(gN) = gM.
+$$
+
+We must check that this is well-defined and a homomorphism, then identify its kernel and image.
+
+1. **Well-defined homomorphism.**
+   If $g_{1}N = g_{2}N$ then $g_{1}^{-1}g_{2} \in N \leq M$, so $g_{1}M = g_{2}M$ and hence $\varphi$ is well-defined.
+   For $g_{1}, g_{2} \in G$ we have
+
+$$
+\varphi(g_{1}N \cdot g_{2}N) = \varphi((g_{1}g_{2})N) = (g_{1}g_{2})M = g_{1}M \cdot g_{2}M = \varphi(g_{1}N)\varphi(g_{2}N),
+$$
+
+   so $\varphi$ is a homomorphism.
+
+1. **Kernel.**
+   The kernel is
+
+$$
+\ker \varphi = \{gN \colon gM = M\} = \{gN \colon g \in M\} = M/N.
+$$
+
+   This shows $M/N$ is normal in $G/N$.
+
+1. **Image.**
+   For any $g \in G$, $gM$ lies in $G/M$, and every coset of $M$ arises like this. Hence
+
+$$
+\operatorname{Im}\varphi = G/M.
+$$
+
+By the first isomorphism theorem,
+
+$$
+(G/N)/(M/N) \;\cong\; G/M.
+$$
+
+---
+
+## Cycle Shape in $\mathrm{S}_{n}$
+
+We now move to a new topic: the **cycle shape** of permutations in the **symmetric group** $\mathrm{S}_{n}$. This is a way to record how long the disjoint cycles of a permutation are, ignoring which actual points are moved.
+
+> [!important] Definition: cycle shape
+> Let $g \in \mathrm{S}_{n}$ be a permutation, $g \neq e$.
+> Write $g$ as a product of disjoint cycles
+
+$$
+> g = c_{1}c_{2}\cdots c_{m},
+> 
+$$
+
+> where each cycle $c_{i}$ has length $r_{i}$ and $r_{1} \geq r_{2} \geq \dots \geq r_{m}$.
+> The **cycle shape** of $g$ is the tuple
+
+$$
+> \boxed{\, (r_{1}, r_{2}, \dots, r_{m})\,}.
+> 
+$$
+
+> The cycle shape of the identity permutation is usually taken to be $\varnothing$.
+
+This is an invariant of a permutation up to relabelling of the underlying set and reordering of disjoint cycles.
+
+> [!example] Examples of cycle shape
+> 1. In $\mathrm{S}_{12}$, consider
+> 
+> $$
+>    g = (1\,3\,5\,7\,2\,9)(4\,8)(10\,6\,12\,11).
+>    $$
+>
+> The cycles have lengths $6$, $2$, and $4$, so the cycle shape is $(6, 4, 2)$ after reordering.
+> 2. In $\mathrm{S}_{10}$, let
+>
+> $$
+>    h = (1\,2)(3\,4)(7\,8)(9\,10).
+>    $$
+>
+> Here $h$ is a product of four disjoint transpositions, so the cycle shape is $(2, 2, 2, 2)$.
+
+The key point is that cycle shape forgets the actual labels and remembers only the multiset of cycle lengths.
+
+### All Cycle Shapes in $\mathrm{S}_{4}$
+
+In $\mathrm{S}_{4}$, every permutation is a product of disjoint cycles acting on $\{1, 2, 3, 4\}$, and each element lies in exactly one cycle (possibly a $1$-cycle). The possible cycle shapes and associated permutations can be listed exhaustively.
+
+We have:
+
+Cycle shape | Elements with this shape in $\mathrm{S}_{4}$ | Number of elements
+----------- | --------------------------------------------- | -------------------
+$\varnothing$ | $e$ | $1$
+$(2)$ | $(1\,2)$, $(1\,3)$, $(1\,4)$, $(2\,3)$, $(2\,4)$, $(3\,4)$ | $6$
+$(2, 2)$ | $(1\,2)(3\,4)$, $(1\,3)(2\,4)$, $(1\,4)(2\,3)$ | $3$
+$(3)$ | $(1\,2\,3)$, $(1\,3\,2)$, $(1\,2\,4)$, $(1\,4\,2)$, $(1\,3\,4)$, $(1\,4\,3)$, $(2\,3\,4)$, $(2\,4\,3)$ | $8$
+$(4)$ | $(1\,2\,3\,4)$, $(1\,2\,4\,3)$, $(1\,3\,2\,4)$, $(1\,3\,4\,2)$, $(1\,4\,2\,3)$, $(1\,4\,3\,2)$ | $6$
+
+We have definitely listed all elements, because
+
+$$
+1 + 6 + 3 + 8 + 6 = 24 = 4! = |\mathrm{S}_{4}|.
+$$
+
+The table illustrates how cycle shape organises permutations by their underlying cycle structure; this will be essential when we define the **signature** homomorphism and study the **alternating group** $A_{n}$.
+
+---
+
+## Pre-Lecture Notes from Mth3003 Lecture Notes 11.pdf|University Notes
+
+- Recall: for a homomorphism $\varphi \colon G \to H$ with kernel $K = \ker \varphi$, $K \trianglelefteq G$ so the quotient $G/K$ is a well-defined group of cosets $gK$ and the canonical projection $\pi(g) = gK$ is a homomorphism.
+- First isomorphism theorem: if $\varphi \colon G \to H$ has kernel $K$ and image $I$, then $G/K \cong I$ via $\theta(gK) = \varphi(g)$; proof checks that $\theta$ is well-defined, is a homomorphism, and is bijective.
+- Example: the homomorphism $\varphi \colon \mathbb{Z} \to \mathbb{Z}_{n}$ given by $\varphi(m) = [m]_{n}$ has kernel $n\mathbb{Z}$ and image $\mathbb{Z}_{n}$, so $\mathbb{Z}/n\mathbb{Z} \cong \mathbb{Z}_{n}$ for all $n \in \mathbb{N}$.
+- Second isomorphism theorem: for $H \leq G$ and $N \trianglelefteq G$ the map $\varphi \colon H \to (HN)/N$, $\varphi(h) = hN$, is a homomorphism with kernel $H \cap N$ and image $(HN)/N$, giving $H/(H \cap N) \cong (HN)/N$.
+- Third isomorphism theorem ("Fool's Cancellation"): for $N \trianglelefteq G$ and $N \leq M \trianglelefteq G$, the map $\varphi \colon G/N \to G/M$, $\varphi(gN) = gM$, has kernel $M/N$ and image $G/M$, yielding $(G/N)/(M/N) \cong G/M$ and showing $M/N \trianglelefteq G/N$.
+- Definition: the **cycle shape** of $g \in \mathrm{S}_{n}$ is the ordered tuple of cycle lengths $(r_{1}, r_{2}, \dots, r_{m})$ when $g$ is written as a product of disjoint cycles with lengths $r_{1} \geq \dots \geq r_{m}$, and the identity has cycle shape $\varnothing$.
+- Worked examples: $g = (1\,3\,5\,7\,2\,9)(4\,8)(10\,6\,12\,11) \in \mathrm{S}_{12}$ has cycle shape $(6, 4, 2)$; $h = (1\,2)(3\,4)(7\,8)(9\,10) \in \mathrm{S}_{10}$ has cycle shape $(2, 2, 2, 2)$; in $\mathrm{S}_{4}$ the possible cycle shapes are $\varnothing$, $(2)$, $(2,2)$, $(3)$, $(4)$ and account for all $4! = 24$ permutations.
+- Next time: define the **signature** homomorphism $\operatorname{sgn} \colon \mathrm{S}_{n} \to \{\pm 1\}$, use cycle shape to compute $\operatorname{sgn}(g)$ efficiently, and study the **alternating group** $A_{n} = \ker(\operatorname{sgn})$.
