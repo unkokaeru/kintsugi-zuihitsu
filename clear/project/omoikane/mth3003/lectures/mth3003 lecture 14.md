@@ -1,354 +1,207 @@
-# MTH3003 Lecture 13
+# MTH3003 Lecture 14
 
-We wrapped up last time by understanding **alternating group** $\;A_{n}\;$ as the even permutations inside $\;S_{n}$ and seeing that $A_{n}$ is normal in $S_{n}$. In this lecture we finish the structural story of $A_{n}$ (simplicity for $n \geq 5$) and then introduce **group actions**, which repackage arbitrary groups as permutation groups via homomorphisms into $\operatorname{Sym}(X)$.
+Last time we set up **group actions** as homomorphisms into **symmetric groups**, and started to treat abstract groups via how they move sets around. In this lecture we push that philosophy to its logical extreme: every **group** can be realised as a **permutation group**, via its regular action on itself. This is the content of **Cayley's Theorem**, and it shows that studying permutation groups is, in a very real sense, enough to understand all groups.
 
-## The Alternating Group $A_{n}$
+## More Examples of Group Actions
 
-### Definition and Basic Properties
+We keep working with the familiar **symmetric group** $S_{5}$ but change the underlying set $X$ it acts on, to emphasise that an action is extra structure, not just the group itself.
 
-> [!important] Alternating group
-> The **alternating group** of degree $n$, written $A_{n}$, is the subgroup of $S_{n}$ consisting of all *even* permutations:
+> [!important] Group action reminder
+> A **group action** of a group $G$ on a set $X$ is a map $\lambda \colon G \to \operatorname{Sym}(X)$ such that:
+> - $\lambda(gh) = \lambda(g)\lambda(h)$ for all $g,h \in G$ (homomorphism condition),
+> - $\lambda(e)$ is the identity permutation on $X$.
+> Equivalently, writing $\lambda(g)x$ for the image of $x \in X$, we require:
+> - $e x = x$ for all $x \in X$,
+> - $(gh)x = g(hx)$ for all $g,h \in G$ and $x \in X$.
+
+### Example: Extending the Domain by "doing nothing"
+
+Take $G = S_{5}$ and let
+
+$$
+X = \{1,2,3,4,5,6,7,8\}.
+$$
+
+Define an action $\lambda \colon S_{5} \to \operatorname{Sym}(X)$ by
+
+$$
+\lambda(g)x =
+\begin{cases}
+gx & \text{if } 1 \leq x \leq 5, \\
+x & \text{if } 6 \leq x \leq 8.
+\end{cases}
+$$
+
+So each $g \in S_{5}$ moves $1,\dots$ in the usual way and fixes $6,7,8$.
+
+> [!example] Checking this is an action
+> - Identity: for $x \leq 5$, $ex = x$ in $S_{5}$; for $x \geq 6$, we fix $x$ by definition.
+> - Compatibility: for $g,h \in S_{5}$ and $x \leq 5$, we have $(gh)x = g(hx)$ as permutations; for $x \geq 6$, all elements fix $x$, so $(gh)x = x = g(hx)$.
+> Hence the axioms for an action hold.
+
+### Example: Action of $S_{5}$ on $\mathbb{Z}$ via Residues
+
+Now let $X = \mathbb{Z}$. Every integer $x \in \mathbb{Z}$ can be written uniquely as
+
+$$
+x = 5n + k \quad\text{with } n \in \mathbb{Z},\ 1 \leq k \leq 5.
+$$
+
+Define $\lambda \colon S_{5} \to \operatorname{Sym}(\mathbb{Z})$ by
+
+$$
+\lambda(g)x = 5n + gk,
+$$
+
+where $x = 5n + k$ is as above.
+
+> [!note] Interpretation
+> The element $g \in S_{5}$ permutes the "remainder" $k \in \{1,\dots\}$ and leaves the "block index" $n$ alone. So we get an $S_{5}$-action on $\mathbb{Z}$ by permuting each residue class mod $5$ in the same way.
+
+Again, one checks:
+
+- $\lambda(e)x = x$ because $ek = k$ for all $k$,
+- $\lambda(gh)x = \lambda(g)(\lambda(h)x)$ since $(gh)k = g(hk)$ in $S_{5}$.
+
+So this is a valid action.
+
+### Example: Action on Unordered Pairs
+
+Let
+
+$$
+X = \big\{\{1,2\},\{1,3\},\{1,4\},\{1,5\},\{2,3\},\{2,4\},\{2,5\},\{3,4\},\{3,5\},\{4,5\}\big\}
+$$
+
+be the set of all $2$-element subsets of $\{1,2,3,4,5\}$.
+
+Define $\lambda \colon S_{5} \to \operatorname{Sym}(X)$ by
+
+$$
+\lambda(g)\{a,b\} = \{ga,gb\}.
+$$
+
+> [!example] Why this is an action
+> - Well-defined: $\{a,b\}$ is unordered, but $\{ga,gb\}$ is also unordered, so the definition does not depend on the order.
+> - Identity: $e\{a,b\} = \{ea,eb\} = \{a,b\}$.
+> - Compatibility: $(gh)\{a,b\} = \{(gh)a,(gh)b\} = \{g(ha),g(hb)\} = g\{ha,hb\} = g(h\{a,b\})$.
+> Hence $\lambda(gh) = \lambda(g)\lambda(h)$.
+
+These examples illustrate that a single group $G$ may act on many different sets $X$ in structurally different ways.
+
+## Kernel of a Group Action
+
+Given an action $\lambda \colon G \to \operatorname{Sym}(X)$, we can view $\lambda$ as a **group homomorphism**, so it makes sense to speak of its **kernel** and **image**.
+
+> [!important] Kernel of an action
+> Let $\lambda$ be an action of $G$ on $X$. The **kernel** of $\lambda$ is the subset
 >
 > $$
-> A_{n} = \{ g \in S_{n} : \sigma(g) = 1 \},
+> \operatorname{Ker}(\lambda) = \{g \in G : \lambda(g)x = x \text{ for all } x \in X\},
 > $$
 >
-> where $\sigma : S_{n} \to \{1,-1\}$ is the signature homomorphism.
+> that is, the set of group elements that fix every point of $X$.
 
-Key points:
+Note that $\operatorname{Ker}(\lambda)$ is a normal subgroup of $G$, because it is the kernel of a homomorphism into a permutation group.
 
-- We already know $\sigma : S_{n} \to \{1,-1\}$ is a surjective group homomorphism with kernel equal to the even permutations.
-- By definition, $A_{n} = \ker(\sigma)$, so $A_{n} \leq S_{n}$.
+### Proof that This Agrees with the Usual Kernel
 
-Using the First Isomorphism Theorem:
-
-- $\operatorname{Im}(\sigma) = \{1,-1\}$, so $\lvert \operatorname{Im}(\sigma) \rvert = 2$.
-- $\ker(\sigma) = A_{n}$.
-
-Hence
+As a group homomorphism $\lambda \colon G \to \operatorname{Sym}(X)$, we know
 
 $$
-\lvert S_{n} / A_{n} \rvert
-= \lvert \operatorname{Im}(\sigma) \rvert
-= 2
-\quad\Rightarrow\quad
-\boxed{\lvert A_{n} \rvert = \frac{n!}{2}}.
+\operatorname{Ker}(\lambda) = \{g \in G : \lambda(g) = \operatorname{id}_{X}\}.
 $$
 
-### Listing Elements of Small $A_{n}$
+On the other hand, $\lambda(g) = \operatorname{id}_{X}$ is equivalent to the statement that $\lambda(g)x = x$ for all $x \in X$, which is exactly the previous description. So the two formulations of the kernel coincide.
 
-We can classify elements of $A_{n}$ by **cycle decomposition** shape plus signature.
+## Cayley's Theorem
 
-- In $S_{3}$ the possible cycle shapes are:
-  - $\varnothing$ (the identity),
-  - $(2)$ (a transposition),
-  - $(3)$ (a $3$-cycle).
-- Their signatures:
-  - $\varnothing$: signature $+1$, so in $A_{3}$;
-  - $(2)$: signature $-1$, so not in $A_{3}$;
-  - $(3)$: signature $+1$, so in $A_{3}$.
+We now reach the central result of the lecture: every group is "the same as" (i.e. **isomorphic** to) a permutation group.
 
-Thus
+> [!important] Cayley's Theorem
+> Every group $G$ is isomorphic to a subgroup of a symmetric group, hence to a permutation group.
 
-$$
-A_{3} = \{ e,¬¬(1¬¬2¬¬3),¬¬(1¬¬3¬¬2) \},
-$$
+The proof uses the **regular action** of $G$ on itself by left multiplication.
 
-which is cyclic of order $3$, so we may also write $A_{3} \cong C_{3}$.
+### The Regular Action
 
-For $S_{4}$ the possible cycle shapes are:
-
-- $\varnothing$,
-- $(2)$,
-- $(2,2)$,
-- $(3)$,
-- $(4)$.
-
-The shapes with signature $+1$ are:
-
-- $\varnothing$,
-- $(2,2)$,
-- $(3)$.
-
-So $A_{4}$ consists of:
-
-- the identity,
-- all products of two disjoint transpositions,
-- all $3$-cycles.
-
-(You will later list all elements of $A_{5}$ in this way on a problem sheet.)
-
-### $A_{n}$ Is Normal in $S_{n}$
-
-> [!important] Normality of $A_{n}$
-> For all $n \geq 2$ we have $\boxed{A_{n} \trianglelefteq S_{n}}$.
-
-Proof idea:
-
-- Take any $g \in S_{n}$ and any $h \in A_{n}$.
-- Because $\sigma$ is a homomorphism and $\sigma(h) = 1$, $\sigma(g^{-1} h g)= \sigma(g^{-1}) \sigma(h) \sigma(g)= \sigma(g^{-1}) \sigma(g)= \sigma(g^{-1} g)= \sigma(e)= 1$.
-- Therefore, $g^{-1} h g$ is even, so $g^{-1} h g \in A_{n}$.
-- Thus, $A_{n}$ is closed under conjugation by elements of $S_{n}$, hence is normal.
-
-### Simplicity of $A_{n}$ for $n \geq 5$
-
-Recall the notion of a **simple group**: a nontrivial group with no normal subgroups other than $\{e\}$ and itself.
-
-- $A_{1}$ and $A_{2}$ are both the trivial group, hence simple.
-- As above, $A_{3} \cong C_{3}$ is simple (it has no nontrivial proper subgroups).
-- $A_{4}$ is not simple, because it has a normal Klein four subgroup $K_{4} \trianglelefteq A_{4}$.
-
-The deep result:
-
-> [!important] Simplicity of $A_{n}$
-> For all $n \geq 5$ the alternating group $A_{n}$ is **simple**, i.e.
->
-> $$
-> \boxed{A_{n} \text{ has no nontrivial proper normal subgroups when } n \geq 5.}
-> $$
-
-We only saw a sketch of the proof, since the full argument is quite long. The strategy has three main steps.
-
-#### Step 1: Every Element of $A_{n}$ is a Product of 3-cycles
-
-Sketch:
-
-1. Every element $g \in A_{n}$ can be expressed as a product of $2$-cycles (transpositions).
-2. Because $\sigma(g) = 1$, this product uses an even number of transpositions, say $2k$.
-3. Use induction on $k$:
-   - For the induction step, write $g = (a_{1}¬¬b_{1})(a_{2}¬¬b_{2}) h$, where $h$ is a product of $2(k-1)$ transpositions and therefore, by induction, a product of $3$-cycles.
-   - Consider the size of $\{a_{1}, b_{1}\} \cap \{a_{2}, b_{2}\}$ (0, 1, or 2).
-   - In each case, manipulate $(a_{1}¬¬b_{1})(a_{2}¬¬b_{2})$ into a product of $3$-cycles or the identity.
-
-Conclusion: $A_{n}$ is generated by $3$-cycles.
-
-#### Step 2: Normal Subgroups Containing a 3-cycle Contain All 3-cycles
-
-Let $H \trianglelefteq A_{n}$, and suppose $H$ contains some $3$-cycle, say $(a_{1}¬¬a_{2}¬¬a_{3})$.
-
-Because $n \geq 5$, we can choose elements
-
-- $b \notin \{a_{1}, a_{2}, a_{3}\}$,
-- $z \notin \{a_{1}, a_{2}, a_{3}, b\}$.
-
-Since $A_{n}$ contains all $3$-cycles, in particular $(a_{1}¬¬z¬¬b) \in A_{n}$.
-
-Using normality of $H$:
-
-- $(a_{1}¬¬z¬¬b)^{-1} (a_{1}¬¬a_{2}¬¬a_{3}) (a_{1}¬¬z¬¬b) \in H$,
-- this conjugate is another $3$-cycle, for example $(b¬¬a_{2}¬¬a_{3})$ (which is the same as $(a_{2}¬¬a_{3}¬¬b)$).
-
-By varying the choice of elements, we can show that *every* $3$-cycle lies in $H$.
-
-Thus any normal subgroup $H \trianglelefteq A_{n}$ which contains one $3$-cycle must contain all $3$-cycles, hence equals $A_{n}$ (since $A_{n}$ is generated by $3$-cycles).
-
-#### Step 3: Any Nontrivial Normal Subgroup Contains a 3-cycle
-
-Let $H \trianglelefteq A_{n}$ with $H \neq \{e\}$.
-
-- Pick $h \in H$ with $h \neq e$ and write it as a product of disjoint cycles:
+Let $G$ be a group, and let $X = G$ as a set. Define an action
 
 $$
-  h = c_{1} c_{2} \cdots c_{m}.
+\lambda \colon G \to \operatorname{Sym}(G)
 $$
 
-Now analyse the cycle structure of $h$:
-
-1. If some $c_{i}$ is a $3$-cycle and all other cycles are $2$-cycles, then $h^{2} \in H$ is itself a $3$-cycle.
-2. If the longest cycle has length at least $4$, we can find a $3$-cycle $\rho$ such that the commutator-like element
+by
 
 $$
-   \rho h \rho^{-1} h^{-1} \in H
+\lambda(g)x = gx \quad\text{for all } g \in G,\, x \in G.
 $$
 
-   becomes a $3$-cycle.
+We have seen this before (Example 8.1.7 in the notes): it is an action because
 
-1. If that fails, we can find $\rho$ making $\rho h \rho^{-1} h^{-1}$ a $5$-cycle, and then apply the previous argument to this $5$-cycle to produce a $3$-cycle inside $H$.
+- $ex = x$ for all $x \in G$,
+- $(gh)x = g(hx)$ for all $g,h,x \in G$.
 
-Either way, $H$ must contain a $3$-cycle.
+Let $H = \operatorname{Im}(\lambda) \leq \operatorname{Sym}(G)$. Then $H$ is a permutation group, consisting of permutations arising from left multiplication by elements of $G$.
 
-Combining with Step 2, any nontrivial normal subgroup $H$ is all of $A_{n}$.
+### Using the First Isomorphism Theorem
+
+Since $\lambda \colon G \to H$ is a surjective homomorphism, the **First Isomorphism Theorem** tells us
+
+$$
+G / \operatorname{Ker}(\lambda) \cong \operatorname{Im}(\lambda) = H.
+$$
+
+Thus, if we can show that $\operatorname{Ker}(\lambda)$ is just the trivial subgroup $\langle e \rangle = \{e\}$, we obtain
+
+$$
+G / \langle e \rangle \cong H,
+$$
+
+and since $G / \langle e \rangle \cong G$ in the natural way, we conclude $G \cong H$. This will prove Cayley's Theorem.
+
+### Computing the Kernel of the Regular Action
+
+Take $g \in \operatorname{Ker}(\lambda)$. By definition of the kernel of an action, this means
+
+$$
+gx = x \quad \text{for all } x \in G.
+$$
+
+We now use the fact that $X = G$ is itself a group. Fix any $x \in G$, and multiply the equality $gx = x$ on the right by $x^{-1}$:
+
+$$
+gx x^{-1} = x x^{-1}.
+$$
+
+So $g = e$. As this argument works for any $g$ in the kernel, we see that
+
+$$
+\operatorname{Ker}(\lambda) = \{e\} = \langle e \rangle.
+$$
+
+Therefore $G / \operatorname{Ker}(\lambda) = G$, and hence $G \cong H \leq \operatorname{Sym}(G)$.
+
+We have thus shown:
+
+$$
+\boxed{\text{Every group } G \text{ is isomorphic to a permutation group } H \leq \operatorname{Sym}(G).}
+$$
+
+### Why Cayley's Theorem Matters
+
+> [!note] What is the point?!
+> - We already knew every permutation group is a group.
+> - Cayley's Theorem says every abstract group can be realised as a permutation group.
+> 
+> So, in principle, we can study all groups purely via their permutation representations. This justifies why symmetric groups and actions play such a central role in group theory.
 
 ---
 
-## Group Actions and $G$-sets
+## Pre-Lecture Notes from [[Mth3003 Lecture Notes 14.pdf|University Notes]]
 
-We now change gears and introduce **group actions**, which encode how groups act as symmetries of sets.
-
-### Definition of a Group Action
-
-> [!important] Group action and $G$-set
-> Let $G$ be a group and $X$ a set. An **action** of $G$ on $X$ is a function
->
-> $$
-> \lambda : G \times X \to X,\quad (g,x) \mapsto \lambda(g)x
-> $$
->
-> such that, for all $g,f \in G$ and all $x \in X$:
-> 1. $\lambda(e_{G})x = x$;
-> 2. $\lambda(fg)x = \lambda(f)(\lambda(g)x)$.
-> If there exists such an action, we say **$G$ acts on $X$**, and we call $X$ a **$G$-set**.
-
-Intuition:
-
-- For each $g \in G$, the action tells you **how $g$ moves points of $X$**.
-- Axioms say: the identity does nothing, and composition in $G$ corresponds to composing the moves.
-
-### Basic Examples
-
-1. **Natural action of $S_{n}$ on $\{1,\dots,n\}$**
-   Let $X = \{1,2,\dots,n\}$ and $G = S_{n}$. Define
-
-$$
-   \lambda(g)x := g x
-$$
-
-   in the usual permutation sense. For example, if $g = (1¬¬2¬¬3)$ then $\lambda(g)3 = 1$.
-
-1. **Trivial action**
-   For any group $G$ and any set $X$, define
-
-$$
-   \lambda(g)x := x
-$$
-
-   for all $g \in G$, $x \in X$. Every element acts as the identity permutation on $X$.
-
-### Actions as Homomorphisms into $\mathrm{Sym}(X)$
-
-Let $X$ be a $G$-set with action $\lambda$.
-
-> [!important] Action as a permutation representation
-> For each $g \in G$, the map $\lambda(g) : X \to X$ is a bijection, so $\lambda(g) \in \mathrm{Sym}(X)$. Moreover,
->
-> $$
-> \boxed{\lambda : G \to \mathrm{Sym}(X)}
-> $$
->
-> is a group homomorphism, called the **permutation representation** associated to the action.
-
-Proof sketch:
-
-- Fix $g \in G$. Using the axioms, one checks:
-  - Injective: if $\lambda(g)x = \lambda(g)y$, then applying $\lambda(g^{-1})$ and using the action property shows $x = y$.
-  - Surjective: for any $y \in X$, set $x := \lambda(g^{-1})y$. Then $\lambda(g)x = y$.
-- Thus $\lambda(g)$ is a permutation of $X$, so $\lambda(g) \in \operatorname{Sym}(X)$.
-- The map $g \mapsto \lambda(g)$ is a homomorphism because for all $f,g \in G$ and all $x$,
-
-$$
-  \lambda(fg)x = \lambda(f)(\lambda(g)x),
-$$
-
-  which is exactly the condition $\lambda(fg) = \lambda(f) \lambda(g)$ in $\operatorname{Sym}(X)$.
-
-Consequence: every action gives us a homomorphism
-
-$$
-\lambda : G \to \operatorname{Sym}(X),
-$$
-
-so we can talk about its kernel and image.
-
-> [!note] Kernel and image of an action
-> The **kernel** of the action is
-> $$
-> \ker(\lambda)= \{ g \in G : \lambda(g)x = x \text{ for all } x \in X \}.
-> $$
-> The **image** $\operatorname{Im}(\lambda)$ is a subgroup of $\mathrm{Sym}(X)$ that describes all permutations of $X$ realised by elements of $G$.
-
-Common notation: we often drop the symbol $\lambda$ and simply write $gx$ for $\lambda(g)x$.
-
-### Why Group Actions Matter
-
-The slogan:
-
-- A **group action** describes how $G$ behaves as a collection of symmetries of some set $X$.
-- Via the associated homomorphism $G \to \operatorname{Sym}(X)$, every group can be represented as a permutation group.
-
-This is the bridge between abstract group theory and explicit permutations.
-
-### Key Examples of Actions on the Group Itself
-
-1. **Regular (left multiplication) action**
-   Take $X = G$ and define
-
-$$
-   gx := gx
-$$
-
-   in the usual group multiplication sense. This is an action; each $g$ permutes $G$ by left multiplication.
-
-1. **Conjugation action**
-   Take again $X = G$, but now define
-
-$$
-   gx := gxg^{-1}
-$$
-
-   for all $g,x \in G$. This is the **(left) conjugation action**.
-
-These two actions are fundamental: the regular action encodes the group's structure in terms of orbits, and the conjugation action is closely tied to normal subgroups and class equations.
-
-### A More Geometric Example: $D_{8}$ Acting on a Cube
-
-Consider the **dihedral group** $D_{8}$, the symmetries of a square with vertices labelled $1,2,3,4$.
-
-- Let $\rho = (1¬¬2¬¬3¬¬4)$ be a rotation, and $\sigma = (1¬¬4)(2¬¬3)$ a reflection.
-- Then
-
-$$
-  D_{8} = \{ e,\rho,\rho^{2},\rho^{3},\sigma,\sigma\rho,\sigma\rho^{2},\sigma\rho^{3} \}.
-$$
-
-Now imagine the square is one face of a cube whose vertices are labelled $1,\dots$. We can define an action of $D_{8}$ on the set of cube vertices $\{1,\dots\}$ by:
-
-- $\lambda(\rho) = (1¬¬2¬¬3¬¬4)(5¬¬6¬¬7¬¬8)$,
-- $\lambda(\sigma) = (1¬¬4)(2¬¬3)(5¬¬8)(6¬¬7)$,
-- $\lambda(\sigma^{i} \rho^{j}) = \lambda(\sigma)^{i} \lambda(\rho)^{j}$.
-
-One checks that the group action axioms hold; this formalises how the 2D symmetries of the square extend to natural symmetries of the cube.
-
-### A Non-example
-
-Not every formula that looks conjugation-like gives a valid action.
-
-Consider the rule
-
-$$
-\lambda(g)x = g^{-1} x g
-$$
-
-for $g,x \in G$ and $X = G$.
-
-- For a **fixed** $g$, this is indeed conjugation by $g^{-1}$, hence a permutation of $G$.
-- However, when you try to check the action condition
-
-$$
-  \lambda(gf)x \stackrel{?}{=} \lambda(g)(\lambda(f)x),
-$$
-
-  you get
-
-$$
-  \lambda(gf)x = (gf)^{-1} x (gf) = f^{-1} g^{-1} x g f,
-$$
-
-  whereas
-
-$$
-  \lambda(g)(\lambda(f)x) = g^{-1} (f^{-1} x f) g = g^{-1} f^{-1} x f g.
-$$
-
-These two expressions coincide only in special situations (e.g. when $G$ is abelian, or $x$ lies in the centre), so this is *not* an action in general.
-
----
-
-## Pre-Lecture Notes from Mth3003 Lecture Notes 13.pdf|University Notes
-
-- Defined the **alternating group** $A_{n}$ as $\ker(\sigma)$ inside $S_{n}$ and used the First Isomorphism Theorem to obtain $\lvert A_{n} \rvert = n!/2$.
-- Classified elements of small $A_{n}$ by cycle shape: $A_{3} = \{e,(1¬¬2¬¬3),(1¬¬3¬¬2)\} \cong C_{3}$; described which cycle shapes in $S_{4}$ give elements of $A_{4}$.
-- Proved $A_{n} \trianglelefteq S_{n}$ using the fact that $A_{n}$ is the kernel of the signature homomorphism; noted that $A_{1},A_{2},A_{3}$ are simple, while $A_{4}$ is not.
-- Sketched the three-part proof that $A_{n}$ is simple for $n \geq 5$: express elements as products of $3$-cycles, show any normal subgroup with one $3$-cycle has all of them, and deduce any nontrivial normal subgroup must contain a $3$-cycle.
-- Introduced **group actions** and **G-sets**, with definition via axioms; emphasised that each action induces a homomorphism $G \to \mathrm{Sym}(X)$ with well-defined kernel and image.
-- Worked through examples: natural action of $S_{n}$ on $\{1,\dots,n\}$, trivial action, actions of a group on itself by left multiplication and by conjugation, and $D_{8}$ acting on the vertices of a cube; contrasted with a conjugation-like map that fails the action axioms.
-- Next time: use group actions to define orbits and stabilisers, and derive the orbit–stabiliser theorem and class equation, tying back to normal subgroups and simplicity.
+- Consider several new **group actions** of $S_{5}$ on different sets $X$ (extended finite sets, $\mathbb{Z}$ by residue decomposition, and sets of $2$-element subsets), and verify the action axioms in each case via the homomorphism viewpoint.
+- Define the **kernel of an action** $\lambda \colon G \to \operatorname{Sym}(X)$ as the subgroup of elements that fix every point, and note it coincides with the usual kernel of a group homomorphism.
+- Introduce the **regular action** of $G$ on itself by left multiplication, observe that its image $H$ is a permutation group inside $\operatorname{Sym}(G)$, and apply the **First Isomorphism Theorem** to obtain $G / \operatorname{Ker}(\lambda) \cong H$.
+- Compute the kernel of the regular action explicitly by using cancellation in $G$, proving $\operatorname{Ker}(\lambda) = \{e\}$ and hence $G \cong H \leq \operatorname{Sym}(G)$, which is the statement of **Cayley's Theorem**.
+- Next time: use these action ideas (especially orbits and stabilisers) to extract structural information about groups, and to study more sophisticated permutation representations.

@@ -48,7 +48,7 @@ Putting this together, $\theta$ is a bijective homomorphism $G/K \to I$, hence a
 
 > [!note] Canonical homomorphism
 > Given $N \trianglelefteq G$, the map $\pi \colon G \to G/N$ defined by $\pi(g) = gN$ is a surjective homomorphism with $\ker \pi = N$.
-> It is often called the **canonical projection|canonical homomorphism**.
+> It is often called the **canonical projection or canonical homomorphism**.
 
 From the first isomorphism theorem, any homomorphism $\varphi \colon G \to H$ with kernel $K$ factors through the quotient $G/K$ as
 $$
@@ -281,7 +281,7 @@ The table illustrates how cycle shape organises permutations by their underlying
 
 ---
 
-## Pre-Lecture Notes from Mth3003 Lecture Notes 11.pdf|University Notes
+## Pre-Lecture Notes from [[Mth3003 Lecture Notes 11.pdf|University Notes]]
 
 - Recall: for a homomorphism $\varphi \colon G \to H$ with kernel $K = \ker \varphi$, $K \trianglelefteq G$ so the quotient $G/K$ is a well-defined group of cosets $gK$ and the canonical projection $\pi(g) = gK$ is a homomorphism.
 - First isomorphism theorem: if $\varphi \colon G \to H$ has kernel $K$ and image $I$, then $G/K \cong I$ via $\theta(gK) = \varphi(g)$; proof checks that $\theta$ is well-defined, is a homomorphism, and is bijective.

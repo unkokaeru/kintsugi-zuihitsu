@@ -4,7 +4,7 @@ This lecture continues our study of $S_n$ by introducing the **signature functio
 
 ## The Signature Function via a Special Polynomial
 
-We work in the symmetric group **symmetric group|$S_n$** acting on variables $x_1, x_2, \dots, x_n$ by permuting indices: for $g \in S_n$ we define $g x_k = x_{gk}$.
+We work in the symmetric group **symmetric group, $S_n$** acting on variables $x_1, x_2, \dots, x_n$ by permuting indices: for $g \in S_n$ we define $g x_k = x_{gk}$.
 
 ### The Vandermonde-type Polynomial
 
@@ -116,7 +116,7 @@ The proof is given on the handout and runs first for cycles, then extends to per
 - For $g = c_1 c_2 \cdots c_m$, we have $g^{-1} = c_1^{-1} c_2^{-1} \cdots c_m^{-1}$, and the homomorphism property then yields $\sigma(g^{-1}) = \sigma(g)$.
 
 > [!note]
-> The signature of a permutation depends only on its **cycle type|cycle shape**, i.e. the multiset of cycle lengths. Two permutations with the same cycle shape have the same signature.
+> The signature of a permutation depends only on its **cycle type**, i.e. the multiset of cycle lengths. Two permutations with the same cycle shape have the same signature.
 
 This is immediate from the formula $\sigma(g) = \prod_i (-1)^{r_i-1}$, which only "sees" the lengths $r_i$.
 
@@ -161,7 +161,7 @@ These become very useful when recognising elements of the alternating group late
 
 ---
 
-## Pre-Lecture Notes from Mth3003 Lecture Notes 12.pdf|University Notes
+## Pre-Lecture Notes from [[Mth3003 Lecture Notes 12.pdf|University Notes]]
 
 - Action of $S_n$ on variables $x_1, \dots, x_n$ by $g x_k = x_{gk}$, setting up the polynomial viewpoint.
 - Definition of the Vandermonde-like polynomial $\Delta = \prod_{i<j} (x_i - x_j)$ and observation that any $g \in S_n$ sends $\Delta$ to either $\Delta$ or $-\Delta$.
@@ -170,4 +170,4 @@ These become very useful when recognising elements of the alternating group late
 - Formula for the signature of a cycle: a cycle of length $r$ has signature $\sigma(c) = (-1)^{r-1}$, giving $\sigma(g)$ as a product over the cycle lengths in the disjoint cycle decomposition.
 - Consequences: signature depends only on the cycle shape; inverse permutations have the same signature; every $3$-cycle is even; products of even permutations remain even.
 - Multiple worked examples in $S_{12}$ illustrating how to compute signatures directly from cycle decompositions and using the homomorphism property for products.
-- Next time we will use the signature homomorphism to define and study the **alternating group|alternating group $A_n$** as the kernel of $\sigma$, and explore its basic properties and importance.
+- Next time we will use the signature homomorphism to define and study the **alternating group $A_n$** as the kernel of $\sigma$, and explore its basic properties and importance.

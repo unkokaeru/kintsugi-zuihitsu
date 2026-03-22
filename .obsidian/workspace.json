@@ -40,51 +40,6 @@
             }
           },
           {
-            "id": "337d178b5f1a0fce",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3003/lectures/mth3003 lecture 14.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "mth3003 lecture 14"
-            }
-          },
-          {
-            "id": "3b8320c0ffd92de2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3003/lectures/mth3003 lecture 13.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "mth3003 lecture 13"
-            }
-          },
-          {
-            "id": "1984436ed721b4b2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "clear/project/omoikane/mth3008/revision/revision.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
-              },
-              "icon": "lucide-file",
-              "title": "revision"
-            }
-          },
-          {
             "id": "ceae8727db7a1e40",
             "type": "leaf",
             "state": {
@@ -100,7 +55,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -222,18 +177,19 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "337d178b5f1a0fce",
+  "active": "6b9e6098d57d458e",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 13.md",
-    "clear/project/omoikane/mth3008/revision/revision.md",
-    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 12.md",
-    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 11.md",
-    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 14.md",
-    "clear/project/omoikane/mth3003/mth3003.md",
-    "clear/project/omoikane/mth3003/revision/mth3003 portfolio cheat sheet.md",
     "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
-    "clear/project/omoikane/mth3003/revision/revision.md",
     "To-Do List.md",
+    "clear/project/omoikane/mth3003/revision/mth3003 portfolio cheat sheet.md",
+    "clear/project/omoikane/mth3008/revision/revision.md",
+    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 13.md",
+    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 14.md",
+    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 14.md",
+    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 11.md",
+    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 12.md",
+    "clear/project/omoikane/mth3003/mth3003.md",
+    "clear/project/omoikane/mth3003/revision/revision.md",
     "clear/project/omoikane/mth3011/Critical Review on the Ergodicity Problem in Economics.md",
     "attached/files/The Ergodicity Problem in Economics.pdf",
     "clear/library/sloth bytes/medium/Fizz Buzz.md",
@@ -255,7 +211,6 @@
     "attached/files/mth3007b lecture notes 7.pdf",
     "clear/project/omoikane/mth3007b/lectures/mth3007b lecture 6.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 7.md",
-    "clear/project/omoikane/mth3008/lectures/mth3008 lecture 14.md",
     "attached/files/mth3008 weekly problem sheet 7.pdf",
     "attached/files/mth3008 lecture notes 14.pdf",
     "attached/files/mth3008 lecture notes 13.pdf",
