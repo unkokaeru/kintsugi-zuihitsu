@@ -300,7 +300,7 @@ When listing all permutations with a given shape, be careful not to double-count
 
 **Verify**: $gg^{-1}$ should give the identity.
 
-### 4d. Listing Elements of $\langle g \rangle$
+### 4d. Listing Elements of $\langle G \rangle$
 
 **Method**: Compute $g^0 = e,\ g^1,\ g^2,\ \dots$ until you get $e$ again. The order is $o(g) = \operatorname{lcm}(\text{cycle lengths})$.
 
@@ -333,7 +333,7 @@ When listing all permutations with a given shape, be careful not to double-count
 
 **Example** ($\theta(g^m) = (\theta(g))^m$): Base: $\theta(g^1) = \theta(g)$. Step: $\theta(g^{m+1}) = \theta(g^m \cdot g) = \theta(g^m)\theta(g) = (\theta(g))^m \theta(g) = (\theta(g))^{m+1}$.
 
-### 5c. Proving $|\langle g \rangle| = o(g)$
+### 5c. Proving $|\langle G \rangle| = o(g)$
 
 Let $n = o(g)$. Then $\{g^0, g^1, \dots, g^{n-1}\} \subseteq \langle g \rangle$, so $|\langle g \rangle| \geq n$. For any $g^m \in \langle g \rangle$, write $m = qn + r$ with $0 \leq r < n$: $g^m = (g^n)^q g^r = g^r \in \{g^0, \dots, g^{n-1}\}$. So $|\langle g \rangle| \leq n$, giving $|\langle g \rangle| = n = o(g)$.
 
