@@ -39,7 +39,8 @@
               "title": "mth3003 portfolio cheat sheet"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -161,10 +162,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "fc7d9a3b8186fcb9",
+  "active": "179ceb5273bbdb60",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3003/revision/mth3003 portfolio cheat sheet.md",
     "To-Do List.md",
+    "clear/project/omoikane/mth3003/revision/mth3003 portfolio cheat sheet.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 8.md",
     "clear/project/omoikane/mth3008/weekly problems/MTH3008 Weekly Problems 6.md",
     "attached/files/mth3008 weekly problem sheet 6 solutions.pdf",
