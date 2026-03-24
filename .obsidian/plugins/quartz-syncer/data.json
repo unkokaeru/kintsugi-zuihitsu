@@ -13,7 +13,6 @@
   "vaultPath": "/",
   "contentFolder": "content",
   "useFullResolutionImages": false,
-  "applyEmbeds": true,
   "publishFrontmatterKey": "publish",
   "allNotesPublishableByDefault": false,
   "showCreatedTimestamp": true,
@@ -22,7 +21,6 @@
   "usePermalink": false,
   "includeAllFrontmatter": false,
   "frontmatterFormat": "yaml",
-  "pathRewriteRules": "",
   "createdTimestampKey": "created, created_at, date",
   "updatedTimestampKey": "modified, lastmod, updated, last-modified",
   "publishedTimestampKey": "published, publishDate, date",
@@ -43,11 +41,13 @@
   "useThemes": false,
   "lastUsedSettingsTab": "git",
   "noteSettingsIsInitialized": true,
-  "pluginVersion": "1.10.1",
+  "pluginVersion": "1.11.0",
   "diffViewStyle": "auto",
   "ENABLE_DEVELOPER_TOOLS": false,
   "logLevel": {
     "value": 99,
     "name": "OFF"
-  }
+  },
+  "applyEmbeds": true,
+  "pathRewriteRules": ""
 }

@@ -1,6 +1,6 @@
 # MTH3008 Weekly Problems 7
 
-> **Original Documents**: [[mth3008 weekly problem sheet 7.pdf|Problem Sheet]] / [[mth3008 weekly problem sheet 7 handwritten solutions.pdf|My Handwritten Solutions]] / `[[mth3008 weekly problem sheet 7 solutions.pdf|Provided Solutions]]`
+> **Original Documents**: [[mth3008 weekly problem sheet 7.pdf|Problem Sheet]] / [[mth3008 weekly problem sheet 7 handwritten solutions.pdf|My Handwritten Solutions]] / [[mth3008 weekly problem sheet 7 solutions.pdf|Provided Solutions]]
 >
 > **Vibes**: …
 >
