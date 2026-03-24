@@ -25,6 +25,7 @@
 | Abelian group | $ab = ba$ for all $a, b \in G$ |
 | Simple group | Only normal subgroups are $\langle e \rangle$ and $G$ |
 | Group action $\lambda$ of $G$ on $X$ | $\lambda(e_G)x = x$ and $\lambda(fg)x = \lambda(f)(\lambda(g)x)$ for all $f,g \in G$, $x \in X$ |
+| Finitary symmetric group $\text{FS}(X)$ | $\{g \in \text{Sym}(X) : g \text{ moves only finitely many elements}\}$; the **support** of $g$ is $\text{supp}(g) = \{x \in X : g(x) \neq x\}$ |
 
 ### Quick Subgroup Test (Theorem 2.2.5)
 
@@ -33,6 +34,12 @@ $H \subseteq G$ is a subgroup of $G$ if and only if:
 - (i) $e_G \in H$
 - (ii) For all $h_1, h_2 \in H$: $h_1 h_2 \in H$ (closure)
 - (iii) For all $h \in H$: $h^{-1} \in H$ (inverses)
+
+### Useful Subgroup/Equality Facts
+
+- **$|H| = 1 \iff H = \langle e_G \rangle$**: If $|H|=1$, since $e_G \in H$ by the subgroup test, the only element must be $e_G$.
+- **Finite case: $|H| = |G| \iff H = G$**: Since $H \subseteq G$, write $G = H \cup S$ with $H \cap S = \varnothing$. Then $|G| = |H| + |S|$, so $|H| = |G|$ iff $|S| = 0$ iff $H = G$.
+- **Infinite case: this FAILS.** Counterexample: $(\mathbb{Z}, +) < (\mathbb{Q}, +)$ yet $|\mathbb{Z}| = |\mathbb{Q}|$ (both countably infinite).
 
 ### Important Groups Reference
 
@@ -44,14 +51,18 @@ $H \subseteq G$ is a subgroup of $G$ if and only if:
 | Dihedral group | $D_{2n}$ | $2n$ | Symmetries of a regular $n$-gon |
 | Klein four-group | $K_4 = \langle (1\ 2), (3\ 4) \rangle$ | 4 | $\{e, (1\ 2), (3\ 4), (1\ 2)(3\ 4)\}$; smallest non-cyclic group |
 | Integers mod $n$ | $\mathbb{Z}_n$ | $n$ | $\{[0]_n, \ldots, [n-1]_n\}$ under $\oplus$; cyclic, $\mathbb{Z}_n = \langle [1]_n \rangle$ |
+| General linear group | $\text{GL}_2(\mathbb{R})$ | $\infty$ | Invertible $2 \times 2$ real matrices; $\det(M) \neq 0$ |
+| Special linear group | $\text{SL}_2(\mathbb{R})$ | $\infty$ | $\{M \in \text{GL}_2(\mathbb{R}) : \det(M) = 1\}$ |
+| Positive-det subgroup | $P$ | $\infty$ | $\{M \in \text{GL}_2(\mathbb{R}) : \det(M) > 0\}$ |
+| Finitary symmetric group | $\text{FS}(\mathbb{Z})$ | $\infty$ | Permutations of $\mathbb{Z}$ with finite support |
 
 ---
 
 ## 1. Permutations — Cycle Notation, Composition, Inversion & Order
 
-### 1a. Converting to Disjoint Cycle Notation
+### 1a. Converting Between Representations
 
-**Goal**: Write a permutation (given as a two-row mapping) in cycle notation.
+**Goal A — Two-row → cycle notation**: Write a permutation (given as a two-row mapping) in cycle notation.
 
 **Method**:
 
@@ -60,6 +71,16 @@ $H \subseteq G$ is a subgroup of $G$ if and only if:
 3. Omit 1-cycles (fixed points).
 
 **Example**: $1\to 4, 2\to 7, 3\to 2, 4\to 1, 5\to 5, 6\to 6, 7\to 3$ gives $(1\ 4)(2\ 7\ 3)$.
+
+**Goal B — Cycle notation → two-row**: Write a permutation (given in cycle notation) as a full mapping.
+
+**Method**:
+
+1. List all elements $1, 2, \ldots, n$.
+2. For each element, read off where it goes from the cycles: in the cycle $(a_1\ a_2\ \ldots\ a_r)$, we have $a_i \to a_{i+1}$ (and $a_r \to a_1$).
+3. Any element not appearing in any cycle is a fixed point: $x \to x$.
+
+**Example**: $(1\ 7\ 2\ 11\ 9)(4\ 10\ 5)(3\ 8\ 6) \in S_{12}$ gives $1\to 7, 2\to 11, 3\to 8, 4\to 10, 5\to 4, 6\to 3, 7\to 2, 8\to 6, 9\to 1, 10\to 5, 11\to 9, 12\to 12$.
 
 ### 1b. Composing (Multiplying) Permutations
 
@@ -140,6 +161,10 @@ $$
 
 **Example** ($H \cap K \leq G$ when $H \leq G$ and $K \leq G$): $e_G \in H \cap K$ ✓. If $a, b \in H \cap K$, then $ab \in H$ and $ab \in K$, so $ab \in H \cap K$ ✓. If $a \in H \cap K$, then $a^{-1} \in H$ and $a^{-1} \in K$ ✓.
 
+**Example** ($\text{Im}(\theta) \leq H$ when $\theta: G \to H$ is a homomorphism): $\theta(e_G) = e_H \in \text{Im}(\theta)$ ✓. If $h_1, h_2 \in \text{Im}(\theta)$, say $h_i = \theta(g_i)$, then $h_1 h_2 = \theta(g_1)\theta(g_2) = \theta(g_1 g_2) \in \text{Im}(\theta)$ ✓. If $h_1 = \theta(g_1) \in \text{Im}(\theta)$, then $h_1^{-1} = \theta(g_1)^{-1} = \theta(g_1^{-1}) \in \text{Im}(\theta)$ ✓.
+
+**Example** ($\text{FS}(\mathbb{Z}) \leq \text{Sym}(\mathbb{Z})$): $e$ fixes everything, so $\text{supp}(e) = \varnothing$ (finite) ✓. If $f, g$ have finite support, then $\text{supp}(fg) \subseteq \text{supp}(f) \cup \text{supp}(g)$ (finite) ✓. $\text{supp}(g^{-1}) = \text{supp}(g)$ (finite) ✓.
+
 ### 2b. Proving $N \unlhd G$ (Normality)
 
 **Goal**: Show a subgroup $N$ is normal in $G$.
@@ -151,10 +176,14 @@ $$
 - If $G$ is abelian, then every subgroup is normal (since $g^{-1}kg = g^{-1}gk = k \in N$).
 - If $N = \text{Ker}(\theta)$ for some homomorphism $\theta$, then $N \unlhd G$ automatically.
 - If $[G : N] = 2$, then $N \unlhd G$ (there are only two cosets: $N$ and $G \setminus N$, so $gN = Ng$ for all $g$).
+- **Determinant trick for matrix groups**: If $N$ is defined by a condition on $\det$ (e.g. $\det = 1$ or $\det > 0$), then $\det(M^{-1}AM) = \det(M)^{-1}\det(A)\det(M) = \det(A)$, so $M^{-1}AM$ satisfies the same determinant condition, hence $M^{-1}AM \in N$.
+- **Support trick for $\text{FS}(X)$**: To show $\text{FS}(X) \unlhd \text{Sym}(X)$: fix $g \in \text{Sym}(X)$, $h \in \text{FS}(X)$ with $\text{supp}(h)$ finite. Then $g^{-1}hg$ fixes $m$ whenever $g(m) \notin \text{supp}(h)$, i.e. $\text{supp}(g^{-1}hg) \subseteq g^{-1}(\text{supp}(h))$ which has the same (finite) size as $\text{supp}(h)$.
 
 **Example** ($C_3 \unlhd S_3$): Check $g^{-1}cg \in C_3$ for each $g \in S_3$, $c \in C_3$ by cases.
 
 **Example** ($A_n \unlhd S_n$): $\sigma(g^{-1}hg) = \sigma(g^{-1})\sigma(h)\sigma(g) = \sigma(g)^{-1} \cdot 1 \cdot \sigma(g) = 1$, so $g^{-1}hg \in A_n$.
+
+**Example** ($H \cap N \unlhd H$ when $N \unlhd G$ and $H \leq G$): Fix $k \in H \cap N$ and $h \in H$. Since $h, k \in H$: $h^{-1}kh \in H$ (closure in $H$). Since $h \in G$, $k \in N$, $N \unlhd G$: $h^{-1}kh \in N$. So $h^{-1}kh \in H \cap N$. ✓
 
 ### 2c. Proving a Group is Cyclic
 
@@ -174,6 +203,11 @@ $$
 **Method**: Compute $g^0 = e, g^1, g^2, g^3, \ldots$ until you get $e$ again (which happens at $g^{o(g)}$).
 
 **Example**: $g = (1\ 3\ 5\ 7)(2\ 4) \in S_{10}$, $o(g) = \text{lcm}(4,2) = 4$. So $\langle g \rangle = \{e, g, g^2, g^3\}$.
+
+- $g^2 = (1\ 5)(3\ 7)$ (compose $g$ with itself; the 2-cycle $(2\ 4)^2 = e$ vanishes).
+- $g^3 = (1\ 7\ 5\ 3)(2\ 4)$ (the 4-cycle reverses direction).
+
+**Subgroups of $\langle g \rangle$**: $\langle g^k \rangle$ is also cyclic. E.g. $\langle g^2 \rangle = \{e, (1\ 5)(3\ 7)\}$.
 
 ---
 
@@ -227,6 +261,7 @@ where:
 - **The dihedral relation**: $\rho\sigma = \sigma\rho^{-1} = \sigma\rho^{n-1}$.
 - More generally: $\rho^k \sigma = \sigma \rho^{-k} = \sigma\rho^{n-k}$.
 - Every element is either a rotation $\rho^i$ or a "reflection" $\sigma\rho^i$.
+- **Proof of $\rho\sigma = \sigma\rho^{-1}$**: $\rho\sigma$ is a reflection (rotation composed with reflection), so $(\rho\sigma)^2 = e$. Expand: $\rho\sigma\rho\sigma = e$, so $\rho\sigma = \sigma^{-1}\rho^{-1} = \sigma\rho^{-1}$ (since $\sigma^2 = e$).
 
 ### Computing Products in $D_{2n}$
 
@@ -236,13 +271,40 @@ where:
 
 **Example**: $\rho^3\sigma = \rho^2(\rho\sigma) = \rho^2\sigma\rho^{-1} = \rho(\rho\sigma)\rho^{-1} = \rho\sigma\rho^{-2} = (\rho\sigma)\rho^{-2} = \sigma\rho^{-3} = \sigma\rho^{n-3}$.
 
+### Writing Dihedral Group Elements in Cycle Notation
+
+**Goal**: Express every element of $D_{2n}$ as a permutation of $\{1, \ldots, n\}$.
+
+**Method**:
+
+1. Draw the regular $n$-gon with vertices $1, 2, \ldots, n$ labelled anticlockwise.
+2. **Rotations**: $\rho^k$ sends vertex $i \to i + k \pmod{n}$ (using $n$ instead of $0$). Write the resulting cycles.
+3. **Reflections**: $\sigma$ reflects through the axis through vertex 1 (and the midpoint of the opposite side if $n$ is even, or the opposite vertex if $n$ is odd). Track where each vertex goes geometrically, then write cycles. For $\sigma\rho^k$: apply $\rho^k$ first, then $\sigma$.
+
+**Example** ($D_{10}$, pentagon with vertices 1–5 anticlockwise):
+
+- $\rho = (1\ 2\ 3\ 4\ 5)$, $\rho^2 = (1\ 3\ 5\ 2\ 4)$, $\rho^3 = (1\ 4\ 2\ 5\ 3)$, $\rho^4 = (1\ 5\ 4\ 3\ 2)$.
+- $\sigma = (2\ 5)(3\ 4)$ (reflection through vertex 1).
+- $\sigma\rho = (1\ 5)(2\ 4)$, $\sigma\rho^2 = (1\ 4)(2\ 3)$, $\sigma\rho^3 = (1\ 3)(4\ 5)$, $\sigma\rho^4 = (1\ 2)(3\ 5)$.
+
+### Finding Symmetry Groups of Arbitrary Shapes
+
+**Goal**: Determine the symmetry group of a given geometric figure as a subgroup of $S_n$.
+
+**Method**:
+
+1. **Label** all corners/vertices $1, 2, \ldots, n$.
+2. **Find all rotations**: Rotate the figure by each angle that maps it to itself. Write where each labelled vertex goes. Express as a permutation.
+3. **Find all reflections**: Identify all axes of symmetry. For each axis, track where each vertex goes. Express as a permutation.
+4. **Check**: The total number of symmetries should be $2n$ for a regular $n$-gon (i.e. $D_{2n}$). For other shapes, count carefully.
+
+**Example** (cross/plus shape with 8 labelled corners): 4 rotations (by $0°, 90°, 180°, 270°$) + 4 reflections (through 4 axes) = 8 elements $\cong D_8$.
+
+**Constructing shapes with a given symmetry group**: To build a shape with symmetry group $D_{2n}$, take any shape with exactly $n$-fold rotational symmetry and at least one line of reflective symmetry (e.g. a regular $n$-gon, or a regular $n$-gon with identical decorations on each edge). A regular hexagon with identical bumps on each edge gives $D_{12}$.
+
 ### Proving $\langle \rho, \sigma \rangle = D_{2n}$
 
 **Method**: Any word in $\rho, \sigma$ can be reduced to $\sigma^k\rho^j$ using $\rho\sigma = \sigma\rho^{-1}$ repeatedly. Since $\sigma^2 = e$ and $\rho^n = e$, we get $k \in \{0,1\}$ and $j \in \{0, \ldots, n-1\}$, giving exactly $2n$ elements.
-
-### Writing Elements in Cycle Notation
-
-Draw the regular $n$-gon with vertices $1, 2, \ldots, n$ labelled anticlockwise. Apply each rotation/reflection geometrically and read off where each vertex goes.
 
 ---
 
@@ -263,13 +325,16 @@ Draw the regular $n$-gon with vertices $1, 2, \ldots, n$ labelled anticlockwise.
 
 **Example** (the map $\phi(g) = g^2$ on $G$): $\phi(g_1 g_2) = (g_1 g_2)^2 = g_1 g_2 g_1 g_2$, while $\phi(g_1)\phi(g_2) = g_1^2 g_2^2$. These are equal iff $g_2 g_1 = g_1 g_2$, i.e. iff $G$ is abelian. So $\phi$ is a homomorphism iff $G$ is abelian.
 
+**Example** (the natural/canonical map $\phi: H \to (HN)/N$ given by $\phi(h) = hN$): $\phi(h_1 h_2) = h_1 h_2 N = (h_1 N)(h_2 N) = \phi(h_1)\phi(h_2)$ by the definition of coset multiplication. ✓
+
 ### 5b. Properties of Homomorphisms (Proposition 5.2.4)
 
 If $\theta: G \to H$ is a homomorphism:
 
-- $\theta(e_G) = e_H$.
-- $\theta(g^m) = (\theta(g))^m$ for all $m \in \mathbb{Z}$.
-- $\text{Im}(\theta) \leq H$ (but not necessarily normal).
+- $\theta(e_G) = e_H$. **Proof**: $\theta(g) = \theta(e_G g) = \theta(e_G)\theta(g)$; cancel $\theta(g)$.
+- $\theta(g^{-1}) = (\theta(g))^{-1}$. **Proof**: $\theta(g)\theta(g^{-1}) = \theta(gg^{-1}) = \theta(e_G) = e_H$.
+- $\theta(g^m) = (\theta(g))^m$ for all $m \in \mathbb{Z}$. **Proof**: Induction — $\theta(g^m) = \theta(g^{m-1} \cdot g) = \theta(g)^{m-1}\theta(g) = \theta(g)^m$.
+- $\text{Im}(\theta) \leq H$.
 - $\text{Ker}(\theta) \unlhd G$.
 
 ### 5c. Proving $\theta$ is an Isomorphism
@@ -283,6 +348,8 @@ If $\theta: G \to H$ is a homomorphism:
 3. $\theta$ is **onto** (surjective): show every $h \in H$ equals $\theta(g)$ for some $g$.
 
 **Shortcut**: If $|G| = |H|$ (finite), then injective $\iff$ surjective, so only check one.
+
+**Power maps on cyclic groups**: The map $\phi(g) = g^k$ on $C_n$ is an isomorphism if and only if $\gcd(k, n) = 1$. **Why**: $\phi$ is a homomorphism (since $C_n$ is abelian). Surjectivity: $\gcd(k,n)=1$ means $k$ has a multiplicative inverse mod $n$, so every element is a $k$-th power.
 
 **Strategy for constructing $\theta$**: Define $\theta$ on generators and extend. E.g. for $D_6 \cong S_3$: set $\theta(\rho) = (1\ 2\ 3)$, $\theta(\sigma) = (1\ 2)$, then compute $\theta$ on all elements.
 
@@ -319,8 +386,10 @@ The isomorphism is $\theta: G/K \to I$ given by $\theta(gK) = \phi(g)$.
 **Key applications**:
 
 - $\mathbb{Z}/n\mathbb{Z} \cong \mathbb{Z}_n$ (via $\phi(m) = [m]_n$).
-- $S_n / A_n \cong C_2$ (via the signature function $\sigma: S_n \to \{1, -1\}$).
-- $\text{GL}_2(\mathbb{R}) / \text{SL}_2(\mathbb{R}) \cong \mathbb{R}^*$ (via $\det: \text{GL}_2(\mathbb{R}) \to \mathbb{R}^*$).
+- $S_n / A_n \cong C_2$ (via the signature function $\sigma: S_n \to \{1, -1\}$; $\text{Ker}(\sigma) = A_n$, $\text{Im}(\sigma) = C_2$).
+- $\text{GL}_2(\mathbb{R}) / \text{SL}_2(\mathbb{R}) \cong \mathbb{R}^*$ (via $\det: \text{GL}_2(\mathbb{R}) \to \mathbb{R}^*$; $\text{Ker}(\det) = \text{SL}_2(\mathbb{R})$, $\text{Im}(\det) = \mathbb{R}^*$).
+- $P / \text{SL}_2(\mathbb{R}) \cong (\mathbb{R}_{>0}, \times)$ (restrict $\det$ to $P$; kernel is $\text{SL}_2(\mathbb{R})$, image is positive reals).
+- $\text{GL}_2(\mathbb{R}) / P \cong C_2$ (via $\text{sgn}(\det): \text{GL}_2(\mathbb{R}) \to \{+1, -1\}$; kernel is $P$).
 
 ### Second Isomorphism Theorem (Theorem 6.0.4)
 
@@ -329,6 +398,8 @@ If $H \leq G$ and $N \unlhd G$, then:
 $$
 H / (H \cap N) \cong (HN) / N
 $$
+
+**Set-up**: The canonical map is $\phi: H \to (HN)/N$ given by $\phi(h) = hN$. This is a homomorphism (check: $\phi(h_1 h_2) = h_1 h_2 N = (h_1 N)(h_2 N) = \phi(h_1)\phi(h_2)$). Its kernel is $\{h \in H : hN = N\} = \{h \in H : h \in N\} = H \cap N$. Apply the First Isomorphism Theorem.
 
 ### Third Isomorphism Theorem (Theorem 6.0.5)
 
@@ -376,6 +447,12 @@ where $r_1, \ldots, r_m$ are the cycle lengths. Equivalently, $\sigma(c) = (-1)^
 
 $\sigma(g) = (-1)^{4} \cdot (-1)^{2} \cdot (-1)^{1} = 1 \cdot 1 \cdot (-1) = -1$ (odd).
 
+**Signature of products/inverses/conjugates**: Since $\sigma$ is a homomorphism:
+
+- $\sigma(gh) = \sigma(g) \cdot \sigma(h)$.
+- $\sigma(g^{-1}) = \sigma(g)$ (since $\sigma(g)\sigma(g^{-1}) = \sigma(e) = 1$).
+- $\sigma(g^{-1}hg) = \sigma(g)^{-1} \cdot \sigma(h) \cdot \sigma(g) = \sigma(h)$ (conjugation preserves signature).
+
 ### 7d. The Alternating Group $A_n$
 
 $$
@@ -390,7 +467,7 @@ $$
 
 **Method**:
 
-1. List all possible cycle shapes in $S_n$ (integer partitions of $n$, possibly with parts summing to $\leq n$).
+1. List all possible cycle shapes in $S_n$ (integer partitions with parts summing to $\leq n$).
 2. Compute the signature for each cycle shape.
 3. Keep only the even ones.
 4. For each even cycle shape, enumerate all permutations with that shape.
@@ -408,6 +485,8 @@ $$
 | $(5)$ | $+1$ | Yes | 24 |
 
 **Total in $A_5$: $1 + 15 + 20 + 24 = 60 = 5!/2$** ✓
+
+**Cycle shapes in $S_3$**: $\varnothing$ (+1), $(2)$ (−1), $(3)$ (+1). So $A_3 = \{e, (1\ 2\ 3), (1\ 3\ 2)\}$.
 
 ---
 
@@ -471,6 +550,12 @@ If $H \leq G$ and $N \unlhd G$:
 
 If $o(g) = n$, then $\langle g \rangle = \{e, g, g^2, \ldots, g^{n-1}\}$ has exactly $n$ elements. Any $g^m$ can be reduced: write $m = qn + r$ with $0 \leq r < n$, then $g^m = g^{qn+r} = (g^n)^q g^r = g^r$.
 
+### Abelian Vs Non-Abelian Quick Checks
+
+- If $G$ is abelian: every subgroup is normal; the map $g \mapsto g^k$ is always a homomorphism; $(gh)^n = g^n h^n$.
+- If $G$ is non-abelian: $(gh)^2 \neq g^2 h^2$ in general; provide a specific counterexample to disprove homomorphism claims.
+- **$\text{FS}(\mathbb{Z})$ is not abelian**: contains copies of every $S_n$, which are non-abelian for $n \geq 3$.
+
 ---
 
 ## 10. Describing Quotient Groups
@@ -485,6 +570,8 @@ Given $N \unlhd G$, to describe $G/N$:
 4. Identify the quotient group as a known group (often $C_k$, $\mathbb{Z}_n$, etc.).
 
 **Tip**: If $|G/N| = 2$, then $G/N \cong C_2$.
+
+**Strategy via First Isomorphism Theorem**: If you can find a homomorphism $\phi: G \to H$ with $\text{Ker}(\phi) = N$, then $G/N \cong \text{Im}(\phi)$. This is often the cleanest way to identify a quotient group.
 
 ### Standard Examples
 
