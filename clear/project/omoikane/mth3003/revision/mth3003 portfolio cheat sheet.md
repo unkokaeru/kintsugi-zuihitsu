@@ -1,585 +1,316 @@
-# **MTH3003** Group Theory, Portfolio Cheat Sheet
+# **MTH3003** Group Theory - Portfolio Cheat Sheet
 
-> [!TIP] Created by William Fayers
-> Good luck and have fun!! :))
+> Created by William Fayers. Good luck and have fun!! :))
 
-## 0. Reference Tables & Foundational Material
+## 0. Reference Tables & Foundations
 
-### Key Definitions
+### Definitions
 
 | Concept | Definition |
 | :--- | :--- |
-| Group $(G, *)$ | Set $G$ with operation $*$ satisfying: (i) Closure, (ii) Identity $e_G$, (iii) Inverses, (iv) Associativity |
-| Subgroup $H \leq G$ | $H \subseteq G$ that is itself a group under the same operation |
-| Normal subgroup $N \unlhd G$ | $g^{-1}kg \in N$ for all $k \in N$, all $g \in G$. Equivalently: $gN = Ng$ for all $g \in G$ |
-| Coset $gH$ | $\{gh : h \in H\}$ for some $g \in G$ |
-| Index $[G : H]$ | Number of distinct cosets of $H$ in $G$ |
-| Quotient group $G/N$ | Set of cosets $\{gN : g \in G\}$ with operation $aN * bN = (ab)N$. Requires $N \unlhd G$ |
-| Homomorphism $\theta: G \to H$ | $\theta(g_1 g_2) = \theta(g_1)\theta(g_2)$ for all $g_1, g_2 \in G$ |
-| Kernel $\text{Ker}(\theta)$ | $\{g \in G : \theta(g) = e_H\}$ |
-| Image $\text{Im}(\theta)$ | $\{\theta(g) : g \in G\}$ |
-| Isomorphism | A bijective homomorphism. $G \cong H$ means "isomorphic" |
-| Order of group $\|G\|$ | Number of elements in $G$ |
-| Order of element $o(g)$ | Smallest $n \in \mathbb{N}$ with $g^n = e_G$ |
-| Cyclic group $\langle g \rangle$ | $\{g^n : n \in \mathbb{Z}\}$. $G$ is cyclic if $G = \langle g \rangle$ for some $g$ |
-| Abelian group | $ab = ba$ for all $a, b \in G$ |
-| Simple group | Only normal subgroups are $\langle e \rangle$ and $G$ |
-| Group action $\lambda$ of $G$ on $X$ | $\lambda(e_G)x = x$ and $\lambda(fg)x = \lambda(f)(\lambda(g)x)$ for all $f,g \in G$, $x \in X$ |
-| Finitary symmetric group $\text{FS}(X)$ | $\{g \in \text{Sym}(X) : g \text{ moves only finitely many elements}\}$; the **support** of $g$ is $\text{supp}(g) = \{x \in X : g(x) \neq x\}$ |
+| Group $(G,*)$ | Closure + Identity $e_G$ + Inverses + Associativity |
+| Subgroup $H \leq G$ | $H \subseteq G$, itself a group under same operation |
+| Normal $N \unlhd G$ | $g^{-1}kg \in N\ \forall k \in N, g \in G$. Equiv: $gN = Ng\ \forall g$. Equiv: $g^{-1}Ng = N\ \forall g$ |
+| Coset $gH$ | $\{gh : h \in H\}$. Index $[G:H]$ = number of distinct cosets |
+| Quotient $G/N$ | $\{gN : g \in G\}$ with $(aN)(bN) = (ab)N$. Requires $N \unlhd G$ |
+| Homomorphism $\theta: G \to H$ | $\theta(g_1 g_2) = \theta(g_1)\theta(g_2)\ \forall g_1,g_2$ |
+| Kernel / Image | $\text{Ker}(\theta) = \{g : \theta(g) = e_H\}$, $\text{Im}(\theta) = \{\theta(g) : g \in G\}$ |
+| Isomorphism | Bijective homomorphism. $G \cong H$ |
+| $o(g)$, $\text{mod}(G)$ | $o(g)$ = smallest $n$ with $g^n = e$. $|G|$ = number of elements |
+| Cyclic $\langle g \rangle$ | $\{g^n : n \in \mathbb{Z}\}$. $G$ cyclic if $G = \langle g \rangle$. $|\langle g \rangle| = o(g)$ |
+| Abelian | $ab = ba\ \forall a,b$. Simple: only normal subgroups are $\{e\}$ and $G$ |
+| Action of $G$ on $X$ | $\lambda(e)x = x$ and $\lambda(fg)x = \lambda(f)(\lambda(g)x)\ \forall f,g,x$ |
+| $\text{FS}(X)$ | $\{g \in \text{Sym}(X) : \text{supp}(g) = \{x : g(x)\neq x\} \text{ is finite}\}$ |
 
-### Quick Subgroup Test (Theorem 2.2.5)
+### Quick Subgroup Test (Thm 2.2.5)
 
-$H \subseteq G$ is a subgroup of $G$ if and only if:
+$H \leq G \iff$ (i) $e_G \in H$, (ii) $h_1,h_2 \in H \Rightarrow h_1 h_2 \in H$, (iii) $h \in H \Rightarrow h^{-1} \in H$.
 
-- (i) $e_G \in H$
-- (ii) For all $h_1, h_2 \in H$: $h_1 h_2 \in H$ (closure)
-- (iii) For all $h \in H$: $h^{-1} \in H$ (inverses)
+### Basic Group Theorems (Thm 2.1.11)
 
-### Useful Subgroup/Equality Facts
+- $(g^{-1})^{-1} = g$. Cancellation: $gh_1 = gh_2 \Rightarrow h_1 = h_2$.
+- Socks-and-shoes: $(h_1 h_2)^{-1} = h_2^{-1}h_1^{-1}$. Proof: $(h_1 h_2)(h_2^{-1}h_1^{-1}) = e$.
+- Identity and inverses are unique (prove by cancellation).
 
-- **$|H| = 1 \iff H = \langle e_G \rangle$**: If $|H|=1$, since $e_G \in H$ by the subgroup test, the only element must be $e_G$.
-- **Finite case: $|H| = |G| \iff H = G$**: Since $H \subseteq G$, write $G = H \cup S$ with $H \cap S = \varnothing$. Then $|G| = |H| + |S|$, so $|H| = |G|$ iff $|S| = 0$ iff $H = G$.
-- **Infinite case: this FAILS.** Counterexample: $(\mathbb{Z}, +) < (\mathbb{Q}, +)$ yet $|\mathbb{Z}| = |\mathbb{Q}|$ (both countably infinite).
+### Subgroup/Equality Facts
 
-### Important Groups Reference
+- $|H|=1 \iff H = \{e\}$. Finite: $|H|=|G| \iff H=G$ (since $H \subseteq G$). Infinite: FAILS ($\mathbb{Z} < \mathbb{Q}$ but $|\mathbb{Z}|=|\mathbb{Q}|$).
 
-| Group | Notation | Order | Key Property |
+### Normal Subgroup Equivalences
+
+$(i) \iff (iii)$: $gN \subseteq Ng$ since $gk = (gkg^{-1})g \in Ng$; and $Ng \subseteq gN$ since $kg = g(g^{-1}kg) \in gN$. So $gN = Ng$.
+
+### Important Groups
+
+| Group | Notation | Order | Notes |
 | :--- | :--- | :--- | :--- |
-| Symmetric group | $S_n$ | $n!$ | All permutations of $\{1, \ldots, n\}$ |
-| Alternating group | $A_n$ | $n!/2$ | Even permutations in $S_n$; $A_n \unlhd S_n$ |
-| Cyclic group of order $n$ | $C_n = \langle (1\ 2\ \ldots\ n) \rangle$ | $n$ | Generated by a single $n$-cycle |
-| Dihedral group | $D_{2n}$ | $2n$ | Symmetries of a regular $n$-gon |
-| Klein four-group | $K_4 = \langle (1\ 2), (3\ 4) \rangle$ | 4 | $\{e, (1\ 2), (3\ 4), (1\ 2)(3\ 4)\}$; smallest non-cyclic group |
-| Integers mod $n$ | $\mathbb{Z}_n$ | $n$ | $\{[0]_n, \ldots, [n-1]_n\}$ under $\oplus$; cyclic, $\mathbb{Z}_n = \langle [1]_n \rangle$ |
-| General linear group | $\text{GL}_2(\mathbb{R})$ | $\infty$ | Invertible $2 \times 2$ real matrices; $\det(M) \neq 0$ |
-| Special linear group | $\text{SL}_2(\mathbb{R})$ | $\infty$ | $\{M \in \text{GL}_2(\mathbb{R}) : \det(M) = 1\}$ |
-| Positive-det subgroup | $P$ | $\infty$ | $\{M \in \text{GL}_2(\mathbb{R}) : \det(M) > 0\}$ |
-| Finitary symmetric group | $\text{FS}(\mathbb{Z})$ | $\infty$ | Permutations of $\mathbb{Z}$ with finite support |
+| Symmetric | $S_n$ | $n!$ | All permutations of $\{1,\ldots,n\}$ |
+| Alternating | $A_n$ | $n!/2$ | Even perms; $A_n \unlhd S_n$; simple for $n \geq 5$ |
+| Cyclic | $C_n = \langle(1\ 2\ \ldots\ n)\rangle$ | $n$ | Single generator |
+| Dihedral | $D_{2n}$ | $2n$ | Symmetries of regular $n$-gon |
+| Klein four | $K_4$ | 4 | $\{e,(1\ 2),(3\ 4),(1\ 2)(3\ 4)\}$; smallest non-cyclic |
+| $\mathbb{Z}_n$ | $\langle[1]_n\rangle$ | $n$ | Integers mod $n$ under $\oplus$ |
+| $\text{GL}_2(\mathbb{R})$ | - | $\infty$ | Invertible $2\times 2$ matrices ($\det \neq 0$) |
+| $\text{SL}_2(\mathbb{R})$ | - | $\infty$ | $\det = 1$ |
+| $P$ | - | $\infty$ | $\det > 0$ |
+| $\text{FS}(\mathbb{Z})$ | - | $\infty$ | Finitary perms of $\mathbb{Z}$ |
 
 ---
 
-## 1. Permutations — Cycle Notation, Composition, Inversion & Order
+## 1. Permutations
 
-### 1a. Converting Between Representations
+### 1a. Converting Representations
 
-**Goal A — Two-row → cycle notation**: Write a permutation (given as a two-row mapping) in cycle notation.
+**Two-row → cycles**: Start at smallest unused element, follow $\sigma$ until you return. Omit fixed points. **Cycles → two-row**: In $(a_1\ a_2\ \ldots\ a_r)$: $a_i \to a_{i+1}$, $a_r \to a_1$. Unlisted elements are fixed.
 
-**Method**:
+### 1b. Composition
 
-1. Start with the smallest element not yet placed, say $1$. Follow $1 \to \sigma(1) \to \sigma(\sigma(1)) \to \cdots$ until you return to $1$. Write the cycle.
-2. Pick the next smallest element not in any cycle. Repeat.
-3. Omit 1-cycles (fixed points).
+$\sigma\rho$ means "apply $\rho$ first, then $\sigma$". Chase each element: $x \to \sigma(\rho(x)) \to \cdots$ until cycle closes. Disjoint cycles commute.
 
-**Example**: $1\to 4, 2\to 7, 3\to 2, 4\to 1, 5\to 5, 6\to 6, 7\to 3$ gives $(1\ 4)(2\ 7\ 3)$.
+### 1c. Inversion
 
-**Goal B — Cycle notation → two-row**: Write a permutation (given in cycle notation) as a full mapping.
+Reverse each cycle: $(a_1\ a_2\ \ldots\ a_m)^{-1} = (a_m\ \ldots\ a_2\ a_1)$. For disjoint product: invert each factor (order doesn't matter).
 
-**Method**:
+### 1d. Order
 
-1. List all elements $1, 2, \ldots, n$.
-2. For each element, read off where it goes from the cycles: in the cycle $(a_1\ a_2\ \ldots\ a_r)$, we have $a_i \to a_{i+1}$ (and $a_r \to a_1$).
-3. Any element not appearing in any cycle is a fixed point: $x \to x$.
+Single $r$-cycle has order $r$. Disjoint cycles of lengths $r_1,\ldots,r_m$: $o(\sigma) = \text{lcm}(r_1,\ldots,r_m)$.
 
-**Example**: $(1\ 7\ 2\ 11\ 9)(4\ 10\ 5)(3\ 8\ 6) \in S_{12}$ gives $1\to 7, 2\to 11, 3\to 8, 4\to 10, 5\to 4, 6\to 3, 7\to 2, 8\to 6, 9\to 1, 10\to 5, 11\to 9, 12\to 12$.
+- **Proof**: Disjoint cycles commute, so $\sigma^k = e$ iff $r_i \mid k\ \forall i$ iff $\text{lcm} \mid k$.
+- **Find order $d$ in $S_n$**: choose cycle lengths summing to $\leq n$ with lcm $= d$.
+- **No order $p$ (prime $> n$)**: would need a $p$-cycle, requiring $p \leq n$.
 
-### 1b. Composing (Multiplying) Permutations
+### 1e. Solving Equations
 
-**Goal**: Compute $\sigma\rho$ where $\sigma\rho$ means "first apply $\rho$, then apply $\sigma$".
+$\alpha\sigma = \beta \Rightarrow \sigma = \alpha^{-1}\beta$. $\sigma\alpha = \beta \Rightarrow \sigma = \beta\alpha^{-1}$. $\alpha\sigma\gamma = \beta \Rightarrow \sigma = \alpha^{-1}\beta\gamma^{-1}$. Always verify.
 
-**Method**:
+### 1f. Foundational Results
 
-1. Pick any element $x$ (e.g. 1).
-2. Compute $\sigma\rho(x) = \sigma(\rho(x))$. This starts a new cycle: $(x\ \ \sigma\rho(x)\ \ \ldots)$.
-3. Continue: compute $\sigma\rho(\sigma\rho(x))$, etc., until you return to $x$.
-4. Pick the next unvisited element and repeat until all elements are accounted for.
-5. Write the result as disjoint cycles (omit 1-cycles).
+**Disjoint cycles commute** (Prop 1.2.7): If $\{a_i\} \cap \{b_j\} = \varnothing$, then for $x = a_i$: both $\sigma\rho(x)$ and $\rho\sigma(x)$ give $a_{i+1}$ (since $\rho$ fixes $a_{i+1}$). Similarly for $b_j$'s and fixed points.
 
-**Key fact**: Disjoint cycles commute — $(1\ 2\ 3)(4\ 5) = (4\ 5)(1\ 2\ 3)$.
-
-### 1c. Inverting Permutations (Quick Inverse Proposition)
-
-**Goal**: Find $\sigma^{-1}$.
-
-**Method**: Write $\sigma$ as disjoint cycles. Reverse each cycle:
-
-$$
-\sigma = (a_1\ a_2\ \ldots\ a_m) \implies \sigma^{-1} = (a_m\ a_{m-1}\ \ldots\ a_1)
-$$
-
-If $\sigma = c_1 c_2 \cdots c_k$ (disjoint), then $\sigma^{-1} = c_1^{-1} c_2^{-1} \cdots c_k^{-1}$.
-
-**Example**: $(1\ 5\ 7)(2\ 3\ 8)^{-1} = (7\ 5\ 1)(8\ 3\ 2)$.
-
-### 1d. Order of a Permutation
-
-**Goal**: Find $o(\sigma)$.
-
-**Rules**:
-
-- A single $r$-cycle has order $r$.
-- If $\sigma = c_1 c_2 \cdots c_m$ is a product of disjoint cycles of lengths $r_1, r_2, \ldots, r_m$, then:
-
-$$
-o(\sigma) = \text{lcm}(r_1, r_2, \ldots, r_m)
-$$
-
-- **Proof sketch**: Disjoint cycles commute, so $\sigma^k = c_1^k c_2^k \cdots c_m^k = e$ iff each $c_i^k = e$ iff $r_i \mid k$ for all $i$ iff $\text{lcm}(r_1, \ldots, r_m) \mid k$.
-
-**Example**: $o((1\ 3\ 5)(2\ 4)) = \text{lcm}(3, 2) = 6$.
-
-**Finding elements of given order in $S_n$**: Choose disjoint cycle lengths $r_1, \ldots, r_m$ with $r_1 + \cdots + r_m \leq n$ and $\text{lcm}(r_1, \ldots, r_m) =$ target order.
-
-**Why an element of order $p$ (prime, $p > n$) cannot exist in $S_n$**: You would need a single $p$-cycle, requiring $p \leq n$.
-
-### 1e. Solving Permutation Equations
-
-**Goal**: Find $\sigma$ satisfying $\alpha \sigma = \beta$ (or $\sigma \alpha = \beta$, or $\alpha \sigma \gamma = \beta$).
-
-**Method**: Isolate $\sigma$ by multiplying by inverses:
-
-- $\alpha \sigma = \beta \implies \sigma = \alpha^{-1} \beta$
-- $\sigma \alpha = \beta \implies \sigma = \beta \alpha^{-1}$
-- $\alpha \sigma \gamma = \beta \implies \sigma = \alpha^{-1} \beta \gamma^{-1}$
-
-**Always verify** by substituting back.
-
-**Example**: $(1\ 3\ 2)\sigma = (1\ 2)(3\ 4) \implies \sigma = (1\ 3\ 2)^{-1}(1\ 2)(3\ 4) = (2\ 3\ 1)(1\ 2)(3\ 4)$. Compose to get $\sigma = (1\ 3\ 4)$.
+**Disjoint cycle decomposition** (Prop 1.3.4): Start at $x_1$, follow $\sigma$ until first repeat - must be $x_1$ (by injectivity), giving a cycle. Remove and repeat on remaining elements.
 
 ---
 
-## 2. Proving Subgroup, Normality & Cyclic Group Properties
+## 2. Subgroups, Normality & Cyclic Groups
 
-### 2a. Proving $H \leq G$ (Subgroup)
+### 2a. Proving $H \leq G$
 
-**Goal**: Show a subset $H$ of a group $G$ is a subgroup.
+Apply Quick Subgroup Test. Key examples:
 
-**Method** (Quick Subgroup Test):
+- **$H \cap K \leq G$**: $e \in H \cap K$; $a,b \in H \cap K \Rightarrow ab \in H$ and $ab \in K$; $a^{-1} \in H$ and $a^{-1} \in K$.
+- **$\text{Im}(\theta) \leq H$**: $e_H = \theta(e_G) \in \text{Im}$; $\theta(g_1)\theta(g_2) = \theta(g_1 g_2) \in \text{Im}$; $\theta(g)^{-1} = \theta(g^{-1}) \in \text{Im}$.
+- **$\text{FS}(\mathbb{Z}) \leq \text{Sym}(\mathbb{Z})$**: $\text{supp}(e) = \varnothing$; $\text{supp}(fg) \subseteq \text{supp}(f) \cup \text{supp}(g)$; $\text{supp}(g^{-1}) = \text{supp}(g)$.
+- **$A_n \leq S_n$**: $\sigma(e)=1$; $\sigma(gh)=\sigma(g)\sigma(h)=1$; $\sigma(g^{-1})=\sigma(g)=1$.
 
-1. **Identity**: Show $e_G \in H$.
-2. **Closure**: Show that for all $h_1, h_2 \in H$, the product $h_1 h_2 \in H$.
-3. **Inverses**: Show that for all $h \in H$, we have $h^{-1} \in H$.
+### 2b. Proving $N \unlhd G$
 
-**Example** ($H \cap K \leq G$ when $H \leq G$ and $K \leq G$): $e_G \in H \cap K$ ✓. If $a, b \in H \cap K$, then $ab \in H$ and $ab \in K$, so $ab \in H \cap K$ ✓. If $a \in H \cap K$, then $a^{-1} \in H$ and $a^{-1} \in K$ ✓.
+Show $g^{-1}kg \in N\ \forall k \in N, g \in G$. **Shortcuts**:
 
-**Example** ($\text{Im}(\theta) \leq H$ when $\theta: G \to H$ is a homomorphism): $\theta(e_G) = e_H \in \text{Im}(\theta)$ ✓. If $h_1, h_2 \in \text{Im}(\theta)$, say $h_i = \theta(g_i)$, then $h_1 h_2 = \theta(g_1)\theta(g_2) = \theta(g_1 g_2) \in \text{Im}(\theta)$ ✓. If $h_1 = \theta(g_1) \in \text{Im}(\theta)$, then $h_1^{-1} = \theta(g_1)^{-1} = \theta(g_1^{-1}) \in \text{Im}(\theta)$ ✓.
+- $G$ abelian $\Rightarrow$ every subgroup normal ($g^{-1}kg = k$).
+- $N = \text{Ker}(\theta) \Rightarrow N \unlhd G$ automatically.
+- $[G:N]=2 \Rightarrow N \unlhd G$ (only two cosets, so $gN = Ng$).
+- **Det trick**: $\det(M^{-1}AM) = \det(A)$, so det-defined subgroups ($\text{SL}_2$, $P$) are normal.
+- **Support trick**: $\text{supp}(g^{-1}hg) \subseteq g^{-1}(\text{supp}(h))$, same finite size. So $\text{FS}(X) \unlhd \text{Sym}(X)$.
 
-**Example** ($\text{FS}(\mathbb{Z}) \leq \text{Sym}(\mathbb{Z})$): $e$ fixes everything, so $\text{supp}(e) = \varnothing$ (finite) ✓. If $f, g$ have finite support, then $\text{supp}(fg) \subseteq \text{supp}(f) \cup \text{supp}(g)$ (finite) ✓. $\text{supp}(g^{-1}) = \text{supp}(g)$ (finite) ✓.
+**Examples**: $A_n \unlhd S_n$: $\sigma(g^{-1}hg) = \sigma(g)^{-1}\cdot 1\cdot\sigma(g)=1$. $C_3 \unlhd S_3$: check by cases. $H\cap N \unlhd H$ (when $N \unlhd G$): $h^{-1}kh \in H$ (closure) and $h^{-1}kh \in N$ (normality).
 
-### 2b. Proving $N \unlhd G$ (Normality)
+### 2c. Cyclic Groups
 
-**Goal**: Show a subgroup $N$ is normal in $G$.
+$G = \langle g \rangle$ if every element is a power of $g$. For $|G|=p$ prime: any $g \neq e$ has $|\langle g\rangle|$ dividing $p$, so $|\langle g\rangle|=p=|G|$. For $\mathbb{Z}_n$: $[m]_n = m \cdot [1]_n$.
 
-**Method**: For all $k \in N$ and all $g \in G$, show $g^{-1}kg \in N$.
+### 2d. Listing $\langle G \rangle$
 
-**Shortcut strategies**:
-
-- If $G$ is abelian, then every subgroup is normal (since $g^{-1}kg = g^{-1}gk = k \in N$).
-- If $N = \text{Ker}(\theta)$ for some homomorphism $\theta$, then $N \unlhd G$ automatically.
-- If $[G : N] = 2$, then $N \unlhd G$ (there are only two cosets: $N$ and $G \setminus N$, so $gN = Ng$ for all $g$).
-- **Determinant trick for matrix groups**: If $N$ is defined by a condition on $\det$ (e.g. $\det = 1$ or $\det > 0$), then $\det(M^{-1}AM) = \det(M)^{-1}\det(A)\det(M) = \det(A)$, so $M^{-1}AM$ satisfies the same determinant condition, hence $M^{-1}AM \in N$.
-- **Support trick for $\text{FS}(X)$**: To show $\text{FS}(X) \unlhd \text{Sym}(X)$: fix $g \in \text{Sym}(X)$, $h \in \text{FS}(X)$ with $\text{supp}(h)$ finite. Then $g^{-1}hg$ fixes $m$ whenever $g(m) \notin \text{supp}(h)$, i.e. $\text{supp}(g^{-1}hg) \subseteq g^{-1}(\text{supp}(h))$ which has the same (finite) size as $\text{supp}(h)$.
-
-**Example** ($C_3 \unlhd S_3$): Check $g^{-1}cg \in C_3$ for each $g \in S_3$, $c \in C_3$ by cases.
-
-**Example** ($A_n \unlhd S_n$): $\sigma(g^{-1}hg) = \sigma(g^{-1})\sigma(h)\sigma(g) = \sigma(g)^{-1} \cdot 1 \cdot \sigma(g) = 1$, so $g^{-1}hg \in A_n$.
-
-**Example** ($H \cap N \unlhd H$ when $N \unlhd G$ and $H \leq G$): Fix $k \in H \cap N$ and $h \in H$. Since $h, k \in H$: $h^{-1}kh \in H$ (closure in $H$). Since $h \in G$, $k \in N$, $N \unlhd G$: $h^{-1}kh \in N$. So $h^{-1}kh \in H \cap N$. ✓
-
-### 2c. Proving a Group is Cyclic
-
-**Goal**: Show $G = \langle g \rangle$ for some $g$.
-
-**Method**: Find an element $g \in G$ and show every element of $G$ is a power of $g$.
-
-- For $|G| = p$ (prime): Take any $g \neq e$. Then $\langle g \rangle \neq \langle e \rangle$, and by Lagrange $|\langle g \rangle|$ divides $p$, so $|\langle g \rangle| = p = |G|$, giving $G = \langle g \rangle$.
-- For $\mathbb{Z}_n$: Every $[m]_n = \underbrace{[1]_n \oplus \cdots \oplus [1]_n}_{m \text{ times}}$, so $\mathbb{Z}_n = \langle [1]_n \rangle$.
-
-**Key fact**: $|\langle g \rangle| = o(g)$ (Proposition 2.3.2).
-
-### 2d. Listing Cyclic Subgroup Elements
-
-**Goal**: List all elements of $\langle g \rangle$.
-
-**Method**: Compute $g^0 = e, g^1, g^2, g^3, \ldots$ until you get $e$ again (which happens at $g^{o(g)}$).
-
-**Example**: $g = (1\ 3\ 5\ 7)(2\ 4) \in S_{10}$, $o(g) = \text{lcm}(4,2) = 4$. So $\langle g \rangle = \{e, g, g^2, g^3\}$.
-
-- $g^2 = (1\ 5)(3\ 7)$ (compose $g$ with itself; the 2-cycle $(2\ 4)^2 = e$ vanishes).
-- $g^3 = (1\ 7\ 5\ 3)(2\ 4)$ (the 4-cycle reverses direction).
-
-**Subgroups of $\langle g \rangle$**: $\langle g^k \rangle$ is also cyclic. E.g. $\langle g^2 \rangle = \{e, (1\ 5)(3\ 7)\}$.
+Compute $e, g, g^2, \ldots$ until return to $e$. Example: $g = (1\ 3\ 5\ 7)(2\ 4) \in S_{10}$, $o(g) = 4$. $\langle g \rangle = \{e,\ g,\ (1\ 5)(3\ 7),\ (1\ 7\ 5\ 3)(2\ 4)\}$. Subgroup: $\langle g^2 \rangle = \{e, (1\ 5)(3\ 7)\}$.
 
 ---
 
-## 3. Lagrange's Theorem & Its Applications
+## 3. Lagrange's Theorem
 
-### Lagrange's Theorem (Theorem 4.2.5)
+### Statement (Thm 4.2.5)
 
-If $H \leq G$ and $G$ is finite, then:
+$H \leq G$ finite $\Rightarrow |G| = [G:H] \cdot |H|$. So $|H| \mid |G|$ and $o(g) \mid |G|$.
 
-$$
-|G| = [G : H] \cdot |H|
-$$
+**Proof**: $G$ is a disjoint union of $[G:H]$ cosets (Cor 4.1.4), each of size $|H|$ (bijection $h \mapsto gh$).
 
-In particular, $|H|$ divides $|G|$, and $o(g)$ divides $|G|$ for all $g \in G$.
+**$o(g) \mid |G|$**: $o(g) = |\langle g\rangle|$, and $\langle g \rangle \leq G$, so Lagrange applies.
 
-### Standard Applications
+### Applications
 
-- **"$G$ has no subgroup of order $k$"**: Show $k \nmid |G|$.
-- **"$G$ has no element of order $k$"**: Show $k \nmid |G|$.
-- **Converse does NOT hold**: $k \mid |G|$ does NOT guarantee a subgroup of order $k$. ($A_4$ has order 12 but no subgroup of order 6.)
-- **Cauchy's Theorem**: If $p$ is prime and $p \mid |G|$, then $G$ has an element (and hence a subgroup) of order $p$.
+- No subgroup/element of order $k$ if $k \nmid |G|$. Converse fails: $A_4$ (order 12) has no subgroup of order 6.
+- **Cauchy**: $p$ prime, $p \mid |G| \Rightarrow \exists$ element of order $p$.
+- **$C_p$ is simple**: subgroup orders divide $p$, so only $\{e\}$ and $C_p$.
 
-### Coset Properties (Corollary 4.1.4)
+### Cosets
 
-- Cosets $aH$ and $bH$ are either disjoint or equal.
-- $aH = bH \iff a^{-1}b \in H \iff a \in bH$.
-- Every element of $G$ lies in exactly one coset.
-- All cosets have the same size: $|gH| = |H|$.
+- $aH = bH \iff a^{-1}b \in H$. **Proof** ($\Rightarrow$): $a \in bH \Rightarrow a = bh \Rightarrow a^{-1}b = h^{-1} \in H$. ($\Leftarrow$): $a^{-1}b = h_0 \Rightarrow ah = b(h_0^{-1}h) \in bH$ so $aH \subseteq bH$; symmetrically $bH \subseteq aH$.
+- Cosets partition $G$: if $aH \cap bH \ni g = ah_1 = bh_2$, then $a^{-1}b = h_1 h_2^{-1} \in H$, so $aH = bH$.
+
+**Listing cosets**: Start with $eH$; pick $g \notin H$, form $gH$; repeat until $G$ exhausted. Example: $H = \{e,(1\ 2)\}$ in $S_3$: cosets $\{e,(1\ 2)\}$, $\{(1\ 2\ 3),(1\ 3)\}$, $\{(1\ 3\ 2),(2\ 3)\}$. $[S_3:H]=3$.
 
 ---
 
 ## 4. Dihedral Groups $D_{2n}$
 
-### Structure
+### Structure & Relations
 
-The dihedral group of order $2n$ is the symmetry group of a regular $n$-gon:
+$D_{2n} = \{e, \rho, \ldots, \rho^{n-1}, \sigma, \sigma\rho, \ldots, \sigma\rho^{n-1}\}$, $|D_{2n}|=2n$.
 
-$$
-D_{2n} = \{e, \rho, \rho^2, \ldots, \rho^{n-1}, \sigma, \sigma\rho, \sigma\rho^2, \ldots, \sigma\rho^{n-1}\}
-$$
+- $\rho = (1\ 2\ \ldots\ n)$ (rotation by $2\pi/n$), $\sigma = (2\ n)(3\ n{-}1)\cdots$ (reflection through vertex 1).
+- $\rho^n = e$, $\sigma^2 = e$, $\rho^k\sigma = \sigma\rho^{-k} = \sigma\rho^{n-k}$.
+- **Proof**: $(\rho\sigma)^2 = e$ (reflection has order 2), so $\rho\sigma = \sigma^{-1}\rho^{-1} = \sigma\rho^{-1}$.
 
-where:
+### Computing in $D_{2n}$
 
-- $\rho = (1\ 2\ 3\ \ldots\ n)$ is anticlockwise rotation by $2\pi/n$.
-- $\sigma$ is a reflection (through the line through vertex 1; as a permutation: $\sigma = (2\ n)(3\ n-1)(4\ n-2)\cdots$).
-- $|D_{2n}| = 2n$.
+Push $\sigma$'s left using $\rho\sigma = \sigma\rho^{-1}$, reduce with $\sigma^2=e$, $\rho^n=e$. Example: $\rho^3\sigma = \sigma\rho^{-3} = \sigma\rho^{n-3}$.
 
-### Key Relations
+### Cycle Notation for $D_{2n}$
 
-- $\rho^n = e$, $\sigma^2 = e$.
-- **The dihedral relation**: $\rho\sigma = \sigma\rho^{-1} = \sigma\rho^{n-1}$.
-- More generally: $\rho^k \sigma = \sigma \rho^{-k} = \sigma\rho^{n-k}$.
-- Every element is either a rotation $\rho^i$ or a "reflection" $\sigma\rho^i$.
-- **Proof of $\rho\sigma = \sigma\rho^{-1}$**: $\rho\sigma$ is a reflection (rotation composed with reflection), so $(\rho\sigma)^2 = e$. Expand: $\rho\sigma\rho\sigma = e$, so $\rho\sigma = \sigma^{-1}\rho^{-1} = \sigma\rho^{-1}$ (since $\sigma^2 = e$).
+Rotations: $\rho^k$ sends $i \to i+k \pmod{n}$. Reflections: draw $n$-gon, track vertices geometrically.
 
-### Computing Products in $D_{2n}$
+**$D_{10}$**: $\rho=(1\ 2\ 3\ 4\ 5)$, $\sigma=(2\ 5)(3\ 4)$. $\sigma\rho=(1\ 5)(2\ 4)$, $\sigma\rho^2=(1\ 4)(2\ 3)$, $\sigma\rho^3=(1\ 3)(4\ 5)$, $\sigma\rho^4=(1\ 2)(3\ 5)$.
 
-**Goal**: Simplify any expression involving $\rho$ and $\sigma$ to the form $\rho^i$ or $\sigma\rho^i$.
+### Symmetry Groups & Construction
 
-**Method**: Use $\rho\sigma = \sigma\rho^{-1}$ to "push all $\sigma$'s to the left" (or equivalently, push all $\rho$'s to the right). Then reduce using $\sigma^2 = e$ and $\rho^n = e$.
+Label vertices, find all rotations and reflections as permutations. Regular $n$-gon $\to D_{2n}$. Cross/plus with 8 corners: 4 rotations + 4 reflections $= D_8$. To build $D_{2n}$: regular $n$-gon with matching decorations.
 
-**Example**: $\rho^3\sigma = \rho^2(\rho\sigma) = \rho^2\sigma\rho^{-1} = \rho(\rho\sigma)\rho^{-1} = \rho\sigma\rho^{-2} = (\rho\sigma)\rho^{-2} = \sigma\rho^{-3} = \sigma\rho^{n-3}$.
+### $\langle\rho,\sigma\rangle = D_{2n}$
 
-### Writing Dihedral Group Elements in Cycle Notation
-
-**Goal**: Express every element of $D_{2n}$ as a permutation of $\{1, \ldots, n\}$.
-
-**Method**:
-
-1. Draw the regular $n$-gon with vertices $1, 2, \ldots, n$ labelled anticlockwise.
-2. **Rotations**: $\rho^k$ sends vertex $i \to i + k \pmod{n}$ (using $n$ instead of $0$). Write the resulting cycles.
-3. **Reflections**: $\sigma$ reflects through the axis through vertex 1 (and the midpoint of the opposite side if $n$ is even, or the opposite vertex if $n$ is odd). Track where each vertex goes geometrically, then write cycles. For $\sigma\rho^k$: apply $\rho^k$ first, then $\sigma$.
-
-**Example** ($D_{10}$, pentagon with vertices 1–5 anticlockwise):
-
-- $\rho = (1\ 2\ 3\ 4\ 5)$, $\rho^2 = (1\ 3\ 5\ 2\ 4)$, $\rho^3 = (1\ 4\ 2\ 5\ 3)$, $\rho^4 = (1\ 5\ 4\ 3\ 2)$.
-- $\sigma = (2\ 5)(3\ 4)$ (reflection through vertex 1).
-- $\sigma\rho = (1\ 5)(2\ 4)$, $\sigma\rho^2 = (1\ 4)(2\ 3)$, $\sigma\rho^3 = (1\ 3)(4\ 5)$, $\sigma\rho^4 = (1\ 2)(3\ 5)$.
-
-### Finding Symmetry Groups of Arbitrary Shapes
-
-**Goal**: Determine the symmetry group of a given geometric figure as a subgroup of $S_n$.
-
-**Method**:
-
-1. **Label** all corners/vertices $1, 2, \ldots, n$.
-2. **Find all rotations**: Rotate the figure by each angle that maps it to itself. Write where each labelled vertex goes. Express as a permutation.
-3. **Find all reflections**: Identify all axes of symmetry. For each axis, track where each vertex goes. Express as a permutation.
-4. **Check**: The total number of symmetries should be $2n$ for a regular $n$-gon (i.e. $D_{2n}$). For other shapes, count carefully.
-
-**Example** (cross/plus shape with 8 labelled corners): 4 rotations (by $0°, 90°, 180°, 270°$) + 4 reflections (through 4 axes) = 8 elements $\cong D_8$.
-
-**Constructing shapes with a given symmetry group**: To build a shape with symmetry group $D_{2n}$, take any shape with exactly $n$-fold rotational symmetry and at least one line of reflective symmetry (e.g. a regular $n$-gon, or a regular $n$-gon with identical decorations on each edge). A regular hexagon with identical bumps on each edge gives $D_{12}$.
-
-### Proving $\langle \rho, \sigma \rangle = D_{2n}$
-
-**Method**: Any word in $\rho, \sigma$ can be reduced to $\sigma^k\rho^j$ using $\rho\sigma = \sigma\rho^{-1}$ repeatedly. Since $\sigma^2 = e$ and $\rho^n = e$, we get $k \in \{0,1\}$ and $j \in \{0, \ldots, n-1\}$, giving exactly $2n$ elements.
+Any word reduces to $\sigma^k\rho^j$ via $\rho\sigma = \sigma\rho^{-1}$. Since $\sigma^2=e$, $\rho^n=e$: $k \in \{0,1\}$, $j \in \{0,\ldots,n{-}1\}$, giving $2n$ elements.
 
 ---
 
 ## 5. Homomorphisms & Isomorphisms
 
-### 5a. Proving $\theta: G \to H$ is a Homomorphism
+### 5a. Proving/Disproving Homomorphism
 
-**Goal**: Verify $\theta(g_1 g_2) = \theta(g_1)\theta(g_2)$ for all $g_1, g_2 \in G$.
+Check $\theta(g_1g_2) = \theta(g_1)\theta(g_2)\ \forall g_1,g_2$. To disprove: one counterexample suffices.
 
-**Method**:
+- $\phi(g)=g^2$: hom iff $G$ abelian (since $(g_1g_2)^2 = g_1^2g_2^2$ iff $g_1g_2 = g_2g_1$).
+- Canonical map $\phi(h)=hN$: $\phi(h_1h_2) = h_1h_2N = (h_1N)(h_2N) = \phi(h_1)\phi(h_2)$.
+- Canonical map $\pi: G \to G/N$, $\pi(g)=gN$: surjective hom with $\text{Ker}(\pi)=N$.
 
-1. Take arbitrary $g_1, g_2 \in G$.
-2. Compute $\theta(g_1 g_2)$ (LHS).
-3. Compute $\theta(g_1)\theta(g_2)$ (RHS).
-4. Show LHS = RHS.
+### 5b. Properties (Prop 5.2.4)
 
-**To disprove**: Find a single counterexample pair $g_1, g_2$ where $\theta(g_1 g_2) \neq \theta(g_1)\theta(g_2)$.
+$\theta: G \to H$ hom $\Rightarrow$: $\theta(e_G) = e_H$ (cancel $\theta(g)$ from $\theta(g) = \theta(e_Gg)$). $\theta(g^{-1}) = \theta(g)^{-1}$. $\theta(g^m) = \theta(g)^m$ (induction). $\text{Im}(\theta) \leq H$. $\text{Ker}(\theta) \unlhd G$.
 
-**Example** (the map $\phi(g) = g^2$ on $G$): $\phi(g_1 g_2) = (g_1 g_2)^2 = g_1 g_2 g_1 g_2$, while $\phi(g_1)\phi(g_2) = g_1^2 g_2^2$. These are equal iff $g_2 g_1 = g_1 g_2$, i.e. iff $G$ is abelian. So $\phi$ is a homomorphism iff $G$ is abelian.
+### 5c. Proving Isomorphism
 
-**Example** (the natural/canonical map $\phi: H \to (HN)/N$ given by $\phi(h) = hN$): $\phi(h_1 h_2) = h_1 h_2 N = (h_1 N)(h_2 N) = \phi(h_1)\phi(h_2)$ by the definition of coset multiplication. ✓
+Construct $\theta$ and verify: (1) homomorphism, (2) injective ($\text{Ker}=\{e\}$), (3) surjective. If $|G|=|H|$ finite: injective $\iff$ surjective.
 
-### 5b. Properties of Homomorphisms (Proposition 5.2.4)
+- **Power maps**: $g \mapsto g^k$ on $C_n$ is iso iff $\gcd(k,n)=1$.
+- **Strategy**: define on generators, extend. E.g. $D_6 \cong S_3$: $\theta(\rho)=(1\ 2\ 3)$, $\theta(\sigma)=(1\ 2)$.
 
-If $\theta: G \to H$ is a homomorphism:
+### 5d. $\text{Ker}(\theta) \unlhd G$
 
-- $\theta(e_G) = e_H$. **Proof**: $\theta(g) = \theta(e_G g) = \theta(e_G)\theta(g)$; cancel $\theta(g)$.
-- $\theta(g^{-1}) = (\theta(g))^{-1}$. **Proof**: $\theta(g)\theta(g^{-1}) = \theta(gg^{-1}) = \theta(e_G) = e_H$.
-- $\theta(g^m) = (\theta(g))^m$ for all $m \in \mathbb{Z}$. **Proof**: Induction — $\theta(g^m) = \theta(g^{m-1} \cdot g) = \theta(g)^{m-1}\theta(g) = \theta(g)^m$.
-- $\text{Im}(\theta) \leq H$.
-- $\text{Ker}(\theta) \unlhd G$.
-
-### 5c. Proving $\theta$ is an Isomorphism
-
-**Goal**: Show $G \cong H$.
-
-**Method**: Construct $\theta: G \to H$ and verify:
-
-1. $\theta$ is a **homomorphism** (check $\theta(ab) = \theta(a)\theta(b)$).
-2. $\theta$ is **one-to-one** (injective): show $\theta(a) = \theta(b) \implies a = b$, or equivalently $\text{Ker}(\theta) = \{e_G\}$.
-3. $\theta$ is **onto** (surjective): show every $h \in H$ equals $\theta(g)$ for some $g$.
-
-**Shortcut**: If $|G| = |H|$ (finite), then injective $\iff$ surjective, so only check one.
-
-**Power maps on cyclic groups**: The map $\phi(g) = g^k$ on $C_n$ is an isomorphism if and only if $\gcd(k, n) = 1$. **Why**: $\phi$ is a homomorphism (since $C_n$ is abelian). Surjectivity: $\gcd(k,n)=1$ means $k$ has a multiplicative inverse mod $n$, so every element is a $k$-th power.
-
-**Strategy for constructing $\theta$**: Define $\theta$ on generators and extend. E.g. for $D_6 \cong S_3$: set $\theta(\rho) = (1\ 2\ 3)$, $\theta(\sigma) = (1\ 2)$, then compute $\theta$ on all elements.
-
-### 5d. Proving $\text{Ker}(\theta) \unlhd G$
-
-**Method**: Fix $a \in \text{Ker}(\theta)$ and $g \in G$. Then:
-
-$$
-\theta(g^{-1}ag) = \theta(g)^{-1}\theta(a)\theta(g) = \theta(g)^{-1} e_H \theta(g) = e_H
-$$
-
-So $g^{-1}ag \in \text{Ker}(\theta)$.
+$\theta(g^{-1}ag) = \theta(g)^{-1}\theta(a)\theta(g) = \theta(g)^{-1}e_H\theta(g) = e_H$, so $g^{-1}ag \in \text{Ker}(\theta)$.
 
 ---
 
-## 6. The Isomorphism Theorems
+## 6. Isomorphism Theorems
 
-### First Isomorphism Theorem (Theorem 6.0.1)
+### First (Thm 6.0.1): $G/\text{Ker}(\phi) \cong \text{Im}(\phi)$
 
-If $\phi: G \to H$ is a homomorphism with kernel $K$ and image $I$, then:
+Via $\theta(gK) = \phi(g)$. **Use**: find Ker and Im of a homomorphism, conclude quotient $\cong$ image.
 
-$$
-G / K \cong I
-$$
+**Proof**: (1) Well-defined: $g_1K = g_2K \Rightarrow g_1^{-1}g_2 \in K \Rightarrow \phi(g_1)=\phi(g_2)$. (2) Hom: $\theta(g_1Kg_2K)=\phi(g_1g_2)=\phi(g_1)\phi(g_2)$. (3) Onto: $\phi(g)=\theta(gK)$. (4) 1-1: $\theta(g_1K)=\theta(g_2K) \Rightarrow \phi(g_1)=\phi(g_2) \Rightarrow g_1^{-1}g_2 \in K$.
 
-The isomorphism is $\theta: G/K \to I$ given by $\theta(gK) = \phi(g)$.
+**Applications**: $\mathbb{Z}/n\mathbb{Z} \cong \mathbb{Z}_n$; $S_n/A_n \cong C_2$ (signature); $\text{GL}_2/\text{SL}_2 \cong \mathbb{R}^*$ (det); $P/\text{SL}_2 \cong \mathbb{R}_{>0}$; $\text{GL}_2/P \cong C_2$ (sgn det).
 
-**How to use it**: Given a homomorphism $\phi$:
+### Second (Thm 6.0.4): $H/(H \cap N) \cong (HN)/N$
 
-1. Find $\text{Ker}(\phi)$.
-2. Find $\text{Im}(\phi)$.
-3. Conclude $G/\text{Ker}(\phi) \cong \text{Im}(\phi)$.
+Map $\phi(h) = hN$: hom with $\text{Ker} = H \cap N$. Apply FIT.
 
-**Key applications**:
+### Third (Thm 6.0.5): $(G/N)/(M/N) \cong G/M$
 
-- $\mathbb{Z}/n\mathbb{Z} \cong \mathbb{Z}_n$ (via $\phi(m) = [m]_n$).
-- $S_n / A_n \cong C_2$ (via the signature function $\sigma: S_n \to \{1, -1\}$; $\text{Ker}(\sigma) = A_n$, $\text{Im}(\sigma) = C_2$).
-- $\text{GL}_2(\mathbb{R}) / \text{SL}_2(\mathbb{R}) \cong \mathbb{R}^*$ (via $\det: \text{GL}_2(\mathbb{R}) \to \mathbb{R}^*$; $\text{Ker}(\det) = \text{SL}_2(\mathbb{R})$, $\text{Im}(\det) = \mathbb{R}^*$).
-- $P / \text{SL}_2(\mathbb{R}) \cong (\mathbb{R}_{>0}, \times)$ (restrict $\det$ to $P$; kernel is $\text{SL}_2(\mathbb{R})$, image is positive reals).
-- $\text{GL}_2(\mathbb{R}) / P \cong C_2$ (via $\text{sgn}(\det): \text{GL}_2(\mathbb{R}) \to \{+1, -1\}$; kernel is $P$).
-
-### Second Isomorphism Theorem (Theorem 6.0.4)
-
-If $H \leq G$ and $N \unlhd G$, then:
-
-$$
-H / (H \cap N) \cong (HN) / N
-$$
-
-**Set-up**: The canonical map is $\phi: H \to (HN)/N$ given by $\phi(h) = hN$. This is a homomorphism (check: $\phi(h_1 h_2) = h_1 h_2 N = (h_1 N)(h_2 N) = \phi(h_1)\phi(h_2)$). Its kernel is $\{h \in H : hN = N\} = \{h \in H : h \in N\} = H \cap N$. Apply the First Isomorphism Theorem.
-
-### Third Isomorphism Theorem (Theorem 6.0.5)
-
-If $N \unlhd G$, $M \unlhd G$, and $N \leq M \leq G$, then $M/N \unlhd G/N$ and:
-
-$$
-(G/N) / (M/N) \cong G/M
-$$
-
-("The Fool's Cancellation Theorem" — it looks like the $N$'s cancel.)
+("Fool's Cancellation.") **Proof**: $\phi(gN) = gM$. Well-defined: $g_1^{-1}g_2 \in N \subseteq M$. Hom: yes. Onto: yes. $\text{Ker} = M/N$. Apply FIT.
 
 ---
 
-## 7. The Alternating Group & Signature Function
+## 7. Alternating Group & Signature
 
-### 7a. Cycle Shape
+### Signature Function
 
-The **cycle shape** of a permutation $g$ (written as disjoint cycles of lengths $r_1 \geq r_2 \geq \cdots \geq r_m$) is $(r_1, r_2, \ldots, r_m)$. The identity has cycle shape $\varnothing$.
+$\sigma(g) = \prod_{i}(-1)^{r_i - 1}$ where $r_i$ are disjoint cycle lengths. Even: $\sigma=1$. Odd: $\sigma=-1$. **Quick rule**: count even-length cycles; odd count $\to$ odd perm.
 
-### 7b. The Signature Function
+- $\sigma$ is a homomorphism: $\sigma(gh)=\sigma(g)\sigma(h)$. Also $\sigma(g^{-1})=\sigma(g)$ and $\sigma(g^{-1}hg)=\sigma(h)$.
 
-$$
-\sigma(g) = (-1)^{(r_1 - 1) + (r_2 - 1) + \cdots + (r_m - 1)}
-$$
+**Proof $\sigma$ is hom** (Prop 7.2.2): $\Delta = \prod_{i<j}(x_i-x_j)$. $gh$ sends $\Delta \to g(\sigma(h)\Delta) = \sigma(h)\sigma(g)\Delta$, so $\sigma(gh) = \sigma(g)\sigma(h)$.
 
-where $r_1, \ldots, r_m$ are the cycle lengths. Equivalently, $\sigma(c) = (-1)^{r-1}$ for a single $r$-cycle.
+### $A_n = \text{Ker}(\sigma)$
 
-- $\sigma(g) = 1$: $g$ is **even**.
-- $\sigma(g) = -1$: $g$ is **odd**.
-- $\sigma$ is a **homomorphism**: $\sigma(gh) = \sigma(g)\sigma(h)$.
-- $\sigma(g^{-1}) = \sigma(g)$.
-- The signature depends only on the cycle shape.
+$A_n \leq S_n$ (QST: $\sigma(e)=1$, $\sigma(gh)=1\cdot1=1$, $\sigma(g^{-1})=1$). $A_n \unlhd S_n$ (kernel of hom). $|A_n|=n!/2$ (FIT: $S_n/A_n \cong C_2$ since $\sigma$ surjective). Simple for $n \geq 5$.
 
-**Quick rule**: Count the number of even-length cycles. If odd count $\to$ odd permutation. If even count $\to$ even permutation.
+### Cycle Shape Tables
 
-### 7c. Computing Signatures
+**$S_3$**: $\varnothing$(+1,1), $(2)$(-1,3), $(3)$(+1,2). $A_3 = \{e,(1\ 2\ 3),(1\ 3\ 2)\}$.
 
-**Method**:
+**$S_4$**: $\varnothing$(+1,1), $(2)$(-1,6), $(2,2)$(+1,3), $(3)$(+1,8), $(4)$(-1,6). $|A_4|=12$. Note: $K_4 \unlhd A_4$, so $A_4$ not simple.
 
-1. Write $g$ as a product of disjoint cycles.
-2. For each cycle of length $r$, compute $(-1)^{r-1}$.
-3. Multiply all the results.
-
-**Example**: $g = (1\ 7\ 3\ 4\ 2)(9\ 5\ 6)(8\ 11)$, cycle lengths $5, 3, 2$:
-
-$\sigma(g) = (-1)^{4} \cdot (-1)^{2} \cdot (-1)^{1} = 1 \cdot 1 \cdot (-1) = -1$ (odd).
-
-**Signature of products/inverses/conjugates**: Since $\sigma$ is a homomorphism:
-
-- $\sigma(gh) = \sigma(g) \cdot \sigma(h)$.
-- $\sigma(g^{-1}) = \sigma(g)$ (since $\sigma(g)\sigma(g^{-1}) = \sigma(e) = 1$).
-- $\sigma(g^{-1}hg) = \sigma(g)^{-1} \cdot \sigma(h) \cdot \sigma(g) = \sigma(h)$ (conjugation preserves signature).
-
-### 7d. The Alternating Group $A_n$
-
-$$
-A_n = \{g \in S_n : \sigma(g) = 1\} = \text{Ker}(\sigma)
-$$
-
-- $|A_n| = n!/2$ for $n \geq 2$.
-- $A_n \unlhd S_n$ (since $A_n$ is the kernel of the homomorphism $\sigma$).
-- $A_n$ is simple for $n \geq 5$.
-
-### 7e. Listing Elements of $A_n$
-
-**Method**:
-
-1. List all possible cycle shapes in $S_n$ (integer partitions with parts summing to $\leq n$).
-2. Compute the signature for each cycle shape.
-3. Keep only the even ones.
-4. For each even cycle shape, enumerate all permutations with that shape.
-
-**Cycle shapes in $S_5$ and membership in $A_5$**:
-
-| Cycle shape | Signature | In $A_5$? | Count |
-| :--- | :--- | :--- | :--- |
-| $\varnothing$ (identity) | $+1$ | Yes | 1 |
-| $(2)$ | $-1$ | No | 10 |
-| $(2,2)$ | $+1$ | Yes | 15 |
-| $(3)$ | $+1$ | Yes | 20 |
-| $(3,2)$ | $-1$ | No | 20 |
-| $(4)$ | $-1$ | No | 30 |
-| $(5)$ | $+1$ | Yes | 24 |
-
-**Total in $A_5$: $1 + 15 + 20 + 24 = 60 = 5!/2$** ✓
-
-**Cycle shapes in $S_3$**: $\varnothing$ (+1), $(2)$ (−1), $(3)$ (+1). So $A_3 = \{e, (1\ 2\ 3), (1\ 3\ 2)\}$.
+**$S_5$**: $\varnothing$(+1,1), $(2)$(-1,10), $(2,2)$(+1,15), $(3)$(+1,20), $(3,2)$(-1,20), $(4)$(-1,30), $(5)$(+1,24). $|A_5|=60$.
 
 ---
 
 ## 8. Group Actions & Cayley's Theorem
 
-### 8a. Group Action Definition
+### Actions
 
-An **action** of $G$ on a set $X$ is a function $\lambda: G \to \text{Sym}(X)$ satisfying:
+| Action | $X$ | Rule |
+| :--- | :--- | :--- |
+| Natural | $\{1,\ldots,n\}$ | $\lambda(g)x = gx$ |
+| Trivial | any | $\lambda(g)x = x$ |
+| Regular | $G$ | $\lambda(g)x = gx$ |
+| Conjugation | $G$ | $\lambda(g)x = gxg^{-1}$ |
 
-1. $\lambda(e_G)x = x$ for all $x \in X$.
-2. $\lambda(fg)x = \lambda(f)(\lambda(g)x)$ for all $f, g \in G$, $x \in X$.
+**Non-action**: $\lambda(g)x = g^{-1}xg$ fails axiom 2. LHS of $\lambda(fg)$: $g^{-1}f^{-1}xfg$. RHS: $f^{-1}g^{-1}xgf$. Differ unless abelian.
 
-Every action $\lambda$ is a homomorphism from $G$ to $\text{Sym}(X)$.
+**Verifying regular action**: (1) $ex=x$. (2) $(fg)x = f(gx)$ by associativity.
 
-### 8b. Important Actions
+**Verifying conjugation**: (1) $exe^{-1}=x$. (2) $(fg)x(fg)^{-1} = fgxg^{-1}f^{-1} = f(\lambda(g)x)f^{-1}$.
 
-| Action | Set $X$ | Rule | Example |
-| :--- | :--- | :--- | :--- |
-| Natural action | $\{1, \ldots, n\}$ | $\lambda(g)x = gx$ | $S_n$ acting on $\{1, \ldots, n\}$ |
-| Trivial action | Any set | $\lambda(g)x = x$ | Every $g$ fixes everything |
-| Regular (left mult.) | $G$ itself | $\lambda(g)x = gx$ | Used in Cayley's Theorem |
-| Conjugation | $G$ itself | $\lambda(g)x = gxg^{-1}$ | Kernel is the centre of $G$ |
+**Action $\Rightarrow$ homomorphism** (Prop 8.1.4): $\lambda(g)$ is bijective ($\lambda(g^{-1})$ is its inverse) and $\lambda(fg)=\lambda(f)\lambda(g)$ by axiom 2.
 
-**Non-action**: $\lambda(g)x = g^{-1}xg$ is NOT in general an action (fails axiom 2 in non-abelian groups).
+### Cayley's Theorem (Thm 8.2.3)
 
-### 8c. Cayley's Theorem (Theorem 8.2.3)
-
-**Every group is isomorphic to a permutation group.**
-
-**Proof**: Use the regular action $\lambda(g)x = gx$ on $X = G$. This is a homomorphism $\lambda: G \to \text{Sym}(G)$ with trivial kernel ($\text{Ker}(\lambda) = \{e\}$). By the First Isomorphism Theorem, $G \cong \text{Im}(\lambda) \leq \text{Sym}(G)$.
+**Every group $\cong$ a permutation group.** Use regular action $\lambda(g)x = gx$ on $X = G$. By Prop 8.1.4, $\lambda: G \to \text{Sym}(G)$ is a hom. $\text{Ker}(\lambda) = \{e\}$ (if $gx=x\ \forall x$, take $x=e$: $g=e$). By FIT: $G \cong \text{Im}(\lambda) \leq \text{Sym}(G)$.
 
 ---
 
-## 9. Proof Toolbox — Common Techniques
+## 9. Proof Toolbox
 
-### The Order Switching Lemma (Lemma 4.2.3)
+### Order Switching Lemma (Lem 4.2.3)
 
-If $N \unlhd G$, $g \in G$, $k \in N$, then there exist $k', k'' \in N$ such that:
+$N \unlhd G$, $g \in G$, $k \in N \Rightarrow \exists k',k'' \in N$: $gk = k'g$ and $kg = gk''$. (Since $gN = Ng$.)
 
-$$
-gk = k'g \quad \text{and} \quad kg = gk''
-$$
+### Key Lemma (Lem 4.2.4): $H \leq G$, $N \unlhd G$
 
-**Usage**: Allows "passing elements of $N$ through elements of $G$" (with adjustment). Essential for proving $HN = NH$ and $HN \leq G$.
+$HN = NH$ (Order Switching). $H \cap N \unlhd H$. $HN \leq G$ (QST + Order Switching for closure/inverses).
 
-### Conjugation Raised to a Power
+### More Tools
 
-For any $g, h \in G$: $(g^{-1}hg)^n = g^{-1}h^ng$.
+- **Conjugation power**: $(g^{-1}hg)^n = g^{-1}h^ng$ (expand, cancel $gg^{-1}$ pairs).
+- **Division algorithm**: $o(g)=n \Rightarrow \langle g \rangle = \{e,g,\ldots,g^{n-1}\}$. Any $g^m = g^r$ where $m = qn+r$.
+- **Abelian**: every subgroup normal; $g \mapsto g^k$ always a hom; $(gh)^n = g^nh^n$.
+- **Non-abelian**: $(gh)^2 \neq g^2h^2$ in general. $\text{FS}(\mathbb{Z})$ is non-abelian (contains $S_n$ for all $n$).
 
-**Proof**: Expand and cancel intermediate $gg^{-1}$ pairs.
+### $G/N$ Is a Well-Defined Group
 
-### Key Lemma: $HN = NH$ and $HN \leq G$ when $N \unlhd G$ (Lemma 4.2.4)
-
-If $H \leq G$ and $N \unlhd G$:
-
-- $HN = NH$ (use Order Switching Lemma).
-- $H \cap N \unlhd H$.
-- $HN \leq G$ (use Quick Subgroup Test + Order Switching Lemma for closure and inverses).
-
-### Division Algorithm Argument for $|\langle G \rangle| = o(g)$
-
-If $o(g) = n$, then $\langle g \rangle = \{e, g, g^2, \ldots, g^{n-1}\}$ has exactly $n$ elements. Any $g^m$ can be reduced: write $m = qn + r$ with $0 \leq r < n$, then $g^m = g^{qn+r} = (g^n)^q g^r = g^r$.
-
-### Abelian Vs Non-Abelian Quick Checks
-
-- If $G$ is abelian: every subgroup is normal; the map $g \mapsto g^k$ is always a homomorphism; $(gh)^n = g^n h^n$.
-- If $G$ is non-abelian: $(gh)^2 \neq g^2 h^2$ in general; provide a specific counterexample to disprove homomorphism claims.
-- **$\text{FS}(\mathbb{Z})$ is not abelian**: contains copies of every $S_n$, which are non-abelian for $n \geq 3$.
+- **Well-defined**: $a_1N=a_2N$, $b_1N=b_2N$ with $a_2=a_1k_1$, $b_2=b_1k_2$. Then $a_2b_2 = a_1k_1b_1k_2 = a_1b_1(b_1^{-1}k_1b_1)k_2 \in (a_1b_1)N$ since $b_1^{-1}k_1b_1 \in N$.
+- **Identity**: $eN=N$. **Inverses**: $(a^{-1}N)(aN) = N$. **Associativity**: inherited from $G$.
 
 ---
 
-## 10. Describing Quotient Groups
+## 10. Quotient Groups
 
 ### Strategy
 
-Given $N \unlhd G$, to describe $G/N$:
+1. $|G/N| = |G|/|N|$. If $= 2$: $G/N \cong C_2$.
+2. List cosets, or find hom $\phi$ with $\text{Ker}(\phi)=N$ and apply FIT: $G/N \cong \text{Im}(\phi)$.
 
-1. Compute $|G/N| = [G : N] = |G|/|N|$.
-2. List the cosets $gN$ (each element of $G$ lies in exactly one coset).
-3. Write the group operation table if needed: $(aN)(bN) = (ab)N$.
-4. Identify the quotient group as a known group (often $C_k$, $\mathbb{Z}_n$, etc.).
-
-**Tip**: If $|G/N| = 2$, then $G/N \cong C_2$.
-
-**Strategy via First Isomorphism Theorem**: If you can find a homomorphism $\phi: G \to H$ with $\text{Ker}(\phi) = N$, then $G/N \cong \text{Im}(\phi)$. This is often the cleanest way to identify a quotient group.
-
-### Standard Examples
-
-| $G$                       | $N$                       | $G/N$                       | Via                           |
-| :------------------------ | :------------------------ | :-------------------------- | :---------------------------- |
-| $\mathbb{Z}$              | $n\mathbb{Z}$             | $\mathbb{Z}_n$              | $\phi(m) = [m]_n$             |
-| $S_n$                     | $A_n$                     | $C_2$                       | Signature function            |
-| $S_3$                     | $C_3$                     | $C_2$                       | Index 2                       |
-| $\text{GL}_2(\mathbb{R})$ | $\text{SL}_2(\mathbb{R})$ | $(\mathbb{R}^*, \times)$    | Determinant map               |
-| $\text{GL}_2(\mathbb{R})$ | $P = \{\det > 0\}$        | $C_2$                       | Sign of determinant           |
-| $P$                       | $\text{SL}_2(\mathbb{R})$ | $(\mathbb{R}_{>0}, \times)$ | Determinant restricted to $P$ |
+| $G$ | $N$ | $G/N$ | Via |
+| :--- | :--- | :--- | :--- |
+| $\mathbb{Z}$ | $n\mathbb{Z}$ | $\mathbb{Z}_n$ | $\phi(m)=[m]_n$ |
+| $S_n$ | $A_n$ | $C_2$ | Signature |
+| $S_3$ | $C_3$ | $C_2$ | Index 2 |
+| $\text{GL}_2$ | $\text{SL}_2$ | $\mathbb{R}^*$ | det |
+| $\text{GL}_2$ | $P$ | $C_2$ | sgn(det) |
+| $P$ | $\text{SL}_2$ | $\mathbb{R}_{>0}$ | det$|_P$ |
