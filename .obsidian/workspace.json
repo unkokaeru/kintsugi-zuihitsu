@@ -55,7 +55,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -177,11 +177,12 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "179ceb5273bbdb60",
+  "active": "e96b72a35a15e09e",
   "lastOpenFiles": [
-    "To-Do List.md",
-    "clear/project/omoikane/mth3003/revision/mth3003 predicted paper.md",
+    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 14.md",
     "clear/project/omoikane/mth3003/revision/mth3003 portfolio cheat sheet.md",
+    "clear/project/omoikane/mth3003/revision/mth3003 predicted paper.md",
+    "To-Do List.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 7.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 6.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 5.md",
@@ -209,7 +210,6 @@
     "clear/project/omoikane/mth3011/Critical Review on the Ergodicity Problem in Economics.md",
     "clear/project/omoikane/mth3008/revision/revision.md",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 13.md",
-    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 14.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 14.md",
     "attached/files/The Ergodicity Problem in Economics.pdf",
     "attached/files/mth3003 lecture notes 14.pdf",
