@@ -43,43 +43,28 @@
             "id": "aa74000a881a72b0",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 3.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": false
+                "file": "attached/files/mth3003 weekly problem sheet 4.pdf"
               },
-              "icon": "lucide-file",
-              "title": "mth3003 weekly problems 3"
+              "icon": "lucide-file-text",
+              "title": "mth3003 weekly problem sheet 4"
             }
           },
           {
-            "id": "9afec565bafca88f",
+            "id": "6b6244368b950b21",
             "type": "leaf",
             "state": {
               "type": "pdf",
               "state": {
-                "file": "attached/files/mth3003 weekly problem sheet 3.pdf"
+                "file": "attached/files/mth3003 weekly problem sheet 4 solutions.pdf"
               },
               "icon": "lucide-file-text",
-              "title": "mth3003 weekly problem sheet 3"
-            }
-          },
-          {
-            "id": "982870757256d528",
-            "type": "leaf",
-            "state": {
-              "type": "pdf",
-              "state": {
-                "file": "attached/files/mth3003 weekly problem sheet 3 solutions.pdf"
-              },
-              "icon": "lucide-file-text",
-              "title": "mth3003 weekly problem sheet 3 solutions"
+              "title": "mth3003 weekly problem sheet 4 solutions"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -201,11 +186,18 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "9afec565bafca88f",
+  "active": "aa74000a881a72b0",
   "lastOpenFiles": [
+    "attached/files/mth3003 weekly problem sheet 4 solutions.pdf",
+    "attached/files/mth3003 weekly problem sheet 4.pdf",
+    "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 4.md",
+    "attached/files/mth3003 weekly problem sheet 7.pdf",
+    "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 7.md",
+    "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 4.md",
+    "attached/files/mth3008 weekly problem sheet 4.pdf",
+    "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 3.md",
     "attached/files/mth3003 weekly problem sheet 3 solutions.pdf",
     "attached/files/mth3003 weekly problem sheet 3.pdf",
-    "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 3.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 2.md",
     "attached/files/mth3003 weekly problem sheet 2.pdf",
     "attached/files/mth3003 weekly problem sheet 2 solutions.pdf",
@@ -213,21 +205,15 @@
     "attached/files/mth3003 weekly problem sheet 1.pdf",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 1.md",
     "attached/files/mth3003 weekly problem sheet 1 solutions.pdf",
-    "attached/files/mth3003 weekly problem sheet 7.pdf",
-    "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 7.md",
-    "attached/files/mth3003 weekly problem sheet 1 handwritten solutions.pdf",
     "clear/project/omoikane/mth3003/revision/mth3003 predicted paper.md",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 14.md",
     "To-Do List.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 6.md",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 5.md",
-    "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 4.md",
     "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
-    "clear/project/omoikane/mth3003/revision/mth3003 portfolio cheat sheet.md.bak",
     "clear/project/omoikane/mth3003/mth3003.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 8.md",
     "clear/project/omoikane/mth3008/weekly problems/MTH3008 Weekly Problems 6.md",
-    "attached/files/mth3008 weekly problem sheet 6 solutions.pdf",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 7.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 16.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 15.md",
@@ -237,7 +223,6 @@
     "clear/project/omoikane/mth3011/mth3011.md",
     "clear/project/omoikane/mth3011/Critical Review on the Ergodicity Problem in Economics.md",
     "clear/project/omoikane/mth3008/revision/revision.md",
-    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 13.md",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",
     "attached/files/luna human.png",
