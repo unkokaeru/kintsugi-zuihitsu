@@ -6,21 +6,20 @@
 
 ### Definitions
 
-| Concept | Definition |
-| ------- | ---------- |
-| Group $(G,*)$ | Closure + Identity $e_G$ + Inverses + Associativity |
-| Subgroup $H \leq G$ | $H \subseteq G$, itself a group under same operation |
-| Normal $N \unlhd G$ | $g^{-1}kg \in N\ \forall k \in N, g \in G$. Equiv: $gN = Ng\ \forall g$. Equiv: $g^{-1}Ng = N\ \forall g$ |
-| Coset $gH$ | $\{gh : h \in H\}$. Index $[G:H]$ = number of distinct cosets |
-| Quotient $G/N$ | $\{gN : g \in G\}$ with $(aN)(bN) = (ab)N$. Requires $N \unlhd G$ |
-| Homomorphism $\theta: G \to H$ | $\theta(g_1 g_2) = \theta(g_1)\theta(g_2)\ \forall g_1,g_2$ |
-| Kernel / Image | $\text{Ker}(\theta) = \{g : \theta(g) = e_H\}$, $\text{Im}(\theta) = \{\theta(g) : g \in G\}$ |
-| Isomorphism | Bijective homomorphism. $G \cong H$ |
-| $o(g)$, $\text{mod}(G)$ | $o(g)$ = smallest $n$ with $g^n = e$. $\text{mod}(G)$ = number of elements |
-| Cyclic $\langle g \rangle$ | $\{g^n : n \in \mathbb{Z}\}$. $G$ cyclic if $G = \langle g \rangle$. $\text{mod}(\langle g \rangle) = o(g)$ |
-| Abelian | $ab = ba\ \forall a,b$. Simple: only normal subgroups are $\{e\}$ and $G$ |
-| Action of $G$ on $X$ | $\lambda(e)x = x$ and $\lambda(fg)x = \lambda(f)(\lambda(g)x)\ \forall f,g,x$ |
-| $\text{FS}(X)$ | $\{g \in \text{Sym}(X) : \text{supp}(g) = \{x : g(x)\neq x\} \text{ is finite}\}$ |
+| Concept                        | Definition                                                                                                  |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| Group $(G,*)$                  | Closure + Identity $e_G$ + Inverses + Associativity                                                         |
+| Subgroup $H \leq G$            | $H \subseteq G$, itself a group under same operation                                                        |
+| Normal $N \unlhd G$            | $g^{-1}kg \in N\ \forall k \in N, g \in G$. Equiv: $gN = Ng\ \forall g$. Equiv: $g^{-1}Ng = N\ \forall g$   |
+| Coset $gH$                     | $\{gh : h \in H\}$. Index $[G:H]$ = number of distinct cosets                                               |
+| Quotient $G/N$                 | $\{gN : g \in G\}$ with $(aN)(bN) = (ab)N$. Requires $N \unlhd G$                                           |
+| Homomorphism $\theta: G \to H$ | $\theta(g_1 g_2) = \theta(g_1)\theta(g_2)\ \forall g_1,g_2$                                                 |
+| Kernel / Image                 | $\text{Ker}(\theta) = \{g : \theta(g) = e_H\}$, $\text{Im}(\theta) = \{\theta(g) : g \in G\}$               |
+| Isomorphism                    | Bijective homomorphism. $G \cong H$                                                                         |
+| $o(g)$, $\text{mod}(G)$        | $o(g)$ = smallest $n$ with $g^n = e$. $\text{mod}(G)$ = number of elements                                  |
+| Cyclic $\langle g \rangle$     | $\{g^n : n \in \mathbb{Z}\}$. $G$ cyclic if $G = \langle g \rangle$. $\text{mod}(\langle g \rangle) = o(g)$ |
+| Abelian                        | $ab = ba\ \forall a,b$. Simple: only normal subgroups are $\{e\}$ and $G$                                   |
+| $\text{FS}(X)$                 | $\{g \in \text{Sym}(X) : \text{supp}(g) = \{x : g(x)\neq x\} \text{ is finite}\}$                           |
 
 **Note**: $\text{mod}(G)=|G|$, just used different notation otherwise it'd break the table.
 
@@ -252,32 +251,7 @@ $A_n \leq S_n$ (Quick Subgroup Theorem: $\sigma(e)=1$, $\sigma(gh)=1\cdot1=1$, $
 
 ---
 
-## 8. Group Actions & Cayley's Theorem
-
-### Actions
-
-| Action | $X$ | Rule |
-| :--- | :--- | :--- |
-| Natural | $\{1,\ldots,n\}$ | $\lambda(g)x = gx$ |
-| Trivial | any | $\lambda(g)x = x$ |
-| Regular | $G$ | $\lambda(g)x = gx$ |
-| Conjugation | $G$ | $\lambda(g)x = gxg^{-1}$ |
-
-**Non-action**: $\lambda(g)x = g^{-1}xg$ fails axiom 2. LHS of $\lambda(fg)$: $g^{-1}f^{-1}xfg$. RHS: $f^{-1}g^{-1}xgf$. Differ unless Abelian.
-
-**Verifying regular action**: (1) $ex=x$. (2) $(fg)x = f(gx)$ by associativity.
-
-**Verifying conjugation**: (1) $exe^{-1}=x$. (2) $(fg)x(fg)^{-1} = fgxg^{-1}f^{-1} = f(\lambda(g)x)f^{-1}$.
-
-**Action $\Rightarrow$ homomorphism** (Prop 8.1.4): $\lambda(g)$ is bijective ($\lambda(g^{-1})$ is its inverse) and $\lambda(fg)=\lambda(f)\lambda(g)$ by axiom 2.
-
-### Cayley's Theorem (Theorem 8.2.3)
-
-**Every group $\cong$ a permutation group.** Use regular action $\lambda(g)x = gx$ on $X = G$. By Prop 8.1.4, $\lambda: G \to \text{Sym}(G)$ is a homomorphism. $\text{Ker}(\lambda) = \{e\}$ (if $gx=x\ \forall x$, take $x=e$: $g=e$). By FIT: $G \cong \text{Im}(\lambda) \leq \text{Sym}(G)$.
-
----
-
-## 9. Proof Toolbox
+## 8. Proof Toolbox
 
 ### Order Switching Lemma (Lemma 4.2.3)
 
@@ -301,7 +275,7 @@ $HN = NH$ (Order Switching). $H \cap N \unlhd H$. $HN \leq G$ (Quick Subgroup Th
 
 ---
 
-## 10. Quotient Groups
+## 9. Quotient Groups
 
 ### Strategy
 

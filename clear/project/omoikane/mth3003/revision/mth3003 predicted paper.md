@@ -114,19 +114,3 @@ Hence identify $\text{GL}_2(\mathbb{R})/P$ as a familiar group. [4 marks]
 **(b)** List all cycle shapes of elements in $S_4$, determine which correspond to even permutations, and hence find $|A_4|$. [5 marks]
 
 **(c)** Using the signature function $\sigma: S_n \to C_2$, prove that $A_n \unlhd S_n$ and $S_n / A_n \cong C_2$. [4 marks]
-
----
-
-## Question 9 — Group Actions and Cayley's Theorem [Section 8]
-
-**(a)** Define what it means for a group $G$ to act on a set $X$. [2 marks]
-
-**(b)** Let $G$ act on itself by left multiplication: $\lambda(g)x = gx$ for all $g, x \in G$. Prove that this defines a group action. [3 marks]
-
-**(c)** State and prove Cayley's Theorem. [6 marks]
-
----
-
-**END OF PAPER**
-
-*Total: approximately 120 marks across 9 questions.*
