@@ -43,6 +43,33 @@
             "id": "aa74000a881a72b0",
             "type": "leaf",
             "state": {
+              "type": "markdown",
+              "state": {
+                "file": "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 2.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": false
+              },
+              "icon": "lucide-file",
+              "title": "mth3003 weekly problems 2"
+            }
+          },
+          {
+            "id": "406f5ec4d5e776e8",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "attached/files/mth3003 weekly problem sheet 2 solutions.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "mth3003 weekly problem sheet 2 solutions"
+            }
+          },
+          {
+            "id": "4e0335b9e5c3e3a9",
+            "type": "leaf",
+            "state": {
               "type": "pdf",
               "state": {
                 "file": "attached/files/mth3003 weekly problem sheet 2.pdf"
@@ -52,7 +79,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -174,16 +201,18 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "aa74000a881a72b0",
+  "active": "406f5ec4d5e776e8",
   "lastOpenFiles": [
+    "attached/files/mth3003 weekly problem sheet 2.pdf",
+    "attached/files/mth3003 weekly problem sheet 2 solutions.pdf",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 2.md",
+    "clear/project/omoikane/mth3003/revision/mth3003 portfolio cheat sheet.md",
     "attached/files/mth3003 weekly problem sheet 1.pdf",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 1.md",
     "attached/files/mth3003 weekly problem sheet 1 solutions.pdf",
     "attached/files/mth3003 weekly problem sheet 7.pdf",
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 7.md",
     "attached/files/mth3003 weekly problem sheet 1 handwritten solutions.pdf",
-    "clear/project/omoikane/mth3003/revision/mth3003 portfolio cheat sheet.md",
     "clear/project/omoikane/mth3003/revision/mth3003 predicted paper.md",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 14.md",
     "To-Do List.md",
@@ -201,9 +230,7 @@
     "attached/files/mth3008 weekly problem sheet 7 solutions.pdf",
     "attached/files/mth3008 weekly problem sheet 8.pdf",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 16.md",
-    "attached/files/mth3008 lecture notes 16.pdf",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 15.md",
-    "attached/files/mth3008 lecture notes 15.pdf",
     "clear/project/omoikane/mth3008/mth3008.md",
     "clear/project/omoikane/mth3008/lectures/lectures.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 12.md",
