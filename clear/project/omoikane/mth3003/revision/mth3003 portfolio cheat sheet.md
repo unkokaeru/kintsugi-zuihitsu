@@ -120,7 +120,7 @@ Show $g^{-1}kg \in N\ \forall k \in N, g \in G$. **Shortcuts**:
 
 $G = \langle g \rangle$ if every element is a power of $g$. For $|G|=p$ prime: any $g \neq e$ has $|\langle g\rangle|$ dividing $p$, so $|\langle g\rangle|=p=|G|$. For $\mathbb{Z}_n$: $[m]_n = m \cdot [1]_n$.
 
-### 2d. Listing $\langle G \rangle$
+### 2d. Listing $\langle \,g\, \rangle$
 
 Compute $e, g, g^2, \ldots$ until return to $e$. Example: $g = (1\ 3\ 5\ 7)(2\ 4) \in S_{10}$, $o(g) = 4$. $\langle g \rangle = \{e,\ g,\ (1\ 5)(3\ 7),\ (1\ 7\ 5\ 3)(2\ 4)\}$. Subgroup: $\langle g^2 \rangle = \{e, (1\ 5)(3\ 7)\}$.
 
@@ -285,13 +285,13 @@ $N \unlhd G$, $g \in G$, $k \in N \Rightarrow \exists k',k'' \in N$: $gk = k'g$ 
 
 ### Key Lemma (Lemma 4.2.4): $H \leq G$, $N \unlhd G$
 
-$HN = NH$ (Order Switching). $H \cap N \unlhd H$. $HN \leq G$ (QST + Order Switching for closure/inverses).
+$HN = NH$ (Order Switching). $H \cap N \unlhd H$. $HN \leq G$ (Quick Subgroup Theorem + Order Switching for closure/inverses).
 
 ### More Tools
 
 - **Conjugation power**: $(g^{-1}hg)^n = g^{-1}h^ng$ (expand, cancel $gg^{-1}$ pairs).
-- **Division algoriTheorem**: $o(g)=n \Rightarrow \langle g \rangle = \{e,g,\ldots,g^{n-1}\}$. Any $g^m = g^r$ where $m = qn+r$.
-- **Abelian**: every subgroup normal; $g \mapsto g^k$ always a hom; $(gh)^n = g^nh^n$.
+- **Division algorithm**: $o(g)=n \Rightarrow \langle g \rangle = \{e,g,\ldots,g^{n-1}\}$. Any $g^m = g^r$ where $m = qn+r$.
+- **Abelian**: every subgroup normal; $g \mapsto g^k$ always a homomorphism; $(gh)^n = g^nh^n$.
 - **Non-Abelian**: $(gh)^2 \neq g^2h^2$ in general. $\text{FS}(\mathbb{Z})$ is non-Abelian (contains $S_n$ for all $n$).
 
 ### $G/N$ Is a Well-Defined Group
@@ -306,13 +306,13 @@ $HN = NH$ (Order Switching). $H \cap N \unlhd H$. $HN \leq G$ (QST + Order Switc
 ### Strategy
 
 1. $|G/N| = |G|/|N|$. If $= 2$: $G/N \cong C_2$.
-2. List cosets, or find hom $\phi$ with $\text{Ker}(\phi)=N$ and apply FIT: $G/N \cong \text{Im}(\phi)$.
+2. List cosets, or find homomorphism $\phi$ with $\text{Ker}(\phi)=N$ and apply FIT: $G/N \cong \text{Im}(\phi)$.
 
 | $G$ | $N$ | $G/N$ | Via |
 | :--- | :--- | :--- | :--- |
 | $\mathbb{Z}$ | $n\mathbb{Z}$ | $\mathbb{Z}_n$ | $\phi(m)=[m]_n$ |
 | $S_n$ | $A_n$ | $C_2$ | Signature |
 | $S_3$ | $C_3$ | $C_2$ | Index 2 |
-| $\text{GL}_2$ | $\text{SL}_2$ | $\mathbb{R}^*$ | det |
-| $\text{GL}_2$ | $P$ | $C_2$ | sgn(det) |
-| $P$ | $\text{SL}_2$ | $\mathbb{R}_{>0}$ | det$|_P$ |
+| $\text{GL}_2$ | $\text{SL}_2$ | $\mathbb{R}^*$ | $\text{det}$ |
+| $\text{GL}_2$ | $P$ | $C_2$ | $\text{sgn(det)}$ |
+| $P$ | $\text{SL}_2$ | $\mathbb{R}_{>0}$ | $\text{det}$ at $P$ |

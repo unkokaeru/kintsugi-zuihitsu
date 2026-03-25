@@ -7,9 +7,9 @@
   "attachmentFolderPath": "attached/files",
   "pdfExportSettings": {
     "pageSize": "A5",
-    "landscape": false,
+    "landscape": true,
     "margin": "2",
-    "downscalePercent": 60
+    "downscalePercent": 61
   },
   "spellcheck": false,
   "userIgnoreFilters": [
