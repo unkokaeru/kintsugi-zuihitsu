@@ -23,21 +23,8 @@
               "icon": "lucide-file",
               "title": "To-Do List"
             }
-          },
-          {
-            "id": "62d0d2196b761e23",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.12.7"
-              },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.12.7"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -159,8 +146,13 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "62d0d2196b761e23",
+  "active": "fc7d9a3b8186fcb9",
   "lastOpenFiles": [
+    "clear/project/omoikane/mth3008/mth3008.md",
+    "clear/project/omoikane/mth3007b/mth3007b.md",
+    "clear/project/omoikane/mth3003/mth3003.md",
+    "clear/project/omoikane/mth3003/lectures/mth3003 lecture 3.md",
+    "To-Do List.md",
     "clear/project/omoikane/mth3003/revision/mth3003 portfolio cheat sheet.md",
     "attached/files/mth3003 weekly problem sheet 7.pdf",
     "attached/files/mth3003 weekly problem sheet 6 solutions.pdf",
@@ -184,18 +176,14 @@
     "clear/project/omoikane/mth3003/weekly problems/mth3003 weekly problems 1.md",
     "clear/project/omoikane/mth3003/revision/mth3003 predicted paper.md",
     "clear/project/omoikane/mth3003/lectures/mth3003 lecture 14.md",
-    "To-Do List.md",
     "clear/project/omoikane/mth3008/revision/mth3008 portfolio cheat sheet.md",
-    "clear/project/omoikane/mth3003/mth3003.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 8.md",
     "clear/project/omoikane/mth3008/weekly problems/mth3008 weekly problems 7.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 16.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 15.md",
-    "clear/project/omoikane/mth3008/mth3008.md",
     "clear/project/omoikane/mth3008/lectures/lectures.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 12.md",
     "clear/project/omoikane/mth3011/mth3011.md",
-    "clear/project/omoikane/mth3011/Critical Review on the Ergodicity Problem in Economics.md",
     "attached/files/tinder.png",
     "attached/files/slugbert.png",
     "attached/files/luna human.png",

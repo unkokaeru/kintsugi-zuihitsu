@@ -12,7 +12,6 @@
   },
   "vaultPath": "/",
   "contentFolder": "content",
-  "useFullResolutionImages": false,
   "publishFrontmatterKey": "publish",
   "allNotesPublishableByDefault": false,
   "showCreatedTimestamp": true,
@@ -41,13 +40,16 @@
   "useThemes": false,
   "lastUsedSettingsTab": "git",
   "noteSettingsIsInitialized": true,
-  "pluginVersion": "1.11.0",
+  "pluginVersion": "1.13.3",
+  "lastUpstreamCommitSha": "",
+  "upgradeCheckStrategy": "version",
   "diffViewStyle": "auto",
   "ENABLE_DEVELOPER_TOOLS": false,
   "logLevel": {
     "value": 99,
     "name": "OFF"
   },
+  "useFullResolutionImages": false,
   "applyEmbeds": true,
   "pathRewriteRules": ""
 }

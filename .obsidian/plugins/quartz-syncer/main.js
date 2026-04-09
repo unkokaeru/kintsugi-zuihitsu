@@ -20,11 +20,11 @@ var __export = (target, all2) => {
   for (var name in all2)
     __defProp(target, name, { get: all2[name], enumerable: true });
 };
-var __copyProps = (to, from2, except, desc) => {
-  if (from2 && typeof from2 === "object" || typeof from2 === "function") {
-    for (let key of __getOwnPropNames(from2))
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
       if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from2[key], enumerable: !(desc = __getOwnPropDesc(from2, key)) || desc.enumerable });
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
   }
   return to;
 };
@@ -38,893 +38,424 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// node_modules/buffer-es6/base64.js
-function init() {
-  inited = true;
-  var code2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-  for (var i = 0, len = code2.length; i < len; ++i) {
-    lookup[i] = code2[i];
-    revLookup[code2.charCodeAt(i)] = i;
-  }
-  revLookup["-".charCodeAt(0)] = 62;
-  revLookup["_".charCodeAt(0)] = 63;
-}
-function toByteArray(b64) {
-  if (!inited) {
-    init();
-  }
-  var i, j, l2, tmp, placeHolders, arr;
-  var len = b64.length;
-  if (len % 4 > 0) {
-    throw new Error("Invalid string. Length must be a multiple of 4");
-  }
-  placeHolders = b64[len - 2] === "=" ? 2 : b64[len - 1] === "=" ? 1 : 0;
-  arr = new Arr(len * 3 / 4 - placeHolders);
-  l2 = placeHolders > 0 ? len - 4 : len;
-  var L = 0;
-  for (i = 0, j = 0; i < l2; i += 4, j += 3) {
-    tmp = revLookup[b64.charCodeAt(i)] << 18 | revLookup[b64.charCodeAt(i + 1)] << 12 | revLookup[b64.charCodeAt(i + 2)] << 6 | revLookup[b64.charCodeAt(i + 3)];
-    arr[L++] = tmp >> 16 & 255;
-    arr[L++] = tmp >> 8 & 255;
-    arr[L++] = tmp & 255;
-  }
-  if (placeHolders === 2) {
-    tmp = revLookup[b64.charCodeAt(i)] << 2 | revLookup[b64.charCodeAt(i + 1)] >> 4;
-    arr[L++] = tmp & 255;
-  } else if (placeHolders === 1) {
-    tmp = revLookup[b64.charCodeAt(i)] << 10 | revLookup[b64.charCodeAt(i + 1)] << 4 | revLookup[b64.charCodeAt(i + 2)] >> 2;
-    arr[L++] = tmp >> 8 & 255;
-    arr[L++] = tmp & 255;
-  }
-  return arr;
-}
-function tripletToBase64(num) {
-  return lookup[num >> 18 & 63] + lookup[num >> 12 & 63] + lookup[num >> 6 & 63] + lookup[num & 63];
-}
-function encodeChunk(uint8, start, end) {
-  var tmp;
-  var output = [];
-  for (var i = start; i < end; i += 3) {
-    tmp = (uint8[i] << 16) + (uint8[i + 1] << 8) + uint8[i + 2];
-    output.push(tripletToBase64(tmp));
-  }
-  return output.join("");
-}
-function fromByteArray(uint8) {
-  if (!inited) {
-    init();
-  }
-  var tmp;
-  var len = uint8.length;
-  var extraBytes = len % 3;
-  var output = "";
-  var parts = [];
-  var maxChunkLength = 16383;
-  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
-    parts.push(encodeChunk(uint8, i, i + maxChunkLength > len2 ? len2 : i + maxChunkLength));
-  }
-  if (extraBytes === 1) {
-    tmp = uint8[len - 1];
-    output += lookup[tmp >> 2];
-    output += lookup[tmp << 4 & 63];
-    output += "==";
-  } else if (extraBytes === 2) {
-    tmp = (uint8[len - 2] << 8) + uint8[len - 1];
-    output += lookup[tmp >> 10];
-    output += lookup[tmp >> 4 & 63];
-    output += lookup[tmp << 2 & 63];
-    output += "=";
-  }
-  parts.push(output);
-  return parts.join("");
-}
-var lookup, revLookup, Arr, inited;
-var init_base64 = __esm({
-  "node_modules/buffer-es6/base64.js"() {
+// node_modules/base64-js/index.js
+var require_base64_js = __commonJS({
+  "node_modules/base64-js/index.js"(exports) {
+    "use strict";
     init_esbuild_buffer_shim();
-    lookup = [];
-    revLookup = [];
-    Arr = typeof Uint8Array !== "undefined" ? Uint8Array : Array;
-    inited = false;
-  }
-});
-
-// node_modules/buffer-es6/ieee754.js
-function read(buffer, offset2, isLE, mLen, nBytes) {
-  var e, m;
-  var eLen = nBytes * 8 - mLen - 1;
-  var eMax = (1 << eLen) - 1;
-  var eBias = eMax >> 1;
-  var nBits = -7;
-  var i = isLE ? nBytes - 1 : 0;
-  var d = isLE ? -1 : 1;
-  var s2 = buffer[offset2 + i];
-  i += d;
-  e = s2 & (1 << -nBits) - 1;
-  s2 >>= -nBits;
-  nBits += eLen;
-  for (; nBits > 0; e = e * 256 + buffer[offset2 + i], i += d, nBits -= 8) {
-  }
-  m = e & (1 << -nBits) - 1;
-  e >>= -nBits;
-  nBits += mLen;
-  for (; nBits > 0; m = m * 256 + buffer[offset2 + i], i += d, nBits -= 8) {
-  }
-  if (e === 0) {
-    e = 1 - eBias;
-  } else if (e === eMax) {
-    return m ? NaN : (s2 ? -1 : 1) * Infinity;
-  } else {
-    m = m + Math.pow(2, mLen);
-    e = e - eBias;
-  }
-  return (s2 ? -1 : 1) * m * Math.pow(2, e - mLen);
-}
-function write(buffer, value2, offset2, isLE, mLen, nBytes) {
-  var e, m, c;
-  var eLen = nBytes * 8 - mLen - 1;
-  var eMax = (1 << eLen) - 1;
-  var eBias = eMax >> 1;
-  var rt = mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0;
-  var i = isLE ? 0 : nBytes - 1;
-  var d = isLE ? 1 : -1;
-  var s2 = value2 < 0 || value2 === 0 && 1 / value2 < 0 ? 1 : 0;
-  value2 = Math.abs(value2);
-  if (isNaN(value2) || value2 === Infinity) {
-    m = isNaN(value2) ? 1 : 0;
-    e = eMax;
-  } else {
-    e = Math.floor(Math.log(value2) / Math.LN2);
-    if (value2 * (c = Math.pow(2, -e)) < 1) {
-      e--;
-      c *= 2;
+    exports.byteLength = byteLength;
+    exports.toByteArray = toByteArray;
+    exports.fromByteArray = fromByteArray;
+    var lookup = [];
+    var revLookup = [];
+    var Arr = typeof Uint8Array !== "undefined" ? Uint8Array : Array;
+    var code2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    for (i = 0, len = code2.length; i < len; ++i) {
+      lookup[i] = code2[i];
+      revLookup[code2.charCodeAt(i)] = i;
     }
-    if (e + eBias >= 1) {
-      value2 += rt / c;
-    } else {
-      value2 += rt * Math.pow(2, 1 - eBias);
-    }
-    if (value2 * c >= 2) {
-      e++;
-      c /= 2;
-    }
-    if (e + eBias >= eMax) {
-      m = 0;
-      e = eMax;
-    } else if (e + eBias >= 1) {
-      m = (value2 * c - 1) * Math.pow(2, mLen);
-      e = e + eBias;
-    } else {
-      m = value2 * Math.pow(2, eBias - 1) * Math.pow(2, mLen);
-      e = 0;
-    }
-  }
-  for (; mLen >= 8; buffer[offset2 + i] = m & 255, i += d, m /= 256, mLen -= 8) {
-  }
-  e = e << mLen | m;
-  eLen += mLen;
-  for (; eLen > 0; buffer[offset2 + i] = e & 255, i += d, e /= 256, eLen -= 8) {
-  }
-  buffer[offset2 + i - d] |= s2 * 128;
-}
-var init_ieee754 = __esm({
-  "node_modules/buffer-es6/ieee754.js"() {
-    init_esbuild_buffer_shim();
-  }
-});
-
-// node_modules/buffer-es6/isArray.js
-var toString, isArray_default;
-var init_isArray = __esm({
-  "node_modules/buffer-es6/isArray.js"() {
-    init_esbuild_buffer_shim();
-    toString = {}.toString;
-    isArray_default = Array.isArray || function(arr) {
-      return toString.call(arr) == "[object Array]";
-    };
-  }
-});
-
-// node_modules/buffer-es6/index.js
-var buffer_es6_exports = {};
-__export(buffer_es6_exports, {
-  Buffer: () => Buffer2,
-  INSPECT_MAX_BYTES: () => INSPECT_MAX_BYTES,
-  SlowBuffer: () => SlowBuffer,
-  isBuffer: () => isBuffer,
-  kMaxLength: () => _kMaxLength
-});
-function kMaxLength() {
-  return Buffer2.TYPED_ARRAY_SUPPORT ? 2147483647 : 1073741823;
-}
-function createBuffer(that, length) {
-  if (kMaxLength() < length) {
-    throw new RangeError("Invalid typed array length");
-  }
-  if (Buffer2.TYPED_ARRAY_SUPPORT) {
-    that = new Uint8Array(length);
-    that.__proto__ = Buffer2.prototype;
-  } else {
-    if (that === null) {
-      that = new Buffer2(length);
-    }
-    that.length = length;
-  }
-  return that;
-}
-function Buffer2(arg, encodingOrOffset, length) {
-  if (!Buffer2.TYPED_ARRAY_SUPPORT && !(this instanceof Buffer2)) {
-    return new Buffer2(arg, encodingOrOffset, length);
-  }
-  if (typeof arg === "number") {
-    if (typeof encodingOrOffset === "string") {
-      throw new Error(
-        "If encoding is specified then the first argument must be a string"
-      );
-    }
-    return allocUnsafe(this, arg);
-  }
-  return from(this, arg, encodingOrOffset, length);
-}
-function from(that, value2, encodingOrOffset, length) {
-  if (typeof value2 === "number") {
-    throw new TypeError('"value" argument must not be a number');
-  }
-  if (typeof ArrayBuffer !== "undefined" && value2 instanceof ArrayBuffer) {
-    return fromArrayBuffer(that, value2, encodingOrOffset, length);
-  }
-  if (typeof value2 === "string") {
-    return fromString(that, value2, encodingOrOffset);
-  }
-  return fromObject(that, value2);
-}
-function assertSize(size) {
-  if (typeof size !== "number") {
-    throw new TypeError('"size" argument must be a number');
-  } else if (size < 0) {
-    throw new RangeError('"size" argument must not be negative');
-  }
-}
-function alloc(that, size, fill2, encoding) {
-  assertSize(size);
-  if (size <= 0) {
-    return createBuffer(that, size);
-  }
-  if (fill2 !== void 0) {
-    return typeof encoding === "string" ? createBuffer(that, size).fill(fill2, encoding) : createBuffer(that, size).fill(fill2);
-  }
-  return createBuffer(that, size);
-}
-function allocUnsafe(that, size) {
-  assertSize(size);
-  that = createBuffer(that, size < 0 ? 0 : checked(size) | 0);
-  if (!Buffer2.TYPED_ARRAY_SUPPORT) {
-    for (var i = 0; i < size; ++i) {
-      that[i] = 0;
-    }
-  }
-  return that;
-}
-function fromString(that, string3, encoding) {
-  if (typeof encoding !== "string" || encoding === "") {
-    encoding = "utf8";
-  }
-  if (!Buffer2.isEncoding(encoding)) {
-    throw new TypeError('"encoding" must be a valid string encoding');
-  }
-  var length = byteLength(string3, encoding) | 0;
-  that = createBuffer(that, length);
-  var actual = that.write(string3, encoding);
-  if (actual !== length) {
-    that = that.slice(0, actual);
-  }
-  return that;
-}
-function fromArrayLike(that, array) {
-  var length = array.length < 0 ? 0 : checked(array.length) | 0;
-  that = createBuffer(that, length);
-  for (var i = 0; i < length; i += 1) {
-    that[i] = array[i] & 255;
-  }
-  return that;
-}
-function fromArrayBuffer(that, array, byteOffset, length) {
-  array.byteLength;
-  if (byteOffset < 0 || array.byteLength < byteOffset) {
-    throw new RangeError("'offset' is out of bounds");
-  }
-  if (array.byteLength < byteOffset + (length || 0)) {
-    throw new RangeError("'length' is out of bounds");
-  }
-  if (byteOffset === void 0 && length === void 0) {
-    array = new Uint8Array(array);
-  } else if (length === void 0) {
-    array = new Uint8Array(array, byteOffset);
-  } else {
-    array = new Uint8Array(array, byteOffset, length);
-  }
-  if (Buffer2.TYPED_ARRAY_SUPPORT) {
-    that = array;
-    that.__proto__ = Buffer2.prototype;
-  } else {
-    that = fromArrayLike(that, array);
-  }
-  return that;
-}
-function fromObject(that, obj) {
-  if (internalIsBuffer(obj)) {
-    var len = checked(obj.length) | 0;
-    that = createBuffer(that, len);
-    if (that.length === 0) {
-      return that;
-    }
-    obj.copy(that, 0, 0, len);
-    return that;
-  }
-  if (obj) {
-    if (typeof ArrayBuffer !== "undefined" && obj.buffer instanceof ArrayBuffer || "length" in obj) {
-      if (typeof obj.length !== "number" || isnan(obj.length)) {
-        return createBuffer(that, 0);
+    var i;
+    var len;
+    revLookup["-".charCodeAt(0)] = 62;
+    revLookup["_".charCodeAt(0)] = 63;
+    function getLens(b64) {
+      var len2 = b64.length;
+      if (len2 % 4 > 0) {
+        throw new Error("Invalid string. Length must be a multiple of 4");
       }
-      return fromArrayLike(that, obj);
+      var validLen = b64.indexOf("=");
+      if (validLen === -1) validLen = len2;
+      var placeHoldersLen = validLen === len2 ? 0 : 4 - validLen % 4;
+      return [validLen, placeHoldersLen];
     }
-    if (obj.type === "Buffer" && isArray_default(obj.data)) {
-      return fromArrayLike(that, obj.data);
+    function byteLength(b64) {
+      var lens = getLens(b64);
+      var validLen = lens[0];
+      var placeHoldersLen = lens[1];
+      return (validLen + placeHoldersLen) * 3 / 4 - placeHoldersLen;
     }
-  }
-  throw new TypeError("First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.");
-}
-function checked(length) {
-  if (length >= kMaxLength()) {
-    throw new RangeError("Attempt to allocate Buffer larger than maximum size: 0x" + kMaxLength().toString(16) + " bytes");
-  }
-  return length | 0;
-}
-function SlowBuffer(length) {
-  if (+length != length) {
-    length = 0;
-  }
-  return Buffer2.alloc(+length);
-}
-function internalIsBuffer(b) {
-  return !!(b != null && b._isBuffer);
-}
-function byteLength(string3, encoding) {
-  if (internalIsBuffer(string3)) {
-    return string3.length;
-  }
-  if (typeof ArrayBuffer !== "undefined" && typeof ArrayBuffer.isView === "function" && (ArrayBuffer.isView(string3) || string3 instanceof ArrayBuffer)) {
-    return string3.byteLength;
-  }
-  if (typeof string3 !== "string") {
-    string3 = "" + string3;
-  }
-  var len = string3.length;
-  if (len === 0) return 0;
-  var loweredCase = false;
-  for (; ; ) {
-    switch (encoding) {
-      case "ascii":
-      case "latin1":
-      case "binary":
-        return len;
-      case "utf8":
-      case "utf-8":
-      case void 0:
-        return utf8ToBytes(string3).length;
-      case "ucs2":
-      case "ucs-2":
-      case "utf16le":
-      case "utf-16le":
-        return len * 2;
-      case "hex":
-        return len >>> 1;
-      case "base64":
-        return base64ToBytes(string3).length;
-      default:
-        if (loweredCase) return utf8ToBytes(string3).length;
-        encoding = ("" + encoding).toLowerCase();
-        loweredCase = true;
+    function _byteLength(b64, validLen, placeHoldersLen) {
+      return (validLen + placeHoldersLen) * 3 / 4 - placeHoldersLen;
     }
-  }
-}
-function slowToString(encoding, start, end) {
-  var loweredCase = false;
-  if (start === void 0 || start < 0) {
-    start = 0;
-  }
-  if (start > this.length) {
-    return "";
-  }
-  if (end === void 0 || end > this.length) {
-    end = this.length;
-  }
-  if (end <= 0) {
-    return "";
-  }
-  end >>>= 0;
-  start >>>= 0;
-  if (end <= start) {
-    return "";
-  }
-  if (!encoding) encoding = "utf8";
-  while (true) {
-    switch (encoding) {
-      case "hex":
-        return hexSlice(this, start, end);
-      case "utf8":
-      case "utf-8":
-        return utf8Slice(this, start, end);
-      case "ascii":
-        return asciiSlice(this, start, end);
-      case "latin1":
-      case "binary":
-        return latin1Slice(this, start, end);
-      case "base64":
-        return base64Slice(this, start, end);
-      case "ucs2":
-      case "ucs-2":
-      case "utf16le":
-      case "utf-16le":
-        return utf16leSlice(this, start, end);
-      default:
-        if (loweredCase) throw new TypeError("Unknown encoding: " + encoding);
-        encoding = (encoding + "").toLowerCase();
-        loweredCase = true;
-    }
-  }
-}
-function swap(b, n2, m) {
-  var i = b[n2];
-  b[n2] = b[m];
-  b[m] = i;
-}
-function bidirectionalIndexOf(buffer, val, byteOffset, encoding, dir) {
-  if (buffer.length === 0) return -1;
-  if (typeof byteOffset === "string") {
-    encoding = byteOffset;
-    byteOffset = 0;
-  } else if (byteOffset > 2147483647) {
-    byteOffset = 2147483647;
-  } else if (byteOffset < -2147483648) {
-    byteOffset = -2147483648;
-  }
-  byteOffset = +byteOffset;
-  if (isNaN(byteOffset)) {
-    byteOffset = dir ? 0 : buffer.length - 1;
-  }
-  if (byteOffset < 0) byteOffset = buffer.length + byteOffset;
-  if (byteOffset >= buffer.length) {
-    if (dir) return -1;
-    else byteOffset = buffer.length - 1;
-  } else if (byteOffset < 0) {
-    if (dir) byteOffset = 0;
-    else return -1;
-  }
-  if (typeof val === "string") {
-    val = Buffer2.from(val, encoding);
-  }
-  if (internalIsBuffer(val)) {
-    if (val.length === 0) {
-      return -1;
-    }
-    return arrayIndexOf(buffer, val, byteOffset, encoding, dir);
-  } else if (typeof val === "number") {
-    val = val & 255;
-    if (Buffer2.TYPED_ARRAY_SUPPORT && typeof Uint8Array.prototype.indexOf === "function") {
-      if (dir) {
-        return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset);
-      } else {
-        return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset);
+    function toByteArray(b64) {
+      var tmp;
+      var lens = getLens(b64);
+      var validLen = lens[0];
+      var placeHoldersLen = lens[1];
+      var arr = new Arr(_byteLength(b64, validLen, placeHoldersLen));
+      var curByte = 0;
+      var len2 = placeHoldersLen > 0 ? validLen - 4 : validLen;
+      var i2;
+      for (i2 = 0; i2 < len2; i2 += 4) {
+        tmp = revLookup[b64.charCodeAt(i2)] << 18 | revLookup[b64.charCodeAt(i2 + 1)] << 12 | revLookup[b64.charCodeAt(i2 + 2)] << 6 | revLookup[b64.charCodeAt(i2 + 3)];
+        arr[curByte++] = tmp >> 16 & 255;
+        arr[curByte++] = tmp >> 8 & 255;
+        arr[curByte++] = tmp & 255;
       }
-    }
-    return arrayIndexOf(buffer, [val], byteOffset, encoding, dir);
-  }
-  throw new TypeError("val must be string, number or Buffer");
-}
-function arrayIndexOf(arr, val, byteOffset, encoding, dir) {
-  var indexSize = 1;
-  var arrLength = arr.length;
-  var valLength = val.length;
-  if (encoding !== void 0) {
-    encoding = String(encoding).toLowerCase();
-    if (encoding === "ucs2" || encoding === "ucs-2" || encoding === "utf16le" || encoding === "utf-16le") {
-      if (arr.length < 2 || val.length < 2) {
-        return -1;
+      if (placeHoldersLen === 2) {
+        tmp = revLookup[b64.charCodeAt(i2)] << 2 | revLookup[b64.charCodeAt(i2 + 1)] >> 4;
+        arr[curByte++] = tmp & 255;
       }
-      indexSize = 2;
-      arrLength /= 2;
-      valLength /= 2;
-      byteOffset /= 2;
-    }
-  }
-  function read2(buf, i2) {
-    if (indexSize === 1) {
-      return buf[i2];
-    } else {
-      return buf.readUInt16BE(i2 * indexSize);
-    }
-  }
-  var i;
-  if (dir) {
-    var foundIndex = -1;
-    for (i = byteOffset; i < arrLength; i++) {
-      if (read2(arr, i) === read2(val, foundIndex === -1 ? 0 : i - foundIndex)) {
-        if (foundIndex === -1) foundIndex = i;
-        if (i - foundIndex + 1 === valLength) return foundIndex * indexSize;
-      } else {
-        if (foundIndex !== -1) i -= i - foundIndex;
-        foundIndex = -1;
+      if (placeHoldersLen === 1) {
+        tmp = revLookup[b64.charCodeAt(i2)] << 10 | revLookup[b64.charCodeAt(i2 + 1)] << 4 | revLookup[b64.charCodeAt(i2 + 2)] >> 2;
+        arr[curByte++] = tmp >> 8 & 255;
+        arr[curByte++] = tmp & 255;
       }
-    }
-  } else {
-    if (byteOffset + valLength > arrLength) byteOffset = arrLength - valLength;
-    for (i = byteOffset; i >= 0; i--) {
-      var found = true;
-      for (var j = 0; j < valLength; j++) {
-        if (read2(arr, i + j) !== read2(val, j)) {
-          found = false;
-          break;
-        }
-      }
-      if (found) return i;
-    }
-  }
-  return -1;
-}
-function hexWrite(buf, string3, offset2, length) {
-  offset2 = Number(offset2) || 0;
-  var remaining = buf.length - offset2;
-  if (!length) {
-    length = remaining;
-  } else {
-    length = Number(length);
-    if (length > remaining) {
-      length = remaining;
-    }
-  }
-  var strLen = string3.length;
-  if (strLen % 2 !== 0) throw new TypeError("Invalid hex string");
-  if (length > strLen / 2) {
-    length = strLen / 2;
-  }
-  for (var i = 0; i < length; ++i) {
-    var parsed = parseInt(string3.substr(i * 2, 2), 16);
-    if (isNaN(parsed)) return i;
-    buf[offset2 + i] = parsed;
-  }
-  return i;
-}
-function utf8Write(buf, string3, offset2, length) {
-  return blitBuffer(utf8ToBytes(string3, buf.length - offset2), buf, offset2, length);
-}
-function asciiWrite(buf, string3, offset2, length) {
-  return blitBuffer(asciiToBytes(string3), buf, offset2, length);
-}
-function latin1Write(buf, string3, offset2, length) {
-  return asciiWrite(buf, string3, offset2, length);
-}
-function base64Write(buf, string3, offset2, length) {
-  return blitBuffer(base64ToBytes(string3), buf, offset2, length);
-}
-function ucs2Write(buf, string3, offset2, length) {
-  return blitBuffer(utf16leToBytes(string3, buf.length - offset2), buf, offset2, length);
-}
-function base64Slice(buf, start, end) {
-  if (start === 0 && end === buf.length) {
-    return fromByteArray(buf);
-  } else {
-    return fromByteArray(buf.slice(start, end));
-  }
-}
-function utf8Slice(buf, start, end) {
-  end = Math.min(buf.length, end);
-  var res = [];
-  var i = start;
-  while (i < end) {
-    var firstByte = buf[i];
-    var codePoint = null;
-    var bytesPerSequence = firstByte > 239 ? 4 : firstByte > 223 ? 3 : firstByte > 191 ? 2 : 1;
-    if (i + bytesPerSequence <= end) {
-      var secondByte, thirdByte, fourthByte, tempCodePoint;
-      switch (bytesPerSequence) {
-        case 1:
-          if (firstByte < 128) {
-            codePoint = firstByte;
-          }
-          break;
-        case 2:
-          secondByte = buf[i + 1];
-          if ((secondByte & 192) === 128) {
-            tempCodePoint = (firstByte & 31) << 6 | secondByte & 63;
-            if (tempCodePoint > 127) {
-              codePoint = tempCodePoint;
-            }
-          }
-          break;
-        case 3:
-          secondByte = buf[i + 1];
-          thirdByte = buf[i + 2];
-          if ((secondByte & 192) === 128 && (thirdByte & 192) === 128) {
-            tempCodePoint = (firstByte & 15) << 12 | (secondByte & 63) << 6 | thirdByte & 63;
-            if (tempCodePoint > 2047 && (tempCodePoint < 55296 || tempCodePoint > 57343)) {
-              codePoint = tempCodePoint;
-            }
-          }
-          break;
-        case 4:
-          secondByte = buf[i + 1];
-          thirdByte = buf[i + 2];
-          fourthByte = buf[i + 3];
-          if ((secondByte & 192) === 128 && (thirdByte & 192) === 128 && (fourthByte & 192) === 128) {
-            tempCodePoint = (firstByte & 15) << 18 | (secondByte & 63) << 12 | (thirdByte & 63) << 6 | fourthByte & 63;
-            if (tempCodePoint > 65535 && tempCodePoint < 1114112) {
-              codePoint = tempCodePoint;
-            }
-          }
-      }
-    }
-    if (codePoint === null) {
-      codePoint = 65533;
-      bytesPerSequence = 1;
-    } else if (codePoint > 65535) {
-      codePoint -= 65536;
-      res.push(codePoint >>> 10 & 1023 | 55296);
-      codePoint = 56320 | codePoint & 1023;
-    }
-    res.push(codePoint);
-    i += bytesPerSequence;
-  }
-  return decodeCodePointsArray(res);
-}
-function decodeCodePointsArray(codePoints) {
-  var len = codePoints.length;
-  if (len <= MAX_ARGUMENTS_LENGTH) {
-    return String.fromCharCode.apply(String, codePoints);
-  }
-  var res = "";
-  var i = 0;
-  while (i < len) {
-    res += String.fromCharCode.apply(
-      String,
-      codePoints.slice(i, i += MAX_ARGUMENTS_LENGTH)
-    );
-  }
-  return res;
-}
-function asciiSlice(buf, start, end) {
-  var ret = "";
-  end = Math.min(buf.length, end);
-  for (var i = start; i < end; ++i) {
-    ret += String.fromCharCode(buf[i] & 127);
-  }
-  return ret;
-}
-function latin1Slice(buf, start, end) {
-  var ret = "";
-  end = Math.min(buf.length, end);
-  for (var i = start; i < end; ++i) {
-    ret += String.fromCharCode(buf[i]);
-  }
-  return ret;
-}
-function hexSlice(buf, start, end) {
-  var len = buf.length;
-  if (!start || start < 0) start = 0;
-  if (!end || end < 0 || end > len) end = len;
-  var out = "";
-  for (var i = start; i < end; ++i) {
-    out += toHex(buf[i]);
-  }
-  return out;
-}
-function utf16leSlice(buf, start, end) {
-  var bytes = buf.slice(start, end);
-  var res = "";
-  for (var i = 0; i < bytes.length; i += 2) {
-    res += String.fromCharCode(bytes[i] + bytes[i + 1] * 256);
-  }
-  return res;
-}
-function checkOffset(offset2, ext, length) {
-  if (offset2 % 1 !== 0 || offset2 < 0) throw new RangeError("offset is not uint");
-  if (offset2 + ext > length) throw new RangeError("Trying to access beyond buffer length");
-}
-function checkInt(buf, value2, offset2, ext, max, min) {
-  if (!internalIsBuffer(buf)) throw new TypeError('"buffer" argument must be a Buffer instance');
-  if (value2 > max || value2 < min) throw new RangeError('"value" argument is out of bounds');
-  if (offset2 + ext > buf.length) throw new RangeError("Index out of range");
-}
-function objectWriteUInt16(buf, value2, offset2, littleEndian) {
-  if (value2 < 0) value2 = 65535 + value2 + 1;
-  for (var i = 0, j = Math.min(buf.length - offset2, 2); i < j; ++i) {
-    buf[offset2 + i] = (value2 & 255 << 8 * (littleEndian ? i : 1 - i)) >>> (littleEndian ? i : 1 - i) * 8;
-  }
-}
-function objectWriteUInt32(buf, value2, offset2, littleEndian) {
-  if (value2 < 0) value2 = 4294967295 + value2 + 1;
-  for (var i = 0, j = Math.min(buf.length - offset2, 4); i < j; ++i) {
-    buf[offset2 + i] = value2 >>> (littleEndian ? i : 3 - i) * 8 & 255;
-  }
-}
-function checkIEEE754(buf, value2, offset2, ext, max, min) {
-  if (offset2 + ext > buf.length) throw new RangeError("Index out of range");
-  if (offset2 < 0) throw new RangeError("Index out of range");
-}
-function writeFloat(buf, value2, offset2, littleEndian, noAssert) {
-  if (!noAssert) {
-    checkIEEE754(buf, value2, offset2, 4, 34028234663852886e22, -34028234663852886e22);
-  }
-  write(buf, value2, offset2, littleEndian, 23, 4);
-  return offset2 + 4;
-}
-function writeDouble(buf, value2, offset2, littleEndian, noAssert) {
-  if (!noAssert) {
-    checkIEEE754(buf, value2, offset2, 8, 17976931348623157e292, -17976931348623157e292);
-  }
-  write(buf, value2, offset2, littleEndian, 52, 8);
-  return offset2 + 8;
-}
-function base64clean(str) {
-  str = stringtrim(str).replace(INVALID_BASE64_RE, "");
-  if (str.length < 2) return "";
-  while (str.length % 4 !== 0) {
-    str = str + "=";
-  }
-  return str;
-}
-function stringtrim(str) {
-  if (str.trim) return str.trim();
-  return str.replace(/^\s+|\s+$/g, "");
-}
-function toHex(n2) {
-  if (n2 < 16) return "0" + n2.toString(16);
-  return n2.toString(16);
-}
-function utf8ToBytes(string3, units) {
-  units = units || Infinity;
-  var codePoint;
-  var length = string3.length;
-  var leadSurrogate = null;
-  var bytes = [];
-  for (var i = 0; i < length; ++i) {
-    codePoint = string3.charCodeAt(i);
-    if (codePoint > 55295 && codePoint < 57344) {
-      if (!leadSurrogate) {
-        if (codePoint > 56319) {
-          if ((units -= 3) > -1) bytes.push(239, 191, 189);
-          continue;
-        } else if (i + 1 === length) {
-          if ((units -= 3) > -1) bytes.push(239, 191, 189);
-          continue;
-        }
-        leadSurrogate = codePoint;
-        continue;
-      }
-      if (codePoint < 56320) {
-        if ((units -= 3) > -1) bytes.push(239, 191, 189);
-        leadSurrogate = codePoint;
-        continue;
-      }
-      codePoint = (leadSurrogate - 55296 << 10 | codePoint - 56320) + 65536;
-    } else if (leadSurrogate) {
-      if ((units -= 3) > -1) bytes.push(239, 191, 189);
-    }
-    leadSurrogate = null;
-    if (codePoint < 128) {
-      if ((units -= 1) < 0) break;
-      bytes.push(codePoint);
-    } else if (codePoint < 2048) {
-      if ((units -= 2) < 0) break;
-      bytes.push(
-        codePoint >> 6 | 192,
-        codePoint & 63 | 128
-      );
-    } else if (codePoint < 65536) {
-      if ((units -= 3) < 0) break;
-      bytes.push(
-        codePoint >> 12 | 224,
-        codePoint >> 6 & 63 | 128,
-        codePoint & 63 | 128
-      );
-    } else if (codePoint < 1114112) {
-      if ((units -= 4) < 0) break;
-      bytes.push(
-        codePoint >> 18 | 240,
-        codePoint >> 12 & 63 | 128,
-        codePoint >> 6 & 63 | 128,
-        codePoint & 63 | 128
-      );
-    } else {
-      throw new Error("Invalid code point");
-    }
-  }
-  return bytes;
-}
-function asciiToBytes(str) {
-  var byteArray = [];
-  for (var i = 0; i < str.length; ++i) {
-    byteArray.push(str.charCodeAt(i) & 255);
-  }
-  return byteArray;
-}
-function utf16leToBytes(str, units) {
-  var c, hi, lo;
-  var byteArray = [];
-  for (var i = 0; i < str.length; ++i) {
-    if ((units -= 2) < 0) break;
-    c = str.charCodeAt(i);
-    hi = c >> 8;
-    lo = c % 256;
-    byteArray.push(lo);
-    byteArray.push(hi);
-  }
-  return byteArray;
-}
-function base64ToBytes(str) {
-  return toByteArray(base64clean(str));
-}
-function blitBuffer(src, dst, offset2, length) {
-  for (var i = 0; i < length; ++i) {
-    if (i + offset2 >= dst.length || i >= src.length) break;
-    dst[i + offset2] = src[i];
-  }
-  return i;
-}
-function isnan(val) {
-  return val !== val;
-}
-function isBuffer(obj) {
-  return obj != null && (!!obj._isBuffer || isFastBuffer(obj) || isSlowBuffer(obj));
-}
-function isFastBuffer(obj) {
-  return !!obj.constructor && typeof obj.constructor.isBuffer === "function" && obj.constructor.isBuffer(obj);
-}
-function isSlowBuffer(obj) {
-  return typeof obj.readFloatLE === "function" && typeof obj.slice === "function" && isFastBuffer(obj.slice(0, 0));
-}
-var INSPECT_MAX_BYTES, _kMaxLength, MAX_ARGUMENTS_LENGTH, INVALID_BASE64_RE;
-var init_buffer_es6 = __esm({
-  "node_modules/buffer-es6/index.js"() {
-    init_esbuild_buffer_shim();
-    init_base64();
-    init_ieee754();
-    init_isArray();
-    INSPECT_MAX_BYTES = 50;
-    Buffer2.TYPED_ARRAY_SUPPORT = globalThis.TYPED_ARRAY_SUPPORT !== void 0 ? globalThis.TYPED_ARRAY_SUPPORT : true;
-    _kMaxLength = kMaxLength();
-    Buffer2.poolSize = 8192;
-    Buffer2._augment = function(arr) {
-      arr.__proto__ = Buffer2.prototype;
       return arr;
+    }
+    function tripletToBase64(num) {
+      return lookup[num >> 18 & 63] + lookup[num >> 12 & 63] + lookup[num >> 6 & 63] + lookup[num & 63];
+    }
+    function encodeChunk(uint8, start, end) {
+      var tmp;
+      var output = [];
+      for (var i2 = start; i2 < end; i2 += 3) {
+        tmp = (uint8[i2] << 16 & 16711680) + (uint8[i2 + 1] << 8 & 65280) + (uint8[i2 + 2] & 255);
+        output.push(tripletToBase64(tmp));
+      }
+      return output.join("");
+    }
+    function fromByteArray(uint8) {
+      var tmp;
+      var len2 = uint8.length;
+      var extraBytes = len2 % 3;
+      var parts = [];
+      var maxChunkLength = 16383;
+      for (var i2 = 0, len22 = len2 - extraBytes; i2 < len22; i2 += maxChunkLength) {
+        parts.push(encodeChunk(uint8, i2, i2 + maxChunkLength > len22 ? len22 : i2 + maxChunkLength));
+      }
+      if (extraBytes === 1) {
+        tmp = uint8[len2 - 1];
+        parts.push(
+          lookup[tmp >> 2] + lookup[tmp << 4 & 63] + "=="
+        );
+      } else if (extraBytes === 2) {
+        tmp = (uint8[len2 - 2] << 8) + uint8[len2 - 1];
+        parts.push(
+          lookup[tmp >> 10] + lookup[tmp >> 4 & 63] + lookup[tmp << 2 & 63] + "="
+        );
+      }
+      return parts.join("");
+    }
+  }
+});
+
+// node_modules/ieee754/index.js
+var require_ieee754 = __commonJS({
+  "node_modules/ieee754/index.js"(exports) {
+    init_esbuild_buffer_shim();
+    exports.read = function(buffer2, offset2, isLE, mLen, nBytes) {
+      var e, m;
+      var eLen = nBytes * 8 - mLen - 1;
+      var eMax = (1 << eLen) - 1;
+      var eBias = eMax >> 1;
+      var nBits = -7;
+      var i = isLE ? nBytes - 1 : 0;
+      var d = isLE ? -1 : 1;
+      var s2 = buffer2[offset2 + i];
+      i += d;
+      e = s2 & (1 << -nBits) - 1;
+      s2 >>= -nBits;
+      nBits += eLen;
+      for (; nBits > 0; e = e * 256 + buffer2[offset2 + i], i += d, nBits -= 8) {
+      }
+      m = e & (1 << -nBits) - 1;
+      e >>= -nBits;
+      nBits += mLen;
+      for (; nBits > 0; m = m * 256 + buffer2[offset2 + i], i += d, nBits -= 8) {
+      }
+      if (e === 0) {
+        e = 1 - eBias;
+      } else if (e === eMax) {
+        return m ? NaN : (s2 ? -1 : 1) * Infinity;
+      } else {
+        m = m + Math.pow(2, mLen);
+        e = e - eBias;
+      }
+      return (s2 ? -1 : 1) * m * Math.pow(2, e - mLen);
     };
-    Buffer2.from = function(value2, encodingOrOffset, length) {
-      return from(null, value2, encodingOrOffset, length);
+    exports.write = function(buffer2, value2, offset2, isLE, mLen, nBytes) {
+      var e, m, c;
+      var eLen = nBytes * 8 - mLen - 1;
+      var eMax = (1 << eLen) - 1;
+      var eBias = eMax >> 1;
+      var rt = mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0;
+      var i = isLE ? 0 : nBytes - 1;
+      var d = isLE ? 1 : -1;
+      var s2 = value2 < 0 || value2 === 0 && 1 / value2 < 0 ? 1 : 0;
+      value2 = Math.abs(value2);
+      if (isNaN(value2) || value2 === Infinity) {
+        m = isNaN(value2) ? 1 : 0;
+        e = eMax;
+      } else {
+        e = Math.floor(Math.log(value2) / Math.LN2);
+        if (value2 * (c = Math.pow(2, -e)) < 1) {
+          e--;
+          c *= 2;
+        }
+        if (e + eBias >= 1) {
+          value2 += rt / c;
+        } else {
+          value2 += rt * Math.pow(2, 1 - eBias);
+        }
+        if (value2 * c >= 2) {
+          e++;
+          c /= 2;
+        }
+        if (e + eBias >= eMax) {
+          m = 0;
+          e = eMax;
+        } else if (e + eBias >= 1) {
+          m = (value2 * c - 1) * Math.pow(2, mLen);
+          e = e + eBias;
+        } else {
+          m = value2 * Math.pow(2, eBias - 1) * Math.pow(2, mLen);
+          e = 0;
+        }
+      }
+      for (; mLen >= 8; buffer2[offset2 + i] = m & 255, i += d, m /= 256, mLen -= 8) {
+      }
+      e = e << mLen | m;
+      eLen += mLen;
+      for (; eLen > 0; buffer2[offset2 + i] = e & 255, i += d, e /= 256, eLen -= 8) {
+      }
+      buffer2[offset2 + i - d] |= s2 * 128;
     };
-    if (Buffer2.TYPED_ARRAY_SUPPORT) {
-      Buffer2.prototype.__proto__ = Uint8Array.prototype;
-      Buffer2.__proto__ = Uint8Array;
-      if (typeof Symbol !== "undefined" && Symbol.species && Buffer2[Symbol.species] === Buffer2) {
+  }
+});
+
+// node_modules/buffer/index.js
+var require_buffer = __commonJS({
+  "node_modules/buffer/index.js"(exports) {
+    "use strict";
+    init_esbuild_buffer_shim();
+    var base64 = require_base64_js();
+    var ieee754 = require_ieee754();
+    var customInspectSymbol = typeof Symbol === "function" && typeof Symbol["for"] === "function" ? Symbol["for"]("nodejs.util.inspect.custom") : null;
+    exports.Buffer = Buffer3;
+    exports.SlowBuffer = SlowBuffer;
+    exports.INSPECT_MAX_BYTES = 50;
+    var K_MAX_LENGTH = 2147483647;
+    exports.kMaxLength = K_MAX_LENGTH;
+    Buffer3.TYPED_ARRAY_SUPPORT = typedArraySupport();
+    if (!Buffer3.TYPED_ARRAY_SUPPORT && typeof console !== "undefined" && typeof console.error === "function") {
+      console.error(
+        "This browser lacks typed array (Uint8Array) support which is required by `buffer` v5.x. Use `buffer` v4.x if you require old browser support."
+      );
+    }
+    function typedArraySupport() {
+      try {
+        const arr = new Uint8Array(1);
+        const proto = { foo: function() {
+          return 42;
+        } };
+        Object.setPrototypeOf(proto, Uint8Array.prototype);
+        Object.setPrototypeOf(arr, proto);
+        return arr.foo() === 42;
+      } catch (e) {
+        return false;
       }
     }
-    Buffer2.alloc = function(size, fill2, encoding) {
-      return alloc(null, size, fill2, encoding);
+    Object.defineProperty(Buffer3.prototype, "parent", {
+      enumerable: true,
+      get: function() {
+        if (!Buffer3.isBuffer(this)) return void 0;
+        return this.buffer;
+      }
+    });
+    Object.defineProperty(Buffer3.prototype, "offset", {
+      enumerable: true,
+      get: function() {
+        if (!Buffer3.isBuffer(this)) return void 0;
+        return this.byteOffset;
+      }
+    });
+    function createBuffer(length) {
+      if (length > K_MAX_LENGTH) {
+        throw new RangeError('The value "' + length + '" is invalid for option "size"');
+      }
+      const buf = new Uint8Array(length);
+      Object.setPrototypeOf(buf, Buffer3.prototype);
+      return buf;
+    }
+    function Buffer3(arg, encodingOrOffset, length) {
+      if (typeof arg === "number") {
+        if (typeof encodingOrOffset === "string") {
+          throw new TypeError(
+            'The "string" argument must be of type string. Received type number'
+          );
+        }
+        return allocUnsafe(arg);
+      }
+      return from(arg, encodingOrOffset, length);
+    }
+    Buffer3.poolSize = 8192;
+    function from(value2, encodingOrOffset, length) {
+      if (typeof value2 === "string") {
+        return fromString(value2, encodingOrOffset);
+      }
+      if (ArrayBuffer.isView(value2)) {
+        return fromArrayView(value2);
+      }
+      if (value2 == null) {
+        throw new TypeError(
+          "The first argument must be one of type string, Buffer, ArrayBuffer, Array, or Array-like Object. Received type " + typeof value2
+        );
+      }
+      if (isInstance(value2, ArrayBuffer) || value2 && isInstance(value2.buffer, ArrayBuffer)) {
+        return fromArrayBuffer(value2, encodingOrOffset, length);
+      }
+      if (typeof SharedArrayBuffer !== "undefined" && (isInstance(value2, SharedArrayBuffer) || value2 && isInstance(value2.buffer, SharedArrayBuffer))) {
+        return fromArrayBuffer(value2, encodingOrOffset, length);
+      }
+      if (typeof value2 === "number") {
+        throw new TypeError(
+          'The "value" argument must not be of type number. Received type number'
+        );
+      }
+      const valueOf = value2.valueOf && value2.valueOf();
+      if (valueOf != null && valueOf !== value2) {
+        return Buffer3.from(valueOf, encodingOrOffset, length);
+      }
+      const b = fromObject(value2);
+      if (b) return b;
+      if (typeof Symbol !== "undefined" && Symbol.toPrimitive != null && typeof value2[Symbol.toPrimitive] === "function") {
+        return Buffer3.from(value2[Symbol.toPrimitive]("string"), encodingOrOffset, length);
+      }
+      throw new TypeError(
+        "The first argument must be one of type string, Buffer, ArrayBuffer, Array, or Array-like Object. Received type " + typeof value2
+      );
+    }
+    Buffer3.from = function(value2, encodingOrOffset, length) {
+      return from(value2, encodingOrOffset, length);
     };
-    Buffer2.allocUnsafe = function(size) {
-      return allocUnsafe(null, size);
+    Object.setPrototypeOf(Buffer3.prototype, Uint8Array.prototype);
+    Object.setPrototypeOf(Buffer3, Uint8Array);
+    function assertSize(size) {
+      if (typeof size !== "number") {
+        throw new TypeError('"size" argument must be of type number');
+      } else if (size < 0) {
+        throw new RangeError('The value "' + size + '" is invalid for option "size"');
+      }
+    }
+    function alloc(size, fill, encoding) {
+      assertSize(size);
+      if (size <= 0) {
+        return createBuffer(size);
+      }
+      if (fill !== void 0) {
+        return typeof encoding === "string" ? createBuffer(size).fill(fill, encoding) : createBuffer(size).fill(fill);
+      }
+      return createBuffer(size);
+    }
+    Buffer3.alloc = function(size, fill, encoding) {
+      return alloc(size, fill, encoding);
     };
-    Buffer2.allocUnsafeSlow = function(size) {
-      return allocUnsafe(null, size);
+    function allocUnsafe(size) {
+      assertSize(size);
+      return createBuffer(size < 0 ? 0 : checked(size) | 0);
+    }
+    Buffer3.allocUnsafe = function(size) {
+      return allocUnsafe(size);
     };
-    Buffer2.isBuffer = isBuffer;
-    Buffer2.compare = function compare(a, b) {
-      if (!internalIsBuffer(a) || !internalIsBuffer(b)) {
-        throw new TypeError("Arguments must be Buffers");
+    Buffer3.allocUnsafeSlow = function(size) {
+      return allocUnsafe(size);
+    };
+    function fromString(string4, encoding) {
+      if (typeof encoding !== "string" || encoding === "") {
+        encoding = "utf8";
+      }
+      if (!Buffer3.isEncoding(encoding)) {
+        throw new TypeError("Unknown encoding: " + encoding);
+      }
+      const length = byteLength(string4, encoding) | 0;
+      let buf = createBuffer(length);
+      const actual = buf.write(string4, encoding);
+      if (actual !== length) {
+        buf = buf.slice(0, actual);
+      }
+      return buf;
+    }
+    function fromArrayLike(array) {
+      const length = array.length < 0 ? 0 : checked(array.length) | 0;
+      const buf = createBuffer(length);
+      for (let i = 0; i < length; i += 1) {
+        buf[i] = array[i] & 255;
+      }
+      return buf;
+    }
+    function fromArrayView(arrayView) {
+      if (isInstance(arrayView, Uint8Array)) {
+        const copy = new Uint8Array(arrayView);
+        return fromArrayBuffer(copy.buffer, copy.byteOffset, copy.byteLength);
+      }
+      return fromArrayLike(arrayView);
+    }
+    function fromArrayBuffer(array, byteOffset, length) {
+      if (byteOffset < 0 || array.byteLength < byteOffset) {
+        throw new RangeError('"offset" is outside of buffer bounds');
+      }
+      if (array.byteLength < byteOffset + (length || 0)) {
+        throw new RangeError('"length" is outside of buffer bounds');
+      }
+      let buf;
+      if (byteOffset === void 0 && length === void 0) {
+        buf = new Uint8Array(array);
+      } else if (length === void 0) {
+        buf = new Uint8Array(array, byteOffset);
+      } else {
+        buf = new Uint8Array(array, byteOffset, length);
+      }
+      Object.setPrototypeOf(buf, Buffer3.prototype);
+      return buf;
+    }
+    function fromObject(obj) {
+      if (Buffer3.isBuffer(obj)) {
+        const len = checked(obj.length) | 0;
+        const buf = createBuffer(len);
+        if (buf.length === 0) {
+          return buf;
+        }
+        obj.copy(buf, 0, 0, len);
+        return buf;
+      }
+      if (obj.length !== void 0) {
+        if (typeof obj.length !== "number" || numberIsNaN(obj.length)) {
+          return createBuffer(0);
+        }
+        return fromArrayLike(obj);
+      }
+      if (obj.type === "Buffer" && Array.isArray(obj.data)) {
+        return fromArrayLike(obj.data);
+      }
+    }
+    function checked(length) {
+      if (length >= K_MAX_LENGTH) {
+        throw new RangeError("Attempt to allocate Buffer larger than maximum size: 0x" + K_MAX_LENGTH.toString(16) + " bytes");
+      }
+      return length | 0;
+    }
+    function SlowBuffer(length) {
+      if (+length != length) {
+        length = 0;
+      }
+      return Buffer3.alloc(+length);
+    }
+    Buffer3.isBuffer = function isBuffer(b) {
+      return b != null && b._isBuffer === true && b !== Buffer3.prototype;
+    };
+    Buffer3.compare = function compare(a, b) {
+      if (isInstance(a, Uint8Array)) a = Buffer3.from(a, a.offset, a.byteLength);
+      if (isInstance(b, Uint8Array)) b = Buffer3.from(b, b.offset, b.byteLength);
+      if (!Buffer3.isBuffer(a) || !Buffer3.isBuffer(b)) {
+        throw new TypeError(
+          'The "buf1", "buf2" arguments must be one of type Buffer or Uint8Array'
+        );
       }
       if (a === b) return 0;
-      var x = a.length;
-      var y = b.length;
-      for (var i = 0, len = Math.min(x, y); i < len; ++i) {
+      let x = a.length;
+      let y = b.length;
+      for (let i = 0, len = Math.min(x, y); i < len; ++i) {
         if (a[i] !== b[i]) {
           x = a[i];
           y = b[i];
@@ -935,7 +466,7 @@ var init_buffer_es6 = __esm({
       if (y < x) return 1;
       return 0;
     };
-    Buffer2.isEncoding = function isEncoding(encoding) {
+    Buffer3.isEncoding = function isEncoding(encoding) {
       switch (String(encoding).toLowerCase()) {
         case "hex":
         case "utf8":
@@ -953,61 +484,167 @@ var init_buffer_es6 = __esm({
           return false;
       }
     };
-    Buffer2.concat = function concat(list4, length) {
-      if (!isArray_default(list4)) {
+    Buffer3.concat = function concat(list4, length) {
+      if (!Array.isArray(list4)) {
         throw new TypeError('"list" argument must be an Array of Buffers');
       }
       if (list4.length === 0) {
-        return Buffer2.alloc(0);
+        return Buffer3.alloc(0);
       }
-      var i;
+      let i;
       if (length === void 0) {
         length = 0;
         for (i = 0; i < list4.length; ++i) {
           length += list4[i].length;
         }
       }
-      var buffer = Buffer2.allocUnsafe(length);
-      var pos = 0;
+      const buffer2 = Buffer3.allocUnsafe(length);
+      let pos = 0;
       for (i = 0; i < list4.length; ++i) {
-        var buf = list4[i];
-        if (!internalIsBuffer(buf)) {
+        let buf = list4[i];
+        if (isInstance(buf, Uint8Array)) {
+          if (pos + buf.length > buffer2.length) {
+            if (!Buffer3.isBuffer(buf)) buf = Buffer3.from(buf);
+            buf.copy(buffer2, pos);
+          } else {
+            Uint8Array.prototype.set.call(
+              buffer2,
+              buf,
+              pos
+            );
+          }
+        } else if (!Buffer3.isBuffer(buf)) {
           throw new TypeError('"list" argument must be an Array of Buffers');
+        } else {
+          buf.copy(buffer2, pos);
         }
-        buf.copy(buffer, pos);
         pos += buf.length;
       }
-      return buffer;
+      return buffer2;
     };
-    Buffer2.byteLength = byteLength;
-    Buffer2.prototype._isBuffer = true;
-    Buffer2.prototype.swap16 = function swap16() {
-      var len = this.length;
+    function byteLength(string4, encoding) {
+      if (Buffer3.isBuffer(string4)) {
+        return string4.length;
+      }
+      if (ArrayBuffer.isView(string4) || isInstance(string4, ArrayBuffer)) {
+        return string4.byteLength;
+      }
+      if (typeof string4 !== "string") {
+        throw new TypeError(
+          'The "string" argument must be one of type string, Buffer, or ArrayBuffer. Received type ' + typeof string4
+        );
+      }
+      const len = string4.length;
+      const mustMatch = arguments.length > 2 && arguments[2] === true;
+      if (!mustMatch && len === 0) return 0;
+      let loweredCase = false;
+      for (; ; ) {
+        switch (encoding) {
+          case "ascii":
+          case "latin1":
+          case "binary":
+            return len;
+          case "utf8":
+          case "utf-8":
+            return utf8ToBytes(string4).length;
+          case "ucs2":
+          case "ucs-2":
+          case "utf16le":
+          case "utf-16le":
+            return len * 2;
+          case "hex":
+            return len >>> 1;
+          case "base64":
+            return base64ToBytes(string4).length;
+          default:
+            if (loweredCase) {
+              return mustMatch ? -1 : utf8ToBytes(string4).length;
+            }
+            encoding = ("" + encoding).toLowerCase();
+            loweredCase = true;
+        }
+      }
+    }
+    Buffer3.byteLength = byteLength;
+    function slowToString(encoding, start, end) {
+      let loweredCase = false;
+      if (start === void 0 || start < 0) {
+        start = 0;
+      }
+      if (start > this.length) {
+        return "";
+      }
+      if (end === void 0 || end > this.length) {
+        end = this.length;
+      }
+      if (end <= 0) {
+        return "";
+      }
+      end >>>= 0;
+      start >>>= 0;
+      if (end <= start) {
+        return "";
+      }
+      if (!encoding) encoding = "utf8";
+      while (true) {
+        switch (encoding) {
+          case "hex":
+            return hexSlice(this, start, end);
+          case "utf8":
+          case "utf-8":
+            return utf8Slice(this, start, end);
+          case "ascii":
+            return asciiSlice(this, start, end);
+          case "latin1":
+          case "binary":
+            return latin1Slice(this, start, end);
+          case "base64":
+            return base64Slice(this, start, end);
+          case "ucs2":
+          case "ucs-2":
+          case "utf16le":
+          case "utf-16le":
+            return utf16leSlice(this, start, end);
+          default:
+            if (loweredCase) throw new TypeError("Unknown encoding: " + encoding);
+            encoding = (encoding + "").toLowerCase();
+            loweredCase = true;
+        }
+      }
+    }
+    Buffer3.prototype._isBuffer = true;
+    function swap(b, n2, m) {
+      const i = b[n2];
+      b[n2] = b[m];
+      b[m] = i;
+    }
+    Buffer3.prototype.swap16 = function swap16() {
+      const len = this.length;
       if (len % 2 !== 0) {
         throw new RangeError("Buffer size must be a multiple of 16-bits");
       }
-      for (var i = 0; i < len; i += 2) {
+      for (let i = 0; i < len; i += 2) {
         swap(this, i, i + 1);
       }
       return this;
     };
-    Buffer2.prototype.swap32 = function swap32() {
-      var len = this.length;
+    Buffer3.prototype.swap32 = function swap32() {
+      const len = this.length;
       if (len % 4 !== 0) {
         throw new RangeError("Buffer size must be a multiple of 32-bits");
       }
-      for (var i = 0; i < len; i += 4) {
+      for (let i = 0; i < len; i += 4) {
         swap(this, i, i + 3);
         swap(this, i + 1, i + 2);
       }
       return this;
     };
-    Buffer2.prototype.swap64 = function swap64() {
-      var len = this.length;
+    Buffer3.prototype.swap64 = function swap64() {
+      const len = this.length;
       if (len % 8 !== 0) {
         throw new RangeError("Buffer size must be a multiple of 64-bits");
       }
-      for (var i = 0; i < len; i += 8) {
+      for (let i = 0; i < len; i += 8) {
         swap(this, i, i + 7);
         swap(this, i + 1, i + 6);
         swap(this, i + 2, i + 5);
@@ -1015,29 +652,36 @@ var init_buffer_es6 = __esm({
       }
       return this;
     };
-    Buffer2.prototype.toString = function toString2() {
-      var length = this.length | 0;
+    Buffer3.prototype.toString = function toString2() {
+      const length = this.length;
       if (length === 0) return "";
       if (arguments.length === 0) return utf8Slice(this, 0, length);
       return slowToString.apply(this, arguments);
     };
-    Buffer2.prototype.equals = function equals(b) {
-      if (!internalIsBuffer(b)) throw new TypeError("Argument must be a Buffer");
+    Buffer3.prototype.toLocaleString = Buffer3.prototype.toString;
+    Buffer3.prototype.equals = function equals(b) {
+      if (!Buffer3.isBuffer(b)) throw new TypeError("Argument must be a Buffer");
       if (this === b) return true;
-      return Buffer2.compare(this, b) === 0;
+      return Buffer3.compare(this, b) === 0;
     };
-    Buffer2.prototype.inspect = function inspect() {
-      var str = "";
-      var max = INSPECT_MAX_BYTES;
-      if (this.length > 0) {
-        str = this.toString("hex", 0, max).match(/.{2}/g).join(" ");
-        if (this.length > max) str += " ... ";
-      }
+    Buffer3.prototype.inspect = function inspect() {
+      let str = "";
+      const max = exports.INSPECT_MAX_BYTES;
+      str = this.toString("hex", 0, max).replace(/(.{2})/g, "$1 ").trim();
+      if (this.length > max) str += " ... ";
       return "<Buffer " + str + ">";
     };
-    Buffer2.prototype.compare = function compare2(target, start, end, thisStart, thisEnd) {
-      if (!internalIsBuffer(target)) {
-        throw new TypeError("Argument must be a Buffer");
+    if (customInspectSymbol) {
+      Buffer3.prototype[customInspectSymbol] = Buffer3.prototype.inspect;
+    }
+    Buffer3.prototype.compare = function compare(target, start, end, thisStart, thisEnd) {
+      if (isInstance(target, Uint8Array)) {
+        target = Buffer3.from(target, target.offset, target.byteLength);
+      }
+      if (!Buffer3.isBuffer(target)) {
+        throw new TypeError(
+          'The "target" argument must be one of type Buffer or Uint8Array. Received type ' + typeof target
+        );
       }
       if (start === void 0) {
         start = 0;
@@ -1068,12 +712,12 @@ var init_buffer_es6 = __esm({
       thisStart >>>= 0;
       thisEnd >>>= 0;
       if (this === target) return 0;
-      var x = thisEnd - thisStart;
-      var y = end - start;
-      var len = Math.min(x, y);
-      var thisCopy = this.slice(thisStart, thisEnd);
-      var targetCopy = target.slice(start, end);
-      for (var i = 0; i < len; ++i) {
+      let x = thisEnd - thisStart;
+      let y = end - start;
+      const len = Math.min(x, y);
+      const thisCopy = this.slice(thisStart, thisEnd);
+      const targetCopy = target.slice(start, end);
+      for (let i = 0; i < len; ++i) {
         if (thisCopy[i] !== targetCopy[i]) {
           x = thisCopy[i];
           y = targetCopy[i];
@@ -1084,16 +728,144 @@ var init_buffer_es6 = __esm({
       if (y < x) return 1;
       return 0;
     };
-    Buffer2.prototype.includes = function includes(val, byteOffset, encoding) {
+    function bidirectionalIndexOf(buffer2, val, byteOffset, encoding, dir) {
+      if (buffer2.length === 0) return -1;
+      if (typeof byteOffset === "string") {
+        encoding = byteOffset;
+        byteOffset = 0;
+      } else if (byteOffset > 2147483647) {
+        byteOffset = 2147483647;
+      } else if (byteOffset < -2147483648) {
+        byteOffset = -2147483648;
+      }
+      byteOffset = +byteOffset;
+      if (numberIsNaN(byteOffset)) {
+        byteOffset = dir ? 0 : buffer2.length - 1;
+      }
+      if (byteOffset < 0) byteOffset = buffer2.length + byteOffset;
+      if (byteOffset >= buffer2.length) {
+        if (dir) return -1;
+        else byteOffset = buffer2.length - 1;
+      } else if (byteOffset < 0) {
+        if (dir) byteOffset = 0;
+        else return -1;
+      }
+      if (typeof val === "string") {
+        val = Buffer3.from(val, encoding);
+      }
+      if (Buffer3.isBuffer(val)) {
+        if (val.length === 0) {
+          return -1;
+        }
+        return arrayIndexOf(buffer2, val, byteOffset, encoding, dir);
+      } else if (typeof val === "number") {
+        val = val & 255;
+        if (typeof Uint8Array.prototype.indexOf === "function") {
+          if (dir) {
+            return Uint8Array.prototype.indexOf.call(buffer2, val, byteOffset);
+          } else {
+            return Uint8Array.prototype.lastIndexOf.call(buffer2, val, byteOffset);
+          }
+        }
+        return arrayIndexOf(buffer2, [val], byteOffset, encoding, dir);
+      }
+      throw new TypeError("val must be string, number or Buffer");
+    }
+    function arrayIndexOf(arr, val, byteOffset, encoding, dir) {
+      let indexSize = 1;
+      let arrLength = arr.length;
+      let valLength = val.length;
+      if (encoding !== void 0) {
+        encoding = String(encoding).toLowerCase();
+        if (encoding === "ucs2" || encoding === "ucs-2" || encoding === "utf16le" || encoding === "utf-16le") {
+          if (arr.length < 2 || val.length < 2) {
+            return -1;
+          }
+          indexSize = 2;
+          arrLength /= 2;
+          valLength /= 2;
+          byteOffset /= 2;
+        }
+      }
+      function read(buf, i2) {
+        if (indexSize === 1) {
+          return buf[i2];
+        } else {
+          return buf.readUInt16BE(i2 * indexSize);
+        }
+      }
+      let i;
+      if (dir) {
+        let foundIndex = -1;
+        for (i = byteOffset; i < arrLength; i++) {
+          if (read(arr, i) === read(val, foundIndex === -1 ? 0 : i - foundIndex)) {
+            if (foundIndex === -1) foundIndex = i;
+            if (i - foundIndex + 1 === valLength) return foundIndex * indexSize;
+          } else {
+            if (foundIndex !== -1) i -= i - foundIndex;
+            foundIndex = -1;
+          }
+        }
+      } else {
+        if (byteOffset + valLength > arrLength) byteOffset = arrLength - valLength;
+        for (i = byteOffset; i >= 0; i--) {
+          let found = true;
+          for (let j = 0; j < valLength; j++) {
+            if (read(arr, i + j) !== read(val, j)) {
+              found = false;
+              break;
+            }
+          }
+          if (found) return i;
+        }
+      }
+      return -1;
+    }
+    Buffer3.prototype.includes = function includes(val, byteOffset, encoding) {
       return this.indexOf(val, byteOffset, encoding) !== -1;
     };
-    Buffer2.prototype.indexOf = function indexOf(val, byteOffset, encoding) {
+    Buffer3.prototype.indexOf = function indexOf(val, byteOffset, encoding) {
       return bidirectionalIndexOf(this, val, byteOffset, encoding, true);
     };
-    Buffer2.prototype.lastIndexOf = function lastIndexOf(val, byteOffset, encoding) {
+    Buffer3.prototype.lastIndexOf = function lastIndexOf(val, byteOffset, encoding) {
       return bidirectionalIndexOf(this, val, byteOffset, encoding, false);
     };
-    Buffer2.prototype.write = function write2(string3, offset2, length, encoding) {
+    function hexWrite(buf, string4, offset2, length) {
+      offset2 = Number(offset2) || 0;
+      const remaining = buf.length - offset2;
+      if (!length) {
+        length = remaining;
+      } else {
+        length = Number(length);
+        if (length > remaining) {
+          length = remaining;
+        }
+      }
+      const strLen = string4.length;
+      if (length > strLen / 2) {
+        length = strLen / 2;
+      }
+      let i;
+      for (i = 0; i < length; ++i) {
+        const parsed = parseInt(string4.substr(i * 2, 2), 16);
+        if (numberIsNaN(parsed)) return i;
+        buf[offset2 + i] = parsed;
+      }
+      return i;
+    }
+    function utf8Write(buf, string4, offset2, length) {
+      return blitBuffer(utf8ToBytes(string4, buf.length - offset2), buf, offset2, length);
+    }
+    function asciiWrite(buf, string4, offset2, length) {
+      return blitBuffer(asciiToBytes(string4), buf, offset2, length);
+    }
+    function base64Write(buf, string4, offset2, length) {
+      return blitBuffer(base64ToBytes(string4), buf, offset2, length);
+    }
+    function ucs2Write(buf, string4, offset2, length) {
+      return blitBuffer(utf16leToBytes(string4, buf.length - offset2), buf, offset2, length);
+    }
+    Buffer3.prototype.write = function write(string4, offset2, length, encoding) {
       if (offset2 === void 0) {
         encoding = "utf8";
         length = this.length;
@@ -1103,9 +875,9 @@ var init_buffer_es6 = __esm({
         length = this.length;
         offset2 = 0;
       } else if (isFinite(offset2)) {
-        offset2 = offset2 | 0;
+        offset2 = offset2 >>> 0;
         if (isFinite(length)) {
-          length = length | 0;
+          length = length >>> 0;
           if (encoding === void 0) encoding = "utf8";
         } else {
           encoding = length;
@@ -1116,32 +888,31 @@ var init_buffer_es6 = __esm({
           "Buffer.write(string, encoding, offset[, length]) is no longer supported"
         );
       }
-      var remaining = this.length - offset2;
+      const remaining = this.length - offset2;
       if (length === void 0 || length > remaining) length = remaining;
-      if (string3.length > 0 && (length < 0 || offset2 < 0) || offset2 > this.length) {
+      if (string4.length > 0 && (length < 0 || offset2 < 0) || offset2 > this.length) {
         throw new RangeError("Attempt to write outside buffer bounds");
       }
       if (!encoding) encoding = "utf8";
-      var loweredCase = false;
+      let loweredCase = false;
       for (; ; ) {
         switch (encoding) {
           case "hex":
-            return hexWrite(this, string3, offset2, length);
+            return hexWrite(this, string4, offset2, length);
           case "utf8":
           case "utf-8":
-            return utf8Write(this, string3, offset2, length);
+            return utf8Write(this, string4, offset2, length);
           case "ascii":
-            return asciiWrite(this, string3, offset2, length);
           case "latin1":
           case "binary":
-            return latin1Write(this, string3, offset2, length);
+            return asciiWrite(this, string4, offset2, length);
           case "base64":
-            return base64Write(this, string3, offset2, length);
+            return base64Write(this, string4, offset2, length);
           case "ucs2":
           case "ucs-2":
           case "utf16le":
           case "utf-16le":
-            return ucs2Write(this, string3, offset2, length);
+            return ucs2Write(this, string4, offset2, length);
           default:
             if (loweredCase) throw new TypeError("Unknown encoding: " + encoding);
             encoding = ("" + encoding).toLowerCase();
@@ -1149,15 +920,131 @@ var init_buffer_es6 = __esm({
         }
       }
     };
-    Buffer2.prototype.toJSON = function toJSON() {
+    Buffer3.prototype.toJSON = function toJSON() {
       return {
         type: "Buffer",
         data: Array.prototype.slice.call(this._arr || this, 0)
       };
     };
-    MAX_ARGUMENTS_LENGTH = 4096;
-    Buffer2.prototype.slice = function slice(start, end) {
-      var len = this.length;
+    function base64Slice(buf, start, end) {
+      if (start === 0 && end === buf.length) {
+        return base64.fromByteArray(buf);
+      } else {
+        return base64.fromByteArray(buf.slice(start, end));
+      }
+    }
+    function utf8Slice(buf, start, end) {
+      end = Math.min(buf.length, end);
+      const res = [];
+      let i = start;
+      while (i < end) {
+        const firstByte = buf[i];
+        let codePoint = null;
+        let bytesPerSequence = firstByte > 239 ? 4 : firstByte > 223 ? 3 : firstByte > 191 ? 2 : 1;
+        if (i + bytesPerSequence <= end) {
+          let secondByte, thirdByte, fourthByte, tempCodePoint;
+          switch (bytesPerSequence) {
+            case 1:
+              if (firstByte < 128) {
+                codePoint = firstByte;
+              }
+              break;
+            case 2:
+              secondByte = buf[i + 1];
+              if ((secondByte & 192) === 128) {
+                tempCodePoint = (firstByte & 31) << 6 | secondByte & 63;
+                if (tempCodePoint > 127) {
+                  codePoint = tempCodePoint;
+                }
+              }
+              break;
+            case 3:
+              secondByte = buf[i + 1];
+              thirdByte = buf[i + 2];
+              if ((secondByte & 192) === 128 && (thirdByte & 192) === 128) {
+                tempCodePoint = (firstByte & 15) << 12 | (secondByte & 63) << 6 | thirdByte & 63;
+                if (tempCodePoint > 2047 && (tempCodePoint < 55296 || tempCodePoint > 57343)) {
+                  codePoint = tempCodePoint;
+                }
+              }
+              break;
+            case 4:
+              secondByte = buf[i + 1];
+              thirdByte = buf[i + 2];
+              fourthByte = buf[i + 3];
+              if ((secondByte & 192) === 128 && (thirdByte & 192) === 128 && (fourthByte & 192) === 128) {
+                tempCodePoint = (firstByte & 15) << 18 | (secondByte & 63) << 12 | (thirdByte & 63) << 6 | fourthByte & 63;
+                if (tempCodePoint > 65535 && tempCodePoint < 1114112) {
+                  codePoint = tempCodePoint;
+                }
+              }
+          }
+        }
+        if (codePoint === null) {
+          codePoint = 65533;
+          bytesPerSequence = 1;
+        } else if (codePoint > 65535) {
+          codePoint -= 65536;
+          res.push(codePoint >>> 10 & 1023 | 55296);
+          codePoint = 56320 | codePoint & 1023;
+        }
+        res.push(codePoint);
+        i += bytesPerSequence;
+      }
+      return decodeCodePointsArray(res);
+    }
+    var MAX_ARGUMENTS_LENGTH = 4096;
+    function decodeCodePointsArray(codePoints) {
+      const len = codePoints.length;
+      if (len <= MAX_ARGUMENTS_LENGTH) {
+        return String.fromCharCode.apply(String, codePoints);
+      }
+      let res = "";
+      let i = 0;
+      while (i < len) {
+        res += String.fromCharCode.apply(
+          String,
+          codePoints.slice(i, i += MAX_ARGUMENTS_LENGTH)
+        );
+      }
+      return res;
+    }
+    function asciiSlice(buf, start, end) {
+      let ret = "";
+      end = Math.min(buf.length, end);
+      for (let i = start; i < end; ++i) {
+        ret += String.fromCharCode(buf[i] & 127);
+      }
+      return ret;
+    }
+    function latin1Slice(buf, start, end) {
+      let ret = "";
+      end = Math.min(buf.length, end);
+      for (let i = start; i < end; ++i) {
+        ret += String.fromCharCode(buf[i]);
+      }
+      return ret;
+    }
+    function hexSlice(buf, start, end) {
+      const len = buf.length;
+      if (!start || start < 0) start = 0;
+      if (!end || end < 0 || end > len) end = len;
+      let out = "";
+      for (let i = start; i < end; ++i) {
+        out += hexSliceLookupTable[buf[i]];
+      }
+      return out;
+    }
+    function utf16leSlice(buf, start, end) {
+      const bytes = buf.slice(start, end);
+      let res = "";
+      for (let i = 0; i < bytes.length - 1; i += 2) {
+        res += String.fromCharCode(bytes[i] + bytes[i + 1] * 256);
+      }
+      return res;
+    }
+    Buffer3.prototype.slice = function slice(start, end) {
+      const len = this.length;
       start = ~~start;
       end = end === void 0 ? len : ~~end;
       if (start < 0) {
@@ -1173,71 +1060,95 @@ var init_buffer_es6 = __esm({
         end = len;
       }
       if (end < start) end = start;
-      var newBuf;
-      if (Buffer2.TYPED_ARRAY_SUPPORT) {
-        newBuf = this.subarray(start, end);
-        newBuf.__proto__ = Buffer2.prototype;
-      } else {
-        var sliceLen = end - start;
-        newBuf = new Buffer2(sliceLen, void 0);
-        for (var i = 0; i < sliceLen; ++i) {
-          newBuf[i] = this[i + start];
-        }
-      }
+      const newBuf = this.subarray(start, end);
+      Object.setPrototypeOf(newBuf, Buffer3.prototype);
       return newBuf;
     };
-    Buffer2.prototype.readUIntLE = function readUIntLE(offset2, byteLength2, noAssert) {
-      offset2 = offset2 | 0;
-      byteLength2 = byteLength2 | 0;
+    function checkOffset(offset2, ext2, length) {
+      if (offset2 % 1 !== 0 || offset2 < 0) throw new RangeError("offset is not uint");
+      if (offset2 + ext2 > length) throw new RangeError("Trying to access beyond buffer length");
+    }
+    Buffer3.prototype.readUintLE = Buffer3.prototype.readUIntLE = function readUIntLE(offset2, byteLength2, noAssert) {
+      offset2 = offset2 >>> 0;
+      byteLength2 = byteLength2 >>> 0;
       if (!noAssert) checkOffset(offset2, byteLength2, this.length);
-      var val = this[offset2];
-      var mul = 1;
-      var i = 0;
+      let val = this[offset2];
+      let mul = 1;
+      let i = 0;
       while (++i < byteLength2 && (mul *= 256)) {
         val += this[offset2 + i] * mul;
       }
       return val;
     };
-    Buffer2.prototype.readUIntBE = function readUIntBE(offset2, byteLength2, noAssert) {
-      offset2 = offset2 | 0;
-      byteLength2 = byteLength2 | 0;
+    Buffer3.prototype.readUintBE = Buffer3.prototype.readUIntBE = function readUIntBE(offset2, byteLength2, noAssert) {
+      offset2 = offset2 >>> 0;
+      byteLength2 = byteLength2 >>> 0;
       if (!noAssert) {
         checkOffset(offset2, byteLength2, this.length);
       }
-      var val = this[offset2 + --byteLength2];
-      var mul = 1;
+      let val = this[offset2 + --byteLength2];
+      let mul = 1;
       while (byteLength2 > 0 && (mul *= 256)) {
         val += this[offset2 + --byteLength2] * mul;
       }
       return val;
     };
-    Buffer2.prototype.readUInt8 = function readUInt8(offset2, noAssert) {
+    Buffer3.prototype.readUint8 = Buffer3.prototype.readUInt8 = function readUInt8(offset2, noAssert) {
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkOffset(offset2, 1, this.length);
       return this[offset2];
     };
-    Buffer2.prototype.readUInt16LE = function readUInt16LE(offset2, noAssert) {
+    Buffer3.prototype.readUint16LE = Buffer3.prototype.readUInt16LE = function readUInt16LE(offset2, noAssert) {
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkOffset(offset2, 2, this.length);
       return this[offset2] | this[offset2 + 1] << 8;
     };
-    Buffer2.prototype.readUInt16BE = function readUInt16BE(offset2, noAssert) {
+    Buffer3.prototype.readUint16BE = Buffer3.prototype.readUInt16BE = function readUInt16BE(offset2, noAssert) {
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkOffset(offset2, 2, this.length);
       return this[offset2] << 8 | this[offset2 + 1];
     };
-    Buffer2.prototype.readUInt32LE = function readUInt32LE(offset2, noAssert) {
+    Buffer3.prototype.readUint32LE = Buffer3.prototype.readUInt32LE = function readUInt32LE(offset2, noAssert) {
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkOffset(offset2, 4, this.length);
       return (this[offset2] | this[offset2 + 1] << 8 | this[offset2 + 2] << 16) + this[offset2 + 3] * 16777216;
     };
-    Buffer2.prototype.readUInt32BE = function readUInt32BE(offset2, noAssert) {
+    Buffer3.prototype.readUint32BE = Buffer3.prototype.readUInt32BE = function readUInt32BE(offset2, noAssert) {
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkOffset(offset2, 4, this.length);
       return this[offset2] * 16777216 + (this[offset2 + 1] << 16 | this[offset2 + 2] << 8 | this[offset2 + 3]);
     };
-    Buffer2.prototype.readIntLE = function readIntLE(offset2, byteLength2, noAssert) {
-      offset2 = offset2 | 0;
-      byteLength2 = byteLength2 | 0;
+    Buffer3.prototype.readBigUInt64LE = defineBigIntMethod(function readBigUInt64LE(offset2) {
+      offset2 = offset2 >>> 0;
+      validateNumber(offset2, "offset");
+      const first = this[offset2];
+      const last = this[offset2 + 7];
+      if (first === void 0 || last === void 0) {
+        boundsError(offset2, this.length - 8);
+      }
+      const lo = first + this[++offset2] * 2 ** 8 + this[++offset2] * 2 ** 16 + this[++offset2] * 2 ** 24;
+      const hi = this[++offset2] + this[++offset2] * 2 ** 8 + this[++offset2] * 2 ** 16 + last * 2 ** 24;
+      return BigInt(lo) + (BigInt(hi) << BigInt(32));
+    });
+    Buffer3.prototype.readBigUInt64BE = defineBigIntMethod(function readBigUInt64BE(offset2) {
+      offset2 = offset2 >>> 0;
+      validateNumber(offset2, "offset");
+      const first = this[offset2];
+      const last = this[offset2 + 7];
+      if (first === void 0 || last === void 0) {
+        boundsError(offset2, this.length - 8);
+      }
+      const hi = first * 2 ** 24 + this[++offset2] * 2 ** 16 + this[++offset2] * 2 ** 8 + this[++offset2];
+      const lo = this[++offset2] * 2 ** 24 + this[++offset2] * 2 ** 16 + this[++offset2] * 2 ** 8 + last;
+      return (BigInt(hi) << BigInt(32)) + BigInt(lo);
+    });
+    Buffer3.prototype.readIntLE = function readIntLE(offset2, byteLength2, noAssert) {
+      offset2 = offset2 >>> 0;
+      byteLength2 = byteLength2 >>> 0;
       if (!noAssert) checkOffset(offset2, byteLength2, this.length);
-      var val = this[offset2];
-      var mul = 1;
-      var i = 0;
+      let val = this[offset2];
+      let mul = 1;
+      let i = 0;
       while (++i < byteLength2 && (mul *= 256)) {
         val += this[offset2 + i] * mul;
       }
@@ -1245,13 +1156,13 @@ var init_buffer_es6 = __esm({
       if (val >= mul) val -= Math.pow(2, 8 * byteLength2);
       return val;
     };
-    Buffer2.prototype.readIntBE = function readIntBE(offset2, byteLength2, noAssert) {
-      offset2 = offset2 | 0;
-      byteLength2 = byteLength2 | 0;
+    Buffer3.prototype.readIntBE = function readIntBE(offset2, byteLength2, noAssert) {
+      offset2 = offset2 >>> 0;
+      byteLength2 = byteLength2 >>> 0;
       if (!noAssert) checkOffset(offset2, byteLength2, this.length);
-      var i = byteLength2;
-      var mul = 1;
-      var val = this[offset2 + --i];
+      let i = byteLength2;
+      let mul = 1;
+      let val = this[offset2 + --i];
       while (i > 0 && (mul *= 256)) {
         val += this[offset2 + --i] * mul;
       }
@@ -1259,147 +1170,213 @@ var init_buffer_es6 = __esm({
       if (val >= mul) val -= Math.pow(2, 8 * byteLength2);
       return val;
     };
-    Buffer2.prototype.readInt8 = function readInt8(offset2, noAssert) {
+    Buffer3.prototype.readInt8 = function readInt8(offset2, noAssert) {
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkOffset(offset2, 1, this.length);
       if (!(this[offset2] & 128)) return this[offset2];
       return (255 - this[offset2] + 1) * -1;
     };
-    Buffer2.prototype.readInt16LE = function readInt16LE(offset2, noAssert) {
+    Buffer3.prototype.readInt16LE = function readInt16LE(offset2, noAssert) {
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkOffset(offset2, 2, this.length);
-      var val = this[offset2] | this[offset2 + 1] << 8;
+      const val = this[offset2] | this[offset2 + 1] << 8;
       return val & 32768 ? val | 4294901760 : val;
     };
-    Buffer2.prototype.readInt16BE = function readInt16BE(offset2, noAssert) {
+    Buffer3.prototype.readInt16BE = function readInt16BE(offset2, noAssert) {
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkOffset(offset2, 2, this.length);
-      var val = this[offset2 + 1] | this[offset2] << 8;
+      const val = this[offset2 + 1] | this[offset2] << 8;
       return val & 32768 ? val | 4294901760 : val;
     };
-    Buffer2.prototype.readInt32LE = function readInt32LE(offset2, noAssert) {
+    Buffer3.prototype.readInt32LE = function readInt32LE(offset2, noAssert) {
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkOffset(offset2, 4, this.length);
       return this[offset2] | this[offset2 + 1] << 8 | this[offset2 + 2] << 16 | this[offset2 + 3] << 24;
     };
-    Buffer2.prototype.readInt32BE = function readInt32BE(offset2, noAssert) {
+    Buffer3.prototype.readInt32BE = function readInt32BE(offset2, noAssert) {
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkOffset(offset2, 4, this.length);
       return this[offset2] << 24 | this[offset2 + 1] << 16 | this[offset2 + 2] << 8 | this[offset2 + 3];
     };
-    Buffer2.prototype.readFloatLE = function readFloatLE(offset2, noAssert) {
+    Buffer3.prototype.readBigInt64LE = defineBigIntMethod(function readBigInt64LE(offset2) {
+      offset2 = offset2 >>> 0;
+      validateNumber(offset2, "offset");
+      const first = this[offset2];
+      const last = this[offset2 + 7];
+      if (first === void 0 || last === void 0) {
+        boundsError(offset2, this.length - 8);
+      }
+      const val = this[offset2 + 4] + this[offset2 + 5] * 2 ** 8 + this[offset2 + 6] * 2 ** 16 + (last << 24);
+      return (BigInt(val) << BigInt(32)) + BigInt(first + this[++offset2] * 2 ** 8 + this[++offset2] * 2 ** 16 + this[++offset2] * 2 ** 24);
+    });
+    Buffer3.prototype.readBigInt64BE = defineBigIntMethod(function readBigInt64BE(offset2) {
+      offset2 = offset2 >>> 0;
+      validateNumber(offset2, "offset");
+      const first = this[offset2];
+      const last = this[offset2 + 7];
+      if (first === void 0 || last === void 0) {
+        boundsError(offset2, this.length - 8);
+      }
+      const val = (first << 24) + // Overflow
+      this[++offset2] * 2 ** 16 + this[++offset2] * 2 ** 8 + this[++offset2];
+      return (BigInt(val) << BigInt(32)) + BigInt(this[++offset2] * 2 ** 24 + this[++offset2] * 2 ** 16 + this[++offset2] * 2 ** 8 + last);
+    });
+    Buffer3.prototype.readFloatLE = function readFloatLE(offset2, noAssert) {
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkOffset(offset2, 4, this.length);
-      return read(this, offset2, true, 23, 4);
+      return ieee754.read(this, offset2, true, 23, 4);
     };
-    Buffer2.prototype.readFloatBE = function readFloatBE(offset2, noAssert) {
+    Buffer3.prototype.readFloatBE = function readFloatBE(offset2, noAssert) {
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkOffset(offset2, 4, this.length);
-      return read(this, offset2, false, 23, 4);
+      return ieee754.read(this, offset2, false, 23, 4);
     };
-    Buffer2.prototype.readDoubleLE = function readDoubleLE(offset2, noAssert) {
+    Buffer3.prototype.readDoubleLE = function readDoubleLE(offset2, noAssert) {
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkOffset(offset2, 8, this.length);
-      return read(this, offset2, true, 52, 8);
+      return ieee754.read(this, offset2, true, 52, 8);
     };
-    Buffer2.prototype.readDoubleBE = function readDoubleBE(offset2, noAssert) {
+    Buffer3.prototype.readDoubleBE = function readDoubleBE(offset2, noAssert) {
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkOffset(offset2, 8, this.length);
-      return read(this, offset2, false, 52, 8);
+      return ieee754.read(this, offset2, false, 52, 8);
     };
-    Buffer2.prototype.writeUIntLE = function writeUIntLE(value2, offset2, byteLength2, noAssert) {
+    function checkInt(buf, value2, offset2, ext2, max, min) {
+      if (!Buffer3.isBuffer(buf)) throw new TypeError('"buffer" argument must be a Buffer instance');
+      if (value2 > max || value2 < min) throw new RangeError('"value" argument is out of bounds');
+      if (offset2 + ext2 > buf.length) throw new RangeError("Index out of range");
+    }
+    Buffer3.prototype.writeUintLE = Buffer3.prototype.writeUIntLE = function writeUIntLE(value2, offset2, byteLength2, noAssert) {
       value2 = +value2;
-      offset2 = offset2 | 0;
-      byteLength2 = byteLength2 | 0;
+      offset2 = offset2 >>> 0;
+      byteLength2 = byteLength2 >>> 0;
       if (!noAssert) {
-        var maxBytes = Math.pow(2, 8 * byteLength2) - 1;
+        const maxBytes = Math.pow(2, 8 * byteLength2) - 1;
         checkInt(this, value2, offset2, byteLength2, maxBytes, 0);
       }
-      var mul = 1;
-      var i = 0;
+      let mul = 1;
+      let i = 0;
       this[offset2] = value2 & 255;
       while (++i < byteLength2 && (mul *= 256)) {
         this[offset2 + i] = value2 / mul & 255;
       }
       return offset2 + byteLength2;
     };
-    Buffer2.prototype.writeUIntBE = function writeUIntBE(value2, offset2, byteLength2, noAssert) {
+    Buffer3.prototype.writeUintBE = Buffer3.prototype.writeUIntBE = function writeUIntBE(value2, offset2, byteLength2, noAssert) {
       value2 = +value2;
-      offset2 = offset2 | 0;
-      byteLength2 = byteLength2 | 0;
+      offset2 = offset2 >>> 0;
+      byteLength2 = byteLength2 >>> 0;
       if (!noAssert) {
-        var maxBytes = Math.pow(2, 8 * byteLength2) - 1;
+        const maxBytes = Math.pow(2, 8 * byteLength2) - 1;
         checkInt(this, value2, offset2, byteLength2, maxBytes, 0);
       }
-      var i = byteLength2 - 1;
-      var mul = 1;
+      let i = byteLength2 - 1;
+      let mul = 1;
       this[offset2 + i] = value2 & 255;
       while (--i >= 0 && (mul *= 256)) {
         this[offset2 + i] = value2 / mul & 255;
       }
       return offset2 + byteLength2;
     };
-    Buffer2.prototype.writeUInt8 = function writeUInt8(value2, offset2, noAssert) {
+    Buffer3.prototype.writeUint8 = Buffer3.prototype.writeUInt8 = function writeUInt8(value2, offset2, noAssert) {
       value2 = +value2;
-      offset2 = offset2 | 0;
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkInt(this, value2, offset2, 1, 255, 0);
-      if (!Buffer2.TYPED_ARRAY_SUPPORT) value2 = Math.floor(value2);
       this[offset2] = value2 & 255;
       return offset2 + 1;
     };
-    Buffer2.prototype.writeUInt16LE = function writeUInt16LE(value2, offset2, noAssert) {
+    Buffer3.prototype.writeUint16LE = Buffer3.prototype.writeUInt16LE = function writeUInt16LE(value2, offset2, noAssert) {
       value2 = +value2;
-      offset2 = offset2 | 0;
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkInt(this, value2, offset2, 2, 65535, 0);
-      if (Buffer2.TYPED_ARRAY_SUPPORT) {
-        this[offset2] = value2 & 255;
-        this[offset2 + 1] = value2 >>> 8;
-      } else {
-        objectWriteUInt16(this, value2, offset2, true);
-      }
+      this[offset2] = value2 & 255;
+      this[offset2 + 1] = value2 >>> 8;
       return offset2 + 2;
     };
-    Buffer2.prototype.writeUInt16BE = function writeUInt16BE(value2, offset2, noAssert) {
+    Buffer3.prototype.writeUint16BE = Buffer3.prototype.writeUInt16BE = function writeUInt16BE(value2, offset2, noAssert) {
       value2 = +value2;
-      offset2 = offset2 | 0;
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkInt(this, value2, offset2, 2, 65535, 0);
-      if (Buffer2.TYPED_ARRAY_SUPPORT) {
-        this[offset2] = value2 >>> 8;
-        this[offset2 + 1] = value2 & 255;
-      } else {
-        objectWriteUInt16(this, value2, offset2, false);
-      }
+      this[offset2] = value2 >>> 8;
+      this[offset2 + 1] = value2 & 255;
       return offset2 + 2;
     };
-    Buffer2.prototype.writeUInt32LE = function writeUInt32LE(value2, offset2, noAssert) {
+    Buffer3.prototype.writeUint32LE = Buffer3.prototype.writeUInt32LE = function writeUInt32LE(value2, offset2, noAssert) {
       value2 = +value2;
-      offset2 = offset2 | 0;
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkInt(this, value2, offset2, 4, 4294967295, 0);
-      if (Buffer2.TYPED_ARRAY_SUPPORT) {
-        this[offset2 + 3] = value2 >>> 24;
-        this[offset2 + 2] = value2 >>> 16;
-        this[offset2 + 1] = value2 >>> 8;
-        this[offset2] = value2 & 255;
-      } else {
-        objectWriteUInt32(this, value2, offset2, true);
-      }
+      this[offset2 + 3] = value2 >>> 24;
+      this[offset2 + 2] = value2 >>> 16;
+      this[offset2 + 1] = value2 >>> 8;
+      this[offset2] = value2 & 255;
       return offset2 + 4;
     };
-    Buffer2.prototype.writeUInt32BE = function writeUInt32BE(value2, offset2, noAssert) {
+    Buffer3.prototype.writeUint32BE = Buffer3.prototype.writeUInt32BE = function writeUInt32BE(value2, offset2, noAssert) {
       value2 = +value2;
-      offset2 = offset2 | 0;
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkInt(this, value2, offset2, 4, 4294967295, 0);
-      if (Buffer2.TYPED_ARRAY_SUPPORT) {
-        this[offset2] = value2 >>> 24;
-        this[offset2 + 1] = value2 >>> 16;
-        this[offset2 + 2] = value2 >>> 8;
-        this[offset2 + 3] = value2 & 255;
-      } else {
-        objectWriteUInt32(this, value2, offset2, false);
-      }
+      this[offset2] = value2 >>> 24;
+      this[offset2 + 1] = value2 >>> 16;
+      this[offset2 + 2] = value2 >>> 8;
+      this[offset2 + 3] = value2 & 255;
       return offset2 + 4;
     };
-    Buffer2.prototype.writeIntLE = function writeIntLE(value2, offset2, byteLength2, noAssert) {
+    function wrtBigUInt64LE(buf, value2, offset2, min, max) {
+      checkIntBI(value2, min, max, buf, offset2, 7);
+      let lo = Number(value2 & BigInt(4294967295));
+      buf[offset2++] = lo;
+      lo = lo >> 8;
+      buf[offset2++] = lo;
+      lo = lo >> 8;
+      buf[offset2++] = lo;
+      lo = lo >> 8;
+      buf[offset2++] = lo;
+      let hi = Number(value2 >> BigInt(32) & BigInt(4294967295));
+      buf[offset2++] = hi;
+      hi = hi >> 8;
+      buf[offset2++] = hi;
+      hi = hi >> 8;
+      buf[offset2++] = hi;
+      hi = hi >> 8;
+      buf[offset2++] = hi;
+      return offset2;
+    }
+    function wrtBigUInt64BE(buf, value2, offset2, min, max) {
+      checkIntBI(value2, min, max, buf, offset2, 7);
+      let lo = Number(value2 & BigInt(4294967295));
+      buf[offset2 + 7] = lo;
+      lo = lo >> 8;
+      buf[offset2 + 6] = lo;
+      lo = lo >> 8;
+      buf[offset2 + 5] = lo;
+      lo = lo >> 8;
+      buf[offset2 + 4] = lo;
+      let hi = Number(value2 >> BigInt(32) & BigInt(4294967295));
+      buf[offset2 + 3] = hi;
+      hi = hi >> 8;
+      buf[offset2 + 2] = hi;
+      hi = hi >> 8;
+      buf[offset2 + 1] = hi;
+      hi = hi >> 8;
+      buf[offset2] = hi;
+      return offset2 + 8;
+    }
+    Buffer3.prototype.writeBigUInt64LE = defineBigIntMethod(function writeBigUInt64LE(value2, offset2 = 0) {
+      return wrtBigUInt64LE(this, value2, offset2, BigInt(0), BigInt("0xffffffffffffffff"));
+    });
+    Buffer3.prototype.writeBigUInt64BE = defineBigIntMethod(function writeBigUInt64BE(value2, offset2 = 0) {
+      return wrtBigUInt64BE(this, value2, offset2, BigInt(0), BigInt("0xffffffffffffffff"));
+    });
+    Buffer3.prototype.writeIntLE = function writeIntLE(value2, offset2, byteLength2, noAssert) {
       value2 = +value2;
-      offset2 = offset2 | 0;
+      offset2 = offset2 >>> 0;
       if (!noAssert) {
-        var limit = Math.pow(2, 8 * byteLength2 - 1);
+        const limit = Math.pow(2, 8 * byteLength2 - 1);
         checkInt(this, value2, offset2, byteLength2, limit - 1, -limit);
       }
-      var i = 0;
-      var mul = 1;
-      var sub = 0;
+      let i = 0;
+      let mul = 1;
+      let sub = 0;
       this[offset2] = value2 & 255;
       while (++i < byteLength2 && (mul *= 256)) {
         if (value2 < 0 && sub === 0 && this[offset2 + i - 1] !== 0) {
@@ -1409,16 +1386,16 @@ var init_buffer_es6 = __esm({
       }
       return offset2 + byteLength2;
     };
-    Buffer2.prototype.writeIntBE = function writeIntBE(value2, offset2, byteLength2, noAssert) {
+    Buffer3.prototype.writeIntBE = function writeIntBE(value2, offset2, byteLength2, noAssert) {
       value2 = +value2;
-      offset2 = offset2 | 0;
+      offset2 = offset2 >>> 0;
       if (!noAssert) {
-        var limit = Math.pow(2, 8 * byteLength2 - 1);
+        const limit = Math.pow(2, 8 * byteLength2 - 1);
         checkInt(this, value2, offset2, byteLength2, limit - 1, -limit);
       }
-      var i = byteLength2 - 1;
-      var mul = 1;
-      var sub = 0;
+      let i = byteLength2 - 1;
+      let mul = 1;
+      let sub = 0;
       this[offset2 + i] = value2 & 255;
       while (--i >= 0 && (mul *= 256)) {
         if (value2 < 0 && sub === 0 && this[offset2 + i + 1] !== 0) {
@@ -1428,81 +1405,93 @@ var init_buffer_es6 = __esm({
       }
       return offset2 + byteLength2;
     };
-    Buffer2.prototype.writeInt8 = function writeInt8(value2, offset2, noAssert) {
+    Buffer3.prototype.writeInt8 = function writeInt8(value2, offset2, noAssert) {
       value2 = +value2;
-      offset2 = offset2 | 0;
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkInt(this, value2, offset2, 1, 127, -128);
-      if (!Buffer2.TYPED_ARRAY_SUPPORT) value2 = Math.floor(value2);
       if (value2 < 0) value2 = 255 + value2 + 1;
       this[offset2] = value2 & 255;
       return offset2 + 1;
     };
-    Buffer2.prototype.writeInt16LE = function writeInt16LE(value2, offset2, noAssert) {
+    Buffer3.prototype.writeInt16LE = function writeInt16LE(value2, offset2, noAssert) {
       value2 = +value2;
-      offset2 = offset2 | 0;
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkInt(this, value2, offset2, 2, 32767, -32768);
-      if (Buffer2.TYPED_ARRAY_SUPPORT) {
-        this[offset2] = value2 & 255;
-        this[offset2 + 1] = value2 >>> 8;
-      } else {
-        objectWriteUInt16(this, value2, offset2, true);
-      }
+      this[offset2] = value2 & 255;
+      this[offset2 + 1] = value2 >>> 8;
       return offset2 + 2;
     };
-    Buffer2.prototype.writeInt16BE = function writeInt16BE(value2, offset2, noAssert) {
+    Buffer3.prototype.writeInt16BE = function writeInt16BE(value2, offset2, noAssert) {
       value2 = +value2;
-      offset2 = offset2 | 0;
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkInt(this, value2, offset2, 2, 32767, -32768);
-      if (Buffer2.TYPED_ARRAY_SUPPORT) {
-        this[offset2] = value2 >>> 8;
-        this[offset2 + 1] = value2 & 255;
-      } else {
-        objectWriteUInt16(this, value2, offset2, false);
-      }
+      this[offset2] = value2 >>> 8;
+      this[offset2 + 1] = value2 & 255;
       return offset2 + 2;
     };
-    Buffer2.prototype.writeInt32LE = function writeInt32LE(value2, offset2, noAssert) {
+    Buffer3.prototype.writeInt32LE = function writeInt32LE(value2, offset2, noAssert) {
       value2 = +value2;
-      offset2 = offset2 | 0;
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkInt(this, value2, offset2, 4, 2147483647, -2147483648);
-      if (Buffer2.TYPED_ARRAY_SUPPORT) {
-        this[offset2] = value2 & 255;
-        this[offset2 + 1] = value2 >>> 8;
-        this[offset2 + 2] = value2 >>> 16;
-        this[offset2 + 3] = value2 >>> 24;
-      } else {
-        objectWriteUInt32(this, value2, offset2, true);
-      }
+      this[offset2] = value2 & 255;
+      this[offset2 + 1] = value2 >>> 8;
+      this[offset2 + 2] = value2 >>> 16;
+      this[offset2 + 3] = value2 >>> 24;
       return offset2 + 4;
     };
-    Buffer2.prototype.writeInt32BE = function writeInt32BE(value2, offset2, noAssert) {
+    Buffer3.prototype.writeInt32BE = function writeInt32BE(value2, offset2, noAssert) {
       value2 = +value2;
-      offset2 = offset2 | 0;
+      offset2 = offset2 >>> 0;
       if (!noAssert) checkInt(this, value2, offset2, 4, 2147483647, -2147483648);
       if (value2 < 0) value2 = 4294967295 + value2 + 1;
-      if (Buffer2.TYPED_ARRAY_SUPPORT) {
-        this[offset2] = value2 >>> 24;
-        this[offset2 + 1] = value2 >>> 16;
-        this[offset2 + 2] = value2 >>> 8;
-        this[offset2 + 3] = value2 & 255;
-      } else {
-        objectWriteUInt32(this, value2, offset2, false);
-      }
+      this[offset2] = value2 >>> 24;
+      this[offset2 + 1] = value2 >>> 16;
+      this[offset2 + 2] = value2 >>> 8;
+      this[offset2 + 3] = value2 & 255;
       return offset2 + 4;
     };
-    Buffer2.prototype.writeFloatLE = function writeFloatLE(value2, offset2, noAssert) {
+    Buffer3.prototype.writeBigInt64LE = defineBigIntMethod(function writeBigInt64LE(value2, offset2 = 0) {
+      return wrtBigUInt64LE(this, value2, offset2, -BigInt("0x8000000000000000"), BigInt("0x7fffffffffffffff"));
+    });
+    Buffer3.prototype.writeBigInt64BE = defineBigIntMethod(function writeBigInt64BE(value2, offset2 = 0) {
+      return wrtBigUInt64BE(this, value2, offset2, -BigInt("0x8000000000000000"), BigInt("0x7fffffffffffffff"));
+    });
+    function checkIEEE754(buf, value2, offset2, ext2, max, min) {
+      if (offset2 + ext2 > buf.length) throw new RangeError("Index out of range");
+      if (offset2 < 0) throw new RangeError("Index out of range");
+    }
+    function writeFloat(buf, value2, offset2, littleEndian, noAssert) {
+      value2 = +value2;
+      offset2 = offset2 >>> 0;
+      if (!noAssert) {
+        checkIEEE754(buf, value2, offset2, 4, 34028234663852886e22, -34028234663852886e22);
+      }
+      ieee754.write(buf, value2, offset2, littleEndian, 23, 4);
+      return offset2 + 4;
+    }
+    Buffer3.prototype.writeFloatLE = function writeFloatLE(value2, offset2, noAssert) {
       return writeFloat(this, value2, offset2, true, noAssert);
     };
-    Buffer2.prototype.writeFloatBE = function writeFloatBE(value2, offset2, noAssert) {
+    Buffer3.prototype.writeFloatBE = function writeFloatBE(value2, offset2, noAssert) {
       return writeFloat(this, value2, offset2, false, noAssert);
     };
-    Buffer2.prototype.writeDoubleLE = function writeDoubleLE(value2, offset2, noAssert) {
+    function writeDouble(buf, value2, offset2, littleEndian, noAssert) {
+      value2 = +value2;
+      offset2 = offset2 >>> 0;
+      if (!noAssert) {
+        checkIEEE754(buf, value2, offset2, 8, 17976931348623157e292, -17976931348623157e292);
+      }
+      ieee754.write(buf, value2, offset2, littleEndian, 52, 8);
+      return offset2 + 8;
+    }
+    Buffer3.prototype.writeDoubleLE = function writeDoubleLE(value2, offset2, noAssert) {
       return writeDouble(this, value2, offset2, true, noAssert);
     };
-    Buffer2.prototype.writeDoubleBE = function writeDoubleBE(value2, offset2, noAssert) {
+    Buffer3.prototype.writeDoubleBE = function writeDoubleBE(value2, offset2, noAssert) {
       return writeDouble(this, value2, offset2, false, noAssert);
     };
-    Buffer2.prototype.copy = function copy(target, targetStart, start, end) {
+    Buffer3.prototype.copy = function copy(target, targetStart, start, end) {
+      if (!Buffer3.isBuffer(target)) throw new TypeError("argument should be a Buffer");
       if (!start) start = 0;
       if (!end && end !== 0) end = this.length;
       if (targetStart >= target.length) targetStart = target.length;
@@ -1513,32 +1502,25 @@ var init_buffer_es6 = __esm({
       if (targetStart < 0) {
         throw new RangeError("targetStart out of bounds");
       }
-      if (start < 0 || start >= this.length) throw new RangeError("sourceStart out of bounds");
+      if (start < 0 || start >= this.length) throw new RangeError("Index out of range");
       if (end < 0) throw new RangeError("sourceEnd out of bounds");
       if (end > this.length) end = this.length;
       if (target.length - targetStart < end - start) {
         end = target.length - targetStart + start;
       }
-      var len = end - start;
-      var i;
-      if (this === target && start < targetStart && targetStart < end) {
-        for (i = len - 1; i >= 0; --i) {
-          target[i + targetStart] = this[i + start];
-        }
-      } else if (len < 1e3 || !Buffer2.TYPED_ARRAY_SUPPORT) {
-        for (i = 0; i < len; ++i) {
-          target[i + targetStart] = this[i + start];
-        }
+      const len = end - start;
+      if (this === target && typeof Uint8Array.prototype.copyWithin === "function") {
+        this.copyWithin(targetStart, start, end);
       } else {
         Uint8Array.prototype.set.call(
           target,
-          this.subarray(start, start + len),
+          this.subarray(start, end),
           targetStart
         );
       }
       return len;
     };
-    Buffer2.prototype.fill = function fill(val, start, end, encoding) {
+    Buffer3.prototype.fill = function fill(val, start, end, encoding) {
       if (typeof val === "string") {
         if (typeof start === "string") {
           encoding = start;
@@ -1548,20 +1530,22 @@ var init_buffer_es6 = __esm({
           encoding = end;
           end = this.length;
         }
-        if (val.length === 1) {
-          var code2 = val.charCodeAt(0);
-          if (code2 < 256) {
-            val = code2;
-          }
-        }
         if (encoding !== void 0 && typeof encoding !== "string") {
           throw new TypeError("encoding must be a string");
         }
-        if (typeof encoding === "string" && !Buffer2.isEncoding(encoding)) {
+        if (typeof encoding === "string" && !Buffer3.isEncoding(encoding)) {
           throw new TypeError("Unknown encoding: " + encoding);
+        }
+        if (val.length === 1) {
+          const code2 = val.charCodeAt(0);
+          if (encoding === "utf8" && code2 < 128 || encoding === "latin1") {
+            val = code2;
+          }
         }
       } else if (typeof val === "number") {
         val = val & 255;
+      } else if (typeof val === "boolean") {
+        val = Number(val);
       }
       if (start < 0 || this.length < start || this.length < end) {
         throw new RangeError("Out of range index");
@@ -1572,30 +1556,279 @@ var init_buffer_es6 = __esm({
       start = start >>> 0;
       end = end === void 0 ? this.length : end >>> 0;
       if (!val) val = 0;
-      var i;
+      let i;
       if (typeof val === "number") {
         for (i = start; i < end; ++i) {
           this[i] = val;
         }
       } else {
-        var bytes = internalIsBuffer(val) ? val : utf8ToBytes(new Buffer2(val, encoding).toString());
-        var len = bytes.length;
+        const bytes = Buffer3.isBuffer(val) ? val : Buffer3.from(val, encoding);
+        const len = bytes.length;
+        if (len === 0) {
+          throw new TypeError('The value "' + val + '" is invalid for argument "value"');
+        }
         for (i = 0; i < end - start; ++i) {
           this[i + start] = bytes[i % len];
         }
       }
       return this;
     };
-    INVALID_BASE64_RE = /[^+\/0-9A-Za-z-_]/g;
+    var errors = {};
+    function E(sym, getMessage, Base) {
+      errors[sym] = class NodeError extends Base {
+        constructor() {
+          super();
+          Object.defineProperty(this, "message", {
+            value: getMessage.apply(this, arguments),
+            writable: true,
+            configurable: true
+          });
+          this.name = `${this.name} [${sym}]`;
+          this.stack;
+          delete this.name;
+        }
+        get code() {
+          return sym;
+        }
+        set code(value2) {
+          Object.defineProperty(this, "code", {
+            configurable: true,
+            enumerable: true,
+            value: value2,
+            writable: true
+          });
+        }
+        toString() {
+          return `${this.name} [${sym}]: ${this.message}`;
+        }
+      };
+    }
+    E(
+      "ERR_BUFFER_OUT_OF_BOUNDS",
+      function(name) {
+        if (name) {
+          return `${name} is outside of buffer bounds`;
+        }
+        return "Attempt to access memory outside buffer bounds";
+      },
+      RangeError
+    );
+    E(
+      "ERR_INVALID_ARG_TYPE",
+      function(name, actual) {
+        return `The "${name}" argument must be of type number. Received type ${typeof actual}`;
+      },
+      TypeError
+    );
+    E(
+      "ERR_OUT_OF_RANGE",
+      function(str, range2, input) {
+        let msg = `The value of "${str}" is out of range.`;
+        let received = input;
+        if (Number.isInteger(input) && Math.abs(input) > 2 ** 32) {
+          received = addNumericalSeparator(String(input));
+        } else if (typeof input === "bigint") {
+          received = String(input);
+          if (input > BigInt(2) ** BigInt(32) || input < -(BigInt(2) ** BigInt(32))) {
+            received = addNumericalSeparator(received);
+          }
+          received += "n";
+        }
+        msg += ` It must be ${range2}. Received ${received}`;
+        return msg;
+      },
+      RangeError
+    );
+    function addNumericalSeparator(val) {
+      let res = "";
+      let i = val.length;
+      const start = val[0] === "-" ? 1 : 0;
+      for (; i >= start + 4; i -= 3) {
+        res = `_${val.slice(i - 3, i)}${res}`;
+      }
+      return `${val.slice(0, i)}${res}`;
+    }
+    function checkBounds(buf, offset2, byteLength2) {
+      validateNumber(offset2, "offset");
+      if (buf[offset2] === void 0 || buf[offset2 + byteLength2] === void 0) {
+        boundsError(offset2, buf.length - (byteLength2 + 1));
+      }
+    }
+    function checkIntBI(value2, min, max, buf, offset2, byteLength2) {
+      if (value2 > max || value2 < min) {
+        const n2 = typeof min === "bigint" ? "n" : "";
+        let range2;
+        if (byteLength2 > 3) {
+          if (min === 0 || min === BigInt(0)) {
+            range2 = `>= 0${n2} and < 2${n2} ** ${(byteLength2 + 1) * 8}${n2}`;
+          } else {
+            range2 = `>= -(2${n2} ** ${(byteLength2 + 1) * 8 - 1}${n2}) and < 2 ** ${(byteLength2 + 1) * 8 - 1}${n2}`;
+          }
+        } else {
+          range2 = `>= ${min}${n2} and <= ${max}${n2}`;
+        }
+        throw new errors.ERR_OUT_OF_RANGE("value", range2, value2);
+      }
+      checkBounds(buf, offset2, byteLength2);
+    }
+    function validateNumber(value2, name) {
+      if (typeof value2 !== "number") {
+        throw new errors.ERR_INVALID_ARG_TYPE(name, "number", value2);
+      }
+    }
+    function boundsError(value2, length, type) {
+      if (Math.floor(value2) !== value2) {
+        validateNumber(value2, type);
+        throw new errors.ERR_OUT_OF_RANGE(type || "offset", "an integer", value2);
+      }
+      if (length < 0) {
+        throw new errors.ERR_BUFFER_OUT_OF_BOUNDS();
+      }
+      throw new errors.ERR_OUT_OF_RANGE(
+        type || "offset",
+        `>= ${type ? 1 : 0} and <= ${length}`,
+        value2
+      );
+    }
+    var INVALID_BASE64_RE = /[^+/0-9A-Za-z-_]/g;
+    function base64clean(str) {
+      str = str.split("=")[0];
+      str = str.trim().replace(INVALID_BASE64_RE, "");
+      if (str.length < 2) return "";
+      while (str.length % 4 !== 0) {
+        str = str + "=";
+      }
+      return str;
+    }
+    function utf8ToBytes(string4, units) {
+      units = units || Infinity;
+      let codePoint;
+      const length = string4.length;
+      let leadSurrogate = null;
+      const bytes = [];
+      for (let i = 0; i < length; ++i) {
+        codePoint = string4.charCodeAt(i);
+        if (codePoint > 55295 && codePoint < 57344) {
+          if (!leadSurrogate) {
+            if (codePoint > 56319) {
+              if ((units -= 3) > -1) bytes.push(239, 191, 189);
+              continue;
+            } else if (i + 1 === length) {
+              if ((units -= 3) > -1) bytes.push(239, 191, 189);
+              continue;
+            }
+            leadSurrogate = codePoint;
+            continue;
+          }
+          if (codePoint < 56320) {
+            if ((units -= 3) > -1) bytes.push(239, 191, 189);
+            leadSurrogate = codePoint;
+            continue;
+          }
+          codePoint = (leadSurrogate - 55296 << 10 | codePoint - 56320) + 65536;
+        } else if (leadSurrogate) {
+          if ((units -= 3) > -1) bytes.push(239, 191, 189);
+        }
+        leadSurrogate = null;
+        if (codePoint < 128) {
+          if ((units -= 1) < 0) break;
+          bytes.push(codePoint);
+        } else if (codePoint < 2048) {
+          if ((units -= 2) < 0) break;
+          bytes.push(
+            codePoint >> 6 | 192,
+            codePoint & 63 | 128
+          );
+        } else if (codePoint < 65536) {
+          if ((units -= 3) < 0) break;
+          bytes.push(
+            codePoint >> 12 | 224,
+            codePoint >> 6 & 63 | 128,
+            codePoint & 63 | 128
+          );
+        } else if (codePoint < 1114112) {
+          if ((units -= 4) < 0) break;
+          bytes.push(
+            codePoint >> 18 | 240,
+            codePoint >> 12 & 63 | 128,
+            codePoint >> 6 & 63 | 128,
+            codePoint & 63 | 128
+          );
+        } else {
+          throw new Error("Invalid code point");
+        }
+      }
+      return bytes;
+    }
+    function asciiToBytes(str) {
+      const byteArray = [];
+      for (let i = 0; i < str.length; ++i) {
+        byteArray.push(str.charCodeAt(i) & 255);
+      }
+      return byteArray;
+    }
+    function utf16leToBytes(str, units) {
+      let c, hi, lo;
+      const byteArray = [];
+      for (let i = 0; i < str.length; ++i) {
+        if ((units -= 2) < 0) break;
+        c = str.charCodeAt(i);
+        hi = c >> 8;
+        lo = c % 256;
+        byteArray.push(lo);
+        byteArray.push(hi);
+      }
+      return byteArray;
+    }
+    function base64ToBytes(str) {
+      return base64.toByteArray(base64clean(str));
+    }
+    function blitBuffer(src, dst, offset2, length) {
+      let i;
+      for (i = 0; i < length; ++i) {
+        if (i + offset2 >= dst.length || i >= src.length) break;
+        dst[i + offset2] = src[i];
+      }
+      return i;
+    }
+    function isInstance(obj, type) {
+      return obj instanceof type || obj != null && obj.constructor != null && obj.constructor.name != null && obj.constructor.name === type.name;
+    }
+    function numberIsNaN(obj) {
+      return obj !== obj;
+    }
+    var hexSliceLookupTable = function() {
+      const alphabet = "0123456789abcdef";
+      const table = new Array(256);
+      for (let i = 0; i < 16; ++i) {
+        const i16 = i * 16;
+        for (let j = 0; j < 16; ++j) {
+          table[i16 + j] = alphabet[i] + alphabet[j];
+        }
+      }
+      return table;
+    }();
+    function defineBigIntMethod(fn) {
+      return typeof BigInt === "undefined" ? BufferBigIntNotDefined : fn;
+    }
+    function BufferBigIntNotDefined() {
+      throw new Error("BigInt not supported");
+    }
   }
 });
 
 // esbuild-buffer-shim.js
+var import_obsidian, buffer, Buffer2;
 var init_esbuild_buffer_shim = __esm({
   "esbuild-buffer-shim.js"() {
     "use strict";
-    init_buffer_es6();
-    globalThis.Buffer = Buffer2;
+    import_obsidian = require("obsidian");
+    if (import_obsidian.Platform.isMobileApp) {
+      buffer = require_buffer().Buffer;
+    } else {
+      buffer = globalThis.Buffer;
+    }
+    Buffer2 = buffer;
   }
 });
 
@@ -1604,11 +1837,11 @@ var require_escape_string_regexp = __commonJS({
   "node_modules/escape-string-regexp/index.js"(exports, module2) {
     "use strict";
     init_esbuild_buffer_shim();
-    module2.exports = (string3) => {
-      if (typeof string3 !== "string") {
+    module2.exports = (string4) => {
+      if (typeof string4 !== "string") {
         throw new TypeError("Expected a string");
       }
-      return string3.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
+      return string4.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
     };
   }
 });
@@ -1848,12 +2081,12 @@ var require_lodash = __commonJS({
     function isSymbol(value2) {
       return typeof value2 == "symbol" || isObjectLike(value2) && objectToString.call(value2) == symbolTag;
     }
-    function toString4(value2) {
+    function toString2(value2) {
       return value2 == null ? "" : baseToString(value2);
     }
-    function deburr(string3) {
-      string3 = toString4(string3);
-      return string3 && string3.replace(reLatin, deburrLetter).replace(reComboMark, "");
+    function deburr(string4) {
+      string4 = toString2(string4);
+      return string4 && string4.replace(reLatin, deburrLetter).replace(reComboMark, "");
     }
     module2.exports = deburr;
   }
@@ -1865,11 +2098,11 @@ var require_escape_string_regexp2 = __commonJS({
     "use strict";
     init_esbuild_buffer_shim();
     var matchOperatorsRegex = /[|\\{}()[\]^$+*?.-]/g;
-    module2.exports = (string3) => {
-      if (typeof string3 !== "string") {
+    module2.exports = (string4) => {
+      if (typeof string4 !== "string") {
         throw new TypeError("Expected a string");
       }
-      return string3.replace(matchOperatorsRegex, "\\$&");
+      return string4.replace(matchOperatorsRegex, "\\$&");
     };
   }
 });
@@ -2661,15 +2894,15 @@ var require_transliterate = __commonJS({
     var deburr = require_lodash();
     var escapeStringRegexp2 = require_escape_string_regexp2();
     var builtinReplacements = require_replacements();
-    var doCustomReplacements = (string3, replacements) => {
+    var doCustomReplacements = (string4, replacements) => {
       for (const [key, value2] of replacements) {
-        string3 = string3.replace(new RegExp(escapeStringRegexp2(key), "g"), value2);
+        string4 = string4.replace(new RegExp(escapeStringRegexp2(key), "g"), value2);
       }
-      return string3;
+      return string4;
     };
-    module2.exports = (string3, options) => {
-      if (typeof string3 !== "string") {
-        throw new TypeError(`Expected a string, got \`${typeof string3}\``);
+    module2.exports = (string4, options) => {
+      if (typeof string4 !== "string") {
+        throw new TypeError(`Expected a string, got \`${typeof string4}\``);
       }
       options = {
         customReplacements: [],
@@ -2679,10 +2912,10 @@ var require_transliterate = __commonJS({
         ...builtinReplacements,
         ...options.customReplacements
       ]);
-      string3 = string3.normalize();
-      string3 = doCustomReplacements(string3, customReplacements);
-      string3 = deburr(string3);
-      return string3;
+      string4 = string4.normalize();
+      string4 = doCustomReplacements(string4, customReplacements);
+      string4 = deburr(string4);
+      return string4;
     };
   }
 });
@@ -2708,16 +2941,16 @@ var require_slugify = __commonJS({
     var escapeStringRegexp2 = require_escape_string_regexp();
     var transliterate = require_transliterate();
     var builtinOverridableReplacements = require_overridable_replacements();
-    var decamelize = (string3) => {
-      return string3.replace(/([A-Z]{2,})(\d+)/g, "$1 $2").replace(/([a-z\d]+)([A-Z]{2,})/g, "$1 $2").replace(/([a-z\d])([A-Z])/g, "$1 $2").replace(/([A-Z]+)([A-Z][a-z\d]+)/g, "$1 $2");
+    var decamelize = (string4) => {
+      return string4.replace(/([A-Z]{2,})(\d+)/g, "$1 $2").replace(/([a-z\d]+)([A-Z]{2,})/g, "$1 $2").replace(/([a-z\d])([A-Z])/g, "$1 $2").replace(/([A-Z]+)([A-Z][a-z\d]+)/g, "$1 $2");
     };
-    var removeMootSeparators = (string3, separator) => {
+    var removeMootSeparators = (string4, separator) => {
       const escapedSeparator = escapeStringRegexp2(separator);
-      return string3.replace(new RegExp(`${escapedSeparator}{2,}`, "g"), separator).replace(new RegExp(`^${escapedSeparator}|${escapedSeparator}$`, "g"), "");
+      return string4.replace(new RegExp(`${escapedSeparator}{2,}`, "g"), separator).replace(new RegExp(`^${escapedSeparator}|${escapedSeparator}$`, "g"), "");
     };
-    var slugify2 = (string3, options) => {
-      if (typeof string3 !== "string") {
-        throw new TypeError(`Expected a string, got \`${typeof string3}\``);
+    var slugify2 = (string4, options) => {
+      if (typeof string4 !== "string") {
+        throw new TypeError(`Expected a string, got \`${typeof string4}\``);
       }
       options = {
         separator: "-",
@@ -2727,46 +2960,46 @@ var require_slugify = __commonJS({
         preserveLeadingUnderscore: false,
         ...options
       };
-      const shouldPrependUnderscore = options.preserveLeadingUnderscore && string3.startsWith("_");
+      const shouldPrependUnderscore = options.preserveLeadingUnderscore && string4.startsWith("_");
       const customReplacements = new Map([
         ...builtinOverridableReplacements,
         ...options.customReplacements
       ]);
-      string3 = transliterate(string3, { customReplacements });
+      string4 = transliterate(string4, { customReplacements });
       if (options.decamelize) {
-        string3 = decamelize(string3);
+        string4 = decamelize(string4);
       }
       let patternSlug = /[^a-zA-Z\d]+/g;
       if (options.lowercase) {
-        string3 = string3.toLowerCase();
+        string4 = string4.toLowerCase();
         patternSlug = /[^a-z\d]+/g;
       }
-      string3 = string3.replace(patternSlug, options.separator);
-      string3 = string3.replace(/\\/g, "");
+      string4 = string4.replace(patternSlug, options.separator);
+      string4 = string4.replace(/\\/g, "");
       if (options.separator) {
-        string3 = removeMootSeparators(string3, options.separator);
+        string4 = removeMootSeparators(string4, options.separator);
       }
       if (shouldPrependUnderscore) {
-        string3 = `_${string3}`;
+        string4 = `_${string4}`;
       }
-      return string3;
+      return string4;
     };
     var counter = () => {
       const occurrences = /* @__PURE__ */ new Map();
-      const countable = (string3, options) => {
-        string3 = slugify2(string3, options);
-        if (!string3) {
+      const countable = (string4, options) => {
+        string4 = slugify2(string4, options);
+        if (!string4) {
           return "";
         }
-        const stringLower = string3.toLowerCase();
+        const stringLower = string4.toLowerCase();
         const numberless = occurrences.get(stringLower.replace(/(?:-\d+?)+?$/, "")) || 0;
         const counter2 = occurrences.get(stringLower);
         occurrences.set(stringLower, typeof counter2 === "number" ? counter2 + 1 : 1);
         const newCounter = occurrences.get(stringLower) || 2;
         if (newCounter >= 2 || numberless > 2) {
-          string3 = `${string3}-${newCounter}`;
+          string4 = `${string4}-${newCounter}`;
         }
-        return string3;
+        return string4;
       };
       countable.reset = () => {
         occurrences.clear();
@@ -3485,8 +3718,8 @@ var require_logger = __commonJS({
     init_esbuild_buffer_shim();
     (function(global2) {
       "use strict";
-      var Logger11 = {};
-      Logger11.VERSION = "1.6.1";
+      var Logger22 = {};
+      Logger22.VERSION = "1.6.1";
       var logHandler;
       var contextualLoggersByNameMap = {};
       var bind = function(scope, func) {
@@ -3494,7 +3727,7 @@ var require_logger = __commonJS({
           return func.apply(scope, arguments);
         };
       };
-      var merge = function() {
+      var merge2 = function() {
         var args = arguments, target = args[0], key, i;
         for (i = 1; i < args.length; i++) {
           for (key in args[i]) {
@@ -3508,13 +3741,13 @@ var require_logger = __commonJS({
       var defineLogLevel = function(value2, name) {
         return { value: value2, name };
       };
-      Logger11.TRACE = defineLogLevel(1, "TRACE");
-      Logger11.DEBUG = defineLogLevel(2, "DEBUG");
-      Logger11.INFO = defineLogLevel(3, "INFO");
-      Logger11.TIME = defineLogLevel(4, "TIME");
-      Logger11.WARN = defineLogLevel(5, "WARN");
-      Logger11.ERROR = defineLogLevel(8, "ERROR");
-      Logger11.OFF = defineLogLevel(99, "OFF");
+      Logger22.TRACE = defineLogLevel(1, "TRACE");
+      Logger22.DEBUG = defineLogLevel(2, "DEBUG");
+      Logger22.INFO = defineLogLevel(3, "INFO");
+      Logger22.TIME = defineLogLevel(4, "TIME");
+      Logger22.WARN = defineLogLevel(5, "WARN");
+      Logger22.ERROR = defineLogLevel(8, "ERROR");
+      Logger22.OFF = defineLogLevel(99, "OFF");
       var ContextualLogger = function(defaultContext) {
         this.context = defaultContext;
         this.setLevel(defaultContext.filterLevel);
@@ -3537,40 +3770,40 @@ var require_logger = __commonJS({
           return lvl.value >= filterLevel.value;
         },
         trace: function() {
-          this.invoke(Logger11.TRACE, arguments);
+          this.invoke(Logger22.TRACE, arguments);
         },
         debug: function() {
-          this.invoke(Logger11.DEBUG, arguments);
+          this.invoke(Logger22.DEBUG, arguments);
         },
         info: function() {
-          this.invoke(Logger11.INFO, arguments);
+          this.invoke(Logger22.INFO, arguments);
         },
         warn: function() {
-          this.invoke(Logger11.WARN, arguments);
+          this.invoke(Logger22.WARN, arguments);
         },
         error: function() {
-          this.invoke(Logger11.ERROR, arguments);
+          this.invoke(Logger22.ERROR, arguments);
         },
         time: function(label) {
           if (typeof label === "string" && label.length > 0) {
-            this.invoke(Logger11.TIME, [label, "start"]);
+            this.invoke(Logger22.TIME, [label, "start"]);
           }
         },
         timeEnd: function(label) {
           if (typeof label === "string" && label.length > 0) {
-            this.invoke(Logger11.TIME, [label, "end"]);
+            this.invoke(Logger22.TIME, [label, "end"]);
           }
         },
         // Invokes the logger callback if it's not being filtered.
         invoke: function(level, msgArgs) {
           if (logHandler && this.enabledFor(level)) {
-            logHandler(msgArgs, merge({ level }, this.context));
+            logHandler(msgArgs, merge2({ level }, this.context));
           }
         }
       };
-      var globalLogger = new ContextualLogger({ filterLevel: Logger11.OFF });
+      var globalLogger = new ContextualLogger({ filterLevel: Logger22.OFF });
       (function() {
-        var L = Logger11;
+        var L = Logger22;
         L.enabledFor = bind(globalLogger, globalLogger.enabledFor);
         L.trace = bind(globalLogger, globalLogger.trace);
         L.debug = bind(globalLogger, globalLogger.debug);
@@ -3581,10 +3814,10 @@ var require_logger = __commonJS({
         L.error = bind(globalLogger, globalLogger.error);
         L.log = L.info;
       })();
-      Logger11.setHandler = function(func) {
+      Logger22.setHandler = function(func) {
         logHandler = func;
       };
-      Logger11.setLevel = function(level) {
+      Logger22.setLevel = function(level) {
         globalLogger.setLevel(level);
         for (var key in contextualLoggersByNameMap) {
           if (contextualLoggersByNameMap.hasOwnProperty(key)) {
@@ -3592,13 +3825,13 @@ var require_logger = __commonJS({
           }
         }
       };
-      Logger11.getLevel = function() {
+      Logger22.getLevel = function() {
         return globalLogger.getLevel();
       };
-      Logger11.get = function(name) {
-        return contextualLoggersByNameMap[name] || (contextualLoggersByNameMap[name] = new ContextualLogger(merge({ name }, globalLogger.context)));
+      Logger22.get = function(name) {
+        return contextualLoggersByNameMap[name] || (contextualLoggersByNameMap[name] = new ContextualLogger(merge2({ name }, globalLogger.context)));
       };
-      Logger11.createDefaultHandler = function(options) {
+      Logger22.createDefaultHandler = function(options) {
         options = options || {};
         options.formatter = options.formatter || function defaultMessageFormatter(messages, context) {
           if (context.name) {
@@ -3617,7 +3850,7 @@ var require_logger = __commonJS({
           messages = Array.prototype.slice.call(messages);
           var hdlr = console.log;
           var timerLabel;
-          if (context.level === Logger11.TIME) {
+          if (context.level === Logger22.TIME) {
             timerLabel = (context.name ? "[" + context.name + "] " : "") + messages[0];
             if (messages[1] === "start") {
               if (console.time) {
@@ -3633,15 +3866,15 @@ var require_logger = __commonJS({
               }
             }
           } else {
-            if (context.level === Logger11.WARN && console.warn) {
+            if (context.level === Logger22.WARN && console.warn) {
               hdlr = console.warn;
-            } else if (context.level === Logger11.ERROR && console.error) {
+            } else if (context.level === Logger22.ERROR && console.error) {
               hdlr = console.error;
-            } else if (context.level === Logger11.INFO && console.info) {
+            } else if (context.level === Logger22.INFO && console.info) {
               hdlr = console.info;
-            } else if (context.level === Logger11.DEBUG && console.debug) {
+            } else if (context.level === Logger22.DEBUG && console.debug) {
               hdlr = console.debug;
-            } else if (context.level === Logger11.TRACE && console.trace) {
+            } else if (context.level === Logger22.TRACE && console.trace) {
               hdlr = console.trace;
             }
             options.formatter(messages, context);
@@ -3649,22 +3882,22 @@ var require_logger = __commonJS({
           }
         };
       };
-      Logger11.useDefaults = function(options) {
-        Logger11.setLevel(options && options.defaultLevel || Logger11.DEBUG);
-        Logger11.setHandler(Logger11.createDefaultHandler(options));
+      Logger22.useDefaults = function(options) {
+        Logger22.setLevel(options && options.defaultLevel || Logger22.DEBUG);
+        Logger22.setHandler(Logger22.createDefaultHandler(options));
       };
-      Logger11.setDefaults = Logger11.useDefaults;
+      Logger22.setDefaults = Logger22.useDefaults;
       if (typeof define === "function" && define.amd) {
-        define(Logger11);
+        define(Logger22);
       } else if (typeof module2 !== "undefined" && module2.exports) {
-        module2.exports = Logger11;
+        module2.exports = Logger22;
       } else {
-        Logger11._prevLogger = global2.Logger;
-        Logger11.noConflict = function() {
-          global2.Logger = Logger11._prevLogger;
-          return Logger11;
+        Logger22._prevLogger = global2.Logger;
+        Logger22.noConflict = function() {
+          global2.Logger = Logger22._prevLogger;
+          return Logger22;
         };
-        global2.Logger = Logger11;
+        global2.Logger = Logger22;
       }
     })(exports);
   }
@@ -3722,7 +3955,7 @@ var require_extend = __commonJS({
       return obj[name];
     };
     module2.exports = function extend2() {
-      var options, name, src, copy2, copyIsArray, clone3;
+      var options, name, src, copy, copyIsArray, clone3;
       var target = arguments[0];
       var i = 1;
       var length = arguments.length;
@@ -3740,18 +3973,18 @@ var require_extend = __commonJS({
         if (options != null) {
           for (name in options) {
             src = getProperty(target, name);
-            copy2 = getProperty(options, name);
-            if (target !== copy2) {
-              if (deep && copy2 && (isPlainObject2(copy2) || (copyIsArray = isArray(copy2)))) {
+            copy = getProperty(options, name);
+            if (target !== copy) {
+              if (deep && copy && (isPlainObject2(copy) || (copyIsArray = isArray(copy)))) {
                 if (copyIsArray) {
                   copyIsArray = false;
                   clone3 = src && isArray(src) ? src : [];
                 } else {
                   clone3 = src && isPlainObject2(src) ? src : {};
                 }
-                setProperty(target, { name, newValue: extend2(deep, clone3, copy2) });
-              } else if (typeof copy2 !== "undefined") {
-                setProperty(target, { name, newValue: copy2 });
+                setProperty(target, { name, newValue: extend2(deep, clone3, copy) });
+              } else if (typeof copy !== "undefined") {
+                setProperty(target, { name, newValue: copy });
               }
             }
           }
@@ -4970,7 +5203,7 @@ var require_lib = __commonJS({
     function maybeArray2(thing) {
       return Array.isArray(thing) ? thing : [thing];
     }
-    function bestBy2(arr, by, compare3) {
+    function bestBy2(arr, by, compare) {
       if (arr.length === 0) {
         return void 0;
       }
@@ -4978,7 +5211,7 @@ var require_lib = __commonJS({
         const pair = [by(next), next];
         if (!best) {
           return pair;
-        } else if (compare3(best[0], pair[0]) === best[0]) {
+        } else if (compare(best[0], pair[0]) === best[0]) {
           return best;
         } else {
           return pair;
@@ -5010,18 +5243,18 @@ var require_lib = __commonJS({
       }
       return padded;
     }
-    function parseInteger2(string3) {
-      if (isUndefined2(string3) || string3 === null || string3 === "") {
+    function parseInteger2(string4) {
+      if (isUndefined2(string4) || string4 === null || string4 === "") {
         return void 0;
       } else {
-        return parseInt(string3, 10);
+        return parseInt(string4, 10);
       }
     }
-    function parseFloating2(string3) {
-      if (isUndefined2(string3) || string3 === null || string3 === "") {
+    function parseFloating2(string4) {
+      if (isUndefined2(string4) || string4 === null || string4 === "") {
         return void 0;
       } else {
-        return parseFloat(string3);
+        return parseFloat(string4);
       }
     }
     function parseMillis2(fraction) {
@@ -5230,7 +5463,7 @@ var require_lib = __commonJS({
     function eraForDateTime2(dt, length) {
       return eras2(length)[dt.year < 0 ? 0 : 1];
     }
-    function formatRelativeTime2(unit, count, numeric = "always", narrow = false) {
+    function formatRelativeTime2(unit, count, numeric2 = "always", narrow = false) {
       const units = {
         years: ["year", "yr."],
         quarters: ["quarter", "qtr."],
@@ -5242,7 +5475,7 @@ var require_lib = __commonJS({
         seconds: ["second", "sec."]
       };
       const lastable = ["hours", "minutes", "seconds"].indexOf(unit) === -1;
-      if (numeric === "auto" && lastable) {
+      if (numeric2 === "auto" && lastable) {
         const isDay = unit === "days";
         switch (count) {
           case 1:
@@ -5364,12 +5597,12 @@ var require_lib = __commonJS({
         return this.loc.numberFormatter(opts).format(n3);
       }
       formatDateTimeFromString(dt, fmt) {
-        const knownEnglish = this.loc.listingMode() === "en", useDateTimeFormatter = this.loc.outputCalendar && this.loc.outputCalendar !== "gregory", string3 = (opts, extract) => this.loc.extract(dt, opts, extract), formatOffset3 = (opts) => {
+        const knownEnglish = this.loc.listingMode() === "en", useDateTimeFormatter = this.loc.outputCalendar && this.loc.outputCalendar !== "gregory", string4 = (opts, extract) => this.loc.extract(dt, opts, extract), formatOffset3 = (opts) => {
           if (dt.isOffsetFixed && dt.offset === 0 && opts.allowZ) {
             return "Z";
           }
           return dt.isValid ? dt.zone.formatOffset(dt.ts, opts.format) : "";
-        }, meridiem = () => knownEnglish ? meridiemForDateTime2(dt) : string3({ hour: "numeric", hourCycle: "h12" }, "dayperiod"), month = (length, standalone) => knownEnglish ? monthForDateTime2(dt, length) : string3(standalone ? { month: length } : { month: length, day: "numeric" }, "month"), weekday = (length, standalone) => knownEnglish ? weekdayForDateTime2(dt, length) : string3(
+        }, meridiem = () => knownEnglish ? meridiemForDateTime2(dt) : string4({ hour: "numeric", hourCycle: "h12" }, "dayperiod"), month = (length, standalone) => knownEnglish ? monthForDateTime2(dt, length) : string4(standalone ? { month: length } : { month: length, day: "numeric" }, "month"), weekday = (length, standalone) => knownEnglish ? weekdayForDateTime2(dt, length) : string4(
           standalone ? { weekday: length } : { weekday: length, month: "long", day: "numeric" },
           "weekday"
         ), maybeMacro = (token) => {
@@ -5379,7 +5612,7 @@ var require_lib = __commonJS({
           } else {
             return token;
           }
-        }, era = (length) => knownEnglish ? eraForDateTime2(dt, length) : string3({ era: length }, "era"), tokenToString = (token) => {
+        }, era = (length) => knownEnglish ? eraForDateTime2(dt, length) : string4({ era: length }, "era"), tokenToString = (token) => {
           switch (token) {
             // ms
             case "S":
@@ -5431,9 +5664,9 @@ var require_lib = __commonJS({
               return meridiem();
             // dates
             case "d":
-              return useDateTimeFormatter ? string3({ day: "numeric" }, "day") : this.num(dt.day);
+              return useDateTimeFormatter ? string4({ day: "numeric" }, "day") : this.num(dt.day);
             case "dd":
-              return useDateTimeFormatter ? string3({ day: "2-digit" }, "day") : this.num(dt.day, 2);
+              return useDateTimeFormatter ? string4({ day: "2-digit" }, "day") : this.num(dt.day, 2);
             // weekdays - standalone
             case "c":
               return this.num(dt.weekday);
@@ -5454,9 +5687,9 @@ var require_lib = __commonJS({
               return weekday("narrow", false);
             // months - standalone
             case "L":
-              return useDateTimeFormatter ? string3({ month: "numeric", day: "numeric" }, "month") : this.num(dt.month);
+              return useDateTimeFormatter ? string4({ month: "numeric", day: "numeric" }, "month") : this.num(dt.month);
             case "LL":
-              return useDateTimeFormatter ? string3({ month: "2-digit", day: "numeric" }, "month") : this.num(dt.month, 2);
+              return useDateTimeFormatter ? string4({ month: "2-digit", day: "numeric" }, "month") : this.num(dt.month, 2);
             case "LLL":
               return month("short", true);
             case "LLLL":
@@ -5465,9 +5698,9 @@ var require_lib = __commonJS({
               return month("narrow", true);
             // months - format
             case "M":
-              return useDateTimeFormatter ? string3({ month: "numeric" }, "month") : this.num(dt.month);
+              return useDateTimeFormatter ? string4({ month: "numeric" }, "month") : this.num(dt.month);
             case "MM":
-              return useDateTimeFormatter ? string3({ month: "2-digit" }, "month") : this.num(dt.month, 2);
+              return useDateTimeFormatter ? string4({ month: "2-digit" }, "month") : this.num(dt.month, 2);
             case "MMM":
               return month("short", false);
             case "MMMM":
@@ -5476,13 +5709,13 @@ var require_lib = __commonJS({
               return month("narrow", false);
             // years
             case "y":
-              return useDateTimeFormatter ? string3({ year: "numeric" }, "year") : this.num(dt.year);
+              return useDateTimeFormatter ? string4({ year: "numeric" }, "year") : this.num(dt.year);
             case "yy":
-              return useDateTimeFormatter ? string3({ year: "2-digit" }, "year") : this.num(dt.year.toString().slice(-2), 2);
+              return useDateTimeFormatter ? string4({ year: "2-digit" }, "year") : this.num(dt.year.toString().slice(-2), 2);
             case "yyyy":
-              return useDateTimeFormatter ? string3({ year: "numeric" }, "year") : this.num(dt.year, 4);
+              return useDateTimeFormatter ? string4({ year: "numeric" }, "year") : this.num(dt.year, 4);
             case "yyyyyy":
-              return useDateTimeFormatter ? string3({ year: "numeric" }, "year") : this.num(dt.year, 6);
+              return useDateTimeFormatter ? string4({ year: "numeric" }, "year") : this.num(dt.year, 6);
             // eras
             case "G":
               return era("short");
@@ -5579,7 +5812,7 @@ var require_lib = __commonJS({
         [{}, null, 1]
       ).slice(0, 2);
     }
-    function parse3(s3, ...patterns) {
+    function parse4(s3, ...patterns) {
       if (s3 == null) {
         return [null, null];
       }
@@ -5592,11 +5825,11 @@ var require_lib = __commonJS({
       return [null, null];
     }
     function simpleParse2(...keys) {
-      return (match3, cursor) => {
+      return (match4, cursor) => {
         const ret = {};
         let i;
         for (i = 0; i < keys.length; i++) {
-          ret[keys[i]] = parseInteger2(match3[cursor + i]);
+          ret[keys[i]] = parseInteger2(match4[cursor + i]);
         }
         return [ret, null, cursor + i];
       };
@@ -5616,39 +5849,39 @@ var require_lib = __commonJS({
       `${isoTimeBaseRegex2.source} ?(?:${offsetRegex2.source}|(${ianaRegex2.source}))?`
     );
     var sqlTimeExtensionRegex2 = RegExp(`(?: ${sqlTimeRegex2.source})?`);
-    function int2(match3, pos, fallback) {
-      const m = match3[pos];
+    function int4(match4, pos, fallback) {
+      const m = match4[pos];
       return isUndefined2(m) ? fallback : parseInteger2(m);
     }
-    function extractISOYmd2(match3, cursor) {
+    function extractISOYmd2(match4, cursor) {
       const item = {
-        year: int2(match3, cursor),
-        month: int2(match3, cursor + 1, 1),
-        day: int2(match3, cursor + 2, 1)
+        year: int4(match4, cursor),
+        month: int4(match4, cursor + 1, 1),
+        day: int4(match4, cursor + 2, 1)
       };
       return [item, null, cursor + 3];
     }
-    function extractISOTime2(match3, cursor) {
+    function extractISOTime2(match4, cursor) {
       const item = {
-        hours: int2(match3, cursor, 0),
-        minutes: int2(match3, cursor + 1, 0),
-        seconds: int2(match3, cursor + 2, 0),
-        milliseconds: parseMillis2(match3[cursor + 3])
+        hours: int4(match4, cursor, 0),
+        minutes: int4(match4, cursor + 1, 0),
+        seconds: int4(match4, cursor + 2, 0),
+        milliseconds: parseMillis2(match4[cursor + 3])
       };
       return [item, null, cursor + 4];
     }
-    function extractISOOffset2(match3, cursor) {
-      const local = !match3[cursor] && !match3[cursor + 1], fullOffset = signedOffset2(match3[cursor + 1], match3[cursor + 2]), zone = local ? null : FixedOffsetZone2.instance(fullOffset);
+    function extractISOOffset2(match4, cursor) {
+      const local = !match4[cursor] && !match4[cursor + 1], fullOffset = signedOffset2(match4[cursor + 1], match4[cursor + 2]), zone = local ? null : FixedOffsetZone2.instance(fullOffset);
       return [{}, zone, cursor + 3];
     }
-    function extractIANAZone2(match3, cursor) {
-      const zone = match3[cursor] ? IANAZone2.create(match3[cursor]) : null;
+    function extractIANAZone2(match4, cursor) {
+      const zone = match4[cursor] ? IANAZone2.create(match4[cursor]) : null;
       return [{}, zone, cursor + 1];
     }
     var isoTimeOnly2 = RegExp(`^T?${isoTimeBaseRegex2.source}$`);
     var isoDuration2 = /^-?P(?:(?:(-?\d{1,20}(?:\.\d{1,20})?)Y)?(?:(-?\d{1,20}(?:\.\d{1,20})?)M)?(?:(-?\d{1,20}(?:\.\d{1,20})?)W)?(?:(-?\d{1,20}(?:\.\d{1,20})?)D)?(?:T(?:(-?\d{1,20}(?:\.\d{1,20})?)H)?(?:(-?\d{1,20}(?:\.\d{1,20})?)M)?(?:(-?\d{1,20})(?:[.,](-?\d{1,20}))?S)?)?)$/;
-    function extractISODuration2(match3) {
-      const [s3, yearStr, monthStr, weekStr, dayStr, hourStr, minuteStr, secondStr, millisecondsStr] = match3;
+    function extractISODuration2(match4) {
+      const [s3, yearStr, monthStr, weekStr, dayStr, hourStr, minuteStr, secondStr, millisecondsStr] = match4;
       const hasNegativePrefix = s3[0] === "-";
       const negativeSeconds = secondStr && secondStr[0] === "-";
       const maybeNegate = (num, force = false) => num !== void 0 && (force || num && hasNegativePrefix) ? -num : num;
@@ -5691,7 +5924,7 @@ var require_lib = __commonJS({
       return result;
     }
     var rfc28222 = /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|(?:([+-]\d\d)(\d\d)))$/;
-    function extractRFC28222(match3) {
+    function extractRFC28222(match4) {
       const [
         ,
         weekdayStr,
@@ -5705,7 +5938,7 @@ var require_lib = __commonJS({
         milOffset,
         offHourStr,
         offMinuteStr
-      ] = match3, result = fromStrings2(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
+      ] = match4, result = fromStrings2(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
       let offset3;
       if (obsOffset) {
         offset3 = obsOffsets2[obsOffset];
@@ -5722,12 +5955,12 @@ var require_lib = __commonJS({
     var rfc11232 = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), (\d\d) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4}) (\d\d):(\d\d):(\d\d) GMT$/;
     var rfc8502 = /^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), (\d\d)-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\d\d) (\d\d):(\d\d):(\d\d) GMT$/;
     var ascii2 = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ( \d|\d\d) (\d\d):(\d\d):(\d\d) (\d{4})$/;
-    function extractRFC1123Or8502(match3) {
-      const [, weekdayStr, dayStr, monthStr, yearStr, hourStr, minuteStr, secondStr] = match3, result = fromStrings2(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
+    function extractRFC1123Or8502(match4) {
+      const [, weekdayStr, dayStr, monthStr, yearStr, hourStr, minuteStr, secondStr] = match4, result = fromStrings2(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
       return [result, FixedOffsetZone2.utcInstance];
     }
-    function extractASCII2(match3) {
-      const [, weekdayStr, monthStr, dayStr, hourStr, minuteStr, secondStr, yearStr] = match3, result = fromStrings2(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
+    function extractASCII2(match4) {
+      const [, weekdayStr, monthStr, dayStr, hourStr, minuteStr, secondStr, yearStr] = match4, result = fromStrings2(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
       return [result, FixedOffsetZone2.utcInstance];
     }
     var isoYmdWithTimeExtensionRegex2 = combineRegexes2(isoYmdRegex2, isoTimeExtensionRegex2);
@@ -5758,7 +5991,7 @@ var require_lib = __commonJS({
       extractIANAZone2
     );
     function parseISODate2(s3) {
-      return parse3(
+      return parse4(
         s3,
         [isoYmdWithTimeExtensionRegex2, extractISOYmdTimeAndOffset2],
         [isoWeekWithTimeExtensionRegex2, extractISOWeekTimeAndOffset2],
@@ -5767,10 +6000,10 @@ var require_lib = __commonJS({
       );
     }
     function parseRFC2822Date2(s3) {
-      return parse3(preprocessRFC28222(s3), [rfc28222, extractRFC28222]);
+      return parse4(preprocessRFC28222(s3), [rfc28222, extractRFC28222]);
     }
     function parseHTTPDate2(s3) {
-      return parse3(
+      return parse4(
         s3,
         [rfc11232, extractRFC1123Or8502],
         [rfc8502, extractRFC1123Or8502],
@@ -5778,11 +6011,11 @@ var require_lib = __commonJS({
       );
     }
     function parseISODuration2(s3) {
-      return parse3(s3, [isoDuration2, extractISODuration2]);
+      return parse4(s3, [isoDuration2, extractISODuration2]);
     }
     var extractISOTimeOnly2 = combineExtractors2(extractISOTime2);
     function parseISOTimeOnly2(s3) {
-      return parse3(s3, [isoTimeOnly2, extractISOTimeOnly2]);
+      return parse4(s3, [isoTimeOnly2, extractISOTimeOnly2]);
     }
     var sqlYmdWithTimeExtensionRegex2 = combineRegexes2(sqlYmdRegex2, sqlTimeExtensionRegex2);
     var sqlTimeCombinedRegex2 = combineRegexes2(sqlTimeRegex2);
@@ -5792,7 +6025,7 @@ var require_lib = __commonJS({
       extractIANAZone2
     );
     function parseSQL2(s3) {
-      return parse3(
+      return parse4(
         s3,
         [sqlYmdWithTimeExtensionRegex2, extractISOYmdTimeAndOffset2],
         [sqlTimeCombinedRegex2, extractISOTimeOffsetAndIANAZone2]
@@ -7621,7 +7854,7 @@ var require_lib = __commonJS({
       const re = units.map((u) => u.regex).reduce((f, r) => `${f}(${r.source})`, "");
       return [`^${re}$`, units];
     }
-    function match2(input, regex, handlers) {
+    function match3(input, regex, handlers) {
       const matches = input.match(regex);
       if (matches) {
         const all2 = {};
@@ -7736,7 +7969,7 @@ var require_lib = __commonJS({
       if (disqualifyingUnit) {
         return { input, tokens, invalidReason: disqualifyingUnit.invalidReason };
       } else {
-        const [regexString, handlers] = buildRegex2(units), regex = RegExp(regexString, "i"), [rawMatches, matches] = match2(input, regex, handlers), [result, zone, specificOffset] = matches ? dateTimeFromMatches2(matches) : [null, null, void 0];
+        const [regexString, handlers] = buildRegex2(units), regex = RegExp(regexString, "i"), [rawMatches, matches] = match3(input, regex, handlers), [result, zone, specificOffset] = matches ? dateTimeFromMatches2(matches) : [null, null, void 0];
         if (hasOwnProperty3(matches, "a") && hasOwnProperty3(matches, "H")) {
           throw new ConflictingSpecificationError2(
             "Can't include meridiem when specifying 24-hour format"
@@ -9149,10 +9382,10 @@ var require_lib = __commonJS({
         if (!this.isValid) {
           return null;
         }
-        const ext = format === "extended";
-        let c = toISODate2(this, ext);
+        const ext2 = format === "extended";
+        let c = toISODate2(this, ext2);
         c += "T";
-        c += toISOTime2(this, ext, suppressSeconds, suppressMilliseconds, includeOffset, extendedZone);
+        c += toISOTime2(this, ext2, suppressSeconds, suppressMilliseconds, includeOffset, extendedZone);
         return c;
       }
       /**
@@ -9877,16 +10110,16 @@ var require_lib = __commonJS({
               var n5;
               r2 = { v: r2.v << 1 | (n5 = r2.buf, n5[0] >> 7), buf: function(n6) {
                 var t3 = i(function(n7, t4, r3, e2) {
-                  return n7.concat(r3 === e2.length - 1 ? Buffer.from([t4, 0]).readUInt16BE(0) : e2.readUInt16BE(r3));
+                  return n7.concat(r3 === e2.length - 1 ? Buffer2.from([t4, 0]).readUInt16BE(0) : e2.readUInt16BE(r3));
                 }, [], n6);
-                return Buffer.from(a(function(n7) {
+                return Buffer2.from(a(function(n7) {
                   return (n7 << 1 & 65535) >> 8;
                 }, t3));
               }(r2.buf) };
             }), r2;
           }
           function c() {
-            return "undefined" != typeof Buffer;
+            return "undefined" != typeof Buffer2;
           }
           function s3() {
             if (!c()) throw new Error("Buffer global does not exist; please use webpack if you need to parse Buffers in the browser.");
@@ -9947,7 +10180,7 @@ var require_lib = __commonJS({
             return "[object Array]" === {}.toString.call(n4);
           }
           function w(n4) {
-            return c() && Buffer.isBuffer(n4);
+            return c() && Buffer2.isBuffer(n4);
           }
           function b(n4, t2) {
             return { status: true, index: n4, value: t2, furthest: -1, expected: [] };
@@ -10376,7 +10609,7 @@ var require_lib = __commonJS({
             });
           }, buffer: function(n4) {
             return h("buffer", n4).map(function(n5) {
-              return Buffer.from(n5);
+              return Buffer2.from(n5);
             });
           }, encodedString: function(n4, t2) {
             return h("string", t2).map(function(t3) {
@@ -10403,12 +10636,12 @@ var require_lib = __commonJS({
         return dur;
       return dur.shiftToAll().normalize();
     }
-    function getFileTitle(path) {
-      if (path.includes("/"))
-        path = path.substring(path.lastIndexOf("/") + 1);
-      if (path.endsWith(".md"))
-        path = path.substring(0, path.length - 3);
-      return path;
+    function getFileTitle(path2) {
+      if (path2.includes("/"))
+        path2 = path2.substring(path2.lastIndexOf("/") + 1);
+      if (path2.endsWith(".md"))
+        path2 = path2.substring(0, path2.length - 3);
+      return path2;
     }
     parsimmon_umd_minExports.alt(parsimmon_umd_minExports.regex(new RegExp(emojiRegex(), "")), parsimmon_umd_minExports.regex(/[0-9\p{Letter}_-]+/u).map((str) => str.toLocaleLowerCase()), parsimmon_umd_minExports.whitespace.map((_) => "-"), parsimmon_umd_minExports.any.map((_) => "")).many().map((result) => result.join(""));
     var HEADER_CANONICALIZER = parsimmon_umd_minExports.alt(parsimmon_umd_minExports.regex(new RegExp(emojiRegex(), "")), parsimmon_umd_minExports.regex(/[0-9\p{Letter}_-]+/u), parsimmon_umd_minExports.whitespace.map((_) => " "), parsimmon_umd_minExports.any.map((_) => " ")).many().map((result) => {
@@ -10424,7 +10657,7 @@ var require_lib = __commonJS({
     }
     var Values;
     (function(Values2) {
-      function toString4(field, setting = DEFAULT_QUERY_SETTINGS, recursive = false) {
+      function toString2(field, setting = DEFAULT_QUERY_SETTINGS, recursive = false) {
         let wrapped = wrapValue(field);
         if (!wrapped)
           return setting.renderNullAs;
@@ -10448,12 +10681,12 @@ var require_lib = __commonJS({
             let result = "";
             if (recursive)
               result += "[";
-            result += wrapped.value.map((f) => toString4(f, setting, true)).join(", ");
+            result += wrapped.value.map((f) => toString2(f, setting, true)).join(", ");
             if (recursive)
               result += "]";
             return result;
           case "object":
-            return "{ " + Object.entries(wrapped.value).map((e) => e[0] + ": " + toString4(e[1], setting, true)).join(", ") + " }";
+            return "{ " + Object.entries(wrapped.value).map((e) => e[0] + ": " + toString2(e[1], setting, true)).join(", ") + " }";
           case "date":
             if (wrapped.value.second == 0 && wrapped.value.hour == 0 && wrapped.value.minute == 0) {
               return wrapped.value.toFormat(setting.defaultDateFormat);
@@ -10463,7 +10696,7 @@ var require_lib = __commonJS({
             return renderMinimalDuration(wrapped.value);
         }
       }
-      Values2.toString = toString4;
+      Values2.toString = toString2;
       function wrapValue(val) {
         if (isNull(val))
           return { type: "null", value: val };
@@ -10740,9 +10973,9 @@ var require_lib = __commonJS({
       /** The type of this link, which determines what 'subpath' refers to, if anything. */
       type;
       /** Create a link to a specific file. */
-      static file(path, embed = false, display) {
+      static file(path2, embed = false, display) {
         return new _Link({
-          path,
+          path: path2,
           embed,
           display,
           subpath: void 0,
@@ -10760,9 +10993,9 @@ var require_lib = __commonJS({
           return _Link.file(linkpath, embed, display);
       }
       /** Create a link to a specific file and header in that file. */
-      static header(path, header, embed, display) {
+      static header(path2, header, embed, display) {
         return new _Link({
-          path,
+          path: path2,
           embed,
           display,
           subpath: normalizeHeaderForLink(header),
@@ -10770,9 +11003,9 @@ var require_lib = __commonJS({
         });
       }
       /** Create a link to a specific file and block in that file. */
-      static block(path, blockId, embed, display) {
+      static block(path2, blockId, embed, display) {
         return new _Link({
-          path,
+          path: path2,
           embed,
           display,
           subpath: blockId,
@@ -10801,8 +11034,8 @@ var require_lib = __commonJS({
       }
       /** Update this link with a new path. */
       //@ts-ignore; error appeared after updating Obsidian to 0.15.4; it also updated other packages but didn't say which
-      withPath(path) {
-        return new _Link(Object.assign({}, this, { path }));
+      withPath(path2) {
+        return new _Link(Object.assign({}, this, { path: path2 }));
       }
       /** Return a new link which points to the same location but with a new display value. */
       withDisplay(display) {
@@ -10976,8 +11209,8 @@ var require_lib = __commonJS({
         return { type: "tag", tag: tag2 };
       }
       Sources2.tag = tag;
-      function csv(path) {
-        return { type: "csv", path };
+      function csv(path2) {
+        return { type: "csv", path: path2 };
       }
       Sources2.csv = csv;
       function folder(prefix) {
@@ -11075,8 +11308,8 @@ var require_lib = __commonJS({
       let [link2, display] = splitOnUnescapedPipe(rawlink);
       return Link.infer(link2, false, display);
     }
-    function createBinaryParser(child, sep, combine) {
-      return parsimmon_umd_minExports.seqMap(child, parsimmon_umd_minExports.seq(parsimmon_umd_minExports.optWhitespace, sep, parsimmon_umd_minExports.optWhitespace, child).many(), (first, rest) => {
+    function createBinaryParser(child, sep2, combine) {
+      return parsimmon_umd_minExports.seqMap(child, parsimmon_umd_minExports.seq(parsimmon_umd_minExports.optWhitespace, sep2, parsimmon_umd_minExports.optWhitespace, child).many(), (first, rest) => {
         if (rest.length == 0)
           return first;
         let node2 = combine(first, rest[0][1], rest[0][3]);
@@ -11154,7 +11387,7 @@ var require_lib = __commonJS({
         parsimmon_umd_minExports.seqMap(parsimmon_umd_minExports.string("."), parsimmon_umd_minExports.regexp(/\d{3}/), (_, millisecond) => ymdhms.set({ millisecond: Number.parseInt(millisecond) })),
         parsimmon_umd_minExports.succeed(ymdhms)
         // pass
-      ), (dt) => parsimmon_umd_minExports.alt(parsimmon_umd_minExports.seqMap(parsimmon_umd_minExports.string("+").or(parsimmon_umd_minExports.string("-")), parsimmon_umd_minExports.regexp(/\d{1,2}(:\d{2})?/), (pm, hr) => dt.setZone("UTC" + pm + hr, { keepLocalTime: true })), parsimmon_umd_minExports.seqMap(parsimmon_umd_minExports.string("Z"), () => dt.setZone("utc", { keepLocalTime: true })), parsimmon_umd_minExports.seqMap(parsimmon_umd_minExports.string("["), parsimmon_umd_minExports.regexp(/[0-9A-Za-z+-\/]+/u), parsimmon_umd_minExports.string("]"), (_a, zone, _b) => dt.setZone(zone, { keepLocalTime: true })))).assert((dt) => dt.isValid, "valid date").desc("date in format YYYY-MM[-DDTHH-MM-SS.MS]"),
+      ), (dt) => parsimmon_umd_minExports.alt(parsimmon_umd_minExports.seqMap(parsimmon_umd_minExports.string("+").or(parsimmon_umd_minExports.string("-")), parsimmon_umd_minExports.regexp(/\d{1,2}(:\d{2})?/), (pm, hr) => dt.setZone("UTC" + pm + hr, { keepLocalTime: true })), parsimmon_umd_minExports.seqMap(parsimmon_umd_minExports.string("Z"), () => dt.setZone("utc", { keepLocalTime: true })), parsimmon_umd_minExports.seqMap(parsimmon_umd_minExports.string("["), parsimmon_umd_minExports.regexp(/[0-9A-Za-z+-\/]+/u), parsimmon_umd_minExports.string("]"), (_a2, zone, _b) => dt.setZone(zone, { keepLocalTime: true })))).assert((dt) => dt.isValid, "valid date").desc("date in format YYYY-MM[-DDTHH-MM-SS.MS]"),
       // A date, plus various shorthand times of day it could be.
       datePlus: (q) => parsimmon_umd_minExports.alt(q.dateShorthand.map((d) => DATE_SHORTHANDS[d]()), q.date).desc("date in format YYYY-MM[-DDTHH-MM-SS.MS] or in shorthand"),
       // A duration of time.
@@ -11164,7 +11397,7 @@ var require_lib = __commonJS({
       rawNull: (_) => parsimmon_umd_minExports.string("null"),
       // Source parsing.
       tagSource: (q) => q.tag.map((tag) => Sources.tag(tag)),
-      csvSource: (q) => parsimmon_umd_minExports.seqMap(parsimmon_umd_minExports.string("csv(").skip(parsimmon_umd_minExports.optWhitespace), q.string, parsimmon_umd_minExports.string(")"), (_1, path, _2) => Sources.csv(path)),
+      csvSource: (q) => parsimmon_umd_minExports.seqMap(parsimmon_umd_minExports.string("csv(").skip(parsimmon_umd_minExports.optWhitespace), q.string, parsimmon_umd_minExports.string(")"), (_1, path2, _2) => Sources.csv(path2)),
       linkIncomingSource: (q) => q.link.map((link2) => Sources.link(link2.path, true)),
       linkOutgoingSource: (q) => parsimmon_umd_minExports.seqMap(parsimmon_umd_minExports.string("outgoing(").skip(parsimmon_umd_minExports.optWhitespace), q.link, parsimmon_umd_minExports.string(")"), (_1, link2, _2) => Sources.link(link2.path, false)),
       folderSource: (q) => q.string.map((str) => Sources.folder(str)),
@@ -11361,10 +11594,10 @@ var require_lib = __commonJS({
       }).desc("GROUP BY <value> [AS <name>]"),
       // Full query parsing.
       clause: (q) => parsimmon_umd_minExports.alt(q.fromClause, q.whereClause, q.sortByClause, q.limitClause, q.groupByClause, q.flattenClause),
-      query: (q) => parsimmon_umd_minExports.seqMap(q.headerClause.trim(optionalWhitespaceOrComment), q.fromClause.trim(optionalWhitespaceOrComment).atMost(1), q.clause.trim(optionalWhitespaceOrComment).many(), (header, from2, clauses) => {
+      query: (q) => parsimmon_umd_minExports.seqMap(q.headerClause.trim(optionalWhitespaceOrComment), q.fromClause.trim(optionalWhitespaceOrComment).atMost(1), q.clause.trim(optionalWhitespaceOrComment).many(), (header, from, clauses) => {
         return {
           header,
-          source: from2.length == 0 ? Sources.folder("") : from2[0],
+          source: from.length == 0 ? Sources.folder("") : from[0],
           operations: clauses,
           settings: DEFAULT_QUERY_SETTINGS
         };
@@ -11661,17 +11894,17 @@ var require_inherits_browser = __commonJS({
 var require_safe_buffer = __commonJS({
   "node_modules/sha.js/node_modules/safe-buffer/index.js"(exports, module2) {
     init_esbuild_buffer_shim();
-    var buffer = (init_buffer_es6(), __toCommonJS(buffer_es6_exports));
-    var Buffer3 = buffer.Buffer;
+    var buffer2 = require_buffer();
+    var Buffer3 = buffer2.Buffer;
     function copyProps(src, dst) {
       for (var key in src) {
         dst[key] = src[key];
       }
     }
     if (Buffer3.from && Buffer3.alloc && Buffer3.allocUnsafe && Buffer3.allocUnsafeSlow) {
-      module2.exports = buffer;
+      module2.exports = buffer2;
     } else {
-      copyProps(buffer, exports);
+      copyProps(buffer2, exports);
       exports.Buffer = SafeBuffer;
     }
     function SafeBuffer(arg, encodingOrOffset, length) {
@@ -11685,16 +11918,16 @@ var require_safe_buffer = __commonJS({
       }
       return Buffer3(arg, encodingOrOffset, length);
     };
-    SafeBuffer.alloc = function(size, fill2, encoding) {
+    SafeBuffer.alloc = function(size, fill, encoding) {
       if (typeof size !== "number") {
         throw new TypeError("Argument must be a number");
       }
       var buf = Buffer3(size);
-      if (fill2 !== void 0) {
+      if (fill !== void 0) {
         if (typeof encoding === "string") {
-          buf.fill(fill2, encoding);
+          buf.fill(fill, encoding);
         } else {
-          buf.fill(fill2);
+          buf.fill(fill);
         }
       } else {
         buf.fill(0);
@@ -11711,7 +11944,7 @@ var require_safe_buffer = __commonJS({
       if (typeof size !== "number") {
         throw new TypeError("Argument must be a number");
       }
-      return buffer.SlowBuffer(size);
+      return buffer2.SlowBuffer(size);
     };
   }
 });
@@ -11720,17 +11953,17 @@ var require_safe_buffer = __commonJS({
 var require_safe_buffer2 = __commonJS({
   "node_modules/to-buffer/node_modules/safe-buffer/index.js"(exports, module2) {
     init_esbuild_buffer_shim();
-    var buffer = (init_buffer_es6(), __toCommonJS(buffer_es6_exports));
-    var Buffer3 = buffer.Buffer;
+    var buffer2 = require_buffer();
+    var Buffer3 = buffer2.Buffer;
     function copyProps(src, dst) {
       for (var key in src) {
         dst[key] = src[key];
       }
     }
     if (Buffer3.from && Buffer3.alloc && Buffer3.allocUnsafe && Buffer3.allocUnsafeSlow) {
-      module2.exports = buffer;
+      module2.exports = buffer2;
     } else {
-      copyProps(buffer, exports);
+      copyProps(buffer2, exports);
       exports.Buffer = SafeBuffer;
     }
     function SafeBuffer(arg, encodingOrOffset, length) {
@@ -11744,16 +11977,16 @@ var require_safe_buffer2 = __commonJS({
       }
       return Buffer3(arg, encodingOrOffset, length);
     };
-    SafeBuffer.alloc = function(size, fill2, encoding) {
+    SafeBuffer.alloc = function(size, fill, encoding) {
       if (typeof size !== "number") {
         throw new TypeError("Argument must be a number");
       }
       var buf = Buffer3(size);
-      if (fill2 !== void 0) {
+      if (fill !== void 0) {
         if (typeof encoding === "string") {
-          buf.fill(fill2, encoding);
+          buf.fill(fill, encoding);
         } else {
-          buf.fill(fill2);
+          buf.fill(fill);
         }
       } else {
         buf.fill(0);
@@ -11770,7 +12003,7 @@ var require_safe_buffer2 = __commonJS({
       if (typeof size !== "number") {
         throw new TypeError("Argument must be a number");
       }
-      return buffer.SlowBuffer(size);
+      return buffer2.SlowBuffer(size);
     };
   }
 });
@@ -11779,9 +12012,9 @@ var require_safe_buffer2 = __commonJS({
 var require_isarray = __commonJS({
   "node_modules/to-buffer/node_modules/isarray/index.js"(exports, module2) {
     init_esbuild_buffer_shim();
-    var toString4 = {}.toString;
+    var toString2 = {}.toString;
     module2.exports = Array.isArray || function(arr) {
-      return toString4.call(arr) == "[object Array]";
+      return toString2.call(arr) == "[object Array]";
     };
   }
 });
@@ -12522,17 +12755,17 @@ var require_get_intrinsic = __commonJS({
     var $exec = bind.call($call, RegExp.prototype.exec);
     var rePropName = /[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g;
     var reEscapeChar = /\\(\\)?/g;
-    var stringToPath = function stringToPath2(string3) {
-      var first = $strSlice(string3, 0, 1);
-      var last = $strSlice(string3, -1);
+    var stringToPath = function stringToPath2(string4) {
+      var first = $strSlice(string4, 0, 1);
+      var last = $strSlice(string4, -1);
       if (first === "%" && last !== "%") {
         throw new $SyntaxError("invalid intrinsic syntax, expected closing `%`");
       } else if (last === "%" && first !== "%") {
         throw new $SyntaxError("invalid intrinsic syntax, expected opening `%`");
       }
       var result = [];
-      $replace(string3, rePropName, function(match2, number, quote, subString) {
-        result[result.length] = quote ? $replace(subString, reEscapeChar, "$1") : number || match2;
+      $replace(string4, rePropName, function(match3, number, quote, subString) {
+        result[result.length] = quote ? $replace(subString, reEscapeChar, "$1") : number || match3;
       });
       return result;
     };
@@ -12785,12 +13018,12 @@ var require_for_each = __commonJS({
         }
       }
     };
-    var forEachString = function forEachString2(string3, iterator, receiver) {
-      for (var i = 0, len = string3.length; i < len; i++) {
+    var forEachString = function forEachString2(string4, iterator, receiver) {
+      for (var i = 0, len = string4.length; i < len; i++) {
         if (receiver == null) {
-          iterator(string3.charAt(i), i, string3);
+          iterator(string4.charAt(i), i, string4);
         } else {
-          iterator.call(receiver, string3.charAt(i), i, string3);
+          iterator.call(receiver, string4.charAt(i), i, string4);
         }
       }
     };
@@ -13062,7 +13295,7 @@ var require_which_typed_array = __commonJS({
     var g = typeof globalThis === "undefined" ? globalThis : globalThis;
     var typedArrays = availableTypedArrays();
     var $slice = callBound("String.prototype.slice");
-    var $indexOf = callBound("Array.prototype.indexOf", true) || function indexOf2(array, value2) {
+    var $indexOf = callBound("Array.prototype.indexOf", true) || function indexOf(array, value2) {
       for (var i = 0; i < array.length; i += 1) {
         if (array[i] === value2) {
           return i;
@@ -14438,7 +14671,7 @@ var require_deflate = __commonJS({
     function longest_match(s2, cur_match) {
       var chain_length = s2.max_chain_length;
       var scan = s2.strstart;
-      var match2;
+      var match3;
       var len;
       var best_len = s2.prev_length;
       var nice_match = s2.nice_match;
@@ -14456,14 +14689,14 @@ var require_deflate = __commonJS({
         nice_match = s2.lookahead;
       }
       do {
-        match2 = cur_match;
-        if (_win[match2 + best_len] !== scan_end || _win[match2 + best_len - 1] !== scan_end1 || _win[match2] !== _win[scan] || _win[++match2] !== _win[scan + 1]) {
+        match3 = cur_match;
+        if (_win[match3 + best_len] !== scan_end || _win[match3 + best_len - 1] !== scan_end1 || _win[match3] !== _win[scan] || _win[++match3] !== _win[scan + 1]) {
           continue;
         }
         scan += 2;
-        match2++;
+        match3++;
         do {
-        } while (_win[++scan] === _win[++match2] && _win[++scan] === _win[++match2] && _win[++scan] === _win[++match2] && _win[++scan] === _win[++match2] && _win[++scan] === _win[++match2] && _win[++scan] === _win[++match2] && _win[++scan] === _win[++match2] && _win[++scan] === _win[++match2] && scan < strend);
+        } while (_win[++scan] === _win[++match3] && _win[++scan] === _win[++match3] && _win[++scan] === _win[++match3] && _win[++scan] === _win[++match3] && _win[++scan] === _win[++match3] && _win[++scan] === _win[++match3] && _win[++scan] === _win[++match3] && _win[++scan] === _win[++match3] && scan < strend);
         len = MAX_MATCH - (strend - scan);
         scan = strend - MAX_MATCH;
         if (len > best_len) {
@@ -15544,7 +15777,7 @@ var require_deflate2 = __commonJS({
     var strings = require_strings();
     var msg = require_messages();
     var ZStream = require_zstream();
-    var toString4 = Object.prototype.toString;
+    var toString2 = Object.prototype.toString;
     var Z_NO_FLUSH = 0;
     var Z_FINISH = 4;
     var Z_OK = 0;
@@ -15594,7 +15827,7 @@ var require_deflate2 = __commonJS({
         var dict;
         if (typeof opt.dictionary === "string") {
           dict = strings.string2buf(opt.dictionary);
-        } else if (toString4.call(opt.dictionary) === "[object ArrayBuffer]") {
+        } else if (toString2.call(opt.dictionary) === "[object ArrayBuffer]") {
           dict = new Uint8Array(opt.dictionary);
         } else {
           dict = opt.dictionary;
@@ -15616,7 +15849,7 @@ var require_deflate2 = __commonJS({
       _mode = mode === ~~mode ? mode : mode === true ? Z_FINISH : Z_NO_FLUSH;
       if (typeof data === "string") {
         strm.input = strings.string2buf(data);
-      } else if (toString4.call(data) === "[object ArrayBuffer]") {
+      } else if (toString2.call(data) === "[object ArrayBuffer]") {
         strm.input = new Uint8Array(data);
       } else {
         strm.input = data;
@@ -15725,7 +15958,7 @@ var require_inffast = __commonJS({
       var op;
       var len;
       var dist;
-      var from2;
+      var from;
       var from_source;
       var input, output;
       state = strm.state;
@@ -15818,72 +16051,72 @@ var require_inffast = __commonJS({
                             break top;
                           }
                         }
-                        from2 = 0;
+                        from = 0;
                         from_source = s_window;
                         if (wnext === 0) {
-                          from2 += wsize - op;
+                          from += wsize - op;
                           if (op < len) {
                             len -= op;
                             do {
-                              output[_out++] = s_window[from2++];
+                              output[_out++] = s_window[from++];
                             } while (--op);
-                            from2 = _out - dist;
+                            from = _out - dist;
                             from_source = output;
                           }
                         } else if (wnext < op) {
-                          from2 += wsize + wnext - op;
+                          from += wsize + wnext - op;
                           op -= wnext;
                           if (op < len) {
                             len -= op;
                             do {
-                              output[_out++] = s_window[from2++];
+                              output[_out++] = s_window[from++];
                             } while (--op);
-                            from2 = 0;
+                            from = 0;
                             if (wnext < len) {
                               op = wnext;
                               len -= op;
                               do {
-                                output[_out++] = s_window[from2++];
+                                output[_out++] = s_window[from++];
                               } while (--op);
-                              from2 = _out - dist;
+                              from = _out - dist;
                               from_source = output;
                             }
                           }
                         } else {
-                          from2 += wnext - op;
+                          from += wnext - op;
                           if (op < len) {
                             len -= op;
                             do {
-                              output[_out++] = s_window[from2++];
+                              output[_out++] = s_window[from++];
                             } while (--op);
-                            from2 = _out - dist;
+                            from = _out - dist;
                             from_source = output;
                           }
                         }
                         while (len > 2) {
-                          output[_out++] = from_source[from2++];
-                          output[_out++] = from_source[from2++];
-                          output[_out++] = from_source[from2++];
+                          output[_out++] = from_source[from++];
+                          output[_out++] = from_source[from++];
+                          output[_out++] = from_source[from++];
                           len -= 3;
                         }
                         if (len) {
-                          output[_out++] = from_source[from2++];
+                          output[_out++] = from_source[from++];
                           if (len > 1) {
-                            output[_out++] = from_source[from2++];
+                            output[_out++] = from_source[from++];
                           }
                         }
                       } else {
-                        from2 = _out - dist;
+                        from = _out - dist;
                         do {
-                          output[_out++] = output[from2++];
-                          output[_out++] = output[from2++];
-                          output[_out++] = output[from2++];
+                          output[_out++] = output[from++];
+                          output[_out++] = output[from++];
+                          output[_out++] = output[from++];
                           len -= 3;
                         } while (len > 2);
                         if (len) {
-                          output[_out++] = output[from2++];
+                          output[_out++] = output[from++];
                           if (len > 1) {
-                            output[_out++] = output[from2++];
+                            output[_out++] = output[from++];
                           }
                         }
                       }
@@ -16088,7 +16321,7 @@ var require_inftrees = __commonJS({
       var used = 0;
       var huff = 0;
       var incr;
-      var fill2;
+      var fill;
       var low;
       var mask;
       var next;
@@ -16188,12 +16421,12 @@ var require_inftrees = __commonJS({
           here_val = 0;
         }
         incr = 1 << len - drop;
-        fill2 = 1 << curr;
-        min = fill2;
+        fill = 1 << curr;
+        min = fill;
         do {
-          fill2 -= incr;
-          table[next + (huff >> drop) + fill2] = here_bits << 24 | here_op << 16 | here_val | 0;
-        } while (fill2 !== 0);
+          fill -= incr;
+          table[next + (huff >> drop) + fill] = here_bits << 24 | here_op << 16 | here_val | 0;
+        } while (fill !== 0);
         incr = 1 << len - 1;
         while (huff & incr) {
           incr >>= 1;
@@ -16268,7 +16501,7 @@ var require_inflate = __commonJS({
     var Z_BUF_ERROR = -5;
     var Z_DEFLATED = 8;
     var HEAD = 1;
-    var FLAGS = 2;
+    var FLAGS14 = 2;
     var TIME = 3;
     var OS = 4;
     var EXLEN = 5;
@@ -16456,7 +16689,7 @@ var require_inflate = __commonJS({
       state.distcode = distfix;
       state.distbits = 5;
     }
-    function updatewindow(strm, src, end, copy2) {
+    function updatewindow(strm, src, end, copy) {
       var dist;
       var state = strm.state;
       if (state.window === null) {
@@ -16465,20 +16698,20 @@ var require_inflate = __commonJS({
         state.whave = 0;
         state.window = new utils.Buf8(state.wsize);
       }
-      if (copy2 >= state.wsize) {
+      if (copy >= state.wsize) {
         utils.arraySet(state.window, src, end - state.wsize, state.wsize, 0);
         state.wnext = 0;
         state.whave = state.wsize;
       } else {
         dist = state.wsize - state.wnext;
-        if (dist > copy2) {
-          dist = copy2;
+        if (dist > copy) {
+          dist = copy;
         }
-        utils.arraySet(state.window, src, end - copy2, dist, state.wnext);
-        copy2 -= dist;
-        if (copy2) {
-          utils.arraySet(state.window, src, end - copy2, copy2, 0);
-          state.wnext = copy2;
+        utils.arraySet(state.window, src, end - copy, dist, state.wnext);
+        copy -= dist;
+        if (copy) {
+          utils.arraySet(state.window, src, end - copy, copy, 0);
+          state.wnext = copy;
           state.whave = state.wsize;
         } else {
           state.wnext += dist;
@@ -16501,8 +16734,8 @@ var require_inflate = __commonJS({
       var hold;
       var bits;
       var _in, _out;
-      var copy2;
-      var from2;
+      var copy;
+      var from;
       var from_source;
       var here = 0;
       var here_bits, here_op, here_val;
@@ -16557,7 +16790,7 @@ var require_inflate = __commonJS({
                 state.check = crc32(state.check, hbuf, 2, 0);
                 hold = 0;
                 bits = 0;
-                state.mode = FLAGS;
+                state.mode = FLAGS14;
                 break;
               }
               state.flags = 0;
@@ -16591,7 +16824,7 @@ var require_inflate = __commonJS({
               hold = 0;
               bits = 0;
               break;
-            case FLAGS:
+            case FLAGS14:
               while (bits < 16) {
                 if (have === 0) {
                   break inf_leave;
@@ -16696,11 +16929,11 @@ var require_inflate = __commonJS({
             /* falls through */
             case EXTRA:
               if (state.flags & 1024) {
-                copy2 = state.length;
-                if (copy2 > have) {
-                  copy2 = have;
+                copy = state.length;
+                if (copy > have) {
+                  copy = have;
                 }
-                if (copy2) {
+                if (copy) {
                   if (state.head) {
                     len = state.head.extra_len - state.length;
                     if (!state.head.extra) {
@@ -16712,17 +16945,17 @@ var require_inflate = __commonJS({
                       next,
                       // extra field is limited to 65536 bytes
                       // - no need for additional size check
-                      copy2,
+                      copy,
                       /*len + copy > state.head.extra_max - len ? state.head.extra_max : copy,*/
                       len
                     );
                   }
                   if (state.flags & 512) {
-                    state.check = crc32(state.check, input, copy2, next);
+                    state.check = crc32(state.check, input, copy, next);
                   }
-                  have -= copy2;
-                  next += copy2;
-                  state.length -= copy2;
+                  have -= copy;
+                  next += copy;
+                  state.length -= copy;
                 }
                 if (state.length) {
                   break inf_leave;
@@ -16736,18 +16969,18 @@ var require_inflate = __commonJS({
                 if (have === 0) {
                   break inf_leave;
                 }
-                copy2 = 0;
+                copy = 0;
                 do {
-                  len = input[next + copy2++];
+                  len = input[next + copy++];
                   if (state.head && len && state.length < 65536) {
                     state.head.name += String.fromCharCode(len);
                   }
-                } while (len && copy2 < have);
+                } while (len && copy < have);
                 if (state.flags & 512) {
-                  state.check = crc32(state.check, input, copy2, next);
+                  state.check = crc32(state.check, input, copy, next);
                 }
-                have -= copy2;
-                next += copy2;
+                have -= copy;
+                next += copy;
                 if (len) {
                   break inf_leave;
                 }
@@ -16762,18 +16995,18 @@ var require_inflate = __commonJS({
                 if (have === 0) {
                   break inf_leave;
                 }
-                copy2 = 0;
+                copy = 0;
                 do {
-                  len = input[next + copy2++];
+                  len = input[next + copy++];
                   if (state.head && len && state.length < 65536) {
                     state.head.comment += String.fromCharCode(len);
                   }
-                } while (len && copy2 < have);
+                } while (len && copy < have);
                 if (state.flags & 512) {
-                  state.check = crc32(state.check, input, copy2, next);
+                  state.check = crc32(state.check, input, copy, next);
                 }
-                have -= copy2;
-                next += copy2;
+                have -= copy;
+                next += copy;
                 if (len) {
                   break inf_leave;
                 }
@@ -16908,23 +17141,23 @@ var require_inflate = __commonJS({
               state.mode = COPY;
             /* falls through */
             case COPY:
-              copy2 = state.length;
-              if (copy2) {
-                if (copy2 > have) {
-                  copy2 = have;
+              copy = state.length;
+              if (copy) {
+                if (copy > have) {
+                  copy = have;
                 }
-                if (copy2 > left) {
-                  copy2 = left;
+                if (copy > left) {
+                  copy = left;
                 }
-                if (copy2 === 0) {
+                if (copy === 0) {
                   break inf_leave;
                 }
-                utils.arraySet(output, input, next, copy2, put);
-                have -= copy2;
-                next += copy2;
-                left -= copy2;
-                put += copy2;
-                state.length -= copy2;
+                utils.arraySet(output, input, next, copy, put);
+                have -= copy;
+                next += copy;
+                left -= copy;
+                put += copy;
+                state.length -= copy;
                 break;
               }
               state.mode = TYPE;
@@ -17025,7 +17258,7 @@ var require_inflate = __commonJS({
                       break;
                     }
                     len = state.lens[state.have - 1];
-                    copy2 = 3 + (hold & 3);
+                    copy = 3 + (hold & 3);
                     hold >>>= 2;
                     bits -= 2;
                   } else if (here_val === 17) {
@@ -17041,7 +17274,7 @@ var require_inflate = __commonJS({
                     hold >>>= here_bits;
                     bits -= here_bits;
                     len = 0;
-                    copy2 = 3 + (hold & 7);
+                    copy = 3 + (hold & 7);
                     hold >>>= 3;
                     bits -= 3;
                   } else {
@@ -17057,16 +17290,16 @@ var require_inflate = __commonJS({
                     hold >>>= here_bits;
                     bits -= here_bits;
                     len = 0;
-                    copy2 = 11 + (hold & 127);
+                    copy = 11 + (hold & 127);
                     hold >>>= 7;
                     bits -= 7;
                   }
-                  if (state.have + copy2 > state.nlen + state.ndist) {
+                  if (state.have + copy > state.nlen + state.ndist) {
                     strm.msg = "invalid bit length repeat";
                     state.mode = BAD;
                     break;
                   }
-                  while (copy2--) {
+                  while (copy--) {
                     state.lens[state.have++] = len;
                   }
                 }
@@ -17285,39 +17518,39 @@ var require_inflate = __commonJS({
               if (left === 0) {
                 break inf_leave;
               }
-              copy2 = _out - left;
-              if (state.offset > copy2) {
-                copy2 = state.offset - copy2;
-                if (copy2 > state.whave) {
+              copy = _out - left;
+              if (state.offset > copy) {
+                copy = state.offset - copy;
+                if (copy > state.whave) {
                   if (state.sane) {
                     strm.msg = "invalid distance too far back";
                     state.mode = BAD;
                     break;
                   }
                 }
-                if (copy2 > state.wnext) {
-                  copy2 -= state.wnext;
-                  from2 = state.wsize - copy2;
+                if (copy > state.wnext) {
+                  copy -= state.wnext;
+                  from = state.wsize - copy;
                 } else {
-                  from2 = state.wnext - copy2;
+                  from = state.wnext - copy;
                 }
-                if (copy2 > state.length) {
-                  copy2 = state.length;
+                if (copy > state.length) {
+                  copy = state.length;
                 }
                 from_source = state.window;
               } else {
                 from_source = output;
-                from2 = put - state.offset;
-                copy2 = state.length;
+                from = put - state.offset;
+                copy = state.length;
               }
-              if (copy2 > left) {
-                copy2 = left;
+              if (copy > left) {
+                copy = left;
               }
-              left -= copy2;
-              state.length -= copy2;
+              left -= copy;
+              state.length -= copy;
               do {
-                output[put++] = from_source[from2++];
-              } while (--copy2);
+                output[put++] = from_source[from++];
+              } while (--copy);
               if (state.length === 0) {
                 state.mode = LEN;
               }
@@ -17564,7 +17797,7 @@ var require_inflate2 = __commonJS({
     var msg = require_messages();
     var ZStream = require_zstream();
     var GZheader = require_gzheader();
-    var toString4 = Object.prototype.toString;
+    var toString2 = Object.prototype.toString;
     function Inflate(options) {
       if (!(this instanceof Inflate)) return new Inflate(options);
       this.options = utils.assign({
@@ -17605,7 +17838,7 @@ var require_inflate2 = __commonJS({
       if (opt.dictionary) {
         if (typeof opt.dictionary === "string") {
           opt.dictionary = strings.string2buf(opt.dictionary);
-        } else if (toString4.call(opt.dictionary) === "[object ArrayBuffer]") {
+        } else if (toString2.call(opt.dictionary) === "[object ArrayBuffer]") {
           opt.dictionary = new Uint8Array(opt.dictionary);
         }
         if (opt.raw) {
@@ -17629,7 +17862,7 @@ var require_inflate2 = __commonJS({
       _mode = mode === ~~mode ? mode : mode === true ? c.Z_FINISH : c.Z_NO_FLUSH;
       if (typeof data === "string") {
         strm.input = strings.binstring2buf(data);
-      } else if (toString4.call(data) === "[object ArrayBuffer]") {
+      } else if (toString2.call(data) === "[object ArrayBuffer]") {
         strm.input = new Uint8Array(data);
       } else {
         strm.input = data;
@@ -17787,9 +18020,9 @@ var require_pify = __commonJS({
       if (!(input !== null && (objType === "object" || objType === "function"))) {
         throw new TypeError(`Expected \`input\` to be a \`Function\` or \`Object\`, got \`${input === null ? "null" : objType}\``);
       }
-      const filter = (key) => {
-        const match2 = (pattern) => typeof pattern === "string" ? key === pattern : pattern.test(key);
-        return options.include ? options.include.some(match2) : !options.exclude.some(match2);
+      const filter2 = (key) => {
+        const match3 = (pattern) => typeof pattern === "string" ? key === pattern : pattern.test(key);
+        return options.include ? options.include.some(match3) : !options.exclude.some(match3);
       };
       let ret;
       if (objType === "function") {
@@ -17801,7 +18034,7 @@ var require_pify = __commonJS({
       }
       for (const key in input) {
         const property = input[key];
-        ret[key] = typeof property === "function" && filter(key) ? processFn(property, options) : property;
+        ret[key] = typeof property === "function" && filter2(key) ? processFn(property, options) : property;
       }
       return ret;
     };
@@ -17833,9 +18066,9 @@ var require_ignore = __commonJS({
     var define2 = (object, key, value2) => Object.defineProperty(object, key, { value: value2 });
     var REGEX_REGEXP_RANGE = /([0-z])-([0-z])/g;
     var RETURN_FALSE = () => false;
-    var sanitizeRange = (range) => range.replace(
+    var sanitizeRange = (range2) => range2.replace(
       REGEX_REGEXP_RANGE,
-      (match2, from2, to) => from2.charCodeAt(0) <= to.charCodeAt(0) ? match2 : EMPTY
+      (match3, from, to) => from.charCodeAt(0) <= to.charCodeAt(0) ? match3 : EMPTY
     );
     var cleanRangeBackSlash = (slashes) => {
       const { length } = slashes;
@@ -17887,7 +18120,7 @@ var require_ignore = __commonJS({
       // > These special characters are often called "metacharacters".
       [
         /[\\$.|*+(){^]/g,
-        (match2) => `\\${match2}`
+        (match3) => `\\${match3}`
       ],
       [
         // > a question mark (?) matches a single character
@@ -17969,7 +18202,7 @@ var require_ignore = __commonJS({
         // > can be used to match one of the characters in a range.
         // `\` is escaped by step 3
         /(\\)?\[([^\]/]*?)(\\*)($|\])/g,
-        (match2, leadEscape, range, endEscape, close2) => leadEscape === ESCAPE ? `\\[${range}${cleanRangeBackSlash(endEscape)}${close2}` : close2 === "]" ? endEscape.length % 2 === 0 ? `[${sanitizeRange(range)}${endEscape}]` : "[]" : "[]"
+        (match3, leadEscape, range2, endEscape, close2) => leadEscape === ESCAPE ? `\\[${range2}${cleanRangeBackSlash(endEscape)}${close2}` : close2 === "]" ? endEscape.length % 2 === 0 ? `[${sanitizeRange(range2)}${endEscape}]` : "[]" : "[]"
       ],
       // ending
       [
@@ -17986,7 +18219,7 @@ var require_ignore = __commonJS({
         // 'js*' will not match 'a.js'
         // 'js/' will not match 'a.js'
         // 'js' will match 'a.js' and 'a.js/'
-        (match2) => /\/$/.test(match2) ? `${match2}$` : `${match2}(?=$|\\/$)`
+        (match3) => /\/$/.test(match3) ? `${match3}$` : `${match3}(?=$|\\/$)`
       ],
       // trailing wildcard
       [
@@ -18039,17 +18272,17 @@ var require_ignore = __commonJS({
     var throwError = (message, Ctor) => {
       throw new Ctor(message);
     };
-    var checkPath = (path, originalPath, doThrow) => {
-      if (!isString2(path)) {
+    var checkPath = (path2, originalPath, doThrow) => {
+      if (!isString2(path2)) {
         return doThrow(
           `path must be a string, but got \`${originalPath}\``,
           TypeError
         );
       }
-      if (!path) {
+      if (!path2) {
         return doThrow(`path must not be empty`, TypeError);
       }
-      if (checkPath.isNotRelative(path)) {
+      if (checkPath.isNotRelative(path2)) {
         const r = "`path.relative()`d";
         return doThrow(
           `path should be a ${r} string, but got "${originalPath}"`,
@@ -18058,7 +18291,7 @@ var require_ignore = __commonJS({
       }
       return true;
     };
-    var isNotRelative = (path) => REGEX_TEST_INVALID_PATH.test(path);
+    var isNotRelative = (path2) => REGEX_TEST_INVALID_PATH.test(path2);
     checkPath.isNotRelative = isNotRelative;
     checkPath.convert = (p) => p;
     var Ignore = class {
@@ -18117,7 +18350,7 @@ var require_ignore = __commonJS({
       //   setting `checkUnignored` to `false` could reduce additional
       //   path matching.
       // @returns {TestResult} true if a file is ignored
-      _testOne(path, checkUnignored) {
+      _testOne(path2, checkUnignored) {
         let ignored = false;
         let unignored = false;
         this._rules.forEach((rule) => {
@@ -18125,7 +18358,7 @@ var require_ignore = __commonJS({
           if (unignored === negative && ignored !== unignored || negative && !ignored && !unignored && !checkUnignored) {
             return;
           }
-          const matched = rule.regex.test(path);
+          const matched = rule.regex.test(path2);
           if (matched) {
             ignored = !negative;
             unignored = negative;
@@ -18138,24 +18371,24 @@ var require_ignore = __commonJS({
       }
       // @returns {TestResult}
       _test(originalPath, cache, checkUnignored, slices) {
-        const path = originalPath && checkPath.convert(originalPath);
+        const path2 = originalPath && checkPath.convert(originalPath);
         checkPath(
-          path,
+          path2,
           originalPath,
           this._allowRelativePaths ? RETURN_FALSE : throwError
         );
-        return this._t(path, cache, checkUnignored, slices);
+        return this._t(path2, cache, checkUnignored, slices);
       }
-      _t(path, cache, checkUnignored, slices) {
-        if (path in cache) {
-          return cache[path];
+      _t(path2, cache, checkUnignored, slices) {
+        if (path2 in cache) {
+          return cache[path2];
         }
         if (!slices) {
-          slices = path.split(SLASH2);
+          slices = path2.split(SLASH2);
         }
         slices.pop();
         if (!slices.length) {
-          return cache[path] = this._testOne(path, checkUnignored);
+          return cache[path2] = this._testOne(path2, checkUnignored);
         }
         const parent = this._t(
           slices.join(SLASH2) + SLASH2,
@@ -18163,24 +18396,24 @@ var require_ignore = __commonJS({
           checkUnignored,
           slices
         );
-        return cache[path] = parent.ignored ? parent : this._testOne(path, checkUnignored);
+        return cache[path2] = parent.ignored ? parent : this._testOne(path2, checkUnignored);
       }
-      ignores(path) {
-        return this._test(path, this._ignoreCache, false).ignored;
+      ignores(path2) {
+        return this._test(path2, this._ignoreCache, false).ignored;
       }
       createFilter() {
-        return (path) => !this.ignores(path);
+        return (path2) => !this.ignores(path2);
       }
       filter(paths) {
         return makeArray(paths).filter(this.createFilter());
       }
       // @returns {TestResult}
-      test(path) {
-        return this._test(path, this._testCache, true);
+      test(path2) {
+        return this._test(path2, this._testCache, true);
       }
     };
     var factory = (options) => new Ignore(options);
-    var isPathValid = (path) => checkPath(path && checkPath.convert(path), path, RETURN_FALSE);
+    var isPathValid = (path2) => checkPath(path2 && checkPath.convert(path2), path2, RETURN_FALSE);
     factory.isPathValid = isPathValid;
     factory.default = factory;
     module2.exports = factory;
@@ -18191,7 +18424,7 @@ var require_ignore = __commonJS({
       const makePosix = (str) => /^\\\\\?\\/.test(str) || /["<>|\u0000-\u001F]+/u.test(str) ? str : str.replace(/\\/g, "/");
       checkPath.convert = makePosix;
       const REGIX_IS_WINDOWS_PATH_ABSOLUTE = /^[a-z]:\//i;
-      checkPath.isNotRelative = (path) => REGIX_IS_WINDOWS_PATH_ABSOLUTE.test(path) || isNotRelative(path);
+      checkPath.isNotRelative = (path2) => REGIX_IS_WINDOWS_PATH_ABSOLUTE.test(path2) || isNotRelative(path2);
     }
   }
 });
@@ -18201,8 +18434,8 @@ var require_lib3 = __commonJS({
   "node_modules/clean-git-ref/lib/index.js"(exports, module2) {
     "use strict";
     init_esbuild_buffer_shim();
-    function escapeRegExp2(string3) {
-      return string3.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    function escapeRegExp2(string4) {
+      return string4.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     }
     function replaceAll(str, search2, replacement) {
       search2 = search2 instanceof RegExp ? search2 : new RegExp(escapeRegExp2(search2), "g");
@@ -18235,9 +18468,9 @@ var require_onp = __commonJS({
   "node_modules/diff3/onp.js"(exports, module2) {
     init_esbuild_buffer_shim();
     module2.exports = function(a_, b_) {
-      var a = a_, b = b_, m = a.length, n2 = b.length, reverse = false, ed = null, offset2 = m + 1, path = [], pathposi = [], ses = [], lcs = "", SES_DELETE = -1, SES_COMMON = 0, SES_ADD = 1;
+      var a = a_, b = b_, m = a.length, n2 = b.length, reverse = false, ed = null, offset2 = m + 1, path2 = [], pathposi = [], ses = [], lcs = "", SES_DELETE = -1, SES_COMMON = 0, SES_ADD = 1;
       var tmp1, tmp2;
-      var init3 = function() {
+      var init2 = function() {
         if (m >= n2) {
           tmp1 = a;
           tmp2 = m;
@@ -18265,9 +18498,9 @@ var require_onp = __commonJS({
       var snake = function(k, p, pp) {
         var r, x, y;
         if (p > pp) {
-          r = path[k - 1 + offset2];
+          r = path2[k - 1 + offset2];
         } else {
-          r = path[k + 1 + offset2];
+          r = path2[k + 1 + offset2];
         }
         y = Math.max(p, pp);
         x = y - k;
@@ -18275,7 +18508,7 @@ var require_onp = __commonJS({
           ++x;
           ++y;
         }
-        path[k + offset2] = pathposi.length;
+        path2[k + offset2] = pathposi.length;
         pathposi[pathposi.length] = new P(x, y, r);
         return y;
       };
@@ -18312,7 +18545,7 @@ var require_onp = __commonJS({
           }
         }
       };
-      init3();
+      init2();
       return {
         SES_DELETE: -1,
         SES_COMMON: 0,
@@ -18333,7 +18566,7 @@ var require_onp = __commonJS({
           fp = {};
           for (i = 0; i < size; ++i) {
             fp[i] = -1;
-            path[i] = -1;
+            path2[i] = -1;
           }
           p = -1;
           do {
@@ -18347,7 +18580,7 @@ var require_onp = __commonJS({
             fp[delta + offset2] = snake(delta, fp[delta - 1 + offset2] + 1, fp[delta + 1 + offset2]);
           } while (fp[delta + offset2] !== n2);
           ed = delta + 2 * p;
-          r = path[delta + offset2];
+          r = path2[delta + offset2];
           epc = [];
           while (r !== -1) {
             epc[epc.length] = new P(pathposi[r].x, pathposi[r].y, null);
@@ -18648,8 +18881,8 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
     };
     UnsafeFilepathError.code = "UnsafeFilepathError";
     var BufferCursor = class {
-      constructor(buffer) {
-        this.buffer = buffer;
+      constructor(buffer2) {
+        this.buffer = buffer2;
         this._start = 0;
       }
       eof() {
@@ -18772,27 +19005,27 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
         size: e.size > -1 ? e.size % MAX_UINT32 : 0
       };
     }
-    function toHex2(buffer) {
+    function toHex(buffer2) {
       let hex = "";
-      for (const byte of new Uint8Array(buffer)) {
+      for (const byte of new Uint8Array(buffer2)) {
         if (byte < 16) hex += "0";
         hex += byte.toString(16);
       }
       return hex;
     }
     var supportsSubtleSHA1 = null;
-    async function shasum(buffer) {
+    async function shasum(buffer2) {
       if (supportsSubtleSHA1 === null) {
         supportsSubtleSHA1 = await testSubtleSHA1();
       }
-      return supportsSubtleSHA1 ? subtleSHA1(buffer) : shasumSync(buffer);
+      return supportsSubtleSHA1 ? subtleSHA1(buffer2) : shasumSync(buffer2);
     }
-    function shasumSync(buffer) {
-      return new Hash().update(buffer).digest("hex");
+    function shasumSync(buffer2) {
+      return new Hash().update(buffer2).digest("hex");
     }
-    async function subtleSHA1(buffer) {
-      const hash = await crypto.subtle.digest("SHA-1", buffer);
-      return toHex2(hash);
+    async function subtleSHA1(buffer2) {
+      const hash = await crypto.subtle.digest("SHA-1", buffer2);
+      return toHex(hash);
     }
     async function testSubtleSHA1() {
       try {
@@ -18813,7 +19046,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
     function renderCacheEntryFlags(entry) {
       const flags = entry.flags;
       flags.extended = false;
-      flags.nameLength = Math.min(Buffer.from(entry.path).length, 4095);
+      flags.nameLength = Math.min(Buffer2.from(entry.path).length, 4095);
       return (flags.assumeValid ? 32768 : 0) + (flags.extended ? 16384 : 0) + ((flags.stage & 3) << 12) + (flags.nameLength & 4095);
     }
     var GitIndex = class _GitIndex {
@@ -18841,27 +19074,27 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
           this._unmergedPaths.add(entry.path);
         }
       }
-      static async from(buffer) {
-        if (Buffer.isBuffer(buffer)) {
-          return _GitIndex.fromBuffer(buffer);
-        } else if (buffer === null) {
+      static async from(buffer2) {
+        if (Buffer2.isBuffer(buffer2)) {
+          return _GitIndex.fromBuffer(buffer2);
+        } else if (buffer2 === null) {
           return new _GitIndex(null);
         } else {
           throw new InternalError("invalid type passed to GitIndex.from");
         }
       }
-      static async fromBuffer(buffer) {
-        if (buffer.length === 0) {
+      static async fromBuffer(buffer2) {
+        if (buffer2.length === 0) {
           throw new InternalError("Index file is empty (.git/index)");
         }
         const index3 = new _GitIndex();
-        const reader = new BufferCursor(buffer);
+        const reader = new BufferCursor(buffer2);
         const magic = reader.toString("utf8", 4);
         if (magic !== "DIRC") {
           throw new InternalError(`Invalid dircache magic file number: ${magic}`);
         }
-        const shaComputed = await shasum(buffer.slice(0, -20));
-        const shaClaimed = buffer.slice(-20).toString("hex");
+        const shaComputed = await shasum(buffer2.slice(0, -20));
+        const shaClaimed = buffer2.slice(-20).toString("hex");
         if (shaClaimed !== shaComputed) {
           throw new InternalError(
             `Invalid checksum in GitIndex buffer: expected ${shaClaimed} but saw ${shaComputed}`
@@ -18888,7 +19121,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
           entry.oid = reader.slice(20).toString("hex");
           const flags = reader.readUInt16BE();
           entry.flags = parseCacheEntryFlags(flags);
-          const pathlength = buffer.indexOf(0, reader.tell() + 1) - reader.tell();
+          const pathlength = buffer2.indexOf(0, reader.tell() + 1) - reader.tell();
           if (pathlength < 1) {
             throw new InternalError(`Got a path length of: ${pathlength}`);
           }
@@ -18949,7 +19182,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
           };
         }
         stats = normalizeStats(stats);
-        const bfilepath = Buffer.from(filepath);
+        const bfilepath = Buffer2.from(filepath);
         const entry = {
           ctimeSeconds: stats.ctimeSeconds,
           ctimeNanoseconds: stats.ctimeNanoseconds,
@@ -19003,9 +19236,9 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
         return this.entries.map((entry) => `${entry.mode.toString(8)} ${entry.oid}    ${entry.path}`).join("\n");
       }
       static async _entryToBuffer(entry) {
-        const bpath = Buffer.from(entry.path);
+        const bpath = Buffer2.from(entry.path);
         const length = Math.ceil((62 + bpath.length + 1) / 8) * 8;
-        const written = Buffer.alloc(length);
+        const written = Buffer2.alloc(length);
         const writer = new BufferCursor(written);
         const stat = normalizeStats(entry);
         writer.writeUInt32BE(stat.ctimeSeconds);
@@ -19024,7 +19257,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
         return written;
       }
       async toObject() {
-        const header = Buffer.alloc(12);
+        const header = Buffer2.alloc(12);
         const writer = new BufferCursor(header);
         writer.write("DIRC", 4, "utf8");
         writer.writeUInt32BE(2);
@@ -19041,10 +19274,10 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
           }
         }
         entryBuffers = await Promise.all(entryBuffers);
-        const body = Buffer.concat(entryBuffers);
-        const main = Buffer.concat([header, body]);
+        const body = Buffer2.concat(entryBuffers);
+        const main = Buffer2.concat([header, body]);
         const sum = await shasum(main);
-        return Buffer.concat([main, Buffer.from(sum, "hex")]);
+        return Buffer2.concat([main, Buffer2.from(sum, "hex")]);
       }
     };
     function compareStats(entry, stats, filemode = true, trustino = true) {
@@ -19110,8 +19343,8 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
             throw new UnmergedPathsError(unmergedPaths);
           result = await closure(index3);
           if (index3._dirty) {
-            const buffer = await index3.toObject();
-            await fs2.write(filepath, buffer);
+            const buffer2 = await index3.toObject();
+            await fs2.write(filepath, buffer2);
             theIndexCache.stats.set(filepath, await fs2.lstat(filepath));
             index3._dirty = false;
           }
@@ -19119,18 +19352,18 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
         return result;
       }
     };
-    function basename2(path) {
-      const last = Math.max(path.lastIndexOf("/"), path.lastIndexOf("\\"));
+    function basename2(path2) {
+      const last = Math.max(path2.lastIndexOf("/"), path2.lastIndexOf("\\"));
       if (last > -1) {
-        path = path.slice(last + 1);
+        path2 = path2.slice(last + 1);
       }
-      return path;
+      return path2;
     }
-    function dirname2(path) {
-      const last = Math.max(path.lastIndexOf("/"), path.lastIndexOf("\\"));
+    function dirname2(path2) {
+      const last = Math.max(path2.lastIndexOf("/"), path2.lastIndexOf("\\"));
       if (last === -1) return ".";
       if (last === 0) return "/";
-      return path.slice(0, last);
+      return path2.slice(0, last);
     }
     function flatFileListToDirectoryStructure(files) {
       const inodes = /* @__PURE__ */ new Map();
@@ -19462,22 +19695,22 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
       }
     };
     function compareRefNames(a, b) {
-      const _a = a.replace(/\^\{\}$/, "");
+      const _a2 = a.replace(/\^\{\}$/, "");
       const _b = b.replace(/\^\{\}$/, "");
-      const tmp = -(_a < _b) || +(_a > _b);
+      const tmp = -(_a2 < _b) || +(_a2 > _b);
       if (tmp === 0) {
         return a.endsWith("^{}") ? 1 : -1;
       }
       return tmp;
     }
-    function normalizeString2(path, aar) {
+    function normalizeString2(path2, aar) {
       let res = "";
       let lastSegmentLength = 0;
       let lastSlash = -1;
       let dots = 0;
       let char = "\0";
-      for (let i = 0; i <= path.length; ++i) {
-        if (i < path.length) char = path[i];
+      for (let i = 0; i <= path2.length; ++i) {
+        if (i < path2.length) char = path2[i];
         else if (char === "/") break;
         else char = "/";
         if (char === "/") {
@@ -19509,8 +19742,8 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
               lastSegmentLength = 2;
             }
           } else {
-            if (res.length > 0) res += "/" + path.slice(lastSlash + 1, i);
-            else res = path.slice(lastSlash + 1, i);
+            if (res.length > 0) res += "/" + path2.slice(lastSlash + 1, i);
+            else res = path2.slice(lastSlash + 1, i);
             lastSegmentLength = i - lastSlash - 1;
           }
           lastSlash = i;
@@ -19523,17 +19756,17 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
       }
       return res;
     }
-    function normalize2(path) {
-      if (!path.length) return ".";
-      const isAbsolute = path[0] === "/";
-      const trailingSeparator = path.at(-1) === "/";
-      path = normalizeString2(path, !isAbsolute);
-      if (!path.length) {
+    function normalize2(path2) {
+      if (!path2.length) return ".";
+      const isAbsolute = path2[0] === "/";
+      const trailingSeparator = path2.at(-1) === "/";
+      path2 = normalizeString2(path2, !isAbsolute);
+      if (!path2.length) {
         if (isAbsolute) return "/";
         return trailingSeparator ? "./" : ".";
       }
-      if (trailingSeparator) path += "/";
-      return isAbsolute ? `/${path}` : path;
+      if (trailingSeparator) path2 += "/";
+      return isAbsolute ? `/${path2}` : path2;
     }
     function join3(...args) {
       if (args.length === 0) return ".";
@@ -19570,7 +19803,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
         `Expected 'true', 'false', 'yes', 'no', 'on', or 'off', but got ${val}`
       );
     };
-    var schema = {
+    var schema4 = {
       core: {
         filemode: bool,
         bare: bool,
@@ -19634,8 +19867,8 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
     var getPath = (section, subsection, name) => {
       return [lower(section), subsection, lower(name)].filter((a) => a != null).join(".");
     };
-    var normalizePath5 = (path) => {
-      const pathSegments = path.split(".");
+    var normalizePath8 = (path2) => {
+      const pathSegments = path2.split(".");
       const section = pathSegments.shift();
       const name = pathSegments.pop();
       const subsection = pathSegments.length ? pathSegments.join(".") : void 0;
@@ -19674,23 +19907,23 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
               [name, value2] = extractedVariable;
             }
           }
-          const path = getPath(section, subsection, name);
-          return { line, isSection, section, subsection, name, value: value2, path };
+          const path2 = getPath(section, subsection, name);
+          return { line, isSection, section, subsection, name, value: value2, path: path2 };
         }) : [];
       }
       static from(text5) {
         return new _GitConfig(text5);
       }
-      async get(path, getall = false) {
-        const normalizedPath = normalizePath5(path).path;
+      async get(path2, getall = false) {
+        const normalizedPath = normalizePath8(path2).path;
         const allValues = this.parsedConfig.filter((config) => config.path === normalizedPath).map(({ section, name, value: value2 }) => {
-          const fn = schema[section] && schema[section][name];
+          const fn = schema4[section] && schema4[section][name];
           return fn ? fn(value2) : value2;
         });
         return getall ? allValues : allValues.pop();
       }
-      async getall(path) {
-        return this.get(path, true);
+      async getall(path2) {
+        return this.get(path2, true);
       }
       async getSubsections(section) {
         return this.parsedConfig.filter((config) => config.isSection && config.section === section).map((config) => config.subsection);
@@ -19700,10 +19933,10 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
           (config) => !(config.section === section && config.subsection === subsection)
         );
       }
-      async append(path, value2) {
-        return this.set(path, value2, true);
+      async append(path2, value2) {
+        return this.set(path2, value2, true);
       }
-      async set(path, value2, append2 = false) {
+      async set(path2, value2, append2 = false) {
         const {
           section,
           subsection,
@@ -19711,7 +19944,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
           path: normalizedPath,
           sectionPath,
           isSection
-        } = normalizePath5(path);
+        } = normalizePath8(path2);
         const configIndex = findLastIndex(
           this.parsedConfig,
           (config) => config.path === normalizedPath
@@ -20093,10 +20326,10 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
        * @param {Map<string, string>} args.map - The map of refs.
        * @returns {Promise<string>} - The expanded ref.
        */
-      static async expandAgainstMap({ ref, map: map4 }) {
+      static async expandAgainstMap({ ref, map: map5 }) {
         const allpaths = refpaths(ref);
         for (const ref2 of allpaths) {
-          if (await map4.has(ref2)) return ref2;
+          if (await map5.has(ref2)) return ref2;
         }
         throw new NotFoundError(ref);
       }
@@ -20110,7 +20343,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
        * @param {Map<string, string>} args.map - The map of refs.
        * @returns {Object} - An object containing the full ref and its object ID.
        */
-      static resolveAgainstMap({ ref, fullref = ref, depth = void 0, map: map4 }) {
+      static resolveAgainstMap({ ref, fullref = ref, depth = void 0, map: map5 }) {
         if (depth !== void 0) {
           depth--;
           if (depth === -1) {
@@ -20119,20 +20352,20 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
         }
         if (ref.startsWith("ref: ")) {
           ref = ref.slice("ref: ".length);
-          return _GitRefManager.resolveAgainstMap({ ref, fullref, depth, map: map4 });
+          return _GitRefManager.resolveAgainstMap({ ref, fullref, depth, map: map5 });
         }
         if (ref.length === 40 && /[0-9a-f]{40}/.test(ref)) {
           return { fullref, oid: ref };
         }
         const allpaths = refpaths(ref);
         for (const ref2 of allpaths) {
-          const sha = map4.get(ref2);
+          const sha = map5.get(ref2);
           if (sha) {
             return _GitRefManager.resolveAgainstMap({
               ref: sha.trim(),
               fullref: ref2,
               depth,
-              map: map4
+              map: map5
             });
           }
         }
@@ -20241,32 +20474,32 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
       }
       throw new InternalError(`Unexpected GitTree entry mode: ${mode}`);
     }
-    function parseBuffer(buffer) {
+    function parseBuffer(buffer2) {
       const _entries = [];
       let cursor = 0;
-      while (cursor < buffer.length) {
-        const space2 = buffer.indexOf(32, cursor);
+      while (cursor < buffer2.length) {
+        const space2 = buffer2.indexOf(32, cursor);
         if (space2 === -1) {
           throw new InternalError(
             `GitTree: Error parsing buffer at byte location ${cursor}: Could not find the next space character.`
           );
         }
-        const nullchar = buffer.indexOf(0, cursor);
+        const nullchar = buffer2.indexOf(0, cursor);
         if (nullchar === -1) {
           throw new InternalError(
             `GitTree: Error parsing buffer at byte location ${cursor}: Could not find the next null character.`
           );
         }
-        let mode = buffer.slice(cursor, space2).toString("utf8");
+        let mode = buffer2.slice(cursor, space2).toString("utf8");
         if (mode === "40000") mode = "040000";
         const type = mode2type$1(mode);
-        const path = buffer.slice(space2 + 1, nullchar).toString("utf8");
-        if (path.includes("\\") || path.includes("/")) {
-          throw new UnsafeFilepathError(path);
+        const path2 = buffer2.slice(space2 + 1, nullchar).toString("utf8");
+        if (path2.includes("\\") || path2.includes("/")) {
+          throw new UnsafeFilepathError(path2);
         }
-        const oid = buffer.slice(nullchar + 1, nullchar + 21).toString("hex");
+        const oid = buffer2.slice(nullchar + 1, nullchar + 21).toString("hex");
         cursor = nullchar + 21;
-        _entries.push({ mode, path, oid, type });
+        _entries.push({ mode, path: path2, oid, type });
       }
       return _entries;
     }
@@ -20293,7 +20526,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
     }
     var GitTree = class _GitTree {
       constructor(entries) {
-        if (Buffer.isBuffer(entries)) {
+        if (Buffer2.isBuffer(entries)) {
           this._entries = parseBuffer(entries);
         } else if (Array.isArray(entries)) {
           this._entries = entries.map(nudgeIntoShape);
@@ -20311,14 +20544,14 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
       toObject() {
         const entries = [...this._entries];
         entries.sort(compareTreeEntryPath);
-        return Buffer.concat(
+        return Buffer2.concat(
           entries.map((entry) => {
-            const mode = Buffer.from(entry.mode.replace(/^0/, ""));
-            const space2 = Buffer.from(" ");
-            const path = Buffer.from(entry.path, "utf8");
-            const nullchar = Buffer.from([0]);
-            const oid = Buffer.from(entry.oid, "hex");
-            return Buffer.concat([mode, space2, path, nullchar, oid]);
+            const mode = Buffer2.from(entry.mode.replace(/^0/, ""));
+            const space2 = Buffer2.from(" ");
+            const path2 = Buffer2.from(entry.path, "utf8");
+            const nullchar = Buffer2.from([0]);
+            const oid = Buffer2.from(entry.oid, "hex");
+            return Buffer2.concat([mode, space2, path2, nullchar, oid]);
           })
         );
       }
@@ -20361,12 +20594,12 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
        * @returns {{ type: string, object: Buffer }} An object containing the type and the raw object data.
        * @throws {InternalError} If the length specified in the header does not match the actual object length.
        */
-      static unwrap(buffer) {
-        const s2 = buffer.indexOf(32);
-        const i = buffer.indexOf(0);
-        const type = buffer.slice(0, s2).toString("utf8");
-        const length = buffer.slice(s2 + 1, i).toString("utf8");
-        const actualLength = buffer.length - (i + 1);
+      static unwrap(buffer2) {
+        const s2 = buffer2.indexOf(32);
+        const i = buffer2.indexOf(0);
+        const type = buffer2.slice(0, s2).toString("utf8");
+        const length = buffer2.slice(s2 + 1, i).toString("utf8");
+        const actualLength = buffer2.length - (i + 1);
         if (parseInt(length) !== actualLength) {
           throw new InternalError(
             `Length mismatch: expected ${length} bytes but got ${actualLength} instead.`
@@ -20374,7 +20607,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
         }
         return {
           type,
-          object: Buffer.from(buffer.slice(i + 1))
+          object: Buffer2.from(buffer2.slice(i + 1))
         };
       }
     };
@@ -20400,7 +20633,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
       if (firstOp.byteLength === targetSize) {
         target = firstOp;
       } else {
-        target = Buffer.alloc(targetSize);
+        target = Buffer2.alloc(targetSize);
         const writer = new BufferCursor(target);
         writer.copy(firstOp);
         while (!reader.eof()) {
@@ -20481,7 +20714,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
     }
     var StreamReader = class {
       constructor(stream) {
-        if (typeof Buffer === "undefined") {
+        if (typeof Buffer2 === "undefined") {
           throw new Error("Missing Buffer dependency");
         }
         this.stream = getIterator(stream);
@@ -20545,10 +20778,10 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
         let { done, value: value2 } = await this.stream.next();
         if (done) {
           this._ended = true;
-          if (!value2) return Buffer.alloc(0);
+          if (!value2) return Buffer2.alloc(0);
         }
         if (value2) {
-          value2 = Buffer.from(value2);
+          value2 = Buffer2.from(value2);
         }
         return value2;
       }
@@ -20573,7 +20806,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
           if (this._ended) break;
           buffers.push(nextbuffer);
         }
-        this.buffer = Buffer.concat(buffers);
+        this.buffer = Buffer2.concat(buffers);
       }
       async _loadnext() {
         this._discardedBytes += this.buffer.length;
@@ -20586,7 +20819,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
       }
     };
     function lengthBuffers(buffers) {
-      return buffers.reduce((acc, buffer) => acc + buffer.length, 0);
+      return buffers.reduce((acc, buffer2) => acc + buffer2.length, 0);
     }
     async function listpack(stream, onData) {
       const reader = new StreamReader(stream);
@@ -20660,7 +20893,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
           shift += 7;
           bytes.push(byte);
         } while (byte & 128);
-        reference = Buffer.from(bytes);
+        reference = Buffer2.from(bytes);
       }
       if (type === 7) {
         const buf = await reader.read(20);
@@ -20669,15 +20902,15 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
       return { type, length, ofs, reference };
     }
     var supportsDecompressionStream = false;
-    async function inflate(buffer) {
+    async function inflate(buffer2) {
       if (supportsDecompressionStream === null) {
         supportsDecompressionStream = testDecompressionStream();
       }
-      return supportsDecompressionStream ? browserInflate(buffer) : pako.inflate(buffer);
+      return supportsDecompressionStream ? browserInflate(buffer2) : pako.inflate(buffer2);
     }
-    async function browserInflate(buffer) {
+    async function browserInflate(buffer2) {
       const ds = new DecompressionStream("deflate");
-      const d = new Blob([buffer]).stream().pipeThrough(ds);
+      const d = new Blob([buffer2]).stream().pipeThrough(ds);
       return new Uint8Array(await new Response(d).arrayBuffer());
     }
     function testDecompressionStream() {
@@ -20857,12 +21090,12 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
       }
       async toBuffer() {
         const buffers = [];
-        const write3 = (str, encoding) => {
-          buffers.push(Buffer.from(str, encoding));
+        const write = (str, encoding) => {
+          buffers.push(Buffer2.from(str, encoding));
         };
-        write3("ff744f63", "hex");
-        write3("00000002", "hex");
-        const fanoutBuffer = new BufferCursor(Buffer.alloc(256 * 4));
+        write("ff744f63", "hex");
+        write("00000002", "hex");
+        const fanoutBuffer = new BufferCursor(Buffer2.alloc(256 * 4));
         for (let i = 0; i < 256; i++) {
           let count = 0;
           for (const hash of this.hashes) {
@@ -20872,24 +21105,24 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
         }
         buffers.push(fanoutBuffer.buffer);
         for (const hash of this.hashes) {
-          write3(hash, "hex");
+          write(hash, "hex");
         }
-        const crcsBuffer = new BufferCursor(Buffer.alloc(this.hashes.length * 4));
+        const crcsBuffer = new BufferCursor(Buffer2.alloc(this.hashes.length * 4));
         for (const hash of this.hashes) {
           crcsBuffer.writeUInt32BE(this.crcs[hash]);
         }
         buffers.push(crcsBuffer.buffer);
-        const offsetsBuffer = new BufferCursor(Buffer.alloc(this.hashes.length * 4));
+        const offsetsBuffer = new BufferCursor(Buffer2.alloc(this.hashes.length * 4));
         for (const hash of this.hashes) {
           offsetsBuffer.writeUInt32BE(this.offsets.get(hash));
         }
         buffers.push(offsetsBuffer.buffer);
-        write3(this.packfileSha, "hex");
-        const totalBuffer = Buffer.concat(buffers);
+        write(this.packfileSha, "hex");
+        const totalBuffer = Buffer2.concat(buffers);
         const sha = await shasum(totalBuffer);
-        const shaBuffer = Buffer.alloc(20);
+        const shaBuffer = Buffer2.alloc(20);
         shaBuffer.write(sha, "hex");
-        return Buffer.concat([totalBuffer, shaBuffer]);
+        return Buffer2.concat([totalBuffer, shaBuffer]);
       }
       async load({ pack }) {
         this.pack = pack;
@@ -20914,7 +21147,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
           return Object.assign({}, this.offsetCache[start]);
         }
         this.readDepth++;
-        const types2 = {
+        const types3 = {
           16: "commit",
           32: "tree",
           48: "blob",
@@ -20931,7 +21164,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
         const reader = new BufferCursor(raw);
         const byte = reader.readUInt8();
         const btype = byte & 112;
-        let type = types2[btype];
+        let type = types3[btype];
         if (type === void 0) {
           throw new InternalError("Unrecognized type: 0b" + btype.toString(2));
         }
@@ -20952,15 +21185,15 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
           const oid = reader.slice(20).toString("hex");
           ({ object: base, type } = await this.read({ oid }));
         }
-        const buffer = raw.slice(reader.tell());
-        object = Buffer.from(await inflate(buffer));
+        const buffer2 = raw.slice(reader.tell());
+        object = Buffer2.from(await inflate(buffer2));
         if (object.byteLength !== length) {
           throw new InternalError(
             `Packfile told us object would have length ${length} but it had length ${object.byteLength}`
           );
         }
         if (base) {
-          object = Buffer.from(applyDelta(object, base));
+          object = Buffer2.from(applyDelta(object, base));
         }
         if (this.readDepth > 3) {
           this.offsetCache[start] = { type, object };
@@ -21043,7 +21276,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
       const getExternalRefDelta = (oid2) => _readObject({ fs: fs2, cache, gitdir, oid: oid2 });
       let result;
       if (oid === "4b825dc642cb6eb9a060e54bf8d69288fbee4904") {
-        result = { format: "wrapped", object: Buffer.from(`tree 0\0`) };
+        result = { format: "wrapped", object: Buffer2.from(`tree 0\0`) };
       }
       if (!result) {
         result = await readObjectLoose({ fs: fs2, gitdir, oid });
@@ -21065,7 +21298,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
         return result;
       }
       if (result.format === "deflated") {
-        result.object = Buffer.from(await inflate(result.object));
+        result.object = Buffer2.from(await inflate(result.object));
         result.format = "wrapped";
       }
       if (format === "wrapped") {
@@ -21448,9 +21681,9 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
       IndexResetError,
       NoCommitError
     });
-    function formatAuthor({ name, email, timestamp, timezoneOffset }) {
+    function formatAuthor({ name, email, timestamp: timestamp2, timezoneOffset }) {
       timezoneOffset = formatTimezoneOffset(timezoneOffset);
-      return `${name} <${email}> ${timestamp} ${timezoneOffset}`;
+      return `${name} <${email}> ${timestamp2} ${timezoneOffset}`;
     }
     function formatTimezoneOffset(minutes) {
       const sign = simpleSign(negateExceptForZero(minutes));
@@ -21476,13 +21709,13 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
       return str;
     }
     function parseAuthor(author) {
-      const [, name, email, timestamp, offset2] = author.match(
+      const [, name, email, timestamp2, offset2] = author.match(
         /^(.*) <(.*)> (.*) (.*)$/
       );
       return {
         name,
         email,
-        timestamp: Number(timestamp),
+        timestamp: Number(timestamp2),
         timezoneOffset: parseTimezoneOffset(offset2)
       };
     }
@@ -21498,7 +21731,7 @@ Please file a bug report at https://github.com/isomorphic-git/isomorphic-git/iss
       constructor(tag2) {
         if (typeof tag2 === "string") {
           this._tag = tag2;
-        } else if (Buffer.isBuffer(tag2)) {
+        } else if (Buffer2.isBuffer(tag2)) {
           this._tag = tag2.toString("utf8");
         } else if (typeof tag2 === "object") {
           this._tag = _GitAnnotatedTag.render(tag2);
@@ -21581,7 +21814,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         return this.withoutSignature() + "\n";
       }
       toObject() {
-        return Buffer.from(this._tag, "utf8");
+        return Buffer2.from(this._tag, "utf8");
       }
       static async sign(tag2, sign, secretKey) {
         const payload = tag2.payload();
@@ -21601,7 +21834,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       constructor(commit2) {
         if (typeof commit2 === "string") {
           this._commit = commit2;
-        } else if (Buffer.isBuffer(commit2)) {
+        } else if (Buffer2.isBuffer(commit2)) {
           this._commit = commit2.toString("utf8");
         } else if (typeof commit2 === "object") {
           this._commit = _GitCommit.render(commit2);
@@ -21621,7 +21854,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         return new _GitCommit(commit2);
       }
       toObject() {
-        return Buffer.from(this._commit, "utf8");
+        return Buffer2.from(this._commit, "utf8");
       }
       // Todo: allow setting the headers and message
       headers() {
@@ -21755,7 +21988,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         this.cache = cache;
         this.gitdir = gitdir;
         this.mapPromise = (async () => {
-          const map4 = /* @__PURE__ */ new Map();
+          const map5 = /* @__PURE__ */ new Map();
           let oid;
           try {
             oid = await GitRefManager.resolve({ fs: fs2, gitdir, ref });
@@ -21767,8 +22000,8 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
           const tree = await resolveTree({ fs: fs2, cache: this.cache, gitdir, oid });
           tree.type = "tree";
           tree.mode = "40000";
-          map4.set(".", tree);
-          return map4;
+          map5.set(".", tree);
+          return map5;
         })();
         const walker = this;
         this.ConstructEntry = class TreeEntry {
@@ -21800,8 +22033,8 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       async readdir(entry) {
         const filepath = entry._fullpath;
         const { fs: fs2, cache, gitdir } = this;
-        const map4 = await this.mapPromise;
-        const obj = map4.get(filepath);
+        const map5 = await this.mapPromise;
+        const obj = map5.get(filepath);
         if (!obj) throw new Error(`No obj for ${filepath}`);
         const oid = obj.oid;
         if (!oid) throw new Error(`No oid for obj ${JSON.stringify(obj)}`);
@@ -21814,22 +22047,22 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         }
         const tree = GitTree.from(object);
         for (const entry2 of tree) {
-          map4.set(join3(filepath, entry2.path), entry2);
+          map5.set(join3(filepath, entry2.path), entry2);
         }
         return tree.entries().map((entry2) => join3(filepath, entry2.path));
       }
       async type(entry) {
         if (entry._type === false) {
-          const map4 = await this.mapPromise;
-          const { type } = map4.get(entry._fullpath);
+          const map5 = await this.mapPromise;
+          const { type } = map5.get(entry._fullpath);
           entry._type = type;
         }
         return entry._type;
       }
       async mode(entry) {
         if (entry._mode === false) {
-          const map4 = await this.mapPromise;
-          const { mode } = map4.get(entry._fullpath);
+          const map5 = await this.mapPromise;
+          const { mode } = map5.get(entry._fullpath);
           entry._mode = normalizeMode(parseInt(mode, 8));
         }
         return entry._mode;
@@ -21838,9 +22071,9 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       }
       async content(entry) {
         if (entry._content === false) {
-          const map4 = await this.mapPromise;
+          const map5 = await this.mapPromise;
           const { fs: fs2, cache, gitdir } = this;
-          const obj = map4.get(entry._fullpath);
+          const obj = map5.get(entry._fullpath);
           const oid = obj.oid;
           const { type, object } = await _readObject({ fs: fs2, cache, gitdir, oid });
           if (type !== "blob") {
@@ -21853,8 +22086,8 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       }
       async oid(entry) {
         if (entry._oid === false) {
-          const map4 = await this.mapPromise;
-          const obj = map4.get(entry._fullpath);
+          const map5 = await this.mapPromise;
+          const obj = map5.get(entry._fullpath);
           entry._oid = obj.oid;
         }
         return entry._oid;
@@ -22079,7 +22312,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       gitdir,
       trees,
       // @ts-ignore
-      map: map4 = async (_, entry) => entry,
+      map: map5 = async (_, entry) => entry,
       // The default reducer is a flatmap that filters out undefineds.
       reduce = async (parent, children2) => {
         const flatten = flat(children2);
@@ -22093,14 +22326,14 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         (proxy) => proxy[GitWalkSymbol]({ fs: fs2, dir, gitdir, cache })
       );
       const root2 = new Array(walkers.length).fill(".");
-      const range = arrayRange(0, walkers.length);
+      const range2 = arrayRange(0, walkers.length);
       const unionWalkerFromReaddir = async (entries) => {
-        range.forEach((i) => {
+        range2.forEach((i) => {
           const entry = entries[i];
           entries[i] = entry && new walkers[i].ConstructEntry(entry);
         });
         const subdirs = await Promise.all(
-          range.map((i) => {
+          range2.map((i) => {
             const entry = entries[i];
             return entry ? walkers[i].readdir(entry) : [];
           })
@@ -22116,7 +22349,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       const walk2 = async (root3) => {
         const { entries, children: children2 } = await unionWalkerFromReaddir(root3);
         const fullpath = entries.find((entry) => entry && entry._fullpath)._fullpath;
-        const parent = await map4(fullpath, entries);
+        const parent = await map5(fullpath, entries);
         if (parent !== null) {
           let walkedChildren = await iterate(walk2, children2);
           walkedChildren = walkedChildren.filter((x) => x !== void 0);
@@ -22242,19 +22475,19 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
        */
       async read(filepath, options = {}) {
         try {
-          let buffer = await this._readFile(filepath, options);
+          let buffer2 = await this._readFile(filepath, options);
           if (options.autocrlf === "true") {
             try {
-              buffer = new TextDecoder("utf8", { fatal: true }).decode(buffer);
-              buffer = buffer.replace(/\r\n/g, "\n");
-              buffer = new TextEncoder().encode(buffer);
+              buffer2 = new TextDecoder("utf8", { fatal: true }).decode(buffer2);
+              buffer2 = buffer2.replace(/\r\n/g, "\n");
+              buffer2 = new TextEncoder().encode(buffer2);
             } catch (error) {
             }
           }
-          if (typeof buffer !== "string") {
-            buffer = Buffer.from(buffer);
+          if (typeof buffer2 !== "string") {
+            buffer2 = Buffer2.from(buffer2);
           }
-          return buffer;
+          return buffer2;
         } catch (err) {
           return null;
         }
@@ -22392,7 +22625,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       async readlink(filename, opts = { encoding: "buffer" }) {
         try {
           const link2 = await this._readlink(filename, opts);
-          return Buffer.isBuffer(link2) ? link2 : Buffer.from(link2);
+          return Buffer2.isBuffer(link2) ? link2 : Buffer2.from(link2);
         } catch (err) {
           if (err.code === "ENOENT" || (err.code || "").includes("ENS")) {
             return null;
@@ -22407,8 +22640,8 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
        * @param {Buffer} buffer - The symlink target.
        * @returns {Promise<void>}
        */
-      async writelink(filename, buffer) {
-        return this._symlink(buffer.toString("utf8"), filename);
+      async writelink(filename, buffer2) {
+        return this._symlink(buffer2.toString("utf8"), filename);
       }
     };
     function assertParameter(name, value2) {
@@ -22470,13 +22703,13 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
           dir,
           gitdir: updatedGitdir,
           trees,
-          map: async function(path, [head, workdir, index3]) {
+          map: async function(path2, [head, workdir, index3]) {
             const staged = !await modified(workdir, index3);
-            const unmerged = unmergedPaths.includes(path);
+            const unmerged = unmergedPaths.includes(path2);
             const unmodified = !await modified(index3, head);
             if (staged || unmerged) {
               return head ? {
-                path,
+                path: path2,
                 mode: await head.mode(),
                 oid: await head.oid(),
                 type: await head.type(),
@@ -22484,7 +22717,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
               } : void 0;
             }
             if (unmodified) return false;
-            else throw new IndexResetError(path);
+            else throw new IndexResetError(path2);
           }
         });
         await GitIndexManager.acquire(
@@ -22535,7 +22768,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         if (await fs2.exists(excludesFile)) {
           excludes = await fs2.read(excludesFile, "utf8");
         }
-        const pairs = [
+        const pairs2 = [
           {
             gitignore: join3(dir, ".gitignore"),
             filepath
@@ -22545,13 +22778,13 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         for (let i = 1; i < pieces.length; i++) {
           const folder = pieces.slice(0, i).join("/");
           const file = pieces.slice(i).join("/");
-          pairs.push({
+          pairs2.push({
             gitignore: join3(dir, folder, ".gitignore"),
             filepath: file
           });
         }
         let ignoredStatus = false;
-        for (const p of pairs) {
+        for (const p of pairs2) {
           let file;
           try {
             file = await fs2.read(p.gitignore, "utf8");
@@ -22582,15 +22815,15 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       if (!await fs2.exists(filepath)) await fs2.write(filepath, object);
     }
     var supportsCompressionStream = null;
-    async function deflate(buffer) {
+    async function deflate(buffer2) {
       if (supportsCompressionStream === null) {
         supportsCompressionStream = testCompressionStream();
       }
-      return supportsCompressionStream ? browserDeflate(buffer) : pako.deflate(buffer);
+      return supportsCompressionStream ? browserDeflate(buffer2) : pako.deflate(buffer2);
     }
-    async function browserDeflate(buffer) {
+    async function browserDeflate(buffer2) {
       const cs = new CompressionStream("deflate");
-      const c = new Blob([buffer]).stream().pipeThrough(cs);
+      const c = new Blob([buffer2]).stream().pipeThrough(cs);
       return new Uint8Array(await new Response(c).arrayBuffer());
     }
     function testCompressionStream() {
@@ -22618,17 +22851,17 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
           object = GitObject.wrap({ type, object });
         }
         oid = await shasum(object);
-        object = Buffer.from(await deflate(object));
+        object = Buffer2.from(await deflate(object));
       }
       if (!dryRun) {
         await writeObjectLoose({ fs: fs2, gitdir, object, format: "deflated", oid });
       }
       return oid;
     }
-    function posixifyPathBuffer(buffer) {
+    function posixifyPathBuffer(buffer2) {
       let idx;
-      while (~(idx = buffer.indexOf(92))) buffer[idx] = 47;
-      return buffer;
+      while (~(idx = buffer2.indexOf(92))) buffer2[idx] = 47;
+      return buffer2;
     }
     async function add({
       fs: _fs,
@@ -22739,9 +22972,9 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       const fulfilledPromises = settledPromises.filter((settle) => settle.status === "fulfilled" && settle.value).map((settle) => settle.value);
       return fulfilledPromises;
     }
-    async function _getConfig({ fs: fs2, gitdir, path }) {
+    async function _getConfig({ fs: fs2, gitdir, path: path2 }) {
       const config = await GitConfigManager.get({ fs: fs2, gitdir });
-      return config.get(path);
+      return config.get(path2);
     }
     function assignDefined(target, ...sources) {
       for (const source of sources) {
@@ -22757,13 +22990,13 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       return target;
     }
     async function normalizeAuthorObject({ fs: fs2, gitdir, author, commit: commit2 }) {
-      const timestamp = Math.floor(Date.now() / 1e3);
+      const timestamp2 = Math.floor(Date.now() / 1e3);
       const defaultAuthor = {
         name: await _getConfig({ fs: fs2, gitdir, path: "user.name" }),
         email: await _getConfig({ fs: fs2, gitdir, path: "user.email" }) || "",
         // author.email is allowed to be empty string
-        timestamp,
-        timezoneOffset: new Date(timestamp * 1e3).getTimezoneOffset()
+        timestamp: timestamp2,
+        timezoneOffset: new Date(timestamp2 * 1e3).getTimezoneOffset()
       };
       const normalizedAuthor = assignDefined(
         {},
@@ -22783,13 +23016,13 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       committer,
       commit: commit2
     }) {
-      const timestamp = Math.floor(Date.now() / 1e3);
+      const timestamp2 = Math.floor(Date.now() / 1e3);
       const defaultCommitter = {
         name: await _getConfig({ fs: fs2, gitdir, path: "user.name" }),
         email: await _getConfig({ fs: fs2, gitdir, path: "user.email" }) || "",
         // committer.email is allowed to be empty string
-        timestamp,
-        timezoneOffset: new Date(timestamp * 1e3).getTimezoneOffset()
+        timestamp: timestamp2,
+        timezoneOffset: new Date(timestamp2 * 1e3).getTimezoneOffset()
       };
       const normalizedCommitter = assignDefined(
         {},
@@ -23098,7 +23331,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         }
       }
       if (typeof note === "string") {
-        note = Buffer.from(note, "utf8");
+        note = Buffer2.from(note, "utf8");
       }
       const noteOid = await _writeObject({
         fs: fs2,
@@ -24031,12 +24264,12 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
     }
     var abbreviateRx = /^refs\/(heads\/|tags\/|remotes\/)?(.*)/;
     function abbreviateRef(ref) {
-      const match2 = abbreviateRx.exec(ref);
-      if (match2) {
-        if (match2[1] === "remotes/" && ref.endsWith("/HEAD")) {
-          return match2[2].slice(0, -5);
+      const match3 = abbreviateRx.exec(ref);
+      if (match3) {
+        if (match3[1] === "remotes/" && ref.endsWith("/HEAD")) {
+          return match3[2].slice(0, -5);
         } else {
-          return match2[2];
+          return match3[2];
         }
       }
       return ref;
@@ -24069,7 +24302,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       return url;
     }
     function calculateBasicAuthHeader({ username = "", password = "" }) {
-      return `Basic ${Buffer.from(`${username}:${password}`).toString("base64")}`;
+      return `Basic ${Buffer2.from(`${username}:${password}`).toString("base64")}`;
     }
     async function forAwait(iterable, cb) {
       const iter = getIterator(iterable);
@@ -24089,9 +24322,9 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       });
       const result = new Uint8Array(size);
       let nextIndex = 0;
-      for (const buffer of buffers) {
-        result.set(buffer, nextIndex);
-        nextIndex += buffer.byteLength;
+      for (const buffer2 of buffers) {
+        result.set(buffer2, nextIndex);
+        nextIndex += buffer2.byteLength;
       }
       return result;
     }
@@ -24109,31 +24342,31 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
     }
     var GitPktLine = class {
       static flush() {
-        return Buffer.from("0000", "utf8");
+        return Buffer2.from("0000", "utf8");
       }
       static delim() {
-        return Buffer.from("0001", "utf8");
+        return Buffer2.from("0001", "utf8");
       }
       static encode(line) {
         if (typeof line === "string") {
-          line = Buffer.from(line);
+          line = Buffer2.from(line);
         }
         const length = line.length + 4;
         const hexlength = padHex(4, length);
-        return Buffer.concat([Buffer.from(hexlength, "utf8"), line]);
+        return Buffer2.concat([Buffer2.from(hexlength, "utf8"), line]);
       }
       static streamReader(stream) {
         const reader = new StreamReader(stream);
-        return async function read2() {
+        return async function read() {
           try {
             let length = await reader.read(4);
             if (length == null) return true;
             length = parseInt(length.toString("utf8"), 16);
             if (length === 0) return null;
             if (length === 1) return null;
-            const buffer = await reader.read(length - 4);
-            if (buffer == null) return true;
-            return buffer;
+            const buffer2 = await reader.read(length - 4);
+            if (buffer2 == null) return true;
+            return buffer2;
           } catch (err) {
             stream.error = err;
             return true;
@@ -24141,11 +24374,11 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         };
       }
     };
-    async function parseCapabilitiesV2(read2) {
+    async function parseCapabilitiesV2(read) {
       const capabilities2 = {};
       let line;
       while (true) {
-        line = await read2();
+        line = await read();
         if (line === true) break;
         if (line === null) continue;
         line = line.toString("utf8").replace(/\n$/, "");
@@ -24164,22 +24397,22 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       const capabilities = /* @__PURE__ */ new Set();
       const refs = /* @__PURE__ */ new Map();
       const symrefs = /* @__PURE__ */ new Map();
-      const read2 = GitPktLine.streamReader(stream);
-      let lineOne = await read2();
-      while (lineOne === null) lineOne = await read2();
+      const read = GitPktLine.streamReader(stream);
+      let lineOne = await read();
+      while (lineOne === null) lineOne = await read();
       if (lineOne === true) throw new EmptyServerResponseError();
       if (lineOne.includes("version 2")) {
-        return parseCapabilitiesV2(read2);
+        return parseCapabilitiesV2(read);
       }
       if (lineOne.toString("utf8").replace(/\n$/, "") !== `# service=${service}`) {
         throw new ParseError(`# service=${service}\\n`, lineOne.toString("utf8"));
       }
-      let lineTwo = await read2();
-      while (lineTwo === null) lineTwo = await read2();
+      let lineTwo = await read();
+      while (lineTwo === null) lineTwo = await read();
       if (lineTwo === true) return { capabilities, refs, symrefs };
       lineTwo = lineTwo.toString("utf8");
       if (lineTwo.includes("version 2")) {
-        return parseCapabilitiesV2(read2);
+        return parseCapabilitiesV2(read);
       }
       const [firstRef, capabilitiesLine] = splitAndAssert(lineTwo, "\0", "\\x00");
       capabilitiesLine.split(" ").map((x) => capabilities.add(x));
@@ -24187,7 +24420,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         const [ref, name] = splitAndAssert(firstRef, " ", " ");
         refs.set(name, ref);
         while (true) {
-          const line = await read2();
+          const line = await read();
           if (line === true) break;
           if (line !== null) {
             const [ref2, name2] = splitAndAssert(line.toString("utf8"), " ", " ");
@@ -24205,8 +24438,8 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       }
       return { protocolVersion: 1, capabilities, refs, symrefs };
     }
-    function splitAndAssert(line, sep, expected) {
-      const split = line.trim().split(sep);
+    function splitAndAssert(line, sep2, expected) {
+      const split = line.trim().split(sep2);
       if (split.length !== 2) {
         throw new ParseError(
           `Two strings separated by '${expected}'`,
@@ -24226,7 +24459,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
     };
     var stringifyBody = async (res) => {
       try {
-        const data = Buffer.from(await collect(res.body));
+        const data = Buffer2.from(await collect(res.body));
         const response = data.toString("utf8");
         const preview = response.length < 256 ? response : response.slice(0, 256) + "...";
         return { preview, response, data };
@@ -24596,7 +24829,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       if (n2 === r + 1) return n2 + 1;
       return Math.min(r, n2) + 1;
     }
-    function splitLines(input) {
+    function splitLines2(input) {
       const output = new FIFO();
       let tmp = "";
       (async () => {
@@ -24619,12 +24852,12 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
     }
     var GitSideBand = class {
       static demux(input) {
-        const read2 = GitPktLine.streamReader(input);
+        const read = GitPktLine.streamReader(input);
         const packetlines = new FIFO();
         const packfile = new FIFO();
         const progress = new FIFO();
         const nextBit = async function() {
-          const line = await read2();
+          const line = await read();
           if (line === null) return nextBit();
           if (line === true) {
             packetlines.end();
@@ -24941,7 +25174,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         since,
         exclude
       });
-      const packbuffer = Buffer.from(await collect(packstream));
+      const packbuffer = Buffer2.from(await collect(packstream));
       const raw = await GitRemoteHTTP2.connect({
         http,
         onProgress,
@@ -25038,7 +25271,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         description: `${noun} '${abbreviateRef(fullref)}' of ${url}`
       };
       if (onProgress || onMessage) {
-        const lines = splitLines(response.progress);
+        const lines = splitLines2(response.progress);
         forAwait(lines, async (line) => {
           if (onMessage) await onMessage(line);
           if (onProgress) {
@@ -25053,7 +25286,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
           }
         });
       }
-      const packfile = Buffer.from(await collect(response.packfile));
+      const packfile = Buffer2.from(await collect(response.packfile));
       if (raw.body.error) throw raw.body.error;
       const packfileSha = packfile.slice(-20).toString("hex");
       const res = {
@@ -25616,14 +25849,14 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         gitdir,
         trees: [ourTree, baseTree, theirTree],
         map: async function(filepath, [ours, base, theirs]) {
-          const path = basename2(filepath);
+          const path2 = basename2(filepath);
           const ourChange = await modified(ours, base);
           const theirChange = await modified(theirs, base);
           switch (`${ourChange}-${theirChange}`) {
             case "false-false": {
               return {
                 mode: await base.mode(),
-                path,
+                path: path2,
                 oid: await base.oid(),
                 type: await base.type()
               };
@@ -25632,14 +25865,14 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
               if (!theirs && await ours.type() === "tree") {
                 return {
                   mode: await ours.mode(),
-                  path,
+                  path: path2,
                   oid: await ours.oid(),
                   type: await ours.type()
                 };
               }
               return theirs ? {
                 mode: await theirs.mode(),
-                path,
+                path: path2,
                 oid: await theirs.oid(),
                 type: await theirs.type()
               } : void 0;
@@ -25648,14 +25881,14 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
               if (!ours && await theirs.type() === "tree") {
                 return {
                   mode: await theirs.mode(),
-                  path,
+                  path: path2,
                   oid: await theirs.oid(),
                   type: await theirs.type()
                 };
               }
               return ours ? {
                 mode: await ours.mode(),
-                path,
+                path: path2,
                 oid: await ours.oid(),
                 type: await ours.type()
               } : void 0;
@@ -25664,7 +25897,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
               if (ours && theirs && await ours.type() === "tree" && await theirs.type() === "tree") {
                 return {
                   mode: await ours.mode(),
-                  path,
+                  path: path2,
                   oid: await ours.oid(),
                   type: "tree"
                 };
@@ -25673,7 +25906,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
                 return mergeBlobs({
                   fs: fs2,
                   gitdir,
-                  path,
+                  path: path2,
                   ours,
                   base,
                   theirs,
@@ -25719,7 +25952,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
                   mode: await theirs.mode(),
                   oid: await theirs.oid(),
                   type: "blob",
-                  path
+                  path: path2
                 };
               }
               if (base && ours && !theirs && await base.type() === "blob" && await ours.type() === "blob") {
@@ -25736,7 +25969,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
                   mode: await ours.mode(),
                   oid: await ours.oid(),
                   type: "blob",
-                  path
+                  path: path2
                 };
               }
               if (base && !ours && !theirs && (await base.type() === "blob" || await base.type() === "tree")) {
@@ -25779,11 +26012,11 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
             gitdir,
             trees: [TREE({ ref: results.oid })],
             map: async function(filepath, [entry]) {
-              const path = `${dir}/${filepath}`;
+              const path2 = `${dir}/${filepath}`;
               if (await entry.type() === "blob") {
                 const mode = await entry.mode();
                 const content3 = new TextDecoder().decode(await entry.content());
-                await fs2.write(path, content3, { mode });
+                await fs2.write(path2, content3, { mode });
               }
               return true;
             }
@@ -25801,7 +26034,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
     async function mergeBlobs({
       fs: fs2,
       gitdir,
-      path,
+      path: path2,
       ours,
       base,
       theirs,
@@ -25818,42 +26051,42 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       if (base && await base.type() === "blob") {
         baseMode = await base.mode();
         baseOid = await base.oid();
-        baseContent = Buffer.from(await base.content()).toString("utf8");
+        baseContent = Buffer2.from(await base.content()).toString("utf8");
       }
       const mode = baseMode === await ours.mode() ? await theirs.mode() : await ours.mode();
       if (await ours.oid() === await theirs.oid()) {
         return {
           cleanMerge: true,
-          mergeResult: { mode, path, oid: await ours.oid(), type }
+          mergeResult: { mode, path: path2, oid: await ours.oid(), type }
         };
       }
       if (await ours.oid() === baseOid) {
         return {
           cleanMerge: true,
-          mergeResult: { mode, path, oid: await theirs.oid(), type }
+          mergeResult: { mode, path: path2, oid: await theirs.oid(), type }
         };
       }
       if (await theirs.oid() === baseOid) {
         return {
           cleanMerge: true,
-          mergeResult: { mode, path, oid: await ours.oid(), type }
+          mergeResult: { mode, path: path2, oid: await ours.oid(), type }
         };
       }
-      const ourContent = Buffer.from(await ours.content()).toString("utf8");
-      const theirContent = Buffer.from(await theirs.content()).toString("utf8");
+      const ourContent = Buffer2.from(await ours.content()).toString("utf8");
+      const theirContent = Buffer2.from(await theirs.content()).toString("utf8");
       const { mergedText, cleanMerge } = await mergeDriver({
         branches: [baseName, ourName, theirName],
         contents: [baseContent, ourContent, theirContent],
-        path
+        path: path2
       });
       const oid = await _writeObject({
         fs: fs2,
         gitdir,
         type: "blob",
-        object: Buffer.from(mergedText, "utf8"),
+        object: Buffer2.from(mergedText, "utf8"),
         dryRun
       });
-      return { cleanMerge, mergeResult: { mode, path, oid, type } };
+      return { cleanMerge, mergeResult: { mode, path: path2, oid, type } };
     }
     async function _merge({
       fs: fs2,
@@ -26228,43 +26461,43 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         throw err;
       }
     }
-    async function getConfig({ fs: fs2, dir, gitdir = join3(dir, ".git"), path }) {
+    async function getConfig({ fs: fs2, dir, gitdir = join3(dir, ".git"), path: path2 }) {
       try {
         assertParameter("fs", fs2);
         assertParameter("gitdir", gitdir);
-        assertParameter("path", path);
+        assertParameter("path", path2);
         const fsp = new FileSystem(fs2);
         const updatedGitdir = await discoverGitdir({ fsp, dotgit: gitdir });
         return await _getConfig({
           fs: fsp,
           gitdir: updatedGitdir,
-          path
+          path: path2
         });
       } catch (err) {
         err.caller = "git.getConfig";
         throw err;
       }
     }
-    async function _getConfigAll({ fs: fs2, gitdir, path }) {
+    async function _getConfigAll({ fs: fs2, gitdir, path: path2 }) {
       const config = await GitConfigManager.get({ fs: fs2, gitdir });
-      return config.getall(path);
+      return config.getall(path2);
     }
     async function getConfigAll({
       fs: fs2,
       dir,
       gitdir = join3(dir, ".git"),
-      path
+      path: path2
     }) {
       try {
         assertParameter("fs", fs2);
         assertParameter("gitdir", gitdir);
-        assertParameter("path", path);
+        assertParameter("path", path2);
         const fsp = new FileSystem(fs2);
         const updatedGitdir = await discoverGitdir({ fsp, dotgit: gitdir });
         return await _getConfigAll({
           fs: fsp,
           gitdir: updatedGitdir,
-          path
+          path: path2
         });
       } catch (err) {
         err.caller = "git.getConfigAll";
@@ -26420,7 +26653,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       try {
         assertParameter("object", object);
         if (typeof object === "string") {
-          object = Buffer.from(object, "utf8");
+          object = Buffer2.from(object, "utf8");
         } else if (!(object instanceof Uint8Array)) {
           object = new Uint8Array(object);
         }
@@ -26490,7 +26723,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         throw err;
       }
     }
-    async function init3({
+    async function init2({
       fs: fs2,
       bare = false,
       dir,
@@ -26797,11 +27030,11 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       }
     }
     async function parseListRefsResponse(stream) {
-      const read2 = GitPktLine.streamReader(stream);
+      const read = GitPktLine.streamReader(stream);
       const refs = [];
       let line;
       while (true) {
-        line = await read2();
+        line = await read();
         if (line === true) break;
         if (line === null) continue;
         line = line.toString("utf8").replace(/\n$/, "");
@@ -27110,7 +27343,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         throw err;
       }
     }
-    async function merge({
+    async function merge2({
       fs: _fs,
       onSign,
       dir,
@@ -27179,7 +27412,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         throw err;
       }
     }
-    var types = {
+    var types2 = {
       commit: 16,
       tree: 32,
       blob: 48,
@@ -27196,44 +27429,44 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
     }) {
       const hash = new Hash();
       const outputStream = [];
-      function write3(chunk, enc) {
-        const buff = Buffer.from(chunk, enc);
+      function write(chunk, enc) {
+        const buff = Buffer2.from(chunk, enc);
         outputStream.push(buff);
         hash.update(buff);
       }
       async function writeObject2({ stype, object }) {
-        const type = types[stype];
+        const type = types2[stype];
         let length = object.length;
         let multibyte = length > 15 ? 128 : 0;
         const lastFour = length & 15;
         length = length >>> 4;
         let byte = (multibyte | type | lastFour).toString(16);
-        write3(byte, "hex");
+        write(byte, "hex");
         while (multibyte) {
           multibyte = length > 127 ? 128 : 0;
           byte = multibyte | length & 127;
-          write3(padHex(2, byte), "hex");
+          write(padHex(2, byte), "hex");
           length = length >>> 7;
         }
-        write3(Buffer.from(await deflate(object)));
+        write(Buffer2.from(await deflate(object)));
       }
-      write3("PACK");
-      write3("00000002", "hex");
-      write3(padHex(8, oids.length), "hex");
+      write("PACK");
+      write("00000002", "hex");
+      write(padHex(8, oids.length), "hex");
       for (const oid of oids) {
         const { type, object } = await _readObject({ fs: fs2, cache, gitdir, oid });
-        await writeObject2({ write: write3, object, stype: type });
+        await writeObject2({ write, object, stype: type });
       }
       const digest = hash.digest();
       outputStream.push(digest);
       return outputStream;
     }
-    async function _packObjects({ fs: fs2, cache, gitdir, oids, write: write3 }) {
+    async function _packObjects({ fs: fs2, cache, gitdir, oids, write }) {
       const buffers = await _pack({ fs: fs2, cache, gitdir, oids });
-      const packfile = Buffer.from(await collect(buffers));
+      const packfile = Buffer2.from(await collect(buffers));
       const packfileSha = packfile.slice(-20).toString("hex");
       const filename = `pack-${packfileSha}.pack`;
-      if (write3) {
+      if (write) {
         await fs2.write(join3(gitdir, `objects/pack/${filename}`), packfile);
         return { filename };
       }
@@ -27247,7 +27480,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       dir,
       gitdir = join3(dir, ".git"),
       oids,
-      write: write3 = false,
+      write = false,
       cache = {}
     }) {
       try {
@@ -27261,7 +27494,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
           cache,
           gitdir: updatedGitdir,
           oids,
-          write: write3
+          write
         });
       } catch (err) {
         err.caller = "git.packObjects";
@@ -27431,11 +27664,11 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
     async function parseReceivePackResponse(packfile) {
       const result = {};
       let response = "";
-      const read2 = GitPktLine.streamReader(packfile);
-      let line = await read2();
+      const read = GitPktLine.streamReader(packfile);
+      let line = await read();
       while (line !== true) {
         if (line !== null) response += line.toString("utf8") + "\n";
-        line = await read2();
+        line = await read();
       }
       const lines = response.toString("utf8").split("\n");
       line = lines.shift();
@@ -27652,7 +27885,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       });
       const { packfile, progress } = await GitSideBand.demux(res.body);
       if (onMessage) {
-        const lines = splitLines(progress);
+        const lines = splitLines2(progress);
         forAwait(lines, async (line) => {
           await onMessage(line);
         });
@@ -28260,7 +28493,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         throw err;
       }
     }
-    async function resolveRef({
+    async function resolveRef2({
       fs: fs2,
       dir,
       gitdir = join3(dir, ".git"),
@@ -28289,21 +28522,21 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       fs: _fs,
       dir,
       gitdir = join3(dir, ".git"),
-      path,
+      path: path2,
       value: value2,
       append: append2 = false
     }) {
       try {
         assertParameter("fs", _fs);
         assertParameter("gitdir", gitdir);
-        assertParameter("path", path);
+        assertParameter("path", path2);
         const fs2 = new FileSystem(_fs);
         const updatedGitdir = await discoverGitdir({ fsp: fs2, dotgit: gitdir });
         const config = await GitConfigManager.get({ fs: fs2, gitdir: updatedGitdir });
         if (append2) {
-          await config.append(path, value2);
+          await config.append(path2, value2);
         } else {
-          await config.set(path, value2);
+          await config.set(path2, value2);
         }
         await GitConfigManager.save({ fs: fs2, gitdir: updatedGitdir, config });
       } catch (err) {
@@ -28334,9 +28567,9 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       static createStashReflogEntry(author, stashCommit, message) {
         const nameNoSpace = author.name.replace(/\s/g, "");
         const z40 = "0000000000000000000000000000000000000000";
-        const timestamp = Math.floor(Date.now() / 1e3);
+        const timestamp2 = Math.floor(Date.now() / 1e3);
         const timezoneOffset = _GitRefStash.timezoneOffsetForRefLogEntry;
-        return `${z40} ${stashCommit} ${nameNoSpace} ${author.email} ${timestamp} ${timezoneOffset}	${message}
+        return `${z40} ${stashCommit} ${nameNoSpace} ${author.email} ${timestamp2} ${timezoneOffset}	${message}
 `;
       }
       static getStashReflogEntry(reflogString, parsed = false) {
@@ -28412,7 +28645,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       const isStage = treePair[1] === "stage";
       const trees = treePair.map((t) => typeof t === "string" ? _TreeMap[t]() : t);
       const changedEntries = [];
-      const map4 = async (filepath, [head, stage]) => {
+      const map5 = async (filepath, [head, stage]) => {
         if (filepath === "." || await GitIgnoreManager.isIgnored({ fs: fs2, dir, gitdir, filepath })) {
           return;
         }
@@ -28465,7 +28698,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         dir,
         gitdir,
         trees,
-        map: map4,
+        map: map5,
         reduce,
         iterate
       });
@@ -28913,9 +29146,9 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       const stashRefPath = [stashMgr.refStashPath, stashMgr.refLogsStashPath];
       await acquireLock$1(stashRefPath, async () => {
         await Promise.all(
-          stashRefPath.map(async (path) => {
-            if (await fs2.exists(path)) {
-              return fs2.rm(path);
+          stashRefPath.map(async (path2) => {
+            if (await fs2.exists(path2)) {
+              return fs2.rm(path2);
             }
           })
         );
@@ -29072,12 +29305,12 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
         throw err;
       }
     }
-    async function getOidAtPath({ fs: fs2, cache, gitdir: updatedGitdir, tree, path }) {
-      if (typeof path === "string") path = path.split("/");
-      const dirname3 = path.shift();
+    async function getOidAtPath({ fs: fs2, cache, gitdir: updatedGitdir, tree, path: path2 }) {
+      if (typeof path2 === "string") path2 = path2.split("/");
+      const dirname3 = path2.shift();
       for (const entry of tree) {
         if (entry.path === dirname3) {
-          if (path.length === 0) {
+          if (path2.length === 0) {
             return entry.oid;
           }
           const { type, object } = await _readObject({
@@ -29088,10 +29321,10 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
           });
           if (type === "tree") {
             const tree2 = GitTree.from(object);
-            return getOidAtPath({ fs: fs2, cache, gitdir: updatedGitdir, tree: tree2, path });
+            return getOidAtPath({ fs: fs2, cache, gitdir: updatedGitdir, tree: tree2, path: path2 });
           }
           if (type === "blob") {
-            throw new ObjectTypeError(entry.oid, type, "blob", path.join("/"));
+            throw new ObjectTypeError(entry.oid, type, "blob", path2.join("/"));
           }
         }
       }
@@ -29119,7 +29352,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       gitdir = join3(dir, ".git"),
       ref = "HEAD",
       filepaths = ["."],
-      filter,
+      filter: filter2,
       cache = {},
       ignored: shouldIgnore = false
     }) {
@@ -29151,8 +29384,8 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
             if (!filepaths.some((base) => worthWalking(filepath, base))) {
               return null;
             }
-            if (filter) {
-              if (!filter(filepath)) return;
+            if (filter2) {
+              if (!filter2(filepath)) return;
             }
             const [headType, workdirType, stageType] = await Promise.all([
               head && head.type(),
@@ -29325,7 +29558,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       dir,
       gitdir = join3(dir, ".git"),
       trees,
-      map: map4,
+      map: map5,
       reduce,
       iterate,
       cache = {}
@@ -29342,7 +29575,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
           dir,
           gitdir: updatedGitdir,
           trees,
-          map: map4,
+          map: map5,
           reduce,
           iterate
         });
@@ -29414,7 +29647,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
               object = GitTree.from(object).toObject();
               break;
             case "blob":
-              object = Buffer.from(object, encoding);
+              object = Buffer2.from(object, encoding);
               break;
             case "tag":
               object = GitAnnotatedTag.from(object).toObject();
@@ -29562,7 +29795,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       getRemoteInfo2,
       hashBlob,
       indexPack,
-      init: init3,
+      init: init2,
       isDescendent,
       isIgnored,
       listBranches,
@@ -29573,7 +29806,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       listServerRefs,
       listTags,
       log,
-      merge,
+      merge: merge2,
       packObjects,
       pull,
       push: push2,
@@ -29588,7 +29821,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
       renameBranch,
       resetIndex,
       updateIndex: updateIndex$1,
-      resolveRef,
+      resolveRef: resolveRef2,
       status,
       statusMatrix,
       tag,
@@ -29633,7 +29866,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
     exports.getRemoteInfo2 = getRemoteInfo2;
     exports.hashBlob = hashBlob;
     exports.indexPack = indexPack;
-    exports.init = init3;
+    exports.init = init2;
     exports.isDescendent = isDescendent;
     exports.isIgnored = isIgnored;
     exports.listBranches = listBranches;
@@ -29644,7 +29877,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
     exports.listServerRefs = listServerRefs;
     exports.listTags = listTags;
     exports.log = log;
-    exports.merge = merge;
+    exports.merge = merge2;
     exports.packObjects = packObjects;
     exports.pull = pull;
     exports.push = push2;
@@ -29658,7 +29891,7 @@ ${obj.gpgsig ? obj.gpgsig : ""}`;
     exports.removeNote = removeNote;
     exports.renameBranch = renameBranch;
     exports.resetIndex = resetIndex;
-    exports.resolveRef = resolveRef;
+    exports.resolveRef = resolveRef2;
     exports.setConfig = setConfig;
     exports.stash = stash;
     exports.status = status;
@@ -29706,10 +29939,10 @@ var require_text_min = __commonJS({
       "use strict";
       function B(r, e) {
         var f;
-        return r instanceof Buffer ? f = r : f = Buffer.from(r.buffer, r.byteOffset, r.byteLength), f.toString(e);
+        return r instanceof Buffer2 ? f = r : f = Buffer2.from(r.buffer, r.byteOffset, r.byteLength), f.toString(e);
       }
       var w = function(r) {
-        return Buffer.from(r);
+        return Buffer2.from(r);
       };
       function h(r) {
         for (var e = 0, f = Math.min(256 * 256, r.length + 1), n2 = new Uint16Array(f), i = [], o = 0; ; ) {
@@ -29762,7 +29995,7 @@ var require_text_min = __commonJS({
       var u = "Failed to ", p = function(r, e, f) {
         if (r) throw new Error("".concat(u).concat(e, ": the '").concat(f, "' option is unsupported."));
       };
-      var x = typeof Buffer == "function" && Buffer.from;
+      var x = typeof Buffer2 == "function" && Buffer2.from;
       var A = x ? w : F;
       function v() {
         this.encoding = "utf-8";
@@ -29793,7 +30026,7 @@ var require_text_min = __commonJS({
       function g(r, e) {
         p(e && e.fatal, y, "fatal"), r = r || "utf-8";
         var f;
-        if (x ? f = Buffer.isEncoding(r) : f = S.indexOf(r.toLowerCase()) !== -1, !f) throw new RangeError("".concat(E, " encoding label provided ('").concat(r, "') is invalid."));
+        if (x ? f = Buffer2.isEncoding(r) : f = S.indexOf(r.toLowerCase()) !== -1, !f) throw new RangeError("".concat(E, " encoding label provided ('").concat(r, "') is invalid."));
         this.encoding = r, this.fatal = false, this.ignoreBOM = false;
       }
       g.prototype.decode = function(r, e) {
@@ -29813,8 +30046,8 @@ var require_browser = __commonJS({
     init_esbuild_buffer_shim();
     require_text_min();
     module2.exports = {
-      encode: (string3) => new TextEncoder().encode(string3),
-      decode: (buffer) => new TextDecoder().decode(buffer)
+      encode: (string4) => new TextEncoder().encode(string4),
+      decode: (buffer2) => new TextDecoder().decode(buffer2)
     };
   }
 });
@@ -29852,39 +30085,39 @@ var require_just_debounce_it = __commonJS({
 var require_path = __commonJS({
   "node_modules/@isomorphic-git/lightning-fs/src/path.js"(exports, module2) {
     init_esbuild_buffer_shim();
-    function normalizePath5(path) {
-      if (path.length === 0) {
+    function normalizePath8(path2) {
+      if (path2.length === 0) {
         return ".";
       }
-      let parts = splitPath(path);
+      let parts = splitPath(path2);
       parts = parts.reduce(reducer, []);
       return joinPath(...parts);
     }
     function resolvePath(...paths) {
       let result = "";
-      for (let path of paths) {
-        if (path.startsWith("/")) {
-          result = path;
+      for (let path2 of paths) {
+        if (path2.startsWith("/")) {
+          result = path2;
         } else {
-          result = normalizePath5(joinPath(result, path));
+          result = normalizePath8(joinPath(result, path2));
         }
       }
       return result;
     }
     function joinPath(...parts) {
       if (parts.length === 0) return "";
-      let path = parts.join("/");
-      path = path.replace(/\/{2,}/g, "/");
-      return path;
+      let path2 = parts.join("/");
+      path2 = path2.replace(/\/{2,}/g, "/");
+      return path2;
     }
-    function splitPath(path) {
-      if (path.length === 0) return [];
-      if (path === "/") return ["/"];
-      let parts = path.split("/");
+    function splitPath(path2) {
+      if (path2.length === 0) return [];
+      if (path2 === "/") return ["/"];
+      let parts = path2.split("/");
       if (parts[parts.length - 1] === "") {
         parts.pop();
       }
-      if (path[0] === "/") {
+      if (path2[0] === "/") {
         parts[0] = "/";
       } else {
         if (parts[0] !== ".") {
@@ -29893,17 +30126,17 @@ var require_path = __commonJS({
       }
       return parts;
     }
-    function dirname2(path) {
-      const last = path.lastIndexOf("/");
-      if (last === -1) throw new Error(`Cannot get dirname of "${path}"`);
+    function dirname2(path2) {
+      const last = path2.lastIndexOf("/");
+      if (last === -1) throw new Error(`Cannot get dirname of "${path2}"`);
       if (last === 0) return "/";
-      return path.slice(0, last);
+      return path2.slice(0, last);
     }
-    function basename2(path) {
-      if (path === "/") throw new Error(`Cannot get basename of "${path}"`);
-      const last = path.lastIndexOf("/");
-      if (last === -1) return path;
-      return path.slice(last + 1);
+    function basename2(path2) {
+      if (path2 === "/") throw new Error(`Cannot get basename of "${path2}"`);
+      const last = path2.lastIndexOf("/");
+      if (last === -1) return path2;
+      return path2.slice(last + 1);
     }
     function reducer(ancestors, current) {
       if (ancestors.length === 0) {
@@ -29934,7 +30167,7 @@ var require_path = __commonJS({
     }
     module2.exports = {
       join: joinPath,
-      normalize: normalizePath5,
+      normalize: normalizePath8,
       split: splitPath,
       basename: basename2,
       dirname: dirname2,
@@ -29974,7 +30207,7 @@ var require_errors = __commonJS({
 var require_CacheFS = __commonJS({
   "node_modules/@isomorphic-git/lightning-fs/src/CacheFS.js"(exports, module2) {
     init_esbuild_buffer_shim();
-    var path = require_path();
+    var path2 = require_path();
     var { EEXIST, ENOENT, ENOTDIR, ENOTEMPTY, EISDIR } = require_errors();
     var STAT = 0;
     module2.exports = class CacheFS {
@@ -30002,9 +30235,9 @@ var require_CacheFS = __commonJS({
       size() {
         return this._countInodes(this._root.get("/")) - 1;
       }
-      _countInodes(map4) {
+      _countInodes(map5) {
         let count = 1;
-        for (let [key, val] of map4) {
+        for (let [key, val] of map5) {
           if (key === STAT) continue;
           count += this._countInodes(val);
         }
@@ -30014,9 +30247,9 @@ var require_CacheFS = __commonJS({
         let val = this._maxInode(this._root.get("/")) + 1;
         return val;
       }
-      _maxInode(map4) {
-        let max = map4.get(STAT).ino;
-        for (let [key, val] of map4) {
+      _maxInode(map5) {
+        let max = map5.get(STAT).ino;
+        for (let [key, val] of map5) {
           if (key === STAT) continue;
           max = Math.max(max, this._maxInode(val));
         }
@@ -30080,7 +30313,7 @@ var require_CacheFS = __commonJS({
       _lookup(filepath, follow = true) {
         let dir = this._root;
         let partialPath = "/";
-        let parts = path.split(filepath);
+        let parts = path2.split(filepath);
         for (let i = 0; i < parts.length; ++i) {
           let part = parts[i];
           dir = dir.get(part);
@@ -30088,13 +30321,13 @@ var require_CacheFS = __commonJS({
           if (follow || i < parts.length - 1) {
             const stat = dir.get(STAT);
             if (stat.type === "symlink") {
-              let target = path.resolve(partialPath, stat.target);
+              let target = path2.resolve(partialPath, stat.target);
               dir = this._lookup(target);
             }
             if (!partialPath) {
               partialPath = part;
             } else {
-              partialPath = path.join(partialPath, part);
+              partialPath = path2.join(partialPath, part);
             }
           }
         }
@@ -30102,8 +30335,8 @@ var require_CacheFS = __commonJS({
       }
       mkdir(filepath, { mode }) {
         if (filepath === "/") throw new EEXIST();
-        let dir = this._lookup(path.dirname(filepath));
-        let basename2 = path.basename(filepath);
+        let dir = this._lookup(path2.dirname(filepath));
+        let basename2 = path2.basename(filepath);
         if (dir.has(basename2)) {
           throw new EEXIST();
         }
@@ -30122,8 +30355,8 @@ var require_CacheFS = __commonJS({
         let dir = this._lookup(filepath);
         if (dir.get(STAT).type !== "dir") throw new ENOTDIR();
         if (dir.size > 1) throw new ENOTEMPTY();
-        let parent = this._lookup(path.dirname(filepath));
-        let basename2 = path.basename(filepath);
+        let parent = this._lookup(path2.dirname(filepath));
+        let basename2 = path2.basename(filepath);
         parent.delete(basename2);
       }
       readdir(filepath) {
@@ -30153,8 +30386,8 @@ var require_CacheFS = __commonJS({
         if (ino == null) {
           ino = this.autoinc();
         }
-        let dir = this._lookup(path.dirname(filepath));
-        let basename2 = path.basename(filepath);
+        let dir = this._lookup(path2.dirname(filepath));
+        let basename2 = path2.basename(filepath);
         let stat = {
           mode,
           type: "file",
@@ -30168,14 +30401,14 @@ var require_CacheFS = __commonJS({
         return stat;
       }
       unlink(filepath) {
-        let parent = this._lookup(path.dirname(filepath));
-        let basename2 = path.basename(filepath);
+        let parent = this._lookup(path2.dirname(filepath));
+        let basename2 = path2.basename(filepath);
         parent.delete(basename2);
       }
       rename(oldFilepath, newFilepath) {
-        let basename2 = path.basename(newFilepath);
+        let basename2 = path2.basename(newFilepath);
         let entry = this._lookup(oldFilepath);
-        let destDir = this._lookup(path.dirname(newFilepath));
+        let destDir = this._lookup(path2.dirname(newFilepath));
         destDir.set(basename2, entry);
         this.unlink(oldFilepath);
       }
@@ -30204,8 +30437,8 @@ var require_CacheFS = __commonJS({
         if (ino == null) {
           ino = this.autoinc();
         }
-        let dir = this._lookup(path.dirname(filepath));
-        let basename2 = path.basename(filepath);
+        let dir = this._lookup(path2.dirname(filepath));
+        let basename2 = path2.basename(filepath);
         let stat = {
           mode,
           type: "symlink",
@@ -30293,7 +30526,7 @@ var require_idb_keyval_cjs = __commonJS({
         req = store3.get(key);
       }).then(() => req.result);
     }
-    function set(key, value2, store2 = getDefaultStore()) {
+    function set2(key, value2, store2 = getDefaultStore()) {
       return store2._withIDBStore("readwrite", (store3) => {
         store3.put(value2, key);
       });
@@ -30332,7 +30565,7 @@ var require_idb_keyval_cjs = __commonJS({
     }
     exports.Store = Store;
     exports.get = get;
-    exports.set = set;
+    exports.set = set2;
     exports.update = update2;
     exports.del = del;
     exports.clear = clear;
@@ -30564,7 +30797,7 @@ var require_DefaultBackend = __commonJS({
     var HttpBackend = require_HttpBackend();
     var Mutex = require_Mutex();
     var Mutex2 = require_Mutex2();
-    var path = require_path();
+    var path2 = require_path();
     module2.exports = class DefaultBackend {
       constructor() {
         this.saveSuperblock = debounce2(() => {
@@ -30635,10 +30868,10 @@ var require_DefaultBackend = __commonJS({
         }
       }
       _writeStat(filepath, size, opts) {
-        let dirparts = path.split(path.dirname(filepath));
+        let dirparts = path2.split(path2.dirname(filepath));
         let dir = dirparts.shift();
         for (let dirpart of dirparts) {
-          dir = path.join(dir, dirpart);
+          dir = path2.join(dir, dirpart);
           try {
             this._cache.mkdir(dir, { mode: 511 });
           } catch (e) {
@@ -30659,7 +30892,7 @@ var require_DefaultBackend = __commonJS({
         if (!data && this._http) {
           let lstat = this._cache.lstat(filepath);
           while (lstat.type === "symlink") {
-            filepath = path.resolve(path.dirname(filepath), lstat.target);
+            filepath = path2.resolve(path2.dirname(filepath), lstat.target);
             lstat = this._cache.lstat(filepath);
           }
           data = await this._http.readFile(filepath);
@@ -30773,9 +31006,9 @@ var require_PromisifiedFS = __commonJS({
     init_esbuild_buffer_shim();
     var DefaultBackend = require_DefaultBackend();
     var Stat = require_Stat();
-    var path = require_path();
+    var path2 = require_path();
     function cleanParamsFilepathOpts(filepath, opts, ...rest) {
-      filepath = path.normalize(filepath);
+      filepath = path2.normalize(filepath);
       if (typeof opts === "undefined" || typeof opts === "function") {
         opts = {};
       }
@@ -30787,7 +31020,7 @@ var require_PromisifiedFS = __commonJS({
       return [filepath, opts, ...rest];
     }
     function cleanParamsFilepathDataOpts(filepath, data, opts, ...rest) {
-      filepath = path.normalize(filepath);
+      filepath = path2.normalize(filepath);
       if (typeof opts === "undefined" || typeof opts === "function") {
         opts = {};
       }
@@ -30799,7 +31032,7 @@ var require_PromisifiedFS = __commonJS({
       return [filepath, data, opts, ...rest];
     }
     function cleanParamsFilepathFilepath(oldFilepath, newFilepath, ...rest) {
-      return [path.normalize(oldFilepath), path.normalize(newFilepath), ...rest];
+      return [path2.normalize(oldFilepath), path2.normalize(newFilepath), ...rest];
     }
     module2.exports = class PromisifiedFS {
       constructor(name, options = {}) {
@@ -31048,6 +31281,7257 @@ var require_src = __commonJS({
         this.promises.flush().then(resolve).catch(reject);
       }
     };
+  }
+});
+
+// node_modules/yaml/browser/dist/nodes/identity.js
+function isCollection(node2) {
+  if (node2 && typeof node2 === "object")
+    switch (node2[NODE_TYPE]) {
+      case MAP:
+      case SEQ:
+        return true;
+    }
+  return false;
+}
+function isNode(node2) {
+  if (node2 && typeof node2 === "object")
+    switch (node2[NODE_TYPE]) {
+      case ALIAS:
+      case MAP:
+      case SCALAR:
+      case SEQ:
+        return true;
+    }
+  return false;
+}
+var ALIAS, DOC, MAP, PAIR, SCALAR, SEQ, NODE_TYPE, isAlias, isDocument, isMap, isPair, isScalar, isSeq, hasAnchor;
+var init_identity = __esm({
+  "node_modules/yaml/browser/dist/nodes/identity.js"() {
+    init_esbuild_buffer_shim();
+    ALIAS = Symbol.for("yaml.alias");
+    DOC = Symbol.for("yaml.document");
+    MAP = Symbol.for("yaml.map");
+    PAIR = Symbol.for("yaml.pair");
+    SCALAR = Symbol.for("yaml.scalar");
+    SEQ = Symbol.for("yaml.seq");
+    NODE_TYPE = Symbol.for("yaml.node.type");
+    isAlias = (node2) => !!node2 && typeof node2 === "object" && node2[NODE_TYPE] === ALIAS;
+    isDocument = (node2) => !!node2 && typeof node2 === "object" && node2[NODE_TYPE] === DOC;
+    isMap = (node2) => !!node2 && typeof node2 === "object" && node2[NODE_TYPE] === MAP;
+    isPair = (node2) => !!node2 && typeof node2 === "object" && node2[NODE_TYPE] === PAIR;
+    isScalar = (node2) => !!node2 && typeof node2 === "object" && node2[NODE_TYPE] === SCALAR;
+    isSeq = (node2) => !!node2 && typeof node2 === "object" && node2[NODE_TYPE] === SEQ;
+    hasAnchor = (node2) => (isScalar(node2) || isCollection(node2)) && !!node2.anchor;
+  }
+});
+
+// node_modules/yaml/browser/dist/visit.js
+function visit3(node2, visitor) {
+  const visitor_ = initVisitor(visitor);
+  if (isDocument(node2)) {
+    const cd = visit_(null, node2.contents, visitor_, Object.freeze([node2]));
+    if (cd === REMOVE)
+      node2.contents = null;
+  } else
+    visit_(null, node2, visitor_, Object.freeze([]));
+}
+function visit_(key, node2, visitor, path2) {
+  const ctrl = callVisitor(key, node2, visitor, path2);
+  if (isNode(ctrl) || isPair(ctrl)) {
+    replaceNode(key, path2, ctrl);
+    return visit_(key, ctrl, visitor, path2);
+  }
+  if (typeof ctrl !== "symbol") {
+    if (isCollection(node2)) {
+      path2 = Object.freeze(path2.concat(node2));
+      for (let i = 0; i < node2.items.length; ++i) {
+        const ci = visit_(i, node2.items[i], visitor, path2);
+        if (typeof ci === "number")
+          i = ci - 1;
+        else if (ci === BREAK)
+          return BREAK;
+        else if (ci === REMOVE) {
+          node2.items.splice(i, 1);
+          i -= 1;
+        }
+      }
+    } else if (isPair(node2)) {
+      path2 = Object.freeze(path2.concat(node2));
+      const ck = visit_("key", node2.key, visitor, path2);
+      if (ck === BREAK)
+        return BREAK;
+      else if (ck === REMOVE)
+        node2.key = null;
+      const cv = visit_("value", node2.value, visitor, path2);
+      if (cv === BREAK)
+        return BREAK;
+      else if (cv === REMOVE)
+        node2.value = null;
+    }
+  }
+  return ctrl;
+}
+async function visitAsync(node2, visitor) {
+  const visitor_ = initVisitor(visitor);
+  if (isDocument(node2)) {
+    const cd = await visitAsync_(null, node2.contents, visitor_, Object.freeze([node2]));
+    if (cd === REMOVE)
+      node2.contents = null;
+  } else
+    await visitAsync_(null, node2, visitor_, Object.freeze([]));
+}
+async function visitAsync_(key, node2, visitor, path2) {
+  const ctrl = await callVisitor(key, node2, visitor, path2);
+  if (isNode(ctrl) || isPair(ctrl)) {
+    replaceNode(key, path2, ctrl);
+    return visitAsync_(key, ctrl, visitor, path2);
+  }
+  if (typeof ctrl !== "symbol") {
+    if (isCollection(node2)) {
+      path2 = Object.freeze(path2.concat(node2));
+      for (let i = 0; i < node2.items.length; ++i) {
+        const ci = await visitAsync_(i, node2.items[i], visitor, path2);
+        if (typeof ci === "number")
+          i = ci - 1;
+        else if (ci === BREAK)
+          return BREAK;
+        else if (ci === REMOVE) {
+          node2.items.splice(i, 1);
+          i -= 1;
+        }
+      }
+    } else if (isPair(node2)) {
+      path2 = Object.freeze(path2.concat(node2));
+      const ck = await visitAsync_("key", node2.key, visitor, path2);
+      if (ck === BREAK)
+        return BREAK;
+      else if (ck === REMOVE)
+        node2.key = null;
+      const cv = await visitAsync_("value", node2.value, visitor, path2);
+      if (cv === BREAK)
+        return BREAK;
+      else if (cv === REMOVE)
+        node2.value = null;
+    }
+  }
+  return ctrl;
+}
+function initVisitor(visitor) {
+  if (typeof visitor === "object" && (visitor.Collection || visitor.Node || visitor.Value)) {
+    return Object.assign({
+      Alias: visitor.Node,
+      Map: visitor.Node,
+      Scalar: visitor.Node,
+      Seq: visitor.Node
+    }, visitor.Value && {
+      Map: visitor.Value,
+      Scalar: visitor.Value,
+      Seq: visitor.Value
+    }, visitor.Collection && {
+      Map: visitor.Collection,
+      Seq: visitor.Collection
+    }, visitor);
+  }
+  return visitor;
+}
+function callVisitor(key, node2, visitor, path2) {
+  if (typeof visitor === "function")
+    return visitor(key, node2, path2);
+  if (isMap(node2))
+    return visitor.Map?.(key, node2, path2);
+  if (isSeq(node2))
+    return visitor.Seq?.(key, node2, path2);
+  if (isPair(node2))
+    return visitor.Pair?.(key, node2, path2);
+  if (isScalar(node2))
+    return visitor.Scalar?.(key, node2, path2);
+  if (isAlias(node2))
+    return visitor.Alias?.(key, node2, path2);
+  return void 0;
+}
+function replaceNode(key, path2, node2) {
+  const parent = path2[path2.length - 1];
+  if (isCollection(parent)) {
+    parent.items[key] = node2;
+  } else if (isPair(parent)) {
+    if (key === "key")
+      parent.key = node2;
+    else
+      parent.value = node2;
+  } else if (isDocument(parent)) {
+    parent.contents = node2;
+  } else {
+    const pt = isAlias(parent) ? "alias" : "scalar";
+    throw new Error(`Cannot replace node with ${pt} parent`);
+  }
+}
+var BREAK, SKIP3, REMOVE;
+var init_visit = __esm({
+  "node_modules/yaml/browser/dist/visit.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    BREAK = Symbol("break visit");
+    SKIP3 = Symbol("skip children");
+    REMOVE = Symbol("remove node");
+    visit3.BREAK = BREAK;
+    visit3.SKIP = SKIP3;
+    visit3.REMOVE = REMOVE;
+    visitAsync.BREAK = BREAK;
+    visitAsync.SKIP = SKIP3;
+    visitAsync.REMOVE = REMOVE;
+  }
+});
+
+// node_modules/yaml/browser/dist/doc/directives.js
+var escapeChars, escapeTagName, Directives;
+var init_directives = __esm({
+  "node_modules/yaml/browser/dist/doc/directives.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    init_visit();
+    escapeChars = {
+      "!": "%21",
+      ",": "%2C",
+      "[": "%5B",
+      "]": "%5D",
+      "{": "%7B",
+      "}": "%7D"
+    };
+    escapeTagName = (tn) => tn.replace(/[!,[\]{}]/g, (ch) => escapeChars[ch]);
+    Directives = class _Directives {
+      constructor(yaml, tags) {
+        this.docStart = null;
+        this.docEnd = false;
+        this.yaml = Object.assign({}, _Directives.defaultYaml, yaml);
+        this.tags = Object.assign({}, _Directives.defaultTags, tags);
+      }
+      clone() {
+        const copy = new _Directives(this.yaml, this.tags);
+        copy.docStart = this.docStart;
+        return copy;
+      }
+      /**
+       * During parsing, get a Directives instance for the current document and
+       * update the stream state according to the current version's spec.
+       */
+      atDocument() {
+        const res = new _Directives(this.yaml, this.tags);
+        switch (this.yaml.version) {
+          case "1.1":
+            this.atNextDocument = true;
+            break;
+          case "1.2":
+            this.atNextDocument = false;
+            this.yaml = {
+              explicit: _Directives.defaultYaml.explicit,
+              version: "1.2"
+            };
+            this.tags = Object.assign({}, _Directives.defaultTags);
+            break;
+        }
+        return res;
+      }
+      /**
+       * @param onError - May be called even if the action was successful
+       * @returns `true` on success
+       */
+      add(line, onError) {
+        if (this.atNextDocument) {
+          this.yaml = { explicit: _Directives.defaultYaml.explicit, version: "1.1" };
+          this.tags = Object.assign({}, _Directives.defaultTags);
+          this.atNextDocument = false;
+        }
+        const parts = line.trim().split(/[ \t]+/);
+        const name = parts.shift();
+        switch (name) {
+          case "%TAG": {
+            if (parts.length !== 2) {
+              onError(0, "%TAG directive should contain exactly two parts");
+              if (parts.length < 2)
+                return false;
+            }
+            const [handle2, prefix] = parts;
+            this.tags[handle2] = prefix;
+            return true;
+          }
+          case "%YAML": {
+            this.yaml.explicit = true;
+            if (parts.length !== 1) {
+              onError(0, "%YAML directive should contain exactly one part");
+              return false;
+            }
+            const [version2] = parts;
+            if (version2 === "1.1" || version2 === "1.2") {
+              this.yaml.version = version2;
+              return true;
+            } else {
+              const isValid2 = /^\d+\.\d+$/.test(version2);
+              onError(6, `Unsupported YAML version ${version2}`, isValid2);
+              return false;
+            }
+          }
+          default:
+            onError(0, `Unknown directive ${name}`, true);
+            return false;
+        }
+      }
+      /**
+       * Resolves a tag, matching handles to those defined in %TAG directives.
+       *
+       * @returns Resolved tag, which may also be the non-specific tag `'!'` or a
+       *   `'!local'` tag, or `null` if unresolvable.
+       */
+      tagName(source, onError) {
+        if (source === "!")
+          return "!";
+        if (source[0] !== "!") {
+          onError(`Not a valid tag: ${source}`);
+          return null;
+        }
+        if (source[1] === "<") {
+          const verbatim = source.slice(2, -1);
+          if (verbatim === "!" || verbatim === "!!") {
+            onError(`Verbatim tags aren't resolved, so ${source} is invalid.`);
+            return null;
+          }
+          if (source[source.length - 1] !== ">")
+            onError("Verbatim tags must end with a >");
+          return verbatim;
+        }
+        const [, handle2, suffix] = source.match(/^(.*!)([^!]*)$/s);
+        if (!suffix)
+          onError(`The ${source} tag has no suffix`);
+        const prefix = this.tags[handle2];
+        if (prefix) {
+          try {
+            return prefix + decodeURIComponent(suffix);
+          } catch (error) {
+            onError(String(error));
+            return null;
+          }
+        }
+        if (handle2 === "!")
+          return source;
+        onError(`Could not resolve tag: ${source}`);
+        return null;
+      }
+      /**
+       * Given a fully resolved tag, returns its printable string form,
+       * taking into account current tag prefixes and defaults.
+       */
+      tagString(tag) {
+        for (const [handle2, prefix] of Object.entries(this.tags)) {
+          if (tag.startsWith(prefix))
+            return handle2 + escapeTagName(tag.substring(prefix.length));
+        }
+        return tag[0] === "!" ? tag : `!<${tag}>`;
+      }
+      toString(doc) {
+        const lines = this.yaml.explicit ? [`%YAML ${this.yaml.version || "1.2"}`] : [];
+        const tagEntries = Object.entries(this.tags);
+        let tagNames;
+        if (doc && tagEntries.length > 0 && isNode(doc.contents)) {
+          const tags = {};
+          visit3(doc.contents, (_key, node2) => {
+            if (isNode(node2) && node2.tag)
+              tags[node2.tag] = true;
+          });
+          tagNames = Object.keys(tags);
+        } else
+          tagNames = [];
+        for (const [handle2, prefix] of tagEntries) {
+          if (handle2 === "!!" && prefix === "tag:yaml.org,2002:")
+            continue;
+          if (!doc || tagNames.some((tn) => tn.startsWith(prefix)))
+            lines.push(`%TAG ${handle2} ${prefix}`);
+        }
+        return lines.join("\n");
+      }
+    };
+    Directives.defaultYaml = { explicit: false, version: "1.2" };
+    Directives.defaultTags = { "!!": "tag:yaml.org,2002:" };
+  }
+});
+
+// node_modules/yaml/browser/dist/doc/anchors.js
+function anchorIsValid(anchor) {
+  if (/[\x00-\x19\s,[\]{}]/.test(anchor)) {
+    const sa = JSON.stringify(anchor);
+    const msg = `Anchor must not contain whitespace or control characters: ${sa}`;
+    throw new Error(msg);
+  }
+  return true;
+}
+function anchorNames(root2) {
+  const anchors = /* @__PURE__ */ new Set();
+  visit3(root2, {
+    Value(_key, node2) {
+      if (node2.anchor)
+        anchors.add(node2.anchor);
+    }
+  });
+  return anchors;
+}
+function findNewAnchor(prefix, exclude) {
+  for (let i = 1; true; ++i) {
+    const name = `${prefix}${i}`;
+    if (!exclude.has(name))
+      return name;
+  }
+}
+function createNodeAnchors(doc, prefix) {
+  const aliasObjects = [];
+  const sourceObjects = /* @__PURE__ */ new Map();
+  let prevAnchors = null;
+  return {
+    onAnchor: (source) => {
+      aliasObjects.push(source);
+      prevAnchors ?? (prevAnchors = anchorNames(doc));
+      const anchor = findNewAnchor(prefix, prevAnchors);
+      prevAnchors.add(anchor);
+      return anchor;
+    },
+    /**
+     * With circular references, the source node is only resolved after all
+     * of its child nodes are. This is why anchors are set only after all of
+     * the nodes have been created.
+     */
+    setAnchors: () => {
+      for (const source of aliasObjects) {
+        const ref = sourceObjects.get(source);
+        if (typeof ref === "object" && ref.anchor && (isScalar(ref.node) || isCollection(ref.node))) {
+          ref.node.anchor = ref.anchor;
+        } else {
+          const error = new Error("Failed to resolve repeated object (this should not happen)");
+          error.source = source;
+          throw error;
+        }
+      }
+    },
+    sourceObjects
+  };
+}
+var init_anchors = __esm({
+  "node_modules/yaml/browser/dist/doc/anchors.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    init_visit();
+  }
+});
+
+// node_modules/yaml/browser/dist/doc/applyReviver.js
+function applyReviver(reviver, obj, key, val) {
+  if (val && typeof val === "object") {
+    if (Array.isArray(val)) {
+      for (let i = 0, len = val.length; i < len; ++i) {
+        const v0 = val[i];
+        const v1 = applyReviver(reviver, val, String(i), v0);
+        if (v1 === void 0)
+          delete val[i];
+        else if (v1 !== v0)
+          val[i] = v1;
+      }
+    } else if (val instanceof Map) {
+      for (const k of Array.from(val.keys())) {
+        const v0 = val.get(k);
+        const v1 = applyReviver(reviver, val, k, v0);
+        if (v1 === void 0)
+          val.delete(k);
+        else if (v1 !== v0)
+          val.set(k, v1);
+      }
+    } else if (val instanceof Set) {
+      for (const v0 of Array.from(val)) {
+        const v1 = applyReviver(reviver, val, v0, v0);
+        if (v1 === void 0)
+          val.delete(v0);
+        else if (v1 !== v0) {
+          val.delete(v0);
+          val.add(v1);
+        }
+      }
+    } else {
+      for (const [k, v0] of Object.entries(val)) {
+        const v1 = applyReviver(reviver, val, k, v0);
+        if (v1 === void 0)
+          delete val[k];
+        else if (v1 !== v0)
+          val[k] = v1;
+      }
+    }
+  }
+  return reviver.call(obj, key, val);
+}
+var init_applyReviver = __esm({
+  "node_modules/yaml/browser/dist/doc/applyReviver.js"() {
+    init_esbuild_buffer_shim();
+  }
+});
+
+// node_modules/yaml/browser/dist/nodes/toJS.js
+function toJS(value2, arg, ctx) {
+  if (Array.isArray(value2))
+    return value2.map((v, i) => toJS(v, String(i), ctx));
+  if (value2 && typeof value2.toJSON === "function") {
+    if (!ctx || !hasAnchor(value2))
+      return value2.toJSON(arg, ctx);
+    const data = { aliasCount: 0, count: 1, res: void 0 };
+    ctx.anchors.set(value2, data);
+    ctx.onCreate = (res2) => {
+      data.res = res2;
+      delete ctx.onCreate;
+    };
+    const res = value2.toJSON(arg, ctx);
+    if (ctx.onCreate)
+      ctx.onCreate(res);
+    return res;
+  }
+  if (typeof value2 === "bigint" && !ctx?.keep)
+    return Number(value2);
+  return value2;
+}
+var init_toJS = __esm({
+  "node_modules/yaml/browser/dist/nodes/toJS.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+  }
+});
+
+// node_modules/yaml/browser/dist/nodes/Node.js
+var NodeBase;
+var init_Node = __esm({
+  "node_modules/yaml/browser/dist/nodes/Node.js"() {
+    init_esbuild_buffer_shim();
+    init_applyReviver();
+    init_identity();
+    init_toJS();
+    NodeBase = class {
+      constructor(type) {
+        Object.defineProperty(this, NODE_TYPE, { value: type });
+      }
+      /** Create a copy of this node.  */
+      clone() {
+        const copy = Object.create(Object.getPrototypeOf(this), Object.getOwnPropertyDescriptors(this));
+        if (this.range)
+          copy.range = this.range.slice();
+        return copy;
+      }
+      /** A plain JavaScript representation of this node. */
+      toJS(doc, { mapAsMap, maxAliasCount, onAnchor, reviver } = {}) {
+        if (!isDocument(doc))
+          throw new TypeError("A document argument is required");
+        const ctx = {
+          anchors: /* @__PURE__ */ new Map(),
+          doc,
+          keep: true,
+          mapAsMap: mapAsMap === true,
+          mapKeyWarned: false,
+          maxAliasCount: typeof maxAliasCount === "number" ? maxAliasCount : 100
+        };
+        const res = toJS(this, "", ctx);
+        if (typeof onAnchor === "function")
+          for (const { count, res: res2 } of ctx.anchors.values())
+            onAnchor(res2, count);
+        return typeof reviver === "function" ? applyReviver(reviver, { "": res }, "", res) : res;
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/nodes/Alias.js
+function getAliasCount(doc, node2, anchors) {
+  if (isAlias(node2)) {
+    const source = node2.resolve(doc);
+    const anchor = anchors && source && anchors.get(source);
+    return anchor ? anchor.count * anchor.aliasCount : 0;
+  } else if (isCollection(node2)) {
+    let count = 0;
+    for (const item of node2.items) {
+      const c = getAliasCount(doc, item, anchors);
+      if (c > count)
+        count = c;
+    }
+    return count;
+  } else if (isPair(node2)) {
+    const kc = getAliasCount(doc, node2.key, anchors);
+    const vc = getAliasCount(doc, node2.value, anchors);
+    return Math.max(kc, vc);
+  }
+  return 1;
+}
+var Alias;
+var init_Alias = __esm({
+  "node_modules/yaml/browser/dist/nodes/Alias.js"() {
+    init_esbuild_buffer_shim();
+    init_anchors();
+    init_visit();
+    init_identity();
+    init_Node();
+    init_toJS();
+    Alias = class extends NodeBase {
+      constructor(source) {
+        super(ALIAS);
+        this.source = source;
+        Object.defineProperty(this, "tag", {
+          set() {
+            throw new Error("Alias nodes cannot have tags");
+          }
+        });
+      }
+      /**
+       * Resolve the value of this alias within `doc`, finding the last
+       * instance of the `source` anchor before this node.
+       */
+      resolve(doc, ctx) {
+        let nodes;
+        if (ctx?.aliasResolveCache) {
+          nodes = ctx.aliasResolveCache;
+        } else {
+          nodes = [];
+          visit3(doc, {
+            Node: (_key, node2) => {
+              if (isAlias(node2) || hasAnchor(node2))
+                nodes.push(node2);
+            }
+          });
+          if (ctx)
+            ctx.aliasResolveCache = nodes;
+        }
+        let found = void 0;
+        for (const node2 of nodes) {
+          if (node2 === this)
+            break;
+          if (node2.anchor === this.source)
+            found = node2;
+        }
+        return found;
+      }
+      toJSON(_arg, ctx) {
+        if (!ctx)
+          return { source: this.source };
+        const { anchors, doc, maxAliasCount } = ctx;
+        const source = this.resolve(doc, ctx);
+        if (!source) {
+          const msg = `Unresolved alias (the anchor must be set before the alias): ${this.source}`;
+          throw new ReferenceError(msg);
+        }
+        let data = anchors.get(source);
+        if (!data) {
+          toJS(source, null, ctx);
+          data = anchors.get(source);
+        }
+        if (data?.res === void 0) {
+          const msg = "This should not happen: Alias anchor was not resolved?";
+          throw new ReferenceError(msg);
+        }
+        if (maxAliasCount >= 0) {
+          data.count += 1;
+          if (data.aliasCount === 0)
+            data.aliasCount = getAliasCount(doc, source, anchors);
+          if (data.count * data.aliasCount > maxAliasCount) {
+            const msg = "Excessive alias count indicates a resource exhaustion attack";
+            throw new ReferenceError(msg);
+          }
+        }
+        return data.res;
+      }
+      toString(ctx, _onComment, _onChompKeep) {
+        const src = `*${this.source}`;
+        if (ctx) {
+          anchorIsValid(this.source);
+          if (ctx.options.verifyAliasOrder && !ctx.anchors.has(this.source)) {
+            const msg = `Unresolved alias (the anchor must be set before the alias): ${this.source}`;
+            throw new Error(msg);
+          }
+          if (ctx.implicitKey)
+            return `${src} `;
+        }
+        return src;
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/nodes/Scalar.js
+var isScalarValue, Scalar;
+var init_Scalar = __esm({
+  "node_modules/yaml/browser/dist/nodes/Scalar.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    init_Node();
+    init_toJS();
+    isScalarValue = (value2) => !value2 || typeof value2 !== "function" && typeof value2 !== "object";
+    Scalar = class extends NodeBase {
+      constructor(value2) {
+        super(SCALAR);
+        this.value = value2;
+      }
+      toJSON(arg, ctx) {
+        return ctx?.keep ? this.value : toJS(this.value, arg, ctx);
+      }
+      toString() {
+        return String(this.value);
+      }
+    };
+    Scalar.BLOCK_FOLDED = "BLOCK_FOLDED";
+    Scalar.BLOCK_LITERAL = "BLOCK_LITERAL";
+    Scalar.PLAIN = "PLAIN";
+    Scalar.QUOTE_DOUBLE = "QUOTE_DOUBLE";
+    Scalar.QUOTE_SINGLE = "QUOTE_SINGLE";
+  }
+});
+
+// node_modules/yaml/browser/dist/doc/createNode.js
+function findTagObject(value2, tagName, tags) {
+  if (tagName) {
+    const match3 = tags.filter((t) => t.tag === tagName);
+    const tagObj = match3.find((t) => !t.format) ?? match3[0];
+    if (!tagObj)
+      throw new Error(`Tag ${tagName} not found`);
+    return tagObj;
+  }
+  return tags.find((t) => t.identify?.(value2) && !t.format);
+}
+function createNode(value2, tagName, ctx) {
+  if (isDocument(value2))
+    value2 = value2.contents;
+  if (isNode(value2))
+    return value2;
+  if (isPair(value2)) {
+    const map5 = ctx.schema[MAP].createNode?.(ctx.schema, null, ctx);
+    map5.items.push(value2);
+    return map5;
+  }
+  if (value2 instanceof String || value2 instanceof Number || value2 instanceof Boolean || typeof BigInt !== "undefined" && value2 instanceof BigInt) {
+    value2 = value2.valueOf();
+  }
+  const { aliasDuplicateObjects, onAnchor, onTagObj, schema: schema4, sourceObjects } = ctx;
+  let ref = void 0;
+  if (aliasDuplicateObjects && value2 && typeof value2 === "object") {
+    ref = sourceObjects.get(value2);
+    if (ref) {
+      ref.anchor ?? (ref.anchor = onAnchor(value2));
+      return new Alias(ref.anchor);
+    } else {
+      ref = { anchor: null, node: null };
+      sourceObjects.set(value2, ref);
+    }
+  }
+  if (tagName?.startsWith("!!"))
+    tagName = defaultTagPrefix + tagName.slice(2);
+  let tagObj = findTagObject(value2, tagName, schema4.tags);
+  if (!tagObj) {
+    if (value2 && typeof value2.toJSON === "function") {
+      value2 = value2.toJSON();
+    }
+    if (!value2 || typeof value2 !== "object") {
+      const node3 = new Scalar(value2);
+      if (ref)
+        ref.node = node3;
+      return node3;
+    }
+    tagObj = value2 instanceof Map ? schema4[MAP] : Symbol.iterator in Object(value2) ? schema4[SEQ] : schema4[MAP];
+  }
+  if (onTagObj) {
+    onTagObj(tagObj);
+    delete ctx.onTagObj;
+  }
+  const node2 = tagObj?.createNode ? tagObj.createNode(ctx.schema, value2, ctx) : typeof tagObj?.nodeClass?.from === "function" ? tagObj.nodeClass.from(ctx.schema, value2, ctx) : new Scalar(value2);
+  if (tagName)
+    node2.tag = tagName;
+  else if (!tagObj.default)
+    node2.tag = tagObj.tag;
+  if (ref)
+    ref.node = node2;
+  return node2;
+}
+var defaultTagPrefix;
+var init_createNode = __esm({
+  "node_modules/yaml/browser/dist/doc/createNode.js"() {
+    init_esbuild_buffer_shim();
+    init_Alias();
+    init_identity();
+    init_Scalar();
+    defaultTagPrefix = "tag:yaml.org,2002:";
+  }
+});
+
+// node_modules/yaml/browser/dist/nodes/Collection.js
+function collectionFromPath(schema4, path2, value2) {
+  let v = value2;
+  for (let i = path2.length - 1; i >= 0; --i) {
+    const k = path2[i];
+    if (typeof k === "number" && Number.isInteger(k) && k >= 0) {
+      const a = [];
+      a[k] = v;
+      v = a;
+    } else {
+      v = /* @__PURE__ */ new Map([[k, v]]);
+    }
+  }
+  return createNode(v, void 0, {
+    aliasDuplicateObjects: false,
+    keepUndefined: false,
+    onAnchor: () => {
+      throw new Error("This should not happen, please report a bug.");
+    },
+    schema: schema4,
+    sourceObjects: /* @__PURE__ */ new Map()
+  });
+}
+var isEmptyPath, Collection;
+var init_Collection = __esm({
+  "node_modules/yaml/browser/dist/nodes/Collection.js"() {
+    init_esbuild_buffer_shim();
+    init_createNode();
+    init_identity();
+    init_Node();
+    isEmptyPath = (path2) => path2 == null || typeof path2 === "object" && !!path2[Symbol.iterator]().next().done;
+    Collection = class extends NodeBase {
+      constructor(type, schema4) {
+        super(type);
+        Object.defineProperty(this, "schema", {
+          value: schema4,
+          configurable: true,
+          enumerable: false,
+          writable: true
+        });
+      }
+      /**
+       * Create a copy of this collection.
+       *
+       * @param schema - If defined, overwrites the original's schema
+       */
+      clone(schema4) {
+        const copy = Object.create(Object.getPrototypeOf(this), Object.getOwnPropertyDescriptors(this));
+        if (schema4)
+          copy.schema = schema4;
+        copy.items = copy.items.map((it) => isNode(it) || isPair(it) ? it.clone(schema4) : it);
+        if (this.range)
+          copy.range = this.range.slice();
+        return copy;
+      }
+      /**
+       * Adds a value to the collection. For `!!map` and `!!omap` the value must
+       * be a Pair instance or a `{ key, value }` object, which may not have a key
+       * that already exists in the map.
+       */
+      addIn(path2, value2) {
+        if (isEmptyPath(path2))
+          this.add(value2);
+        else {
+          const [key, ...rest] = path2;
+          const node2 = this.get(key, true);
+          if (isCollection(node2))
+            node2.addIn(rest, value2);
+          else if (node2 === void 0 && this.schema)
+            this.set(key, collectionFromPath(this.schema, rest, value2));
+          else
+            throw new Error(`Expected YAML collection at ${key}. Remaining path: ${rest}`);
+        }
+      }
+      /**
+       * Removes a value from the collection.
+       * @returns `true` if the item was found and removed.
+       */
+      deleteIn(path2) {
+        const [key, ...rest] = path2;
+        if (rest.length === 0)
+          return this.delete(key);
+        const node2 = this.get(key, true);
+        if (isCollection(node2))
+          return node2.deleteIn(rest);
+        else
+          throw new Error(`Expected YAML collection at ${key}. Remaining path: ${rest}`);
+      }
+      /**
+       * Returns item at `key`, or `undefined` if not found. By default unwraps
+       * scalar values from their surrounding node; to disable set `keepScalar` to
+       * `true` (collections are always returned intact).
+       */
+      getIn(path2, keepScalar) {
+        const [key, ...rest] = path2;
+        const node2 = this.get(key, true);
+        if (rest.length === 0)
+          return !keepScalar && isScalar(node2) ? node2.value : node2;
+        else
+          return isCollection(node2) ? node2.getIn(rest, keepScalar) : void 0;
+      }
+      hasAllNullValues(allowScalar) {
+        return this.items.every((node2) => {
+          if (!isPair(node2))
+            return false;
+          const n2 = node2.value;
+          return n2 == null || allowScalar && isScalar(n2) && n2.value == null && !n2.commentBefore && !n2.comment && !n2.tag;
+        });
+      }
+      /**
+       * Checks if the collection includes a value with the key `key`.
+       */
+      hasIn(path2) {
+        const [key, ...rest] = path2;
+        if (rest.length === 0)
+          return this.has(key);
+        const node2 = this.get(key, true);
+        return isCollection(node2) ? node2.hasIn(rest) : false;
+      }
+      /**
+       * Sets a value in this collection. For `!!set`, `value` needs to be a
+       * boolean to add/remove the item from the set.
+       */
+      setIn(path2, value2) {
+        const [key, ...rest] = path2;
+        if (rest.length === 0) {
+          this.set(key, value2);
+        } else {
+          const node2 = this.get(key, true);
+          if (isCollection(node2))
+            node2.setIn(rest, value2);
+          else if (node2 === void 0 && this.schema)
+            this.set(key, collectionFromPath(this.schema, rest, value2));
+          else
+            throw new Error(`Expected YAML collection at ${key}. Remaining path: ${rest}`);
+        }
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/stringify/stringifyComment.js
+function indentComment(comment, indent) {
+  if (/^\n+$/.test(comment))
+    return comment.substring(1);
+  return indent ? comment.replace(/^(?! *$)/gm, indent) : comment;
+}
+var stringifyComment, lineComment;
+var init_stringifyComment = __esm({
+  "node_modules/yaml/browser/dist/stringify/stringifyComment.js"() {
+    init_esbuild_buffer_shim();
+    stringifyComment = (str) => str.replace(/^(?!$)(?: $)?/gm, "#");
+    lineComment = (str, indent, comment) => str.endsWith("\n") ? indentComment(comment, indent) : comment.includes("\n") ? "\n" + indentComment(comment, indent) : (str.endsWith(" ") ? "" : " ") + comment;
+  }
+});
+
+// node_modules/yaml/browser/dist/stringify/foldFlowLines.js
+function foldFlowLines(text5, indent, mode = "flow", { indentAtStart, lineWidth = 80, minContentWidth = 20, onFold, onOverflow } = {}) {
+  if (!lineWidth || lineWidth < 0)
+    return text5;
+  if (lineWidth < minContentWidth)
+    minContentWidth = 0;
+  const endStep = Math.max(1 + minContentWidth, 1 + lineWidth - indent.length);
+  if (text5.length <= endStep)
+    return text5;
+  const folds = [];
+  const escapedFolds = {};
+  let end = lineWidth - indent.length;
+  if (typeof indentAtStart === "number") {
+    if (indentAtStart > lineWidth - Math.max(2, minContentWidth))
+      folds.push(0);
+    else
+      end = lineWidth - indentAtStart;
+  }
+  let split = void 0;
+  let prev = void 0;
+  let overflow = false;
+  let i = -1;
+  let escStart = -1;
+  let escEnd = -1;
+  if (mode === FOLD_BLOCK) {
+    i = consumeMoreIndentedLines(text5, i, indent.length);
+    if (i !== -1)
+      end = i + endStep;
+  }
+  for (let ch; ch = text5[i += 1]; ) {
+    if (mode === FOLD_QUOTED && ch === "\\") {
+      escStart = i;
+      switch (text5[i + 1]) {
+        case "x":
+          i += 3;
+          break;
+        case "u":
+          i += 5;
+          break;
+        case "U":
+          i += 9;
+          break;
+        default:
+          i += 1;
+      }
+      escEnd = i;
+    }
+    if (ch === "\n") {
+      if (mode === FOLD_BLOCK)
+        i = consumeMoreIndentedLines(text5, i, indent.length);
+      end = i + indent.length + endStep;
+      split = void 0;
+    } else {
+      if (ch === " " && prev && prev !== " " && prev !== "\n" && prev !== "	") {
+        const next = text5[i + 1];
+        if (next && next !== " " && next !== "\n" && next !== "	")
+          split = i;
+      }
+      if (i >= end) {
+        if (split) {
+          folds.push(split);
+          end = split + endStep;
+          split = void 0;
+        } else if (mode === FOLD_QUOTED) {
+          while (prev === " " || prev === "	") {
+            prev = ch;
+            ch = text5[i += 1];
+            overflow = true;
+          }
+          const j = i > escEnd + 1 ? i - 2 : escStart - 1;
+          if (escapedFolds[j])
+            return text5;
+          folds.push(j);
+          escapedFolds[j] = true;
+          end = j + endStep;
+          split = void 0;
+        } else {
+          overflow = true;
+        }
+      }
+    }
+    prev = ch;
+  }
+  if (overflow && onOverflow)
+    onOverflow();
+  if (folds.length === 0)
+    return text5;
+  if (onFold)
+    onFold();
+  let res = text5.slice(0, folds[0]);
+  for (let i2 = 0; i2 < folds.length; ++i2) {
+    const fold = folds[i2];
+    const end2 = folds[i2 + 1] || text5.length;
+    if (fold === 0)
+      res = `
+${indent}${text5.slice(0, end2)}`;
+    else {
+      if (mode === FOLD_QUOTED && escapedFolds[fold])
+        res += `${text5[fold]}\\`;
+      res += `
+${indent}${text5.slice(fold + 1, end2)}`;
+    }
+  }
+  return res;
+}
+function consumeMoreIndentedLines(text5, i, indent) {
+  let end = i;
+  let start = i + 1;
+  let ch = text5[start];
+  while (ch === " " || ch === "	") {
+    if (i < start + indent) {
+      ch = text5[++i];
+    } else {
+      do {
+        ch = text5[++i];
+      } while (ch && ch !== "\n");
+      end = i;
+      start = i + 1;
+      ch = text5[start];
+    }
+  }
+  return end;
+}
+var FOLD_FLOW, FOLD_BLOCK, FOLD_QUOTED;
+var init_foldFlowLines = __esm({
+  "node_modules/yaml/browser/dist/stringify/foldFlowLines.js"() {
+    init_esbuild_buffer_shim();
+    FOLD_FLOW = "flow";
+    FOLD_BLOCK = "block";
+    FOLD_QUOTED = "quoted";
+  }
+});
+
+// node_modules/yaml/browser/dist/stringify/stringifyString.js
+function lineLengthOverLimit(str, lineWidth, indentLength) {
+  if (!lineWidth || lineWidth < 0)
+    return false;
+  const limit = lineWidth - indentLength;
+  const strLen = str.length;
+  if (strLen <= limit)
+    return false;
+  for (let i = 0, start = 0; i < strLen; ++i) {
+    if (str[i] === "\n") {
+      if (i - start > limit)
+        return true;
+      start = i + 1;
+      if (strLen - start <= limit)
+        return false;
+    }
+  }
+  return true;
+}
+function doubleQuotedString(value2, ctx) {
+  const json = JSON.stringify(value2);
+  if (ctx.options.doubleQuotedAsJSON)
+    return json;
+  const { implicitKey } = ctx;
+  const minMultiLineLength = ctx.options.doubleQuotedMinMultiLineLength;
+  const indent = ctx.indent || (containsDocumentMarker(value2) ? "  " : "");
+  let str = "";
+  let start = 0;
+  for (let i = 0, ch = json[i]; ch; ch = json[++i]) {
+    if (ch === " " && json[i + 1] === "\\" && json[i + 2] === "n") {
+      str += json.slice(start, i) + "\\ ";
+      i += 1;
+      start = i;
+      ch = "\\";
+    }
+    if (ch === "\\")
+      switch (json[i + 1]) {
+        case "u":
+          {
+            str += json.slice(start, i);
+            const code2 = json.substr(i + 2, 4);
+            switch (code2) {
+              case "0000":
+                str += "\\0";
+                break;
+              case "0007":
+                str += "\\a";
+                break;
+              case "000b":
+                str += "\\v";
+                break;
+              case "001b":
+                str += "\\e";
+                break;
+              case "0085":
+                str += "\\N";
+                break;
+              case "00a0":
+                str += "\\_";
+                break;
+              case "2028":
+                str += "\\L";
+                break;
+              case "2029":
+                str += "\\P";
+                break;
+              default:
+                if (code2.substr(0, 2) === "00")
+                  str += "\\x" + code2.substr(2);
+                else
+                  str += json.substr(i, 6);
+            }
+            i += 5;
+            start = i + 1;
+          }
+          break;
+        case "n":
+          if (implicitKey || json[i + 2] === '"' || json.length < minMultiLineLength) {
+            i += 1;
+          } else {
+            str += json.slice(start, i) + "\n\n";
+            while (json[i + 2] === "\\" && json[i + 3] === "n" && json[i + 4] !== '"') {
+              str += "\n";
+              i += 2;
+            }
+            str += indent;
+            if (json[i + 2] === " ")
+              str += "\\";
+            i += 1;
+            start = i + 1;
+          }
+          break;
+        default:
+          i += 1;
+      }
+  }
+  str = start ? str + json.slice(start) : json;
+  return implicitKey ? str : foldFlowLines(str, indent, FOLD_QUOTED, getFoldOptions(ctx, false));
+}
+function singleQuotedString(value2, ctx) {
+  if (ctx.options.singleQuote === false || ctx.implicitKey && value2.includes("\n") || /[ \t]\n|\n[ \t]/.test(value2))
+    return doubleQuotedString(value2, ctx);
+  const indent = ctx.indent || (containsDocumentMarker(value2) ? "  " : "");
+  const res = "'" + value2.replace(/'/g, "''").replace(/\n+/g, `$&
+${indent}`) + "'";
+  return ctx.implicitKey ? res : foldFlowLines(res, indent, FOLD_FLOW, getFoldOptions(ctx, false));
+}
+function quotedString(value2, ctx) {
+  const { singleQuote } = ctx.options;
+  let qs;
+  if (singleQuote === false)
+    qs = doubleQuotedString;
+  else {
+    const hasDouble = value2.includes('"');
+    const hasSingle = value2.includes("'");
+    if (hasDouble && !hasSingle)
+      qs = singleQuotedString;
+    else if (hasSingle && !hasDouble)
+      qs = doubleQuotedString;
+    else
+      qs = singleQuote ? singleQuotedString : doubleQuotedString;
+  }
+  return qs(value2, ctx);
+}
+function blockString({ comment, type, value: value2 }, ctx, onComment, onChompKeep) {
+  const { blockQuote: blockQuote2, commentString, lineWidth } = ctx.options;
+  if (!blockQuote2 || /\n[\t ]+$/.test(value2)) {
+    return quotedString(value2, ctx);
+  }
+  const indent = ctx.indent || (ctx.forceBlockIndent || containsDocumentMarker(value2) ? "  " : "");
+  const literal = blockQuote2 === "literal" ? true : blockQuote2 === "folded" || type === Scalar.BLOCK_FOLDED ? false : type === Scalar.BLOCK_LITERAL ? true : !lineLengthOverLimit(value2, lineWidth, indent.length);
+  if (!value2)
+    return literal ? "|\n" : ">\n";
+  let chomp;
+  let endStart;
+  for (endStart = value2.length; endStart > 0; --endStart) {
+    const ch = value2[endStart - 1];
+    if (ch !== "\n" && ch !== "	" && ch !== " ")
+      break;
+  }
+  let end = value2.substring(endStart);
+  const endNlPos = end.indexOf("\n");
+  if (endNlPos === -1) {
+    chomp = "-";
+  } else if (value2 === end || endNlPos !== end.length - 1) {
+    chomp = "+";
+    if (onChompKeep)
+      onChompKeep();
+  } else {
+    chomp = "";
+  }
+  if (end) {
+    value2 = value2.slice(0, -end.length);
+    if (end[end.length - 1] === "\n")
+      end = end.slice(0, -1);
+    end = end.replace(blockEndNewlines, `$&${indent}`);
+  }
+  let startWithSpace = false;
+  let startEnd;
+  let startNlPos = -1;
+  for (startEnd = 0; startEnd < value2.length; ++startEnd) {
+    const ch = value2[startEnd];
+    if (ch === " ")
+      startWithSpace = true;
+    else if (ch === "\n")
+      startNlPos = startEnd;
+    else
+      break;
+  }
+  let start = value2.substring(0, startNlPos < startEnd ? startNlPos + 1 : startEnd);
+  if (start) {
+    value2 = value2.substring(start.length);
+    start = start.replace(/\n+/g, `$&${indent}`);
+  }
+  const indentSize = indent ? "2" : "1";
+  let header = (startWithSpace ? indentSize : "") + chomp;
+  if (comment) {
+    header += " " + commentString(comment.replace(/ ?[\r\n]+/g, " "));
+    if (onComment)
+      onComment();
+  }
+  if (!literal) {
+    const foldedValue = value2.replace(/\n+/g, "\n$&").replace(/(?:^|\n)([\t ].*)(?:([\n\t ]*)\n(?![\n\t ]))?/g, "$1$2").replace(/\n+/g, `$&${indent}`);
+    let literalFallback = false;
+    const foldOptions = getFoldOptions(ctx, true);
+    if (blockQuote2 !== "folded" && type !== Scalar.BLOCK_FOLDED) {
+      foldOptions.onOverflow = () => {
+        literalFallback = true;
+      };
+    }
+    const body = foldFlowLines(`${start}${foldedValue}${end}`, indent, FOLD_BLOCK, foldOptions);
+    if (!literalFallback)
+      return `>${header}
+${indent}${body}`;
+  }
+  value2 = value2.replace(/\n+/g, `$&${indent}`);
+  return `|${header}
+${indent}${start}${value2}${end}`;
+}
+function plainString(item, ctx, onComment, onChompKeep) {
+  const { type, value: value2 } = item;
+  const { actualString, implicitKey, indent, indentStep, inFlow } = ctx;
+  if (implicitKey && value2.includes("\n") || inFlow && /[[\]{},]/.test(value2)) {
+    return quotedString(value2, ctx);
+  }
+  if (/^[\n\t ,[\]{}#&*!|>'"%@`]|^[?-]$|^[?-][ \t]|[\n:][ \t]|[ \t]\n|[\n\t ]#|[\n\t :]$/.test(value2)) {
+    return implicitKey || inFlow || !value2.includes("\n") ? quotedString(value2, ctx) : blockString(item, ctx, onComment, onChompKeep);
+  }
+  if (!implicitKey && !inFlow && type !== Scalar.PLAIN && value2.includes("\n")) {
+    return blockString(item, ctx, onComment, onChompKeep);
+  }
+  if (containsDocumentMarker(value2)) {
+    if (indent === "") {
+      ctx.forceBlockIndent = true;
+      return blockString(item, ctx, onComment, onChompKeep);
+    } else if (implicitKey && indent === indentStep) {
+      return quotedString(value2, ctx);
+    }
+  }
+  const str = value2.replace(/\n+/g, `$&
+${indent}`);
+  if (actualString) {
+    const test = (tag) => tag.default && tag.tag !== "tag:yaml.org,2002:str" && tag.test?.test(str);
+    const { compat, tags } = ctx.doc.schema;
+    if (tags.some(test) || compat?.some(test))
+      return quotedString(value2, ctx);
+  }
+  return implicitKey ? str : foldFlowLines(str, indent, FOLD_FLOW, getFoldOptions(ctx, false));
+}
+function stringifyString(item, ctx, onComment, onChompKeep) {
+  const { implicitKey, inFlow } = ctx;
+  const ss = typeof item.value === "string" ? item : Object.assign({}, item, { value: String(item.value) });
+  let { type } = item;
+  if (type !== Scalar.QUOTE_DOUBLE) {
+    if (/[\x00-\x08\x0b-\x1f\x7f-\x9f\u{D800}-\u{DFFF}]/u.test(ss.value))
+      type = Scalar.QUOTE_DOUBLE;
+  }
+  const _stringify = (_type) => {
+    switch (_type) {
+      case Scalar.BLOCK_FOLDED:
+      case Scalar.BLOCK_LITERAL:
+        return implicitKey || inFlow ? quotedString(ss.value, ctx) : blockString(ss, ctx, onComment, onChompKeep);
+      case Scalar.QUOTE_DOUBLE:
+        return doubleQuotedString(ss.value, ctx);
+      case Scalar.QUOTE_SINGLE:
+        return singleQuotedString(ss.value, ctx);
+      case Scalar.PLAIN:
+        return plainString(ss, ctx, onComment, onChompKeep);
+      default:
+        return null;
+    }
+  };
+  let res = _stringify(type);
+  if (res === null) {
+    const { defaultKeyType, defaultStringType } = ctx.options;
+    const t = implicitKey && defaultKeyType || defaultStringType;
+    res = _stringify(t);
+    if (res === null)
+      throw new Error(`Unsupported default string type ${t}`);
+  }
+  return res;
+}
+var getFoldOptions, containsDocumentMarker, blockEndNewlines;
+var init_stringifyString = __esm({
+  "node_modules/yaml/browser/dist/stringify/stringifyString.js"() {
+    init_esbuild_buffer_shim();
+    init_Scalar();
+    init_foldFlowLines();
+    getFoldOptions = (ctx, isBlock2) => ({
+      indentAtStart: isBlock2 ? ctx.indent.length : ctx.indentAtStart,
+      lineWidth: ctx.options.lineWidth,
+      minContentWidth: ctx.options.minContentWidth
+    });
+    containsDocumentMarker = (str) => /^(%|---|\.\.\.)/m.test(str);
+    try {
+      blockEndNewlines = new RegExp("(^|(?<!\n))\n+(?!\n|$)", "g");
+    } catch {
+      blockEndNewlines = /\n+(?!\n|$)/g;
+    }
+  }
+});
+
+// node_modules/yaml/browser/dist/stringify/stringify.js
+function createStringifyContext(doc, options) {
+  const opt = Object.assign({
+    blockQuote: true,
+    commentString: stringifyComment,
+    defaultKeyType: null,
+    defaultStringType: "PLAIN",
+    directives: null,
+    doubleQuotedAsJSON: false,
+    doubleQuotedMinMultiLineLength: 40,
+    falseStr: "false",
+    flowCollectionPadding: true,
+    indentSeq: true,
+    lineWidth: 80,
+    minContentWidth: 20,
+    nullStr: "null",
+    simpleKeys: false,
+    singleQuote: null,
+    trailingComma: false,
+    trueStr: "true",
+    verifyAliasOrder: true
+  }, doc.schema.toStringOptions, options);
+  let inFlow;
+  switch (opt.collectionStyle) {
+    case "block":
+      inFlow = false;
+      break;
+    case "flow":
+      inFlow = true;
+      break;
+    default:
+      inFlow = null;
+  }
+  return {
+    anchors: /* @__PURE__ */ new Set(),
+    doc,
+    flowCollectionPadding: opt.flowCollectionPadding ? " " : "",
+    indent: "",
+    indentStep: typeof opt.indent === "number" ? " ".repeat(opt.indent) : "  ",
+    inFlow,
+    options: opt
+  };
+}
+function getTagObject(tags, item) {
+  if (item.tag) {
+    const match3 = tags.filter((t) => t.tag === item.tag);
+    if (match3.length > 0)
+      return match3.find((t) => t.format === item.format) ?? match3[0];
+  }
+  let tagObj = void 0;
+  let obj;
+  if (isScalar(item)) {
+    obj = item.value;
+    let match3 = tags.filter((t) => t.identify?.(obj));
+    if (match3.length > 1) {
+      const testMatch = match3.filter((t) => t.test);
+      if (testMatch.length > 0)
+        match3 = testMatch;
+    }
+    tagObj = match3.find((t) => t.format === item.format) ?? match3.find((t) => !t.format);
+  } else {
+    obj = item;
+    tagObj = tags.find((t) => t.nodeClass && obj instanceof t.nodeClass);
+  }
+  if (!tagObj) {
+    const name = obj?.constructor?.name ?? (obj === null ? "null" : typeof obj);
+    throw new Error(`Tag not resolved for ${name} value`);
+  }
+  return tagObj;
+}
+function stringifyProps(node2, tagObj, { anchors, doc }) {
+  if (!doc.directives)
+    return "";
+  const props = [];
+  const anchor = (isScalar(node2) || isCollection(node2)) && node2.anchor;
+  if (anchor && anchorIsValid(anchor)) {
+    anchors.add(anchor);
+    props.push(`&${anchor}`);
+  }
+  const tag = node2.tag ?? (tagObj.default ? null : tagObj.tag);
+  if (tag)
+    props.push(doc.directives.tagString(tag));
+  return props.join(" ");
+}
+function stringify(item, ctx, onComment, onChompKeep) {
+  if (isPair(item))
+    return item.toString(ctx, onComment, onChompKeep);
+  if (isAlias(item)) {
+    if (ctx.doc.directives)
+      return item.toString(ctx);
+    if (ctx.resolvedAliases?.has(item)) {
+      throw new TypeError(`Cannot stringify circular structure without alias nodes`);
+    } else {
+      if (ctx.resolvedAliases)
+        ctx.resolvedAliases.add(item);
+      else
+        ctx.resolvedAliases = /* @__PURE__ */ new Set([item]);
+      item = item.resolve(ctx.doc);
+    }
+  }
+  let tagObj = void 0;
+  const node2 = isNode(item) ? item : ctx.doc.createNode(item, { onTagObj: (o) => tagObj = o });
+  tagObj ?? (tagObj = getTagObject(ctx.doc.schema.tags, node2));
+  const props = stringifyProps(node2, tagObj, ctx);
+  if (props.length > 0)
+    ctx.indentAtStart = (ctx.indentAtStart ?? 0) + props.length + 1;
+  const str = typeof tagObj.stringify === "function" ? tagObj.stringify(node2, ctx, onComment, onChompKeep) : isScalar(node2) ? stringifyString(node2, ctx, onComment, onChompKeep) : node2.toString(ctx, onComment, onChompKeep);
+  if (!props)
+    return str;
+  return isScalar(node2) || str[0] === "{" || str[0] === "[" ? `${props} ${str}` : `${props}
+${ctx.indent}${str}`;
+}
+var init_stringify = __esm({
+  "node_modules/yaml/browser/dist/stringify/stringify.js"() {
+    init_esbuild_buffer_shim();
+    init_anchors();
+    init_identity();
+    init_stringifyComment();
+    init_stringifyString();
+  }
+});
+
+// node_modules/yaml/browser/dist/stringify/stringifyPair.js
+function stringifyPair({ key, value: value2 }, ctx, onComment, onChompKeep) {
+  const { allNullValues, doc, indent, indentStep, options: { commentString, indentSeq, simpleKeys } } = ctx;
+  let keyComment = isNode(key) && key.comment || null;
+  if (simpleKeys) {
+    if (keyComment) {
+      throw new Error("With simple keys, key nodes cannot have comments");
+    }
+    if (isCollection(key) || !isNode(key) && typeof key === "object") {
+      const msg = "With simple keys, collection cannot be used as a key value";
+      throw new Error(msg);
+    }
+  }
+  let explicitKey = !simpleKeys && (!key || keyComment && value2 == null && !ctx.inFlow || isCollection(key) || (isScalar(key) ? key.type === Scalar.BLOCK_FOLDED || key.type === Scalar.BLOCK_LITERAL : typeof key === "object"));
+  ctx = Object.assign({}, ctx, {
+    allNullValues: false,
+    implicitKey: !explicitKey && (simpleKeys || !allNullValues),
+    indent: indent + indentStep
+  });
+  let keyCommentDone = false;
+  let chompKeep = false;
+  let str = stringify(key, ctx, () => keyCommentDone = true, () => chompKeep = true);
+  if (!explicitKey && !ctx.inFlow && str.length > 1024) {
+    if (simpleKeys)
+      throw new Error("With simple keys, single line scalar must not span more than 1024 characters");
+    explicitKey = true;
+  }
+  if (ctx.inFlow) {
+    if (allNullValues || value2 == null) {
+      if (keyCommentDone && onComment)
+        onComment();
+      return str === "" ? "?" : explicitKey ? `? ${str}` : str;
+    }
+  } else if (allNullValues && !simpleKeys || value2 == null && explicitKey) {
+    str = `? ${str}`;
+    if (keyComment && !keyCommentDone) {
+      str += lineComment(str, ctx.indent, commentString(keyComment));
+    } else if (chompKeep && onChompKeep)
+      onChompKeep();
+    return str;
+  }
+  if (keyCommentDone)
+    keyComment = null;
+  if (explicitKey) {
+    if (keyComment)
+      str += lineComment(str, ctx.indent, commentString(keyComment));
+    str = `? ${str}
+${indent}:`;
+  } else {
+    str = `${str}:`;
+    if (keyComment)
+      str += lineComment(str, ctx.indent, commentString(keyComment));
+  }
+  let vsb, vcb, valueComment;
+  if (isNode(value2)) {
+    vsb = !!value2.spaceBefore;
+    vcb = value2.commentBefore;
+    valueComment = value2.comment;
+  } else {
+    vsb = false;
+    vcb = null;
+    valueComment = null;
+    if (value2 && typeof value2 === "object")
+      value2 = doc.createNode(value2);
+  }
+  ctx.implicitKey = false;
+  if (!explicitKey && !keyComment && isScalar(value2))
+    ctx.indentAtStart = str.length + 1;
+  chompKeep = false;
+  if (!indentSeq && indentStep.length >= 2 && !ctx.inFlow && !explicitKey && isSeq(value2) && !value2.flow && !value2.tag && !value2.anchor) {
+    ctx.indent = ctx.indent.substring(2);
+  }
+  let valueCommentDone = false;
+  const valueStr = stringify(value2, ctx, () => valueCommentDone = true, () => chompKeep = true);
+  let ws = " ";
+  if (keyComment || vsb || vcb) {
+    ws = vsb ? "\n" : "";
+    if (vcb) {
+      const cs = commentString(vcb);
+      ws += `
+${indentComment(cs, ctx.indent)}`;
+    }
+    if (valueStr === "" && !ctx.inFlow) {
+      if (ws === "\n" && valueComment)
+        ws = "\n\n";
+    } else {
+      ws += `
+${ctx.indent}`;
+    }
+  } else if (!explicitKey && isCollection(value2)) {
+    const vs0 = valueStr[0];
+    const nl0 = valueStr.indexOf("\n");
+    const hasNewline = nl0 !== -1;
+    const flow3 = ctx.inFlow ?? value2.flow ?? value2.items.length === 0;
+    if (hasNewline || !flow3) {
+      let hasPropsLine = false;
+      if (hasNewline && (vs0 === "&" || vs0 === "!")) {
+        let sp0 = valueStr.indexOf(" ");
+        if (vs0 === "&" && sp0 !== -1 && sp0 < nl0 && valueStr[sp0 + 1] === "!") {
+          sp0 = valueStr.indexOf(" ", sp0 + 1);
+        }
+        if (sp0 === -1 || nl0 < sp0)
+          hasPropsLine = true;
+      }
+      if (!hasPropsLine)
+        ws = `
+${ctx.indent}`;
+    }
+  } else if (valueStr === "" || valueStr[0] === "\n") {
+    ws = "";
+  }
+  str += ws + valueStr;
+  if (ctx.inFlow) {
+    if (valueCommentDone && onComment)
+      onComment();
+  } else if (valueComment && !valueCommentDone) {
+    str += lineComment(str, ctx.indent, commentString(valueComment));
+  } else if (chompKeep && onChompKeep) {
+    onChompKeep();
+  }
+  return str;
+}
+var init_stringifyPair = __esm({
+  "node_modules/yaml/browser/dist/stringify/stringifyPair.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    init_Scalar();
+    init_stringify();
+    init_stringifyComment();
+  }
+});
+
+// node_modules/yaml/browser/dist/log.js
+function warn(logLevel, warning) {
+  if (logLevel === "debug" || logLevel === "warn") {
+    console.warn(warning);
+  }
+}
+var init_log = __esm({
+  "node_modules/yaml/browser/dist/log.js"() {
+    init_esbuild_buffer_shim();
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/yaml-1.1/merge.js
+function addMergeToJSMap(ctx, map5, value2) {
+  value2 = ctx && isAlias(value2) ? value2.resolve(ctx.doc) : value2;
+  if (isSeq(value2))
+    for (const it of value2.items)
+      mergeValue(ctx, map5, it);
+  else if (Array.isArray(value2))
+    for (const it of value2)
+      mergeValue(ctx, map5, it);
+  else
+    mergeValue(ctx, map5, value2);
+}
+function mergeValue(ctx, map5, value2) {
+  const source = ctx && isAlias(value2) ? value2.resolve(ctx.doc) : value2;
+  if (!isMap(source))
+    throw new Error("Merge sources must be maps or map aliases");
+  const srcMap = source.toJSON(null, ctx, Map);
+  for (const [key, value3] of srcMap) {
+    if (map5 instanceof Map) {
+      if (!map5.has(key))
+        map5.set(key, value3);
+    } else if (map5 instanceof Set) {
+      map5.add(key);
+    } else if (!Object.prototype.hasOwnProperty.call(map5, key)) {
+      Object.defineProperty(map5, key, {
+        value: value3,
+        writable: true,
+        enumerable: true,
+        configurable: true
+      });
+    }
+  }
+  return map5;
+}
+var MERGE_KEY, merge, isMergeKey;
+var init_merge = __esm({
+  "node_modules/yaml/browser/dist/schema/yaml-1.1/merge.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    init_Scalar();
+    MERGE_KEY = "<<";
+    merge = {
+      identify: (value2) => value2 === MERGE_KEY || typeof value2 === "symbol" && value2.description === MERGE_KEY,
+      default: "key",
+      tag: "tag:yaml.org,2002:merge",
+      test: /^<<$/,
+      resolve: () => Object.assign(new Scalar(Symbol(MERGE_KEY)), {
+        addToJSMap: addMergeToJSMap
+      }),
+      stringify: () => MERGE_KEY
+    };
+    isMergeKey = (ctx, key) => (merge.identify(key) || isScalar(key) && (!key.type || key.type === Scalar.PLAIN) && merge.identify(key.value)) && ctx?.doc.schema.tags.some((tag) => tag.tag === merge.tag && tag.default);
+  }
+});
+
+// node_modules/yaml/browser/dist/nodes/addPairToJSMap.js
+function addPairToJSMap(ctx, map5, { key, value: value2 }) {
+  if (isNode(key) && key.addToJSMap)
+    key.addToJSMap(ctx, map5, value2);
+  else if (isMergeKey(ctx, key))
+    addMergeToJSMap(ctx, map5, value2);
+  else {
+    const jsKey = toJS(key, "", ctx);
+    if (map5 instanceof Map) {
+      map5.set(jsKey, toJS(value2, jsKey, ctx));
+    } else if (map5 instanceof Set) {
+      map5.add(jsKey);
+    } else {
+      const stringKey = stringifyKey(key, jsKey, ctx);
+      const jsValue = toJS(value2, stringKey, ctx);
+      if (stringKey in map5)
+        Object.defineProperty(map5, stringKey, {
+          value: jsValue,
+          writable: true,
+          enumerable: true,
+          configurable: true
+        });
+      else
+        map5[stringKey] = jsValue;
+    }
+  }
+  return map5;
+}
+function stringifyKey(key, jsKey, ctx) {
+  if (jsKey === null)
+    return "";
+  if (typeof jsKey !== "object")
+    return String(jsKey);
+  if (isNode(key) && ctx?.doc) {
+    const strCtx = createStringifyContext(ctx.doc, {});
+    strCtx.anchors = /* @__PURE__ */ new Set();
+    for (const node2 of ctx.anchors.keys())
+      strCtx.anchors.add(node2.anchor);
+    strCtx.inFlow = true;
+    strCtx.inStringifyKey = true;
+    const strKey = key.toString(strCtx);
+    if (!ctx.mapKeyWarned) {
+      let jsonStr = JSON.stringify(strKey);
+      if (jsonStr.length > 40)
+        jsonStr = jsonStr.substring(0, 36) + '..."';
+      warn(ctx.doc.options.logLevel, `Keys with collection values will be stringified due to JS Object restrictions: ${jsonStr}. Set mapAsMap: true to use object keys.`);
+      ctx.mapKeyWarned = true;
+    }
+    return strKey;
+  }
+  return JSON.stringify(jsKey);
+}
+var init_addPairToJSMap = __esm({
+  "node_modules/yaml/browser/dist/nodes/addPairToJSMap.js"() {
+    init_esbuild_buffer_shim();
+    init_log();
+    init_merge();
+    init_stringify();
+    init_identity();
+    init_toJS();
+  }
+});
+
+// node_modules/yaml/browser/dist/nodes/Pair.js
+function createPair(key, value2, ctx) {
+  const k = createNode(key, void 0, ctx);
+  const v = createNode(value2, void 0, ctx);
+  return new Pair(k, v);
+}
+var Pair;
+var init_Pair = __esm({
+  "node_modules/yaml/browser/dist/nodes/Pair.js"() {
+    init_esbuild_buffer_shim();
+    init_createNode();
+    init_stringifyPair();
+    init_addPairToJSMap();
+    init_identity();
+    Pair = class _Pair {
+      constructor(key, value2 = null) {
+        Object.defineProperty(this, NODE_TYPE, { value: PAIR });
+        this.key = key;
+        this.value = value2;
+      }
+      clone(schema4) {
+        let { key, value: value2 } = this;
+        if (isNode(key))
+          key = key.clone(schema4);
+        if (isNode(value2))
+          value2 = value2.clone(schema4);
+        return new _Pair(key, value2);
+      }
+      toJSON(_, ctx) {
+        const pair = ctx?.mapAsMap ? /* @__PURE__ */ new Map() : {};
+        return addPairToJSMap(ctx, pair, this);
+      }
+      toString(ctx, onComment, onChompKeep) {
+        return ctx?.doc ? stringifyPair(this, ctx, onComment, onChompKeep) : JSON.stringify(this);
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/stringify/stringifyCollection.js
+function stringifyCollection(collection, ctx, options) {
+  const flow3 = ctx.inFlow ?? collection.flow;
+  const stringify4 = flow3 ? stringifyFlowCollection : stringifyBlockCollection;
+  return stringify4(collection, ctx, options);
+}
+function stringifyBlockCollection({ comment, items }, ctx, { blockItemPrefix, flowChars, itemIndent, onChompKeep, onComment }) {
+  const { indent, options: { commentString } } = ctx;
+  const itemCtx = Object.assign({}, ctx, { indent: itemIndent, type: null });
+  let chompKeep = false;
+  const lines = [];
+  for (let i = 0; i < items.length; ++i) {
+    const item = items[i];
+    let comment2 = null;
+    if (isNode(item)) {
+      if (!chompKeep && item.spaceBefore)
+        lines.push("");
+      addCommentBefore(ctx, lines, item.commentBefore, chompKeep);
+      if (item.comment)
+        comment2 = item.comment;
+    } else if (isPair(item)) {
+      const ik = isNode(item.key) ? item.key : null;
+      if (ik) {
+        if (!chompKeep && ik.spaceBefore)
+          lines.push("");
+        addCommentBefore(ctx, lines, ik.commentBefore, chompKeep);
+      }
+    }
+    chompKeep = false;
+    let str2 = stringify(item, itemCtx, () => comment2 = null, () => chompKeep = true);
+    if (comment2)
+      str2 += lineComment(str2, itemIndent, commentString(comment2));
+    if (chompKeep && comment2)
+      chompKeep = false;
+    lines.push(blockItemPrefix + str2);
+  }
+  let str;
+  if (lines.length === 0) {
+    str = flowChars.start + flowChars.end;
+  } else {
+    str = lines[0];
+    for (let i = 1; i < lines.length; ++i) {
+      const line = lines[i];
+      str += line ? `
+${indent}${line}` : "\n";
+    }
+  }
+  if (comment) {
+    str += "\n" + indentComment(commentString(comment), indent);
+    if (onComment)
+      onComment();
+  } else if (chompKeep && onChompKeep)
+    onChompKeep();
+  return str;
+}
+function stringifyFlowCollection({ items }, ctx, { flowChars, itemIndent }) {
+  const { indent, indentStep, flowCollectionPadding: fcPadding, options: { commentString } } = ctx;
+  itemIndent += indentStep;
+  const itemCtx = Object.assign({}, ctx, {
+    indent: itemIndent,
+    inFlow: true,
+    type: null
+  });
+  let reqNewline = false;
+  let linesAtValue = 0;
+  const lines = [];
+  for (let i = 0; i < items.length; ++i) {
+    const item = items[i];
+    let comment = null;
+    if (isNode(item)) {
+      if (item.spaceBefore)
+        lines.push("");
+      addCommentBefore(ctx, lines, item.commentBefore, false);
+      if (item.comment)
+        comment = item.comment;
+    } else if (isPair(item)) {
+      const ik = isNode(item.key) ? item.key : null;
+      if (ik) {
+        if (ik.spaceBefore)
+          lines.push("");
+        addCommentBefore(ctx, lines, ik.commentBefore, false);
+        if (ik.comment)
+          reqNewline = true;
+      }
+      const iv = isNode(item.value) ? item.value : null;
+      if (iv) {
+        if (iv.comment)
+          comment = iv.comment;
+        if (iv.commentBefore)
+          reqNewline = true;
+      } else if (item.value == null && ik?.comment) {
+        comment = ik.comment;
+      }
+    }
+    if (comment)
+      reqNewline = true;
+    let str = stringify(item, itemCtx, () => comment = null);
+    reqNewline || (reqNewline = lines.length > linesAtValue || str.includes("\n"));
+    if (i < items.length - 1) {
+      str += ",";
+    } else if (ctx.options.trailingComma) {
+      if (ctx.options.lineWidth > 0) {
+        reqNewline || (reqNewline = lines.reduce((sum, line) => sum + line.length + 2, 2) + (str.length + 2) > ctx.options.lineWidth);
+      }
+      if (reqNewline) {
+        str += ",";
+      }
+    }
+    if (comment)
+      str += lineComment(str, itemIndent, commentString(comment));
+    lines.push(str);
+    linesAtValue = lines.length;
+  }
+  const { start, end } = flowChars;
+  if (lines.length === 0) {
+    return start + end;
+  } else {
+    if (!reqNewline) {
+      const len = lines.reduce((sum, line) => sum + line.length + 2, 2);
+      reqNewline = ctx.options.lineWidth > 0 && len > ctx.options.lineWidth;
+    }
+    if (reqNewline) {
+      let str = start;
+      for (const line of lines)
+        str += line ? `
+${indentStep}${indent}${line}` : "\n";
+      return `${str}
+${indent}${end}`;
+    } else {
+      return `${start}${fcPadding}${lines.join(" ")}${fcPadding}${end}`;
+    }
+  }
+}
+function addCommentBefore({ indent, options: { commentString } }, lines, comment, chompKeep) {
+  if (comment && chompKeep)
+    comment = comment.replace(/^\n+/, "");
+  if (comment) {
+    const ic = indentComment(commentString(comment), indent);
+    lines.push(ic.trimStart());
+  }
+}
+var init_stringifyCollection = __esm({
+  "node_modules/yaml/browser/dist/stringify/stringifyCollection.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    init_stringify();
+    init_stringifyComment();
+  }
+});
+
+// node_modules/yaml/browser/dist/nodes/YAMLMap.js
+function findPair(items, key) {
+  const k = isScalar(key) ? key.value : key;
+  for (const it of items) {
+    if (isPair(it)) {
+      if (it.key === key || it.key === k)
+        return it;
+      if (isScalar(it.key) && it.key.value === k)
+        return it;
+    }
+  }
+  return void 0;
+}
+var YAMLMap;
+var init_YAMLMap = __esm({
+  "node_modules/yaml/browser/dist/nodes/YAMLMap.js"() {
+    init_esbuild_buffer_shim();
+    init_stringifyCollection();
+    init_addPairToJSMap();
+    init_Collection();
+    init_identity();
+    init_Pair();
+    init_Scalar();
+    YAMLMap = class extends Collection {
+      static get tagName() {
+        return "tag:yaml.org,2002:map";
+      }
+      constructor(schema4) {
+        super(MAP, schema4);
+        this.items = [];
+      }
+      /**
+       * A generic collection parsing method that can be extended
+       * to other node classes that inherit from YAMLMap
+       */
+      static from(schema4, obj, ctx) {
+        const { keepUndefined, replacer } = ctx;
+        const map5 = new this(schema4);
+        const add = (key, value2) => {
+          if (typeof replacer === "function")
+            value2 = replacer.call(obj, key, value2);
+          else if (Array.isArray(replacer) && !replacer.includes(key))
+            return;
+          if (value2 !== void 0 || keepUndefined)
+            map5.items.push(createPair(key, value2, ctx));
+        };
+        if (obj instanceof Map) {
+          for (const [key, value2] of obj)
+            add(key, value2);
+        } else if (obj && typeof obj === "object") {
+          for (const key of Object.keys(obj))
+            add(key, obj[key]);
+        }
+        if (typeof schema4.sortMapEntries === "function") {
+          map5.items.sort(schema4.sortMapEntries);
+        }
+        return map5;
+      }
+      /**
+       * Adds a value to the collection.
+       *
+       * @param overwrite - If not set `true`, using a key that is already in the
+       *   collection will throw. Otherwise, overwrites the previous value.
+       */
+      add(pair, overwrite) {
+        let _pair;
+        if (isPair(pair))
+          _pair = pair;
+        else if (!pair || typeof pair !== "object" || !("key" in pair)) {
+          _pair = new Pair(pair, pair?.value);
+        } else
+          _pair = new Pair(pair.key, pair.value);
+        const prev = findPair(this.items, _pair.key);
+        const sortEntries = this.schema?.sortMapEntries;
+        if (prev) {
+          if (!overwrite)
+            throw new Error(`Key ${_pair.key} already set`);
+          if (isScalar(prev.value) && isScalarValue(_pair.value))
+            prev.value.value = _pair.value;
+          else
+            prev.value = _pair.value;
+        } else if (sortEntries) {
+          const i = this.items.findIndex((item) => sortEntries(_pair, item) < 0);
+          if (i === -1)
+            this.items.push(_pair);
+          else
+            this.items.splice(i, 0, _pair);
+        } else {
+          this.items.push(_pair);
+        }
+      }
+      delete(key) {
+        const it = findPair(this.items, key);
+        if (!it)
+          return false;
+        const del = this.items.splice(this.items.indexOf(it), 1);
+        return del.length > 0;
+      }
+      get(key, keepScalar) {
+        const it = findPair(this.items, key);
+        const node2 = it?.value;
+        return (!keepScalar && isScalar(node2) ? node2.value : node2) ?? void 0;
+      }
+      has(key) {
+        return !!findPair(this.items, key);
+      }
+      set(key, value2) {
+        this.add(new Pair(key, value2), true);
+      }
+      /**
+       * @param ctx - Conversion context, originally set in Document#toJS()
+       * @param {Class} Type - If set, forces the returned collection type
+       * @returns Instance of Type, Map, or Object
+       */
+      toJSON(_, ctx, Type) {
+        const map5 = Type ? new Type() : ctx?.mapAsMap ? /* @__PURE__ */ new Map() : {};
+        if (ctx?.onCreate)
+          ctx.onCreate(map5);
+        for (const item of this.items)
+          addPairToJSMap(ctx, map5, item);
+        return map5;
+      }
+      toString(ctx, onComment, onChompKeep) {
+        if (!ctx)
+          return JSON.stringify(this);
+        for (const item of this.items) {
+          if (!isPair(item))
+            throw new Error(`Map items must all be pairs; found ${JSON.stringify(item)} instead`);
+        }
+        if (!ctx.allNullValues && this.hasAllNullValues(false))
+          ctx = Object.assign({}, ctx, { allNullValues: true });
+        return stringifyCollection(this, ctx, {
+          blockItemPrefix: "",
+          flowChars: { start: "{", end: "}" },
+          itemIndent: ctx.indent || "",
+          onChompKeep,
+          onComment
+        });
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/common/map.js
+var map4;
+var init_map = __esm({
+  "node_modules/yaml/browser/dist/schema/common/map.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    init_YAMLMap();
+    map4 = {
+      collection: "map",
+      default: true,
+      nodeClass: YAMLMap,
+      tag: "tag:yaml.org,2002:map",
+      resolve(map5, onError) {
+        if (!isMap(map5))
+          onError("Expected a mapping for this tag");
+        return map5;
+      },
+      createNode: (schema4, obj, ctx) => YAMLMap.from(schema4, obj, ctx)
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/nodes/YAMLSeq.js
+function asItemIndex(key) {
+  let idx = isScalar(key) ? key.value : key;
+  if (idx && typeof idx === "string")
+    idx = Number(idx);
+  return typeof idx === "number" && Number.isInteger(idx) && idx >= 0 ? idx : null;
+}
+var YAMLSeq;
+var init_YAMLSeq = __esm({
+  "node_modules/yaml/browser/dist/nodes/YAMLSeq.js"() {
+    init_esbuild_buffer_shim();
+    init_createNode();
+    init_stringifyCollection();
+    init_Collection();
+    init_identity();
+    init_Scalar();
+    init_toJS();
+    YAMLSeq = class extends Collection {
+      static get tagName() {
+        return "tag:yaml.org,2002:seq";
+      }
+      constructor(schema4) {
+        super(SEQ, schema4);
+        this.items = [];
+      }
+      add(value2) {
+        this.items.push(value2);
+      }
+      /**
+       * Removes a value from the collection.
+       *
+       * `key` must contain a representation of an integer for this to succeed.
+       * It may be wrapped in a `Scalar`.
+       *
+       * @returns `true` if the item was found and removed.
+       */
+      delete(key) {
+        const idx = asItemIndex(key);
+        if (typeof idx !== "number")
+          return false;
+        const del = this.items.splice(idx, 1);
+        return del.length > 0;
+      }
+      get(key, keepScalar) {
+        const idx = asItemIndex(key);
+        if (typeof idx !== "number")
+          return void 0;
+        const it = this.items[idx];
+        return !keepScalar && isScalar(it) ? it.value : it;
+      }
+      /**
+       * Checks if the collection includes a value with the key `key`.
+       *
+       * `key` must contain a representation of an integer for this to succeed.
+       * It may be wrapped in a `Scalar`.
+       */
+      has(key) {
+        const idx = asItemIndex(key);
+        return typeof idx === "number" && idx < this.items.length;
+      }
+      /**
+       * Sets a value in this collection. For `!!set`, `value` needs to be a
+       * boolean to add/remove the item from the set.
+       *
+       * If `key` does not contain a representation of an integer, this will throw.
+       * It may be wrapped in a `Scalar`.
+       */
+      set(key, value2) {
+        const idx = asItemIndex(key);
+        if (typeof idx !== "number")
+          throw new Error(`Expected a valid index, not ${key}.`);
+        const prev = this.items[idx];
+        if (isScalar(prev) && isScalarValue(value2))
+          prev.value = value2;
+        else
+          this.items[idx] = value2;
+      }
+      toJSON(_, ctx) {
+        const seq2 = [];
+        if (ctx?.onCreate)
+          ctx.onCreate(seq2);
+        let i = 0;
+        for (const item of this.items)
+          seq2.push(toJS(item, String(i++), ctx));
+        return seq2;
+      }
+      toString(ctx, onComment, onChompKeep) {
+        if (!ctx)
+          return JSON.stringify(this);
+        return stringifyCollection(this, ctx, {
+          blockItemPrefix: "- ",
+          flowChars: { start: "[", end: "]" },
+          itemIndent: (ctx.indent || "") + "  ",
+          onChompKeep,
+          onComment
+        });
+      }
+      static from(schema4, obj, ctx) {
+        const { replacer } = ctx;
+        const seq2 = new this(schema4);
+        if (obj && Symbol.iterator in Object(obj)) {
+          let i = 0;
+          for (let it of obj) {
+            if (typeof replacer === "function") {
+              const key = obj instanceof Set ? it : String(i++);
+              it = replacer.call(obj, key, it);
+            }
+            seq2.items.push(createNode(it, void 0, ctx));
+          }
+        }
+        return seq2;
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/common/seq.js
+var seq;
+var init_seq = __esm({
+  "node_modules/yaml/browser/dist/schema/common/seq.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    init_YAMLSeq();
+    seq = {
+      collection: "seq",
+      default: true,
+      nodeClass: YAMLSeq,
+      tag: "tag:yaml.org,2002:seq",
+      resolve(seq2, onError) {
+        if (!isSeq(seq2))
+          onError("Expected a sequence for this tag");
+        return seq2;
+      },
+      createNode: (schema4, obj, ctx) => YAMLSeq.from(schema4, obj, ctx)
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/common/string.js
+var string3;
+var init_string = __esm({
+  "node_modules/yaml/browser/dist/schema/common/string.js"() {
+    init_esbuild_buffer_shim();
+    init_stringifyString();
+    string3 = {
+      identify: (value2) => typeof value2 === "string",
+      default: true,
+      tag: "tag:yaml.org,2002:str",
+      resolve: (str) => str,
+      stringify(item, ctx, onComment, onChompKeep) {
+        ctx = Object.assign({ actualString: true }, ctx);
+        return stringifyString(item, ctx, onComment, onChompKeep);
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/common/null.js
+var nullTag;
+var init_null = __esm({
+  "node_modules/yaml/browser/dist/schema/common/null.js"() {
+    init_esbuild_buffer_shim();
+    init_Scalar();
+    nullTag = {
+      identify: (value2) => value2 == null,
+      createNode: () => new Scalar(null),
+      default: true,
+      tag: "tag:yaml.org,2002:null",
+      test: /^(?:~|[Nn]ull|NULL)?$/,
+      resolve: () => new Scalar(null),
+      stringify: ({ source }, ctx) => typeof source === "string" && nullTag.test.test(source) ? source : ctx.options.nullStr
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/core/bool.js
+var boolTag;
+var init_bool = __esm({
+  "node_modules/yaml/browser/dist/schema/core/bool.js"() {
+    init_esbuild_buffer_shim();
+    init_Scalar();
+    boolTag = {
+      identify: (value2) => typeof value2 === "boolean",
+      default: true,
+      tag: "tag:yaml.org,2002:bool",
+      test: /^(?:[Tt]rue|TRUE|[Ff]alse|FALSE)$/,
+      resolve: (str) => new Scalar(str[0] === "t" || str[0] === "T"),
+      stringify({ source, value: value2 }, ctx) {
+        if (source && boolTag.test.test(source)) {
+          const sv = source[0] === "t" || source[0] === "T";
+          if (value2 === sv)
+            return source;
+        }
+        return value2 ? ctx.options.trueStr : ctx.options.falseStr;
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/stringify/stringifyNumber.js
+function stringifyNumber({ format, minFractionDigits, tag, value: value2 }) {
+  if (typeof value2 === "bigint")
+    return String(value2);
+  const num = typeof value2 === "number" ? value2 : Number(value2);
+  if (!isFinite(num))
+    return isNaN(num) ? ".nan" : num < 0 ? "-.inf" : ".inf";
+  let n2 = Object.is(value2, -0) ? "-0" : JSON.stringify(value2);
+  if (!format && minFractionDigits && (!tag || tag === "tag:yaml.org,2002:float") && /^\d/.test(n2)) {
+    let i = n2.indexOf(".");
+    if (i < 0) {
+      i = n2.length;
+      n2 += ".";
+    }
+    let d = minFractionDigits - (n2.length - i - 1);
+    while (d-- > 0)
+      n2 += "0";
+  }
+  return n2;
+}
+var init_stringifyNumber = __esm({
+  "node_modules/yaml/browser/dist/stringify/stringifyNumber.js"() {
+    init_esbuild_buffer_shim();
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/core/float.js
+var floatNaN, floatExp, float;
+var init_float = __esm({
+  "node_modules/yaml/browser/dist/schema/core/float.js"() {
+    init_esbuild_buffer_shim();
+    init_Scalar();
+    init_stringifyNumber();
+    floatNaN = {
+      identify: (value2) => typeof value2 === "number",
+      default: true,
+      tag: "tag:yaml.org,2002:float",
+      test: /^(?:[-+]?\.(?:inf|Inf|INF)|\.nan|\.NaN|\.NAN)$/,
+      resolve: (str) => str.slice(-3).toLowerCase() === "nan" ? NaN : str[0] === "-" ? Number.NEGATIVE_INFINITY : Number.POSITIVE_INFINITY,
+      stringify: stringifyNumber
+    };
+    floatExp = {
+      identify: (value2) => typeof value2 === "number",
+      default: true,
+      tag: "tag:yaml.org,2002:float",
+      format: "EXP",
+      test: /^[-+]?(?:\.[0-9]+|[0-9]+(?:\.[0-9]*)?)[eE][-+]?[0-9]+$/,
+      resolve: (str) => parseFloat(str),
+      stringify(node2) {
+        const num = Number(node2.value);
+        return isFinite(num) ? num.toExponential() : stringifyNumber(node2);
+      }
+    };
+    float = {
+      identify: (value2) => typeof value2 === "number",
+      default: true,
+      tag: "tag:yaml.org,2002:float",
+      test: /^[-+]?(?:\.[0-9]+|[0-9]+\.[0-9]*)$/,
+      resolve(str) {
+        const node2 = new Scalar(parseFloat(str));
+        const dot = str.indexOf(".");
+        if (dot !== -1 && str[str.length - 1] === "0")
+          node2.minFractionDigits = str.length - dot - 1;
+        return node2;
+      },
+      stringify: stringifyNumber
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/core/int.js
+function intStringify(node2, radix, prefix) {
+  const { value: value2 } = node2;
+  if (intIdentify(value2) && value2 >= 0)
+    return prefix + value2.toString(radix);
+  return stringifyNumber(node2);
+}
+var intIdentify, intResolve, intOct, int2, intHex;
+var init_int = __esm({
+  "node_modules/yaml/browser/dist/schema/core/int.js"() {
+    init_esbuild_buffer_shim();
+    init_stringifyNumber();
+    intIdentify = (value2) => typeof value2 === "bigint" || Number.isInteger(value2);
+    intResolve = (str, offset2, radix, { intAsBigInt }) => intAsBigInt ? BigInt(str) : parseInt(str.substring(offset2), radix);
+    intOct = {
+      identify: (value2) => intIdentify(value2) && value2 >= 0,
+      default: true,
+      tag: "tag:yaml.org,2002:int",
+      format: "OCT",
+      test: /^0o[0-7]+$/,
+      resolve: (str, _onError, opt) => intResolve(str, 2, 8, opt),
+      stringify: (node2) => intStringify(node2, 8, "0o")
+    };
+    int2 = {
+      identify: intIdentify,
+      default: true,
+      tag: "tag:yaml.org,2002:int",
+      test: /^[-+]?[0-9]+$/,
+      resolve: (str, _onError, opt) => intResolve(str, 0, 10, opt),
+      stringify: stringifyNumber
+    };
+    intHex = {
+      identify: (value2) => intIdentify(value2) && value2 >= 0,
+      default: true,
+      tag: "tag:yaml.org,2002:int",
+      format: "HEX",
+      test: /^0x[0-9a-fA-F]+$/,
+      resolve: (str, _onError, opt) => intResolve(str, 2, 16, opt),
+      stringify: (node2) => intStringify(node2, 16, "0x")
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/core/schema.js
+var schema;
+var init_schema = __esm({
+  "node_modules/yaml/browser/dist/schema/core/schema.js"() {
+    init_esbuild_buffer_shim();
+    init_map();
+    init_null();
+    init_seq();
+    init_string();
+    init_bool();
+    init_float();
+    init_int();
+    schema = [
+      map4,
+      seq,
+      string3,
+      nullTag,
+      boolTag,
+      intOct,
+      int2,
+      intHex,
+      floatNaN,
+      floatExp,
+      float
+    ];
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/json/schema.js
+function intIdentify2(value2) {
+  return typeof value2 === "bigint" || Number.isInteger(value2);
+}
+var stringifyJSON, jsonScalars, jsonError, schema2;
+var init_schema2 = __esm({
+  "node_modules/yaml/browser/dist/schema/json/schema.js"() {
+    init_esbuild_buffer_shim();
+    init_Scalar();
+    init_map();
+    init_seq();
+    stringifyJSON = ({ value: value2 }) => JSON.stringify(value2);
+    jsonScalars = [
+      {
+        identify: (value2) => typeof value2 === "string",
+        default: true,
+        tag: "tag:yaml.org,2002:str",
+        resolve: (str) => str,
+        stringify: stringifyJSON
+      },
+      {
+        identify: (value2) => value2 == null,
+        createNode: () => new Scalar(null),
+        default: true,
+        tag: "tag:yaml.org,2002:null",
+        test: /^null$/,
+        resolve: () => null,
+        stringify: stringifyJSON
+      },
+      {
+        identify: (value2) => typeof value2 === "boolean",
+        default: true,
+        tag: "tag:yaml.org,2002:bool",
+        test: /^true$|^false$/,
+        resolve: (str) => str === "true",
+        stringify: stringifyJSON
+      },
+      {
+        identify: intIdentify2,
+        default: true,
+        tag: "tag:yaml.org,2002:int",
+        test: /^-?(?:0|[1-9][0-9]*)$/,
+        resolve: (str, _onError, { intAsBigInt }) => intAsBigInt ? BigInt(str) : parseInt(str, 10),
+        stringify: ({ value: value2 }) => intIdentify2(value2) ? value2.toString() : JSON.stringify(value2)
+      },
+      {
+        identify: (value2) => typeof value2 === "number",
+        default: true,
+        tag: "tag:yaml.org,2002:float",
+        test: /^-?(?:0|[1-9][0-9]*)(?:\.[0-9]*)?(?:[eE][-+]?[0-9]+)?$/,
+        resolve: (str) => parseFloat(str),
+        stringify: stringifyJSON
+      }
+    ];
+    jsonError = {
+      default: true,
+      tag: "",
+      test: /^/,
+      resolve(str, onError) {
+        onError(`Unresolved plain scalar ${JSON.stringify(str)}`);
+        return str;
+      }
+    };
+    schema2 = [map4, seq].concat(jsonScalars, jsonError);
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/yaml-1.1/binary.js
+var binary;
+var init_binary = __esm({
+  "node_modules/yaml/browser/dist/schema/yaml-1.1/binary.js"() {
+    init_esbuild_buffer_shim();
+    init_Scalar();
+    init_stringifyString();
+    binary = {
+      identify: (value2) => value2 instanceof Uint8Array,
+      // Buffer inherits from Uint8Array
+      default: false,
+      tag: "tag:yaml.org,2002:binary",
+      /**
+       * Returns a Buffer in node and an Uint8Array in browsers
+       *
+       * To use the resulting buffer as an image, you'll want to do something like:
+       *
+       *   const blob = new Blob([buffer], { type: 'image/jpeg' })
+       *   document.querySelector('#photo').src = URL.createObjectURL(blob)
+       */
+      resolve(src, onError) {
+        if (typeof atob === "function") {
+          const str = atob(src.replace(/[\n\r]/g, ""));
+          const buffer2 = new Uint8Array(str.length);
+          for (let i = 0; i < str.length; ++i)
+            buffer2[i] = str.charCodeAt(i);
+          return buffer2;
+        } else {
+          onError("This environment does not support reading binary tags; either Buffer or atob is required");
+          return src;
+        }
+      },
+      stringify({ comment, type, value: value2 }, ctx, onComment, onChompKeep) {
+        if (!value2)
+          return "";
+        const buf = value2;
+        let str;
+        if (typeof btoa === "function") {
+          let s2 = "";
+          for (let i = 0; i < buf.length; ++i)
+            s2 += String.fromCharCode(buf[i]);
+          str = btoa(s2);
+        } else {
+          throw new Error("This environment does not support writing binary tags; either Buffer or btoa is required");
+        }
+        type ?? (type = Scalar.BLOCK_LITERAL);
+        if (type !== Scalar.QUOTE_DOUBLE) {
+          const lineWidth = Math.max(ctx.options.lineWidth - ctx.indent.length, ctx.options.minContentWidth);
+          const n2 = Math.ceil(str.length / lineWidth);
+          const lines = new Array(n2);
+          for (let i = 0, o = 0; i < n2; ++i, o += lineWidth) {
+            lines[i] = str.substr(o, lineWidth);
+          }
+          str = lines.join(type === Scalar.BLOCK_LITERAL ? "\n" : " ");
+        }
+        return stringifyString({ comment, type, value: str }, ctx, onComment, onChompKeep);
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/yaml-1.1/pairs.js
+function resolvePairs(seq2, onError) {
+  if (isSeq(seq2)) {
+    for (let i = 0; i < seq2.items.length; ++i) {
+      let item = seq2.items[i];
+      if (isPair(item))
+        continue;
+      else if (isMap(item)) {
+        if (item.items.length > 1)
+          onError("Each pair must have its own sequence indicator");
+        const pair = item.items[0] || new Pair(new Scalar(null));
+        if (item.commentBefore)
+          pair.key.commentBefore = pair.key.commentBefore ? `${item.commentBefore}
+${pair.key.commentBefore}` : item.commentBefore;
+        if (item.comment) {
+          const cn = pair.value ?? pair.key;
+          cn.comment = cn.comment ? `${item.comment}
+${cn.comment}` : item.comment;
+        }
+        item = pair;
+      }
+      seq2.items[i] = isPair(item) ? item : new Pair(item);
+    }
+  } else
+    onError("Expected a sequence for this tag");
+  return seq2;
+}
+function createPairs(schema4, iterable, ctx) {
+  const { replacer } = ctx;
+  const pairs2 = new YAMLSeq(schema4);
+  pairs2.tag = "tag:yaml.org,2002:pairs";
+  let i = 0;
+  if (iterable && Symbol.iterator in Object(iterable))
+    for (let it of iterable) {
+      if (typeof replacer === "function")
+        it = replacer.call(iterable, String(i++), it);
+      let key, value2;
+      if (Array.isArray(it)) {
+        if (it.length === 2) {
+          key = it[0];
+          value2 = it[1];
+        } else
+          throw new TypeError(`Expected [key, value] tuple: ${it}`);
+      } else if (it && it instanceof Object) {
+        const keys = Object.keys(it);
+        if (keys.length === 1) {
+          key = keys[0];
+          value2 = it[key];
+        } else {
+          throw new TypeError(`Expected tuple with one key, not ${keys.length} keys`);
+        }
+      } else {
+        key = it;
+      }
+      pairs2.items.push(createPair(key, value2, ctx));
+    }
+  return pairs2;
+}
+var pairs;
+var init_pairs = __esm({
+  "node_modules/yaml/browser/dist/schema/yaml-1.1/pairs.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    init_Pair();
+    init_Scalar();
+    init_YAMLSeq();
+    pairs = {
+      collection: "seq",
+      default: false,
+      tag: "tag:yaml.org,2002:pairs",
+      resolve: resolvePairs,
+      createNode: createPairs
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/yaml-1.1/omap.js
+var YAMLOMap, omap;
+var init_omap = __esm({
+  "node_modules/yaml/browser/dist/schema/yaml-1.1/omap.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    init_toJS();
+    init_YAMLMap();
+    init_YAMLSeq();
+    init_pairs();
+    YAMLOMap = class _YAMLOMap extends YAMLSeq {
+      constructor() {
+        super();
+        this.add = YAMLMap.prototype.add.bind(this);
+        this.delete = YAMLMap.prototype.delete.bind(this);
+        this.get = YAMLMap.prototype.get.bind(this);
+        this.has = YAMLMap.prototype.has.bind(this);
+        this.set = YAMLMap.prototype.set.bind(this);
+        this.tag = _YAMLOMap.tag;
+      }
+      /**
+       * If `ctx` is given, the return type is actually `Map<unknown, unknown>`,
+       * but TypeScript won't allow widening the signature of a child method.
+       */
+      toJSON(_, ctx) {
+        if (!ctx)
+          return super.toJSON(_);
+        const map5 = /* @__PURE__ */ new Map();
+        if (ctx?.onCreate)
+          ctx.onCreate(map5);
+        for (const pair of this.items) {
+          let key, value2;
+          if (isPair(pair)) {
+            key = toJS(pair.key, "", ctx);
+            value2 = toJS(pair.value, key, ctx);
+          } else {
+            key = toJS(pair, "", ctx);
+          }
+          if (map5.has(key))
+            throw new Error("Ordered maps must not include duplicate keys");
+          map5.set(key, value2);
+        }
+        return map5;
+      }
+      static from(schema4, iterable, ctx) {
+        const pairs2 = createPairs(schema4, iterable, ctx);
+        const omap2 = new this();
+        omap2.items = pairs2.items;
+        return omap2;
+      }
+    };
+    YAMLOMap.tag = "tag:yaml.org,2002:omap";
+    omap = {
+      collection: "seq",
+      identify: (value2) => value2 instanceof Map,
+      nodeClass: YAMLOMap,
+      default: false,
+      tag: "tag:yaml.org,2002:omap",
+      resolve(seq2, onError) {
+        const pairs2 = resolvePairs(seq2, onError);
+        const seenKeys = [];
+        for (const { key } of pairs2.items) {
+          if (isScalar(key)) {
+            if (seenKeys.includes(key.value)) {
+              onError(`Ordered maps must not include duplicate keys: ${key.value}`);
+            } else {
+              seenKeys.push(key.value);
+            }
+          }
+        }
+        return Object.assign(new YAMLOMap(), pairs2);
+      },
+      createNode: (schema4, iterable, ctx) => YAMLOMap.from(schema4, iterable, ctx)
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/yaml-1.1/bool.js
+function boolStringify({ value: value2, source }, ctx) {
+  const boolObj = value2 ? trueTag : falseTag;
+  if (source && boolObj.test.test(source))
+    return source;
+  return value2 ? ctx.options.trueStr : ctx.options.falseStr;
+}
+var trueTag, falseTag;
+var init_bool2 = __esm({
+  "node_modules/yaml/browser/dist/schema/yaml-1.1/bool.js"() {
+    init_esbuild_buffer_shim();
+    init_Scalar();
+    trueTag = {
+      identify: (value2) => value2 === true,
+      default: true,
+      tag: "tag:yaml.org,2002:bool",
+      test: /^(?:Y|y|[Yy]es|YES|[Tt]rue|TRUE|[Oo]n|ON)$/,
+      resolve: () => new Scalar(true),
+      stringify: boolStringify
+    };
+    falseTag = {
+      identify: (value2) => value2 === false,
+      default: true,
+      tag: "tag:yaml.org,2002:bool",
+      test: /^(?:N|n|[Nn]o|NO|[Ff]alse|FALSE|[Oo]ff|OFF)$/,
+      resolve: () => new Scalar(false),
+      stringify: boolStringify
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/yaml-1.1/float.js
+var floatNaN2, floatExp2, float2;
+var init_float2 = __esm({
+  "node_modules/yaml/browser/dist/schema/yaml-1.1/float.js"() {
+    init_esbuild_buffer_shim();
+    init_Scalar();
+    init_stringifyNumber();
+    floatNaN2 = {
+      identify: (value2) => typeof value2 === "number",
+      default: true,
+      tag: "tag:yaml.org,2002:float",
+      test: /^(?:[-+]?\.(?:inf|Inf|INF)|\.nan|\.NaN|\.NAN)$/,
+      resolve: (str) => str.slice(-3).toLowerCase() === "nan" ? NaN : str[0] === "-" ? Number.NEGATIVE_INFINITY : Number.POSITIVE_INFINITY,
+      stringify: stringifyNumber
+    };
+    floatExp2 = {
+      identify: (value2) => typeof value2 === "number",
+      default: true,
+      tag: "tag:yaml.org,2002:float",
+      format: "EXP",
+      test: /^[-+]?(?:[0-9][0-9_]*)?(?:\.[0-9_]*)?[eE][-+]?[0-9]+$/,
+      resolve: (str) => parseFloat(str.replace(/_/g, "")),
+      stringify(node2) {
+        const num = Number(node2.value);
+        return isFinite(num) ? num.toExponential() : stringifyNumber(node2);
+      }
+    };
+    float2 = {
+      identify: (value2) => typeof value2 === "number",
+      default: true,
+      tag: "tag:yaml.org,2002:float",
+      test: /^[-+]?(?:[0-9][0-9_]*)?\.[0-9_]*$/,
+      resolve(str) {
+        const node2 = new Scalar(parseFloat(str.replace(/_/g, "")));
+        const dot = str.indexOf(".");
+        if (dot !== -1) {
+          const f = str.substring(dot + 1).replace(/_/g, "");
+          if (f[f.length - 1] === "0")
+            node2.minFractionDigits = f.length;
+        }
+        return node2;
+      },
+      stringify: stringifyNumber
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/yaml-1.1/int.js
+function intResolve2(str, offset2, radix, { intAsBigInt }) {
+  const sign = str[0];
+  if (sign === "-" || sign === "+")
+    offset2 += 1;
+  str = str.substring(offset2).replace(/_/g, "");
+  if (intAsBigInt) {
+    switch (radix) {
+      case 2:
+        str = `0b${str}`;
+        break;
+      case 8:
+        str = `0o${str}`;
+        break;
+      case 16:
+        str = `0x${str}`;
+        break;
+    }
+    const n3 = BigInt(str);
+    return sign === "-" ? BigInt(-1) * n3 : n3;
+  }
+  const n2 = parseInt(str, radix);
+  return sign === "-" ? -1 * n2 : n2;
+}
+function intStringify2(node2, radix, prefix) {
+  const { value: value2 } = node2;
+  if (intIdentify3(value2)) {
+    const str = value2.toString(radix);
+    return value2 < 0 ? "-" + prefix + str.substr(1) : prefix + str;
+  }
+  return stringifyNumber(node2);
+}
+var intIdentify3, intBin, intOct2, int3, intHex2;
+var init_int2 = __esm({
+  "node_modules/yaml/browser/dist/schema/yaml-1.1/int.js"() {
+    init_esbuild_buffer_shim();
+    init_stringifyNumber();
+    intIdentify3 = (value2) => typeof value2 === "bigint" || Number.isInteger(value2);
+    intBin = {
+      identify: intIdentify3,
+      default: true,
+      tag: "tag:yaml.org,2002:int",
+      format: "BIN",
+      test: /^[-+]?0b[0-1_]+$/,
+      resolve: (str, _onError, opt) => intResolve2(str, 2, 2, opt),
+      stringify: (node2) => intStringify2(node2, 2, "0b")
+    };
+    intOct2 = {
+      identify: intIdentify3,
+      default: true,
+      tag: "tag:yaml.org,2002:int",
+      format: "OCT",
+      test: /^[-+]?0[0-7_]+$/,
+      resolve: (str, _onError, opt) => intResolve2(str, 1, 8, opt),
+      stringify: (node2) => intStringify2(node2, 8, "0")
+    };
+    int3 = {
+      identify: intIdentify3,
+      default: true,
+      tag: "tag:yaml.org,2002:int",
+      test: /^[-+]?[0-9][0-9_]*$/,
+      resolve: (str, _onError, opt) => intResolve2(str, 0, 10, opt),
+      stringify: stringifyNumber
+    };
+    intHex2 = {
+      identify: intIdentify3,
+      default: true,
+      tag: "tag:yaml.org,2002:int",
+      format: "HEX",
+      test: /^[-+]?0x[0-9a-fA-F_]+$/,
+      resolve: (str, _onError, opt) => intResolve2(str, 2, 16, opt),
+      stringify: (node2) => intStringify2(node2, 16, "0x")
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/yaml-1.1/set.js
+var YAMLSet, set;
+var init_set = __esm({
+  "node_modules/yaml/browser/dist/schema/yaml-1.1/set.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    init_Pair();
+    init_YAMLMap();
+    YAMLSet = class _YAMLSet extends YAMLMap {
+      constructor(schema4) {
+        super(schema4);
+        this.tag = _YAMLSet.tag;
+      }
+      add(key) {
+        let pair;
+        if (isPair(key))
+          pair = key;
+        else if (key && typeof key === "object" && "key" in key && "value" in key && key.value === null)
+          pair = new Pair(key.key, null);
+        else
+          pair = new Pair(key, null);
+        const prev = findPair(this.items, pair.key);
+        if (!prev)
+          this.items.push(pair);
+      }
+      /**
+       * If `keepPair` is `true`, returns the Pair matching `key`.
+       * Otherwise, returns the value of that Pair's key.
+       */
+      get(key, keepPair) {
+        const pair = findPair(this.items, key);
+        return !keepPair && isPair(pair) ? isScalar(pair.key) ? pair.key.value : pair.key : pair;
+      }
+      set(key, value2) {
+        if (typeof value2 !== "boolean")
+          throw new Error(`Expected boolean value for set(key, value) in a YAML set, not ${typeof value2}`);
+        const prev = findPair(this.items, key);
+        if (prev && !value2) {
+          this.items.splice(this.items.indexOf(prev), 1);
+        } else if (!prev && value2) {
+          this.items.push(new Pair(key));
+        }
+      }
+      toJSON(_, ctx) {
+        return super.toJSON(_, ctx, Set);
+      }
+      toString(ctx, onComment, onChompKeep) {
+        if (!ctx)
+          return JSON.stringify(this);
+        if (this.hasAllNullValues(true))
+          return super.toString(Object.assign({}, ctx, { allNullValues: true }), onComment, onChompKeep);
+        else
+          throw new Error("Set items must all have null values");
+      }
+      static from(schema4, iterable, ctx) {
+        const { replacer } = ctx;
+        const set2 = new this(schema4);
+        if (iterable && Symbol.iterator in Object(iterable))
+          for (let value2 of iterable) {
+            if (typeof replacer === "function")
+              value2 = replacer.call(iterable, value2, value2);
+            set2.items.push(createPair(value2, null, ctx));
+          }
+        return set2;
+      }
+    };
+    YAMLSet.tag = "tag:yaml.org,2002:set";
+    set = {
+      collection: "map",
+      identify: (value2) => value2 instanceof Set,
+      nodeClass: YAMLSet,
+      default: false,
+      tag: "tag:yaml.org,2002:set",
+      createNode: (schema4, iterable, ctx) => YAMLSet.from(schema4, iterable, ctx),
+      resolve(map5, onError) {
+        if (isMap(map5)) {
+          if (map5.hasAllNullValues(true))
+            return Object.assign(new YAMLSet(), map5);
+          else
+            onError("Set items must all have null values");
+        } else
+          onError("Expected a mapping for this tag");
+        return map5;
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/yaml-1.1/timestamp.js
+function parseSexagesimal(str, asBigInt) {
+  const sign = str[0];
+  const parts = sign === "-" || sign === "+" ? str.substring(1) : str;
+  const num = (n2) => asBigInt ? BigInt(n2) : Number(n2);
+  const res = parts.replace(/_/g, "").split(":").reduce((res2, p) => res2 * num(60) + num(p), num(0));
+  return sign === "-" ? num(-1) * res : res;
+}
+function stringifySexagesimal(node2) {
+  let { value: value2 } = node2;
+  let num = (n2) => n2;
+  if (typeof value2 === "bigint")
+    num = (n2) => BigInt(n2);
+  else if (isNaN(value2) || !isFinite(value2))
+    return stringifyNumber(node2);
+  let sign = "";
+  if (value2 < 0) {
+    sign = "-";
+    value2 *= num(-1);
+  }
+  const _60 = num(60);
+  const parts = [value2 % _60];
+  if (value2 < 60) {
+    parts.unshift(0);
+  } else {
+    value2 = (value2 - parts[0]) / _60;
+    parts.unshift(value2 % _60);
+    if (value2 >= 60) {
+      value2 = (value2 - parts[0]) / _60;
+      parts.unshift(value2);
+    }
+  }
+  return sign + parts.map((n2) => String(n2).padStart(2, "0")).join(":").replace(/000000\d*$/, "");
+}
+var intTime, floatTime, timestamp;
+var init_timestamp = __esm({
+  "node_modules/yaml/browser/dist/schema/yaml-1.1/timestamp.js"() {
+    init_esbuild_buffer_shim();
+    init_stringifyNumber();
+    intTime = {
+      identify: (value2) => typeof value2 === "bigint" || Number.isInteger(value2),
+      default: true,
+      tag: "tag:yaml.org,2002:int",
+      format: "TIME",
+      test: /^[-+]?[0-9][0-9_]*(?::[0-5]?[0-9])+$/,
+      resolve: (str, _onError, { intAsBigInt }) => parseSexagesimal(str, intAsBigInt),
+      stringify: stringifySexagesimal
+    };
+    floatTime = {
+      identify: (value2) => typeof value2 === "number",
+      default: true,
+      tag: "tag:yaml.org,2002:float",
+      format: "TIME",
+      test: /^[-+]?[0-9][0-9_]*(?::[0-5]?[0-9])+\.[0-9_]*$/,
+      resolve: (str) => parseSexagesimal(str, false),
+      stringify: stringifySexagesimal
+    };
+    timestamp = {
+      identify: (value2) => value2 instanceof Date,
+      default: true,
+      tag: "tag:yaml.org,2002:timestamp",
+      // If the time zone is omitted, the timestamp is assumed to be specified in UTC. The time part
+      // may be omitted altogether, resulting in a date format. In such a case, the time part is
+      // assumed to be 00:00:00Z (start of day, UTC).
+      test: RegExp("^([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})(?:(?:t|T|[ \\t]+)([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}(\\.[0-9]+)?)(?:[ \\t]*(Z|[-+][012]?[0-9](?::[0-9]{2})?))?)?$"),
+      resolve(str) {
+        const match3 = str.match(timestamp.test);
+        if (!match3)
+          throw new Error("!!timestamp expects a date, starting with yyyy-mm-dd");
+        const [, year, month, day, hour, minute, second] = match3.map(Number);
+        const millisec = match3[7] ? Number((match3[7] + "00").substr(1, 3)) : 0;
+        let date = Date.UTC(year, month - 1, day, hour || 0, minute || 0, second || 0, millisec);
+        const tz = match3[8];
+        if (tz && tz !== "Z") {
+          let d = parseSexagesimal(tz, false);
+          if (Math.abs(d) < 30)
+            d *= 60;
+          date -= 6e4 * d;
+        }
+        return new Date(date);
+      },
+      stringify: ({ value: value2 }) => value2?.toISOString().replace(/(T00:00:00)?\.000Z$/, "") ?? ""
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/yaml-1.1/schema.js
+var schema3;
+var init_schema3 = __esm({
+  "node_modules/yaml/browser/dist/schema/yaml-1.1/schema.js"() {
+    init_esbuild_buffer_shim();
+    init_map();
+    init_null();
+    init_seq();
+    init_string();
+    init_binary();
+    init_bool2();
+    init_float2();
+    init_int2();
+    init_merge();
+    init_omap();
+    init_pairs();
+    init_set();
+    init_timestamp();
+    schema3 = [
+      map4,
+      seq,
+      string3,
+      nullTag,
+      trueTag,
+      falseTag,
+      intBin,
+      intOct2,
+      int3,
+      intHex2,
+      floatNaN2,
+      floatExp2,
+      float2,
+      binary,
+      merge,
+      omap,
+      pairs,
+      set,
+      intTime,
+      floatTime,
+      timestamp
+    ];
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/tags.js
+function getTags(customTags, schemaName, addMergeTag) {
+  const schemaTags = schemas.get(schemaName);
+  if (schemaTags && !customTags) {
+    return addMergeTag && !schemaTags.includes(merge) ? schemaTags.concat(merge) : schemaTags.slice();
+  }
+  let tags = schemaTags;
+  if (!tags) {
+    if (Array.isArray(customTags))
+      tags = [];
+    else {
+      const keys = Array.from(schemas.keys()).filter((key) => key !== "yaml11").map((key) => JSON.stringify(key)).join(", ");
+      throw new Error(`Unknown schema "${schemaName}"; use one of ${keys} or define customTags array`);
+    }
+  }
+  if (Array.isArray(customTags)) {
+    for (const tag of customTags)
+      tags = tags.concat(tag);
+  } else if (typeof customTags === "function") {
+    tags = customTags(tags.slice());
+  }
+  if (addMergeTag)
+    tags = tags.concat(merge);
+  return tags.reduce((tags2, tag) => {
+    const tagObj = typeof tag === "string" ? tagsByName[tag] : tag;
+    if (!tagObj) {
+      const tagName = JSON.stringify(tag);
+      const keys = Object.keys(tagsByName).map((key) => JSON.stringify(key)).join(", ");
+      throw new Error(`Unknown custom tag ${tagName}; use one of ${keys}`);
+    }
+    if (!tags2.includes(tagObj))
+      tags2.push(tagObj);
+    return tags2;
+  }, []);
+}
+var schemas, tagsByName, coreKnownTags;
+var init_tags = __esm({
+  "node_modules/yaml/browser/dist/schema/tags.js"() {
+    init_esbuild_buffer_shim();
+    init_map();
+    init_null();
+    init_seq();
+    init_string();
+    init_bool();
+    init_float();
+    init_int();
+    init_schema();
+    init_schema2();
+    init_binary();
+    init_merge();
+    init_omap();
+    init_pairs();
+    init_schema3();
+    init_set();
+    init_timestamp();
+    schemas = /* @__PURE__ */ new Map([
+      ["core", schema],
+      ["failsafe", [map4, seq, string3]],
+      ["json", schema2],
+      ["yaml11", schema3],
+      ["yaml-1.1", schema3]
+    ]);
+    tagsByName = {
+      binary,
+      bool: boolTag,
+      float,
+      floatExp,
+      floatNaN,
+      floatTime,
+      int: int2,
+      intHex,
+      intOct,
+      intTime,
+      map: map4,
+      merge,
+      null: nullTag,
+      omap,
+      pairs,
+      seq,
+      set,
+      timestamp
+    };
+    coreKnownTags = {
+      "tag:yaml.org,2002:binary": binary,
+      "tag:yaml.org,2002:merge": merge,
+      "tag:yaml.org,2002:omap": omap,
+      "tag:yaml.org,2002:pairs": pairs,
+      "tag:yaml.org,2002:set": set,
+      "tag:yaml.org,2002:timestamp": timestamp
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/schema/Schema.js
+var sortMapEntriesByKey, Schema;
+var init_Schema = __esm({
+  "node_modules/yaml/browser/dist/schema/Schema.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    init_map();
+    init_seq();
+    init_string();
+    init_tags();
+    sortMapEntriesByKey = (a, b) => a.key < b.key ? -1 : a.key > b.key ? 1 : 0;
+    Schema = class _Schema {
+      constructor({ compat, customTags, merge: merge2, resolveKnownTags, schema: schema4, sortMapEntries, toStringDefaults }) {
+        this.compat = Array.isArray(compat) ? getTags(compat, "compat") : compat ? getTags(null, compat) : null;
+        this.name = typeof schema4 === "string" && schema4 || "core";
+        this.knownTags = resolveKnownTags ? coreKnownTags : {};
+        this.tags = getTags(customTags, this.name, merge2);
+        this.toStringOptions = toStringDefaults ?? null;
+        Object.defineProperty(this, MAP, { value: map4 });
+        Object.defineProperty(this, SCALAR, { value: string3 });
+        Object.defineProperty(this, SEQ, { value: seq });
+        this.sortMapEntries = typeof sortMapEntries === "function" ? sortMapEntries : sortMapEntries === true ? sortMapEntriesByKey : null;
+      }
+      clone() {
+        const copy = Object.create(_Schema.prototype, Object.getOwnPropertyDescriptors(this));
+        copy.tags = this.tags.slice();
+        return copy;
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/stringify/stringifyDocument.js
+function stringifyDocument(doc, options) {
+  const lines = [];
+  let hasDirectives = options.directives === true;
+  if (options.directives !== false && doc.directives) {
+    const dir = doc.directives.toString(doc);
+    if (dir) {
+      lines.push(dir);
+      hasDirectives = true;
+    } else if (doc.directives.docStart)
+      hasDirectives = true;
+  }
+  if (hasDirectives)
+    lines.push("---");
+  const ctx = createStringifyContext(doc, options);
+  const { commentString } = ctx.options;
+  if (doc.commentBefore) {
+    if (lines.length !== 1)
+      lines.unshift("");
+    const cs = commentString(doc.commentBefore);
+    lines.unshift(indentComment(cs, ""));
+  }
+  let chompKeep = false;
+  let contentComment = null;
+  if (doc.contents) {
+    if (isNode(doc.contents)) {
+      if (doc.contents.spaceBefore && hasDirectives)
+        lines.push("");
+      if (doc.contents.commentBefore) {
+        const cs = commentString(doc.contents.commentBefore);
+        lines.push(indentComment(cs, ""));
+      }
+      ctx.forceBlockIndent = !!doc.comment;
+      contentComment = doc.contents.comment;
+    }
+    const onChompKeep = contentComment ? void 0 : () => chompKeep = true;
+    let body = stringify(doc.contents, ctx, () => contentComment = null, onChompKeep);
+    if (contentComment)
+      body += lineComment(body, "", commentString(contentComment));
+    if ((body[0] === "|" || body[0] === ">") && lines[lines.length - 1] === "---") {
+      lines[lines.length - 1] = `--- ${body}`;
+    } else
+      lines.push(body);
+  } else {
+    lines.push(stringify(doc.contents, ctx));
+  }
+  if (doc.directives?.docEnd) {
+    if (doc.comment) {
+      const cs = commentString(doc.comment);
+      if (cs.includes("\n")) {
+        lines.push("...");
+        lines.push(indentComment(cs, ""));
+      } else {
+        lines.push(`... ${cs}`);
+      }
+    } else {
+      lines.push("...");
+    }
+  } else {
+    let dc = doc.comment;
+    if (dc && chompKeep)
+      dc = dc.replace(/^\n+/, "");
+    if (dc) {
+      if ((!chompKeep || contentComment) && lines[lines.length - 1] !== "")
+        lines.push("");
+      lines.push(indentComment(commentString(dc), ""));
+    }
+  }
+  return lines.join("\n") + "\n";
+}
+var init_stringifyDocument = __esm({
+  "node_modules/yaml/browser/dist/stringify/stringifyDocument.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    init_stringify();
+    init_stringifyComment();
+  }
+});
+
+// node_modules/yaml/browser/dist/doc/Document.js
+function assertCollection(contents) {
+  if (isCollection(contents))
+    return true;
+  throw new Error("Expected a YAML collection as document contents");
+}
+var Document;
+var init_Document = __esm({
+  "node_modules/yaml/browser/dist/doc/Document.js"() {
+    init_esbuild_buffer_shim();
+    init_Alias();
+    init_Collection();
+    init_identity();
+    init_Pair();
+    init_toJS();
+    init_Schema();
+    init_stringifyDocument();
+    init_anchors();
+    init_applyReviver();
+    init_createNode();
+    init_directives();
+    Document = class _Document {
+      constructor(value2, replacer, options) {
+        this.commentBefore = null;
+        this.comment = null;
+        this.errors = [];
+        this.warnings = [];
+        Object.defineProperty(this, NODE_TYPE, { value: DOC });
+        let _replacer = null;
+        if (typeof replacer === "function" || Array.isArray(replacer)) {
+          _replacer = replacer;
+        } else if (options === void 0 && replacer) {
+          options = replacer;
+          replacer = void 0;
+        }
+        const opt = Object.assign({
+          intAsBigInt: false,
+          keepSourceTokens: false,
+          logLevel: "warn",
+          prettyErrors: true,
+          strict: true,
+          stringKeys: false,
+          uniqueKeys: true,
+          version: "1.2"
+        }, options);
+        this.options = opt;
+        let { version: version2 } = opt;
+        if (options?._directives) {
+          this.directives = options._directives.atDocument();
+          if (this.directives.yaml.explicit)
+            version2 = this.directives.yaml.version;
+        } else
+          this.directives = new Directives({ version: version2 });
+        this.setSchema(version2, options);
+        this.contents = value2 === void 0 ? null : this.createNode(value2, _replacer, options);
+      }
+      /**
+       * Create a deep copy of this Document and its contents.
+       *
+       * Custom Node values that inherit from `Object` still refer to their original instances.
+       */
+      clone() {
+        const copy = Object.create(_Document.prototype, {
+          [NODE_TYPE]: { value: DOC }
+        });
+        copy.commentBefore = this.commentBefore;
+        copy.comment = this.comment;
+        copy.errors = this.errors.slice();
+        copy.warnings = this.warnings.slice();
+        copy.options = Object.assign({}, this.options);
+        if (this.directives)
+          copy.directives = this.directives.clone();
+        copy.schema = this.schema.clone();
+        copy.contents = isNode(this.contents) ? this.contents.clone(copy.schema) : this.contents;
+        if (this.range)
+          copy.range = this.range.slice();
+        return copy;
+      }
+      /** Adds a value to the document. */
+      add(value2) {
+        if (assertCollection(this.contents))
+          this.contents.add(value2);
+      }
+      /** Adds a value to the document. */
+      addIn(path2, value2) {
+        if (assertCollection(this.contents))
+          this.contents.addIn(path2, value2);
+      }
+      /**
+       * Create a new `Alias` node, ensuring that the target `node` has the required anchor.
+       *
+       * If `node` already has an anchor, `name` is ignored.
+       * Otherwise, the `node.anchor` value will be set to `name`,
+       * or if an anchor with that name is already present in the document,
+       * `name` will be used as a prefix for a new unique anchor.
+       * If `name` is undefined, the generated anchor will use 'a' as a prefix.
+       */
+      createAlias(node2, name) {
+        if (!node2.anchor) {
+          const prev = anchorNames(this);
+          node2.anchor = // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+          !name || prev.has(name) ? findNewAnchor(name || "a", prev) : name;
+        }
+        return new Alias(node2.anchor);
+      }
+      createNode(value2, replacer, options) {
+        let _replacer = void 0;
+        if (typeof replacer === "function") {
+          value2 = replacer.call({ "": value2 }, "", value2);
+          _replacer = replacer;
+        } else if (Array.isArray(replacer)) {
+          const keyToStr = (v) => typeof v === "number" || v instanceof String || v instanceof Number;
+          const asStr = replacer.filter(keyToStr).map(String);
+          if (asStr.length > 0)
+            replacer = replacer.concat(asStr);
+          _replacer = replacer;
+        } else if (options === void 0 && replacer) {
+          options = replacer;
+          replacer = void 0;
+        }
+        const { aliasDuplicateObjects, anchorPrefix, flow: flow3, keepUndefined, onTagObj, tag } = options ?? {};
+        const { onAnchor, setAnchors, sourceObjects } = createNodeAnchors(
+          this,
+          // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+          anchorPrefix || "a"
+        );
+        const ctx = {
+          aliasDuplicateObjects: aliasDuplicateObjects ?? true,
+          keepUndefined: keepUndefined ?? false,
+          onAnchor,
+          onTagObj,
+          replacer: _replacer,
+          schema: this.schema,
+          sourceObjects
+        };
+        const node2 = createNode(value2, tag, ctx);
+        if (flow3 && isCollection(node2))
+          node2.flow = true;
+        setAnchors();
+        return node2;
+      }
+      /**
+       * Convert a key and a value into a `Pair` using the current schema,
+       * recursively wrapping all values as `Scalar` or `Collection` nodes.
+       */
+      createPair(key, value2, options = {}) {
+        const k = this.createNode(key, null, options);
+        const v = this.createNode(value2, null, options);
+        return new Pair(k, v);
+      }
+      /**
+       * Removes a value from the document.
+       * @returns `true` if the item was found and removed.
+       */
+      delete(key) {
+        return assertCollection(this.contents) ? this.contents.delete(key) : false;
+      }
+      /**
+       * Removes a value from the document.
+       * @returns `true` if the item was found and removed.
+       */
+      deleteIn(path2) {
+        if (isEmptyPath(path2)) {
+          if (this.contents == null)
+            return false;
+          this.contents = null;
+          return true;
+        }
+        return assertCollection(this.contents) ? this.contents.deleteIn(path2) : false;
+      }
+      /**
+       * Returns item at `key`, or `undefined` if not found. By default unwraps
+       * scalar values from their surrounding node; to disable set `keepScalar` to
+       * `true` (collections are always returned intact).
+       */
+      get(key, keepScalar) {
+        return isCollection(this.contents) ? this.contents.get(key, keepScalar) : void 0;
+      }
+      /**
+       * Returns item at `path`, or `undefined` if not found. By default unwraps
+       * scalar values from their surrounding node; to disable set `keepScalar` to
+       * `true` (collections are always returned intact).
+       */
+      getIn(path2, keepScalar) {
+        if (isEmptyPath(path2))
+          return !keepScalar && isScalar(this.contents) ? this.contents.value : this.contents;
+        return isCollection(this.contents) ? this.contents.getIn(path2, keepScalar) : void 0;
+      }
+      /**
+       * Checks if the document includes a value with the key `key`.
+       */
+      has(key) {
+        return isCollection(this.contents) ? this.contents.has(key) : false;
+      }
+      /**
+       * Checks if the document includes a value at `path`.
+       */
+      hasIn(path2) {
+        if (isEmptyPath(path2))
+          return this.contents !== void 0;
+        return isCollection(this.contents) ? this.contents.hasIn(path2) : false;
+      }
+      /**
+       * Sets a value in this document. For `!!set`, `value` needs to be a
+       * boolean to add/remove the item from the set.
+       */
+      set(key, value2) {
+        if (this.contents == null) {
+          this.contents = collectionFromPath(this.schema, [key], value2);
+        } else if (assertCollection(this.contents)) {
+          this.contents.set(key, value2);
+        }
+      }
+      /**
+       * Sets a value in this document. For `!!set`, `value` needs to be a
+       * boolean to add/remove the item from the set.
+       */
+      setIn(path2, value2) {
+        if (isEmptyPath(path2)) {
+          this.contents = value2;
+        } else if (this.contents == null) {
+          this.contents = collectionFromPath(this.schema, Array.from(path2), value2);
+        } else if (assertCollection(this.contents)) {
+          this.contents.setIn(path2, value2);
+        }
+      }
+      /**
+       * Change the YAML version and schema used by the document.
+       * A `null` version disables support for directives, explicit tags, anchors, and aliases.
+       * It also requires the `schema` option to be given as a `Schema` instance value.
+       *
+       * Overrides all previously set schema options.
+       */
+      setSchema(version2, options = {}) {
+        if (typeof version2 === "number")
+          version2 = String(version2);
+        let opt;
+        switch (version2) {
+          case "1.1":
+            if (this.directives)
+              this.directives.yaml.version = "1.1";
+            else
+              this.directives = new Directives({ version: "1.1" });
+            opt = { resolveKnownTags: false, schema: "yaml-1.1" };
+            break;
+          case "1.2":
+          case "next":
+            if (this.directives)
+              this.directives.yaml.version = version2;
+            else
+              this.directives = new Directives({ version: version2 });
+            opt = { resolveKnownTags: true, schema: "core" };
+            break;
+          case null:
+            if (this.directives)
+              delete this.directives;
+            opt = null;
+            break;
+          default: {
+            const sv = JSON.stringify(version2);
+            throw new Error(`Expected '1.1', '1.2' or null as first argument, but found: ${sv}`);
+          }
+        }
+        if (options.schema instanceof Object)
+          this.schema = options.schema;
+        else if (opt)
+          this.schema = new Schema(Object.assign(opt, options));
+        else
+          throw new Error(`With a null YAML version, the { schema: Schema } option is required`);
+      }
+      // json & jsonArg are only used from toJSON()
+      toJS({ json, jsonArg, mapAsMap, maxAliasCount, onAnchor, reviver } = {}) {
+        const ctx = {
+          anchors: /* @__PURE__ */ new Map(),
+          doc: this,
+          keep: !json,
+          mapAsMap: mapAsMap === true,
+          mapKeyWarned: false,
+          maxAliasCount: typeof maxAliasCount === "number" ? maxAliasCount : 100
+        };
+        const res = toJS(this.contents, jsonArg ?? "", ctx);
+        if (typeof onAnchor === "function")
+          for (const { count, res: res2 } of ctx.anchors.values())
+            onAnchor(res2, count);
+        return typeof reviver === "function" ? applyReviver(reviver, { "": res }, "", res) : res;
+      }
+      /**
+       * A JSON representation of the document `contents`.
+       *
+       * @param jsonArg Used by `JSON.stringify` to indicate the array index or
+       *   property name.
+       */
+      toJSON(jsonArg, onAnchor) {
+        return this.toJS({ json: true, jsonArg, mapAsMap: false, onAnchor });
+      }
+      /** A YAML representation of the document. */
+      toString(options = {}) {
+        if (this.errors.length > 0)
+          throw new Error("Document with errors cannot be stringified");
+        if ("indent" in options && (!Number.isInteger(options.indent) || Number(options.indent) <= 0)) {
+          const s2 = JSON.stringify(options.indent);
+          throw new Error(`"indent" option must be a positive integer, not ${s2}`);
+        }
+        return stringifyDocument(this, options);
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/errors.js
+var YAMLError, YAMLParseError, YAMLWarning, prettifyError;
+var init_errors = __esm({
+  "node_modules/yaml/browser/dist/errors.js"() {
+    init_esbuild_buffer_shim();
+    YAMLError = class extends Error {
+      constructor(name, pos, code2, message) {
+        super();
+        this.name = name;
+        this.code = code2;
+        this.message = message;
+        this.pos = pos;
+      }
+    };
+    YAMLParseError = class extends YAMLError {
+      constructor(pos, code2, message) {
+        super("YAMLParseError", pos, code2, message);
+      }
+    };
+    YAMLWarning = class extends YAMLError {
+      constructor(pos, code2, message) {
+        super("YAMLWarning", pos, code2, message);
+      }
+    };
+    prettifyError = (src, lc) => (error) => {
+      if (error.pos[0] === -1)
+        return;
+      error.linePos = error.pos.map((pos) => lc.linePos(pos));
+      const { line, col } = error.linePos[0];
+      error.message += ` at line ${line}, column ${col}`;
+      let ci = col - 1;
+      let lineStr = src.substring(lc.lineStarts[line - 1], lc.lineStarts[line]).replace(/[\n\r]+$/, "");
+      if (ci >= 60 && lineStr.length > 80) {
+        const trimStart = Math.min(ci - 39, lineStr.length - 79);
+        lineStr = "\u2026" + lineStr.substring(trimStart);
+        ci -= trimStart - 1;
+      }
+      if (lineStr.length > 80)
+        lineStr = lineStr.substring(0, 79) + "\u2026";
+      if (line > 1 && /^ *$/.test(lineStr.substring(0, ci))) {
+        let prev = src.substring(lc.lineStarts[line - 2], lc.lineStarts[line - 1]);
+        if (prev.length > 80)
+          prev = prev.substring(0, 79) + "\u2026\n";
+        lineStr = prev + lineStr;
+      }
+      if (/[^ ]/.test(lineStr)) {
+        let count = 1;
+        const end = error.linePos[1];
+        if (end?.line === line && end.col > col) {
+          count = Math.max(1, Math.min(end.col - col, 80 - ci));
+        }
+        const pointer = " ".repeat(ci) + "^".repeat(count);
+        error.message += `:
+
+${lineStr}
+${pointer}
+`;
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/compose/resolve-props.js
+function resolveProps(tokens, { flow: flow3, indicator, next, offset: offset2, onError, parentIndent, startOnNewline }) {
+  let spaceBefore = false;
+  let atNewline = startOnNewline;
+  let hasSpace = startOnNewline;
+  let comment = "";
+  let commentSep = "";
+  let hasNewline = false;
+  let reqSpace = false;
+  let tab = null;
+  let anchor = null;
+  let tag = null;
+  let newlineAfterProp = null;
+  let comma = null;
+  let found = null;
+  let start = null;
+  for (const token of tokens) {
+    if (reqSpace) {
+      if (token.type !== "space" && token.type !== "newline" && token.type !== "comma")
+        onError(token.offset, "MISSING_CHAR", "Tags and anchors must be separated from the next token by white space");
+      reqSpace = false;
+    }
+    if (tab) {
+      if (atNewline && token.type !== "comment" && token.type !== "newline") {
+        onError(tab, "TAB_AS_INDENT", "Tabs are not allowed as indentation");
+      }
+      tab = null;
+    }
+    switch (token.type) {
+      case "space":
+        if (!flow3 && (indicator !== "doc-start" || next?.type !== "flow-collection") && token.source.includes("	")) {
+          tab = token;
+        }
+        hasSpace = true;
+        break;
+      case "comment": {
+        if (!hasSpace)
+          onError(token, "MISSING_CHAR", "Comments must be separated from other tokens by white space characters");
+        const cb = token.source.substring(1) || " ";
+        if (!comment)
+          comment = cb;
+        else
+          comment += commentSep + cb;
+        commentSep = "";
+        atNewline = false;
+        break;
+      }
+      case "newline":
+        if (atNewline) {
+          if (comment)
+            comment += token.source;
+          else if (!found || indicator !== "seq-item-ind")
+            spaceBefore = true;
+        } else
+          commentSep += token.source;
+        atNewline = true;
+        hasNewline = true;
+        if (anchor || tag)
+          newlineAfterProp = token;
+        hasSpace = true;
+        break;
+      case "anchor":
+        if (anchor)
+          onError(token, "MULTIPLE_ANCHORS", "A node can have at most one anchor");
+        if (token.source.endsWith(":"))
+          onError(token.offset + token.source.length - 1, "BAD_ALIAS", "Anchor ending in : is ambiguous", true);
+        anchor = token;
+        start ?? (start = token.offset);
+        atNewline = false;
+        hasSpace = false;
+        reqSpace = true;
+        break;
+      case "tag": {
+        if (tag)
+          onError(token, "MULTIPLE_TAGS", "A node can have at most one tag");
+        tag = token;
+        start ?? (start = token.offset);
+        atNewline = false;
+        hasSpace = false;
+        reqSpace = true;
+        break;
+      }
+      case indicator:
+        if (anchor || tag)
+          onError(token, "BAD_PROP_ORDER", `Anchors and tags must be after the ${token.source} indicator`);
+        if (found)
+          onError(token, "UNEXPECTED_TOKEN", `Unexpected ${token.source} in ${flow3 ?? "collection"}`);
+        found = token;
+        atNewline = indicator === "seq-item-ind" || indicator === "explicit-key-ind";
+        hasSpace = false;
+        break;
+      case "comma":
+        if (flow3) {
+          if (comma)
+            onError(token, "UNEXPECTED_TOKEN", `Unexpected , in ${flow3}`);
+          comma = token;
+          atNewline = false;
+          hasSpace = false;
+          break;
+        }
+      // else fallthrough
+      default:
+        onError(token, "UNEXPECTED_TOKEN", `Unexpected ${token.type} token`);
+        atNewline = false;
+        hasSpace = false;
+    }
+  }
+  const last = tokens[tokens.length - 1];
+  const end = last ? last.offset + last.source.length : offset2;
+  if (reqSpace && next && next.type !== "space" && next.type !== "newline" && next.type !== "comma" && (next.type !== "scalar" || next.source !== "")) {
+    onError(next.offset, "MISSING_CHAR", "Tags and anchors must be separated from the next token by white space");
+  }
+  if (tab && (atNewline && tab.indent <= parentIndent || next?.type === "block-map" || next?.type === "block-seq"))
+    onError(tab, "TAB_AS_INDENT", "Tabs are not allowed as indentation");
+  return {
+    comma,
+    found,
+    spaceBefore,
+    comment,
+    hasNewline,
+    anchor,
+    tag,
+    newlineAfterProp,
+    end,
+    start: start ?? end
+  };
+}
+var init_resolve_props = __esm({
+  "node_modules/yaml/browser/dist/compose/resolve-props.js"() {
+    init_esbuild_buffer_shim();
+  }
+});
+
+// node_modules/yaml/browser/dist/compose/util-contains-newline.js
+function containsNewline(key) {
+  if (!key)
+    return null;
+  switch (key.type) {
+    case "alias":
+    case "scalar":
+    case "double-quoted-scalar":
+    case "single-quoted-scalar":
+      if (key.source.includes("\n"))
+        return true;
+      if (key.end) {
+        for (const st of key.end)
+          if (st.type === "newline")
+            return true;
+      }
+      return false;
+    case "flow-collection":
+      for (const it of key.items) {
+        for (const st of it.start)
+          if (st.type === "newline")
+            return true;
+        if (it.sep) {
+          for (const st of it.sep)
+            if (st.type === "newline")
+              return true;
+        }
+        if (containsNewline(it.key) || containsNewline(it.value))
+          return true;
+      }
+      return false;
+    default:
+      return true;
+  }
+}
+var init_util_contains_newline = __esm({
+  "node_modules/yaml/browser/dist/compose/util-contains-newline.js"() {
+    init_esbuild_buffer_shim();
+  }
+});
+
+// node_modules/yaml/browser/dist/compose/util-flow-indent-check.js
+function flowIndentCheck(indent, fc, onError) {
+  if (fc?.type === "flow-collection") {
+    const end = fc.end[0];
+    if (end.indent === indent && (end.source === "]" || end.source === "}") && containsNewline(fc)) {
+      const msg = "Flow end indicator should be more indented than parent";
+      onError(end, "BAD_INDENT", msg, true);
+    }
+  }
+}
+var init_util_flow_indent_check = __esm({
+  "node_modules/yaml/browser/dist/compose/util-flow-indent-check.js"() {
+    init_esbuild_buffer_shim();
+    init_util_contains_newline();
+  }
+});
+
+// node_modules/yaml/browser/dist/compose/util-map-includes.js
+function mapIncludes(ctx, items, search2) {
+  const { uniqueKeys } = ctx.options;
+  if (uniqueKeys === false)
+    return false;
+  const isEqual = typeof uniqueKeys === "function" ? uniqueKeys : (a, b) => a === b || isScalar(a) && isScalar(b) && a.value === b.value;
+  return items.some((pair) => isEqual(pair.key, search2));
+}
+var init_util_map_includes = __esm({
+  "node_modules/yaml/browser/dist/compose/util-map-includes.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+  }
+});
+
+// node_modules/yaml/browser/dist/compose/resolve-block-map.js
+function resolveBlockMap({ composeNode: composeNode2, composeEmptyNode: composeEmptyNode2 }, ctx, bm, onError, tag) {
+  const NodeClass = tag?.nodeClass ?? YAMLMap;
+  const map5 = new NodeClass(ctx.schema);
+  if (ctx.atRoot)
+    ctx.atRoot = false;
+  let offset2 = bm.offset;
+  let commentEnd = null;
+  for (const collItem of bm.items) {
+    const { start, key, sep: sep2, value: value2 } = collItem;
+    const keyProps = resolveProps(start, {
+      indicator: "explicit-key-ind",
+      next: key ?? sep2?.[0],
+      offset: offset2,
+      onError,
+      parentIndent: bm.indent,
+      startOnNewline: true
+    });
+    const implicitKey = !keyProps.found;
+    if (implicitKey) {
+      if (key) {
+        if (key.type === "block-seq")
+          onError(offset2, "BLOCK_AS_IMPLICIT_KEY", "A block sequence may not be used as an implicit map key");
+        else if ("indent" in key && key.indent !== bm.indent)
+          onError(offset2, "BAD_INDENT", startColMsg);
+      }
+      if (!keyProps.anchor && !keyProps.tag && !sep2) {
+        commentEnd = keyProps.end;
+        if (keyProps.comment) {
+          if (map5.comment)
+            map5.comment += "\n" + keyProps.comment;
+          else
+            map5.comment = keyProps.comment;
+        }
+        continue;
+      }
+      if (keyProps.newlineAfterProp || containsNewline(key)) {
+        onError(key ?? start[start.length - 1], "MULTILINE_IMPLICIT_KEY", "Implicit keys need to be on a single line");
+      }
+    } else if (keyProps.found?.indent !== bm.indent) {
+      onError(offset2, "BAD_INDENT", startColMsg);
+    }
+    ctx.atKey = true;
+    const keyStart = keyProps.end;
+    const keyNode = key ? composeNode2(ctx, key, keyProps, onError) : composeEmptyNode2(ctx, keyStart, start, null, keyProps, onError);
+    if (ctx.schema.compat)
+      flowIndentCheck(bm.indent, key, onError);
+    ctx.atKey = false;
+    if (mapIncludes(ctx, map5.items, keyNode))
+      onError(keyStart, "DUPLICATE_KEY", "Map keys must be unique");
+    const valueProps = resolveProps(sep2 ?? [], {
+      indicator: "map-value-ind",
+      next: value2,
+      offset: keyNode.range[2],
+      onError,
+      parentIndent: bm.indent,
+      startOnNewline: !key || key.type === "block-scalar"
+    });
+    offset2 = valueProps.end;
+    if (valueProps.found) {
+      if (implicitKey) {
+        if (value2?.type === "block-map" && !valueProps.hasNewline)
+          onError(offset2, "BLOCK_AS_IMPLICIT_KEY", "Nested mappings are not allowed in compact mappings");
+        if (ctx.options.strict && keyProps.start < valueProps.found.offset - 1024)
+          onError(keyNode.range, "KEY_OVER_1024_CHARS", "The : indicator must be at most 1024 chars after the start of an implicit block mapping key");
+      }
+      const valueNode = value2 ? composeNode2(ctx, value2, valueProps, onError) : composeEmptyNode2(ctx, offset2, sep2, null, valueProps, onError);
+      if (ctx.schema.compat)
+        flowIndentCheck(bm.indent, value2, onError);
+      offset2 = valueNode.range[2];
+      const pair = new Pair(keyNode, valueNode);
+      if (ctx.options.keepSourceTokens)
+        pair.srcToken = collItem;
+      map5.items.push(pair);
+    } else {
+      if (implicitKey)
+        onError(keyNode.range, "MISSING_CHAR", "Implicit map keys need to be followed by map values");
+      if (valueProps.comment) {
+        if (keyNode.comment)
+          keyNode.comment += "\n" + valueProps.comment;
+        else
+          keyNode.comment = valueProps.comment;
+      }
+      const pair = new Pair(keyNode);
+      if (ctx.options.keepSourceTokens)
+        pair.srcToken = collItem;
+      map5.items.push(pair);
+    }
+  }
+  if (commentEnd && commentEnd < offset2)
+    onError(commentEnd, "IMPOSSIBLE", "Map comment with trailing content");
+  map5.range = [bm.offset, offset2, commentEnd ?? offset2];
+  return map5;
+}
+var startColMsg;
+var init_resolve_block_map = __esm({
+  "node_modules/yaml/browser/dist/compose/resolve-block-map.js"() {
+    init_esbuild_buffer_shim();
+    init_Pair();
+    init_YAMLMap();
+    init_resolve_props();
+    init_util_contains_newline();
+    init_util_flow_indent_check();
+    init_util_map_includes();
+    startColMsg = "All mapping items must start at the same column";
+  }
+});
+
+// node_modules/yaml/browser/dist/compose/resolve-block-seq.js
+function resolveBlockSeq({ composeNode: composeNode2, composeEmptyNode: composeEmptyNode2 }, ctx, bs, onError, tag) {
+  const NodeClass = tag?.nodeClass ?? YAMLSeq;
+  const seq2 = new NodeClass(ctx.schema);
+  if (ctx.atRoot)
+    ctx.atRoot = false;
+  if (ctx.atKey)
+    ctx.atKey = false;
+  let offset2 = bs.offset;
+  let commentEnd = null;
+  for (const { start, value: value2 } of bs.items) {
+    const props = resolveProps(start, {
+      indicator: "seq-item-ind",
+      next: value2,
+      offset: offset2,
+      onError,
+      parentIndent: bs.indent,
+      startOnNewline: true
+    });
+    if (!props.found) {
+      if (props.anchor || props.tag || value2) {
+        if (value2?.type === "block-seq")
+          onError(props.end, "BAD_INDENT", "All sequence items must start at the same column");
+        else
+          onError(offset2, "MISSING_CHAR", "Sequence item without - indicator");
+      } else {
+        commentEnd = props.end;
+        if (props.comment)
+          seq2.comment = props.comment;
+        continue;
+      }
+    }
+    const node2 = value2 ? composeNode2(ctx, value2, props, onError) : composeEmptyNode2(ctx, props.end, start, null, props, onError);
+    if (ctx.schema.compat)
+      flowIndentCheck(bs.indent, value2, onError);
+    offset2 = node2.range[2];
+    seq2.items.push(node2);
+  }
+  seq2.range = [bs.offset, offset2, commentEnd ?? offset2];
+  return seq2;
+}
+var init_resolve_block_seq = __esm({
+  "node_modules/yaml/browser/dist/compose/resolve-block-seq.js"() {
+    init_esbuild_buffer_shim();
+    init_YAMLSeq();
+    init_resolve_props();
+    init_util_flow_indent_check();
+  }
+});
+
+// node_modules/yaml/browser/dist/compose/resolve-end.js
+function resolveEnd(end, offset2, reqSpace, onError) {
+  let comment = "";
+  if (end) {
+    let hasSpace = false;
+    let sep2 = "";
+    for (const token of end) {
+      const { source, type } = token;
+      switch (type) {
+        case "space":
+          hasSpace = true;
+          break;
+        case "comment": {
+          if (reqSpace && !hasSpace)
+            onError(token, "MISSING_CHAR", "Comments must be separated from other tokens by white space characters");
+          const cb = source.substring(1) || " ";
+          if (!comment)
+            comment = cb;
+          else
+            comment += sep2 + cb;
+          sep2 = "";
+          break;
+        }
+        case "newline":
+          if (comment)
+            sep2 += source;
+          hasSpace = true;
+          break;
+        default:
+          onError(token, "UNEXPECTED_TOKEN", `Unexpected ${type} at node end`);
+      }
+      offset2 += source.length;
+    }
+  }
+  return { comment, offset: offset2 };
+}
+var init_resolve_end = __esm({
+  "node_modules/yaml/browser/dist/compose/resolve-end.js"() {
+    init_esbuild_buffer_shim();
+  }
+});
+
+// node_modules/yaml/browser/dist/compose/resolve-flow-collection.js
+function resolveFlowCollection({ composeNode: composeNode2, composeEmptyNode: composeEmptyNode2 }, ctx, fc, onError, tag) {
+  const isMap2 = fc.start.source === "{";
+  const fcName = isMap2 ? "flow map" : "flow sequence";
+  const NodeClass = tag?.nodeClass ?? (isMap2 ? YAMLMap : YAMLSeq);
+  const coll = new NodeClass(ctx.schema);
+  coll.flow = true;
+  const atRoot = ctx.atRoot;
+  if (atRoot)
+    ctx.atRoot = false;
+  if (ctx.atKey)
+    ctx.atKey = false;
+  let offset2 = fc.offset + fc.start.source.length;
+  for (let i = 0; i < fc.items.length; ++i) {
+    const collItem = fc.items[i];
+    const { start, key, sep: sep2, value: value2 } = collItem;
+    const props = resolveProps(start, {
+      flow: fcName,
+      indicator: "explicit-key-ind",
+      next: key ?? sep2?.[0],
+      offset: offset2,
+      onError,
+      parentIndent: fc.indent,
+      startOnNewline: false
+    });
+    if (!props.found) {
+      if (!props.anchor && !props.tag && !sep2 && !value2) {
+        if (i === 0 && props.comma)
+          onError(props.comma, "UNEXPECTED_TOKEN", `Unexpected , in ${fcName}`);
+        else if (i < fc.items.length - 1)
+          onError(props.start, "UNEXPECTED_TOKEN", `Unexpected empty item in ${fcName}`);
+        if (props.comment) {
+          if (coll.comment)
+            coll.comment += "\n" + props.comment;
+          else
+            coll.comment = props.comment;
+        }
+        offset2 = props.end;
+        continue;
+      }
+      if (!isMap2 && ctx.options.strict && containsNewline(key))
+        onError(
+          key,
+          // checked by containsNewline()
+          "MULTILINE_IMPLICIT_KEY",
+          "Implicit keys of flow sequence pairs need to be on a single line"
+        );
+    }
+    if (i === 0) {
+      if (props.comma)
+        onError(props.comma, "UNEXPECTED_TOKEN", `Unexpected , in ${fcName}`);
+    } else {
+      if (!props.comma)
+        onError(props.start, "MISSING_CHAR", `Missing , between ${fcName} items`);
+      if (props.comment) {
+        let prevItemComment = "";
+        loop: for (const st of start) {
+          switch (st.type) {
+            case "comma":
+            case "space":
+              break;
+            case "comment":
+              prevItemComment = st.source.substring(1);
+              break loop;
+            default:
+              break loop;
+          }
+        }
+        if (prevItemComment) {
+          let prev = coll.items[coll.items.length - 1];
+          if (isPair(prev))
+            prev = prev.value ?? prev.key;
+          if (prev.comment)
+            prev.comment += "\n" + prevItemComment;
+          else
+            prev.comment = prevItemComment;
+          props.comment = props.comment.substring(prevItemComment.length + 1);
+        }
+      }
+    }
+    if (!isMap2 && !sep2 && !props.found) {
+      const valueNode = value2 ? composeNode2(ctx, value2, props, onError) : composeEmptyNode2(ctx, props.end, sep2, null, props, onError);
+      coll.items.push(valueNode);
+      offset2 = valueNode.range[2];
+      if (isBlock(value2))
+        onError(valueNode.range, "BLOCK_IN_FLOW", blockMsg);
+    } else {
+      ctx.atKey = true;
+      const keyStart = props.end;
+      const keyNode = key ? composeNode2(ctx, key, props, onError) : composeEmptyNode2(ctx, keyStart, start, null, props, onError);
+      if (isBlock(key))
+        onError(keyNode.range, "BLOCK_IN_FLOW", blockMsg);
+      ctx.atKey = false;
+      const valueProps = resolveProps(sep2 ?? [], {
+        flow: fcName,
+        indicator: "map-value-ind",
+        next: value2,
+        offset: keyNode.range[2],
+        onError,
+        parentIndent: fc.indent,
+        startOnNewline: false
+      });
+      if (valueProps.found) {
+        if (!isMap2 && !props.found && ctx.options.strict) {
+          if (sep2)
+            for (const st of sep2) {
+              if (st === valueProps.found)
+                break;
+              if (st.type === "newline") {
+                onError(st, "MULTILINE_IMPLICIT_KEY", "Implicit keys of flow sequence pairs need to be on a single line");
+                break;
+              }
+            }
+          if (props.start < valueProps.found.offset - 1024)
+            onError(valueProps.found, "KEY_OVER_1024_CHARS", "The : indicator must be at most 1024 chars after the start of an implicit flow sequence key");
+        }
+      } else if (value2) {
+        if ("source" in value2 && value2.source?.[0] === ":")
+          onError(value2, "MISSING_CHAR", `Missing space after : in ${fcName}`);
+        else
+          onError(valueProps.start, "MISSING_CHAR", `Missing , or : between ${fcName} items`);
+      }
+      const valueNode = value2 ? composeNode2(ctx, value2, valueProps, onError) : valueProps.found ? composeEmptyNode2(ctx, valueProps.end, sep2, null, valueProps, onError) : null;
+      if (valueNode) {
+        if (isBlock(value2))
+          onError(valueNode.range, "BLOCK_IN_FLOW", blockMsg);
+      } else if (valueProps.comment) {
+        if (keyNode.comment)
+          keyNode.comment += "\n" + valueProps.comment;
+        else
+          keyNode.comment = valueProps.comment;
+      }
+      const pair = new Pair(keyNode, valueNode);
+      if (ctx.options.keepSourceTokens)
+        pair.srcToken = collItem;
+      if (isMap2) {
+        const map5 = coll;
+        if (mapIncludes(ctx, map5.items, keyNode))
+          onError(keyStart, "DUPLICATE_KEY", "Map keys must be unique");
+        map5.items.push(pair);
+      } else {
+        const map5 = new YAMLMap(ctx.schema);
+        map5.flow = true;
+        map5.items.push(pair);
+        const endRange = (valueNode ?? keyNode).range;
+        map5.range = [keyNode.range[0], endRange[1], endRange[2]];
+        coll.items.push(map5);
+      }
+      offset2 = valueNode ? valueNode.range[2] : valueProps.end;
+    }
+  }
+  const expectedEnd = isMap2 ? "}" : "]";
+  const [ce, ...ee] = fc.end;
+  let cePos = offset2;
+  if (ce?.source === expectedEnd)
+    cePos = ce.offset + ce.source.length;
+  else {
+    const name = fcName[0].toUpperCase() + fcName.substring(1);
+    const msg = atRoot ? `${name} must end with a ${expectedEnd}` : `${name} in block collection must be sufficiently indented and end with a ${expectedEnd}`;
+    onError(offset2, atRoot ? "MISSING_CHAR" : "BAD_INDENT", msg);
+    if (ce && ce.source.length !== 1)
+      ee.unshift(ce);
+  }
+  if (ee.length > 0) {
+    const end = resolveEnd(ee, cePos, ctx.options.strict, onError);
+    if (end.comment) {
+      if (coll.comment)
+        coll.comment += "\n" + end.comment;
+      else
+        coll.comment = end.comment;
+    }
+    coll.range = [fc.offset, cePos, end.offset];
+  } else {
+    coll.range = [fc.offset, cePos, cePos];
+  }
+  return coll;
+}
+var blockMsg, isBlock;
+var init_resolve_flow_collection = __esm({
+  "node_modules/yaml/browser/dist/compose/resolve-flow-collection.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    init_Pair();
+    init_YAMLMap();
+    init_YAMLSeq();
+    init_resolve_end();
+    init_resolve_props();
+    init_util_contains_newline();
+    init_util_map_includes();
+    blockMsg = "Block collections are not allowed within flow collections";
+    isBlock = (token) => token && (token.type === "block-map" || token.type === "block-seq");
+  }
+});
+
+// node_modules/yaml/browser/dist/compose/compose-collection.js
+function resolveCollection(CN2, ctx, token, onError, tagName, tag) {
+  const coll = token.type === "block-map" ? resolveBlockMap(CN2, ctx, token, onError, tag) : token.type === "block-seq" ? resolveBlockSeq(CN2, ctx, token, onError, tag) : resolveFlowCollection(CN2, ctx, token, onError, tag);
+  const Coll = coll.constructor;
+  if (tagName === "!" || tagName === Coll.tagName) {
+    coll.tag = Coll.tagName;
+    return coll;
+  }
+  if (tagName)
+    coll.tag = tagName;
+  return coll;
+}
+function composeCollection(CN2, ctx, token, props, onError) {
+  const tagToken = props.tag;
+  const tagName = !tagToken ? null : ctx.directives.tagName(tagToken.source, (msg) => onError(tagToken, "TAG_RESOLVE_FAILED", msg));
+  if (token.type === "block-seq") {
+    const { anchor, newlineAfterProp: nl } = props;
+    const lastProp = anchor && tagToken ? anchor.offset > tagToken.offset ? anchor : tagToken : anchor ?? tagToken;
+    if (lastProp && (!nl || nl.offset < lastProp.offset)) {
+      const message = "Missing newline after block sequence props";
+      onError(lastProp, "MISSING_CHAR", message);
+    }
+  }
+  const expType = token.type === "block-map" ? "map" : token.type === "block-seq" ? "seq" : token.start.source === "{" ? "map" : "seq";
+  if (!tagToken || !tagName || tagName === "!" || tagName === YAMLMap.tagName && expType === "map" || tagName === YAMLSeq.tagName && expType === "seq") {
+    return resolveCollection(CN2, ctx, token, onError, tagName);
+  }
+  let tag = ctx.schema.tags.find((t) => t.tag === tagName && t.collection === expType);
+  if (!tag) {
+    const kt = ctx.schema.knownTags[tagName];
+    if (kt?.collection === expType) {
+      ctx.schema.tags.push(Object.assign({}, kt, { default: false }));
+      tag = kt;
+    } else {
+      if (kt) {
+        onError(tagToken, "BAD_COLLECTION_TYPE", `${kt.tag} used for ${expType} collection, but expects ${kt.collection ?? "scalar"}`, true);
+      } else {
+        onError(tagToken, "TAG_RESOLVE_FAILED", `Unresolved tag: ${tagName}`, true);
+      }
+      return resolveCollection(CN2, ctx, token, onError, tagName);
+    }
+  }
+  const coll = resolveCollection(CN2, ctx, token, onError, tagName, tag);
+  const res = tag.resolve?.(coll, (msg) => onError(tagToken, "TAG_RESOLVE_FAILED", msg), ctx.options) ?? coll;
+  const node2 = isNode(res) ? res : new Scalar(res);
+  node2.range = coll.range;
+  node2.tag = tagName;
+  if (tag?.format)
+    node2.format = tag.format;
+  return node2;
+}
+var init_compose_collection = __esm({
+  "node_modules/yaml/browser/dist/compose/compose-collection.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    init_Scalar();
+    init_YAMLMap();
+    init_YAMLSeq();
+    init_resolve_block_map();
+    init_resolve_block_seq();
+    init_resolve_flow_collection();
+  }
+});
+
+// node_modules/yaml/browser/dist/compose/resolve-block-scalar.js
+function resolveBlockScalar(ctx, scalar, onError) {
+  const start = scalar.offset;
+  const header = parseBlockScalarHeader(scalar, ctx.options.strict, onError);
+  if (!header)
+    return { value: "", type: null, comment: "", range: [start, start, start] };
+  const type = header.mode === ">" ? Scalar.BLOCK_FOLDED : Scalar.BLOCK_LITERAL;
+  const lines = scalar.source ? splitLines(scalar.source) : [];
+  let chompStart = lines.length;
+  for (let i = lines.length - 1; i >= 0; --i) {
+    const content3 = lines[i][1];
+    if (content3 === "" || content3 === "\r")
+      chompStart = i;
+    else
+      break;
+  }
+  if (chompStart === 0) {
+    const value3 = header.chomp === "+" && lines.length > 0 ? "\n".repeat(Math.max(1, lines.length - 1)) : "";
+    let end2 = start + header.length;
+    if (scalar.source)
+      end2 += scalar.source.length;
+    return { value: value3, type, comment: header.comment, range: [start, end2, end2] };
+  }
+  let trimIndent = scalar.indent + header.indent;
+  let offset2 = scalar.offset + header.length;
+  let contentStart = 0;
+  for (let i = 0; i < chompStart; ++i) {
+    const [indent, content3] = lines[i];
+    if (content3 === "" || content3 === "\r") {
+      if (header.indent === 0 && indent.length > trimIndent)
+        trimIndent = indent.length;
+    } else {
+      if (indent.length < trimIndent) {
+        const message = "Block scalars with more-indented leading empty lines must use an explicit indentation indicator";
+        onError(offset2 + indent.length, "MISSING_CHAR", message);
+      }
+      if (header.indent === 0)
+        trimIndent = indent.length;
+      contentStart = i;
+      if (trimIndent === 0 && !ctx.atRoot) {
+        const message = "Block scalar values in collections must be indented";
+        onError(offset2, "BAD_INDENT", message);
+      }
+      break;
+    }
+    offset2 += indent.length + content3.length + 1;
+  }
+  for (let i = lines.length - 1; i >= chompStart; --i) {
+    if (lines[i][0].length > trimIndent)
+      chompStart = i + 1;
+  }
+  let value2 = "";
+  let sep2 = "";
+  let prevMoreIndented = false;
+  for (let i = 0; i < contentStart; ++i)
+    value2 += lines[i][0].slice(trimIndent) + "\n";
+  for (let i = contentStart; i < chompStart; ++i) {
+    let [indent, content3] = lines[i];
+    offset2 += indent.length + content3.length + 1;
+    const crlf = content3[content3.length - 1] === "\r";
+    if (crlf)
+      content3 = content3.slice(0, -1);
+    if (content3 && indent.length < trimIndent) {
+      const src = header.indent ? "explicit indentation indicator" : "first line";
+      const message = `Block scalar lines must not be less indented than their ${src}`;
+      onError(offset2 - content3.length - (crlf ? 2 : 1), "BAD_INDENT", message);
+      indent = "";
+    }
+    if (type === Scalar.BLOCK_LITERAL) {
+      value2 += sep2 + indent.slice(trimIndent) + content3;
+      sep2 = "\n";
+    } else if (indent.length > trimIndent || content3[0] === "	") {
+      if (sep2 === " ")
+        sep2 = "\n";
+      else if (!prevMoreIndented && sep2 === "\n")
+        sep2 = "\n\n";
+      value2 += sep2 + indent.slice(trimIndent) + content3;
+      sep2 = "\n";
+      prevMoreIndented = true;
+    } else if (content3 === "") {
+      if (sep2 === "\n")
+        value2 += "\n";
+      else
+        sep2 = "\n";
+    } else {
+      value2 += sep2 + content3;
+      sep2 = " ";
+      prevMoreIndented = false;
+    }
+  }
+  switch (header.chomp) {
+    case "-":
+      break;
+    case "+":
+      for (let i = chompStart; i < lines.length; ++i)
+        value2 += "\n" + lines[i][0].slice(trimIndent);
+      if (value2[value2.length - 1] !== "\n")
+        value2 += "\n";
+      break;
+    default:
+      value2 += "\n";
+  }
+  const end = start + header.length + scalar.source.length;
+  return { value: value2, type, comment: header.comment, range: [start, end, end] };
+}
+function parseBlockScalarHeader({ offset: offset2, props }, strict, onError) {
+  if (props[0].type !== "block-scalar-header") {
+    onError(props[0], "IMPOSSIBLE", "Block scalar header not found");
+    return null;
+  }
+  const { source } = props[0];
+  const mode = source[0];
+  let indent = 0;
+  let chomp = "";
+  let error = -1;
+  for (let i = 1; i < source.length; ++i) {
+    const ch = source[i];
+    if (!chomp && (ch === "-" || ch === "+"))
+      chomp = ch;
+    else {
+      const n2 = Number(ch);
+      if (!indent && n2)
+        indent = n2;
+      else if (error === -1)
+        error = offset2 + i;
+    }
+  }
+  if (error !== -1)
+    onError(error, "UNEXPECTED_TOKEN", `Block scalar header includes extra characters: ${source}`);
+  let hasSpace = false;
+  let comment = "";
+  let length = source.length;
+  for (let i = 1; i < props.length; ++i) {
+    const token = props[i];
+    switch (token.type) {
+      case "space":
+        hasSpace = true;
+      // fallthrough
+      case "newline":
+        length += token.source.length;
+        break;
+      case "comment":
+        if (strict && !hasSpace) {
+          const message = "Comments must be separated from other tokens by white space characters";
+          onError(token, "MISSING_CHAR", message);
+        }
+        length += token.source.length;
+        comment = token.source.substring(1);
+        break;
+      case "error":
+        onError(token, "UNEXPECTED_TOKEN", token.message);
+        length += token.source.length;
+        break;
+      /* istanbul ignore next should not happen */
+      default: {
+        const message = `Unexpected token in block scalar header: ${token.type}`;
+        onError(token, "UNEXPECTED_TOKEN", message);
+        const ts = token.source;
+        if (ts && typeof ts === "string")
+          length += ts.length;
+      }
+    }
+  }
+  return { mode, indent, chomp, comment, length };
+}
+function splitLines(source) {
+  const split = source.split(/\n( *)/);
+  const first = split[0];
+  const m = first.match(/^( *)/);
+  const line0 = m?.[1] ? [m[1], first.slice(m[1].length)] : ["", first];
+  const lines = [line0];
+  for (let i = 1; i < split.length; i += 2)
+    lines.push([split[i], split[i + 1]]);
+  return lines;
+}
+var init_resolve_block_scalar = __esm({
+  "node_modules/yaml/browser/dist/compose/resolve-block-scalar.js"() {
+    init_esbuild_buffer_shim();
+    init_Scalar();
+  }
+});
+
+// node_modules/yaml/browser/dist/compose/resolve-flow-scalar.js
+function resolveFlowScalar(scalar, strict, onError) {
+  const { offset: offset2, type, source, end } = scalar;
+  let _type;
+  let value2;
+  const _onError = (rel, code2, msg) => onError(offset2 + rel, code2, msg);
+  switch (type) {
+    case "scalar":
+      _type = Scalar.PLAIN;
+      value2 = plainValue(source, _onError);
+      break;
+    case "single-quoted-scalar":
+      _type = Scalar.QUOTE_SINGLE;
+      value2 = singleQuotedValue(source, _onError);
+      break;
+    case "double-quoted-scalar":
+      _type = Scalar.QUOTE_DOUBLE;
+      value2 = doubleQuotedValue(source, _onError);
+      break;
+    /* istanbul ignore next should not happen */
+    default:
+      onError(scalar, "UNEXPECTED_TOKEN", `Expected a flow scalar value, but found: ${type}`);
+      return {
+        value: "",
+        type: null,
+        comment: "",
+        range: [offset2, offset2 + source.length, offset2 + source.length]
+      };
+  }
+  const valueEnd = offset2 + source.length;
+  const re = resolveEnd(end, valueEnd, strict, onError);
+  return {
+    value: value2,
+    type: _type,
+    comment: re.comment,
+    range: [offset2, valueEnd, re.offset]
+  };
+}
+function plainValue(source, onError) {
+  let badChar = "";
+  switch (source[0]) {
+    /* istanbul ignore next should not happen */
+    case "	":
+      badChar = "a tab character";
+      break;
+    case ",":
+      badChar = "flow indicator character ,";
+      break;
+    case "%":
+      badChar = "directive indicator character %";
+      break;
+    case "|":
+    case ">": {
+      badChar = `block scalar indicator ${source[0]}`;
+      break;
+    }
+    case "@":
+    case "`": {
+      badChar = `reserved character ${source[0]}`;
+      break;
+    }
+  }
+  if (badChar)
+    onError(0, "BAD_SCALAR_START", `Plain value cannot start with ${badChar}`);
+  return foldLines(source);
+}
+function singleQuotedValue(source, onError) {
+  if (source[source.length - 1] !== "'" || source.length === 1)
+    onError(source.length, "MISSING_CHAR", "Missing closing 'quote");
+  return foldLines(source.slice(1, -1)).replace(/''/g, "'");
+}
+function foldLines(source) {
+  let first, line;
+  try {
+    first = new RegExp("(.*?)(?<![ 	])[ 	]*\r?\n", "sy");
+    line = new RegExp("[ 	]*(.*?)(?:(?<![ 	])[ 	]*)?\r?\n", "sy");
+  } catch {
+    first = /(.*?)[ \t]*\r?\n/sy;
+    line = /[ \t]*(.*?)[ \t]*\r?\n/sy;
+  }
+  let match3 = first.exec(source);
+  if (!match3)
+    return source;
+  let res = match3[1];
+  let sep2 = " ";
+  let pos = first.lastIndex;
+  line.lastIndex = pos;
+  while (match3 = line.exec(source)) {
+    if (match3[1] === "") {
+      if (sep2 === "\n")
+        res += sep2;
+      else
+        sep2 = "\n";
+    } else {
+      res += sep2 + match3[1];
+      sep2 = " ";
+    }
+    pos = line.lastIndex;
+  }
+  const last = /[ \t]*(.*)/sy;
+  last.lastIndex = pos;
+  match3 = last.exec(source);
+  return res + sep2 + (match3?.[1] ?? "");
+}
+function doubleQuotedValue(source, onError) {
+  let res = "";
+  for (let i = 1; i < source.length - 1; ++i) {
+    const ch = source[i];
+    if (ch === "\r" && source[i + 1] === "\n")
+      continue;
+    if (ch === "\n") {
+      const { fold, offset: offset2 } = foldNewline(source, i);
+      res += fold;
+      i = offset2;
+    } else if (ch === "\\") {
+      let next = source[++i];
+      const cc = escapeCodes[next];
+      if (cc)
+        res += cc;
+      else if (next === "\n") {
+        next = source[i + 1];
+        while (next === " " || next === "	")
+          next = source[++i + 1];
+      } else if (next === "\r" && source[i + 1] === "\n") {
+        next = source[++i + 1];
+        while (next === " " || next === "	")
+          next = source[++i + 1];
+      } else if (next === "x" || next === "u" || next === "U") {
+        const length = { x: 2, u: 4, U: 8 }[next];
+        res += parseCharCode(source, i + 1, length, onError);
+        i += length;
+      } else {
+        const raw = source.substr(i - 1, 2);
+        onError(i - 1, "BAD_DQ_ESCAPE", `Invalid escape sequence ${raw}`);
+        res += raw;
+      }
+    } else if (ch === " " || ch === "	") {
+      const wsStart = i;
+      let next = source[i + 1];
+      while (next === " " || next === "	")
+        next = source[++i + 1];
+      if (next !== "\n" && !(next === "\r" && source[i + 2] === "\n"))
+        res += i > wsStart ? source.slice(wsStart, i + 1) : ch;
+    } else {
+      res += ch;
+    }
+  }
+  if (source[source.length - 1] !== '"' || source.length === 1)
+    onError(source.length, "MISSING_CHAR", 'Missing closing "quote');
+  return res;
+}
+function foldNewline(source, offset2) {
+  let fold = "";
+  let ch = source[offset2 + 1];
+  while (ch === " " || ch === "	" || ch === "\n" || ch === "\r") {
+    if (ch === "\r" && source[offset2 + 2] !== "\n")
+      break;
+    if (ch === "\n")
+      fold += "\n";
+    offset2 += 1;
+    ch = source[offset2 + 1];
+  }
+  if (!fold)
+    fold = " ";
+  return { fold, offset: offset2 };
+}
+function parseCharCode(source, offset2, length, onError) {
+  const cc = source.substr(offset2, length);
+  const ok4 = cc.length === length && /^[0-9a-fA-F]+$/.test(cc);
+  const code2 = ok4 ? parseInt(cc, 16) : NaN;
+  if (isNaN(code2)) {
+    const raw = source.substr(offset2 - 2, length + 2);
+    onError(offset2 - 2, "BAD_DQ_ESCAPE", `Invalid escape sequence ${raw}`);
+    return raw;
+  }
+  return String.fromCodePoint(code2);
+}
+var escapeCodes;
+var init_resolve_flow_scalar = __esm({
+  "node_modules/yaml/browser/dist/compose/resolve-flow-scalar.js"() {
+    init_esbuild_buffer_shim();
+    init_Scalar();
+    init_resolve_end();
+    escapeCodes = {
+      "0": "\0",
+      // null character
+      a: "\x07",
+      // bell character
+      b: "\b",
+      // backspace
+      e: "\x1B",
+      // escape character
+      f: "\f",
+      // form feed
+      n: "\n",
+      // line feed
+      r: "\r",
+      // carriage return
+      t: "	",
+      // horizontal tab
+      v: "\v",
+      // vertical tab
+      N: "\x85",
+      // Unicode next line
+      _: "\xA0",
+      // Unicode non-breaking space
+      L: "\u2028",
+      // Unicode line separator
+      P: "\u2029",
+      // Unicode paragraph separator
+      " ": " ",
+      '"': '"',
+      "/": "/",
+      "\\": "\\",
+      "	": "	"
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/compose/compose-scalar.js
+function composeScalar(ctx, token, tagToken, onError) {
+  const { value: value2, type, comment, range: range2 } = token.type === "block-scalar" ? resolveBlockScalar(ctx, token, onError) : resolveFlowScalar(token, ctx.options.strict, onError);
+  const tagName = tagToken ? ctx.directives.tagName(tagToken.source, (msg) => onError(tagToken, "TAG_RESOLVE_FAILED", msg)) : null;
+  let tag;
+  if (ctx.options.stringKeys && ctx.atKey) {
+    tag = ctx.schema[SCALAR];
+  } else if (tagName)
+    tag = findScalarTagByName(ctx.schema, value2, tagName, tagToken, onError);
+  else if (token.type === "scalar")
+    tag = findScalarTagByTest(ctx, value2, token, onError);
+  else
+    tag = ctx.schema[SCALAR];
+  let scalar;
+  try {
+    const res = tag.resolve(value2, (msg) => onError(tagToken ?? token, "TAG_RESOLVE_FAILED", msg), ctx.options);
+    scalar = isScalar(res) ? res : new Scalar(res);
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error);
+    onError(tagToken ?? token, "TAG_RESOLVE_FAILED", msg);
+    scalar = new Scalar(value2);
+  }
+  scalar.range = range2;
+  scalar.source = value2;
+  if (type)
+    scalar.type = type;
+  if (tagName)
+    scalar.tag = tagName;
+  if (tag.format)
+    scalar.format = tag.format;
+  if (comment)
+    scalar.comment = comment;
+  return scalar;
+}
+function findScalarTagByName(schema4, value2, tagName, tagToken, onError) {
+  if (tagName === "!")
+    return schema4[SCALAR];
+  const matchWithTest = [];
+  for (const tag of schema4.tags) {
+    if (!tag.collection && tag.tag === tagName) {
+      if (tag.default && tag.test)
+        matchWithTest.push(tag);
+      else
+        return tag;
+    }
+  }
+  for (const tag of matchWithTest)
+    if (tag.test?.test(value2))
+      return tag;
+  const kt = schema4.knownTags[tagName];
+  if (kt && !kt.collection) {
+    schema4.tags.push(Object.assign({}, kt, { default: false, test: void 0 }));
+    return kt;
+  }
+  onError(tagToken, "TAG_RESOLVE_FAILED", `Unresolved tag: ${tagName}`, tagName !== "tag:yaml.org,2002:str");
+  return schema4[SCALAR];
+}
+function findScalarTagByTest({ atKey, directives, schema: schema4 }, value2, token, onError) {
+  const tag = schema4.tags.find((tag2) => (tag2.default === true || atKey && tag2.default === "key") && tag2.test?.test(value2)) || schema4[SCALAR];
+  if (schema4.compat) {
+    const compat = schema4.compat.find((tag2) => tag2.default && tag2.test?.test(value2)) ?? schema4[SCALAR];
+    if (tag.tag !== compat.tag) {
+      const ts = directives.tagString(tag.tag);
+      const cs = directives.tagString(compat.tag);
+      const msg = `Value may be parsed as either ${ts} or ${cs}`;
+      onError(token, "TAG_RESOLVE_FAILED", msg, true);
+    }
+  }
+  return tag;
+}
+var init_compose_scalar = __esm({
+  "node_modules/yaml/browser/dist/compose/compose-scalar.js"() {
+    init_esbuild_buffer_shim();
+    init_identity();
+    init_Scalar();
+    init_resolve_block_scalar();
+    init_resolve_flow_scalar();
+  }
+});
+
+// node_modules/yaml/browser/dist/compose/util-empty-scalar-position.js
+function emptyScalarPosition(offset2, before, pos) {
+  if (before) {
+    pos ?? (pos = before.length);
+    for (let i = pos - 1; i >= 0; --i) {
+      let st = before[i];
+      switch (st.type) {
+        case "space":
+        case "comment":
+        case "newline":
+          offset2 -= st.source.length;
+          continue;
+      }
+      st = before[++i];
+      while (st?.type === "space") {
+        offset2 += st.source.length;
+        st = before[++i];
+      }
+      break;
+    }
+  }
+  return offset2;
+}
+var init_util_empty_scalar_position = __esm({
+  "node_modules/yaml/browser/dist/compose/util-empty-scalar-position.js"() {
+    init_esbuild_buffer_shim();
+  }
+});
+
+// node_modules/yaml/browser/dist/compose/compose-node.js
+function composeNode(ctx, token, props, onError) {
+  const atKey = ctx.atKey;
+  const { spaceBefore, comment, anchor, tag } = props;
+  let node2;
+  let isSrcToken = true;
+  switch (token.type) {
+    case "alias":
+      node2 = composeAlias(ctx, token, onError);
+      if (anchor || tag)
+        onError(token, "ALIAS_PROPS", "An alias node must not specify any properties");
+      break;
+    case "scalar":
+    case "single-quoted-scalar":
+    case "double-quoted-scalar":
+    case "block-scalar":
+      node2 = composeScalar(ctx, token, tag, onError);
+      if (anchor)
+        node2.anchor = anchor.source.substring(1);
+      break;
+    case "block-map":
+    case "block-seq":
+    case "flow-collection":
+      try {
+        node2 = composeCollection(CN, ctx, token, props, onError);
+        if (anchor)
+          node2.anchor = anchor.source.substring(1);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        onError(token, "RESOURCE_EXHAUSTION", message);
+      }
+      break;
+    default: {
+      const message = token.type === "error" ? token.message : `Unsupported token (type: ${token.type})`;
+      onError(token, "UNEXPECTED_TOKEN", message);
+      isSrcToken = false;
+    }
+  }
+  node2 ?? (node2 = composeEmptyNode(ctx, token.offset, void 0, null, props, onError));
+  if (anchor && node2.anchor === "")
+    onError(anchor, "BAD_ALIAS", "Anchor cannot be an empty string");
+  if (atKey && ctx.options.stringKeys && (!isScalar(node2) || typeof node2.value !== "string" || node2.tag && node2.tag !== "tag:yaml.org,2002:str")) {
+    const msg = "With stringKeys, all keys must be strings";
+    onError(tag ?? token, "NON_STRING_KEY", msg);
+  }
+  if (spaceBefore)
+    node2.spaceBefore = true;
+  if (comment) {
+    if (token.type === "scalar" && token.source === "")
+      node2.comment = comment;
+    else
+      node2.commentBefore = comment;
+  }
+  if (ctx.options.keepSourceTokens && isSrcToken)
+    node2.srcToken = token;
+  return node2;
+}
+function composeEmptyNode(ctx, offset2, before, pos, { spaceBefore, comment, anchor, tag, end }, onError) {
+  const token = {
+    type: "scalar",
+    offset: emptyScalarPosition(offset2, before, pos),
+    indent: -1,
+    source: ""
+  };
+  const node2 = composeScalar(ctx, token, tag, onError);
+  if (anchor) {
+    node2.anchor = anchor.source.substring(1);
+    if (node2.anchor === "")
+      onError(anchor, "BAD_ALIAS", "Anchor cannot be an empty string");
+  }
+  if (spaceBefore)
+    node2.spaceBefore = true;
+  if (comment) {
+    node2.comment = comment;
+    node2.range[2] = end;
+  }
+  return node2;
+}
+function composeAlias({ options }, { offset: offset2, source, end }, onError) {
+  const alias = new Alias(source.substring(1));
+  if (alias.source === "")
+    onError(offset2, "BAD_ALIAS", "Alias cannot be an empty string");
+  if (alias.source.endsWith(":"))
+    onError(offset2 + source.length - 1, "BAD_ALIAS", "Alias ending in : is ambiguous", true);
+  const valueEnd = offset2 + source.length;
+  const re = resolveEnd(end, valueEnd, options.strict, onError);
+  alias.range = [offset2, valueEnd, re.offset];
+  if (re.comment)
+    alias.comment = re.comment;
+  return alias;
+}
+var CN;
+var init_compose_node = __esm({
+  "node_modules/yaml/browser/dist/compose/compose-node.js"() {
+    init_esbuild_buffer_shim();
+    init_Alias();
+    init_identity();
+    init_compose_collection();
+    init_compose_scalar();
+    init_resolve_end();
+    init_util_empty_scalar_position();
+    CN = { composeNode, composeEmptyNode };
+  }
+});
+
+// node_modules/yaml/browser/dist/compose/compose-doc.js
+function composeDoc(options, directives, { offset: offset2, start, value: value2, end }, onError) {
+  const opts = Object.assign({ _directives: directives }, options);
+  const doc = new Document(void 0, opts);
+  const ctx = {
+    atKey: false,
+    atRoot: true,
+    directives: doc.directives,
+    options: doc.options,
+    schema: doc.schema
+  };
+  const props = resolveProps(start, {
+    indicator: "doc-start",
+    next: value2 ?? end?.[0],
+    offset: offset2,
+    onError,
+    parentIndent: 0,
+    startOnNewline: true
+  });
+  if (props.found) {
+    doc.directives.docStart = true;
+    if (value2 && (value2.type === "block-map" || value2.type === "block-seq") && !props.hasNewline)
+      onError(props.end, "MISSING_CHAR", "Block collection cannot start on same line with directives-end marker");
+  }
+  doc.contents = value2 ? composeNode(ctx, value2, props, onError) : composeEmptyNode(ctx, props.end, start, null, props, onError);
+  const contentEnd = doc.contents.range[2];
+  const re = resolveEnd(end, contentEnd, false, onError);
+  if (re.comment)
+    doc.comment = re.comment;
+  doc.range = [offset2, contentEnd, re.offset];
+  return doc;
+}
+var init_compose_doc = __esm({
+  "node_modules/yaml/browser/dist/compose/compose-doc.js"() {
+    init_esbuild_buffer_shim();
+    init_Document();
+    init_compose_node();
+    init_resolve_end();
+    init_resolve_props();
+  }
+});
+
+// node_modules/yaml/browser/dist/compose/composer.js
+function getErrorPos(src) {
+  if (typeof src === "number")
+    return [src, src + 1];
+  if (Array.isArray(src))
+    return src.length === 2 ? src : [src[0], src[1]];
+  const { offset: offset2, source } = src;
+  return [offset2, offset2 + (typeof source === "string" ? source.length : 1)];
+}
+function parsePrelude(prelude) {
+  let comment = "";
+  let atComment = false;
+  let afterEmptyLine = false;
+  for (let i = 0; i < prelude.length; ++i) {
+    const source = prelude[i];
+    switch (source[0]) {
+      case "#":
+        comment += (comment === "" ? "" : afterEmptyLine ? "\n\n" : "\n") + (source.substring(1) || " ");
+        atComment = true;
+        afterEmptyLine = false;
+        break;
+      case "%":
+        if (prelude[i + 1]?.[0] !== "#")
+          i += 1;
+        atComment = false;
+        break;
+      default:
+        if (!atComment)
+          afterEmptyLine = true;
+        atComment = false;
+    }
+  }
+  return { comment, afterEmptyLine };
+}
+var Composer;
+var init_composer = __esm({
+  "node_modules/yaml/browser/dist/compose/composer.js"() {
+    init_esbuild_buffer_shim();
+    init_directives();
+    init_Document();
+    init_errors();
+    init_identity();
+    init_compose_doc();
+    init_resolve_end();
+    Composer = class {
+      constructor(options = {}) {
+        this.doc = null;
+        this.atDirectives = false;
+        this.prelude = [];
+        this.errors = [];
+        this.warnings = [];
+        this.onError = (source, code2, message, warning) => {
+          const pos = getErrorPos(source);
+          if (warning)
+            this.warnings.push(new YAMLWarning(pos, code2, message));
+          else
+            this.errors.push(new YAMLParseError(pos, code2, message));
+        };
+        this.directives = new Directives({ version: options.version || "1.2" });
+        this.options = options;
+      }
+      decorate(doc, afterDoc) {
+        const { comment, afterEmptyLine } = parsePrelude(this.prelude);
+        if (comment) {
+          const dc = doc.contents;
+          if (afterDoc) {
+            doc.comment = doc.comment ? `${doc.comment}
+${comment}` : comment;
+          } else if (afterEmptyLine || doc.directives.docStart || !dc) {
+            doc.commentBefore = comment;
+          } else if (isCollection(dc) && !dc.flow && dc.items.length > 0) {
+            let it = dc.items[0];
+            if (isPair(it))
+              it = it.key;
+            const cb = it.commentBefore;
+            it.commentBefore = cb ? `${comment}
+${cb}` : comment;
+          } else {
+            const cb = dc.commentBefore;
+            dc.commentBefore = cb ? `${comment}
+${cb}` : comment;
+          }
+        }
+        if (afterDoc) {
+          Array.prototype.push.apply(doc.errors, this.errors);
+          Array.prototype.push.apply(doc.warnings, this.warnings);
+        } else {
+          doc.errors = this.errors;
+          doc.warnings = this.warnings;
+        }
+        this.prelude = [];
+        this.errors = [];
+        this.warnings = [];
+      }
+      /**
+       * Current stream status information.
+       *
+       * Mostly useful at the end of input for an empty stream.
+       */
+      streamInfo() {
+        return {
+          comment: parsePrelude(this.prelude).comment,
+          directives: this.directives,
+          errors: this.errors,
+          warnings: this.warnings
+        };
+      }
+      /**
+       * Compose tokens into documents.
+       *
+       * @param forceDoc - If the stream contains no document, still emit a final document including any comments and directives that would be applied to a subsequent document.
+       * @param endOffset - Should be set if `forceDoc` is also set, to set the document range end and to indicate errors correctly.
+       */
+      *compose(tokens, forceDoc = false, endOffset = -1) {
+        for (const token of tokens)
+          yield* this.next(token);
+        yield* this.end(forceDoc, endOffset);
+      }
+      /** Advance the composer by one CST token. */
+      *next(token) {
+        switch (token.type) {
+          case "directive":
+            this.directives.add(token.source, (offset2, message, warning) => {
+              const pos = getErrorPos(token);
+              pos[0] += offset2;
+              this.onError(pos, "BAD_DIRECTIVE", message, warning);
+            });
+            this.prelude.push(token.source);
+            this.atDirectives = true;
+            break;
+          case "document": {
+            const doc = composeDoc(this.options, this.directives, token, this.onError);
+            if (this.atDirectives && !doc.directives.docStart)
+              this.onError(token, "MISSING_CHAR", "Missing directives-end/doc-start indicator line");
+            this.decorate(doc, false);
+            if (this.doc)
+              yield this.doc;
+            this.doc = doc;
+            this.atDirectives = false;
+            break;
+          }
+          case "byte-order-mark":
+          case "space":
+            break;
+          case "comment":
+          case "newline":
+            this.prelude.push(token.source);
+            break;
+          case "error": {
+            const msg = token.source ? `${token.message}: ${JSON.stringify(token.source)}` : token.message;
+            const error = new YAMLParseError(getErrorPos(token), "UNEXPECTED_TOKEN", msg);
+            if (this.atDirectives || !this.doc)
+              this.errors.push(error);
+            else
+              this.doc.errors.push(error);
+            break;
+          }
+          case "doc-end": {
+            if (!this.doc) {
+              const msg = "Unexpected doc-end without preceding document";
+              this.errors.push(new YAMLParseError(getErrorPos(token), "UNEXPECTED_TOKEN", msg));
+              break;
+            }
+            this.doc.directives.docEnd = true;
+            const end = resolveEnd(token.end, token.offset + token.source.length, this.doc.options.strict, this.onError);
+            this.decorate(this.doc, true);
+            if (end.comment) {
+              const dc = this.doc.comment;
+              this.doc.comment = dc ? `${dc}
+${end.comment}` : end.comment;
+            }
+            this.doc.range[2] = end.offset;
+            break;
+          }
+          default:
+            this.errors.push(new YAMLParseError(getErrorPos(token), "UNEXPECTED_TOKEN", `Unsupported token ${token.type}`));
+        }
+      }
+      /**
+       * Call at end of input to yield any remaining document.
+       *
+       * @param forceDoc - If the stream contains no document, still emit a final document including any comments and directives that would be applied to a subsequent document.
+       * @param endOffset - Should be set if `forceDoc` is also set, to set the document range end and to indicate errors correctly.
+       */
+      *end(forceDoc = false, endOffset = -1) {
+        if (this.doc) {
+          this.decorate(this.doc, true);
+          yield this.doc;
+          this.doc = null;
+        } else if (forceDoc) {
+          const opts = Object.assign({ _directives: this.directives }, this.options);
+          const doc = new Document(void 0, opts);
+          if (this.atDirectives)
+            this.onError(endOffset, "MISSING_CHAR", "Missing directives-end indicator line");
+          doc.range = [0, endOffset, endOffset];
+          this.decorate(doc, false);
+          yield doc;
+        }
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/parse/cst-scalar.js
+function resolveAsScalar(token, strict = true, onError) {
+  if (token) {
+    const _onError = (pos, code2, message) => {
+      const offset2 = typeof pos === "number" ? pos : Array.isArray(pos) ? pos[0] : pos.offset;
+      if (onError)
+        onError(offset2, code2, message);
+      else
+        throw new YAMLParseError([offset2, offset2 + 1], code2, message);
+    };
+    switch (token.type) {
+      case "scalar":
+      case "single-quoted-scalar":
+      case "double-quoted-scalar":
+        return resolveFlowScalar(token, strict, _onError);
+      case "block-scalar":
+        return resolveBlockScalar({ options: { strict } }, token, _onError);
+    }
+  }
+  return null;
+}
+function createScalarToken(value2, context) {
+  const { implicitKey = false, indent, inFlow = false, offset: offset2 = -1, type = "PLAIN" } = context;
+  const source = stringifyString({ type, value: value2 }, {
+    implicitKey,
+    indent: indent > 0 ? " ".repeat(indent) : "",
+    inFlow,
+    options: { blockQuote: true, lineWidth: -1 }
+  });
+  const end = context.end ?? [
+    { type: "newline", offset: -1, indent, source: "\n" }
+  ];
+  switch (source[0]) {
+    case "|":
+    case ">": {
+      const he = source.indexOf("\n");
+      const head = source.substring(0, he);
+      const body = source.substring(he + 1) + "\n";
+      const props = [
+        { type: "block-scalar-header", offset: offset2, indent, source: head }
+      ];
+      if (!addEndtoBlockProps(props, end))
+        props.push({ type: "newline", offset: -1, indent, source: "\n" });
+      return { type: "block-scalar", offset: offset2, indent, props, source: body };
+    }
+    case '"':
+      return { type: "double-quoted-scalar", offset: offset2, indent, source, end };
+    case "'":
+      return { type: "single-quoted-scalar", offset: offset2, indent, source, end };
+    default:
+      return { type: "scalar", offset: offset2, indent, source, end };
+  }
+}
+function setScalarValue(token, value2, context = {}) {
+  let { afterKey = false, implicitKey = false, inFlow = false, type } = context;
+  let indent = "indent" in token ? token.indent : null;
+  if (afterKey && typeof indent === "number")
+    indent += 2;
+  if (!type)
+    switch (token.type) {
+      case "single-quoted-scalar":
+        type = "QUOTE_SINGLE";
+        break;
+      case "double-quoted-scalar":
+        type = "QUOTE_DOUBLE";
+        break;
+      case "block-scalar": {
+        const header = token.props[0];
+        if (header.type !== "block-scalar-header")
+          throw new Error("Invalid block scalar header");
+        type = header.source[0] === ">" ? "BLOCK_FOLDED" : "BLOCK_LITERAL";
+        break;
+      }
+      default:
+        type = "PLAIN";
+    }
+  const source = stringifyString({ type, value: value2 }, {
+    implicitKey: implicitKey || indent === null,
+    indent: indent !== null && indent > 0 ? " ".repeat(indent) : "",
+    inFlow,
+    options: { blockQuote: true, lineWidth: -1 }
+  });
+  switch (source[0]) {
+    case "|":
+    case ">":
+      setBlockScalarValue(token, source);
+      break;
+    case '"':
+      setFlowScalarValue(token, source, "double-quoted-scalar");
+      break;
+    case "'":
+      setFlowScalarValue(token, source, "single-quoted-scalar");
+      break;
+    default:
+      setFlowScalarValue(token, source, "scalar");
+  }
+}
+function setBlockScalarValue(token, source) {
+  const he = source.indexOf("\n");
+  const head = source.substring(0, he);
+  const body = source.substring(he + 1) + "\n";
+  if (token.type === "block-scalar") {
+    const header = token.props[0];
+    if (header.type !== "block-scalar-header")
+      throw new Error("Invalid block scalar header");
+    header.source = head;
+    token.source = body;
+  } else {
+    const { offset: offset2 } = token;
+    const indent = "indent" in token ? token.indent : -1;
+    const props = [
+      { type: "block-scalar-header", offset: offset2, indent, source: head }
+    ];
+    if (!addEndtoBlockProps(props, "end" in token ? token.end : void 0))
+      props.push({ type: "newline", offset: -1, indent, source: "\n" });
+    for (const key of Object.keys(token))
+      if (key !== "type" && key !== "offset")
+        delete token[key];
+    Object.assign(token, { type: "block-scalar", indent, props, source: body });
+  }
+}
+function addEndtoBlockProps(props, end) {
+  if (end)
+    for (const st of end)
+      switch (st.type) {
+        case "space":
+        case "comment":
+          props.push(st);
+          break;
+        case "newline":
+          props.push(st);
+          return true;
+      }
+  return false;
+}
+function setFlowScalarValue(token, source, type) {
+  switch (token.type) {
+    case "scalar":
+    case "double-quoted-scalar":
+    case "single-quoted-scalar":
+      token.type = type;
+      token.source = source;
+      break;
+    case "block-scalar": {
+      const end = token.props.slice(1);
+      let oa = source.length;
+      if (token.props[0].type === "block-scalar-header")
+        oa -= token.props[0].source.length;
+      for (const tok of end)
+        tok.offset += oa;
+      delete token.props;
+      Object.assign(token, { type, source, end });
+      break;
+    }
+    case "block-map":
+    case "block-seq": {
+      const offset2 = token.offset + source.length;
+      const nl = { type: "newline", offset: offset2, indent: token.indent, source: "\n" };
+      delete token.items;
+      Object.assign(token, { type, source, end: [nl] });
+      break;
+    }
+    default: {
+      const indent = "indent" in token ? token.indent : -1;
+      const end = "end" in token && Array.isArray(token.end) ? token.end.filter((st) => st.type === "space" || st.type === "comment" || st.type === "newline") : [];
+      for (const key of Object.keys(token))
+        if (key !== "type" && key !== "offset")
+          delete token[key];
+      Object.assign(token, { type, indent, source, end });
+    }
+  }
+}
+var init_cst_scalar = __esm({
+  "node_modules/yaml/browser/dist/parse/cst-scalar.js"() {
+    init_esbuild_buffer_shim();
+    init_resolve_block_scalar();
+    init_resolve_flow_scalar();
+    init_errors();
+    init_stringifyString();
+  }
+});
+
+// node_modules/yaml/browser/dist/parse/cst-stringify.js
+function stringifyToken(token) {
+  switch (token.type) {
+    case "block-scalar": {
+      let res = "";
+      for (const tok of token.props)
+        res += stringifyToken(tok);
+      return res + token.source;
+    }
+    case "block-map":
+    case "block-seq": {
+      let res = "";
+      for (const item of token.items)
+        res += stringifyItem(item);
+      return res;
+    }
+    case "flow-collection": {
+      let res = token.start.source;
+      for (const item of token.items)
+        res += stringifyItem(item);
+      for (const st of token.end)
+        res += st.source;
+      return res;
+    }
+    case "document": {
+      let res = stringifyItem(token);
+      if (token.end)
+        for (const st of token.end)
+          res += st.source;
+      return res;
+    }
+    default: {
+      let res = token.source;
+      if ("end" in token && token.end)
+        for (const st of token.end)
+          res += st.source;
+      return res;
+    }
+  }
+}
+function stringifyItem({ start, key, sep: sep2, value: value2 }) {
+  let res = "";
+  for (const st of start)
+    res += st.source;
+  if (key)
+    res += stringifyToken(key);
+  if (sep2)
+    for (const st of sep2)
+      res += st.source;
+  if (value2)
+    res += stringifyToken(value2);
+  return res;
+}
+var stringify2;
+var init_cst_stringify = __esm({
+  "node_modules/yaml/browser/dist/parse/cst-stringify.js"() {
+    init_esbuild_buffer_shim();
+    stringify2 = (cst) => "type" in cst ? stringifyToken(cst) : stringifyItem(cst);
+  }
+});
+
+// node_modules/yaml/browser/dist/parse/cst-visit.js
+function visit4(cst, visitor) {
+  if ("type" in cst && cst.type === "document")
+    cst = { start: cst.start, value: cst.value };
+  _visit(Object.freeze([]), cst, visitor);
+}
+function _visit(path2, item, visitor) {
+  let ctrl = visitor(item, path2);
+  if (typeof ctrl === "symbol")
+    return ctrl;
+  for (const field of ["key", "value"]) {
+    const token = item[field];
+    if (token && "items" in token) {
+      for (let i = 0; i < token.items.length; ++i) {
+        const ci = _visit(Object.freeze(path2.concat([[field, i]])), token.items[i], visitor);
+        if (typeof ci === "number")
+          i = ci - 1;
+        else if (ci === BREAK2)
+          return BREAK2;
+        else if (ci === REMOVE2) {
+          token.items.splice(i, 1);
+          i -= 1;
+        }
+      }
+      if (typeof ctrl === "function" && field === "key")
+        ctrl = ctrl(item, path2);
+    }
+  }
+  return typeof ctrl === "function" ? ctrl(item, path2) : ctrl;
+}
+var BREAK2, SKIP4, REMOVE2;
+var init_cst_visit = __esm({
+  "node_modules/yaml/browser/dist/parse/cst-visit.js"() {
+    init_esbuild_buffer_shim();
+    BREAK2 = Symbol("break visit");
+    SKIP4 = Symbol("skip children");
+    REMOVE2 = Symbol("remove item");
+    visit4.BREAK = BREAK2;
+    visit4.SKIP = SKIP4;
+    visit4.REMOVE = REMOVE2;
+    visit4.itemAtPath = (cst, path2) => {
+      let item = cst;
+      for (const [field, index2] of path2) {
+        const tok = item?.[field];
+        if (tok && "items" in tok) {
+          item = tok.items[index2];
+        } else
+          return void 0;
+      }
+      return item;
+    };
+    visit4.parentCollection = (cst, path2) => {
+      const parent = visit4.itemAtPath(cst, path2.slice(0, -1));
+      const field = path2[path2.length - 1][0];
+      const coll = parent?.[field];
+      if (coll && "items" in coll)
+        return coll;
+      throw new Error("Parent collection not found");
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/parse/cst.js
+var cst_exports = {};
+__export(cst_exports, {
+  BOM: () => BOM,
+  DOCUMENT: () => DOCUMENT,
+  FLOW_END: () => FLOW_END,
+  SCALAR: () => SCALAR2,
+  createScalarToken: () => createScalarToken,
+  isCollection: () => isCollection2,
+  isScalar: () => isScalar2,
+  prettyToken: () => prettyToken,
+  resolveAsScalar: () => resolveAsScalar,
+  setScalarValue: () => setScalarValue,
+  stringify: () => stringify2,
+  tokenType: () => tokenType,
+  visit: () => visit4
+});
+function prettyToken(token) {
+  switch (token) {
+    case BOM:
+      return "<BOM>";
+    case DOCUMENT:
+      return "<DOC>";
+    case FLOW_END:
+      return "<FLOW_END>";
+    case SCALAR2:
+      return "<SCALAR>";
+    default:
+      return JSON.stringify(token);
+  }
+}
+function tokenType(source) {
+  switch (source) {
+    case BOM:
+      return "byte-order-mark";
+    case DOCUMENT:
+      return "doc-mode";
+    case FLOW_END:
+      return "flow-error-end";
+    case SCALAR2:
+      return "scalar";
+    case "---":
+      return "doc-start";
+    case "...":
+      return "doc-end";
+    case "":
+    case "\n":
+    case "\r\n":
+      return "newline";
+    case "-":
+      return "seq-item-ind";
+    case "?":
+      return "explicit-key-ind";
+    case ":":
+      return "map-value-ind";
+    case "{":
+      return "flow-map-start";
+    case "}":
+      return "flow-map-end";
+    case "[":
+      return "flow-seq-start";
+    case "]":
+      return "flow-seq-end";
+    case ",":
+      return "comma";
+  }
+  switch (source[0]) {
+    case " ":
+    case "	":
+      return "space";
+    case "#":
+      return "comment";
+    case "%":
+      return "directive-line";
+    case "*":
+      return "alias";
+    case "&":
+      return "anchor";
+    case "!":
+      return "tag";
+    case "'":
+      return "single-quoted-scalar";
+    case '"':
+      return "double-quoted-scalar";
+    case "|":
+    case ">":
+      return "block-scalar-header";
+  }
+  return null;
+}
+var BOM, DOCUMENT, FLOW_END, SCALAR2, isCollection2, isScalar2;
+var init_cst = __esm({
+  "node_modules/yaml/browser/dist/parse/cst.js"() {
+    init_esbuild_buffer_shim();
+    init_cst_scalar();
+    init_cst_stringify();
+    init_cst_visit();
+    BOM = "\uFEFF";
+    DOCUMENT = "";
+    FLOW_END = "";
+    SCALAR2 = "";
+    isCollection2 = (token) => !!token && "items" in token;
+    isScalar2 = (token) => !!token && (token.type === "scalar" || token.type === "single-quoted-scalar" || token.type === "double-quoted-scalar" || token.type === "block-scalar");
+  }
+});
+
+// node_modules/yaml/browser/dist/parse/lexer.js
+function isEmpty(ch) {
+  switch (ch) {
+    case void 0:
+    case " ":
+    case "\n":
+    case "\r":
+    case "	":
+      return true;
+    default:
+      return false;
+  }
+}
+var hexDigits, tagChars, flowIndicatorChars, invalidAnchorChars, isNotAnchorChar, Lexer;
+var init_lexer = __esm({
+  "node_modules/yaml/browser/dist/parse/lexer.js"() {
+    init_esbuild_buffer_shim();
+    init_cst();
+    hexDigits = new Set("0123456789ABCDEFabcdef");
+    tagChars = new Set("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-#;/?:@&=+$_.!~*'()");
+    flowIndicatorChars = new Set(",[]{}");
+    invalidAnchorChars = new Set(" ,[]{}\n\r	");
+    isNotAnchorChar = (ch) => !ch || invalidAnchorChars.has(ch);
+    Lexer = class {
+      constructor() {
+        this.atEnd = false;
+        this.blockScalarIndent = -1;
+        this.blockScalarKeep = false;
+        this.buffer = "";
+        this.flowKey = false;
+        this.flowLevel = 0;
+        this.indentNext = 0;
+        this.indentValue = 0;
+        this.lineEndPos = null;
+        this.next = null;
+        this.pos = 0;
+      }
+      /**
+       * Generate YAML tokens from the `source` string. If `incomplete`,
+       * a part of the last line may be left as a buffer for the next call.
+       *
+       * @returns A generator of lexical tokens
+       */
+      *lex(source, incomplete = false) {
+        if (source) {
+          if (typeof source !== "string")
+            throw TypeError("source is not a string");
+          this.buffer = this.buffer ? this.buffer + source : source;
+          this.lineEndPos = null;
+        }
+        this.atEnd = !incomplete;
+        let next = this.next ?? "stream";
+        while (next && (incomplete || this.hasChars(1)))
+          next = yield* this.parseNext(next);
+      }
+      atLineEnd() {
+        let i = this.pos;
+        let ch = this.buffer[i];
+        while (ch === " " || ch === "	")
+          ch = this.buffer[++i];
+        if (!ch || ch === "#" || ch === "\n")
+          return true;
+        if (ch === "\r")
+          return this.buffer[i + 1] === "\n";
+        return false;
+      }
+      charAt(n2) {
+        return this.buffer[this.pos + n2];
+      }
+      continueScalar(offset2) {
+        let ch = this.buffer[offset2];
+        if (this.indentNext > 0) {
+          let indent = 0;
+          while (ch === " ")
+            ch = this.buffer[++indent + offset2];
+          if (ch === "\r") {
+            const next = this.buffer[indent + offset2 + 1];
+            if (next === "\n" || !next && !this.atEnd)
+              return offset2 + indent + 1;
+          }
+          return ch === "\n" || indent >= this.indentNext || !ch && !this.atEnd ? offset2 + indent : -1;
+        }
+        if (ch === "-" || ch === ".") {
+          const dt = this.buffer.substr(offset2, 3);
+          if ((dt === "---" || dt === "...") && isEmpty(this.buffer[offset2 + 3]))
+            return -1;
+        }
+        return offset2;
+      }
+      getLine() {
+        let end = this.lineEndPos;
+        if (typeof end !== "number" || end !== -1 && end < this.pos) {
+          end = this.buffer.indexOf("\n", this.pos);
+          this.lineEndPos = end;
+        }
+        if (end === -1)
+          return this.atEnd ? this.buffer.substring(this.pos) : null;
+        if (this.buffer[end - 1] === "\r")
+          end -= 1;
+        return this.buffer.substring(this.pos, end);
+      }
+      hasChars(n2) {
+        return this.pos + n2 <= this.buffer.length;
+      }
+      setNext(state) {
+        this.buffer = this.buffer.substring(this.pos);
+        this.pos = 0;
+        this.lineEndPos = null;
+        this.next = state;
+        return null;
+      }
+      peek(n2) {
+        return this.buffer.substr(this.pos, n2);
+      }
+      *parseNext(next) {
+        switch (next) {
+          case "stream":
+            return yield* this.parseStream();
+          case "line-start":
+            return yield* this.parseLineStart();
+          case "block-start":
+            return yield* this.parseBlockStart();
+          case "doc":
+            return yield* this.parseDocument();
+          case "flow":
+            return yield* this.parseFlowCollection();
+          case "quoted-scalar":
+            return yield* this.parseQuotedScalar();
+          case "block-scalar":
+            return yield* this.parseBlockScalar();
+          case "plain-scalar":
+            return yield* this.parsePlainScalar();
+        }
+      }
+      *parseStream() {
+        let line = this.getLine();
+        if (line === null)
+          return this.setNext("stream");
+        if (line[0] === BOM) {
+          yield* this.pushCount(1);
+          line = line.substring(1);
+        }
+        if (line[0] === "%") {
+          let dirEnd = line.length;
+          let cs = line.indexOf("#");
+          while (cs !== -1) {
+            const ch = line[cs - 1];
+            if (ch === " " || ch === "	") {
+              dirEnd = cs - 1;
+              break;
+            } else {
+              cs = line.indexOf("#", cs + 1);
+            }
+          }
+          while (true) {
+            const ch = line[dirEnd - 1];
+            if (ch === " " || ch === "	")
+              dirEnd -= 1;
+            else
+              break;
+          }
+          const n2 = (yield* this.pushCount(dirEnd)) + (yield* this.pushSpaces(true));
+          yield* this.pushCount(line.length - n2);
+          this.pushNewline();
+          return "stream";
+        }
+        if (this.atLineEnd()) {
+          const sp = yield* this.pushSpaces(true);
+          yield* this.pushCount(line.length - sp);
+          yield* this.pushNewline();
+          return "stream";
+        }
+        yield DOCUMENT;
+        return yield* this.parseLineStart();
+      }
+      *parseLineStart() {
+        const ch = this.charAt(0);
+        if (!ch && !this.atEnd)
+          return this.setNext("line-start");
+        if (ch === "-" || ch === ".") {
+          if (!this.atEnd && !this.hasChars(4))
+            return this.setNext("line-start");
+          const s2 = this.peek(3);
+          if ((s2 === "---" || s2 === "...") && isEmpty(this.charAt(3))) {
+            yield* this.pushCount(3);
+            this.indentValue = 0;
+            this.indentNext = 0;
+            return s2 === "---" ? "doc" : "stream";
+          }
+        }
+        this.indentValue = yield* this.pushSpaces(false);
+        if (this.indentNext > this.indentValue && !isEmpty(this.charAt(1)))
+          this.indentNext = this.indentValue;
+        return yield* this.parseBlockStart();
+      }
+      *parseBlockStart() {
+        const [ch0, ch1] = this.peek(2);
+        if (!ch1 && !this.atEnd)
+          return this.setNext("block-start");
+        if ((ch0 === "-" || ch0 === "?" || ch0 === ":") && isEmpty(ch1)) {
+          const n2 = (yield* this.pushCount(1)) + (yield* this.pushSpaces(true));
+          this.indentNext = this.indentValue + 1;
+          this.indentValue += n2;
+          return yield* this.parseBlockStart();
+        }
+        return "doc";
+      }
+      *parseDocument() {
+        yield* this.pushSpaces(true);
+        const line = this.getLine();
+        if (line === null)
+          return this.setNext("doc");
+        let n2 = yield* this.pushIndicators();
+        switch (line[n2]) {
+          case "#":
+            yield* this.pushCount(line.length - n2);
+          // fallthrough
+          case void 0:
+            yield* this.pushNewline();
+            return yield* this.parseLineStart();
+          case "{":
+          case "[":
+            yield* this.pushCount(1);
+            this.flowKey = false;
+            this.flowLevel = 1;
+            return "flow";
+          case "}":
+          case "]":
+            yield* this.pushCount(1);
+            return "doc";
+          case "*":
+            yield* this.pushUntil(isNotAnchorChar);
+            return "doc";
+          case '"':
+          case "'":
+            return yield* this.parseQuotedScalar();
+          case "|":
+          case ">":
+            n2 += yield* this.parseBlockScalarHeader();
+            n2 += yield* this.pushSpaces(true);
+            yield* this.pushCount(line.length - n2);
+            yield* this.pushNewline();
+            return yield* this.parseBlockScalar();
+          default:
+            return yield* this.parsePlainScalar();
+        }
+      }
+      *parseFlowCollection() {
+        let nl, sp;
+        let indent = -1;
+        do {
+          nl = yield* this.pushNewline();
+          if (nl > 0) {
+            sp = yield* this.pushSpaces(false);
+            this.indentValue = indent = sp;
+          } else {
+            sp = 0;
+          }
+          sp += yield* this.pushSpaces(true);
+        } while (nl + sp > 0);
+        const line = this.getLine();
+        if (line === null)
+          return this.setNext("flow");
+        if (indent !== -1 && indent < this.indentNext && line[0] !== "#" || indent === 0 && (line.startsWith("---") || line.startsWith("...")) && isEmpty(line[3])) {
+          const atFlowEndMarker = indent === this.indentNext - 1 && this.flowLevel === 1 && (line[0] === "]" || line[0] === "}");
+          if (!atFlowEndMarker) {
+            this.flowLevel = 0;
+            yield FLOW_END;
+            return yield* this.parseLineStart();
+          }
+        }
+        let n2 = 0;
+        while (line[n2] === ",") {
+          n2 += yield* this.pushCount(1);
+          n2 += yield* this.pushSpaces(true);
+          this.flowKey = false;
+        }
+        n2 += yield* this.pushIndicators();
+        switch (line[n2]) {
+          case void 0:
+            return "flow";
+          case "#":
+            yield* this.pushCount(line.length - n2);
+            return "flow";
+          case "{":
+          case "[":
+            yield* this.pushCount(1);
+            this.flowKey = false;
+            this.flowLevel += 1;
+            return "flow";
+          case "}":
+          case "]":
+            yield* this.pushCount(1);
+            this.flowKey = true;
+            this.flowLevel -= 1;
+            return this.flowLevel ? "flow" : "doc";
+          case "*":
+            yield* this.pushUntil(isNotAnchorChar);
+            return "flow";
+          case '"':
+          case "'":
+            this.flowKey = true;
+            return yield* this.parseQuotedScalar();
+          case ":": {
+            const next = this.charAt(1);
+            if (this.flowKey || isEmpty(next) || next === ",") {
+              this.flowKey = false;
+              yield* this.pushCount(1);
+              yield* this.pushSpaces(true);
+              return "flow";
+            }
+          }
+          // fallthrough
+          default:
+            this.flowKey = false;
+            return yield* this.parsePlainScalar();
+        }
+      }
+      *parseQuotedScalar() {
+        const quote = this.charAt(0);
+        let end = this.buffer.indexOf(quote, this.pos + 1);
+        if (quote === "'") {
+          while (end !== -1 && this.buffer[end + 1] === "'")
+            end = this.buffer.indexOf("'", end + 2);
+        } else {
+          while (end !== -1) {
+            let n2 = 0;
+            while (this.buffer[end - 1 - n2] === "\\")
+              n2 += 1;
+            if (n2 % 2 === 0)
+              break;
+            end = this.buffer.indexOf('"', end + 1);
+          }
+        }
+        const qb = this.buffer.substring(0, end);
+        let nl = qb.indexOf("\n", this.pos);
+        if (nl !== -1) {
+          while (nl !== -1) {
+            const cs = this.continueScalar(nl + 1);
+            if (cs === -1)
+              break;
+            nl = qb.indexOf("\n", cs);
+          }
+          if (nl !== -1) {
+            end = nl - (qb[nl - 1] === "\r" ? 2 : 1);
+          }
+        }
+        if (end === -1) {
+          if (!this.atEnd)
+            return this.setNext("quoted-scalar");
+          end = this.buffer.length;
+        }
+        yield* this.pushToIndex(end + 1, false);
+        return this.flowLevel ? "flow" : "doc";
+      }
+      *parseBlockScalarHeader() {
+        this.blockScalarIndent = -1;
+        this.blockScalarKeep = false;
+        let i = this.pos;
+        while (true) {
+          const ch = this.buffer[++i];
+          if (ch === "+")
+            this.blockScalarKeep = true;
+          else if (ch > "0" && ch <= "9")
+            this.blockScalarIndent = Number(ch) - 1;
+          else if (ch !== "-")
+            break;
+        }
+        return yield* this.pushUntil((ch) => isEmpty(ch) || ch === "#");
+      }
+      *parseBlockScalar() {
+        let nl = this.pos - 1;
+        let indent = 0;
+        let ch;
+        loop: for (let i2 = this.pos; ch = this.buffer[i2]; ++i2) {
+          switch (ch) {
+            case " ":
+              indent += 1;
+              break;
+            case "\n":
+              nl = i2;
+              indent = 0;
+              break;
+            case "\r": {
+              const next = this.buffer[i2 + 1];
+              if (!next && !this.atEnd)
+                return this.setNext("block-scalar");
+              if (next === "\n")
+                break;
+            }
+            // fallthrough
+            default:
+              break loop;
+          }
+        }
+        if (!ch && !this.atEnd)
+          return this.setNext("block-scalar");
+        if (indent >= this.indentNext) {
+          if (this.blockScalarIndent === -1)
+            this.indentNext = indent;
+          else {
+            this.indentNext = this.blockScalarIndent + (this.indentNext === 0 ? 1 : this.indentNext);
+          }
+          do {
+            const cs = this.continueScalar(nl + 1);
+            if (cs === -1)
+              break;
+            nl = this.buffer.indexOf("\n", cs);
+          } while (nl !== -1);
+          if (nl === -1) {
+            if (!this.atEnd)
+              return this.setNext("block-scalar");
+            nl = this.buffer.length;
+          }
+        }
+        let i = nl + 1;
+        ch = this.buffer[i];
+        while (ch === " ")
+          ch = this.buffer[++i];
+        if (ch === "	") {
+          while (ch === "	" || ch === " " || ch === "\r" || ch === "\n")
+            ch = this.buffer[++i];
+          nl = i - 1;
+        } else if (!this.blockScalarKeep) {
+          do {
+            let i2 = nl - 1;
+            let ch2 = this.buffer[i2];
+            if (ch2 === "\r")
+              ch2 = this.buffer[--i2];
+            const lastChar = i2;
+            while (ch2 === " ")
+              ch2 = this.buffer[--i2];
+            if (ch2 === "\n" && i2 >= this.pos && i2 + 1 + indent > lastChar)
+              nl = i2;
+            else
+              break;
+          } while (true);
+        }
+        yield SCALAR2;
+        yield* this.pushToIndex(nl + 1, true);
+        return yield* this.parseLineStart();
+      }
+      *parsePlainScalar() {
+        const inFlow = this.flowLevel > 0;
+        let end = this.pos - 1;
+        let i = this.pos - 1;
+        let ch;
+        while (ch = this.buffer[++i]) {
+          if (ch === ":") {
+            const next = this.buffer[i + 1];
+            if (isEmpty(next) || inFlow && flowIndicatorChars.has(next))
+              break;
+            end = i;
+          } else if (isEmpty(ch)) {
+            let next = this.buffer[i + 1];
+            if (ch === "\r") {
+              if (next === "\n") {
+                i += 1;
+                ch = "\n";
+                next = this.buffer[i + 1];
+              } else
+                end = i;
+            }
+            if (next === "#" || inFlow && flowIndicatorChars.has(next))
+              break;
+            if (ch === "\n") {
+              const cs = this.continueScalar(i + 1);
+              if (cs === -1)
+                break;
+              i = Math.max(i, cs - 2);
+            }
+          } else {
+            if (inFlow && flowIndicatorChars.has(ch))
+              break;
+            end = i;
+          }
+        }
+        if (!ch && !this.atEnd)
+          return this.setNext("plain-scalar");
+        yield SCALAR2;
+        yield* this.pushToIndex(end + 1, true);
+        return inFlow ? "flow" : "doc";
+      }
+      *pushCount(n2) {
+        if (n2 > 0) {
+          yield this.buffer.substr(this.pos, n2);
+          this.pos += n2;
+          return n2;
+        }
+        return 0;
+      }
+      *pushToIndex(i, allowEmpty) {
+        const s2 = this.buffer.slice(this.pos, i);
+        if (s2) {
+          yield s2;
+          this.pos += s2.length;
+          return s2.length;
+        } else if (allowEmpty)
+          yield "";
+        return 0;
+      }
+      *pushIndicators() {
+        switch (this.charAt(0)) {
+          case "!":
+            return (yield* this.pushTag()) + (yield* this.pushSpaces(true)) + (yield* this.pushIndicators());
+          case "&":
+            return (yield* this.pushUntil(isNotAnchorChar)) + (yield* this.pushSpaces(true)) + (yield* this.pushIndicators());
+          case "-":
+          // this is an error
+          case "?":
+          // this is an error outside flow collections
+          case ":": {
+            const inFlow = this.flowLevel > 0;
+            const ch1 = this.charAt(1);
+            if (isEmpty(ch1) || inFlow && flowIndicatorChars.has(ch1)) {
+              if (!inFlow)
+                this.indentNext = this.indentValue + 1;
+              else if (this.flowKey)
+                this.flowKey = false;
+              return (yield* this.pushCount(1)) + (yield* this.pushSpaces(true)) + (yield* this.pushIndicators());
+            }
+          }
+        }
+        return 0;
+      }
+      *pushTag() {
+        if (this.charAt(1) === "<") {
+          let i = this.pos + 2;
+          let ch = this.buffer[i];
+          while (!isEmpty(ch) && ch !== ">")
+            ch = this.buffer[++i];
+          return yield* this.pushToIndex(ch === ">" ? i + 1 : i, false);
+        } else {
+          let i = this.pos + 1;
+          let ch = this.buffer[i];
+          while (ch) {
+            if (tagChars.has(ch))
+              ch = this.buffer[++i];
+            else if (ch === "%" && hexDigits.has(this.buffer[i + 1]) && hexDigits.has(this.buffer[i + 2])) {
+              ch = this.buffer[i += 3];
+            } else
+              break;
+          }
+          return yield* this.pushToIndex(i, false);
+        }
+      }
+      *pushNewline() {
+        const ch = this.buffer[this.pos];
+        if (ch === "\n")
+          return yield* this.pushCount(1);
+        else if (ch === "\r" && this.charAt(1) === "\n")
+          return yield* this.pushCount(2);
+        else
+          return 0;
+      }
+      *pushSpaces(allowTabs) {
+        let i = this.pos - 1;
+        let ch;
+        do {
+          ch = this.buffer[++i];
+        } while (ch === " " || allowTabs && ch === "	");
+        const n2 = i - this.pos;
+        if (n2 > 0) {
+          yield this.buffer.substr(this.pos, n2);
+          this.pos = i;
+        }
+        return n2;
+      }
+      *pushUntil(test) {
+        let i = this.pos;
+        let ch = this.buffer[i];
+        while (!test(ch))
+          ch = this.buffer[++i];
+        return yield* this.pushToIndex(i, false);
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/parse/line-counter.js
+var LineCounter;
+var init_line_counter = __esm({
+  "node_modules/yaml/browser/dist/parse/line-counter.js"() {
+    init_esbuild_buffer_shim();
+    LineCounter = class {
+      constructor() {
+        this.lineStarts = [];
+        this.addNewLine = (offset2) => this.lineStarts.push(offset2);
+        this.linePos = (offset2) => {
+          let low = 0;
+          let high = this.lineStarts.length;
+          while (low < high) {
+            const mid = low + high >> 1;
+            if (this.lineStarts[mid] < offset2)
+              low = mid + 1;
+            else
+              high = mid;
+          }
+          if (this.lineStarts[low] === offset2)
+            return { line: low + 1, col: 1 };
+          if (low === 0)
+            return { line: 0, col: offset2 };
+          const start = this.lineStarts[low - 1];
+          return { line: low, col: offset2 - start + 1 };
+        };
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/parse/parser.js
+function includesToken(list4, type) {
+  for (let i = 0; i < list4.length; ++i)
+    if (list4[i].type === type)
+      return true;
+  return false;
+}
+function findNonEmptyIndex(list4) {
+  for (let i = 0; i < list4.length; ++i) {
+    switch (list4[i].type) {
+      case "space":
+      case "comment":
+      case "newline":
+        break;
+      default:
+        return i;
+    }
+  }
+  return -1;
+}
+function isFlowToken(token) {
+  switch (token?.type) {
+    case "alias":
+    case "scalar":
+    case "single-quoted-scalar":
+    case "double-quoted-scalar":
+    case "flow-collection":
+      return true;
+    default:
+      return false;
+  }
+}
+function getPrevProps(parent) {
+  switch (parent.type) {
+    case "document":
+      return parent.start;
+    case "block-map": {
+      const it = parent.items[parent.items.length - 1];
+      return it.sep ?? it.start;
+    }
+    case "block-seq":
+      return parent.items[parent.items.length - 1].start;
+    /* istanbul ignore next should not happen */
+    default:
+      return [];
+  }
+}
+function getFirstKeyStartProps(prev) {
+  if (prev.length === 0)
+    return [];
+  let i = prev.length;
+  loop: while (--i >= 0) {
+    switch (prev[i].type) {
+      case "doc-start":
+      case "explicit-key-ind":
+      case "map-value-ind":
+      case "seq-item-ind":
+      case "newline":
+        break loop;
+    }
+  }
+  while (prev[++i]?.type === "space") {
+  }
+  return prev.splice(i, prev.length);
+}
+function fixFlowSeqItems(fc) {
+  if (fc.start.type === "flow-seq-start") {
+    for (const it of fc.items) {
+      if (it.sep && !it.value && !includesToken(it.start, "explicit-key-ind") && !includesToken(it.sep, "map-value-ind")) {
+        if (it.key)
+          it.value = it.key;
+        delete it.key;
+        if (isFlowToken(it.value)) {
+          if (it.value.end)
+            Array.prototype.push.apply(it.value.end, it.sep);
+          else
+            it.value.end = it.sep;
+        } else
+          Array.prototype.push.apply(it.start, it.sep);
+        delete it.sep;
+      }
+    }
+  }
+}
+var Parser;
+var init_parser = __esm({
+  "node_modules/yaml/browser/dist/parse/parser.js"() {
+    init_esbuild_buffer_shim();
+    init_cst();
+    init_lexer();
+    Parser = class {
+      /**
+       * @param onNewLine - If defined, called separately with the start position of
+       *   each new line (in `parse()`, including the start of input).
+       */
+      constructor(onNewLine) {
+        this.atNewLine = true;
+        this.atScalar = false;
+        this.indent = 0;
+        this.offset = 0;
+        this.onKeyLine = false;
+        this.stack = [];
+        this.source = "";
+        this.type = "";
+        this.lexer = new Lexer();
+        this.onNewLine = onNewLine;
+      }
+      /**
+       * Parse `source` as a YAML stream.
+       * If `incomplete`, a part of the last line may be left as a buffer for the next call.
+       *
+       * Errors are not thrown, but yielded as `{ type: 'error', message }` tokens.
+       *
+       * @returns A generator of tokens representing each directive, document, and other structure.
+       */
+      *parse(source, incomplete = false) {
+        if (this.onNewLine && this.offset === 0)
+          this.onNewLine(0);
+        for (const lexeme of this.lexer.lex(source, incomplete))
+          yield* this.next(lexeme);
+        if (!incomplete)
+          yield* this.end();
+      }
+      /**
+       * Advance the parser by the `source` of one lexical token.
+       */
+      *next(source) {
+        this.source = source;
+        if (this.atScalar) {
+          this.atScalar = false;
+          yield* this.step();
+          this.offset += source.length;
+          return;
+        }
+        const type = tokenType(source);
+        if (!type) {
+          const message = `Not a YAML token: ${source}`;
+          yield* this.pop({ type: "error", offset: this.offset, message, source });
+          this.offset += source.length;
+        } else if (type === "scalar") {
+          this.atNewLine = false;
+          this.atScalar = true;
+          this.type = "scalar";
+        } else {
+          this.type = type;
+          yield* this.step();
+          switch (type) {
+            case "newline":
+              this.atNewLine = true;
+              this.indent = 0;
+              if (this.onNewLine)
+                this.onNewLine(this.offset + source.length);
+              break;
+            case "space":
+              if (this.atNewLine && source[0] === " ")
+                this.indent += source.length;
+              break;
+            case "explicit-key-ind":
+            case "map-value-ind":
+            case "seq-item-ind":
+              if (this.atNewLine)
+                this.indent += source.length;
+              break;
+            case "doc-mode":
+            case "flow-error-end":
+              return;
+            default:
+              this.atNewLine = false;
+          }
+          this.offset += source.length;
+        }
+      }
+      /** Call at end of input to push out any remaining constructions */
+      *end() {
+        while (this.stack.length > 0)
+          yield* this.pop();
+      }
+      get sourceToken() {
+        const st = {
+          type: this.type,
+          offset: this.offset,
+          indent: this.indent,
+          source: this.source
+        };
+        return st;
+      }
+      *step() {
+        const top = this.peek(1);
+        if (this.type === "doc-end" && top?.type !== "doc-end") {
+          while (this.stack.length > 0)
+            yield* this.pop();
+          this.stack.push({
+            type: "doc-end",
+            offset: this.offset,
+            source: this.source
+          });
+          return;
+        }
+        if (!top)
+          return yield* this.stream();
+        switch (top.type) {
+          case "document":
+            return yield* this.document(top);
+          case "alias":
+          case "scalar":
+          case "single-quoted-scalar":
+          case "double-quoted-scalar":
+            return yield* this.scalar(top);
+          case "block-scalar":
+            return yield* this.blockScalar(top);
+          case "block-map":
+            return yield* this.blockMap(top);
+          case "block-seq":
+            return yield* this.blockSequence(top);
+          case "flow-collection":
+            return yield* this.flowCollection(top);
+          case "doc-end":
+            return yield* this.documentEnd(top);
+        }
+        yield* this.pop();
+      }
+      peek(n2) {
+        return this.stack[this.stack.length - n2];
+      }
+      *pop(error) {
+        const token = error ?? this.stack.pop();
+        if (!token) {
+          const message = "Tried to pop an empty stack";
+          yield { type: "error", offset: this.offset, source: "", message };
+        } else if (this.stack.length === 0) {
+          yield token;
+        } else {
+          const top = this.peek(1);
+          if (token.type === "block-scalar") {
+            token.indent = "indent" in top ? top.indent : 0;
+          } else if (token.type === "flow-collection" && top.type === "document") {
+            token.indent = 0;
+          }
+          if (token.type === "flow-collection")
+            fixFlowSeqItems(token);
+          switch (top.type) {
+            case "document":
+              top.value = token;
+              break;
+            case "block-scalar":
+              top.props.push(token);
+              break;
+            case "block-map": {
+              const it = top.items[top.items.length - 1];
+              if (it.value) {
+                top.items.push({ start: [], key: token, sep: [] });
+                this.onKeyLine = true;
+                return;
+              } else if (it.sep) {
+                it.value = token;
+              } else {
+                Object.assign(it, { key: token, sep: [] });
+                this.onKeyLine = !it.explicitKey;
+                return;
+              }
+              break;
+            }
+            case "block-seq": {
+              const it = top.items[top.items.length - 1];
+              if (it.value)
+                top.items.push({ start: [], value: token });
+              else
+                it.value = token;
+              break;
+            }
+            case "flow-collection": {
+              const it = top.items[top.items.length - 1];
+              if (!it || it.value)
+                top.items.push({ start: [], key: token, sep: [] });
+              else if (it.sep)
+                it.value = token;
+              else
+                Object.assign(it, { key: token, sep: [] });
+              return;
+            }
+            /* istanbul ignore next should not happen */
+            default:
+              yield* this.pop();
+              yield* this.pop(token);
+          }
+          if ((top.type === "document" || top.type === "block-map" || top.type === "block-seq") && (token.type === "block-map" || token.type === "block-seq")) {
+            const last = token.items[token.items.length - 1];
+            if (last && !last.sep && !last.value && last.start.length > 0 && findNonEmptyIndex(last.start) === -1 && (token.indent === 0 || last.start.every((st) => st.type !== "comment" || st.indent < token.indent))) {
+              if (top.type === "document")
+                top.end = last.start;
+              else
+                top.items.push({ start: last.start });
+              token.items.splice(-1, 1);
+            }
+          }
+        }
+      }
+      *stream() {
+        switch (this.type) {
+          case "directive-line":
+            yield { type: "directive", offset: this.offset, source: this.source };
+            return;
+          case "byte-order-mark":
+          case "space":
+          case "comment":
+          case "newline":
+            yield this.sourceToken;
+            return;
+          case "doc-mode":
+          case "doc-start": {
+            const doc = {
+              type: "document",
+              offset: this.offset,
+              start: []
+            };
+            if (this.type === "doc-start")
+              doc.start.push(this.sourceToken);
+            this.stack.push(doc);
+            return;
+          }
+        }
+        yield {
+          type: "error",
+          offset: this.offset,
+          message: `Unexpected ${this.type} token in YAML stream`,
+          source: this.source
+        };
+      }
+      *document(doc) {
+        if (doc.value)
+          return yield* this.lineEnd(doc);
+        switch (this.type) {
+          case "doc-start": {
+            if (findNonEmptyIndex(doc.start) !== -1) {
+              yield* this.pop();
+              yield* this.step();
+            } else
+              doc.start.push(this.sourceToken);
+            return;
+          }
+          case "anchor":
+          case "tag":
+          case "space":
+          case "comment":
+          case "newline":
+            doc.start.push(this.sourceToken);
+            return;
+        }
+        const bv = this.startBlockValue(doc);
+        if (bv)
+          this.stack.push(bv);
+        else {
+          yield {
+            type: "error",
+            offset: this.offset,
+            message: `Unexpected ${this.type} token in YAML document`,
+            source: this.source
+          };
+        }
+      }
+      *scalar(scalar) {
+        if (this.type === "map-value-ind") {
+          const prev = getPrevProps(this.peek(2));
+          const start = getFirstKeyStartProps(prev);
+          let sep2;
+          if (scalar.end) {
+            sep2 = scalar.end;
+            sep2.push(this.sourceToken);
+            delete scalar.end;
+          } else
+            sep2 = [this.sourceToken];
+          const map5 = {
+            type: "block-map",
+            offset: scalar.offset,
+            indent: scalar.indent,
+            items: [{ start, key: scalar, sep: sep2 }]
+          };
+          this.onKeyLine = true;
+          this.stack[this.stack.length - 1] = map5;
+        } else
+          yield* this.lineEnd(scalar);
+      }
+      *blockScalar(scalar) {
+        switch (this.type) {
+          case "space":
+          case "comment":
+          case "newline":
+            scalar.props.push(this.sourceToken);
+            return;
+          case "scalar":
+            scalar.source = this.source;
+            this.atNewLine = true;
+            this.indent = 0;
+            if (this.onNewLine) {
+              let nl = this.source.indexOf("\n") + 1;
+              while (nl !== 0) {
+                this.onNewLine(this.offset + nl);
+                nl = this.source.indexOf("\n", nl) + 1;
+              }
+            }
+            yield* this.pop();
+            break;
+          /* istanbul ignore next should not happen */
+          default:
+            yield* this.pop();
+            yield* this.step();
+        }
+      }
+      *blockMap(map5) {
+        const it = map5.items[map5.items.length - 1];
+        switch (this.type) {
+          case "newline":
+            this.onKeyLine = false;
+            if (it.value) {
+              const end = "end" in it.value ? it.value.end : void 0;
+              const last = Array.isArray(end) ? end[end.length - 1] : void 0;
+              if (last?.type === "comment")
+                end?.push(this.sourceToken);
+              else
+                map5.items.push({ start: [this.sourceToken] });
+            } else if (it.sep) {
+              it.sep.push(this.sourceToken);
+            } else {
+              it.start.push(this.sourceToken);
+            }
+            return;
+          case "space":
+          case "comment":
+            if (it.value) {
+              map5.items.push({ start: [this.sourceToken] });
+            } else if (it.sep) {
+              it.sep.push(this.sourceToken);
+            } else {
+              if (this.atIndentedComment(it.start, map5.indent)) {
+                const prev = map5.items[map5.items.length - 2];
+                const end = prev?.value?.end;
+                if (Array.isArray(end)) {
+                  Array.prototype.push.apply(end, it.start);
+                  end.push(this.sourceToken);
+                  map5.items.pop();
+                  return;
+                }
+              }
+              it.start.push(this.sourceToken);
+            }
+            return;
+        }
+        if (this.indent >= map5.indent) {
+          const atMapIndent = !this.onKeyLine && this.indent === map5.indent;
+          const atNextItem = atMapIndent && (it.sep || it.explicitKey) && this.type !== "seq-item-ind";
+          let start = [];
+          if (atNextItem && it.sep && !it.value) {
+            const nl = [];
+            for (let i = 0; i < it.sep.length; ++i) {
+              const st = it.sep[i];
+              switch (st.type) {
+                case "newline":
+                  nl.push(i);
+                  break;
+                case "space":
+                  break;
+                case "comment":
+                  if (st.indent > map5.indent)
+                    nl.length = 0;
+                  break;
+                default:
+                  nl.length = 0;
+              }
+            }
+            if (nl.length >= 2)
+              start = it.sep.splice(nl[1]);
+          }
+          switch (this.type) {
+            case "anchor":
+            case "tag":
+              if (atNextItem || it.value) {
+                start.push(this.sourceToken);
+                map5.items.push({ start });
+                this.onKeyLine = true;
+              } else if (it.sep) {
+                it.sep.push(this.sourceToken);
+              } else {
+                it.start.push(this.sourceToken);
+              }
+              return;
+            case "explicit-key-ind":
+              if (!it.sep && !it.explicitKey) {
+                it.start.push(this.sourceToken);
+                it.explicitKey = true;
+              } else if (atNextItem || it.value) {
+                start.push(this.sourceToken);
+                map5.items.push({ start, explicitKey: true });
+              } else {
+                this.stack.push({
+                  type: "block-map",
+                  offset: this.offset,
+                  indent: this.indent,
+                  items: [{ start: [this.sourceToken], explicitKey: true }]
+                });
+              }
+              this.onKeyLine = true;
+              return;
+            case "map-value-ind":
+              if (it.explicitKey) {
+                if (!it.sep) {
+                  if (includesToken(it.start, "newline")) {
+                    Object.assign(it, { key: null, sep: [this.sourceToken] });
+                  } else {
+                    const start2 = getFirstKeyStartProps(it.start);
+                    this.stack.push({
+                      type: "block-map",
+                      offset: this.offset,
+                      indent: this.indent,
+                      items: [{ start: start2, key: null, sep: [this.sourceToken] }]
+                    });
+                  }
+                } else if (it.value) {
+                  map5.items.push({ start: [], key: null, sep: [this.sourceToken] });
+                } else if (includesToken(it.sep, "map-value-ind")) {
+                  this.stack.push({
+                    type: "block-map",
+                    offset: this.offset,
+                    indent: this.indent,
+                    items: [{ start, key: null, sep: [this.sourceToken] }]
+                  });
+                } else if (isFlowToken(it.key) && !includesToken(it.sep, "newline")) {
+                  const start2 = getFirstKeyStartProps(it.start);
+                  const key = it.key;
+                  const sep2 = it.sep;
+                  sep2.push(this.sourceToken);
+                  delete it.key;
+                  delete it.sep;
+                  this.stack.push({
+                    type: "block-map",
+                    offset: this.offset,
+                    indent: this.indent,
+                    items: [{ start: start2, key, sep: sep2 }]
+                  });
+                } else if (start.length > 0) {
+                  it.sep = it.sep.concat(start, this.sourceToken);
+                } else {
+                  it.sep.push(this.sourceToken);
+                }
+              } else {
+                if (!it.sep) {
+                  Object.assign(it, { key: null, sep: [this.sourceToken] });
+                } else if (it.value || atNextItem) {
+                  map5.items.push({ start, key: null, sep: [this.sourceToken] });
+                } else if (includesToken(it.sep, "map-value-ind")) {
+                  this.stack.push({
+                    type: "block-map",
+                    offset: this.offset,
+                    indent: this.indent,
+                    items: [{ start: [], key: null, sep: [this.sourceToken] }]
+                  });
+                } else {
+                  it.sep.push(this.sourceToken);
+                }
+              }
+              this.onKeyLine = true;
+              return;
+            case "alias":
+            case "scalar":
+            case "single-quoted-scalar":
+            case "double-quoted-scalar": {
+              const fs2 = this.flowScalar(this.type);
+              if (atNextItem || it.value) {
+                map5.items.push({ start, key: fs2, sep: [] });
+                this.onKeyLine = true;
+              } else if (it.sep) {
+                this.stack.push(fs2);
+              } else {
+                Object.assign(it, { key: fs2, sep: [] });
+                this.onKeyLine = true;
+              }
+              return;
+            }
+            default: {
+              const bv = this.startBlockValue(map5);
+              if (bv) {
+                if (bv.type === "block-seq") {
+                  if (!it.explicitKey && it.sep && !includesToken(it.sep, "newline")) {
+                    yield* this.pop({
+                      type: "error",
+                      offset: this.offset,
+                      message: "Unexpected block-seq-ind on same line with key",
+                      source: this.source
+                    });
+                    return;
+                  }
+                } else if (atMapIndent) {
+                  map5.items.push({ start });
+                }
+                this.stack.push(bv);
+                return;
+              }
+            }
+          }
+        }
+        yield* this.pop();
+        yield* this.step();
+      }
+      *blockSequence(seq2) {
+        const it = seq2.items[seq2.items.length - 1];
+        switch (this.type) {
+          case "newline":
+            if (it.value) {
+              const end = "end" in it.value ? it.value.end : void 0;
+              const last = Array.isArray(end) ? end[end.length - 1] : void 0;
+              if (last?.type === "comment")
+                end?.push(this.sourceToken);
+              else
+                seq2.items.push({ start: [this.sourceToken] });
+            } else
+              it.start.push(this.sourceToken);
+            return;
+          case "space":
+          case "comment":
+            if (it.value)
+              seq2.items.push({ start: [this.sourceToken] });
+            else {
+              if (this.atIndentedComment(it.start, seq2.indent)) {
+                const prev = seq2.items[seq2.items.length - 2];
+                const end = prev?.value?.end;
+                if (Array.isArray(end)) {
+                  Array.prototype.push.apply(end, it.start);
+                  end.push(this.sourceToken);
+                  seq2.items.pop();
+                  return;
+                }
+              }
+              it.start.push(this.sourceToken);
+            }
+            return;
+          case "anchor":
+          case "tag":
+            if (it.value || this.indent <= seq2.indent)
+              break;
+            it.start.push(this.sourceToken);
+            return;
+          case "seq-item-ind":
+            if (this.indent !== seq2.indent)
+              break;
+            if (it.value || includesToken(it.start, "seq-item-ind"))
+              seq2.items.push({ start: [this.sourceToken] });
+            else
+              it.start.push(this.sourceToken);
+            return;
+        }
+        if (this.indent > seq2.indent) {
+          const bv = this.startBlockValue(seq2);
+          if (bv) {
+            this.stack.push(bv);
+            return;
+          }
+        }
+        yield* this.pop();
+        yield* this.step();
+      }
+      *flowCollection(fc) {
+        const it = fc.items[fc.items.length - 1];
+        if (this.type === "flow-error-end") {
+          let top;
+          do {
+            yield* this.pop();
+            top = this.peek(1);
+          } while (top?.type === "flow-collection");
+        } else if (fc.end.length === 0) {
+          switch (this.type) {
+            case "comma":
+            case "explicit-key-ind":
+              if (!it || it.sep)
+                fc.items.push({ start: [this.sourceToken] });
+              else
+                it.start.push(this.sourceToken);
+              return;
+            case "map-value-ind":
+              if (!it || it.value)
+                fc.items.push({ start: [], key: null, sep: [this.sourceToken] });
+              else if (it.sep)
+                it.sep.push(this.sourceToken);
+              else
+                Object.assign(it, { key: null, sep: [this.sourceToken] });
+              return;
+            case "space":
+            case "comment":
+            case "newline":
+            case "anchor":
+            case "tag":
+              if (!it || it.value)
+                fc.items.push({ start: [this.sourceToken] });
+              else if (it.sep)
+                it.sep.push(this.sourceToken);
+              else
+                it.start.push(this.sourceToken);
+              return;
+            case "alias":
+            case "scalar":
+            case "single-quoted-scalar":
+            case "double-quoted-scalar": {
+              const fs2 = this.flowScalar(this.type);
+              if (!it || it.value)
+                fc.items.push({ start: [], key: fs2, sep: [] });
+              else if (it.sep)
+                this.stack.push(fs2);
+              else
+                Object.assign(it, { key: fs2, sep: [] });
+              return;
+            }
+            case "flow-map-end":
+            case "flow-seq-end":
+              fc.end.push(this.sourceToken);
+              return;
+          }
+          const bv = this.startBlockValue(fc);
+          if (bv)
+            this.stack.push(bv);
+          else {
+            yield* this.pop();
+            yield* this.step();
+          }
+        } else {
+          const parent = this.peek(2);
+          if (parent.type === "block-map" && (this.type === "map-value-ind" && parent.indent === fc.indent || this.type === "newline" && !parent.items[parent.items.length - 1].sep)) {
+            yield* this.pop();
+            yield* this.step();
+          } else if (this.type === "map-value-ind" && parent.type !== "flow-collection") {
+            const prev = getPrevProps(parent);
+            const start = getFirstKeyStartProps(prev);
+            fixFlowSeqItems(fc);
+            const sep2 = fc.end.splice(1, fc.end.length);
+            sep2.push(this.sourceToken);
+            const map5 = {
+              type: "block-map",
+              offset: fc.offset,
+              indent: fc.indent,
+              items: [{ start, key: fc, sep: sep2 }]
+            };
+            this.onKeyLine = true;
+            this.stack[this.stack.length - 1] = map5;
+          } else {
+            yield* this.lineEnd(fc);
+          }
+        }
+      }
+      flowScalar(type) {
+        if (this.onNewLine) {
+          let nl = this.source.indexOf("\n") + 1;
+          while (nl !== 0) {
+            this.onNewLine(this.offset + nl);
+            nl = this.source.indexOf("\n", nl) + 1;
+          }
+        }
+        return {
+          type,
+          offset: this.offset,
+          indent: this.indent,
+          source: this.source
+        };
+      }
+      startBlockValue(parent) {
+        switch (this.type) {
+          case "alias":
+          case "scalar":
+          case "single-quoted-scalar":
+          case "double-quoted-scalar":
+            return this.flowScalar(this.type);
+          case "block-scalar-header":
+            return {
+              type: "block-scalar",
+              offset: this.offset,
+              indent: this.indent,
+              props: [this.sourceToken],
+              source: ""
+            };
+          case "flow-map-start":
+          case "flow-seq-start":
+            return {
+              type: "flow-collection",
+              offset: this.offset,
+              indent: this.indent,
+              start: this.sourceToken,
+              items: [],
+              end: []
+            };
+          case "seq-item-ind":
+            return {
+              type: "block-seq",
+              offset: this.offset,
+              indent: this.indent,
+              items: [{ start: [this.sourceToken] }]
+            };
+          case "explicit-key-ind": {
+            this.onKeyLine = true;
+            const prev = getPrevProps(parent);
+            const start = getFirstKeyStartProps(prev);
+            start.push(this.sourceToken);
+            return {
+              type: "block-map",
+              offset: this.offset,
+              indent: this.indent,
+              items: [{ start, explicitKey: true }]
+            };
+          }
+          case "map-value-ind": {
+            this.onKeyLine = true;
+            const prev = getPrevProps(parent);
+            const start = getFirstKeyStartProps(prev);
+            return {
+              type: "block-map",
+              offset: this.offset,
+              indent: this.indent,
+              items: [{ start, key: null, sep: [this.sourceToken] }]
+            };
+          }
+        }
+        return null;
+      }
+      atIndentedComment(start, indent) {
+        if (this.type !== "comment")
+          return false;
+        if (this.indent <= indent)
+          return false;
+        return start.every((st) => st.type === "newline" || st.type === "space");
+      }
+      *documentEnd(docEnd) {
+        if (this.type !== "doc-mode") {
+          if (docEnd.end)
+            docEnd.end.push(this.sourceToken);
+          else
+            docEnd.end = [this.sourceToken];
+          if (this.type === "newline")
+            yield* this.pop();
+        }
+      }
+      *lineEnd(token) {
+        switch (this.type) {
+          case "comma":
+          case "doc-start":
+          case "doc-end":
+          case "flow-seq-end":
+          case "flow-map-end":
+          case "map-value-ind":
+            yield* this.pop();
+            yield* this.step();
+            break;
+          case "newline":
+            this.onKeyLine = false;
+          // fallthrough
+          case "space":
+          case "comment":
+          default:
+            if (token.end)
+              token.end.push(this.sourceToken);
+            else
+              token.end = [this.sourceToken];
+            if (this.type === "newline")
+              yield* this.pop();
+        }
+      }
+    };
+  }
+});
+
+// node_modules/yaml/browser/dist/public-api.js
+function parseOptions(options) {
+  const prettyErrors = options.prettyErrors !== false;
+  const lineCounter = options.lineCounter || prettyErrors && new LineCounter() || null;
+  return { lineCounter, prettyErrors };
+}
+function parseAllDocuments(source, options = {}) {
+  const { lineCounter, prettyErrors } = parseOptions(options);
+  const parser = new Parser(lineCounter?.addNewLine);
+  const composer = new Composer(options);
+  const docs = Array.from(composer.compose(parser.parse(source)));
+  if (prettyErrors && lineCounter)
+    for (const doc of docs) {
+      doc.errors.forEach(prettifyError(source, lineCounter));
+      doc.warnings.forEach(prettifyError(source, lineCounter));
+    }
+  if (docs.length > 0)
+    return docs;
+  return Object.assign([], { empty: true }, composer.streamInfo());
+}
+function parseDocument(source, options = {}) {
+  const { lineCounter, prettyErrors } = parseOptions(options);
+  const parser = new Parser(lineCounter?.addNewLine);
+  const composer = new Composer(options);
+  let doc = null;
+  for (const _doc of composer.compose(parser.parse(source), true, source.length)) {
+    if (!doc)
+      doc = _doc;
+    else if (doc.options.logLevel !== "silent") {
+      doc.errors.push(new YAMLParseError(_doc.range.slice(0, 2), "MULTIPLE_DOCS", "Source contains multiple documents; please use YAML.parseAllDocuments()"));
+      break;
+    }
+  }
+  if (prettyErrors && lineCounter) {
+    doc.errors.forEach(prettifyError(source, lineCounter));
+    doc.warnings.forEach(prettifyError(source, lineCounter));
+  }
+  return doc;
+}
+function parse3(src, reviver, options) {
+  let _reviver = void 0;
+  if (typeof reviver === "function") {
+    _reviver = reviver;
+  } else if (options === void 0 && reviver && typeof reviver === "object") {
+    options = reviver;
+  }
+  const doc = parseDocument(src, options);
+  if (!doc)
+    return null;
+  doc.warnings.forEach((warning) => warn(doc.options.logLevel, warning));
+  if (doc.errors.length > 0) {
+    if (doc.options.logLevel !== "silent")
+      throw doc.errors[0];
+    else
+      doc.errors = [];
+  }
+  return doc.toJS(Object.assign({ reviver: _reviver }, options));
+}
+function stringify3(value2, replacer, options) {
+  let _replacer = null;
+  if (typeof replacer === "function" || Array.isArray(replacer)) {
+    _replacer = replacer;
+  } else if (options === void 0 && replacer) {
+    options = replacer;
+  }
+  if (typeof options === "string")
+    options = options.length;
+  if (typeof options === "number") {
+    const indent = Math.round(options);
+    options = indent < 1 ? void 0 : indent > 8 ? { indent: 8 } : { indent };
+  }
+  if (value2 === void 0) {
+    const { keepUndefined } = options ?? replacer ?? {};
+    if (!keepUndefined)
+      return void 0;
+  }
+  if (isDocument(value2) && !_replacer)
+    return value2.toString(options);
+  return new Document(value2, _replacer, options).toString(options);
+}
+var init_public_api = __esm({
+  "node_modules/yaml/browser/dist/public-api.js"() {
+    init_esbuild_buffer_shim();
+    init_composer();
+    init_Document();
+    init_errors();
+    init_log();
+    init_identity();
+    init_line_counter();
+    init_parser();
+  }
+});
+
+// node_modules/yaml/browser/dist/index.js
+var dist_exports = {};
+__export(dist_exports, {
+  Alias: () => Alias,
+  CST: () => cst_exports,
+  Composer: () => Composer,
+  Document: () => Document,
+  Lexer: () => Lexer,
+  LineCounter: () => LineCounter,
+  Pair: () => Pair,
+  Parser: () => Parser,
+  Scalar: () => Scalar,
+  Schema: () => Schema,
+  YAMLError: () => YAMLError,
+  YAMLMap: () => YAMLMap,
+  YAMLParseError: () => YAMLParseError,
+  YAMLSeq: () => YAMLSeq,
+  YAMLWarning: () => YAMLWarning,
+  isAlias: () => isAlias,
+  isCollection: () => isCollection,
+  isDocument: () => isDocument,
+  isMap: () => isMap,
+  isNode: () => isNode,
+  isPair: () => isPair,
+  isScalar: () => isScalar,
+  isSeq: () => isSeq,
+  parse: () => parse3,
+  parseAllDocuments: () => parseAllDocuments,
+  parseDocument: () => parseDocument,
+  stringify: () => stringify3,
+  visit: () => visit3,
+  visitAsync: () => visitAsync
+});
+var init_dist = __esm({
+  "node_modules/yaml/browser/dist/index.js"() {
+    init_esbuild_buffer_shim();
+    init_composer();
+    init_Document();
+    init_Schema();
+    init_errors();
+    init_Alias();
+    init_identity();
+    init_Pair();
+    init_Scalar();
+    init_YAMLMap();
+    init_YAMLSeq();
+    init_cst();
+    init_lexer();
+    init_line_counter();
+    init_parser();
+    init_public_api();
+    init_visit();
+  }
+});
+
+// node_modules/yaml/browser/index.js
+var browser_exports = {};
+__export(browser_exports, {
+  Alias: () => Alias,
+  CST: () => cst_exports,
+  Composer: () => Composer,
+  Document: () => Document,
+  Lexer: () => Lexer,
+  LineCounter: () => LineCounter,
+  Pair: () => Pair,
+  Parser: () => Parser,
+  Scalar: () => Scalar,
+  Schema: () => Schema,
+  YAMLError: () => YAMLError,
+  YAMLMap: () => YAMLMap,
+  YAMLParseError: () => YAMLParseError,
+  YAMLSeq: () => YAMLSeq,
+  YAMLWarning: () => YAMLWarning,
+  default: () => browser_default,
+  isAlias: () => isAlias,
+  isCollection: () => isCollection,
+  isDocument: () => isDocument,
+  isMap: () => isMap,
+  isNode: () => isNode,
+  isPair: () => isPair,
+  isScalar: () => isScalar,
+  isSeq: () => isSeq,
+  parse: () => parse3,
+  parseAllDocuments: () => parseAllDocuments,
+  parseDocument: () => parseDocument,
+  stringify: () => stringify3,
+  visit: () => visit3,
+  visitAsync: () => visitAsync
+});
+var browser_default;
+var init_browser = __esm({
+  "node_modules/yaml/browser/index.js"() {
+    init_esbuild_buffer_shim();
+    init_dist();
+    init_dist();
+    browser_default = dist_exports;
   }
 });
 
@@ -31494,7 +38978,7 @@ var require_localforage = __commonJS({
         var DETECT_BLOB_SUPPORT_STORE = "local-forage-detect-blob-support";
         var supportsBlobs = void 0;
         var dbContexts = {};
-        var toString4 = Object.prototype.toString;
+        var toString2 = Object.prototype.toString;
         var READ_ONLY = "readonly";
         var READ_WRITE = "readwrite";
         function _binStringToArrayBuffer(bin) {
@@ -31875,7 +39359,7 @@ var require_localforage = __commonJS({
             var dbInfo;
             self2.ready().then(function() {
               dbInfo = self2._dbInfo;
-              if (toString4.call(value2) === "[object Blob]") {
+              if (toString2.call(value2) === "[object Blob]") {
                 return _checkBlobSupport(dbInfo.db).then(function(blobSupport) {
                   if (blobSupport) {
                     return value2;
@@ -32238,8 +39722,8 @@ var require_localforage = __commonJS({
               bufferLength--;
             }
           }
-          var buffer = new ArrayBuffer(bufferLength);
-          var bytes = new Uint8Array(buffer);
+          var buffer2 = new ArrayBuffer(bufferLength);
+          var bytes = new Uint8Array(buffer2);
           for (i = 0; i < len; i += 4) {
             encoded1 = BASE_CHARS.indexOf(serializedString[i]);
             encoded2 = BASE_CHARS.indexOf(serializedString[i + 1]);
@@ -32249,10 +39733,10 @@ var require_localforage = __commonJS({
             bytes[p++] = (encoded2 & 15) << 4 | encoded3 >> 2;
             bytes[p++] = (encoded3 & 3) << 6 | encoded4 & 63;
           }
-          return buffer;
+          return buffer2;
         }
-        function bufferToString(buffer) {
-          var bytes = new Uint8Array(buffer);
+        function bufferToString(buffer2) {
+          var bytes = new Uint8Array(buffer2);
           var base64String = "";
           var i;
           for (i = 0; i < bytes.length; i += 3) {
@@ -32274,13 +39758,13 @@ var require_localforage = __commonJS({
             valueType = toString$1.call(value2);
           }
           if (value2 && (valueType === "[object ArrayBuffer]" || value2.buffer && toString$1.call(value2.buffer) === "[object ArrayBuffer]")) {
-            var buffer;
+            var buffer2;
             var marker = SERIALIZED_MARKER;
             if (value2 instanceof ArrayBuffer) {
-              buffer = value2;
+              buffer2 = value2;
               marker += TYPE_ARRAYBUFFER;
             } else {
-              buffer = value2.buffer;
+              buffer2 = value2.buffer;
               if (valueType === "[object Int8Array]") {
                 marker += TYPE_INT8ARRAY;
               } else if (valueType === "[object Uint8Array]") {
@@ -32303,7 +39787,7 @@ var require_localforage = __commonJS({
                 callback(new Error("Failed to get type for BinaryArray"));
               }
             }
-            callback(marker + bufferToString(buffer));
+            callback(marker + bufferToString(buffer2));
           } else if (valueType === "[object Blob]") {
             var fileReader = new FileReader();
             fileReader.onload = function() {
@@ -32332,30 +39816,30 @@ var require_localforage = __commonJS({
             blobType = matcher[1];
             serializedString = serializedString.substring(matcher[0].length);
           }
-          var buffer = stringToBuffer(serializedString);
+          var buffer2 = stringToBuffer(serializedString);
           switch (type) {
             case TYPE_ARRAYBUFFER:
-              return buffer;
+              return buffer2;
             case TYPE_BLOB:
-              return createBlob([buffer], { type: blobType });
+              return createBlob([buffer2], { type: blobType });
             case TYPE_INT8ARRAY:
-              return new Int8Array(buffer);
+              return new Int8Array(buffer2);
             case TYPE_UINT8ARRAY:
-              return new Uint8Array(buffer);
+              return new Uint8Array(buffer2);
             case TYPE_UINT8CLAMPEDARRAY:
-              return new Uint8ClampedArray(buffer);
+              return new Uint8ClampedArray(buffer2);
             case TYPE_INT16ARRAY:
-              return new Int16Array(buffer);
+              return new Int16Array(buffer2);
             case TYPE_UINT16ARRAY:
-              return new Uint16Array(buffer);
+              return new Uint16Array(buffer2);
             case TYPE_INT32ARRAY:
-              return new Int32Array(buffer);
+              return new Int32Array(buffer2);
             case TYPE_UINT32ARRAY:
-              return new Uint32Array(buffer);
+              return new Uint32Array(buffer2);
             case TYPE_FLOAT32ARRAY:
-              return new Float32Array(buffer);
+              return new Float32Array(buffer2);
             case TYPE_FLOAT64ARRAY:
-              return new Float64Array(buffer);
+              return new Float64Array(buffer2);
             default:
               throw new Error("Unkown type: " + type);
           }
@@ -32919,7 +40403,7 @@ var require_localforage = __commonJS({
         var sameValue = function sameValue2(x, y) {
           return x === y || typeof x === "number" && typeof y === "number" && isNaN(x) && isNaN(y);
         };
-        var includes2 = function includes3(array, searchElement) {
+        var includes = function includes2(array, searchElement) {
           var len = array.length;
           var i = 0;
           while (i < len) {
@@ -33037,7 +40521,7 @@ var require_localforage = __commonJS({
                 var driverMethods = LibraryMethods.concat("_initStorage");
                 for (var i = 0, len = driverMethods.length; i < len; i++) {
                   var driverMethodName = driverMethods[i];
-                  var isRequired = !includes2(OptionalDriverMethods, driverMethodName);
+                  var isRequired = !includes(OptionalDriverMethods, driverMethodName);
                   if ((isRequired || driverObject[driverMethodName]) && typeof driverObject[driverMethodName] !== "function") {
                     reject(complianceError);
                     return;
@@ -33202,23 +40686,23 @@ var generateSyncerSnapshot_exports = {};
 __export(generateSyncerSnapshot_exports, {
   generateSyncerSnapshot: () => generateSyncerSnapshot
 });
-var import_obsidian25, import_promises, SNAPSHOT_PATH, generateSyncerSnapshot;
+var import_obsidian31, import_promises, SNAPSHOT_PATH, generateSyncerSnapshot;
 var init_generateSyncerSnapshot = __esm({
   "src/test/snapshot/generateSyncerSnapshot.ts"() {
     "use strict";
     init_esbuild_buffer_shim();
-    import_obsidian25 = require("obsidian");
+    import_obsidian31 = require("obsidian");
     import_promises = __toESM(require("fs/promises"));
     SNAPSHOT_PATH = "src/test/snapshot/snapshot.md";
     generateSyncerSnapshot = async (settings, publisher) => {
       const devPluginPath = settings.devPluginPath;
       if (!devPluginPath) {
-        new import_obsidian25.Notice("devPluginPath missing, run generateSyncerSettings.mjs");
+        new import_obsidian31.Notice("devPluginPath missing, run generateSyncerSettings.mjs");
         return;
       }
       const marked = await publisher.getFilesMarkedForPublishing();
       let fileString = "IMAGES: \n";
-      fileString += marked.blobs.map((path) => `${path}
+      fileString += marked.blobs.map((path2) => `${path2}
 `);
       const assetPaths = /* @__PURE__ */ new Set();
       for (const file of marked.notes) {
@@ -33230,16 +40714,16 @@ var init_generateSyncerSnapshot = __esm({
         assets.blobs.map((blob) => assetPaths.add(blob.path));
         fileString += `${content3}
 `;
-        fileString += Array.from(assetPaths).map((path) => `${path}
+        fileString += Array.from(assetPaths).map((path2) => `${path2}
 `);
       }
       fileString += "==========\n";
       const fullSnapshotPath = `${devPluginPath}/${SNAPSHOT_PATH}`;
-      if (import_obsidian25.Platform.isDesktop) {
+      if (import_obsidian31.Platform.isDesktop) {
         await import_promises.default.writeFile(fullSnapshotPath, fileString);
       }
-      new import_obsidian25.Notice(`Snapshot written to ${fullSnapshotPath}`);
-      new import_obsidian25.Notice(`Check snapshot to make sure nothing has accidentally changed`);
+      new import_obsidian31.Notice(`Snapshot written to ${fullSnapshotPath}`);
+      new import_obsidian31.Notice(`Check snapshot to make sure nothing has accidentally changed`);
     };
   }
 });
@@ -33251,18 +40735,18 @@ __export(main_exports, {
 });
 module.exports = __toCommonJS(main_exports);
 init_esbuild_buffer_shim();
-var import_obsidian26 = require("obsidian");
+var import_obsidian32 = require("obsidian");
 
 // src/publisher/Publisher.ts
 init_esbuild_buffer_shim();
 
 // src/publishFile/Validator.ts
 init_esbuild_buffer_shim();
-var import_obsidian = require("obsidian");
+var import_obsidian2 = require("obsidian");
 var hasPublishFlag = (flag, frontMatter, override = false) => !!frontMatter?.[flag] || override;
 function isPublishFrontmatterValid(flag, frontMatter, override = false) {
   if (!hasPublishFlag(flag, frontMatter, override)) {
-    new import_obsidian.Notice(
+    new import_obsidian2.Notice(
       "Quartz Syncer: Note does not have the publish: true set. Please add this and try again."
     );
     return false;
@@ -33272,21 +40756,21 @@ function isPublishFrontmatterValid(flag, frontMatter, override = false) {
 
 // src/compiler/SyncerPageCompiler.ts
 init_esbuild_buffer_shim();
-var import_obsidian8 = require("obsidian");
+var import_obsidian9 = require("obsidian");
 
 // src/utils/utils.ts
 init_esbuild_buffer_shim();
 var import_slugify = __toESM(require_slugify());
 var import_sha1 = __toESM(require_sha1());
-var import_obsidian2 = require("obsidian");
+var import_obsidian3 = require("obsidian");
 function generateBlobHash(content3) {
-  const byteLength2 = new TextEncoder().encode(content3).byteLength;
-  const header = `blob ${byteLength2}\0`;
+  const byteLength = new TextEncoder().encode(content3).byteLength;
+  const header = `blob ${byteLength}\0`;
   const gitBlob = header + content3;
   return (0, import_sha1.default)(gitBlob).toString();
 }
-function escapeRegExp(string3) {
-  return string3.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+function escapeRegExp(string4) {
+  return string4.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 function sanitizePermalink(permalink) {
   if (permalink.endsWith("/")) {
@@ -33333,7 +40817,7 @@ function renderPromise(div, selector, timeout = 5e3, interval = 500) {
     observer.observe(div, { childList: true, subtree: true });
     const timeoutTimer = setTimeout(() => {
       cleanUp();
-      reject(new import_obsidian2.Notice(`Timeout waiting for selector: ${selector}`));
+      reject(new import_obsidian3.Notice(`Timeout waiting for selector: ${selector}`));
     }, timeout);
   });
 }
@@ -33370,7 +40854,7 @@ function sanitizeQuery(query) {
 }
 function sanitizeHTMLToString(div, serializer) {
   const styleTags = div.querySelectorAll("style");
-  const sanitizedHtml = (0, import_obsidian2.sanitizeHTMLToDom)(div.innerHTML);
+  const sanitizedHtml = (0, import_obsidian3.sanitizeHTMLToDom)(div.innerHTML);
   let container = document.createElement("div");
   container.appendChild(sanitizedHtml);
   removeUnwantedElements(container, "script, link, meta, title");
@@ -33406,7 +40890,7 @@ function sanitizeHTMLToString(div, serializer) {
   if (classes.length > 0 && Array.from(classes).some(
     (cls) => markdownableClasses.includes(cls)
   ) || markdownableTagNames.includes(container.tagName.toLowerCase())) {
-    const result = (0, import_obsidian2.htmlToMarkdown)(container) || "";
+    const result = (0, import_obsidian3.htmlToMarkdown)(container) || "";
     return cleanQueryResult(result);
   }
   styleTags.forEach((styleTag) => {
@@ -33842,18 +41326,18 @@ VFileMessage.prototype.source = void 0;
 // node_modules/vfile/lib/minpath.browser.js
 init_esbuild_buffer_shim();
 var minpath = { basename, dirname, extname, join, sep: "/" };
-function basename(path, extname2) {
+function basename(path2, extname2) {
   if (extname2 !== void 0 && typeof extname2 !== "string") {
     throw new TypeError('"ext" argument must be a string');
   }
-  assertPath(path);
+  assertPath(path2);
   let start = 0;
   let end = -1;
-  let index2 = path.length;
+  let index2 = path2.length;
   let seenNonSlash;
-  if (extname2 === void 0 || extname2.length === 0 || extname2.length > path.length) {
+  if (extname2 === void 0 || extname2.length === 0 || extname2.length > path2.length) {
     while (index2--) {
-      if (path.codePointAt(index2) === 47) {
+      if (path2.codePointAt(index2) === 47) {
         if (seenNonSlash) {
           start = index2 + 1;
           break;
@@ -33863,15 +41347,15 @@ function basename(path, extname2) {
         end = index2 + 1;
       }
     }
-    return end < 0 ? "" : path.slice(start, end);
+    return end < 0 ? "" : path2.slice(start, end);
   }
-  if (extname2 === path) {
+  if (extname2 === path2) {
     return "";
   }
   let firstNonSlashEnd = -1;
   let extnameIndex = extname2.length - 1;
   while (index2--) {
-    if (path.codePointAt(index2) === 47) {
+    if (path2.codePointAt(index2) === 47) {
       if (seenNonSlash) {
         start = index2 + 1;
         break;
@@ -33882,7 +41366,7 @@ function basename(path, extname2) {
         firstNonSlashEnd = index2 + 1;
       }
       if (extnameIndex > -1) {
-        if (path.codePointAt(index2) === extname2.codePointAt(extnameIndex--)) {
+        if (path2.codePointAt(index2) === extname2.codePointAt(extnameIndex--)) {
           if (extnameIndex < 0) {
             end = index2;
           }
@@ -33896,20 +41380,20 @@ function basename(path, extname2) {
   if (start === end) {
     end = firstNonSlashEnd;
   } else if (end < 0) {
-    end = path.length;
+    end = path2.length;
   }
-  return path.slice(start, end);
+  return path2.slice(start, end);
 }
-function dirname(path) {
-  assertPath(path);
-  if (path.length === 0) {
+function dirname(path2) {
+  assertPath(path2);
+  if (path2.length === 0) {
     return ".";
   }
   let end = -1;
-  let index2 = path.length;
+  let index2 = path2.length;
   let unmatchedSlash;
   while (--index2) {
-    if (path.codePointAt(index2) === 47) {
+    if (path2.codePointAt(index2) === 47) {
       if (unmatchedSlash) {
         end = index2;
         break;
@@ -33918,18 +41402,18 @@ function dirname(path) {
       unmatchedSlash = true;
     }
   }
-  return end < 0 ? path.codePointAt(0) === 47 ? "/" : "." : end === 1 && path.codePointAt(0) === 47 ? "//" : path.slice(0, end);
+  return end < 0 ? path2.codePointAt(0) === 47 ? "/" : "." : end === 1 && path2.codePointAt(0) === 47 ? "//" : path2.slice(0, end);
 }
-function extname(path) {
-  assertPath(path);
-  let index2 = path.length;
+function extname(path2) {
+  assertPath(path2);
+  let index2 = path2.length;
   let end = -1;
   let startPart = 0;
   let startDot = -1;
   let preDotState = 0;
   let unmatchedSlash;
   while (index2--) {
-    const code2 = path.codePointAt(index2);
+    const code2 = path2.codePointAt(index2);
     if (code2 === 47) {
       if (unmatchedSlash) {
         startPart = index2 + 1;
@@ -33956,7 +41440,7 @@ function extname(path) {
   preDotState === 1 && startDot === end - 1 && startDot === startPart + 1) {
     return "";
   }
-  return path.slice(startDot, end);
+  return path2.slice(startDot, end);
 }
 function join(...segments) {
   let index2 = -1;
@@ -33969,19 +41453,19 @@ function join(...segments) {
   }
   return joined === void 0 ? "." : normalize(joined);
 }
-function normalize(path) {
-  assertPath(path);
-  const absolute = path.codePointAt(0) === 47;
-  let value2 = normalizeString(path, !absolute);
+function normalize(path2) {
+  assertPath(path2);
+  const absolute = path2.codePointAt(0) === 47;
+  let value2 = normalizeString(path2, !absolute);
   if (value2.length === 0 && !absolute) {
     value2 = ".";
   }
-  if (value2.length > 0 && path.codePointAt(path.length - 1) === 47) {
+  if (value2.length > 0 && path2.codePointAt(path2.length - 1) === 47) {
     value2 += "/";
   }
   return absolute ? "/" + value2 : value2;
 }
-function normalizeString(path, allowAboveRoot) {
+function normalizeString(path2, allowAboveRoot) {
   let result = "";
   let lastSegmentLength = 0;
   let lastSlash = -1;
@@ -33989,9 +41473,9 @@ function normalizeString(path, allowAboveRoot) {
   let index2 = -1;
   let code2;
   let lastSlashIndex;
-  while (++index2 <= path.length) {
-    if (index2 < path.length) {
-      code2 = path.codePointAt(index2);
+  while (++index2 <= path2.length) {
+    if (index2 < path2.length) {
+      code2 = path2.codePointAt(index2);
     } else if (code2 === 47) {
       break;
     } else {
@@ -34029,9 +41513,9 @@ function normalizeString(path, allowAboveRoot) {
         }
       } else {
         if (result.length > 0) {
-          result += "/" + path.slice(lastSlash + 1, index2);
+          result += "/" + path2.slice(lastSlash + 1, index2);
         } else {
-          result = path.slice(lastSlash + 1, index2);
+          result = path2.slice(lastSlash + 1, index2);
         }
         lastSegmentLength = index2 - lastSlash - 1;
       }
@@ -34045,10 +41529,10 @@ function normalizeString(path, allowAboveRoot) {
   }
   return result;
 }
-function assertPath(path) {
-  if (typeof path !== "string") {
+function assertPath(path2) {
+  if (typeof path2 !== "string") {
     throw new TypeError(
-      "Path must be a string. Received " + JSON.stringify(path)
+      "Path must be a string. Received " + JSON.stringify(path2)
     );
   }
 }
@@ -34073,22 +41557,22 @@ function isUrl(fileUrlOrPath) {
 }
 
 // node_modules/vfile/lib/minurl.browser.js
-function urlToPath(path) {
-  if (typeof path === "string") {
-    path = new URL(path);
-  } else if (!isUrl(path)) {
+function urlToPath(path2) {
+  if (typeof path2 === "string") {
+    path2 = new URL(path2);
+  } else if (!isUrl(path2)) {
     const error = new TypeError(
-      'The "path" argument must be of type string or an instance of URL. Received `' + path + "`"
+      'The "path" argument must be of type string or an instance of URL. Received `' + path2 + "`"
     );
     error.code = "ERR_INVALID_ARG_TYPE";
     throw error;
   }
-  if (path.protocol !== "file:") {
+  if (path2.protocol !== "file:") {
     const error = new TypeError("The URL must be of scheme file");
     error.code = "ERR_INVALID_URL_SCHEME";
     throw error;
   }
-  return getPathFromURLPosix(path);
+  return getPathFromURLPosix(path2);
 }
 function getPathFromURLPosix(url) {
   if (url.hostname !== "") {
@@ -34287,13 +41771,13 @@ var VFile = class {
    * @returns {undefined}
    *   Nothing.
    */
-  set path(path) {
-    if (isUrl(path)) {
-      path = urlToPath(path);
+  set path(path2) {
+    if (isUrl(path2)) {
+      path2 = urlToPath(path2);
     }
-    assertNonEmpty(path, "path");
-    if (this.path !== path) {
-      this.history.push(path);
+    assertNonEmpty(path2, "path");
+    if (this.path !== path2) {
+      this.history.push(path2);
     }
   }
   /**
@@ -34560,8 +42044,8 @@ function assertNonEmpty(part, name) {
     throw new Error("`" + name + "` cannot be empty");
   }
 }
-function assertPath2(path, name) {
-  if (!path) {
+function assertPath2(path2, name) {
+  if (!path2) {
     throw new Error("Setting `" + name + "` requires `path` to be set too");
   }
 }
@@ -35255,7 +42739,7 @@ init_esbuild_buffer_shim();
 // node_modules/mdast-util-to-string/lib/index.js
 init_esbuild_buffer_shim();
 var emptyOptions = {};
-function toString3(value2, options) {
+function toString(value2, options) {
   const settings = options || emptyOptions;
   const includeImageAlt = typeof settings.includeImageAlt === "boolean" ? settings.includeImageAlt : true;
   const includeHtml = typeof settings.includeHtml === "boolean" ? settings.includeHtml : true;
@@ -36096,14 +43580,14 @@ function tokenizeCharacterReference(effects, ok4, nok) {
       effects.enter("characterReferenceMarkerNumeric");
       effects.consume(code2);
       effects.exit("characterReferenceMarkerNumeric");
-      return numeric;
+      return numeric2;
     }
     effects.enter("characterReferenceValue");
     max = 31;
     test = asciiAlphanumeric;
     return value2(code2);
   }
-  function numeric(code2) {
+  function numeric2(code2) {
     if (code2 === 88 || code2 === 120) {
       effects.enter("characterReferenceMarkerHexadecimal");
       effects.consume(code2);
@@ -36842,10 +44326,10 @@ function subcontent(events, eventIndex) {
   }
   index2 = breaks.length;
   while (index2--) {
-    const slice2 = childEvents.slice(breaks[index2], breaks[index2 + 1]);
+    const slice = childEvents.slice(breaks[index2], breaks[index2 + 1]);
     const start2 = startPositions.pop();
-    jumps.push([start2, start2 + slice2.length - 1]);
-    events.splice(start2, 2, slice2);
+    jumps.push([start2, start2 + slice.length - 1]);
+    events.splice(start2, 2, slice);
   }
   jumps.reverse();
   index2 = -1;
@@ -37137,9 +44621,9 @@ function factoryTitle(effects, ok4, nok, type, markerType, stringType) {
       return atBreak(code2);
     }
     effects.consume(code2);
-    return code2 === 92 ? escape3 : inside;
+    return code2 === 92 ? escape4 : inside;
   }
-  function escape3(code2) {
+  function escape4(code2) {
     if (code2 === marker || code2 === 92) {
       effects.consume(code2);
       return inside;
@@ -37472,7 +44956,7 @@ function tokenizeHtmlFlow(effects, ok4, nok) {
   const self2 = this;
   let marker;
   let closingTag;
-  let buffer;
+  let buffer2;
   let index2;
   let markerB;
   return start;
@@ -37502,7 +44986,7 @@ function tokenizeHtmlFlow(effects, ok4, nok) {
     }
     if (asciiAlpha(code2)) {
       effects.consume(code2);
-      buffer = String.fromCharCode(code2);
+      buffer2 = String.fromCharCode(code2);
       return tagName;
     }
     return nok(code2);
@@ -37547,7 +45031,7 @@ function tokenizeHtmlFlow(effects, ok4, nok) {
   function tagCloseStart(code2) {
     if (asciiAlpha(code2)) {
       effects.consume(code2);
-      buffer = String.fromCharCode(code2);
+      buffer2 = String.fromCharCode(code2);
       return tagName;
     }
     return nok(code2);
@@ -37555,12 +45039,12 @@ function tokenizeHtmlFlow(effects, ok4, nok) {
   function tagName(code2) {
     if (code2 === null || code2 === 47 || code2 === 62 || markdownLineEndingOrSpace(code2)) {
       const slash = code2 === 47;
-      const name = buffer.toLowerCase();
+      const name = buffer2.toLowerCase();
       if (!slash && !closingTag && htmlRawNames.includes(name)) {
         marker = 1;
         return self2.interrupt ? ok4(code2) : continuation(code2);
       }
-      if (htmlBlockNames.includes(buffer.toLowerCase())) {
+      if (htmlBlockNames.includes(buffer2.toLowerCase())) {
         marker = 6;
         if (slash) {
           effects.consume(code2);
@@ -37573,7 +45057,7 @@ function tokenizeHtmlFlow(effects, ok4, nok) {
     }
     if (code2 === 45 || asciiAlphanumeric(code2)) {
       effects.consume(code2);
-      buffer += String.fromCharCode(code2);
+      buffer2 += String.fromCharCode(code2);
       return tagName;
     }
     return nok(code2);
@@ -37740,23 +45224,23 @@ function tokenizeHtmlFlow(effects, ok4, nok) {
   function continuationRawTagOpen(code2) {
     if (code2 === 47) {
       effects.consume(code2);
-      buffer = "";
+      buffer2 = "";
       return continuationRawEndTag;
     }
     return continuation(code2);
   }
   function continuationRawEndTag(code2) {
     if (code2 === 62) {
-      const name = buffer.toLowerCase();
+      const name = buffer2.toLowerCase();
       if (htmlRawNames.includes(name)) {
         effects.consume(code2);
         return continuationClose;
       }
       return continuation(code2);
     }
-    if (asciiAlpha(code2) && buffer.length < 8) {
+    if (asciiAlpha(code2) && buffer2.length < 8) {
       effects.consume(code2);
-      buffer += String.fromCharCode(code2);
+      buffer2 += String.fromCharCode(code2);
       return continuationRawEndTag;
     }
     return continuation(code2);
@@ -38945,13 +46429,13 @@ var disable = {
 
 // node_modules/micromark/lib/create-tokenizer.js
 init_esbuild_buffer_shim();
-function createTokenizer(parser, initialize, from2) {
+function createTokenizer(parser, initialize, from) {
   let point3 = {
     _bufferIndex: -1,
     _index: 0,
-    line: from2 && from2.line || 1,
-    column: from2 && from2.column || 1,
-    offset: from2 && from2.offset || 0
+    line: from && from.line || 1,
+    column: from && from.column || 1,
+    offset: from && from.offset || 0
   };
   const columnStart = {};
   const resolveAllConstructs = [];
@@ -38978,7 +46462,7 @@ function createTokenizer(parser, initialize, from2) {
     previous: null,
     sliceSerialize,
     sliceStream,
-    write: write3
+    write
   };
   let state = initialize.tokenize.call(context, effects);
   let expectedCode;
@@ -38986,8 +46470,8 @@ function createTokenizer(parser, initialize, from2) {
     resolveAllConstructs.push(initialize);
   }
   return context;
-  function write3(slice2) {
-    chunks = push(chunks, slice2);
+  function write(slice) {
+    chunks = push(chunks, slice);
     main();
     if (chunks[chunks.length - 1] !== null) {
       return [];
@@ -39106,11 +46590,11 @@ function createTokenizer(parser, initialize, from2) {
           constructs2
         ])
       ) : handleMapOfConstructs(constructs2);
-      function handleMapOfConstructs(map4) {
+      function handleMapOfConstructs(map5) {
         return start;
         function start(code2) {
-          const left = code2 !== null && map4[code2];
-          const all2 = code2 !== null && map4.null;
+          const left = code2 !== null && map5[code2];
+          const all2 = code2 !== null && map5.null;
           const list4 = [
             // To do: add more extension tests.
             /* c8 ignore next 2 */
@@ -39165,12 +46649,12 @@ function createTokenizer(parser, initialize, from2) {
       }
     }
   }
-  function addResult(construct, from3) {
+  function addResult(construct, from2) {
     if (construct.resolveAll && !resolveAllConstructs.includes(construct)) {
       resolveAllConstructs.push(construct);
     }
     if (construct.resolve) {
-      splice(context.events, from3, context.events.length - from3, construct.resolve(context.events.slice(from3), context));
+      splice(context.events, from2, context.events.length - from2, construct.resolve(context.events.slice(from2), context));
     }
     if (construct.resolveTo) {
       context.events = construct.resolveTo(context.events, context);
@@ -39287,8 +46771,8 @@ function parse(options) {
   return parser;
   function create2(initial) {
     return creator;
-    function creator(from2) {
-      return createTokenizer(parser, initial, from2);
+    function creator(from) {
+      return createTokenizer(parser, initial, from);
     }
   }
 }
@@ -39306,20 +46790,20 @@ init_esbuild_buffer_shim();
 var search = /[\0\t\n\r]/g;
 function preprocess() {
   let column = 1;
-  let buffer = "";
+  let buffer2 = "";
   let start = true;
   let atCarriageReturn;
   return preprocessor;
   function preprocessor(value2, encoding, end) {
     const chunks = [];
-    let match2;
+    let match3;
     let next;
     let startPosition;
     let endPosition;
     let code2;
-    value2 = buffer + (typeof value2 === "string" ? value2.toString() : new TextDecoder(encoding || void 0).decode(value2));
+    value2 = buffer2 + (typeof value2 === "string" ? value2.toString() : new TextDecoder(encoding || void 0).decode(value2));
     startPosition = 0;
-    buffer = "";
+    buffer2 = "";
     if (start) {
       if (value2.charCodeAt(0) === 65279) {
         startPosition++;
@@ -39328,11 +46812,11 @@ function preprocess() {
     }
     while (startPosition < value2.length) {
       search.lastIndex = startPosition;
-      match2 = search.exec(value2);
-      endPosition = match2 && match2.index !== void 0 ? match2.index : value2.length;
+      match3 = search.exec(value2);
+      endPosition = match3 && match3.index !== void 0 ? match3.index : value2.length;
       code2 = value2.charCodeAt(endPosition);
-      if (!match2) {
-        buffer = value2.slice(startPosition);
+      if (!match3) {
+        buffer2 = value2.slice(startPosition);
         break;
       }
       if (code2 === 10 && startPosition === endPosition && atCarriageReturn) {
@@ -39374,7 +46858,7 @@ function preprocess() {
     }
     if (end) {
       if (atCarriageReturn) chunks.push(-5);
-      if (buffer) chunks.push(buffer);
+      if (buffer2) chunks.push(buffer2);
       chunks.push(null);
     }
     return chunks;
@@ -39422,26 +46906,26 @@ function compiler(options) {
       characterEscape: onenterdata,
       characterReference: onenterdata,
       codeFenced: opener2(codeFlow),
-      codeFencedFenceInfo: buffer,
-      codeFencedFenceMeta: buffer,
-      codeIndented: opener2(codeFlow, buffer),
-      codeText: opener2(codeText2, buffer),
+      codeFencedFenceInfo: buffer2,
+      codeFencedFenceMeta: buffer2,
+      codeIndented: opener2(codeFlow, buffer2),
+      codeText: opener2(codeText2, buffer2),
       codeTextData: onenterdata,
       data: onenterdata,
       codeFlowValue: onenterdata,
       definition: opener2(definition3),
-      definitionDestinationString: buffer,
-      definitionLabelString: buffer,
-      definitionTitleString: buffer,
+      definitionDestinationString: buffer2,
+      definitionLabelString: buffer2,
+      definitionTitleString: buffer2,
       emphasis: opener2(emphasis2),
       hardBreakEscape: opener2(hardBreak2),
       hardBreakTrailing: opener2(hardBreak2),
-      htmlFlow: opener2(html2, buffer),
+      htmlFlow: opener2(html2, buffer2),
       htmlFlowData: onenterdata,
-      htmlText: opener2(html2, buffer),
+      htmlText: opener2(html2, buffer2),
       htmlTextData: onenterdata,
       image: opener2(image2),
-      label: buffer,
+      label: buffer2,
       link: opener2(link2),
       listItem: opener2(listItem2),
       listItemValue: onenterlistitemvalue,
@@ -39449,9 +46933,9 @@ function compiler(options) {
       listUnordered: opener2(list4),
       paragraph: opener2(paragraph2),
       reference: onenterreference,
-      referenceString: buffer,
-      resourceDestinationString: buffer,
-      resourceTitleString: buffer,
+      referenceString: buffer2,
+      resourceDestinationString: buffer2,
+      resourceTitleString: buffer2,
       setextHeading: opener2(heading2),
       strong: opener2(strong2),
       thematicBreak: opener2(thematicBreak3)
@@ -39522,7 +47006,7 @@ function compiler(options) {
       config,
       enter,
       exit: exit2,
-      buffer,
+      buffer: buffer2,
       resume,
       data
     };
@@ -39666,7 +47150,7 @@ function compiler(options) {
       if (and) and.call(this, token);
     }
   }
-  function buffer() {
+  function buffer2() {
     this.stack.push({
       type: "fragment",
       children: []
@@ -39710,7 +47194,7 @@ function compiler(options) {
     node2.position.end = point2(token.end);
   }
   function resume() {
-    return toString3(this.stack.pop());
+    return toString(this.stack.pop());
   }
   function onenterlistordered() {
     this.data.expectingFirstListItemValue = true;
@@ -39861,10 +47345,10 @@ function compiler(options) {
     this.data.referenceType = void 0;
   }
   function onexitlabeltext(token) {
-    const string3 = this.sliceSerialize(token);
+    const string4 = this.sliceSerialize(token);
     const ancestor = this.stack[this.stack.length - 2];
-    ancestor.label = decodeString(string3);
-    ancestor.identifier = normalizeIdentifier(string3).toLowerCase();
+    ancestor.label = decodeString(string4);
+    ancestor.identifier = normalizeIdentifier(string4).toLowerCase();
   }
   function onexitlabel() {
     const fragment = this.stack[this.stack.length - 1];
@@ -40699,12 +48183,12 @@ function visitParents(tree, test, visitor, reverse) {
           typeof value2.name === "string" ? value2.name : void 0
         )
       );
-      Object.defineProperty(visit3, "name", {
+      Object.defineProperty(visit5, "name", {
         value: "node (" + color(node2.type + (name ? "<" + name + ">" : "")) + ")"
       });
     }
-    return visit3;
-    function visit3() {
+    return visit5;
+    function visit5() {
       let result = empty;
       let subresult;
       let offset2;
@@ -40779,7 +48263,7 @@ function formatHeadingAsSetext(node2, state) {
     }
   });
   return Boolean(
-    (!node2.depth || node2.depth < 3) && toString3(node2) && (state.options.setext || literalWithBreak)
+    (!node2.depth || node2.depth < 3) && toString(node2) && (state.options.setext || literalWithBreak)
   );
 }
 
@@ -40949,14 +48433,14 @@ function inlineCode(node2, _, state) {
   while (++index2 < state.unsafe.length) {
     const pattern = state.unsafe[index2];
     const expression = state.compilePattern(pattern);
-    let match2;
+    let match3;
     if (!pattern.atBreak) continue;
-    while (match2 = expression.exec(value2)) {
-      let position2 = match2.index;
+    while (match3 = expression.exec(value2)) {
+      let position2 = match3.index;
       if (value2.charCodeAt(position2) === 10 && value2.charCodeAt(position2 - 1) === 13) {
         position2--;
       }
-      value2 = value2.slice(0, position2) + " " + value2.slice(match2.index + 1);
+      value2 = value2.slice(0, position2) + " " + value2.slice(match3.index + 1);
     }
   }
   return sequence + value2 + sequence;
@@ -40971,7 +48455,7 @@ init_esbuild_buffer_shim();
 // node_modules/mdast-util-to-markdown/lib/util/format-link-as-autolink.js
 init_esbuild_buffer_shim();
 function formatLinkAsAutolink(node2, state) {
-  const raw = toString3(node2);
+  const raw = toString(node2);
   return Boolean(
     !state.options.resourceLink && // If there’s a url…
     node2.url && // And there’s a no title…
@@ -41236,11 +48720,11 @@ function listItem(node2, parent, state, info) {
   const exit2 = state.enter("listItem");
   const value2 = state.indentLines(
     state.containerFlow(node2, tracker.current()),
-    map4
+    map5
   );
   exit2();
   return value2;
-  function map4(line, index2, blank) {
+  function map5(line, index2, blank) {
     if (index2) {
       return (blank ? "" : " ".repeat(size)) + line;
     }
@@ -41696,21 +49180,21 @@ function between(left, right, parent, state) {
 // node_modules/mdast-util-to-markdown/lib/util/indent-lines.js
 init_esbuild_buffer_shim();
 var eol = /\r?\n|\r/g;
-function indentLines(value2, map4) {
+function indentLines(value2, map5) {
   const result = [];
   let start = 0;
   let line = 0;
-  let match2;
-  while (match2 = eol.exec(value2)) {
-    one2(value2.slice(start, match2.index));
-    result.push(match2[0]);
-    start = match2.index + match2[0].length;
+  let match3;
+  while (match3 = eol.exec(value2)) {
+    one2(value2.slice(start, match3.index));
+    result.push(match3[0]);
+    start = match3.index + match3[0].length;
     line++;
   }
   one2(value2.slice(start));
   return result.join("");
   function one2(value3) {
-    result.push(map4(value3, line, !value3));
+    result.push(map5(value3, line, !value3));
   }
 }
 
@@ -41728,11 +49212,11 @@ function safe(state, input, config) {
       continue;
     }
     const expression = state.compilePattern(pattern);
-    let match2;
-    while (match2 = expression.exec(value2)) {
+    let match3;
+    while (match3 = expression.exec(value2)) {
       const before = "before" in pattern || Boolean(pattern.atBreak);
       const after = "after" in pattern;
-      const position2 = match2.index + (before ? match2[1].length : 0);
+      const position2 = match3.index + (before ? match3[1].length : 0);
       if (positions.includes(position2)) {
         if (infos[position2].before && !before) {
           infos[position2].before = false;
@@ -41782,9 +49266,9 @@ function escapeBackslashes(value2, after) {
   const whole = value2 + after;
   let index2 = -1;
   let start = 0;
-  let match2;
-  while (match2 = expression.exec(whole)) {
-    positions.push(match2.index);
+  let match3;
+  while (match3 = expression.exec(whole)) {
+    positions.push(match3.index);
   }
   while (++index2 < positions.length) {
     if (start !== positions[index2]) {
@@ -42033,7 +49517,7 @@ function createConstruct(matter2) {
     tokenize: tokenizeClosingFence,
     partial: true
   };
-  let buffer;
+  let buffer2;
   let bufferIndex = 0;
   return {
     tokenize: tokenizeFrontmatter,
@@ -42049,9 +49533,9 @@ function createConstruct(matter2) {
         position2.column === 1 && // Normally, only allowed in first line.
         (position2.line === 1 || anywhere)
       ) {
-        buffer = fence(matter2, "open");
+        buffer2 = fence(matter2, "open");
         bufferIndex = 0;
-        if (code2 === buffer.charCodeAt(bufferIndex)) {
+        if (code2 === buffer2.charCodeAt(bufferIndex)) {
           effects.enter(frontmatterType);
           effects.enter(fenceType);
           effects.enter(sequenceType);
@@ -42061,7 +49545,7 @@ function createConstruct(matter2) {
       return nok(code2);
     }
     function openSequence(code2) {
-      if (bufferIndex === buffer.length) {
+      if (bufferIndex === buffer2.length) {
         effects.exit(sequenceType);
         if (markdownSpace(code2)) {
           effects.enter("whitespace");
@@ -42069,7 +49553,7 @@ function createConstruct(matter2) {
         }
         return openAfter(code2);
       }
-      if (code2 === buffer.charCodeAt(bufferIndex++)) {
+      if (code2 === buffer2.charCodeAt(bufferIndex++)) {
         effects.consume(code2);
         return openSequence;
       }
@@ -42089,7 +49573,7 @@ function createConstruct(matter2) {
         effects.enter("lineEnding");
         effects.consume(code2);
         effects.exit("lineEnding");
-        buffer = fence(matter2, "close");
+        buffer2 = fence(matter2, "close");
         bufferIndex = 0;
         return effects.attempt(closingFenceConstruct, after, contentStart);
       }
@@ -42128,7 +49612,7 @@ function createConstruct(matter2) {
     let bufferIndex2 = 0;
     return closeStart;
     function closeStart(code2) {
-      if (code2 === buffer.charCodeAt(bufferIndex2)) {
+      if (code2 === buffer2.charCodeAt(bufferIndex2)) {
         effects.enter(fenceType);
         effects.enter(sequenceType);
         return closeSequence(code2);
@@ -42136,7 +49620,7 @@ function createConstruct(matter2) {
       return nok(code2);
     }
     function closeSequence(code2) {
-      if (bufferIndex2 === buffer.length) {
+      if (bufferIndex2 === buffer2.length) {
         effects.exit(sequenceType);
         if (markdownSpace(code2)) {
           effects.enter("whitespace");
@@ -42144,7 +49628,7 @@ function createConstruct(matter2) {
         }
         return closeAfter(code2);
       }
-      if (code2 === buffer.charCodeAt(bufferIndex2++)) {
+      if (code2 === buffer2.charCodeAt(bufferIndex2++)) {
         effects.consume(code2);
         return closeSequence;
       }
@@ -42173,17 +49657,17 @@ function fence(matter2, prop) {
     pick(matter2.fence, prop)
   );
 }
-function pick(schema, prop) {
-  return typeof schema === "string" ? schema : schema[prop];
+function pick(schema4, prop) {
+  return typeof schema4 === "string" ? schema4 : schema4[prop];
 }
 
 // node_modules/mdast-util-frontmatter/node_modules/escape-string-regexp/index.js
 init_esbuild_buffer_shim();
-function escapeStringRegexp(string3) {
-  if (typeof string3 !== "string") {
+function escapeStringRegexp(string4) {
+  if (typeof string4 !== "string") {
     throw new TypeError("Expected a string");
   }
-  return string3.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
+  return string4.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
 }
 
 // node_modules/mdast-util-frontmatter/lib/index.js
@@ -42249,8 +49733,8 @@ function fence2(matter2, prop) {
     pick2(matter2.fence, prop)
   );
 }
-function pick2(schema, prop) {
-  return typeof schema === "string" ? schema : schema[prop];
+function pick2(schema4, prop) {
+  return typeof schema4 === "string" ? schema4 : schema4[prop];
 }
 
 // node_modules/remark-frontmatter/lib/index.js
@@ -42765,9 +50249,9 @@ function tokenize(effects, ok22, nok) {
       return nok(code2);
     effects.enter("wikilinkPath");
     hasPath = true;
-    return path(code2);
+    return path2(code2);
   }
-  function path(code2) {
+  function path2(code2) {
     if (code2 === BACKSLASH) {
       effects.consume(code2);
       return pathEscape;
@@ -42786,7 +50270,7 @@ function tokenize(effects, ok22, nok) {
     }
     if (code2 === null || isLineEnding(code2)) return nok(code2);
     effects.consume(code2);
-    return path;
+    return path2;
   }
   function pathEscape(code2) {
     if (code2 === PIPE) {
@@ -42795,7 +50279,7 @@ function tokenize(effects, ok22, nok) {
     }
     if (code2 === null || isLineEnding(code2)) return nok(code2);
     effects.consume(code2);
-    return path;
+    return path2;
   }
   function headingMarker(code2) {
     if (code2 !== HASH) return nok(code2);
@@ -43059,6 +50543,13 @@ function tokenizeFlow(effects, ok22, nok) {
     if (code2 === null) {
       return abandon(code2);
     }
+    if (isLineEnding3(code2)) {
+      return effects.attempt(
+        nonLazyContinuation2,
+        beforeContentChunk,
+        abandon
+      )(code2);
+    }
     if (code2 === PERCENT) {
       return effects.attempt(flowClose, closeAfter, startContent)(code2);
     }
@@ -43153,7 +50644,7 @@ function isWhitespace(code2) {
   return code2 === codes.space || code2 === codes.horizontalTab || code2 === codes.lineFeed || code2 === codes.carriageReturn || code2 === codes.carriageReturnLineFeed;
 }
 function isTagChar(code2) {
-  if (code2 === null) return false;
+  if (code2 === null || code2 < 0) return false;
   if (code2 >= 48 && code2 <= 57) return true;
   if (code2 === DASH || code2 === UNDERSCORE) return true;
   return tagCharRegex.test(String.fromCodePoint(code2));
@@ -43290,7 +50781,7 @@ function commentFromMarkdown() {
     exit: {
       commentContent(token) {
         const node2 = this.stack[this.stack.length - 1];
-        node2.value = this.sliceSerialize(token);
+        node2.value += this.sliceSerialize(token);
       },
       comment(token) {
         this.exit(token);
@@ -43372,20 +50863,20 @@ function customTaskCharTransform(tree) {
     if (!firstChild || firstChild.type !== "paragraph") return;
     const firstText = firstChild.children?.[0];
     if (!firstText || firstText.type !== "text") return;
-    const match2 = firstText.value.match(/^\[([^\]])\]\s/);
-    if (!match2) return;
-    const taskChar = match2[1];
+    const match3 = firstText.value.match(/^\[([^\]])\]\s/);
+    if (!match3) return;
+    const taskChar = match3[1];
     node2.checked = taskChar !== " ";
     node2.data ??= {};
     node2.data.taskChar = taskChar;
     node2.data.hProperties ??= {};
     node2.data.hProperties.dataTaskChar = taskChar;
-    firstText.value = firstText.value.slice(match2[0].length);
+    firstText.value = firstText.value.slice(match3[0].length);
     if (firstText.value.length === 0) {
       firstChild.children.shift();
     } else if (firstText.position && typeof firstText.position.start.offset === "number") {
-      firstText.position.start.column += match2[0].length;
-      firstText.position.start.offset += match2[0].length;
+      firstText.position.start.column += match3[0].length;
+      firstText.position.start.offset += match3[0].length;
     }
   });
 }
@@ -43492,7 +50983,7 @@ var integrationRegistry = new IntegrationRegistry();
 
 // src/compiler/integrations/AssetSyncer.ts
 init_esbuild_buffer_shim();
-var import_obsidian3 = require("obsidian");
+var import_obsidian4 = require("obsidian");
 var import_js_logger = __toESM(require_logger());
 var SYNCER_STYLES_DIR = "quartz/styles/syncer";
 var INDEX_FILE = "_index.scss";
@@ -43529,8 +51020,8 @@ var AssetSyncer = class {
       }
       const scssFiles = this.getScssFiles();
       if (scssFiles.size > 0) {
-        for (const [path, content3] of scssFiles) {
-          result.filesToStage.set(path, content3);
+        for (const [path2, content3] of scssFiles) {
+          result.filesToStage.set(path2, content3);
         }
         const customScssUpdate = await this.getCustomScssUpdate(connection);
         if (customScssUpdate) {
@@ -43544,7 +51035,7 @@ var AssetSyncer = class {
       result.success = true;
     } catch (error) {
       import_js_logger.default.error("Failed to collect integration assets", error);
-      new import_obsidian3.Notice(
+      new import_obsidian4.Notice(
         "Quartz Syncer: Failed to collect integration styles. Check console for details.",
         1e4
       );
@@ -43574,7 +51065,7 @@ var AssetSyncer = class {
     try {
       const customScss = await connection.getRawFile(CUSTOM_SCSS_PATH);
       if (customScss) {
-        const content3 = Buffer.from(
+        const content3 = Buffer2.from(
           customScss.content,
           "base64"
         ).toString("utf-8");
@@ -43593,7 +51084,7 @@ var AssetSyncer = class {
       try {
         const customScss = await connection.getRawFile(CUSTOM_SCSS_PATH);
         if (customScss) {
-          content3 = Buffer.from(
+          content3 = Buffer2.from(
             customScss.content,
             "base64"
           ).toString("utf-8");
@@ -43616,9 +51107,9 @@ var AssetSyncer = class {
 `;
     }
     const baseImportPattern = /@use\s+["']\.\/base(?:\.scss)?["'];?/;
-    const match2 = content3.match(baseImportPattern);
-    if (match2) {
-      const insertPosition = match2.index + match2[0].length;
+    const match3 = content3.match(baseImportPattern);
+    if (match3) {
+      const insertPosition = match3.index + match3[0].length;
       const before = content3.slice(0, insertPosition);
       const after = content3.slice(insertPosition);
       return `${before}
@@ -43661,7 +51152,7 @@ ${indexImports.join("\n")}
 
 // src/compiler/integrations/dataview.ts
 init_esbuild_buffer_shim();
-var import_obsidian4 = require("obsidian");
+var import_obsidian5 = require("obsidian");
 var import_obsidian_dataview = __toESM(require_lib());
 var import_js_logger2 = __toESM(require_logger());
 function getDataviewApi() {
@@ -43690,11 +51181,11 @@ function tryEval(query) {
 }
 async function tryExecuteJs(query, filePath, dvApi) {
   const div = createEl("div");
-  const component = new import_obsidian4.Component();
+  const component = new import_obsidian5.Component();
   component.load();
   await dvApi.executeJs(query, div, component, filePath);
   await renderPromise(div, "[data-tag-name]");
-  const markdown = (0, import_obsidian4.htmlToMarkdown)(div) || "";
+  const markdown = (0, import_obsidian5.htmlToMarkdown)(div) || "";
   return cleanQueryResult(markdown);
 }
 var DataviewIntegration = {
@@ -43749,15 +51240,15 @@ var DataviewIntegration = {
     }
     return patterns;
   },
-  async compile(match2, context) {
+  async compile(match3, context) {
     const dvApi = getDataviewApi();
-    if (!dvApi) return match2.fullMatch;
+    if (!dvApi) return match3.fullMatch;
     const filePath = context.file.getPath();
-    const query = match2.captures[0];
+    const query = match3.captures[0];
     const { isInsideCalloutDepth, finalQuery } = sanitizeQuery(query);
     try {
       let result = "";
-      switch (match2.descriptor.id) {
+      switch (match3.descriptor.id) {
         case "dv-block": {
           let markdown = await dvApi.tryQueryMarkdown(
             finalQuery,
@@ -43789,21 +51280,21 @@ var DataviewIntegration = {
           return result ?? "Unable to render query";
         }
         default:
-          return match2.fullMatch;
+          return match3.fullMatch;
       }
     } catch (e) {
       import_js_logger2.default.error(e);
-      new import_obsidian4.Notice(
+      new import_obsidian5.Notice(
         "Quartz Syncer: Unable to render dataview query. Please update the dataview plugin to the latest version."
       );
-      return match2.fullMatch;
+      return match3.fullMatch;
     }
   }
 };
 
 // src/compiler/integrations/datacore.ts
 init_esbuild_buffer_shim();
-var import_obsidian5 = require("obsidian");
+var import_obsidian6 = require("obsidian");
 var import_js_logger3 = __toESM(require_logger());
 
 // src/ui/suggest/constants.ts
@@ -44215,12 +51706,12 @@ function getDatacoreApi() {
 }
 async function tryExecuteJs2(query, filePath, dcApi) {
   const div = createEl("div");
-  const component = new import_obsidian5.Component();
+  const component = new import_obsidian6.Component();
   try {
     dcApi.executeJs(query, div, component, filePath);
   } catch (error) {
     import_js_logger3.default.error(error);
-    new import_obsidian5.Notice(
+    new import_obsidian6.Notice(
       `Quartz Syncer: DatacoreJS execution error: ${error}, trying JSX...`
     );
     return tryExecuteJsx(query, filePath, dcApi);
@@ -44234,12 +51725,12 @@ async function tryExecuteJs2(query, filePath, dcApi) {
 }
 async function tryExecuteJsx(query, filePath, dcApi) {
   const div = createEl("div");
-  const component = new import_obsidian5.Component();
+  const component = new import_obsidian6.Component();
   try {
     dcApi.executeJsx(query, div, component, filePath);
   } catch (error) {
     import_js_logger3.default.error(error);
-    new import_obsidian5.Notice(`Quartz Syncer: DatacoreJSX execution error: ${error}`);
+    new import_obsidian6.Notice(`Quartz Syncer: DatacoreJSX execution error: ${error}`);
     return div;
   }
   component.load();
@@ -44251,12 +51742,12 @@ async function tryExecuteJsx(query, filePath, dcApi) {
 }
 async function tryExecuteTs(query, filePath, dcApi) {
   const div = createEl("div");
-  const component = new import_obsidian5.Component();
+  const component = new import_obsidian6.Component();
   try {
     dcApi.executeTs(query, div, component, filePath);
   } catch (error) {
     import_js_logger3.default.error(error);
-    new import_obsidian5.Notice(
+    new import_obsidian6.Notice(
       `Quartz Syncer: DatacoreTS execution error: ${error}, trying TSX...`
     );
     return tryExecuteTsx(query, filePath, dcApi);
@@ -44270,12 +51761,12 @@ async function tryExecuteTs(query, filePath, dcApi) {
 }
 async function tryExecuteTsx(query, filePath, dcApi) {
   const div = createEl("div");
-  const component = new import_obsidian5.Component();
+  const component = new import_obsidian6.Component();
   try {
     dcApi.executeTsx(query, div, component, filePath);
   } catch (error) {
     import_js_logger3.default.error(error);
-    new import_obsidian5.Notice(`Quartz Syncer: DatacoreTSX execution error: ${error}`);
+    new import_obsidian6.Notice(`Quartz Syncer: DatacoreTSX execution error: ${error}`);
     return div;
   }
   component.load();
@@ -44321,16 +51812,16 @@ var DatacoreIntegration = {
       }
     ];
   },
-  async compile(match2, context) {
+  async compile(match3, context) {
     const dcApi = getDatacoreApi();
-    if (!dcApi) return match2.fullMatch;
+    if (!dcApi) return match3.fullMatch;
     const filePath = context.file.getPath();
-    const query = match2.captures[0];
+    const query = match3.captures[0];
     const { isInsideCalloutDepth, finalQuery } = sanitizeQuery(query);
     const serializer = new XMLSerializer();
     try {
       let queryResult;
-      switch (match2.descriptor.id) {
+      switch (match3.descriptor.id) {
         case "dc-js":
           queryResult = await tryExecuteJs2(
             finalQuery,
@@ -44360,7 +51851,7 @@ var DatacoreIntegration = {
           );
           break;
         default:
-          return match2.fullMatch;
+          return match3.fullMatch;
       }
       const result = sanitizeHTMLToString(queryResult, serializer);
       if (isInsideCalloutDepth > 0) {
@@ -44369,8 +51860,8 @@ var DatacoreIntegration = {
       return result;
     } catch (error) {
       import_js_logger3.default.error(error);
-      new import_obsidian5.Notice(`Quartz Syncer: Datacore query error: ${error}`);
-      return match2.fullMatch;
+      new import_obsidian6.Notice(`Quartz Syncer: Datacore query error: ${error}`);
+      return match3.fullMatch;
     }
   }
 };
@@ -44390,14 +51881,14 @@ var ExcalidrawIntegration = {
   getPatterns() {
     return [];
   },
-  async compile(match2) {
-    return match2.fullMatch;
+  async compile(match3) {
+    return match3.fullMatch;
   }
 };
 
 // src/compiler/integrations/fantasy-statblocks.ts
 init_esbuild_buffer_shim();
-var import_obsidian6 = require("obsidian");
+var import_obsidian7 = require("obsidian");
 var import_js_logger4 = __toESM(require_logger());
 var fantasyStatblocksScss = `
 // Quartz fixes
@@ -44806,13 +52297,13 @@ function getFantasyStatblocksApi() {
 }
 async function tryRenderStatblock(query, filePath, api) {
   const div = createEl("div");
-  const component = new import_obsidian6.Component();
+  const component = new import_obsidian7.Component();
   component.load();
   try {
     api.renderMarkdown(query, div, filePath, component);
   } catch (error) {
     import_js_logger4.default.error(error);
-    new import_obsidian6.Notice(
+    new import_obsidian7.Notice(
       `Quartz Syncer: Fantasy Statblocks execution error: ${error}.`
     );
     return div;
@@ -44841,11 +52332,11 @@ var FantasyStatblocksIntegration = {
       }
     ];
   },
-  async compile(match2, context) {
+  async compile(match3, context) {
     const api = getFantasyStatblocksApi();
-    if (!api) return match2.fullMatch;
-    const query = match2.fullMatch.trim();
-    if (!query) return match2.fullMatch;
+    if (!api) return match3.fullMatch;
+    const query = match3.fullMatch.trim();
+    if (!query) return match3.fullMatch;
     try {
       const renderedDiv = await tryRenderStatblock(
         query,
@@ -44875,14 +52366,14 @@ var FantasyStatblocksIntegration = {
       );
     } catch (error) {
       import_js_logger4.default.error(error);
-      return match2.fullMatch;
+      return match3.fullMatch;
     }
   }
 };
 
 // src/compiler/integrations/auto-card-link.ts
 init_esbuild_buffer_shim();
-var import_obsidian7 = require("obsidian");
+var import_obsidian8 = require("obsidian");
 var import_js_logger5 = __toESM(require_logger());
 var autoCardLinkScss = `
 .auto-card-link-container {
@@ -44991,7 +52482,7 @@ function parseLinkMetadataFromYaml(source) {
     })
   ).join("\n");
   try {
-    yaml = (0, import_obsidian7.parseYaml)(source);
+    yaml = (0, import_obsidian8.parseYaml)(source);
   } catch (error) {
     import_js_logger5.default.error(error);
     throw new YamlParseError(
@@ -45055,7 +52546,7 @@ function genLinkEl(data, app2) {
     if (!isUrl2(imageSrc)) {
       const link2 = imageSrc.slice(2, -2);
       const imageRelativePath = app2.metadataCache.getFirstLinkpathDest(
-        (0, import_obsidian7.getLinkpath)(link2),
+        (0, import_obsidian8.getLinkpath)(link2),
         ""
       )?.path;
       if (imageRelativePath) {
@@ -45091,9 +52582,9 @@ var AutoCardLinkIntegration = {
       }
     ];
   },
-  async compile(match2, context) {
-    const query = match2.captures[0];
-    if (!query) return match2.fullMatch;
+  async compile(match3, context) {
+    const query = match3.captures[0];
+    if (!query) return match3.fullMatch;
     const serializer = new XMLSerializer();
     try {
       const div = createEl("div");
@@ -45120,8 +52611,8 @@ var AutoCardLinkIntegration = {
       return sanitizeHTMLToString(div, serializer);
     } catch (error) {
       import_js_logger5.default.error(error);
-      new import_obsidian7.Notice(`Quartz Syncer: Auto Card Link error: ${error}`);
-      return match2.fullMatch;
+      new import_obsidian8.Notice(`Quartz Syncer: Auto Card Link error: ${error}`);
+      return match3.fullMatch;
     }
   }
 };
@@ -45149,8 +52640,8 @@ var BasesIntegration = {
   getPatterns() {
     return [];
   },
-  async compile(match2) {
-    return match2.fullMatch;
+  async compile(match3) {
+    return match3.fullMatch;
   }
 };
 
@@ -45177,8 +52668,8 @@ var CanvasIntegration = {
   getPatterns() {
     return [];
   },
-  async compile(match2) {
-    return match2.fullMatch;
+  async compile(match3) {
+    return match3.fullMatch;
   }
 };
 
@@ -45237,12 +52728,12 @@ var PluginCompiler = class {
         descriptor.pattern.flags
       );
       const matches = [];
-      let match2;
-      while ((match2 = regex.exec(text5)) !== null) {
+      let match3;
+      while ((match3 = regex.exec(text5)) !== null) {
         matches.push({
           descriptor,
-          fullMatch: match2[0],
-          captures: match2.slice(1)
+          fullMatch: match3[0],
+          captures: match3.slice(1)
         });
       }
       for (const patternMatch of matches) {
@@ -45377,7 +52868,11 @@ var SyncerPageCompiler = class _SyncerPageCompiler {
       });
     }
     let result = processor.stringify(transformed);
-    result = result.replace(/^((?:> ?)+)\\\[(![\w-]+)\]/gm, "$1[$2]");
+    result = result.replace(
+      /^((?:> ?)+)\\\[(![\w-]+(?:\|[^\]\r\n]*)?)]/gm,
+      "$1[$2]"
+    );
+    result = result.replace(/\\\[(\^[\w-]+)\]/g, "[$1]");
     result = result.replace(
       /^(\|.*)/gm,
       (line) => line.replace(/(!?\[\[[^\]]*?)(?<!\\)\|([^\]]*?\]\])/g, "$1\\|$2")
@@ -45469,7 +52964,7 @@ var SyncerPageCompiler = class _SyncerPageCompiler {
     for (const embed of cache.embeds) {
       try {
         const linkedFile = this.metadataCache.getFirstLinkpathDest(
-          (0, import_obsidian8.getLinkpath)(embed.link),
+          (0, import_obsidian9.getLinkpath)(embed.link),
           file.getPath()
         );
         if (!linkedFile) continue;
@@ -45496,7 +52991,7 @@ var SyncerPageCompiler = class _SyncerPageCompiler {
     for (const embed of cache.embeds) {
       try {
         const linkedFile = this.metadataCache.getFirstLinkpathDest(
-          (0, import_obsidian8.getLinkpath)(embed.link),
+          (0, import_obsidian9.getLinkpath)(embed.link),
           filePath
         );
         if (!linkedFile) continue;
@@ -45506,7 +53001,7 @@ var SyncerPageCompiler = class _SyncerPageCompiler {
           continue;
         }
         const blob = await this.vault.readBinary(linkedFile);
-        const blobBase64 = (0, import_obsidian8.arrayBufferToBase64)(blob);
+        const blobBase64 = (0, import_obsidian9.arrayBufferToBase64)(blob);
         const blobLinkText = this.metadataCache.fileToLinktext(
           linkedFile,
           this.settings.vaultPath
@@ -45572,7 +53067,7 @@ init_esbuild_buffer_shim();
 
 // src/compiler/FrontmatterCompiler.ts
 init_esbuild_buffer_shim();
-var import_obsidian9 = require("obsidian");
+var import_obsidian10 = require("obsidian");
 var FrontmatterCompiler = class {
   settings;
   constructor(settings) {
@@ -45617,7 +53112,7 @@ var FrontmatterCompiler = class {
       publishedFrontMatter
     );
     const fullFrontMatter = this.settings.includeAllFrontmatter ? { ...publishedFrontMatter, ...fileFrontMatter } : publishedFrontMatter;
-    const frontMatterString = this.settings.frontmatterFormat === "json" ? JSON.stringify(fullFrontMatter) + "\n" : (0, import_obsidian9.stringifyYaml)(fullFrontMatter);
+    const frontMatterString = this.settings.frontmatterFormat === "json" ? JSON.stringify(fullFrontMatter) + "\n" : (0, import_obsidian10.stringifyYaml)(fullFrontMatter);
     return `---
 ${frontMatterString}---
 `;
@@ -47367,7 +54862,7 @@ function hasLocaleWeekInfo() {
 function maybeArray(thing) {
   return Array.isArray(thing) ? thing : [thing];
 }
-function bestBy(arr, by, compare3) {
+function bestBy(arr, by, compare) {
   if (arr.length === 0) {
     return void 0;
   }
@@ -47375,7 +54870,7 @@ function bestBy(arr, by, compare3) {
     const pair = [by(next), next];
     if (!best) {
       return pair;
-    } else if (compare3(best[0], pair[0]) === best[0]) {
+    } else if (compare(best[0], pair[0]) === best[0]) {
       return best;
     } else {
       return pair;
@@ -47423,18 +54918,18 @@ function padStart(input, n2 = 2) {
   }
   return padded;
 }
-function parseInteger(string3) {
-  if (isUndefined(string3) || string3 === null || string3 === "") {
+function parseInteger(string4) {
+  if (isUndefined(string4) || string4 === null || string4 === "") {
     return void 0;
   } else {
-    return parseInt(string3, 10);
+    return parseInt(string4, 10);
   }
 }
-function parseFloating(string3) {
-  if (isUndefined(string3) || string3 === null || string3 === "") {
+function parseFloating(string4) {
+  if (isUndefined(string4) || string4 === null || string4 === "") {
     return void 0;
   } else {
-    return parseFloat(string3);
+    return parseFloat(string4);
   }
 }
 function parseMillis(fraction) {
@@ -47650,7 +55145,7 @@ function monthForDateTime(dt, length) {
 function eraForDateTime(dt, length) {
   return eras(length)[dt.year < 0 ? 0 : 1];
 }
-function formatRelativeTime(unit, count, numeric = "always", narrow = false) {
+function formatRelativeTime(unit, count, numeric2 = "always", narrow = false) {
   const units = {
     years: ["year", "yr."],
     quarters: ["quarter", "qtr."],
@@ -47662,7 +55157,7 @@ function formatRelativeTime(unit, count, numeric = "always", narrow = false) {
     seconds: ["second", "sec."]
   };
   const lastable = ["hours", "minutes", "seconds"].indexOf(unit) === -1;
-  if (numeric === "auto" && lastable) {
+  if (numeric2 === "auto" && lastable) {
     const isDay = unit === "days";
     switch (count) {
       case 1:
@@ -47787,12 +55282,12 @@ var Formatter = class _Formatter {
     return this.loc.numberFormatter(opts).format(n2);
   }
   formatDateTimeFromString(dt, fmt) {
-    const knownEnglish = this.loc.listingMode() === "en", useDateTimeFormatter = this.loc.outputCalendar && this.loc.outputCalendar !== "gregory", string3 = (opts, extract) => this.loc.extract(dt, opts, extract), formatOffset2 = (opts) => {
+    const knownEnglish = this.loc.listingMode() === "en", useDateTimeFormatter = this.loc.outputCalendar && this.loc.outputCalendar !== "gregory", string4 = (opts, extract) => this.loc.extract(dt, opts, extract), formatOffset2 = (opts) => {
       if (dt.isOffsetFixed && dt.offset === 0 && opts.allowZ) {
         return "Z";
       }
       return dt.isValid ? dt.zone.formatOffset(dt.ts, opts.format) : "";
-    }, meridiem = () => knownEnglish ? meridiemForDateTime(dt) : string3({ hour: "numeric", hourCycle: "h12" }, "dayperiod"), month = (length, standalone) => knownEnglish ? monthForDateTime(dt, length) : string3(standalone ? { month: length } : { month: length, day: "numeric" }, "month"), weekday = (length, standalone) => knownEnglish ? weekdayForDateTime(dt, length) : string3(
+    }, meridiem = () => knownEnglish ? meridiemForDateTime(dt) : string4({ hour: "numeric", hourCycle: "h12" }, "dayperiod"), month = (length, standalone) => knownEnglish ? monthForDateTime(dt, length) : string4(standalone ? { month: length } : { month: length, day: "numeric" }, "month"), weekday = (length, standalone) => knownEnglish ? weekdayForDateTime(dt, length) : string4(
       standalone ? { weekday: length } : { weekday: length, month: "long", day: "numeric" },
       "weekday"
     ), maybeMacro = (token) => {
@@ -47802,7 +55297,7 @@ var Formatter = class _Formatter {
       } else {
         return token;
       }
-    }, era = (length) => knownEnglish ? eraForDateTime(dt, length) : string3({ era: length }, "era"), tokenToString = (token) => {
+    }, era = (length) => knownEnglish ? eraForDateTime(dt, length) : string4({ era: length }, "era"), tokenToString = (token) => {
       switch (token) {
         // ms
         case "S":
@@ -47854,9 +55349,9 @@ var Formatter = class _Formatter {
           return meridiem();
         // dates
         case "d":
-          return useDateTimeFormatter ? string3({ day: "numeric" }, "day") : this.num(dt.day);
+          return useDateTimeFormatter ? string4({ day: "numeric" }, "day") : this.num(dt.day);
         case "dd":
-          return useDateTimeFormatter ? string3({ day: "2-digit" }, "day") : this.num(dt.day, 2);
+          return useDateTimeFormatter ? string4({ day: "2-digit" }, "day") : this.num(dt.day, 2);
         // weekdays - standalone
         case "c":
           return this.num(dt.weekday);
@@ -47877,9 +55372,9 @@ var Formatter = class _Formatter {
           return weekday("narrow", false);
         // months - standalone
         case "L":
-          return useDateTimeFormatter ? string3({ month: "numeric", day: "numeric" }, "month") : this.num(dt.month);
+          return useDateTimeFormatter ? string4({ month: "numeric", day: "numeric" }, "month") : this.num(dt.month);
         case "LL":
-          return useDateTimeFormatter ? string3({ month: "2-digit", day: "numeric" }, "month") : this.num(dt.month, 2);
+          return useDateTimeFormatter ? string4({ month: "2-digit", day: "numeric" }, "month") : this.num(dt.month, 2);
         case "LLL":
           return month("short", true);
         case "LLLL":
@@ -47888,9 +55383,9 @@ var Formatter = class _Formatter {
           return month("narrow", true);
         // months - format
         case "M":
-          return useDateTimeFormatter ? string3({ month: "numeric" }, "month") : this.num(dt.month);
+          return useDateTimeFormatter ? string4({ month: "numeric" }, "month") : this.num(dt.month);
         case "MM":
-          return useDateTimeFormatter ? string3({ month: "2-digit" }, "month") : this.num(dt.month, 2);
+          return useDateTimeFormatter ? string4({ month: "2-digit" }, "month") : this.num(dt.month, 2);
         case "MMM":
           return month("short", false);
         case "MMMM":
@@ -47899,13 +55394,13 @@ var Formatter = class _Formatter {
           return month("narrow", false);
         // years
         case "y":
-          return useDateTimeFormatter ? string3({ year: "numeric" }, "year") : this.num(dt.year);
+          return useDateTimeFormatter ? string4({ year: "numeric" }, "year") : this.num(dt.year);
         case "yy":
-          return useDateTimeFormatter ? string3({ year: "2-digit" }, "year") : this.num(dt.year.toString().slice(-2), 2);
+          return useDateTimeFormatter ? string4({ year: "2-digit" }, "year") : this.num(dt.year.toString().slice(-2), 2);
         case "yyyy":
-          return useDateTimeFormatter ? string3({ year: "numeric" }, "year") : this.num(dt.year, 4);
+          return useDateTimeFormatter ? string4({ year: "numeric" }, "year") : this.num(dt.year, 4);
         case "yyyyyy":
-          return useDateTimeFormatter ? string3({ year: "numeric" }, "year") : this.num(dt.year, 6);
+          return useDateTimeFormatter ? string4({ year: "numeric" }, "year") : this.num(dt.year, 6);
         // eras
         case "G":
           return era("short");
@@ -48013,11 +55508,11 @@ function parse2(s2, ...patterns) {
   return [null, null];
 }
 function simpleParse(...keys) {
-  return (match2, cursor) => {
+  return (match3, cursor) => {
     const ret = {};
     let i;
     for (i = 0; i < keys.length; i++) {
-      ret[keys[i]] = parseInteger(match2[cursor + i]);
+      ret[keys[i]] = parseInteger(match3[cursor + i]);
     }
     return [ret, null, cursor + i];
   };
@@ -48037,39 +55532,39 @@ var sqlTimeRegex = RegExp(
   `${isoTimeBaseRegex.source} ?(?:${offsetRegex.source}|(${ianaRegex.source}))?`
 );
 var sqlTimeExtensionRegex = RegExp(`(?: ${sqlTimeRegex.source})?`);
-function int(match2, pos, fallback) {
-  const m = match2[pos];
+function int(match3, pos, fallback) {
+  const m = match3[pos];
   return isUndefined(m) ? fallback : parseInteger(m);
 }
-function extractISOYmd(match2, cursor) {
+function extractISOYmd(match3, cursor) {
   const item = {
-    year: int(match2, cursor),
-    month: int(match2, cursor + 1, 1),
-    day: int(match2, cursor + 2, 1)
+    year: int(match3, cursor),
+    month: int(match3, cursor + 1, 1),
+    day: int(match3, cursor + 2, 1)
   };
   return [item, null, cursor + 3];
 }
-function extractISOTime(match2, cursor) {
+function extractISOTime(match3, cursor) {
   const item = {
-    hours: int(match2, cursor, 0),
-    minutes: int(match2, cursor + 1, 0),
-    seconds: int(match2, cursor + 2, 0),
-    milliseconds: parseMillis(match2[cursor + 3])
+    hours: int(match3, cursor, 0),
+    minutes: int(match3, cursor + 1, 0),
+    seconds: int(match3, cursor + 2, 0),
+    milliseconds: parseMillis(match3[cursor + 3])
   };
   return [item, null, cursor + 4];
 }
-function extractISOOffset(match2, cursor) {
-  const local = !match2[cursor] && !match2[cursor + 1], fullOffset = signedOffset(match2[cursor + 1], match2[cursor + 2]), zone = local ? null : FixedOffsetZone.instance(fullOffset);
+function extractISOOffset(match3, cursor) {
+  const local = !match3[cursor] && !match3[cursor + 1], fullOffset = signedOffset(match3[cursor + 1], match3[cursor + 2]), zone = local ? null : FixedOffsetZone.instance(fullOffset);
   return [{}, zone, cursor + 3];
 }
-function extractIANAZone(match2, cursor) {
-  const zone = match2[cursor] ? IANAZone.create(match2[cursor]) : null;
+function extractIANAZone(match3, cursor) {
+  const zone = match3[cursor] ? IANAZone.create(match3[cursor]) : null;
   return [{}, zone, cursor + 1];
 }
 var isoTimeOnly = RegExp(`^T?${isoTimeBaseRegex.source}$`);
 var isoDuration = /^-?P(?:(?:(-?\d{1,20}(?:\.\d{1,20})?)Y)?(?:(-?\d{1,20}(?:\.\d{1,20})?)M)?(?:(-?\d{1,20}(?:\.\d{1,20})?)W)?(?:(-?\d{1,20}(?:\.\d{1,20})?)D)?(?:T(?:(-?\d{1,20}(?:\.\d{1,20})?)H)?(?:(-?\d{1,20}(?:\.\d{1,20})?)M)?(?:(-?\d{1,20})(?:[.,](-?\d{1,20}))?S)?)?)$/;
-function extractISODuration(match2) {
-  const [s2, yearStr, monthStr, weekStr, dayStr, hourStr, minuteStr, secondStr, millisecondsStr] = match2;
+function extractISODuration(match3) {
+  const [s2, yearStr, monthStr, weekStr, dayStr, hourStr, minuteStr, secondStr, millisecondsStr] = match3;
   const hasNegativePrefix = s2[0] === "-";
   const negativeSeconds = secondStr && secondStr[0] === "-";
   const maybeNegate = (num, force = false) => num !== void 0 && (force || num && hasNegativePrefix) ? -num : num;
@@ -48112,7 +55607,7 @@ function fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, 
   return result;
 }
 var rfc2822 = /^(?:(Mon|Tue|Wed|Thu|Fri|Sat|Sun),\s)?(\d{1,2})\s(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s(\d{2,4})\s(\d\d):(\d\d)(?::(\d\d))?\s(?:(UT|GMT|[ECMP][SD]T)|([Zz])|(?:([+-]\d\d)(\d\d)))$/;
-function extractRFC2822(match2) {
+function extractRFC2822(match3) {
   const [
     ,
     weekdayStr,
@@ -48126,7 +55621,7 @@ function extractRFC2822(match2) {
     milOffset,
     offHourStr,
     offMinuteStr
-  ] = match2, result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
+  ] = match3, result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
   let offset2;
   if (obsOffset) {
     offset2 = obsOffsets[obsOffset];
@@ -48143,12 +55638,12 @@ function preprocessRFC2822(s2) {
 var rfc1123 = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), (\d\d) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4}) (\d\d):(\d\d):(\d\d) GMT$/;
 var rfc850 = /^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), (\d\d)-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\d\d) (\d\d):(\d\d):(\d\d) GMT$/;
 var ascii = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ( \d|\d\d) (\d\d):(\d\d):(\d\d) (\d{4})$/;
-function extractRFC1123Or850(match2) {
-  const [, weekdayStr, dayStr, monthStr, yearStr, hourStr, minuteStr, secondStr] = match2, result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
+function extractRFC1123Or850(match3) {
+  const [, weekdayStr, dayStr, monthStr, yearStr, hourStr, minuteStr, secondStr] = match3, result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
   return [result, FixedOffsetZone.utcInstance];
 }
-function extractASCII(match2) {
-  const [, weekdayStr, monthStr, dayStr, hourStr, minuteStr, secondStr, yearStr] = match2, result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
+function extractASCII(match3) {
+  const [, weekdayStr, monthStr, dayStr, hourStr, minuteStr, secondStr, yearStr] = match3, result = fromStrings(weekdayStr, yearStr, monthStr, dayStr, hourStr, minuteStr, secondStr);
   return [result, FixedOffsetZone.utcInstance];
 }
 var isoYmdWithTimeExtensionRegex = combineRegexes(isoYmdRegex, isoTimeExtensionRegex);
@@ -51659,10 +59154,10 @@ var DateTime = class _DateTime {
     if (!this.isValid) {
       return null;
     }
-    const ext = format === "extended";
-    let c = toISODate(this, ext);
+    const ext2 = format === "extended";
+    let c = toISODate(this, ext2);
     c += "T";
-    c += toISOTime(this, ext, suppressSeconds, suppressMilliseconds, includeOffset, extendedZone);
+    c += toISOTime(this, ext2, suppressSeconds, suppressMilliseconds, includeOffset, extendedZone);
     return c;
   }
   /**
@@ -52583,16 +60078,16 @@ var PublishFile = class {
       const inlineFieldMatches = text5.matchAll(
         DATAVIEW_INLINE_FIELD_REGEX
       );
-      for (const match2 of fieldMatches) {
-        if (match2[1] && match2[2]) {
-          metadata[match2[1]] = match2[2];
+      for (const match3 of fieldMatches) {
+        if (match3[1] && match3[2]) {
+          metadata[match3[1]] = match3[2];
         }
       }
-      for (const match2 of inlineFieldMatches) {
-        if (match2[1] && match2[2]) {
-          metadata[match2[1]] = match2[2];
-        } else if (match2[3] && match2[4]) {
-          metadata[match2[3]] = match2[4];
+      for (const match3 of inlineFieldMatches) {
+        if (match3[1] && match3[2]) {
+          metadata[match3[1]] = match3[2];
+        } else if (match3[3] && match3[4]) {
+          metadata[match3[3]] = match3[4];
         }
       }
     }
@@ -52628,7 +60123,7 @@ var CompiledPublishFile = class extends PublishFile {
 init_esbuild_buffer_shim();
 var import_isomorphic_git = __toESM(require_isomorphic_git());
 var import_lightning_fs = __toESM(require_src());
-var import_obsidian10 = require("obsidian");
+var import_obsidian11 = require("obsidian");
 var import_js_logger7 = __toESM(require_logger());
 var logger = import_js_logger7.default.get("repository-connection");
 async function collectBody(body) {
@@ -52651,7 +60146,7 @@ var obsidianHttpClient = {
     const { url, method = "GET", headers = {}, body } = config;
     try {
       const bodyData = await collectBody(body);
-      const response = await (0, import_obsidian10.requestUrl)({
+      const response = await (0, import_obsidian11.requestUrl)({
         url,
         method,
         headers,
@@ -52799,30 +60294,30 @@ var RepositoryConnection = class {
       return this.remoteUrl;
     }
   }
-  getRepositoryPath(path) {
-    const repositoryPath = path.startsWith(this.contentFolder) ? path.replace(this.contentFolder, "") : path;
+  getRepositoryPath(path2) {
+    const repositoryPath = path2.startsWith(this.contentFolder) ? path2.replace(this.contentFolder, "") : path2;
     return repositoryPath.startsWith("/") ? repositoryPath.slice(1) : repositoryPath;
   }
-  getVaultPath(path) {
-    path = (0, import_obsidian10.normalizePath)(path);
-    const vaultPath = path.startsWith(this.vaultPath) ? path.replace(this.vaultPath, "") : path;
+  getVaultPath(path2) {
+    path2 = (0, import_obsidian11.normalizePath)(path2);
+    const vaultPath = path2.startsWith(this.vaultPath) ? path2.replace(this.vaultPath, "") : path2;
     return vaultPath.startsWith("/") ? vaultPath.slice(1) : vaultPath;
   }
-  setRepositoryPath(path) {
-    path = (0, import_obsidian10.normalizePath)(path);
-    const repositoryPath = path.startsWith(this.contentFolder) ? path : `${this.contentFolder}/${path}`;
+  setRepositoryPath(path2) {
+    path2 = (0, import_obsidian11.normalizePath)(path2);
+    const repositoryPath = path2.startsWith(this.contentFolder) ? path2 : `${this.contentFolder}/${path2}`;
     return repositoryPath.startsWith("/") ? repositoryPath.slice(1) : repositoryPath;
   }
-  setVaultPath(path) {
-    const separator = path.startsWith("/") ? "" : "/";
-    const vaultPath = path.startsWith(this.vaultPath) ? path : `${this.vaultPath}${separator}${path}`;
+  setVaultPath(path2) {
+    const separator = path2.startsWith("/") ? "" : "/";
+    const vaultPath = path2.startsWith(this.vaultPath) ? path2 : `${this.vaultPath}${separator}${path2}`;
     return vaultPath.startsWith("/") ? vaultPath.slice(1) : vaultPath;
   }
-  repositoryToVaultPath(path) {
-    return this.setVaultPath(this.getRepositoryPath(path));
+  repositoryToVaultPath(path2) {
+    return this.setVaultPath(this.getRepositoryPath(path2));
   }
-  repositoryToRepositoryPath(path) {
-    return this.setRepositoryPath(this.getVaultPath(path));
+  repositoryToRepositoryPath(path2) {
+    return this.setRepositoryPath(this.getVaultPath(path2));
   }
   async checkExistingRepo() {
     try {
@@ -52833,11 +60328,11 @@ var RepositoryConnection = class {
       return false;
     }
   }
-  async createDirIfNotExists(path) {
+  async createDirIfNotExists(path2) {
     try {
-      await this.getFs().promises.mkdir(path);
+      await this.getFs().promises.mkdir(path2);
     } catch {
-      logger.debug(`Directory ${path} already exists`);
+      logger.debug(`Directory ${path2} already exists`);
     }
   }
   async ensureRepoInitialized() {
@@ -52962,12 +60457,12 @@ var RepositoryConnection = class {
       );
     }
   }
-  async getFile(path, _branch) {
-    path = this.setRepositoryPath(
-      this.getVaultPath(this.getRepositoryPath(path))
+  async getFile(path2, _branch) {
+    path2 = this.setRepositoryPath(
+      this.getVaultPath(this.getRepositoryPath(path2))
     );
     logger.info(
-      `Getting file ${path} from repository ${this.getRepositoryName()}`
+      `Getting file ${path2} from repository ${this.getRepositoryName()}`
     );
     try {
       await this.ensureRepoInitialized();
@@ -52978,19 +60473,19 @@ var RepositoryConnection = class {
       const { blob, oid } = await import_isomorphic_git.default.readBlob({
         ...this.getGitConfig(),
         oid: commitOid,
-        filepath: path
+        filepath: path2
       });
-      const content3 = Buffer.from(blob).toString("base64");
+      const content3 = Buffer2.from(blob).toString("base64");
       return {
         content: content3,
         sha: oid,
-        path,
+        path: path2,
         type: "file"
       };
     } catch (error) {
-      logger.error(`Could not get file ${path}`, error);
+      logger.error(`Could not get file ${path2}`, error);
       throw new Error(
-        `Could not get file ${path} from repository ${this.getRepositoryName()}`
+        `Could not get file ${path2} from repository ${this.getRepositoryName()}`
       );
     }
   }
@@ -52998,9 +60493,9 @@ var RepositoryConnection = class {
    * Gets a file from the repository without adding the content folder prefix.
    * Use this for files outside the content folder (e.g., quartz/styles/custom.scss).
    */
-  async getRawFile(path) {
+  async getRawFile(path2) {
     logger.info(
-      `Getting raw file ${path} from repository ${this.getRepositoryName()}`
+      `Getting raw file ${path2} from repository ${this.getRepositoryName()}`
     );
     try {
       await this.ensureRepoInitialized();
@@ -53011,20 +60506,64 @@ var RepositoryConnection = class {
       const { blob, oid } = await import_isomorphic_git.default.readBlob({
         ...this.getGitConfig(),
         oid: commitOid,
-        filepath: path
+        filepath: path2
       });
-      const content3 = Buffer.from(blob).toString("base64");
+      const content3 = Buffer2.from(blob).toString("base64");
       return {
         content: content3,
         sha: oid,
-        path,
+        path: path2,
         type: "file"
       };
     } catch (error) {
-      logger.error(`Could not get raw file ${path}`, error);
+      logger.error(`Could not get raw file ${path2}`, error);
       throw new Error(
-        `Could not get file ${path} from repository ${this.getRepositoryName()}`
+        `Could not get file ${path2} from repository ${this.getRepositoryName()}`
       );
+    }
+  }
+  /**
+   * Lists file and directory names in a specific directory path within the repository.
+   * Only lists immediate children (non-recursive).
+   *
+   * @param dirPath - The directory path to list (e.g. "quartz/cli/templates").
+   * @returns An array of entry names, or an empty array if the directory doesn't exist.
+   */
+  async listDirectory(dirPath) {
+    try {
+      await this.ensureRepoInitialized();
+      const commitOid = await import_isomorphic_git.default.resolveRef({
+        ...this.getGitConfig(),
+        ref: `origin/${this.branch}`
+      });
+      const { commit } = await import_isomorphic_git.default.readCommit({
+        ...this.getGitConfig(),
+        oid: commitOid
+      });
+      let currentOid = commit.tree;
+      const parts = dirPath.split("/").filter((p) => p.length > 0);
+      for (const part of parts) {
+        const { tree: tree2 } = await import_isomorphic_git.default.readTree({
+          ...this.getGitConfig(),
+          oid: currentOid
+        });
+        const entry = tree2.find(
+          (e) => e.path === part && e.type === "tree"
+        );
+        if (!entry) return [];
+        currentOid = entry.oid;
+      }
+      const { tree } = await import_isomorphic_git.default.readTree({
+        ...this.getGitConfig(),
+        oid: currentOid
+      });
+      return tree.map((e) => ({
+        name: e.path,
+        type: e.type
+      }));
+    } catch (error) {
+      logger.debug(`Could not list directory ${dirPath}`, error);
+      return [];
     }
   }
   async getLatestCommit() {
@@ -53058,6 +60597,185 @@ var RepositoryConnection = class {
       return void 0;
     }
   }
+  async hasCommitInHistory(targetOid, fetchDepth = 100) {
+    try {
+      await this.ensureRepoInitialized();
+      await import_isomorphic_git.default.fetch({
+        ...this.getGitConfig(),
+        url: this.remoteUrl,
+        ref: this.branch,
+        singleBranch: true,
+        depth: fetchDepth
+      });
+      const commits = await import_isomorphic_git.default.log({
+        ...this.getGitConfig(),
+        ref: `origin/${this.branch}`,
+        depth: fetchDepth
+      });
+      return commits.some((entry) => entry.oid === targetOid);
+    } catch {
+      return false;
+    }
+  }
+  async upgradeFromUpstream(upstreamUrl, upstreamBranch) {
+    await this.ensureRepoInitialized();
+    await import_isomorphic_git.default.fetch({
+      ...this.getGitConfig(),
+      url: this.remoteUrl,
+      ref: this.branch,
+      singleBranch: true
+    });
+    const remoteCommit = await import_isomorphic_git.default.resolveRef({
+      ...this.getGitConfig(),
+      ref: `origin/${this.branch}`
+    });
+    await import_isomorphic_git.default.checkout({
+      ...this.getGitConfig(),
+      ref: remoteCommit,
+      force: true
+    });
+    await import_isomorphic_git.default.branch({
+      ...this.getGitConfig(),
+      ref: this.branch,
+      object: remoteCommit,
+      force: true
+    });
+    await import_isomorphic_git.default.checkout({
+      ...this.getGitConfig(),
+      ref: this.branch
+    });
+    const remoteName = "upstream";
+    const existingRemotes = await import_isomorphic_git.default.listRemotes({
+      ...this.getGitConfig()
+    });
+    if (existingRemotes.some((r) => r.remote === remoteName)) {
+      await import_isomorphic_git.default.deleteRemote({
+        ...this.getGitConfig(),
+        remote: remoteName
+      });
+    }
+    await import_isomorphic_git.default.addRemote({
+      ...this.getGitConfig(),
+      remote: remoteName,
+      url: upstreamUrl
+    });
+    await import_isomorphic_git.default.fetch({
+      ...this.getGitConfig(),
+      url: upstreamUrl,
+      remote: remoteName,
+      ref: upstreamBranch,
+      singleBranch: true
+    });
+    const mergeRef = `remotes/${remoteName}/${upstreamBranch}`;
+    const lockfilePath = "quartz.lock.json";
+    const mergeAuthor = {
+      name: "Quartz Syncer",
+      email: "268450573+quartz-syncer-publisher[bot]@users.noreply.github.com"
+    };
+    let lockfileBackup = null;
+    try {
+      const { blob } = await import_isomorphic_git.default.readBlob({
+        ...this.getGitConfig(),
+        oid: remoteCommit,
+        filepath: lockfilePath
+      });
+      lockfileBackup = blob;
+    } catch {
+      logger.debug("No quartz.lock.json found, skipping backup");
+    }
+    let result;
+    try {
+      result = await import_isomorphic_git.default.merge({
+        ...this.getGitConfig(),
+        ours: this.branch,
+        theirs: mergeRef,
+        abortOnConflict: true,
+        author: mergeAuthor
+      });
+    } catch (mergeError) {
+      const conflictFiles = this.extractConflictFiles(mergeError);
+      if (!conflictFiles) throw mergeError;
+      const nonLockfileConflicts = conflictFiles.filter(
+        (f) => f !== lockfilePath
+      );
+      if (nonLockfileConflicts.length > 0) {
+        throw new Error(
+          `Merge conflicts in: ${conflictFiles.join(", ")}`
+        );
+      }
+      if (!lockfileBackup) {
+        throw new Error(
+          `Merge conflicts in: ${conflictFiles.join(", ")}`
+        );
+      }
+      logger.info("Only quartz.lock.json conflicts, auto-resolving");
+      try {
+        await import_isomorphic_git.default.merge({
+          ...this.getGitConfig(),
+          ours: this.branch,
+          theirs: mergeRef,
+          abortOnConflict: false,
+          author: mergeAuthor
+        });
+      } catch (retryError) {
+        const retryConflicts = this.extractConflictFiles(retryError);
+        if (!retryConflicts) throw retryError;
+        const retryNonLockfile = retryConflicts.filter(
+          (f) => f !== lockfilePath
+        );
+        if (retryNonLockfile.length > 0) {
+          throw new Error(
+            `Merge conflicts in: ${retryConflicts.join(", ")}`
+          );
+        }
+      }
+      const fullLockfilePath = `${this.dir}/${lockfilePath}`;
+      await this.getFs().promises.writeFile(
+        fullLockfilePath,
+        lockfileBackup
+      );
+      await import_isomorphic_git.default.add({
+        ...this.getGitConfig(),
+        filepath: lockfilePath
+      });
+      const oursOid = await import_isomorphic_git.default.resolveRef({
+        ...this.getGitConfig(),
+        ref: this.branch
+      });
+      const theirsOid = await import_isomorphic_git.default.resolveRef({
+        ...this.getGitConfig(),
+        ref: mergeRef
+      });
+      const commitOid = await import_isomorphic_git.default.commit({
+        ...this.getGitConfig(),
+        message: `Merge upstream/${upstreamBranch} (auto-resolved quartz.lock.json)`,
+        author: mergeAuthor,
+        parent: [oursOid, theirsOid]
+      });
+      result = { oid: commitOid, alreadyMerged: false };
+    }
+    if (result.alreadyMerged) {
+      return {
+        oid: result.oid ?? remoteCommit,
+        alreadyMerged: true
+      };
+    }
+    await import_isomorphic_git.default.checkout({
+      ...this.getGitConfig(),
+      ref: this.branch
+    });
+    await this.pushWithRetry();
+    return {
+      oid: result.oid,
+      alreadyMerged: false
+    };
+  }
+  extractConflictFiles(error) {
+    if (error && typeof error === "object" && "data" in error && error.data && typeof error.data === "object" && "filepaths" in error.data && Array.isArray(error.data.filepaths)) {
+      return error.data.filepaths;
+    }
+    return null;
+  }
   async deleteFiles(filePaths, onProgress) {
     if (filePaths.length === 0) return;
     try {
@@ -53068,14 +60786,14 @@ var RepositoryConnection = class {
         ref: this.branch,
         singleBranch: true
       });
-      const normalizeFilePath = (path) => {
+      const normalizeFilePath = (path2) => {
         let previous2;
         do {
-          previous2 = path;
-          path = path.replace(/\.\.\//g, "");
-        } while (path !== previous2);
-        path = this.getVaultPath(path);
-        return path.startsWith("/") ? `${this.contentFolder}${path}` : `${this.contentFolder}/${path}`;
+          previous2 = path2;
+          path2 = path2.replace(/\.\.\//g, "");
+        } while (path2 !== previous2);
+        path2 = this.getVaultPath(path2);
+        return path2.startsWith("/") ? `${this.contentFolder}${path2}` : `${this.contentFolder}/${path2}`;
       };
       const remoteCommit = await import_isomorphic_git.default.resolveRef({
         ...this.getGitConfig(),
@@ -53167,14 +60885,14 @@ var RepositoryConnection = class {
         ...this.getGitConfig(),
         ref: this.branch
       });
-      const normalizeFilePath = (path) => {
+      const normalizeFilePath = (path2) => {
         let previous2;
         do {
-          previous2 = path;
-          path = path.replace(/\.\.\//g, "");
-        } while (path !== previous2);
-        path = this.getVaultPath(path);
-        return path.startsWith("/") ? `${this.contentFolder}${path}` : `${this.contentFolder}/${path}`;
+          previous2 = path2;
+          path2 = path2.replace(/\.\.\//g, "");
+        } while (path2 !== previous2);
+        path2 = this.getVaultPath(path2);
+        return path2.startsWith("/") ? `${this.contentFolder}${path2}` : `${this.contentFolder}/${path2}`;
       };
       const ensureDirectory = async (filePath) => {
         const parts = filePath.split("/");
@@ -53300,7 +61018,7 @@ var RepositoryConnection = class {
       }
     }
   }
-  async writeRawFiles(files) {
+  async writeRawFiles(files, commitMessage = "Updated integration styles") {
     if (files.size === 0) return;
     try {
       await this.ensureRepoInitialized();
@@ -53332,7 +61050,7 @@ var RepositoryConnection = class {
       await this.stageRawFiles(files);
       await import_isomorphic_git.default.commit({
         ...this.getGitConfig(),
-        message: "Updated integration styles",
+        message: commitMessage,
         author: {
           name: "Quartz Syncer",
           email: "268450573+quartz-syncer-publisher[bot]@users.noreply.github.com"
@@ -53385,6 +61103,28 @@ var RepositoryConnection = class {
       username: auth.username || "",
       password: auth.secret || ""
     });
+  }
+  static async fetchRemoteHeadCommit(remoteUrl, auth, ref, corsProxyUrl) {
+    try {
+      const prefix = ref ? `refs/heads/${ref}` : "HEAD";
+      const refs = await import_isomorphic_git.default.listServerRefs({
+        http: obsidianHttpClient,
+        url: remoteUrl,
+        corsProxy: corsProxyUrl,
+        onAuth: this.getOnAuth(auth),
+        prefix,
+        symrefs: true
+      });
+      if (ref) {
+        const match3 = refs.find((r) => r.ref === `refs/heads/${ref}`);
+        return match3?.oid ?? null;
+      }
+      const head = refs.find((r) => r.ref === "HEAD");
+      return head?.oid ?? null;
+    } catch (error) {
+      logger.debug("Failed to fetch remote HEAD commit", error);
+      return null;
+    }
   }
   static async fetchRemoteBranches(remoteUrl, auth, corsProxyUrl) {
     try {
@@ -53609,7 +61349,7 @@ var Publisher = class {
 
 // src/views/PublicationCenter/PublicationCenter.ts
 init_esbuild_buffer_shim();
-var import_obsidian14 = require("obsidian");
+var import_obsidian15 = require("obsidian");
 
 // src/views/PublicationCenter/PublicationCenter.svelte
 init_esbuild_buffer_shim();
@@ -54148,7 +61888,7 @@ function make_dirty(component, i) {
   }
   component.$$.dirty[i / 31 | 0] |= 1 << i % 31;
 }
-function init2(component, options, instance6, create_fragment6, not_equal, props, append_styles2 = null, dirty = [-1]) {
+function init(component, options, instance6, create_fragment6, not_equal, props, append_styles2 = null, dirty = [-1]) {
   const parent_component = current_component;
   set_current_component(component);
   const $$ = component.$$ = {
@@ -54470,7 +62210,7 @@ if (typeof window !== "undefined")
   (window.__svelte || (window.__svelte = { v: /* @__PURE__ */ new Set() })).v.add(PUBLIC_VERSION);
 
 // src/views/PublicationCenter/PublicationCenter.svelte
-var import_obsidian12 = require("obsidian");
+var import_obsidian13 = require("obsidian");
 
 // src/ui/TreeView/TreeView.svelte
 init_esbuild_buffer_shim();
@@ -54483,10 +62223,10 @@ init_esbuild_buffer_shim();
 
 // src/ui/Icon.svelte
 init_esbuild_buffer_shim();
-var import_obsidian11 = require("obsidian");
+var import_obsidian12 = require("obsidian");
 function create_fragment(ctx) {
   let html_tag;
-  let raw_value = (0, import_obsidian11.getIcon)(
+  let raw_value = (0, import_obsidian12.getIcon)(
     /*name*/
     ctx[0]
   )?.outerHTML + "";
@@ -54503,7 +62243,7 @@ function create_fragment(ctx) {
     },
     p(ctx2, [dirty]) {
       if (dirty & /*name*/
-      1 && raw_value !== (raw_value = (0, import_obsidian11.getIcon)(
+      1 && raw_value !== (raw_value = (0, import_obsidian12.getIcon)(
         /*name*/
         ctx2[0]
       )?.outerHTML + "")) html_tag.p(raw_value);
@@ -54528,7 +62268,7 @@ function instance($$self, $$props, $$invalidate) {
 var Icon = class extends SvelteComponent {
   constructor(options) {
     super();
-    init2(this, options, instance, create_fragment, safe_not_equal, { name: 0 });
+    init(this, options, instance, create_fragment, safe_not_equal, { name: 0 });
   }
 };
 var Icon_default = Icon;
@@ -55528,7 +63268,7 @@ function instance2($$self, $$props, $$invalidate) {
 var TreeNode = class extends SvelteComponent {
   constructor(options) {
     super();
-    init2(this, options, instance2, create_fragment2, safe_not_equal, { tree: 0, readOnly: 1, enableShowDiff: 2 });
+    init(this, options, instance2, create_fragment2, safe_not_equal, { tree: 0, readOnly: 1, enableShowDiff: 2 });
   }
 };
 var TreeNode_default = TreeNode;
@@ -55663,7 +63403,7 @@ function instance3($$self, $$props, $$invalidate) {
 var TreeView = class extends SvelteComponent {
   constructor(options) {
     super();
-    init2(this, options, instance3, create_fragment3, safe_not_equal, {
+    init(this, options, instance3, create_fragment3, safe_not_equal, {
       tree: 0,
       readOnly: 1,
       enableShowDiff: 2,
@@ -56860,7 +64600,7 @@ function instance4($$self, $$props, $$invalidate) {
     return root2;
   }
   function loadingProgressBar(node2) {
-    const progressBar = new import_obsidian12.ProgressBarComponent(node2);
+    const progressBar = new import_obsidian13.ProgressBarComponent(node2);
     controller = {
       setProgress: (percentage) => {
         progressBar.setValue(percentage);
@@ -56878,7 +64618,7 @@ function instance4($$self, $$props, $$invalidate) {
     };
   }
   function publishProgressBarAction(node2) {
-    const progressBar = new import_obsidian12.ProgressBarComponent(node2);
+    const progressBar = new import_obsidian13.ProgressBarComponent(node2);
     $$invalidate(23, publishController = {
       setProgress: (progress) => {
         progressBar.setValue(progress);
@@ -56894,7 +64634,7 @@ function instance4($$self, $$props, $$invalidate) {
     };
   }
   const rotatingCog = () => {
-    let cog = (0, import_obsidian12.getIcon)("cog");
+    let cog = (0, import_obsidian13.getIcon)("cog");
     cog?.classList.add("quartz-syncer-rotate", "quartz-syncer-cog");
     return cog;
   };
@@ -56925,8 +64665,8 @@ function instance4($$self, $$props, $$invalidate) {
     const unpublishedPaths = traverseTree(unpublishedNoteTree);
     const changedPaths = traverseTree(changedNotesTree);
     $$invalidate(5, pathsToDelete = traverseTree(deletedNoteTree));
-    const notesToDelete = pathsToDelete.filter((path) => publishStatus.deletedNotePaths.some((p) => p.path === path));
-    const blobsToDelete = pathsToDelete.filter((path) => publishStatus.deletedBlobPaths.some((p) => p.path === path));
+    const notesToDelete = pathsToDelete.filter((path2) => publishStatus.deletedNotePaths.some((p) => p.path === path2));
+    const blobsToDelete = pathsToDelete.filter((path2) => publishStatus.deletedBlobPaths.some((p) => p.path === path2));
     $$invalidate(3, unpublishedToPublish = publishStatus.unpublishedNotes.filter((note) => unpublishedPaths.includes(note.getVaultPath())) ?? []);
     $$invalidate(4, changedToPublish = publishStatus?.changedNotes.filter((note) => changedPaths.includes(note.getVaultPath())) ?? []);
     const allNotesToPublish = unpublishedToPublish.concat(changedToPublish);
@@ -56981,7 +64721,7 @@ function instance4($$self, $$props, $$invalidate) {
     }
     if ($$self.$$.dirty[0] & /*publishStatus*/
     4) {
-      $: $$invalidate(11, deletedNoteTree = publishStatus && filePathsToTree([...publishStatus.deletedNotePaths, ...publishStatus.deletedBlobPaths].map((path) => path.path), "Published notes (select to unpublish)" + (publishStatus.changedNotes.length + publishStatus.publishedNotes.length > 0 ? ` (${publishStatus.changedNotes.length + publishStatus.publishedNotes.length === 1 ? "1 note" : `${publishStatus.changedNotes.length + publishStatus.publishedNotes.length} notes`})` : "")));
+      $: $$invalidate(11, deletedNoteTree = publishStatus && filePathsToTree([...publishStatus.deletedNotePaths, ...publishStatus.deletedBlobPaths].map((path2) => path2.path), "Published notes (select to unpublish)" + (publishStatus.changedNotes.length + publishStatus.publishedNotes.length > 0 ? ` (${publishStatus.changedNotes.length + publishStatus.publishedNotes.length === 1 ? "1 note" : `${publishStatus.changedNotes.length + publishStatus.publishedNotes.length} notes`})` : "")));
     }
     if ($$self.$$.dirty[0] & /*publishStatus*/
     4) {
@@ -57027,7 +64767,7 @@ function instance4($$self, $$props, $$invalidate) {
 var PublicationCenter = class extends SvelteComponent {
   constructor(options) {
     super();
-    init2(
+    init(
       this,
       options,
       instance4,
@@ -57070,7 +64810,7 @@ var Diff = class {
     return this.diffWithOptionsObj(oldTokens, newTokens, options, callback);
   }
   diffWithOptionsObj(oldTokens, newTokens, options, callback) {
-    var _a;
+    var _a2;
     const done = (value2) => {
       value2 = this.postProcess(value2, options);
       if (callback) {
@@ -57088,7 +64828,7 @@ var Diff = class {
     if (options.maxEditLength != null) {
       maxEditLength = Math.min(maxEditLength, options.maxEditLength);
     }
-    const maxExecutionTime = (_a = options.timeout) !== null && _a !== void 0 ? _a : Infinity;
+    const maxExecutionTime = (_a2 = options.timeout) !== null && _a2 !== void 0 ? _a2 : Infinity;
     const abortAfterTimestamp = Date.now() + maxExecutionTime;
     const bestPath = [{ oldPos: -1, lastComponent: void 0 }];
     let newPos = this.extractCommon(bestPath[0], newTokens, oldTokens, 0, options);
@@ -57153,16 +64893,16 @@ var Diff = class {
       }
     }
   }
-  addToPath(path, added, removed, oldPosInc, options) {
-    const last = path.lastComponent;
+  addToPath(path2, added, removed, oldPosInc, options) {
+    const last = path2.lastComponent;
     if (last && !options.oneChangePerToken && last.added === added && last.removed === removed) {
       return {
-        oldPos: path.oldPos + oldPosInc,
+        oldPos: path2.oldPos + oldPosInc,
         lastComponent: { count: last.count + 1, added, removed, previousComponent: last.previousComponent }
       };
     } else {
       return {
-        oldPos: path.oldPos + oldPosInc,
+        oldPos: path2.oldPos + oldPosInc,
         lastComponent: { count: 1, added, removed, previousComponent: last }
       };
     }
@@ -57305,7 +65045,7 @@ function tokenize4(value2, options) {
 }
 
 // src/views/PublicationCenter/DiffView.svelte
-var import_obsidian13 = require("obsidian");
+var import_obsidian14 = require("obsidian");
 function add_css(target) {
   append_styles(target, "svelte-1o1t5ba", ".diff-view-wrapper.svelte-1o1t5ba.svelte-1o1t5ba{font-family:var(--font-monospace);font-size:12px;border:1px solid var(--background-modifier-border);border-radius:6px;overflow:hidden}.diff-header.svelte-1o1t5ba.svelte-1o1t5ba{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--background-secondary);border-bottom:1px solid var(--background-modifier-border)}.diff-info.svelte-1o1t5ba.svelte-1o1t5ba{display:flex;align-items:center;gap:12px}.diff-stats.svelte-1o1t5ba.svelte-1o1t5ba{display:flex;gap:8px;font-weight:500}.additions.svelte-1o1t5ba.svelte-1o1t5ba{color:var(--color-green)}.deletions.svelte-1o1t5ba.svelte-1o1t5ba{color:var(--color-red)}.diff-filename.svelte-1o1t5ba.svelte-1o1t5ba{color:var(--text-muted)}.diff-controls.svelte-1o1t5ba.svelte-1o1t5ba{display:flex;gap:4px}.view-toggle.svelte-1o1t5ba.svelte-1o1t5ba{padding:4px 12px;border:1px solid var(--background-modifier-border);background:var(--background-primary);border-radius:4px;cursor:pointer;font-size:11px;color:var(--text-muted)}.view-toggle.svelte-1o1t5ba.svelte-1o1t5ba:hover{background:var(--background-modifier-hover)}.view-toggle.active.svelte-1o1t5ba.svelte-1o1t5ba{background:var(--interactive-accent);color:var(--text-on-accent);border-color:var(--interactive-accent)}.diff-split.svelte-1o1t5ba.svelte-1o1t5ba{display:flex;height:50vh}.diff-pane.svelte-1o1t5ba.svelte-1o1t5ba{flex:1;display:flex;flex-direction:column;min-width:0;overflow:hidden}.diff-pane.svelte-1o1t5ba.svelte-1o1t5ba:first-child{border-right:1px solid var(--background-modifier-border)}.diff-pane-header.svelte-1o1t5ba.svelte-1o1t5ba{padding:6px 12px;background:var(--background-secondary);border-bottom:1px solid var(--background-modifier-border);font-size:11px;font-weight:500;color:var(--text-muted)}.diff-scroll-area.svelte-1o1t5ba.svelte-1o1t5ba{flex:1;overflow:auto}.diff-unified-scroll.svelte-1o1t5ba.svelte-1o1t5ba{height:50vh;overflow:auto}.diff-lines-inner.svelte-1o1t5ba.svelte-1o1t5ba{display:inline-block;min-width:100%}.diff-line.svelte-1o1t5ba.svelte-1o1t5ba{display:flex;line-height:20px;white-space:pre}.diff-line.added.svelte-1o1t5ba.svelte-1o1t5ba{--fallback-color-added:46, 160, 67;background:rgba(\n			var(\n				--background-modifier-success-rgb,\n				var(--color-green-rgb, var(--fallback-color-added))\n			),\n			0.15\n		)}.diff-line.removed.svelte-1o1t5ba.svelte-1o1t5ba{--fallback-color-removed:248, 81, 73;background:rgba(\n			var(\n				--background-modifier-error-rgb,\n				var(--color-red-rgb, var(--fallback-color-removed))\n			),\n			0.15\n		)}.diff-line.empty.svelte-1o1t5ba.svelte-1o1t5ba{background:var(--background-secondary)}.line-num.svelte-1o1t5ba.svelte-1o1t5ba{min-width:40px;padding:0 8px;text-align:right;color:var(--text-faint);background:var(--background-secondary);user-select:none;border-right:1px solid var(--background-modifier-border);flex-shrink:0}.diff-line.added.svelte-1o1t5ba>.line-num.svelte-1o1t5ba,.diff-line.removed.svelte-1o1t5ba>.line-num.svelte-1o1t5ba{background:transparent}.line-indicator.svelte-1o1t5ba.svelte-1o1t5ba{width:20px;min-width:20px;text-align:center;color:var(--text-muted);user-select:none;flex-shrink:0}.diff-line.added.svelte-1o1t5ba .line-indicator.svelte-1o1t5ba{color:var(--color-green);font-weight:bold}.diff-line.removed.svelte-1o1t5ba .line-indicator.svelte-1o1t5ba{color:var(--color-red);font-weight:bold}.line-content.svelte-1o1t5ba.svelte-1o1t5ba{flex:1;padding:0 8px}.diff-footer.svelte-1o1t5ba.svelte-1o1t5ba{padding:8px 12px;background:var(--background-secondary);border-top:1px solid var(--background-modifier-border);font-size:11px;color:var(--text-muted);font-family:var(--font-interface)}");
 }
@@ -58233,7 +65973,7 @@ function getUnifiedLines(changes) {
 }
 function instance5($$self, $$props, $$invalidate) {
   let diff;
-  let splitLines;
+  let splitLines2;
   let unifiedLines;
   let additions;
   let deletions;
@@ -58244,7 +65984,7 @@ function instance5($$self, $$props, $$invalidate) {
   function getInitialViewMode() {
     if (defaultViewStyle === "split") return "split";
     if (defaultViewStyle === "unified") return "unified";
-    return import_obsidian13.Platform.isMobile ? "unified" : "split";
+    return import_obsidian14.Platform.isMobile ? "unified" : "split";
   }
   let viewMode = getInitialViewMode();
   let leftPane = null;
@@ -58300,7 +66040,7 @@ function instance5($$self, $$props, $$invalidate) {
     }
     if ($$self.$$.dirty & /*diff*/
     2048) {
-      $: $$invalidate(5, splitLines = buildSplitLines(diff));
+      $: $$invalidate(5, splitLines2 = buildSplitLines(diff));
     }
     if ($$self.$$.dirty & /*diff*/
     2048) {
@@ -58321,7 +66061,7 @@ function instance5($$self, $$props, $$invalidate) {
     deletions,
     additions,
     unifiedLines,
-    splitLines,
+    splitLines2,
     leftPaneAction,
     rightPaneAction,
     oldContent,
@@ -58335,7 +66075,7 @@ function instance5($$self, $$props, $$invalidate) {
 var DiffView = class extends SvelteComponent {
   constructor(options) {
     super();
-    init2(
+    init(
       this,
       options,
       instance5,
@@ -58363,7 +66103,7 @@ var PublicationCenter2 = class {
   vault;
   publicationCenterUi;
   constructor(app2, publishStatusManager, publisher, siteManager, settings) {
-    this.modal = new import_obsidian14.Modal(app2);
+    this.modal = new import_obsidian15.Modal(app2);
     this.settings = settings;
     this.publishStatusManager = publishStatusManager;
     this.publisher = publisher;
@@ -58381,7 +66121,7 @@ var PublicationCenter2 = class {
    * @returns A Node representing the icon.
    */
   getIcon(name) {
-    const icon = (0, import_obsidian14.getIcon)(name) ?? document.createElement("span");
+    const icon = (0, import_obsidian15.getIcon)(name) ?? document.createElement("span");
     if (icon instanceof SVGSVGElement) {
       icon.addClass("quartz-syncer-svg-icon");
     }
@@ -58416,7 +66156,7 @@ var PublicationCenter2 = class {
         localFile = localContent ? localContent[0] : void 0;
       } else {
         localContent = this.vault.getFileByPath(localNotePath);
-        if (!(localContent instanceof import_obsidian14.TFile)) {
+        if (!(localContent instanceof import_obsidian15.TFile)) {
           localFile = "";
         } else {
           localContent = await this.publisher.compiler.generateMarkdown(
@@ -58439,7 +66179,7 @@ var PublicationCenter2 = class {
       }
       if (remoteFile && localFile) {
         let diffView;
-        const diffModal = new import_obsidian14.Modal(this.modal.app);
+        const diffModal = new import_obsidian15.Modal(this.modal.app);
         const title = notePath.split("/").pop() || "Diff";
         diffModal.titleEl.createEl("span", {
           text: `${title}`
@@ -58524,10 +66264,10 @@ var PublishStatusManager = class {
     const deletedPaths = Object.keys(remoteNoteHashes).filter(
       (key) => !isJsFile(key) && !isMarkedForPublish(key)
     );
-    const pathsWithSha = deletedPaths.map((path) => {
+    const pathsWithSha = deletedPaths.map((path2) => {
       return {
-        path,
-        sha: remoteNoteHashes[path]
+        path: path2,
+        sha: remoteNoteHashes[path2]
       };
     });
     return pathsWithSha;
@@ -58559,9 +66299,9 @@ var PublishStatusManager = class {
     if (this.publisher.settings.useCache) {
       await this.publisher.datastore.preloadCache();
       const entriesToProcess = remoteBlobHashesArray.filter(
-        ([path, sha]) => {
+        ([path2, sha]) => {
           if (!sha) return false;
-          const isPublishableFile = path.endsWith(".md") || this.publisher.settings.useBases && path.endsWith(".base") || this.publisher.settings.useCanvas && path.endsWith(".canvas");
+          const isPublishableFile = path2.endsWith(".md") || this.publisher.settings.useBases && path2.endsWith(".base") || this.publisher.settings.useCanvas && path2.endsWith(".canvas");
           return isPublishableFile;
         }
       );
@@ -58571,7 +66311,7 @@ var PublishStatusManager = class {
       const allNoteContents = await this.siteManager.getAllNoteContents();
       await batchParallel(
         entriesToProcess,
-        async ([path, sha]) => {
+        async ([path2, sha]) => {
           syncIndex++;
           if (controller) {
             controller.setProgress(
@@ -58580,28 +66320,28 @@ var PublishStatusManager = class {
             controller.setIndexText(
               `Syncing remote cache: ${syncIndex.toString().padStart(syncPadLength)}/${syncTotal}`
             );
-            controller.setText(`Processing ${path}...`);
+            controller.setText(`Processing ${path2}...`);
           }
-          const hash = await this.publisher.datastore.loadRemoteHash(path);
+          const hash = await this.publisher.datastore.loadRemoteHash(path2);
           if (hash && hash === sha) {
             return;
           }
-          if (!this.publisher.vault.getFileByPath(path)) {
+          if (!this.publisher.vault.getFileByPath(path2)) {
             return;
           }
-          const remoteContent = allNoteContents.get(path) ?? "";
+          const remoteContent = allNoteContents.get(path2) ?? "";
           if (!remoteContent) {
             return;
           }
-          const timestamp = await this.publisher.datastore.getTime(path) ?? Date.now();
+          const timestamp2 = await this.publisher.datastore.getTime(path2) ?? Date.now();
           await this.publisher.datastore.storeRemoteFile(
-            path,
-            timestamp,
+            path2,
+            timestamp2,
             [remoteContent, { blobs: [] }]
           );
           await this.publisher.datastore.storeRemoteHash(
-            path,
-            timestamp,
+            path2,
+            timestamp2,
             sha
           );
         },
@@ -58799,7 +66539,7 @@ init_esbuild_buffer_shim();
 init_esbuild_buffer_shim();
 var version = "3.7.7";
 var VERSION2 = version;
-var _hasBuffer = typeof Buffer === "function";
+var _hasBuffer = typeof Buffer2 === "function";
 var _TD = typeof TextDecoder === "function" ? new TextDecoder() : void 0;
 var _TE = typeof TextEncoder === "function" ? new TextEncoder() : void 0;
 var b64ch = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -58825,8 +66565,8 @@ var btoaPolyfill = (bin) => {
   }
   return pad ? asc.slice(0, pad - 3) + "===".substring(pad) : asc;
 };
-var _btoa = typeof btoa === "function" ? (bin) => btoa(bin) : _hasBuffer ? (bin) => Buffer.from(bin, "binary").toString("base64") : btoaPolyfill;
-var _fromUint8Array = _hasBuffer ? (u8a) => Buffer.from(u8a).toString("base64") : (u8a) => {
+var _btoa = typeof btoa === "function" ? (bin) => btoa(bin) : _hasBuffer ? (bin) => Buffer2.from(bin, "binary").toString("base64") : btoaPolyfill;
+var _fromUint8Array = _hasBuffer ? (u8a) => Buffer2.from(u8a).toString("base64") : (u8a) => {
   const maxargs = 4096;
   let strs = [];
   for (let i = 0, l2 = u8a.length; i < l2; i += maxargs) {
@@ -58846,7 +66586,7 @@ var cb_utob = (c) => {
 };
 var re_utob = /[\uD800-\uDBFF][\uDC00-\uDFFFF]|[^\x00-\x7F]/g;
 var utob = (u) => u.replace(re_utob, cb_utob);
-var _encode = _hasBuffer ? (s2) => Buffer.from(s2, "utf8").toString("base64") : _TE ? (s2) => _fromUint8Array(_TE.encode(s2)) : (s2) => _btoa(utob(s2));
+var _encode = _hasBuffer ? (s2) => Buffer2.from(s2, "utf8").toString("base64") : _TE ? (s2) => _fromUint8Array(_TE.encode(s2)) : (s2) => _btoa(utob(s2));
 var encode = (src, urlsafe = false) => urlsafe ? _mkUriSafe(_encode(src)) : _encode(src);
 var encodeURI2 = (src) => encode(src, true);
 var re_btou = /[\xC0-\xDF][\x80-\xBF]|[\xE0-\xEF][\x80-\xBF]{2}|[\xF0-\xF7][\x80-\xBF]{3}/g;
@@ -58874,10 +66614,10 @@ var atobPolyfill = (asc) => {
   }
   return bin;
 };
-var _atob = typeof atob === "function" ? (asc) => atob(_tidyB64(asc)) : _hasBuffer ? (asc) => Buffer.from(asc, "base64").toString("binary") : atobPolyfill;
-var _toUint8Array = _hasBuffer ? (a) => _U8Afrom(Buffer.from(a, "base64")) : (a) => _U8Afrom(_atob(a).split("").map((c) => c.charCodeAt(0)));
+var _atob = typeof atob === "function" ? (asc) => atob(_tidyB64(asc)) : _hasBuffer ? (asc) => Buffer2.from(asc, "base64").toString("binary") : atobPolyfill;
+var _toUint8Array = _hasBuffer ? (a) => _U8Afrom(Buffer2.from(a, "base64")) : (a) => _U8Afrom(_atob(a).split("").map((c) => c.charCodeAt(0)));
 var toUint8Array = (a) => _toUint8Array(_unURI(a));
-var _decode = _hasBuffer ? (a) => Buffer.from(a, "base64").toString("utf8") : _TD ? (a) => _TD.decode(_toUint8Array(a)) : (a) => btou(_atob(a));
+var _decode = _hasBuffer ? (a) => Buffer2.from(a, "base64").toString("utf8") : _TD ? (a) => _TD.decode(_toUint8Array(a)) : (a) => btou(_atob(a));
 var _unURI = (a) => _tidyB64(a.replace(/[-_]/g, (m0) => m0 == "-" ? "+" : "/"));
 var decode2 = (src) => _decode(_unURI(src));
 var isValid = (src) => {
@@ -58951,12 +66691,189 @@ var gBase64 = {
   extendBuiltins
 };
 
+// src/quartz/QuartzVersionDetector.ts
+init_esbuild_buffer_shim();
+var import_js_logger9 = __toESM(require_logger());
+var logger2 = import_js_logger9.default.get("quartz-version-detector");
+var QUARTZ_CONFIG_YAML = "quartz.config.yaml";
+var QUARTZ_PLUGINS_JSON = "quartz.plugins.json";
+var QUARTZ_CONFIG_TS = "quartz.config.ts";
+var PACKAGE_JSON = "package.json";
+var QuartzVersionDetector = class _QuartzVersionDetector {
+  /**
+   * Detect the Quartz configuration format by probing for known config files.
+   *
+   * Priority: quartz.config.yaml (v5) → quartz.plugins.json (legacy v5) → quartz.config.ts (v4).
+   */
+  static async detectQuartzVersion(repo) {
+    if (await _QuartzVersionDetector.fileExists(repo, QUARTZ_CONFIG_YAML)) {
+      logger2.info("Detected Quartz v5 (YAML config)");
+      return "v5-yaml";
+    }
+    if (await _QuartzVersionDetector.fileExists(repo, QUARTZ_PLUGINS_JSON)) {
+      logger2.info("Detected Quartz v5 (legacy JSON config)");
+      return "v5-json";
+    }
+    if (await _QuartzVersionDetector.fileExists(repo, QUARTZ_CONFIG_TS)) {
+      logger2.info("Detected Quartz v4 (TypeScript config)");
+      return "v4";
+    }
+    logger2.info("No Quartz configuration detected");
+    return "unknown";
+  }
+  /**
+   * Read the Quartz version string from the repository's `package.json`.
+   * Returns `null` if `package.json` is missing or has no `version` field.
+   */
+  static async getQuartzPackageVersion(repo) {
+    try {
+      const file = await repo.getRawFile(PACKAGE_JSON);
+      if (!file) return null;
+      const content3 = gBase64.decode(file.content);
+      const pkg = JSON.parse(content3);
+      return pkg.version ?? null;
+    } catch (error) {
+      logger2.warn("Could not read package.json version", error);
+      return null;
+    }
+  }
+  static async fileExists(repo, path2) {
+    try {
+      const file = await repo.getRawFile(path2);
+      return file !== void 0;
+    } catch {
+      return false;
+    }
+  }
+};
+
+// src/quartz/QuartzConfigService.ts
+init_esbuild_buffer_shim();
+init_browser();
+var import_js_logger10 = __toESM(require_logger());
+var logger3 = import_js_logger10.default.get("quartz-config-service");
+var CONFIG_YAML_PATH = "quartz.config.yaml";
+var CONFIG_JSON_PATH = "quartz.plugins.json";
+var LOCK_FILE_PATH = "quartz.lock.json";
+var SCHEMA_COMMENT = "yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json";
+var QuartzConfigService = class {
+  repo;
+  yamlDocument = null;
+  configFormat = null;
+  constructor(repo) {
+    this.repo = repo;
+  }
+  async readConfig() {
+    const { content: content3, format } = await this.readRawConfig();
+    this.configFormat = format;
+    if (format === "json") {
+      return JSON.parse(content3);
+    }
+    this.yamlDocument = parseDocument(content3, {
+      keepSourceTokens: true
+    });
+    return this.yamlDocument.toJSON();
+  }
+  /**
+   * Serialize the current config back to a string, preserving YAML comments
+   * and formatting when possible.
+   *
+   * If the config was originally read via `readConfig()`, the internal
+   * `Document` is reused so that user comments survive the roundtrip.
+   *
+   * For JSON configs, returns formatted JSON.
+   */
+  serializeConfig(config) {
+    if (this.configFormat === "json") {
+      return JSON.stringify(config, null, 2) + "\n";
+    }
+    if (this.yamlDocument) {
+      this.yamlDocument.set("configuration", config.configuration);
+      this.yamlDocument.set("plugins", config.plugins);
+      if (config.layout) {
+        this.yamlDocument.set("layout", config.layout);
+      } else {
+        this.yamlDocument.delete("layout");
+      }
+      this.ensureSchemaComment(this.yamlDocument);
+      return this.yamlDocument.toString();
+    }
+    const doc = new Document(config);
+    this.ensureSchemaComment(doc);
+    return doc.toString();
+  }
+  async writeConfig(config, commitMessage = "Update Quartz configuration via Syncer") {
+    const serialized = this.serializeConfig(config);
+    const filePath = this.configFormat === "json" ? CONFIG_JSON_PATH : CONFIG_YAML_PATH;
+    const files = /* @__PURE__ */ new Map();
+    files.set(filePath, serialized);
+    await this.repo.writeRawFiles(files, commitMessage);
+  }
+  async readLockFile() {
+    try {
+      const file = await this.repo.getRawFile(LOCK_FILE_PATH);
+      if (!file) return null;
+      const content3 = gBase64.decode(file.content);
+      return JSON.parse(content3);
+    } catch (error) {
+      logger3.debug("Could not read lock file", error);
+      return null;
+    }
+  }
+  async writeLockFile(lockFile, commitMessage = "Update plugin lock file via Syncer") {
+    const serialized = JSON.stringify(lockFile, null, 2) + "\n";
+    const files = /* @__PURE__ */ new Map();
+    files.set(LOCK_FILE_PATH, serialized);
+    await this.repo.writeRawFiles(files, commitMessage);
+  }
+  getConfigFormat() {
+    return this.configFormat;
+  }
+  getRawYamlDocument() {
+    return this.yamlDocument;
+  }
+  async readRawConfig() {
+    try {
+      const yamlFile = await this.repo.getRawFile(CONFIG_YAML_PATH);
+      if (yamlFile) {
+        return {
+          content: gBase64.decode(yamlFile.content),
+          format: "yaml"
+        };
+      }
+    } catch {
+      logger3.debug("No YAML config found, trying JSON fallback");
+    }
+    try {
+      const jsonFile = await this.repo.getRawFile(CONFIG_JSON_PATH);
+      if (jsonFile) {
+        return {
+          content: gBase64.decode(jsonFile.content),
+          format: "json"
+        };
+      }
+    } catch {
+      logger3.debug("No JSON config found either");
+    }
+    throw new Error(
+      "No Quartz v5 configuration file found. Expected quartz.config.yaml or quartz.plugins.json."
+    );
+  }
+  ensureSchemaComment(doc) {
+    if (!doc.commentBefore?.includes("yaml-language-server")) {
+      doc.commentBefore = SCHEMA_COMMENT;
+    }
+  }
+};
+
 // src/repositoryConnection/QuartzSyncerSiteManager.ts
 var QuartzSyncerSiteManager = class {
   settings;
   metadataCache;
   baseSyncerConnection;
   userSyncerConnection;
+  quartzVersion = null;
+  configService = null;
   constructor(metadataCache, settings, gitSettingsWithSecret) {
     this.settings = settings;
     this.metadataCache = metadataCache;
@@ -58981,12 +66898,12 @@ var QuartzSyncerSiteManager = class {
    * @param path - The path to the note file.
    * @returns A promise that resolves to the note content as a string.
    */
-  async getNoteContent(path) {
-    if (path.startsWith("/")) {
-      path = path.substring(1);
+  async getNoteContent(path2) {
+    if (path2.startsWith("/")) {
+      path2 = path2.substring(1);
     }
     const response = await this.userSyncerConnection.getFile(
-      `${this.settings.contentFolder}/${path}`
+      `${this.settings.contentFolder}/${path2}`
     );
     if (!response) {
       return "";
@@ -59023,7 +66940,7 @@ var QuartzSyncerSiteManager = class {
    */
   async getNoteHashes(contentTree) {
     const files = contentTree.tree;
-    const isPublishableFile = (path) => path.endsWith(".md") || this.settings.useBases && path.endsWith(".base") || this.settings.useCanvas && path.endsWith(".canvas");
+    const isPublishableFile = (path2) => path2.endsWith(".md") || this.settings.useBases && path2.endsWith(".base") || this.settings.useCanvas && path2.endsWith(".canvas");
     const notes = files.filter(
       (x) => typeof x.path === "string" && x.path.startsWith(this.settings.contentFolder) && x.type === "blob" && isPublishableFile(x.path)
     );
@@ -59060,30 +66977,53 @@ var QuartzSyncerSiteManager = class {
     }
     return hashes;
   }
+  async getQuartzVersion() {
+    if (!this.quartzVersion) {
+      this.quartzVersion = await QuartzVersionDetector.detectQuartzVersion(
+        this.userSyncerConnection
+      );
+    }
+    return this.quartzVersion;
+  }
+  async getConfigService() {
+    const version2 = await this.getQuartzVersion();
+    if (version2 !== "v5-yaml" && version2 !== "v5-json") {
+      return null;
+    }
+    if (!this.configService) {
+      this.configService = new QuartzConfigService(
+        this.userSyncerConnection
+      );
+    }
+    return this.configService;
+  }
+  isQuartzV5() {
+    return this.quartzVersion === "v5-yaml" || this.quartzVersion === "v5-json";
+  }
 };
 
 // src/views/QuartzSyncerSettingTab.ts
 init_esbuild_buffer_shim();
-var import_obsidian24 = require("obsidian");
+var import_obsidian26 = require("obsidian");
 
 // src/views/SettingsView/SettingView.ts
 init_esbuild_buffer_shim();
-var import_obsidian23 = require("obsidian");
+var import_obsidian25 = require("obsidian");
 
 // src/views/SettingsView/Views/GitSettings.ts
 init_esbuild_buffer_shim();
-var import_obsidian16 = require("obsidian");
+var import_obsidian17 = require("obsidian");
 
 // src/ui/suggest/folder.ts
 init_esbuild_buffer_shim();
-var import_obsidian15 = require("obsidian");
-var FolderSuggest = class extends import_obsidian15.AbstractInputSuggest {
+var import_obsidian16 = require("obsidian");
+var FolderSuggest = class extends import_obsidian16.AbstractInputSuggest {
   folders;
   inputEl;
   constructor(app2, inputEl) {
     super(app2, inputEl);
     this.inputEl = inputEl;
-    this.folders = this.app.vault.getAllFolders(true).map((folder) => (0, import_obsidian15.normalizePath)(folder.path));
+    this.folders = this.app.vault.getAllFolders(true).map((folder) => (0, import_obsidian16.normalizePath)(folder.path));
   }
   /**
    * Returns the suggestions to display based on the user's input.
@@ -59121,8 +67061,8 @@ var FolderSuggest = class extends import_obsidian15.AbstractInputSuggest {
 
 // src/utils/SecretStorageService.ts
 init_esbuild_buffer_shim();
-var import_js_logger9 = __toESM(require_logger());
-var logger2 = import_js_logger9.default.get("secret-storage-service");
+var import_js_logger11 = __toESM(require_logger());
+var logger4 = import_js_logger11.default.get("secret-storage-service");
 var GIT_AUTH_SECRET_ID = "quartz-syncer-git-token";
 var SecretStorageService = class {
   secretStorage;
@@ -59140,17 +67080,17 @@ var SecretStorageService = class {
   }
   setToken(token) {
     if (!token) {
-      logger2.warn("Attempted to store empty token");
+      logger4.warn("Attempted to store empty token");
       return;
     }
     this.secretStorage.setSecret(GIT_AUTH_SECRET_ID, token);
     this.cachedToken = token;
-    logger2.info("Git authentication token stored in secure storage");
+    logger4.info("Git authentication token stored in secure storage");
   }
   clearToken() {
     this.secretStorage.setSecret(GIT_AUTH_SECRET_ID, "");
     this.cachedToken = null;
-    logger2.info("Git authentication token cleared from secure storage");
+    logger4.info("Git authentication token cleared from secure storage");
   }
   hasToken() {
     const token = this.getToken();
@@ -59159,20 +67099,20 @@ var SecretStorageService = class {
   async migrateFromSettings(settings, saveSettings) {
     const legacyToken = settings.git?.auth?.secret;
     if (!legacyToken) {
-      logger2.debug(
+      logger4.debug(
         "No legacy token found in settings, skipping migration"
       );
       return false;
     }
     const existingToken = this.getToken();
     if (existingToken && existingToken !== "") {
-      logger2.debug(
+      logger4.debug(
         "Token already exists in secure storage, skipping migration"
       );
       if (settings.git?.auth?.secret) {
         settings.git.auth.secret = void 0;
         await saveSettings();
-        logger2.info(
+        logger4.info(
           "Cleared legacy token from settings (secure storage already has token)"
         );
       }
@@ -59181,7 +67121,7 @@ var SecretStorageService = class {
     this.setToken(legacyToken);
     settings.git.auth.secret = void 0;
     await saveSettings();
-    logger2.info(
+    logger4.info(
       "Successfully migrated Git authentication token from settings to secure storage"
     );
     return true;
@@ -59193,7 +67133,7 @@ var SecretStorageService = class {
 };
 
 // src/views/SettingsView/Views/GitSettings.ts
-var GitSettings = class extends import_obsidian16.PluginSettingTab {
+var GitSettings = class extends import_obsidian17.PluginSettingTab {
   app;
   plugin;
   settings;
@@ -59257,7 +67197,7 @@ var GitSettings = class extends import_obsidian16.PluginSettingTab {
       "quartz-syncer-connection-status",
       "quartz-syncer-connection-status-pending"
     );
-    new import_obsidian16.Setting(this.settingsRootElement).setName("Git Repository").setDesc(
+    new import_obsidian17.Setting(this.settingsRootElement).setName("Git Repository").setDesc(
       "Configure your Git remote. Works with GitHub, GitLab, Bitbucket, and self-hosted Git servers."
     ).setHeading().nameEl.append(statusContainer);
   };
@@ -59324,7 +67264,7 @@ var GitSettings = class extends import_obsidian16.PluginSettingTab {
       this.initializeBranchSetting();
     }
   }
-  debouncedUpdateConnectionStatus = (0, import_obsidian16.debounce)(
+  debouncedUpdateConnectionStatus = (0, import_obsidian17.debounce)(
     this.updateConnectionStatus,
     500,
     true
@@ -59369,7 +67309,7 @@ var GitSettings = class extends import_obsidian16.PluginSettingTab {
     }
   }
   initializeRemoteUrlSetting() {
-    new import_obsidian16.Setting(this.settingsRootElement).setName("Remote URL").setDesc(
+    new import_obsidian17.Setting(this.settingsRootElement).setName("Remote URL").setDesc(
       "The full URL of your Git repository (e.g., https://github.com/username/quartz.git)"
     ).addText(
       (text5) => text5.setPlaceholder("https://github.com/username/quartz.git").setValue(this.settings.settings.git.remoteUrl).onChange(async (value2) => {
@@ -59401,7 +67341,7 @@ var GitSettings = class extends import_obsidian16.PluginSettingTab {
     if (!this.branchSettingEl) {
       this.branchSettingEl = this.settingsRootElement.createDiv();
     }
-    const setting = new import_obsidian16.Setting(this.branchSettingEl).setName("Branch").setDesc("The branch to sync with");
+    const setting = new import_obsidian17.Setting(this.branchSettingEl).setName("Branch").setDesc("The branch to sync with");
     if (this.remoteBranches.length > 0) {
       setting.addDropdown((dropdown) => {
         for (const branch of this.remoteBranches) {
@@ -59436,7 +67376,7 @@ var GitSettings = class extends import_obsidian16.PluginSettingTab {
     }
   }
   initializeProviderHintSetting() {
-    new import_obsidian16.Setting(this.settingsRootElement).setName("Provider").setDesc(
+    new import_obsidian17.Setting(this.settingsRootElement).setName("Provider").setDesc(
       "Select your Git provider for optimized authentication hints"
     ).addDropdown(
       (dropdown) => dropdown.addOption("github", "GitHub").addOption("gitlab", "GitLab").addOption("bitbucket", "Bitbucket").addOption("gitea", "Gitea / Codeberg").addOption("custom", "Custom / Self-hosted").setValue(
@@ -59448,7 +67388,7 @@ var GitSettings = class extends import_obsidian16.PluginSettingTab {
     );
   }
   initializeAuthTypeSetting() {
-    new import_obsidian16.Setting(this.settingsRootElement).setName("Authentication Type").setDesc("How to authenticate with the Git server").addDropdown(
+    new import_obsidian17.Setting(this.settingsRootElement).setName("Authentication Type").setDesc("How to authenticate with the Git server").addDropdown(
       (dropdown) => dropdown.addOption("basic", "Username & Token/Password").addOption("bearer", "Bearer Token").addOption("none", "None (public repos)").setValue(this.settings.settings.git.auth.type).onChange(async (value2) => {
         this.settings.settings.git.auth.type = value2;
         await this.checkConnectionAndSaveSettings();
@@ -59470,7 +67410,7 @@ var GitSettings = class extends import_obsidian16.PluginSettingTab {
       placeholder = "x-token-auth or username";
       description = "Use 'x-token-auth' for app passwords, or your username";
     }
-    new import_obsidian16.Setting(this.settingsRootElement).setName("Username").setDesc(description).addText(
+    new import_obsidian17.Setting(this.settingsRootElement).setName("Username").setDesc(description).addText(
       (text5) => text5.setPlaceholder(placeholder).setValue(this.settings.settings.git.auth.username || "").onChange(async (value2) => {
         this.settings.settings.git.auth.username = value2;
         await this.checkConnectionAndSaveSettings();
@@ -59499,7 +67439,7 @@ var GitSettings = class extends import_obsidian16.PluginSettingTab {
       href: "https://saberzero1.github.io/quartz-syncer-docs/Guides/Generating-an-access-token"
     });
     const hasToken = this.secretStorageService.hasToken();
-    const setting = new import_obsidian16.Setting(this.settingsRootElement).setName(name).setDesc(desc);
+    const setting = new import_obsidian17.Setting(this.settingsRootElement).setName(name).setDesc(desc);
     const controlEl = setting.controlEl;
     const tokenContainer = controlEl.createDiv({
       cls: "quartz-syncer-token-container"
@@ -59522,13 +67462,13 @@ var GitSettings = class extends import_obsidian16.PluginSettingTab {
       cls: "quartz-syncer-token-toggle clickable-icon",
       attr: { "aria-label": "Toggle token visibility" }
     });
-    (0, import_obsidian16.setIcon)(toggleBtn, "eye");
+    (0, import_obsidian17.setIcon)(toggleBtn, "eye");
     let isVisible = false;
     toggleBtn.addEventListener("click", (e) => {
       e.preventDefault();
       isVisible = !isVisible;
       input.type = isVisible ? "text" : "password";
-      (0, import_obsidian16.setIcon)(toggleBtn, isVisible ? "eye-off" : "eye");
+      (0, import_obsidian17.setIcon)(toggleBtn, isVisible ? "eye-off" : "eye");
     });
     const buttonContainer = tokenContainer.createDiv({
       cls: "quartz-syncer-token-buttons"
@@ -59577,7 +67517,7 @@ var GitSettings = class extends import_obsidian16.PluginSettingTab {
       text: "Learn more",
       href: "https://github.com/isomorphic-git/cors-proxy"
     });
-    new import_obsidian16.Setting(this.settingsRootElement).setName("CORS Proxy (optional)").setDesc(desc).addText(
+    new import_obsidian17.Setting(this.settingsRootElement).setName("CORS Proxy (optional)").setDesc(desc).addText(
       (text5) => text5.setPlaceholder("https://cors.isomorphic-git.org").setValue(this.settings.settings.git.corsProxyUrl || "").onChange(async (value2) => {
         this.settings.settings.git.corsProxyUrl = value2 || void 0;
         await this.checkConnectionAndSaveSettings();
@@ -59586,12 +67526,12 @@ var GitSettings = class extends import_obsidian16.PluginSettingTab {
   }
   initializeVaultFolderSetting() {
     const app2 = this.settings.app;
-    new import_obsidian16.Setting(this.settingsRootElement).setName("Vault root folder").setDesc(
+    new import_obsidian17.Setting(this.settingsRootElement).setName("Vault root folder").setDesc(
       'The folder in your Obsidian vault to sync. Use "/" for the entire vault.'
     ).addSearch((text5) => {
       new FolderSuggest(app2, text5.inputEl);
       text5.setPlaceholder("/").setValue(this.settings.settings.vaultPath).onChange(async (value2) => {
-        value2 = (0, import_obsidian16.normalizePath)(value2.trim());
+        value2 = (0, import_obsidian17.normalizePath)(value2.trim());
         if (value2 === "/") {
           value2 = "";
         }
@@ -59602,14 +67542,788 @@ var GitSettings = class extends import_obsidian16.PluginSettingTab {
   }
 };
 
-// src/views/SettingsView/Views/QuartzSettings.ts
+// src/views/SettingsView/Views/QuartzV5SettingsTab.ts
 init_esbuild_buffer_shim();
-var import_obsidian17 = require("obsidian");
-var QuartzSettings = class extends import_obsidian17.PluginSettingTab {
+var import_obsidian19 = require("obsidian");
+
+// src/quartz/QuartzPluginUtils.ts
+init_esbuild_buffer_shim();
+function isObjectSource(source) {
+  return typeof source === "object" && source !== null && "repo" in source && typeof source.repo === "string";
+}
+function getPluginName(source) {
+  if (isObjectSource(source)) {
+    if (source.name) return source.name;
+    return extractNameFromSourceString(source.repo);
+  }
+  return extractNameFromSourceString(source);
+}
+function getPluginSourceKey(source) {
+  if (isObjectSource(source)) {
+    const repoKey = stripRef(source.repo);
+    return source.subdir ? `${repoKey}::${source.subdir}` : repoKey;
+  }
+  return stripRef(source);
+}
+function resolveSourceToGitUrl(source) {
+  const raw = isObjectSource(source) ? source.repo : source;
+  const withoutRef = stripRef(raw);
+  if (withoutRef.startsWith("github:")) {
+    const path2 = withoutRef.slice("github:".length);
+    return `https://github.com/${path2}.git`;
+  }
+  if (withoutRef.startsWith("git+")) {
+    return withoutRef.slice("git+".length);
+  }
+  return withoutRef;
+}
+function getSourceRef(source) {
+  if (isObjectSource(source)) {
+    return source.ref;
+  }
+  const hashIndex = source.indexOf("#");
+  return hashIndex !== -1 ? source.slice(hashIndex + 1) : void 0;
+}
+function stripRef(source) {
+  const hashIndex = source.indexOf("#");
+  return hashIndex !== -1 ? source.slice(0, hashIndex) : source;
+}
+function extractNameFromSourceString(source) {
+  const withoutRef = stripRef(source);
+  if (withoutRef.startsWith("github:")) {
+    const path2 = withoutRef.slice("github:".length);
+    const parts2 = path2.split("/");
+    return parts2[parts2.length - 1] || path2;
+  }
+  if (withoutRef.includes("://")) {
+    try {
+      const url = new URL(withoutRef.replace(/^git\+/, ""));
+      const pathname = url.pathname.replace(/\.git$/, "");
+      const parts2 = pathname.split("/").filter(Boolean);
+      return parts2[parts2.length - 1] || pathname;
+    } catch {
+    }
+  }
+  const parts = withoutRef.split("/").filter(Boolean);
+  return parts[parts.length - 1] || withoutRef;
+}
+
+// src/quartz/QuartzPluginManager.ts
+init_esbuild_buffer_shim();
+var DEFAULT_ORDER = 50;
+var QuartzPluginManager = class {
+  addPlugin(config, source, options) {
+    const sourceKey = getPluginSourceKey(source);
+    const existing = config.plugins.find(
+      (p) => getPluginSourceKey(p.source) === sourceKey
+    );
+    if (existing) {
+      throw new Error(
+        `Plugin "${sourceKey}" is already in the configuration.`
+      );
+    }
+    const entry = {
+      source,
+      enabled: options?.enabled ?? true,
+      order: options?.order ?? DEFAULT_ORDER,
+      options: options?.options ?? {}
+    };
+    config.plugins.push(entry);
+    return entry;
+  }
+  removePlugin(config, sourceKey) {
+    const index2 = config.plugins.findIndex(
+      (p) => getPluginSourceKey(p.source) === sourceKey
+    );
+    if (index2 === -1) {
+      throw new Error(
+        `Plugin "${sourceKey}" not found in the configuration.`
+      );
+    }
+    const [removed] = config.plugins.splice(index2, 1);
+    return removed;
+  }
+  findPlugin(config, sourceKey) {
+    return config.plugins.find(
+      (p) => getPluginSourceKey(p.source) === sourceKey
+    );
+  }
+};
+
+// src/quartz/QuartzPluginUpdateChecker.ts
+init_esbuild_buffer_shim();
+var import_js_logger12 = __toESM(require_logger());
+var logger5 = import_js_logger12.default.get("quartz-plugin-update-checker");
+var QuartzPluginUpdateChecker = class {
+  auth;
+  corsProxyUrl;
+  constructor(auth, corsProxyUrl) {
+    this.auth = auth;
+    this.corsProxyUrl = corsProxyUrl;
+  }
+  async checkUpdates(plugins, lockFile) {
+    const lockPlugins = lockFile?.plugins ?? {};
+    const checks = plugins.map(
+      (plugin) => this.checkSinglePlugin(plugin, lockPlugins)
+    );
+    return Promise.all(checks);
+  }
+  async checkSinglePlugin(plugin, lockPlugins) {
+    const sourceKey = getPluginName(plugin.source);
+    const lockEntry = lockPlugins[sourceKey];
+    const lockedCommit = lockEntry?.commit ?? null;
+    if (!lockedCommit) {
+      return {
+        name: sourceKey,
+        sourceKey,
+        lockedCommit: null,
+        remoteCommit: null,
+        hasUpdate: false
+      };
+    }
+    try {
+      const gitUrl = resolveSourceToGitUrl(plugin.source);
+      const ref = getSourceRef(plugin.source) ?? void 0;
+      const remoteCommit = await RepositoryConnection.fetchRemoteHeadCommit(
+        gitUrl,
+        this.auth,
+        ref,
+        this.corsProxyUrl
+      );
+      if (!remoteCommit) {
+        return {
+          name: sourceKey,
+          sourceKey,
+          lockedCommit,
+          remoteCommit: null,
+          hasUpdate: false,
+          error: "Could not reach remote"
+        };
+      }
+      return {
+        name: sourceKey,
+        sourceKey,
+        lockedCommit,
+        remoteCommit,
+        hasUpdate: remoteCommit !== lockedCommit
+      };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      logger5.debug(`Update check failed for ${sourceKey}`, error);
+      return {
+        name: sourceKey,
+        sourceKey,
+        lockedCommit,
+        remoteCommit: null,
+        hasUpdate: false,
+        error: message
+      };
+    }
+  }
+};
+
+// src/quartz/QuartzUpgradeService.ts
+init_esbuild_buffer_shim();
+var import_js_logger13 = __toESM(require_logger());
+var logger6 = import_js_logger13.default.get("quartz-upgrade-service");
+var UPSTREAM_PACKAGE_JSON_URL = "https://raw.githubusercontent.com/jackyzha0/quartz/v5/package.json";
+var UPSTREAM_REPO_URL = "https://github.com/jackyzha0/quartz.git";
+var UPSTREAM_BRANCH = "v5";
+var UPSTREAM_AUTH = { type: "none" };
+var QuartzUpgradeService = class {
+  userRepo;
+  constructor(userRepo) {
+    this.userRepo = userRepo;
+  }
+  async checkForUpgrade() {
+    let currentVersion = null;
+    try {
+      currentVersion = await QuartzVersionDetector.getQuartzPackageVersion(
+        this.userRepo
+      );
+    } catch (error) {
+      logger6.debug("Could not read current Quartz version", error);
+    }
+    let upstreamVersion = null;
+    try {
+      upstreamVersion = await this.fetchUpstreamVersion();
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      logger6.debug("Could not reach upstream Quartz", error);
+      return {
+        currentVersion,
+        upstreamVersion: null,
+        hasUpgrade: false,
+        latestUpstreamSha: null,
+        hasNewerCommits: false,
+        error: `Could not reach upstream Quartz: ${message}`
+      };
+    }
+    if (!upstreamVersion) {
+      return {
+        currentVersion,
+        upstreamVersion: null,
+        hasUpgrade: false,
+        latestUpstreamSha: null,
+        hasNewerCommits: false,
+        error: "Could not determine upstream Quartz version"
+      };
+    }
+    const hasUpgrade = currentVersion !== null && upstreamVersion !== currentVersion;
+    let latestUpstreamSha = null;
+    try {
+      latestUpstreamSha = await RepositoryConnection.fetchRemoteHeadCommit(
+        UPSTREAM_REPO_URL,
+        UPSTREAM_AUTH,
+        UPSTREAM_BRANCH
+      );
+      logger6.info(`Upstream HEAD commit: ${latestUpstreamSha ?? "null"}`);
+    } catch (error) {
+      logger6.warn("Could not fetch upstream HEAD commit SHA", error);
+    }
+    let hasNewerCommits = false;
+    if (latestUpstreamSha) {
+      logger6.info(
+        `Checking if ${latestUpstreamSha.slice(0, 7)} exists in user repo history`
+      );
+      const foundInHistory = await this.userRepo.hasCommitInHistory(latestUpstreamSha);
+      hasNewerCommits = !foundInHistory;
+      logger6.info(
+        `Commit ${latestUpstreamSha.slice(0, 7)} ${foundInHistory ? "found" : "NOT found"} in user repo`
+      );
+    } else {
+      logger6.warn(
+        "Could not determine upstream HEAD SHA, skipping commit check"
+      );
+    }
+    return {
+      currentVersion,
+      upstreamVersion,
+      hasUpgrade,
+      latestUpstreamSha,
+      hasNewerCommits
+    };
+  }
+  async performUpgrade() {
+    try {
+      logger6.info("Starting Quartz upgrade from upstream");
+      const result = await this.userRepo.upgradeFromUpstream(
+        UPSTREAM_REPO_URL,
+        UPSTREAM_BRANCH
+      );
+      if (result.alreadyMerged) {
+        logger6.info("Quartz is already up to date with upstream");
+        return { success: true, alreadyMerged: true, oid: result.oid };
+      }
+      logger6.info(
+        `Quartz upgraded successfully to ${result.oid.slice(0, 7)}`
+      );
+      return { success: true, oid: result.oid, alreadyMerged: false };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      const isConflict = message.includes("Merge conflicts in:") || message.includes("MergeNotSupportedError") || message.includes("MergeConflictError") || message.includes("Merges with conflicts");
+      if (isConflict) {
+        logger6.warn(`Upgrade aborted: ${message}`);
+        return {
+          success: false,
+          error: `${message}. No changes were made. Run \`npx quartz upgrade\` manually to resolve conflicts.`
+        };
+      }
+      logger6.error("Quartz upgrade failed", error);
+      return {
+        success: false,
+        error: `Upgrade failed: ${message}`
+      };
+    }
+  }
+  async fetchUpstreamVersion() {
+    const response = await fetch(UPSTREAM_PACKAGE_JSON_URL);
+    if (!response.ok) return null;
+    const data = await response.json();
+    return data.version ?? null;
+  }
+};
+
+// src/quartz/QuartzTemplateService.ts
+init_esbuild_buffer_shim();
+var import_js_logger14 = __toESM(require_logger());
+var logger7 = import_js_logger14.default.get("quartz-template-service");
+var TEMPLATES_DIR = "quartz/cli/templates";
+var BUILT_IN_FRAMES = ["default", "full-width", "minimal"];
+var QuartzTemplateService = class {
+  repo;
+  constructor(repo) {
+    this.repo = repo;
+  }
+  async listTemplateNames() {
+    const entries = await this.repo.listDirectory(TEMPLATES_DIR);
+    return entries.filter((e) => e.type === "tree").map((e) => e.name);
+  }
+  async readTemplate(templateName) {
+    const configPath = `${TEMPLATES_DIR}/${templateName}/quartz.config.yaml`;
+    try {
+      const file = await this.repo.getRawFile(configPath);
+      if (!file) return null;
+      const { parseDocument: parseDocument2 } = await Promise.resolve().then(() => (init_browser(), browser_exports));
+      const content3 = gBase64.decode(file.content);
+      const doc = parseDocument2(content3, { keepSourceTokens: true });
+      const config = doc.toJSON();
+      return { name: templateName, config };
+    } catch (error) {
+      logger7.debug(`Could not read template ${templateName}`, error);
+      return null;
+    }
+  }
+  async getAvailableFrameNames() {
+    const templateNames = await this.listTemplateNames();
+    const allFrames = new Set(BUILT_IN_FRAMES);
+    for (const name of templateNames) {
+      allFrames.add(name);
+    }
+    return [...allFrames].sort();
+  }
+  applyTemplate(currentConfig, template) {
+    currentConfig.configuration = {
+      ...template.config.configuration
+    };
+    currentConfig.plugins = [...template.config.plugins];
+    currentConfig.layout = template.config.layout ? { ...template.config.layout } : void 0;
+  }
+};
+
+// src/quartz/QuartzPluginManifestService.ts
+init_esbuild_buffer_shim();
+var import_js_logger15 = __toESM(require_logger());
+var logger8 = import_js_logger15.default.get("quartz-plugin-manifest-service");
+function resolveSourceToUrl(source) {
+  if (typeof source === "string") {
+    if (source.startsWith("github:")) {
+      const repoPath = source.replace("github:", "").split("#")[0];
+      return { url: `https://github.com/${repoPath}.git` };
+    }
+    if (source.startsWith("git+https://")) {
+      return { url: source.replace("git+", "").split("#")[0] };
+    }
+    if (source.startsWith("https://")) {
+      return { url: source.split("#")[0] };
+    }
+    return null;
+  }
+  const obj = source;
+  if (obj.repo.startsWith("github:")) {
+    const repoPath = obj.repo.replace("github:", "").split("#")[0];
+    return {
+      url: `https://github.com/${repoPath}.git`,
+      subdir: obj.subdir
+    };
+  }
+  return { url: obj.repo.split("#")[0], subdir: obj.subdir };
+}
+function resolveRef(source) {
+  if (typeof source === "string") {
+    const hashIndex = source.indexOf("#");
+    return hashIndex >= 0 ? source.slice(hashIndex + 1) : void 0;
+  }
+  return source.ref;
+}
+var QuartzPluginManifestService = class {
+  auth;
+  corsProxyUrl;
+  cache = /* @__PURE__ */ new Map();
+  constructor(auth, corsProxyUrl) {
+    this.auth = auth;
+    this.corsProxyUrl = corsProxyUrl;
+  }
+  async fetchManifest(source) {
+    const cacheKey = typeof source === "string" ? source : JSON.stringify(source);
+    if (this.cache.has(cacheKey)) {
+      return this.cache.get(cacheKey) ?? null;
+    }
+    const resolved = resolveSourceToUrl(source);
+    if (!resolved) {
+      this.cache.set(cacheKey, null);
+      return null;
+    }
+    try {
+      let ref = resolveRef(source);
+      if (!ref) {
+        const { defaultBranch } = await RepositoryConnection.fetchRemoteBranches(
+          resolved.url,
+          this.auth,
+          this.corsProxyUrl
+        );
+        ref = defaultBranch ?? "main";
+      }
+      const repo = new RepositoryConnection({
+        gitSettings: {
+          remoteUrl: resolved.url,
+          branch: ref,
+          auth: this.auth,
+          corsProxyUrl: this.corsProxyUrl
+        },
+        contentFolder: "content",
+        vaultPath: "/"
+      });
+      const packageJsonPath = resolved.subdir ? `${resolved.subdir}/package.json` : "package.json";
+      const file = await repo.getRawFile(packageJsonPath);
+      if (!file) {
+        this.cache.set(cacheKey, null);
+        return null;
+      }
+      const content3 = gBase64.decode(file.content);
+      const packageJson = JSON.parse(content3);
+      const manifest = packageJson.quartz ?? null;
+      this.cache.set(cacheKey, manifest);
+      return manifest;
+    } catch (error) {
+      logger8.debug("Could not fetch plugin manifest", error);
+      this.cache.set(cacheKey, null);
+      return null;
+    }
+  }
+  clearCache() {
+    this.cache.clear();
+  }
+};
+
+// src/quartz/QuartzPluginRegistry.ts
+init_esbuild_buffer_shim();
+var import_js_logger16 = __toESM(require_logger());
+var logger9 = import_js_logger16.default.get("quartz-plugin-registry");
+var REGISTRY_URL = "https://raw.githubusercontent.com/quartz-community/registry/main/registry.json";
+var QuartzPluginRegistry = class {
+  cache = null;
+  fetchPromise = null;
+  /**
+   * Fetch the plugin registry, returning cached data if available.
+   * Concurrent calls share the same in-flight request.
+   */
+  async getPlugins() {
+    if (this.cache) return this.cache;
+    if (this.fetchPromise) return this.fetchPromise;
+    this.fetchPromise = this.fetchRegistry();
+    try {
+      const plugins = await this.fetchPromise;
+      this.cache = plugins;
+      return plugins;
+    } finally {
+      this.fetchPromise = null;
+    }
+  }
+  /** Force a fresh fetch on next call. */
+  clearCache() {
+    this.cache = null;
+  }
+  async fetchRegistry() {
+    try {
+      const response = await fetch(REGISTRY_URL);
+      if (!response.ok) {
+        logger9.warn(
+          `Failed to fetch plugin registry: ${response.status}`
+        );
+        return [];
+      }
+      const data = await response.json();
+      return data.plugins ?? [];
+    } catch (error) {
+      logger9.warn("Failed to fetch plugin registry:", error);
+      return [];
+    }
+  }
+};
+
+// src/views/PluginBrowser/PluginBrowserModal.ts
+init_esbuild_buffer_shim();
+var import_obsidian18 = require("obsidian");
+var import_js_logger17 = __toESM(require_logger());
+var logger10 = import_js_logger17.default.get("plugin-browser-modal");
+var PluginBrowserModal = class extends import_obsidian18.Modal {
+  registry;
+  config;
+  onInstall;
+  allPlugins = [];
+  searchQuery = "";
+  selectedTag = "";
+  isLoading = false;
+  installingPlugins = /* @__PURE__ */ new Set();
+  pluginManager = new QuartzPluginManager();
+  constructor(app2, registry, config, onInstall) {
+    super(app2);
+    this.registry = registry;
+    this.config = config;
+    this.onInstall = onInstall;
+  }
+  async onOpen() {
+    this.modalEl.addClass("quartz-syncer-plugin-browser");
+    this.titleEl.setText("Community Plugin Browser");
+    this.loadAndRender();
+  }
+  onClose() {
+    this.contentEl.empty();
+  }
+  async loadAndRender() {
+    this.isLoading = true;
+    this.render();
+    try {
+      this.allPlugins = await this.registry.getPlugins();
+    } catch (error) {
+      logger10.warn("Failed to load registry", error);
+      this.allPlugins = [];
+    }
+    this.isLoading = false;
+    this.render();
+  }
+  render() {
+    this.contentEl.empty();
+    if (this.isLoading) {
+      this.contentEl.createEl("p", {
+        text: "Loading plugin registry...",
+        cls: "quartz-syncer-plugin-browser-loading"
+      });
+      return;
+    }
+    if (this.allPlugins.length === 0) {
+      this.contentEl.createEl("p", {
+        text: "Could not load the plugin registry. Check your internet connection and try again."
+      });
+      return;
+    }
+    this.renderControls();
+    const filtered = this.getFilteredPlugins();
+    const listEl = this.contentEl.createDiv(
+      "quartz-syncer-plugin-browser-list"
+    );
+    if (filtered.length === 0) {
+      listEl.createEl("p", {
+        text: "No plugins match your search.",
+        cls: "quartz-syncer-plugin-browser-empty"
+      });
+      return;
+    }
+    for (const entry of filtered) {
+      this.renderPluginCard(listEl, entry);
+    }
+  }
+  renderControls() {
+    const controlsEl = this.contentEl.createDiv(
+      "quartz-syncer-plugin-browser-controls"
+    );
+    const searchInput = controlsEl.createEl("input", {
+      type: "text",
+      placeholder: "Search plugins...",
+      cls: "quartz-syncer-plugin-browser-search"
+    });
+    searchInput.value = this.searchQuery;
+    searchInput.addEventListener("input", () => {
+      this.searchQuery = searchInput.value;
+      this.renderList();
+    });
+    const allTags = this.getAllTags();
+    if (allTags.length > 0) {
+      const tagSelect = controlsEl.createEl("select", {
+        cls: "quartz-syncer-plugin-browser-tag-filter"
+      });
+      tagSelect.createEl("option", { text: "All categories", value: "" });
+      for (const tag of allTags) {
+        tagSelect.createEl("option", { text: tag, value: tag });
+      }
+      tagSelect.value = this.selectedTag;
+      tagSelect.addEventListener("change", () => {
+        this.selectedTag = tagSelect.value;
+        this.renderList();
+      });
+    }
+  }
+  renderList() {
+    const existing = this.contentEl.querySelector(
+      ".quartz-syncer-plugin-browser-list"
+    );
+    if (existing) existing.remove();
+    const filtered = this.getFilteredPlugins();
+    const listEl = this.contentEl.createDiv(
+      "quartz-syncer-plugin-browser-list"
+    );
+    if (filtered.length === 0) {
+      listEl.createEl("p", {
+        text: "No plugins match your search.",
+        cls: "quartz-syncer-plugin-browser-empty"
+      });
+      return;
+    }
+    for (const entry of filtered) {
+      this.renderPluginCard(listEl, entry);
+    }
+  }
+  renderPluginCard(container, entry) {
+    const isInstalled = this.isPluginInstalled(entry);
+    const isInstalling = this.installingPlugins.has(entry.name);
+    const cardEl = container.createDiv("quartz-syncer-plugin-browser-card");
+    const headerEl = cardEl.createDiv(
+      "quartz-syncer-plugin-browser-card-header"
+    );
+    headerEl.createEl("span", {
+      text: entry.name,
+      cls: "quartz-syncer-plugin-browser-card-name"
+    });
+    if (entry.official) {
+      headerEl.createEl("span", {
+        text: "official",
+        cls: "quartz-syncer-plugin-browser-badge-official"
+      });
+    }
+    cardEl.createEl("p", {
+      text: entry.description,
+      cls: "quartz-syncer-plugin-browser-card-desc"
+    });
+    const footerEl = cardEl.createDiv(
+      "quartz-syncer-plugin-browser-card-footer"
+    );
+    const tagsEl = footerEl.createDiv(
+      "quartz-syncer-plugin-browser-card-tags"
+    );
+    for (const tag of entry.tags) {
+      tagsEl.createEl("span", {
+        text: tag,
+        cls: "quartz-syncer-plugin-browser-tag"
+      });
+    }
+    if (isInstalled) {
+      footerEl.createEl("span", {
+        text: "Installed",
+        cls: "quartz-syncer-plugin-browser-installed"
+      });
+    } else {
+      const installBtn = footerEl.createEl("button", {
+        text: isInstalling ? "Installing..." : "Install",
+        cls: "quartz-syncer-plugin-browser-install-btn"
+      });
+      if (isInstalling) {
+        installBtn.disabled = true;
+      }
+      installBtn.addEventListener("click", async () => {
+        await this.handleInstall(entry, installBtn);
+      });
+    }
+  }
+  async handleInstall(entry, button) {
+    if (this.installingPlugins.has(entry.name)) return;
+    this.installingPlugins.add(entry.name);
+    button.textContent = "Installing...";
+    button.disabled = true;
+    try {
+      await this.onInstall(entry.source);
+      new import_obsidian18.Notice(`Plugin "${entry.name}" installed successfully.`);
+      this.render();
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      logger10.warn(`Failed to install ${entry.name}`, error);
+      new import_obsidian18.Notice(`Failed to install "${entry.name}": ${message}`);
+      button.textContent = "Install";
+      button.disabled = false;
+    } finally {
+      this.installingPlugins.delete(entry.name);
+    }
+  }
+  isPluginInstalled(entry) {
+    const entryKey = getPluginSourceKey(entry.source);
+    return this.config.plugins.some(
+      (p) => getPluginSourceKey(p.source) === entryKey
+    );
+  }
+  getFilteredPlugins() {
+    const query = this.searchQuery.toLowerCase().trim();
+    return this.allPlugins.filter((entry) => {
+      if (this.selectedTag && !entry.tags.includes(this.selectedTag)) {
+        return false;
+      }
+      if (!query) return true;
+      return entry.name.toLowerCase().includes(query) || entry.description.toLowerCase().includes(query) || entry.tags.some((t) => t.toLowerCase().includes(query));
+    });
+  }
+  getAllTags() {
+    const tagSet = /* @__PURE__ */ new Set();
+    for (const entry of this.allPlugins) {
+      for (const tag of entry.tags) {
+        tagSet.add(tag);
+      }
+    }
+    return [...tagSet].sort();
+  }
+};
+
+// src/views/SettingsView/Views/QuartzV5SettingsTab.ts
+var import_js_logger18 = __toESM(require_logger());
+var logger11 = import_js_logger18.default.get("quartz-v5-settings");
+var LAYOUT_POSITIONS = [
+  "left",
+  "right",
+  "beforeBody",
+  "afterBody",
+  "body"
+];
+var DISPLAY_MODES = [
+  "all",
+  "mobile-only",
+  "desktop-only"
+];
+var DEFAULT_LIGHT_COLORS = {
+  light: "#faf8f8",
+  lightgray: "#e5e5e5",
+  gray: "#b8b8b8",
+  darkgray: "#4e4e4e",
+  dark: "#2b2b2b",
+  secondary: "#284b63",
+  tertiary: "#84a59d",
+  highlight: "rgba(143, 159, 169, 0.15)",
+  textHighlight: "#fff23688"
+};
+var DEFAULT_DARK_COLORS = {
+  light: "#161618",
+  lightgray: "#393639",
+  gray: "#646464",
+  darkgray: "#d4d4d4",
+  dark: "#ebebec",
+  secondary: "#7b97aa",
+  tertiary: "#84a59d",
+  highlight: "rgba(143, 159, 169, 0.15)",
+  textHighlight: "#fff23688"
+};
+var PAGE_TYPES = [
+  "content",
+  "folder",
+  "tag",
+  "canvas",
+  "bases",
+  "404"
+];
+var QuartzV5SettingsTab = class extends import_obsidian19.PluginSettingTab {
   app;
   plugin;
   settings;
   settingsRootElement;
+  siteManager = null;
+  configService = null;
+  cachedConfig = null;
+  cachedLockFile = null;
+  cachedVersion = null;
+  cachedPackageVersion = null;
+  cachedUpdateStatuses = null;
+  cachedUpgradeStatus = null;
+  cachedTemplateNames = [];
+  cachedTemplates = /* @__PURE__ */ new Map();
+  templateService = null;
+  manifestService = null;
+  cachedManifests = /* @__PURE__ */ new Map();
+  expandedPlugins = /* @__PURE__ */ new Set();
+  pluginRegistry = new QuartzPluginRegistry();
+  cachedThemesJson = null;
+  isLoading = false;
+  isSaving = false;
+  isCheckingUpdates = false;
+  isCheckingUpgrade = false;
+  isUpgrading = false;
+  hasUnsavedChanges = false;
+  pluginManager = new QuartzPluginManager();
   constructor(app2, plugin, settings, settingsRootElement) {
     super(app2, plugin);
     this.app = app2;
@@ -59617,62 +68331,1115 @@ var QuartzSettings = class extends import_obsidian17.PluginSettingTab {
     this.settings = settings;
     this.settingsRootElement = settingsRootElement;
   }
-  /**
-   * Display the Quartz settings tab.
-   * This method initializes and displays the Quartz-specific settings in the plugin's settings view.
-   */
   display() {
     this.settingsRootElement.empty();
     this.settingsRootElement.addClass("quartz-syncer-github-settings");
-    this.initializeQuartzHeader();
-    this.initializeQuartzContentFolder();
-    this.initializeUseFullImageResolutionSetting();
     this.settings.settings.lastUsedSettingsTab = "quartz";
     this.settings.plugin.saveSettings();
+    this.renderQuartzHeader();
+    this.renderContentFolderSetting();
+    if (this.cachedConfig) {
+      this.renderV5Content();
+    } else {
+      this.renderLoading();
+      this.loadV5Data();
+    }
   }
-  /**
-   * Initializes the Quartz header in the settings view.
-   * This method creates a header for the Quartz settings section.
-   */
-  initializeQuartzHeader = () => {
-    new import_obsidian17.Setting(this.settingsRootElement).setName("Quartz").setDesc(
+  renderQuartzHeader() {
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Quartz").setDesc(
       "Quartz Syncer will apply these settings to your Quartz notes."
     ).setHeading();
-  };
-  /**
-   * Initializes the setting for using full image resolution.
-   * This method creates a toggle setting that allows users to choose whether to use full resolution images.
-   */
-  initializeUseFullImageResolutionSetting() {
-    new import_obsidian17.Setting(this.settingsRootElement).setName("Use full image resolution").setDesc(
-      "By default, Quartz Syncer will use lower resolution images to save space. If you want to use the full resolution blob, enable this setting."
-    ).addToggle(
-      (toggle) => toggle.setValue(this.settings.settings.useFullResolutionImages).onChange(async (value2) => {
-        this.settings.settings.useFullResolutionImages = value2;
+  }
+  renderContentFolderSetting() {
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Content folder").setDesc(
+      'The folder in your Quartz repository where Quartz Syncer should store your notes. By default "content".'
+    ).addText(
+      (text5) => text5.setPlaceholder("content").setValue(this.settings.settings.contentFolder).onChange(async (value2) => {
+        this.settings.settings.contentFolder = (0, import_obsidian19.normalizePath)(value2);
         await this.settings.plugin.saveSettings();
       })
     );
   }
-  /**
-   * Initializes the Quartz content folder setting.
-   * This method creates a text input for the content folder where Quartz Syncer should store notes.
-   */
-  initializeQuartzContentFolder() {
-    new import_obsidian17.Setting(this.settingsRootElement).setName("Content folder").setDesc(
-      'The folder in your Quartz repository where Quartz Syncer should store your notes. By default "content"'
-    ).addText(
-      (text5) => text5.setPlaceholder("content").setValue(this.settings.settings.contentFolder).onChange(async (value2) => {
-        this.settings.settings.contentFolder = (0, import_obsidian17.normalizePath)(value2);
-        await this.settings.plugin.saveSettings();
+  renderLoading() {
+    new import_obsidian19.Setting(this.settingsRootElement).setName("v5 Configuration").setDesc("Loading configuration from repository...");
+  }
+  renderNonV5Message() {
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Quartz v5 not detected").setDesc(
+      "Your Quartz site uses the v4 configuration format. Run `npx quartz migrate` in your repository to enable plugin management from Obsidian."
+    );
+  }
+  renderError(message) {
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Error").setDesc(message).addButton(
+      (button) => button.setButtonText("Retry").onClick(() => {
+        this.resetCache();
+        this.display();
       })
     );
+  }
+  async loadV5Data() {
+    if (this.isLoading) return;
+    this.isLoading = true;
+    try {
+      const siteManager = this.getOrCreateSiteManager();
+      const version2 = await siteManager.getQuartzVersion();
+      this.cachedVersion = version2;
+      if (version2 !== "v5-yaml" && version2 !== "v5-json") {
+        this.renderNonV5Message();
+        this.isLoading = false;
+        return;
+      }
+      this.configService = await siteManager.getConfigService();
+      if (!this.configService) {
+        this.renderError(
+          "Could not initialize config service for this repository."
+        );
+        this.isLoading = false;
+        return;
+      }
+      this.templateService = new QuartzTemplateService(
+        siteManager.userSyncerConnection
+      );
+      const gitSettings = this.plugin.getGitSettingsWithSecret();
+      this.manifestService = new QuartzPluginManifestService(
+        gitSettings.auth,
+        gitSettings.corsProxyUrl
+      );
+      const [config, lockFile, packageVersion, templateNames] = await Promise.all([
+        this.configService.readConfig(),
+        this.configService.readLockFile(),
+        this.loadPackageVersion(siteManager),
+        this.templateService.listTemplateNames()
+      ]);
+      this.cachedConfig = config;
+      this.cachedLockFile = lockFile;
+      this.cachedPackageVersion = packageVersion;
+      this.cachedTemplateNames = templateNames;
+      this.display();
+      if (this.settings.settings.upgradeCheckStrategy === "commit" && !this.settings.settings.lastUpstreamCommitSha) {
+        this.checkForQuartzUpgrade();
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      logger11.warn("Failed to load Quartz v5 config", error);
+      this.renderError(message);
+    } finally {
+      this.isLoading = false;
+    }
+  }
+  async loadPackageVersion(siteManager) {
+    try {
+      return await QuartzVersionDetector.getQuartzPackageVersion(
+        siteManager.userSyncerConnection
+      );
+    } catch {
+      return null;
+    }
+  }
+  getOrCreateSiteManager() {
+    if (!this.siteManager) {
+      this.siteManager = new QuartzSyncerSiteManager(
+        this.app.metadataCache,
+        this.settings.settings,
+        this.plugin.getGitSettingsWithSecret()
+      );
+    }
+    return this.siteManager;
+  }
+  resetCache() {
+    this.cachedConfig = null;
+    this.cachedLockFile = null;
+    this.cachedVersion = null;
+    this.cachedPackageVersion = null;
+    this.cachedUpdateStatuses = null;
+    this.cachedUpgradeStatus = null;
+    this.cachedTemplateNames = [];
+    this.cachedTemplates = /* @__PURE__ */ new Map();
+    this.cachedManifests = /* @__PURE__ */ new Map();
+    this.expandedPlugins = /* @__PURE__ */ new Set();
+    this.templateService = null;
+    this.manifestService = null;
+    this.configService = null;
+    this.siteManager = null;
+    this.hasUnsavedChanges = false;
+  }
+  markDirty() {
+    this.hasUnsavedChanges = true;
+  }
+  async saveConfig() {
+    if (!this.cachedConfig || !this.configService || this.isSaving) return;
+    this.isSaving = true;
+    try {
+      await this.configService.writeConfig(this.cachedConfig);
+      this.hasUnsavedChanges = false;
+      new import_obsidian19.Notice("Quartz configuration saved and pushed.");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      logger11.warn("Failed to save Quartz config", error);
+      new import_obsidian19.Notice(`Failed to save configuration: ${message}`);
+    } finally {
+      this.isSaving = false;
+    }
+  }
+  renderV5Content() {
+    this.renderVersionSection();
+    this.renderUpgradeSection();
+    this.renderTemplateSection();
+    this.renderSiteConfigSection();
+    this.renderPluginListSection();
+    this.renderLayoutSection();
+  }
+  renderVersionSection() {
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Quartz v5 Configuration").setDesc(
+      "Edit your Quartz v5 site configuration. Changes are pushed to your repository on save."
+    ).setHeading();
+    const versionLabel = this.cachedPackageVersion ? `${this.cachedPackageVersion} (${this.cachedVersion})` : this.cachedVersion ?? "unknown";
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Quartz version").setDesc(versionLabel);
+    const configFormat = this.cachedVersion === "v5-yaml" ? "YAML" : "JSON";
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Configuration format").setDesc(configFormat);
+    new import_obsidian19.Setting(this.settingsRootElement).addButton(
+      (button) => button.setButtonText("Save").onClick(async () => {
+        await this.saveConfig();
+      })
+    ).addButton(
+      (button) => button.setButtonText("Refresh").onClick(() => {
+        this.resetCache();
+        this.display();
+      })
+    );
+  }
+  renderUpgradeSection() {
+    const upgradeSetting = new import_obsidian19.Setting(this.settingsRootElement).setName("Quartz Updates").setHeading();
+    upgradeSetting.addButton(
+      (button) => button.setButtonText(
+        this.isCheckingUpgrade ? "Checking..." : "Check for Quartz updates"
+      ).setDisabled(this.isCheckingUpgrade).onClick(async () => {
+        await this.checkForQuartzUpgrade();
+      })
+    );
+    const strategy = this.settings.settings.upgradeCheckStrategy;
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Update check strategy").setDesc(
+      "Version: check for new Quartz releases. Commit: check for any new upstream commits (including unreleased changes)."
+    ).addDropdown((dropdown) => {
+      dropdown.addOption("version", "Version");
+      dropdown.addOption("commit", "Commit");
+      dropdown.setValue(strategy).onChange(async (value2) => {
+        this.settings.settings.upgradeCheckStrategy = value2;
+        await this.settings.plugin.saveSettings();
+        this.cachedUpgradeStatus = null;
+        this.display();
+        if (value2 === "commit" && !this.settings.settings.lastUpstreamCommitSha) {
+          this.checkForQuartzUpgrade();
+        }
+      });
+    });
+    if (this.cachedUpgradeStatus) {
+      const status = this.cachedUpgradeStatus;
+      const upgradeAvailable = strategy === "commit" ? status.hasNewerCommits : status.hasUpgrade;
+      if (status.error) {
+        new import_obsidian19.Setting(this.settingsRootElement).setName("Upgrade check failed").setDesc(status.error);
+      } else if (upgradeAvailable) {
+        const desc = strategy === "commit" ? `Latest upstream commit: ${status.latestUpstreamSha?.slice(0, 7) ?? "unknown"}.` : `Your Quartz is at ${status.currentVersion ?? "unknown"}, upstream is at ${status.upstreamVersion ?? "unknown"}.`;
+        const upgradeSetting2 = new import_obsidian19.Setting(this.settingsRootElement).setName(
+          strategy === "commit" ? "New upstream commits available" : "Quartz upgrade available"
+        ).setDesc(desc);
+        upgradeSetting2.addButton(
+          (button) => button.setButtonText(
+            this.isUpgrading ? "Upgrading..." : "Upgrade now"
+          ).setWarning().setDisabled(this.isUpgrading).onClick(async () => {
+            await this.performQuartzUpgrade();
+          })
+        );
+      } else if (strategy === "commit" && status.latestUpstreamSha) {
+        new import_obsidian19.Setting(this.settingsRootElement).setName("Quartz is up to date").setDesc(
+          `Current upstream commit: ${status.latestUpstreamSha.slice(0, 7)}`
+        );
+      } else {
+        new import_obsidian19.Setting(this.settingsRootElement).setName("Quartz is up to date").setDesc(
+          `Current version: ${status.currentVersion ?? "unknown"}`
+        );
+      }
+    }
+  }
+  async checkForQuartzUpgrade() {
+    if (this.isCheckingUpgrade) return;
+    this.isCheckingUpgrade = true;
+    this.display();
+    try {
+      const siteManager = this.getOrCreateSiteManager();
+      const upgradeService = new QuartzUpgradeService(
+        siteManager.userSyncerConnection
+      );
+      this.cachedUpgradeStatus = await upgradeService.checkForUpgrade();
+      if (this.cachedUpgradeStatus.latestUpstreamSha && !this.cachedUpgradeStatus.hasNewerCommits) {
+        this.settings.settings.lastUpstreamCommitSha = this.cachedUpgradeStatus.latestUpstreamSha;
+        await this.settings.plugin.saveSettings();
+      }
+      const useCommitStrategy = this.settings.settings.upgradeCheckStrategy === "commit";
+      const hasUpdate = useCommitStrategy ? this.cachedUpgradeStatus.hasNewerCommits : this.cachedUpgradeStatus.hasUpgrade;
+      if (hasUpdate) {
+        new import_obsidian19.Notice(
+          useCommitStrategy ? "New upstream Quartz commits available. Run `npx quartz upgrade` to upgrade." : "A Quartz upgrade is available. Run `npx quartz upgrade` to upgrade."
+        );
+      } else if (!this.cachedUpgradeStatus.error) {
+        new import_obsidian19.Notice("Quartz is up to date.");
+      } else {
+        new import_obsidian19.Notice(
+          `Upgrade check failed: ${this.cachedUpgradeStatus.error}`
+        );
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      logger11.warn("Failed to check for Quartz upgrade", error);
+      new import_obsidian19.Notice(`Failed to check for Quartz upgrade: ${message}`);
+    } finally {
+      this.isCheckingUpgrade = false;
+      this.display();
+    }
+  }
+  async performQuartzUpgrade() {
+    if (this.isUpgrading) return;
+    this.isUpgrading = true;
+    this.display();
+    try {
+      const siteManager = this.getOrCreateSiteManager();
+      const upgradeService = new QuartzUpgradeService(
+        siteManager.userSyncerConnection
+      );
+      const result = await upgradeService.performUpgrade();
+      if (result.success) {
+        if (result.alreadyMerged) {
+          new import_obsidian19.Notice("Quartz is already up to date.");
+        } else {
+          new import_obsidian19.Notice(
+            `Quartz upgraded successfully to ${result.oid?.slice(0, 7)}.`
+          );
+        }
+        this.cachedUpgradeStatus = null;
+        this.resetCache();
+      } else {
+        new import_obsidian19.Notice(result.error ?? "Upgrade failed.");
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      logger11.warn("Failed to upgrade Quartz", error);
+      new import_obsidian19.Notice(`Failed to upgrade Quartz: ${message}`);
+    } finally {
+      this.isUpgrading = false;
+      this.display();
+    }
+  }
+  renderTemplateSection() {
+    if (this.cachedTemplateNames.length === 0) return;
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Templates").setDesc(
+      "Apply a configuration template to replace your current settings with a preset."
+    ).setHeading();
+    for (const templateName of this.cachedTemplateNames) {
+      const setting = new import_obsidian19.Setting(this.settingsRootElement).setName(
+        templateName
+      );
+      const cached = this.cachedTemplates.get(templateName);
+      if (cached) {
+        setting.setDesc(
+          `Title: "${cached.config.configuration.pageTitle}" \xB7 ${cached.config.plugins.length} plugin(s)`
+        );
+      }
+      setting.addButton(
+        (button) => button.setButtonText("Preview").onClick(async () => {
+          if (!this.templateService) return;
+          const template = this.cachedTemplates.get(templateName) ?? await this.templateService.readTemplate(templateName);
+          if (!template) {
+            new import_obsidian19.Notice(
+              `Could not load template "${templateName}".`
+            );
+            return;
+          }
+          this.cachedTemplates.set(templateName, template);
+          new import_obsidian19.Notice(
+            `Template "${templateName}": ${template.config.plugins.length} plugin(s), title "${template.config.configuration.pageTitle}"`
+          );
+          this.display();
+        })
+      );
+      setting.addButton(
+        (button) => button.setButtonText("Apply").setWarning().onClick(async () => {
+          if (!this.cachedConfig || !this.templateService) return;
+          const template = this.cachedTemplates.get(templateName) ?? await this.templateService.readTemplate(
+            templateName
+          );
+          if (!template) {
+            new import_obsidian19.Notice(
+              `Could not load template "${templateName}".`
+            );
+            return;
+          }
+          this.cachedTemplates.set(templateName, template);
+          this.templateService.applyTemplate(
+            this.cachedConfig,
+            template
+          );
+          this.markDirty();
+          this.display();
+          new import_obsidian19.Notice(
+            `Template "${templateName}" applied. Save to push changes.`
+          );
+        })
+      );
+    }
+  }
+  renderSiteConfigSection() {
+    if (!this.cachedConfig) return;
+    const config = this.cachedConfig.configuration;
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Site Configuration").setDesc(
+      "Edit site settings. Changes are applied when you click Save above."
+    ).setHeading();
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Page title").setDesc("The title shown in the browser tab and site header.").addText(
+      (text5) => text5.setValue(config.pageTitle).onChange((value2) => {
+        config.pageTitle = value2;
+        this.markDirty();
+      })
+    );
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Page title suffix").setDesc(
+      'Appended to the page title on subpages (e.g. " | My Site").'
+    ).addText(
+      (text5) => text5.setValue(config.pageTitleSuffix ?? "").onChange((value2) => {
+        config.pageTitleSuffix = value2 || void 0;
+        this.markDirty();
+      })
+    );
+    new import_obsidian19.Setting(this.settingsRootElement).setName("SPA mode").setDesc(
+      "Single Page Application mode for faster navigation between pages."
+    ).addToggle(
+      (toggle) => toggle.setValue(config.enableSPA).onChange((value2) => {
+        config.enableSPA = value2;
+        this.markDirty();
+      })
+    );
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Popovers").setDesc("Show page preview popovers on hover.").addToggle(
+      (toggle) => toggle.setValue(config.enablePopovers ?? false).onChange((value2) => {
+        config.enablePopovers = value2;
+        this.markDirty();
+      })
+    );
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Locale").setDesc(
+      "BCP 47 locale tag for date formatting and i18n (e.g. en-US)."
+    ).addText(
+      (text5) => text5.setValue(config.locale).onChange((value2) => {
+        config.locale = value2;
+        this.markDirty();
+      })
+    );
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Base URL").setDesc(
+      "The base URL where your site is hosted (without protocol, e.g. example.com/quartz)."
+    ).addText(
+      (text5) => text5.setPlaceholder("example.com").setValue(config.baseUrl ?? "").onChange((value2) => {
+        config.baseUrl = value2 || void 0;
+        this.markDirty();
+      })
+    );
+    if (config.analytics) {
+      new import_obsidian19.Setting(this.settingsRootElement).setName("Analytics provider").setDesc(config.analytics.provider);
+    }
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Ignore patterns").setDesc(
+      "Comma-separated glob patterns for files to exclude from processing."
+    ).addText(
+      (text5) => text5.setPlaceholder("drafts/*, private/*").setValue((config.ignorePatterns ?? []).join(", ")).onChange((value2) => {
+        config.ignorePatterns = value2.split(",").map((p) => p.trim()).filter((p) => p.length > 0);
+        this.markDirty();
+      })
+    );
+    if (config.theme) {
+      this.renderThemeSection(config);
+    }
+  }
+  renderThemeSection(config) {
+    const theme = config.theme;
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Theme").setDesc("Typography and font settings.").setHeading();
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Header font").addText(
+      (text5) => text5.setValue(theme.typography.header).onChange((value2) => {
+        theme.typography.header = value2;
+        this.markDirty();
+      })
+    );
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Body font").addText(
+      (text5) => text5.setValue(theme.typography.body).onChange((value2) => {
+        theme.typography.body = value2;
+        this.markDirty();
+      })
+    );
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Code font").addText(
+      (text5) => text5.setValue(theme.typography.code).onChange((value2) => {
+        theme.typography.code = value2;
+        this.markDirty();
+      })
+    );
+    new import_obsidian19.Setting(this.settingsRootElement).setName("CDN caching").setDesc("Cache fonts via CDN for faster loading.").addToggle(
+      (toggle) => toggle.setValue(theme.cdnCaching).onChange((value2) => {
+        theme.cdnCaching = value2;
+        this.markDirty();
+      })
+    );
+    const quartzThemesPlugin = this.findQuartzThemesPlugin();
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Use Quartz Themes").setDesc(
+      "Use community color themes from Quartz Themes instead of manual color editing."
+    ).addToggle(
+      (toggle) => toggle.setValue(quartzThemesPlugin !== null).onChange((enabled) => {
+        if (!this.cachedConfig) return;
+        if (enabled) {
+          try {
+            this.pluginManager.addPlugin(
+              this.cachedConfig,
+              {
+                name: "quartz-themes",
+                repo: "github:saberzero1/quartz-themes",
+                subdir: "plugin",
+                ref: "main"
+              }
+            );
+            new import_obsidian19.Notice(
+              "Quartz Themes plugin added. Save to push changes."
+            );
+          } catch (error) {
+            const message = error instanceof Error ? error.message : String(error);
+            new import_obsidian19.Notice(message);
+          }
+        } else {
+          const idx = this.cachedConfig.plugins.findIndex(
+            (p) => getPluginName(p.source) === "quartz-themes"
+          );
+          if (idx !== -1) {
+            this.cachedConfig.plugins.splice(idx, 1);
+            new import_obsidian19.Notice(
+              "Quartz Themes plugin removed. Save to push changes."
+            );
+          }
+        }
+        this.markDirty();
+        this.display();
+      })
+    );
+    if (quartzThemesPlugin) {
+      this.renderQuartzThemesConfig(quartzThemesPlugin);
+    } else {
+      this.renderColorSchemeSection(
+        "Light mode colors",
+        theme.colors.lightMode,
+        DEFAULT_LIGHT_COLORS
+      );
+      this.renderColorSchemeSection(
+        "Dark mode colors",
+        theme.colors.darkMode,
+        DEFAULT_DARK_COLORS
+      );
+    }
+  }
+  renderColorSchemeSection(heading2, scheme, defaults2) {
+    new import_obsidian19.Setting(this.settingsRootElement).setName(heading2).setHeading();
+    const colorFields = [
+      { key: "light", label: "Background" },
+      { key: "lightgray", label: "Light gray (borders)" },
+      { key: "gray", label: "Gray (graph, heavier borders)" },
+      { key: "darkgray", label: "Dark gray (body text)" },
+      { key: "dark", label: "Dark (headings)" },
+      { key: "secondary", label: "Secondary (link color)" },
+      { key: "tertiary", label: "Tertiary (hover states)" },
+      { key: "highlight", label: "Highlight (internal link bg)" },
+      { key: "textHighlight", label: "Text highlight (==marked==)" }
+    ];
+    for (const { key, label } of colorFields) {
+      const setting = new import_obsidian19.Setting(this.settingsRootElement).setName(
+        label
+      );
+      const currentValue = scheme[key];
+      const defaultValue = defaults2[key];
+      const isHexColor = /^#[0-9a-fA-F]{3,8}$/.test(currentValue);
+      if (currentValue !== defaultValue) {
+        setting.addExtraButton(
+          (button) => button.setIcon("reset").setTooltip(`Reset to default: ${defaultValue}`).onClick(() => {
+            scheme[key] = defaultValue;
+            this.markDirty();
+            this.display();
+          })
+        );
+      }
+      if (isHexColor) {
+        setting.addColorPicker(
+          (picker) => picker.setValue(currentValue).onChange((value2) => {
+            scheme[key] = value2;
+            this.markDirty();
+            this.display();
+          })
+        );
+      }
+      setting.addText(
+        (text5) => text5.setValue(currentValue).onChange((value2) => {
+          scheme[key] = value2;
+          this.markDirty();
+        })
+      );
+    }
+  }
+  findQuartzThemesPlugin() {
+    if (!this.cachedConfig) return null;
+    return this.cachedConfig.plugins.find(
+      (p) => getPluginName(p.source) === "quartz-themes"
+    ) ?? null;
+  }
+  renderQuartzThemesConfig(plugin) {
+    if (!plugin.options) {
+      plugin.options = {};
+    }
+    const currentThemeName = plugin.options["theme"] ?? "default";
+    const currentVariation = plugin.options["variation"] ?? null;
+    const themes = this.cachedThemesJson;
+    if (!themes) {
+      new import_obsidian19.Setting(this.settingsRootElement).setName("Theme").setDesc("Loading available themes...");
+      this.fetchThemesJson().then(() => this.display());
+      return;
+    }
+    const themeNames = Object.keys(themes).sort();
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Theme").setDesc("Select a community color theme.").addDropdown((dropdown) => {
+      for (const name of themeNames) {
+        dropdown.addOption(name, name);
+      }
+      dropdown.setValue(currentThemeName).onChange((value2) => {
+        if (!plugin.options) plugin.options = {};
+        plugin.options["theme"] = value2 || "default";
+        const selectedTheme2 = value2 ? themes[value2] : null;
+        const hasVariations = selectedTheme2 && selectedTheme2.variations && selectedTheme2.variations.length > 0;
+        if (!hasVariations) {
+          delete plugin.options["variation"];
+        } else {
+          plugin.options["variation"] = null;
+        }
+        this.markDirty();
+        this.display();
+      });
+    });
+    const selectedTheme = currentThemeName ? themes[currentThemeName] : null;
+    const variations = selectedTheme?.variations ?? [];
+    if (variations.length > 0) {
+      new import_obsidian19.Setting(this.settingsRootElement).setName("Variation").setDesc("Select a theme variation.").addDropdown((dropdown) => {
+        dropdown.addOption("", "\u2014 No variation \u2014");
+        for (const variation of variations) {
+          dropdown.addOption(variation.name, variation.name);
+        }
+        dropdown.setValue(currentVariation ?? "").onChange((value2) => {
+          if (!plugin.options) plugin.options = {};
+          if (value2) {
+            plugin.options["variation"] = value2;
+          } else {
+            delete plugin.options["variation"];
+          }
+          this.markDirty();
+        });
+      });
+    }
+  }
+  async fetchThemesJson() {
+    if (this.cachedThemesJson) return;
+    try {
+      const response = await fetch(
+        "https://raw.githubusercontent.com/saberzero1/quartz-themes/master/themes.json"
+      );
+      if (!response.ok) {
+        logger11.warn(`Failed to fetch themes.json: ${response.status}`);
+        return;
+      }
+      const data = await response.json();
+      this.cachedThemesJson = data.themes;
+    } catch (error) {
+      logger11.warn("Failed to fetch themes.json:", error);
+    }
+  }
+  async checkForUpdates() {
+    if (!this.cachedConfig || this.isCheckingUpdates) return;
+    this.isCheckingUpdates = true;
+    this.display();
+    try {
+      const gitSettings = this.plugin.getGitSettingsWithSecret();
+      const checker = new QuartzPluginUpdateChecker(
+        gitSettings.auth,
+        gitSettings.corsProxyUrl
+      );
+      const statuses = await checker.checkUpdates(
+        this.cachedConfig.plugins,
+        this.cachedLockFile
+      );
+      this.cachedUpdateStatuses = new Map(
+        statuses.map((s2) => [s2.sourceKey, s2])
+      );
+      const updatesAvailable = statuses.filter((s2) => s2.hasUpdate).length;
+      if (updatesAvailable > 0) {
+        new import_obsidian19.Notice(`${updatesAvailable} plugin update(s) available.`);
+      } else {
+        new import_obsidian19.Notice("All plugins are up to date.");
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      logger11.warn("Failed to check for plugin updates", error);
+      new import_obsidian19.Notice(`Failed to check for updates: ${message}`);
+    } finally {
+      this.isCheckingUpdates = false;
+      this.display();
+    }
+  }
+  async updatePlugin(pluginName, newCommit) {
+    if (!this.cachedLockFile || !this.configService) return;
+    const lockEntry = this.cachedLockFile.plugins[pluginName];
+    if (!lockEntry) {
+      new import_obsidian19.Notice(`No lock entry found for ${pluginName}.`);
+      return;
+    }
+    try {
+      lockEntry.commit = newCommit;
+      lockEntry.installedAt = (/* @__PURE__ */ new Date()).toISOString();
+      await this.configService.writeLockFile(
+        this.cachedLockFile,
+        `Update ${pluginName} to ${newCommit.slice(0, 7)} via Syncer`
+      );
+      if (this.cachedUpdateStatuses) {
+        this.cachedUpdateStatuses.delete(pluginName);
+      }
+      new import_obsidian19.Notice(`Updated ${pluginName} to ${newCommit.slice(0, 7)}.`);
+      this.display();
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      logger11.warn(`Failed to update ${pluginName}`, error);
+      new import_obsidian19.Notice(`Failed to update ${pluginName}: ${message}`);
+    }
+  }
+  async updateAllPlugins() {
+    if (!this.cachedLockFile || !this.configService || !this.cachedUpdateStatuses)
+      return;
+    const updatable = [...this.cachedUpdateStatuses.values()].filter(
+      (s2) => s2.hasUpdate && s2.remoteCommit
+    );
+    if (updatable.length === 0) {
+      new import_obsidian19.Notice("No plugin updates available.");
+      return;
+    }
+    try {
+      for (const status of updatable) {
+        const lockEntry = this.cachedLockFile.plugins[status.sourceKey];
+        if (lockEntry && status.remoteCommit) {
+          lockEntry.commit = status.remoteCommit;
+          lockEntry.installedAt = (/* @__PURE__ */ new Date()).toISOString();
+        }
+      }
+      const names = updatable.map((s2) => s2.sourceKey).join(", ");
+      await this.configService.writeLockFile(
+        this.cachedLockFile,
+        `Update ${updatable.length} plugin(s) via Syncer: ${names}`
+      );
+      this.cachedUpdateStatuses = null;
+      new import_obsidian19.Notice(`Updated ${updatable.length} plugin(s): ${names}`);
+      this.display();
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      logger11.warn("Failed to update plugins", error);
+      new import_obsidian19.Notice(`Failed to update plugins: ${message}`);
+    }
+  }
+  async installPlugin(source) {
+    if (!this.cachedConfig || !this.configService) {
+      throw new Error("Configuration not loaded.");
+    }
+    const entry = this.pluginManager.addPlugin(this.cachedConfig, source);
+    if (this.manifestService) {
+      try {
+        const manifest = await this.manifestService.fetchManifest(source);
+        if (manifest?.defaultOptions) {
+          entry.options = { ...manifest.defaultOptions };
+        }
+      } catch {
+      }
+    }
+    await this.configService.writeConfig(this.cachedConfig);
+    const gitSettings = this.plugin.getGitSettingsWithSecret();
+    try {
+      const checker = new QuartzPluginUpdateChecker(
+        gitSettings.auth,
+        gitSettings.corsProxyUrl
+      );
+      const statuses = await checker.checkUpdates(
+        [entry],
+        this.cachedLockFile
+      );
+      const status = statuses[0];
+      if (status?.remoteCommit && this.cachedLockFile && this.configService) {
+        const name = getPluginName(source);
+        this.cachedLockFile.plugins[name] = {
+          source,
+          resolved: resolveSourceToGitUrl(source),
+          commit: status.remoteCommit,
+          installedAt: (/* @__PURE__ */ new Date()).toISOString()
+        };
+        await this.configService.writeLockFile(
+          this.cachedLockFile,
+          `Install ${name} via Syncer`
+        );
+      }
+    } catch {
+    }
+    this.hasUnsavedChanges = false;
+    this.display();
+  }
+  renderPluginListSection() {
+    if (!this.cachedConfig) return;
+    const plugins = this.cachedConfig.plugins;
+    const lockPlugins = this.cachedLockFile?.plugins ?? {};
+    const pluginHeading = new import_obsidian19.Setting(this.settingsRootElement).setName("Plugins").setDesc(
+      `${plugins.length} plugin(s) configured. Toggle enabled state or adjust execution order.`
+    ).setHeading();
+    pluginHeading.addButton(
+      (button) => button.setButtonText(
+        this.isCheckingUpdates ? "Checking..." : "Check for updates"
+      ).setDisabled(this.isCheckingUpdates).onClick(async () => {
+        await this.checkForUpdates();
+      })
+    );
+    const updatableCount = this.cachedUpdateStatuses ? [...this.cachedUpdateStatuses.values()].filter((s2) => s2.hasUpdate).length : 0;
+    if (updatableCount > 0) {
+      pluginHeading.addButton(
+        (button) => button.setButtonText(`Update all (${updatableCount})`).onClick(async () => {
+          await this.updateAllPlugins();
+        })
+      );
+    }
+    pluginHeading.addButton(
+      (button) => button.setButtonText("Browse plugins").onClick(() => {
+        if (!this.cachedConfig) return;
+        const modal = new PluginBrowserModal(
+          this.app,
+          this.pluginRegistry,
+          this.cachedConfig,
+          async (source) => this.installPlugin(source)
+        );
+        modal.open();
+      })
+    );
+    let addPluginSource = "";
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Add plugin").setDesc(
+      'Enter a plugin source (e.g. "github:quartz-community/explorer").'
+    ).addText(
+      (text5) => text5.setPlaceholder("github:org/plugin").onChange((value2) => {
+        addPluginSource = value2;
+      })
+    ).addButton(
+      (button) => button.setButtonText("Add").onClick(() => {
+        if (!this.cachedConfig || !addPluginSource.trim()) return;
+        try {
+          this.pluginManager.addPlugin(
+            this.cachedConfig,
+            addPluginSource.trim()
+          );
+          this.markDirty();
+          this.display();
+          new import_obsidian19.Notice(
+            `Plugin "${addPluginSource.trim()}" added. Save to push changes.`
+          );
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          new import_obsidian19.Notice(message);
+        }
+      })
+    );
+    if (plugins.length === 0) {
+      new import_obsidian19.Setting(this.settingsRootElement).setName("No plugins").setDesc("No plugins are configured in your Quartz config.");
+      return;
+    }
+    for (let i = 0; i < plugins.length; i++) {
+      this.renderPluginEntry(plugins[i], i, plugins.length, lockPlugins);
+    }
+  }
+  renderPluginEntry(plugin, index2, total, lockPlugins) {
+    const name = getPluginName(plugin.source);
+    const infoParts = [];
+    if (plugin.order !== void 0) {
+      infoParts.push(`Order: ${plugin.order}`);
+    }
+    if (plugin.layout?.position) {
+      infoParts.push(`Position: ${plugin.layout.position}`);
+    }
+    const lockEntry = lockPlugins[name];
+    if (lockEntry?.commit) {
+      infoParts.push(`Commit: ${lockEntry.commit.slice(0, 7)}`);
+    }
+    const updateStatus = this.cachedUpdateStatuses?.get(name);
+    if (updateStatus?.hasUpdate) {
+      infoParts.push(
+        `Update available: ${updateStatus.remoteCommit?.slice(0, 7)}`
+      );
+    } else if (updateStatus && !updateStatus.hasUpdate && updateStatus.lockedCommit) {
+      infoParts.push("Up to date");
+    }
+    if (updateStatus?.error) {
+      infoParts.push(`Check failed: ${updateStatus.error}`);
+    }
+    const displayName = updateStatus?.hasUpdate ? `${name} *` : name;
+    const setting = new import_obsidian19.Setting(this.settingsRootElement).setName(displayName).setDesc(infoParts.length > 0 ? infoParts.join(" \xB7 ") : "");
+    setting.addToggle(
+      (toggle) => toggle.setTooltip("Enable or disable this plugin").setValue(plugin.enabled).onChange((value2) => {
+        plugin.enabled = value2;
+        this.markDirty();
+      })
+    );
+    setting.addExtraButton(
+      (button) => button.setIcon("arrow-up").setTooltip("Move up").setDisabled(index2 === 0).onClick(() => this.movePlugin(index2, index2 - 1))
+    );
+    setting.addExtraButton(
+      (button) => button.setIcon("arrow-down").setTooltip("Move down").setDisabled(index2 === total - 1).onClick(() => this.movePlugin(index2, index2 + 1))
+    );
+    setting.addExtraButton(
+      (button) => button.setIcon("trash").setTooltip("Remove plugin").onClick(() => {
+        if (!this.cachedConfig) return;
+        const key = getPluginSourceKey(plugin.source);
+        try {
+          this.pluginManager.removePlugin(this.cachedConfig, key);
+          this.markDirty();
+          this.display();
+          new import_obsidian19.Notice(
+            `Plugin "${getPluginName(plugin.source)}" removed. Save to push changes.`
+          );
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          new import_obsidian19.Notice(message);
+        }
+      })
+    );
+    if (plugin.layout) {
+      this.renderPluginLayoutControls(plugin);
+    }
+    if (updateStatus?.hasUpdate && updateStatus.remoteCommit) {
+      setting.addExtraButton(
+        (button) => button.setIcon("download").setTooltip(
+          `Update to ${updateStatus.remoteCommit?.slice(0, 7)}`
+        ).onClick(async () => {
+          await this.updatePlugin(
+            name,
+            updateStatus.remoteCommit
+          );
+        })
+      );
+    }
+    const isExpanded = this.expandedPlugins.has(name);
+    setting.addExtraButton(
+      (button) => button.setIcon(isExpanded ? "chevron-up" : "settings").setTooltip(isExpanded ? "Hide options" : "Show options").onClick(async () => {
+        if (isExpanded) {
+          this.expandedPlugins.delete(name);
+        } else {
+          this.expandedPlugins.add(name);
+          if (!this.cachedManifests.has(name) && this.manifestService) {
+            const manifest = await this.manifestService.fetchManifest(
+              plugin.source
+            );
+            this.cachedManifests.set(name, manifest);
+          }
+        }
+        this.display();
+      })
+    );
+    if (isExpanded) {
+      this.renderPluginOptions(plugin, name);
+    }
+  }
+  renderPluginOptions(plugin, sourceKey) {
+    if (!plugin.options) {
+      plugin.options = {};
+    }
+    const manifest = this.cachedManifests.get(sourceKey);
+    const schema4 = manifest?.optionSchema ?? manifest?.configSchema ?? null;
+    const optionKeys = /* @__PURE__ */ new Set([
+      ...Object.keys(plugin.options),
+      ...schema4 ? Object.keys(schema4) : []
+    ]);
+    if (optionKeys.size === 0) {
+      new import_obsidian19.Setting(this.settingsRootElement).setDesc(
+        manifest ? "This plugin has no configurable options." : "Loading manifest failed. You can still edit options manually."
+      );
+    }
+    for (const optKey of optionKeys) {
+      const currentValue = plugin.options[optKey];
+      const schemaEntry = schema4?.[optKey];
+      const label = schemaEntry?.title ?? optKey;
+      const desc = schemaEntry?.description ?? "";
+      const setting = new import_obsidian19.Setting(this.settingsRootElement).setName(label).setDesc(desc);
+      if (typeof currentValue === "boolean") {
+        setting.addToggle(
+          (toggle) => toggle.setValue(currentValue).onChange((value2) => {
+            plugin.options[optKey] = value2;
+            this.markDirty();
+          })
+        );
+      } else if (typeof currentValue === "number" || schemaEntry?.type === "number" || schemaEntry?.type === "integer") {
+        setting.addText(
+          (text5) => text5.setValue(
+            currentValue !== void 0 ? String(currentValue) : ""
+          ).setPlaceholder(
+            schemaEntry?.default !== void 0 ? String(schemaEntry.default) : ""
+          ).onChange((value2) => {
+            const num = parseFloat(value2);
+            plugin.options[optKey] = isNaN(num) ? void 0 : num;
+            this.markDirty();
+          })
+        );
+      } else {
+        setting.addText(
+          (text5) => text5.setValue(
+            currentValue !== void 0 ? String(currentValue) : ""
+          ).setPlaceholder(
+            schemaEntry?.default !== void 0 ? String(schemaEntry.default) : ""
+          ).onChange((value2) => {
+            plugin.options[optKey] = value2 || void 0;
+            this.markDirty();
+          })
+        );
+      }
+    }
+    let newOptionKey = "";
+    new import_obsidian19.Setting(this.settingsRootElement).setDesc("Add a custom option key.").addText(
+      (text5) => text5.setPlaceholder("optionKey").onChange((value2) => {
+        newOptionKey = value2;
+      })
+    ).addButton(
+      (button) => button.setButtonText("Add option").onClick(() => {
+        if (!newOptionKey.trim() || !plugin.options) return;
+        if (plugin.options[newOptionKey.trim()] !== void 0) {
+          new import_obsidian19.Notice(
+            `Option "${newOptionKey.trim()}" already exists.`
+          );
+          return;
+        }
+        plugin.options[newOptionKey.trim()] = "";
+        this.markDirty();
+        this.display();
+      })
+    );
+  }
+  renderPluginLayoutControls(plugin) {
+    if (!plugin.layout) return;
+    const layout = plugin.layout;
+    const layoutSetting = new import_obsidian19.Setting(this.settingsRootElement).setDesc(
+      "Layout: position, priority, and display mode for this plugin's component."
+    );
+    layoutSetting.addDropdown((dropdown) => {
+      dropdown.addOption("", "No position");
+      for (const pos of LAYOUT_POSITIONS) {
+        dropdown.addOption(pos, pos);
+      }
+      dropdown.setValue(layout.position ?? "").onChange((value2) => {
+        layout.position = value2 || void 0;
+        this.markDirty();
+      });
+    });
+    layoutSetting.addText(
+      (text5) => text5.setPlaceholder("Priority").setValue(
+        layout.priority !== void 0 ? String(layout.priority) : ""
+      ).onChange((value2) => {
+        const num = parseInt(value2, 10);
+        layout.priority = isNaN(num) ? void 0 : num;
+        this.markDirty();
+      })
+    );
+    layoutSetting.addDropdown((dropdown) => {
+      for (const mode of DISPLAY_MODES) {
+        dropdown.addOption(mode, mode);
+      }
+      dropdown.setValue(layout.display ?? "all").onChange((value2) => {
+        layout.display = value2;
+        this.markDirty();
+      });
+    });
+  }
+  renderLayoutSection() {
+    if (!this.cachedConfig) return;
+    const config = this.cachedConfig;
+    if (!config.layout) {
+      config.layout = {};
+    }
+    const layout = config.layout;
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Layout Overrides").setDesc(
+      "Per-page-type layout overrides. Set a frame template or exclude plugins for specific page types."
+    ).setHeading();
+    for (const pageType of PAGE_TYPES) {
+      this.renderPageTypeOverride(layout, pageType);
+    }
+  }
+  renderPageTypeOverride(layout, pageType) {
+    if (!layout.byPageType) {
+      layout.byPageType = {};
+    }
+    const override = layout.byPageType[pageType];
+    const hasOverride = override !== void 0;
+    const setting = new import_obsidian19.Setting(this.settingsRootElement).setName(pageType);
+    if (!hasOverride) {
+      setting.setDesc("No overrides configured.");
+      setting.addButton(
+        (button) => button.setButtonText("Add override").onClick(() => {
+          if (!layout.byPageType) {
+            layout.byPageType = {};
+          }
+          layout.byPageType[pageType] = {};
+          this.markDirty();
+          this.display();
+        })
+      );
+      return;
+    }
+    setting.addButton(
+      (button) => button.setButtonText("Remove override").onClick(() => {
+        if (layout.byPageType) {
+          delete layout.byPageType[pageType];
+        }
+        this.markDirty();
+        this.display();
+      })
+    );
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Template").setDesc(`Frame template for ${pageType} pages.`).addDropdown((dropdown) => {
+      dropdown.addOption("", "Default");
+      const frameNames = [
+        "default",
+        "full-width",
+        "minimal",
+        ...this.cachedTemplateNames.filter(
+          (n2) => n2 !== "default" && n2 !== "full-width" && n2 !== "minimal"
+        )
+      ];
+      for (const frame of frameNames) {
+        dropdown.addOption(frame, frame);
+      }
+      dropdown.setValue(override.template ?? "").onChange((value2) => {
+        override.template = value2 || void 0;
+        this.markDirty();
+      });
+    });
+    new import_obsidian19.Setting(this.settingsRootElement).setName("Excluded plugins").setDesc(
+      `Comma-separated plugin names to exclude from ${pageType} pages.`
+    ).addText(
+      (text5) => text5.setPlaceholder("reader-mode, graph").setValue((override.exclude ?? []).join(", ")).onChange((value2) => {
+        override.exclude = value2.split(",").map((s2) => s2.trim()).filter((s2) => s2.length > 0);
+        if (override.exclude.length === 0) {
+          override.exclude = void 0;
+        }
+        this.markDirty();
+      })
+    );
+  }
+  movePlugin(fromIndex, toIndex) {
+    if (!this.cachedConfig) return;
+    const plugins = this.cachedConfig.plugins;
+    if (toIndex < 0 || toIndex >= plugins.length) return;
+    const [moved] = plugins.splice(fromIndex, 1);
+    plugins.splice(toIndex, 0, moved);
+    this.markDirty();
+    this.display();
   }
 };
 
 // src/views/SettingsView/Views/FrontmatterSettings.ts
 init_esbuild_buffer_shim();
-var import_obsidian18 = require("obsidian");
-var FrontmatterSettings = class extends import_obsidian18.PluginSettingTab {
+var import_obsidian20 = require("obsidian");
+var FrontmatterSettings = class extends import_obsidian20.PluginSettingTab {
   app;
   plugin;
   settings;
@@ -59730,12 +69497,12 @@ var FrontmatterSettings = class extends import_obsidian18.PluginSettingTab {
    * This method creates a heading for the frontmatter settings in the UI.
    */
   initializeFrontmatterHeader = () => {
-    new import_obsidian18.Setting(this.settingsRootElement).setName("Note properties (frontmatter)").setDesc(
+    new import_obsidian20.Setting(this.settingsRootElement).setName("Note properties (frontmatter)").setDesc(
       "Quartz Syncer will apply these settings to your Quartz notes' properties or frontmatter."
     ).setHeading();
   };
   initializeFrontmatterFormatSetting() {
-    new import_obsidian18.Setting(this.settingsRootElement).setName("Frontmatter format").setDesc(
+    new import_obsidian20.Setting(this.settingsRootElement).setName("Frontmatter format").setDesc(
       "Output format for frontmatter in published notes. YAML is more readable, JSON is supported in case you need it."
     ).addDropdown(
       (dropdown) => dropdown.addOption("yaml", "YAML").addOption("json", "JSON").setValue(
@@ -59748,7 +69515,7 @@ var FrontmatterSettings = class extends import_obsidian18.PluginSettingTab {
   }
   initializePublishFrontmatterKeySetting() {
     if (!this.settings.settings.allNotesPublishableByDefault) {
-      new import_obsidian18.Setting(this.settingsRootElement).setName("Publish key").setDesc(
+      new import_obsidian20.Setting(this.settingsRootElement).setName("Publish key").setDesc(
         'Note property key used to mark a note as eligible to publish. Quartz Syncer will ignore all notes without this property. By default "publish".'
       ).addText(
         (text5) => text5.setPlaceholder("publish").setValue(this.settings.settings.publishFrontmatterKey).onChange(async (value2) => {
@@ -59766,7 +69533,7 @@ var FrontmatterSettings = class extends import_obsidian18.PluginSettingTab {
    * This method allows users to override the publish key setting and make all notes eligible for publication.
    */
   initializeAllNotesPublishableByDefaultSetting() {
-    new import_obsidian18.Setting(this.settingsRootElement).setName("All notes publishable by default").setDesc(
+    new import_obsidian20.Setting(this.settingsRootElement).setName("All notes publishable by default").setDesc(
       "Make all notes publishable by default. This will override the publish key setting and make all notes eligible for publication."
     ).addToggle(
       (toggle) => toggle.setValue(
@@ -59784,7 +69551,7 @@ var FrontmatterSettings = class extends import_obsidian18.PluginSettingTab {
    * overriding other property settings.
    */
   initializeIncludeAllFrontmatterSetting() {
-    new import_obsidian18.Setting(this.settingsRootElement).setName("Include all properties").setDesc(
+    new import_obsidian20.Setting(this.settingsRootElement).setName("Include all properties").setDesc(
       "Include all note properties in the Quartz Syncer note. Enabling this will overrides other property settings to include all properties keys and values. Even note properties that are not used by Quartz will be included in the note's frontmatter. You shouldn't need this setting unless you have Quartz components that require non-standard properties."
     ).addToggle(
       (toggle) => toggle.setValue(this.settings.settings.includeAllFrontmatter).onChange(async (value2) => {
@@ -59800,7 +69567,7 @@ var FrontmatterSettings = class extends import_obsidian18.PluginSettingTab {
    */
   initializeShowCreatedTimestampSetting() {
     if (!this.settings.settings.includeAllFrontmatter) {
-      new import_obsidian18.Setting(this.settingsRootElement).setName("Include created timestamp").setDesc(
+      new import_obsidian20.Setting(this.settingsRootElement).setName("Include created timestamp").setDesc(
         "Include the created timestamp in your note's properties."
       ).addToggle(
         (toggle) => toggle.setValue(this.settings.settings.showCreatedTimestamp).setDisabled(
@@ -59819,7 +69586,7 @@ var FrontmatterSettings = class extends import_obsidian18.PluginSettingTab {
    */
   initializeCreatedTimestampKeysSetting() {
     if (!this.settings.settings.includeAllFrontmatter && this.settings.settings.showCreatedTimestamp) {
-      new import_obsidian18.Setting(this.settingsRootElement).setName("Created timestamp keys").setDesc(
+      new import_obsidian20.Setting(this.settingsRootElement).setName("Created timestamp keys").setDesc(
         "Comma-separated list of keys to look for to determine the created timestamp. By default, Quartz Syncer will look for 'created', 'created_at', and 'date'."
       ).addText(
         (text5) => text5.setPlaceholder("created, created_at, date").setValue(this.settings.settings.createdTimestampKey).setDisabled(
@@ -59840,7 +69607,7 @@ var FrontmatterSettings = class extends import_obsidian18.PluginSettingTab {
    */
   initializeShowUpdatedTimestampSetting() {
     if (!this.settings.settings.includeAllFrontmatter) {
-      new import_obsidian18.Setting(this.settingsRootElement).setName("Include modified timestamp").setDesc(
+      new import_obsidian20.Setting(this.settingsRootElement).setName("Include modified timestamp").setDesc(
         "Include the modified timestamp in your note's properties."
       ).addToggle(
         (toggle) => toggle.setValue(this.settings.settings.showUpdatedTimestamp).setDisabled(
@@ -59859,7 +69626,7 @@ var FrontmatterSettings = class extends import_obsidian18.PluginSettingTab {
    */
   initializeUpdatedTimestampKeysSetting() {
     if (!this.settings.settings.includeAllFrontmatter && this.settings.settings.showUpdatedTimestamp) {
-      new import_obsidian18.Setting(this.settingsRootElement).setName("Modified timestamp keys").setDesc(
+      new import_obsidian20.Setting(this.settingsRootElement).setName("Modified timestamp keys").setDesc(
         "Comma-separated list of keys to look for to determine the modified timestamp. By default, Quartz Syncer will look for 'modified', 'lastmod', 'updated', and 'last-modified'."
       ).addText(
         (text5) => text5.setPlaceholder(
@@ -59882,7 +69649,7 @@ var FrontmatterSettings = class extends import_obsidian18.PluginSettingTab {
    */
   initializeShowPublishedTimestampSetting() {
     if (!this.settings.settings.includeAllFrontmatter) {
-      new import_obsidian18.Setting(this.settingsRootElement).setName("Include published timestamp").setDesc(
+      new import_obsidian20.Setting(this.settingsRootElement).setName("Include published timestamp").setDesc(
         "Include the published timestamp in your note's properties."
       ).addToggle(
         (toggle) => toggle.setValue(this.settings.settings.showPublishedTimestamp).setDisabled(
@@ -59901,7 +69668,7 @@ var FrontmatterSettings = class extends import_obsidian18.PluginSettingTab {
    */
   initializePublishedTimestampKeysSetting() {
     if (!this.settings.settings.includeAllFrontmatter && this.settings.settings.showPublishedTimestamp) {
-      new import_obsidian18.Setting(this.settingsRootElement).setName("Published timestamp keys").setDesc(
+      new import_obsidian20.Setting(this.settingsRootElement).setName("Published timestamp keys").setDesc(
         "Comma-separated list of keys to look for to determine the published timestamp. By default, Quartz Syncer will look for 'published', 'publishDate', and 'date'."
       ).addText(
         (text5) => text5.setPlaceholder("published, publishDate, date").setValue(this.settings.settings.publishedTimestampKey).setDisabled(
@@ -59922,7 +69689,7 @@ var FrontmatterSettings = class extends import_obsidian18.PluginSettingTab {
    * even if "permalink" is not in the frontmatter.
    */
   initializeEnablePermalinkSetting() {
-    new import_obsidian18.Setting(this.settingsRootElement).setName("Enable permalinks").setDesc(
+    new import_obsidian20.Setting(this.settingsRootElement).setName("Enable permalinks").setDesc(
       `Use the note's permalink as the Quartz note's URL if "permalink" is not in the frontmatter. This will override the default Quartz URL.`
     ).addToggle(
       (toggle) => toggle.setValue(this.settings.settings.usePermalink).setDisabled(this.settings.settings.includeAllFrontmatter).onChange(async (value2) => {
@@ -59935,8 +69702,8 @@ var FrontmatterSettings = class extends import_obsidian18.PluginSettingTab {
 
 // src/views/SettingsView/Views/IntegrationSettings.ts
 init_esbuild_buffer_shim();
-var import_obsidian19 = require("obsidian");
-var IntegrationSettings = class extends import_obsidian19.PluginSettingTab {
+var import_obsidian21 = require("obsidian");
+var IntegrationSettings = class extends import_obsidian21.PluginSettingTab {
   app;
   plugin;
   settings;
@@ -59971,16 +69738,16 @@ var IntegrationSettings = class extends import_obsidian19.PluginSettingTab {
     this.settings.plugin.saveSettings();
   }
   initializeCorePluginHeader() {
-    new import_obsidian19.Setting(this.settingsRootElement).setName("Core plugins").setDesc("Integrations for Obsidian's built-in core plugins.").setHeading();
+    new import_obsidian21.Setting(this.settingsRootElement).setName("Core plugins").setDesc("Integrations for Obsidian's built-in core plugins.").setHeading();
   }
   initializeCommunityPluginHeader() {
-    new import_obsidian19.Setting(this.settingsRootElement).setName("Community plugins").setDesc("Integrations for third-party community plugins.").setHeading();
+    new import_obsidian21.Setting(this.settingsRootElement).setName("Community plugins").setDesc("Integrations for third-party community plugins.").setHeading();
   }
   initializeIntegrationSetting(integration) {
     const isAvailable = integration.isAvailable();
     const settingKey = integration.settingKey;
     const currentValue = this.settings.settings[settingKey];
-    new import_obsidian19.Setting(this.settingsRootElement).setName(`Enable ${integration.name} integration`).setDesc(this.getIntegrationDescription(integration.id)).addToggle(
+    new import_obsidian21.Setting(this.settingsRootElement).setName(`Enable ${integration.name} integration`).setDesc(this.getIntegrationDescription(integration.id)).addToggle(
       (toggle) => toggle.setValue(currentValue && isAvailable).setDisabled(!isAvailable).onChange(async (value2) => {
         this.settings.settings[settingKey] = value2 && isAvailable;
         await this.settings.plugin.saveSettings();
@@ -60002,12 +69769,12 @@ var IntegrationSettings = class extends import_obsidian19.PluginSettingTab {
     return descriptions[integrationId] ?? `Enables ${integrationId} integration.`;
   }
   initializeStylesHeader() {
-    new import_obsidian19.Setting(this.settingsRootElement).setName("Integration styles").setDesc(
+    new import_obsidian21.Setting(this.settingsRootElement).setName("Integration styles").setDesc(
       "Settings for managing integration styles in your Quartz project."
     ).setHeading();
   }
   initializeManageSyncerStylesSetting() {
-    new import_obsidian19.Setting(this.settingsRootElement).setName("Manage integration styles").setDesc(
+    new import_obsidian21.Setting(this.settingsRootElement).setName("Manage integration styles").setDesc(
       "When enabled, Quartz Syncer will automatically write SCSS files for enabled integrations and ensure custom.scss imports them."
     ).addToggle(
       (toggle) => toggle.setValue(this.settings.settings.manageSyncerStyles).onChange(async (value2) => {
@@ -60020,8 +69787,8 @@ var IntegrationSettings = class extends import_obsidian19.PluginSettingTab {
 
 // src/views/SettingsView/Views/PerformanceSettings.ts
 init_esbuild_buffer_shim();
-var import_obsidian20 = require("obsidian");
-var PerformanceSettings = class extends import_obsidian20.PluginSettingTab {
+var import_obsidian22 = require("obsidian");
+var PerformanceSettings = class extends import_obsidian22.PluginSettingTab {
   app;
   plugin;
   settings;
@@ -60054,7 +69821,7 @@ var PerformanceSettings = class extends import_obsidian20.PluginSettingTab {
    * This method creates a header for the performance settings section.
    */
   initializePerformanceHeader = () => {
-    new import_obsidian20.Setting(this.settingsRootElement).setName("Performance").setDesc(
+    new import_obsidian22.Setting(this.settingsRootElement).setName("Performance").setDesc(
       "Quartz Syncer will use these settings to improve performance."
     ).setHeading();
   };
@@ -60063,7 +69830,7 @@ var PerformanceSettings = class extends import_obsidian20.PluginSettingTab {
    * This method creates a toggle for enabling or disabling the Quartz Syncer cache.
    */
   initializeEnableCacheSetting = () => {
-    new import_obsidian20.Setting(this.settingsRootElement).setName("Enable caching").setDesc(
+    new import_obsidian22.Setting(this.settingsRootElement).setName("Enable caching").setDesc(
       "Enable or disable the Quartz Syncer cache. This can improve performance by storing compiled files locally."
     ).addToggle(
       (toggle) => toggle.setValue(this.settings.settings.useCache).onChange((value2) => {
@@ -60071,7 +69838,7 @@ var PerformanceSettings = class extends import_obsidian20.PluginSettingTab {
         this.settings.plugin.saveSettings();
         if (!value2) {
           this.plugin.datastore.persister.clear();
-          new import_obsidian20.Notice(
+          new import_obsidian22.Notice(
             "Quartz Syncer: Cache disabled. All cached data will be cleared."
           );
         }
@@ -60086,7 +69853,7 @@ var PerformanceSettings = class extends import_obsidian20.PluginSettingTab {
    */
   initializeSyncCacheSetting = () => {
     if (this.settings.settings.useCache) {
-      new import_obsidian20.Setting(this.settingsRootElement).setName("Synchronize cache between devices").setDesc(
+      new import_obsidian22.Setting(this.settingsRootElement).setName("Synchronize cache between devices").setDesc(
         "Whether to write the cache to `data.json`. This is useful for syncing the cache across devices. It is recommended to enable this setting if you are using Quartz Syncer on multiple devices."
       ).addToggle(
         (toggle) => toggle.setValue(this.settings.settings.syncCache).onChange((value2) => {
@@ -60106,7 +69873,7 @@ var PerformanceSettings = class extends import_obsidian20.PluginSettingTab {
    */
   initializePersistCacheSetting = () => {
     if (this.settings.settings.useCache) {
-      new import_obsidian20.Setting(this.settingsRootElement).setName("Persist cache after unload").setDesc(
+      new import_obsidian22.Setting(this.settingsRootElement).setName("Persist cache after unload").setDesc(
         "Whether to persist the cache when the plugin is unloaded. This is useful for users that start Obsidian with the plugin disabled."
       ).addToggle(
         (toggle) => toggle.setValue(this.settings.settings.persistCache).onChange((value2) => {
@@ -60123,14 +69890,14 @@ var PerformanceSettings = class extends import_obsidian20.PluginSettingTab {
    */
   initializeClearCacheSetting = () => {
     if (this.settings.settings.useCache) {
-      new import_obsidian20.Setting(this.settingsRootElement).setName("Clear cache").setDesc(
+      new import_obsidian22.Setting(this.settingsRootElement).setName("Clear cache").setDesc(
         "Clear the Quartz Syncer cache. This will remove all cached files and force a re-fetch of all data from the remote repository."
       ).addButton(
         (button) => button.setButtonText("Clear cache").setCta().onClick(async () => {
           await this.plugin.datastore.dropAllFiles();
           this.settings.settings.cache = "{}";
           this.settings.plugin.saveSettings();
-          new import_obsidian20.Notice("Quartz Syncer: cache cleared.");
+          new import_obsidian22.Notice("Quartz Syncer: cache cleared.");
         })
       );
     }
@@ -60139,8 +69906,8 @@ var PerformanceSettings = class extends import_obsidian20.PluginSettingTab {
 
 // src/views/SettingsView/Views/ThemesSettings.ts
 init_esbuild_buffer_shim();
-var import_obsidian21 = require("obsidian");
-var ThemesSettings = class extends import_obsidian21.PluginSettingTab {
+var import_obsidian23 = require("obsidian");
+var ThemesSettings = class extends import_obsidian23.PluginSettingTab {
   app;
   plugin;
   settings;
@@ -60170,7 +69937,7 @@ var ThemesSettings = class extends import_obsidian21.PluginSettingTab {
    * This method is called when the settings tab is unloaded.
    */
   initializeThemesHeader = () => {
-    new import_obsidian21.Setting(this.settingsRootElement).setName("Themes").setDesc(
+    new import_obsidian23.Setting(this.settingsRootElement).setName("Themes").setDesc(
       "Quartz Themes is a project that aims to regularly convert Obsidian themes to a Quartz-compatible format. Quartz Syncer will install the chosen theme in Quartz from the Quartz Themes repository."
     ).setHeading();
   };
@@ -60179,7 +69946,7 @@ var ThemesSettings = class extends import_obsidian21.PluginSettingTab {
    * This method creates a toggle for enabling or disabling the use of themes in Quartz.
    */
   initializeThemeSetting = () => {
-    new import_obsidian21.Setting(this.settingsRootElement).setName("Theme").setDesc("Select the theme for your Quartz site.").addToggle(
+    new import_obsidian23.Setting(this.settingsRootElement).setName("Theme").setDesc("Select the theme for your Quartz site.").addToggle(
       (toggle) => toggle.setValue(this.settings.settings.useThemes).setValue(false).setDisabled(true).onChange((value2) => {
         this.settings.settings.useThemes = value2;
         this.settings.plugin.saveSettings();
@@ -60190,8 +69957,8 @@ var ThemesSettings = class extends import_obsidian21.PluginSettingTab {
 
 // src/views/SettingsView/Views/UISettings.ts
 init_esbuild_buffer_shim();
-var import_obsidian22 = require("obsidian");
-var UISettings = class extends import_obsidian22.PluginSettingTab {
+var import_obsidian24 = require("obsidian");
+var UISettings = class extends import_obsidian24.PluginSettingTab {
   app;
   plugin;
   settings;
@@ -60213,10 +69980,10 @@ var UISettings = class extends import_obsidian22.PluginSettingTab {
     this.settings.plugin.saveSettings();
   }
   initializeUIHeader = () => {
-    new import_obsidian22.Setting(this.settingsRootElement).setName("User Interface").setDesc("Customize the appearance and behavior of Quartz Syncer.").setHeading();
+    new import_obsidian24.Setting(this.settingsRootElement).setName("User Interface").setDesc("Customize the appearance and behavior of Quartz Syncer.").setHeading();
   };
   initializeDiffViewStyleSetting = () => {
-    new import_obsidian22.Setting(this.settingsRootElement).setName("Diff view style").setDesc(
+    new import_obsidian24.Setting(this.settingsRootElement).setName("Diff view style").setDesc(
       "Choose how differences are displayed when comparing local and published files."
     ).addDropdown(
       (dropdown) => dropdown.addOption(
@@ -60242,9 +70009,9 @@ var SettingView = class {
     this.plugin = plugin;
     this.settingsRootElement = settingsRootElement;
     this.settingsRootElement.classList.add("quartz-syncer-settings");
-    if (import_obsidian23.Platform.isDesktop)
+    if (import_obsidian25.Platform.isDesktop)
       this.settingsRootElement.classList.add("quartz-syncer-desktop");
-    else if (import_obsidian23.Platform.isMobile)
+    else if (import_obsidian25.Platform.isMobile)
       this.settingsRootElement.classList.add("quartz-syncer-mobile");
     this.settings = settings;
     this.datastore = datastore;
@@ -60257,7 +70024,7 @@ var SettingView = class {
    * @returns A Node representing the icon.
    */
   getIcon(name) {
-    return (0, import_obsidian23.getIcon)(name) ?? document.createElement("span");
+    return (0, import_obsidian25.getIcon)(name) ?? document.createElement("span");
   }
   /**
    * Initializes the settings view.
@@ -60333,7 +70100,7 @@ var SettingView = class {
       )
     );
     settingTabs.push(
-      new QuartzSettings(
+      new QuartzV5SettingsTab(
         this.app,
         this.plugin,
         this,
@@ -60396,13 +70163,6 @@ var SettingView = class {
       settingTabs
     );
   }
-  /**
-   * Creates a settings tab element with the specified name and icon.
-   *
-   * @param name - The name of the tab.
-   * @param icon - The icon to display in the tab.
-   * @returns The created tab element.
-   */
   createTab(name, icon) {
     const tab = this.settingsRootElement.createEl("div", {
       cls: "quartz-syncer-navigation-item",
@@ -60464,7 +70224,7 @@ var SettingView = class {
 };
 
 // src/views/QuartzSyncerSettingTab.ts
-var QuartzSyncerSettingTab = class extends import_obsidian24.PluginSettingTab {
+var QuartzSyncerSettingTab = class extends import_obsidian26.PluginSettingTab {
   app;
   plugin;
   constructor(app2, plugin) {
@@ -60579,8 +70339,8 @@ var DataStore = class {
    * Get a cache entry from memory (if preloaded) or IndexedDB.
    * This is the single read path used by all accessor methods.
    */
-  async getCacheEntry(path) {
-    const key = this.fileKey(path);
+  async getCacheEntry(path2) {
+    const key = this.fileKey(path2);
     if (this.memoryCache) {
       return this.memoryCache.get(key) ?? null;
     }
@@ -60589,8 +70349,8 @@ var DataStore = class {
   /**
    * Store a cache entry to IndexedDB and update the in-memory cache if active.
    */
-  async setCacheEntry(path, data) {
-    const key = this.fileKey(path);
+  async setCacheEntry(path2, data) {
+    const key = this.fileKey(path2);
     if (this.memoryCache) {
       this.memoryCache.set(key, data);
       this.dirtyKeys.add(key);
@@ -60638,13 +70398,13 @@ var DataStore = class {
    * @param timestamp - The UNIX epoch time in milliseconds to compare against.
    * @returns A promise that resolves to true if the local file is outdated, false otherwise.
    */
-  async isLocalFileOutdated(path, timestamp) {
-    const data = await this.getCacheEntry(path);
+  async isLocalFileOutdated(path2, timestamp2) {
+    const data = await this.getCacheEntry(path2);
     if (data && data.localData) {
       if (data.hasDynamicContent) {
         return true;
       }
-      return data.time < timestamp || data.version !== this.version;
+      return data.time < timestamp2 || data.version !== this.version;
     }
     return true;
   }
@@ -60654,8 +70414,8 @@ var DataStore = class {
    * @param path - The file path to check.
    * @returns A promise that resolves to true if the file has dynamic content, false otherwise.
    */
-  async hasDynamicContentFlag(path) {
-    const data = await this.getCacheEntry(path);
+  async hasDynamicContentFlag(path2) {
+    const data = await this.getCacheEntry(path2);
     return data?.hasDynamicContent ?? false;
   }
   /**
@@ -60664,8 +70424,8 @@ var DataStore = class {
    * @param path - The file path to check for outdated status.
    * @returns A promise that resolves to true if the remote file is outdated, false otherwise.
    */
-  async isRemoteFileOutdated(path) {
-    const data = await this.getCacheEntry(path);
+  async isRemoteFileOutdated(path2) {
+    const data = await this.getCacheEntry(path2);
     if (data && data.remoteData) {
       return data.version !== this.version;
     }
@@ -60677,8 +70437,8 @@ var DataStore = class {
    * @param path - The file path to check for identity.
    * @returns A promise that resolves to true if they are identical, false otherwise.
    */
-  async areLocalAndRemoteIdentical(path) {
-    const data = await this.getCacheEntry(path);
+  async areLocalAndRemoteIdentical(path2) {
+    const data = await this.getCacheEntry(path2);
     if (data && data.localData && data.remoteData) {
       return data.localHash === data.remoteHash && data.version === this.version;
     }
@@ -60690,8 +70450,8 @@ var DataStore = class {
    * @param path - The file path to load the local file for.
    * @returns A promise that resolves to the local file data, or null if not found.
    */
-  async loadLocalFile(path) {
-    const data = await this.getCacheEntry(path);
+  async loadLocalFile(path2) {
+    const data = await this.getCacheEntry(path2);
     if (data && data.localData) {
       return data.localData;
     }
@@ -60703,8 +70463,8 @@ var DataStore = class {
    * @param path - The file path to load the remote file for.
    * @returns A promise that resolves to the remote file data, or null if not found.
    */
-  async loadRemoteFile(path) {
-    const data = await this.getCacheEntry(path);
+  async loadRemoteFile(path2) {
+    const data = await this.getCacheEntry(path2);
     if (data && data.remoteData) {
       return data.remoteData;
     }
@@ -60718,11 +70478,11 @@ var DataStore = class {
    * @param data - The local file data to store.
    * @param hasDynamicContent - Whether the file contains dynamic content (Dataview, Datacore, etc.).
    */
-  async storeLocalFile(path, timestamp, data, hasDynamicContent2) {
-    const existingData = await this.getCacheEntry(path);
-    await this.setCacheEntry(path, {
+  async storeLocalFile(path2, timestamp2, data, hasDynamicContent2) {
+    const existingData = await this.getCacheEntry(path2);
+    await this.setCacheEntry(path2, {
       version: this.version,
-      time: timestamp ?? Date.now(),
+      time: timestamp2 ?? Date.now(),
       localData: data,
       localHash: existingData?.localHash ?? generateBlobHash(data[0]),
       remoteData: existingData?.remoteData ?? null,
@@ -60739,11 +70499,11 @@ var DataStore = class {
    * @param timestamp - The UNIX epoch time in milliseconds to set for the data.
    * @param data - The remote file data to store.
    */
-  async storeRemoteFile(path, timestamp, data) {
-    const existingData = await this.getCacheEntry(path);
-    await this.setCacheEntry(path, {
+  async storeRemoteFile(path2, timestamp2, data) {
+    const existingData = await this.getCacheEntry(path2);
+    await this.setCacheEntry(path2, {
       version: this.version,
-      time: timestamp ?? Date.now(),
+      time: timestamp2 ?? Date.now(),
       localData: existingData?.localData ?? null,
       // Preserve local data if it exists
       localHash: existingData?.localHash,
@@ -60761,8 +70521,8 @@ var DataStore = class {
    * @param path - The file path to load the local hash for.
    * @returns A promise that resolves to the local hash, or null if not found.
    */
-  async loadLocalHash(path) {
-    const data = await this.getCacheEntry(path);
+  async loadLocalHash(path2) {
+    const data = await this.getCacheEntry(path2);
     if (data && data.localHash) {
       return data.localHash;
     }
@@ -60774,8 +70534,8 @@ var DataStore = class {
    * @param path - The file path to load the remote hash for.
    * @returns A promise that resolves to the remote hash, or null if not found.
    */
-  async loadRemoteHash(path) {
-    const data = await this.getCacheEntry(path);
+  async loadRemoteHash(path2) {
+    const data = await this.getCacheEntry(path2);
     if (data && data.remoteHash) {
       return data.remoteHash;
     }
@@ -60788,11 +70548,11 @@ var DataStore = class {
    * @param timestamp - The UNIX epoch time in milliseconds to set for the data.
    * @param hash - The hash of the local file.
    */
-  async storeLocalHash(path, timestamp, hash) {
-    const existingData = await this.getCacheEntry(path);
-    await this.setCacheEntry(path, {
+  async storeLocalHash(path2, timestamp2, hash) {
+    const existingData = await this.getCacheEntry(path2);
+    await this.setCacheEntry(path2, {
       version: this.version,
-      time: timestamp ?? Date.now(),
+      time: timestamp2 ?? Date.now(),
       localData: existingData?.localData ?? null,
       // Preserve local data if it exists
       localHash: hash,
@@ -60812,11 +70572,11 @@ var DataStore = class {
    * @param hash - The hash of the remote file to store.
    * @returns A promise that resolves when the remote hash is stored.
    */
-  async storeRemoteHash(path, timestamp, hash) {
-    const existingData = await this.getCacheEntry(path);
-    await this.setCacheEntry(path, {
+  async storeRemoteHash(path2, timestamp2, hash) {
+    const existingData = await this.getCacheEntry(path2);
+    await this.setCacheEntry(path2, {
       version: this.version,
-      time: timestamp ?? Date.now(),
+      time: timestamp2 ?? Date.now(),
       localData: existingData?.localData ?? null,
       // Preserve local data if it exists
       localHash: existingData?.localHash,
@@ -60834,8 +70594,8 @@ var DataStore = class {
    * @param path - The file path to get the cached time for.
    * @returns A promise that resolves to the cached time in milliseconds, or null if not found.
    */
-  async getTime(path) {
-    const data = await this.getCacheEntry(path);
+  async getTime(path2) {
+    const data = await this.getCacheEntry(path2);
     if (data) {
       return data.time;
     }
@@ -60847,8 +70607,8 @@ var DataStore = class {
    * @param path - The file path to load metadata for.
    * @returns A promise that resolves to the cached metadata for the file, or null if not found.
    */
-  async loadFile(path) {
-    return this.getCacheEntry(path).then((raw) => {
+  async loadFile(path2) {
+    return this.getCacheEntry(path2).then((raw) => {
       return raw;
     });
   }
@@ -60858,8 +70618,8 @@ var DataStore = class {
    * @param path - The file path to drop from the cache.
    * @returns A promise that resolves when the file is dropped.
    */
-  async dropFile(path) {
-    await this.persister.removeItem(this.fileKey(path));
+  async dropFile(path2) {
+    await this.persister.removeItem(this.fileKey(path2));
   }
   /**
    * Drop all files in the cache.
@@ -60892,7 +70652,7 @@ var DataStore = class {
    * @param plugin - The QuartzSyncer plugin instance to use for saving settings.
    * @returns A promise that resolves to a tuple containing the saved timestamp and the DataStore as JSON string.
    */
-  async saveToDataJson(timestamp, plugin) {
+  async saveToDataJson(timestamp2, plugin) {
     const data = {};
     const keys = await this.allKeys();
     for (const key of keys) {
@@ -60906,7 +70666,7 @@ var DataStore = class {
     const jsonData = JSON.stringify(data, null, 2);
     plugin.settings.cache = jsonData;
     await plugin.saveSettings();
-    await this.setLastUpdateTimestamp(timestamp, plugin);
+    await this.setLastUpdateTimestamp(timestamp2, plugin);
   }
   /**
    * Load the data store from data.json file.
@@ -60915,13 +70675,13 @@ var DataStore = class {
    * @param plugin - The QuartzSyncer plugin instance to use for loading settings.
    * @returns A promise that resolves when the cache is loaded from.
    */
-  async loadFromDataJson(timestamp, plugin) {
+  async loadFromDataJson(timestamp2, plugin) {
     const cache = plugin.settings.cache;
     const data = JSON.parse(cache);
     for (const [key, value2] of Object.entries(data)) {
       await this.persister.setItem(key, value2);
     }
-    await this.setLastUpdateTimestamp(timestamp, plugin);
+    await this.setLastUpdateTimestamp(timestamp2, plugin);
     return;
   }
   /**
@@ -60947,17 +70707,17 @@ var DataStore = class {
    * @param path - The file path to generate a key for.
    * @returns A unique key for the file, prefixed with "file:".
    */
-  fileKey(path) {
-    return "file:" + path;
+  fileKey(path2) {
+    return "file:" + path2;
   }
   /**
    * Get the timestamp of the last cache update.
    * @returns A promise that resolves to the timestamp of the last cache update, or null if not found.
    */
   async getLastUpdateTimestamp() {
-    const timestamp = await this.persister.getItem("data.json");
-    if (timestamp) {
-      return timestamp;
+    const timestamp2 = await this.persister.getItem("data.json");
+    if (timestamp2) {
+      return timestamp2;
     }
     return null;
   }
@@ -60967,15 +70727,4033 @@ var DataStore = class {
    * @param plugin - The QuartzSyncer plugin instance to use for saving settings.
    * @returns A promise that resolves when the timestamp is set.
    */
-  async setLastUpdateTimestamp(timestamp, plugin) {
-    plugin.settings.cacheTimestamp = timestamp;
-    await this.persister.setItem("data.json", timestamp);
+  async setLastUpdateTimestamp(timestamp2, plugin) {
+    plugin.settings.cacheTimestamp = timestamp2;
+    await this.persister.setItem("data.json", timestamp2);
     await plugin.saveSettings();
   }
 };
 
 // main.ts
-var import_js_logger10 = __toESM(require_logger());
+var import_js_logger21 = __toESM(require_logger());
+
+// src/cli/registerCliHandlers.ts
+init_esbuild_buffer_shim();
+
+// src/cli/formatOutput.ts
+init_esbuild_buffer_shim();
+var FLAG_ALIASES = {
+  h: "help",
+  v: "verbose"
+};
+var GLOBAL_FLAGS = {
+  help: { description: "Show this help message" },
+  h: { description: "Show this help message" },
+  "--help": { description: "Show this help message" },
+  verbose: { description: "Enable verbose output" },
+  v: { description: "Enable verbose output" },
+  "--verbose": { description: "Enable verbose output" }
+};
+function normalizeCliParams(params) {
+  const normalized = {};
+  for (const key of Object.keys(params)) {
+    const stripped = key.replace(/^-{1,2}/, "");
+    const canonical = FLAG_ALIASES[stripped] ?? stripped;
+    normalized[canonical] = params[key];
+  }
+  return normalized;
+}
+function withDashAliases(flags) {
+  const expanded = { ...GLOBAL_FLAGS };
+  if (!flags) return expanded;
+  for (const [name, flag] of Object.entries(flags)) {
+    expanded[name] = flag;
+    expanded[`--${name}`] = flag;
+  }
+  return expanded;
+}
+function generateCommandHelp(command, description, flags) {
+  const lines = [`Usage: obsidian ${command} [flags]`, "", description];
+  if (flags && Object.keys(flags).length > 0) {
+    const canonicalFlags = Object.entries(flags).filter(
+      ([name]) => !name.startsWith("-") && !Object.keys(GLOBAL_FLAGS).includes(name)
+    );
+    if (canonicalFlags.length > 0) {
+      lines.push("", "Flags:");
+      for (const [name, flag] of canonicalFlags) {
+        const valuePart = flag.value ? `=${flag.value}` : "";
+        lines.push(`  ${name}${valuePart}  ${flag.description}`);
+      }
+    }
+  }
+  lines.push(
+    "",
+    "Global flags:",
+    "  help, h        Show this help message",
+    "  verbose, v     Enable verbose output"
+  );
+  return lines.join("\n");
+}
+function formatCliOutput(params, result) {
+  if (params.format === "json") {
+    return JSON.stringify(result, null, 2);
+  }
+  if (!result.ok) {
+    return `Error: ${result.error ?? "Unknown error"}`;
+  }
+  const base = result.message ?? JSON.stringify(result.data);
+  const duration = result.durationMs ? ` (${(result.durationMs / 1e3).toFixed(1)}s)` : "";
+  return `${base}${duration}`;
+}
+function cliError(command, error) {
+  return { ok: false, command, error };
+}
+function cliSuccess(command, message, data, durationMs) {
+  return { ok: true, command, message, data, durationMs };
+}
+
+// src/cli/handlers/statusHandler.ts
+init_esbuild_buffer_shim();
+
+// src/cli/validators.ts
+init_esbuild_buffer_shim();
+function validatePreFlight(plugin) {
+  if (!plugin.settings.git.remoteUrl) {
+    return "Git remote URL is not configured. Set it in plugin settings or via 'obsidian quartz-syncer:config action=set key=git.remoteUrl value=<url>'.";
+  }
+  if (!plugin.settings.git.branch) {
+    return "Git branch is not configured. Set it in plugin settings or via 'obsidian quartz-syncer:config action=set key=git.branch value=<branch>'.";
+  }
+  return null;
+}
+
+// src/cli/cliProgressController.ts
+init_esbuild_buffer_shim();
+var import_js_logger19 = __toESM(require_logger());
+var CliProgressController = class {
+  setProgress(percentage) {
+    import_js_logger19.default.debug(`CLI progress: ${percentage}%`);
+  }
+  setIndexText(indexText) {
+    import_js_logger19.default.debug(`CLI index: ${indexText}`);
+  }
+  setText(message) {
+    import_js_logger19.default.debug(`CLI status: ${message}`);
+  }
+};
+
+// src/cli/handlers/statusHandler.ts
+var COMMAND = "quartz-syncer:status";
+var FLAGS = {
+  format: {
+    value: "<json|text>",
+    description: "Output format (default: text)"
+  }
+};
+function createStatusHandler(register, plugin) {
+  register(
+    COMMAND,
+    "Show the publish status of all marked notes",
+    FLAGS,
+    async (params) => {
+      try {
+        const validationError = validatePreFlight(plugin);
+        if (validationError) {
+          return formatCliOutput(
+            params,
+            cliError(COMMAND, validationError)
+          );
+        }
+        const startTime = Date.now();
+        const siteManager = new QuartzSyncerSiteManager(
+          plugin.app.metadataCache,
+          plugin.settings,
+          plugin.getGitSettingsWithSecret()
+        );
+        const publisher = new Publisher(
+          plugin.app,
+          plugin,
+          plugin.app.vault,
+          plugin.app.metadataCache,
+          plugin.settings,
+          plugin.datastore
+        );
+        const statusManager = new PublishStatusManager(
+          siteManager,
+          publisher
+        );
+        const controller = new CliProgressController();
+        const status = await statusManager.getPublishStatus(controller);
+        const notePaths = /* @__PURE__ */ new Set([
+          ...status.unpublishedNotes.map((f) => f.getPath()),
+          ...status.changedNotes.map((f) => f.getPath()),
+          ...status.publishedNotes.map((f) => f.getPath()),
+          ...status.deletedNotePaths.map((p) => p.path)
+        ]);
+        const filteredDeletedBlobs = status.deletedBlobPaths.filter(
+          (p) => !notePaths.has(p.path)
+        );
+        const data = {
+          unpublished: status.unpublishedNotes.map(
+            (f) => f.getPath()
+          ),
+          changed: status.changedNotes.map((f) => f.getPath()),
+          published: status.publishedNotes.map((f) => f.getPath()),
+          deletedNotes: status.deletedNotePaths.map((p) => p.path),
+          deletedBlobs: filteredDeletedBlobs.map((p) => p.path),
+          summary: {
+            unpublished: status.unpublishedNotes.length,
+            changed: status.changedNotes.length,
+            published: status.publishedNotes.length,
+            deletedNotes: status.deletedNotePaths.length,
+            deletedBlobs: filteredDeletedBlobs.length
+          }
+        };
+        const verbose = params.verbose === "true";
+        const includeVerbose = verbose && params.format !== "json";
+        const messageLines = [];
+        const appendSection = (label, paths) => {
+          messageLines.push(label);
+          if (!includeVerbose || paths.length === 0) {
+            return;
+          }
+          messageLines.push(...paths.map((path2) => `	${path2}`));
+        };
+        const deletedPaths = [
+          ...data.deletedNotes,
+          ...data.deletedBlobs
+        ];
+        appendSection(
+          `Unpublished: ${data.summary.unpublished}`,
+          data.unpublished
+        );
+        appendSection(
+          `Changed:     ${data.summary.changed}`,
+          data.changed
+        );
+        appendSection(
+          `Published:   ${data.summary.published}`,
+          data.published
+        );
+        appendSection(
+          `Deleted:     ${data.summary.deletedNotes + data.summary.deletedBlobs}`,
+          deletedPaths
+        );
+        const message = messageLines.join("\n");
+        return formatCliOutput(
+          params,
+          cliSuccess(COMMAND, message, data, Date.now() - startTime)
+        );
+      } catch (error) {
+        return formatCliOutput(
+          params,
+          cliError(
+            COMMAND,
+            error instanceof Error ? error.message : String(error)
+          )
+        );
+      }
+    }
+  );
+}
+
+// src/cli/handlers/syncHandler.ts
+init_esbuild_buffer_shim();
+var COMMAND2 = "quartz-syncer:sync";
+var FLAGS2 = {
+  force: {
+    description: "Apply deletions (required to delete remote files)"
+  },
+  "dry-run": {
+    description: "Show what would be published/deleted without changes"
+  },
+  format: {
+    value: "<json|text>",
+    description: "Output format (default: text)"
+  }
+};
+function createSyncHandler(register, plugin) {
+  register(
+    COMMAND2,
+    "Publish pending notes and optionally delete removed notes",
+    FLAGS2,
+    async (params) => {
+      try {
+        const validationError = validatePreFlight(plugin);
+        if (validationError) {
+          return formatCliOutput(
+            params,
+            cliError(COMMAND2, validationError)
+          );
+        }
+        const startTime = Date.now();
+        const dryRun = params["dry-run"] === "true";
+        const force = params.force === "true";
+        const verbose = params.verbose === "true";
+        const includeVerbose = verbose && params.format !== "json";
+        const siteManager = new QuartzSyncerSiteManager(
+          plugin.app.metadataCache,
+          plugin.settings,
+          plugin.getGitSettingsWithSecret()
+        );
+        const publisher = new Publisher(
+          plugin.app,
+          plugin,
+          plugin.app.vault,
+          plugin.app.metadataCache,
+          plugin.settings,
+          plugin.datastore
+        );
+        const statusManager = new PublishStatusManager(
+          siteManager,
+          publisher
+        );
+        const controller = new CliProgressController();
+        const status = await statusManager.getPublishStatus(controller);
+        const filesToPublish = [
+          ...status.unpublishedNotes,
+          ...status.changedNotes
+        ];
+        const notePaths = /* @__PURE__ */ new Set([
+          ...status.unpublishedNotes.map((f) => f.getPath()),
+          ...status.changedNotes.map((f) => f.getPath()),
+          ...status.publishedNotes.map((f) => f.getPath()),
+          ...status.deletedNotePaths.map((p) => p.path)
+        ]);
+        const filteredDeletedBlobs = status.deletedBlobPaths.filter(
+          (p) => !notePaths.has(p.path)
+        );
+        const deletions = [
+          ...status.deletedNotePaths.map((p) => p.path),
+          ...filteredDeletedBlobs.map((p) => p.path)
+        ];
+        const data = {
+          publish: filesToPublish.map((f) => f.getPath()),
+          delete: deletions,
+          skippedDeletes: [],
+          summary: {
+            published: filesToPublish.length,
+            deleted: 0,
+            skippedDeletes: 0
+          }
+        };
+        const buildVerboseMessage = (published, deleted, skipped, fallback) => {
+          if (!includeVerbose) {
+            return fallback;
+          }
+          const lines = [];
+          if (published.length > 0) {
+            lines.push(
+              `Published ${published.length} file${published.length === 1 ? "" : "s"}:`
+            );
+            lines.push(...published.map((path2) => `	${path2}`));
+          }
+          if (deleted.length > 0) {
+            lines.push(
+              `Deleted ${deleted.length} file${deleted.length === 1 ? "" : "s"}:`
+            );
+            lines.push(...deleted.map((path2) => `	${path2}`));
+          }
+          if (skipped.length > 0) {
+            lines.push(
+              `Skipped ${skipped.length} deletion${skipped.length === 1 ? "" : "s"}:`
+            );
+            lines.push(...skipped.map((path2) => `	${path2}`));
+          }
+          return lines.length > 0 ? lines.join("\n") : fallback;
+        };
+        if (dryRun) {
+          data.summary.deleted = deletions.length;
+          const baseMessage2 = `Dry run: ${data.summary.published} to publish, ${deletions.length} to delete.`;
+          const message2 = buildVerboseMessage(
+            data.publish,
+            data.delete,
+            [],
+            baseMessage2
+          );
+          return formatCliOutput(
+            params,
+            cliSuccess(
+              COMMAND2,
+              message2,
+              data,
+              Date.now() - startTime
+            )
+          );
+        }
+        if (filesToPublish.length === 0 && deletions.length === 0) {
+          return formatCliOutput(
+            params,
+            cliSuccess(
+              COMMAND2,
+              buildVerboseMessage([], [], [], "Nothing to sync."),
+              data,
+              Date.now() - startTime
+            )
+          );
+        }
+        const connection = publisher.createConnection();
+        const publishOk = await publisher.publishBatch(
+          filesToPublish,
+          connection
+        );
+        if (!publishOk) {
+          throw new Error("Failed to publish files.");
+        }
+        let deletedCount = 0;
+        let skippedDeletes = [];
+        if (deletions.length > 0) {
+          if (force) {
+            const deleteOk = await publisher.deleteBatch(
+              deletions,
+              connection
+            );
+            if (!deleteOk) {
+              throw new Error("Failed to delete files.");
+            }
+            deletedCount = deletions.length;
+          } else {
+            skippedDeletes = deletions;
+          }
+        }
+        data.skippedDeletes = skippedDeletes;
+        data.summary.deleted = deletedCount;
+        data.summary.skippedDeletes = skippedDeletes.length;
+        const messageParts = [
+          `Published ${filesToPublish.length} file${filesToPublish.length === 1 ? "" : "s"}`,
+          `Deleted ${deletedCount} file${deletedCount === 1 ? "" : "s"}`
+        ];
+        if (skippedDeletes.length > 0) {
+          messageParts.push(
+            `Skipped ${skippedDeletes.length} deletion${skippedDeletes.length === 1 ? "" : "s"} (use force)`
+          );
+        }
+        const baseMessage = messageParts.join(". ") + ".";
+        const actuallyDeleted = force ? deletions : [];
+        const message = buildVerboseMessage(
+          data.publish,
+          actuallyDeleted,
+          skippedDeletes,
+          baseMessage
+        );
+        return formatCliOutput(
+          params,
+          cliSuccess(COMMAND2, message, data, Date.now() - startTime)
+        );
+      } catch (error) {
+        return formatCliOutput(
+          params,
+          cliError(
+            COMMAND2,
+            error instanceof Error ? error.message : String(error)
+          )
+        );
+      }
+    }
+  );
+}
+
+// src/cli/handlers/publishHandler.ts
+init_esbuild_buffer_shim();
+var COMMAND3 = "quartz-syncer:publish";
+var FLAGS3 = {
+  "dry-run": {
+    description: "Show what would be published without changes"
+  },
+  format: {
+    value: "<json|text>",
+    description: "Output format (default: text)"
+  }
+};
+function createPublishHandler(register, plugin) {
+  register(
+    COMMAND3,
+    "Publish pending notes without deletions",
+    FLAGS3,
+    async (params) => {
+      try {
+        const validationError = validatePreFlight(plugin);
+        if (validationError) {
+          return formatCliOutput(
+            params,
+            cliError(COMMAND3, validationError)
+          );
+        }
+        const startTime = Date.now();
+        const dryRun = params["dry-run"] === "true";
+        const verbose = params.verbose === "true";
+        const includeVerbose = verbose && params.format !== "json";
+        const siteManager = new QuartzSyncerSiteManager(
+          plugin.app.metadataCache,
+          plugin.settings,
+          plugin.getGitSettingsWithSecret()
+        );
+        const publisher = new Publisher(
+          plugin.app,
+          plugin,
+          plugin.app.vault,
+          plugin.app.metadataCache,
+          plugin.settings,
+          plugin.datastore
+        );
+        const statusManager = new PublishStatusManager(
+          siteManager,
+          publisher
+        );
+        const controller = new CliProgressController();
+        const status = await statusManager.getPublishStatus(controller);
+        const filesToPublish = [
+          ...status.unpublishedNotes,
+          ...status.changedNotes
+        ];
+        const data = {
+          publish: filesToPublish.map((f) => f.getPath()),
+          summary: {
+            published: filesToPublish.length
+          }
+        };
+        const buildVerboseMessage = (published, fallback) => {
+          if (!includeVerbose) {
+            return fallback;
+          }
+          if (published.length === 0) {
+            return fallback;
+          }
+          return [
+            `Published ${published.length} file${published.length === 1 ? "" : "s"}:`,
+            ...published.map((path2) => `	${path2}`)
+          ].join("\n");
+        };
+        if (dryRun) {
+          const baseMessage2 = `Dry run: ${filesToPublish.length} to publish.`;
+          const message2 = buildVerboseMessage(
+            data.publish,
+            baseMessage2
+          );
+          return formatCliOutput(
+            params,
+            cliSuccess(
+              COMMAND3,
+              message2,
+              data,
+              Date.now() - startTime
+            )
+          );
+        }
+        if (filesToPublish.length === 0) {
+          return formatCliOutput(
+            params,
+            cliSuccess(
+              COMMAND3,
+              buildVerboseMessage([], "Nothing to publish."),
+              data,
+              Date.now() - startTime
+            )
+          );
+        }
+        const connection = publisher.createConnection();
+        const publishOk = await publisher.publishBatch(
+          filesToPublish,
+          connection
+        );
+        if (!publishOk) {
+          throw new Error("Failed to publish files.");
+        }
+        const baseMessage = `Published ${filesToPublish.length} file${filesToPublish.length === 1 ? "" : "s"}.`;
+        const message = buildVerboseMessage(data.publish, baseMessage);
+        return formatCliOutput(
+          params,
+          cliSuccess(COMMAND3, message, data, Date.now() - startTime)
+        );
+      } catch (error) {
+        return formatCliOutput(
+          params,
+          cliError(
+            COMMAND3,
+            error instanceof Error ? error.message : String(error)
+          )
+        );
+      }
+    }
+  );
+}
+
+// src/cli/handlers/deleteHandler.ts
+init_esbuild_buffer_shim();
+var COMMAND4 = "quartz-syncer:delete";
+var FLAGS4 = {
+  force: {
+    description: "Apply deletions (required)"
+  },
+  "dry-run": {
+    description: "Show what would be deleted without changes"
+  },
+  format: {
+    value: "<json|text>",
+    description: "Output format (default: text)"
+  }
+};
+function createDeleteHandler(register, plugin) {
+  register(
+    COMMAND4,
+    "Delete removed notes from the remote repository",
+    FLAGS4,
+    async (params) => {
+      try {
+        const validationError = validatePreFlight(plugin);
+        if (validationError) {
+          return formatCliOutput(
+            params,
+            cliError(COMMAND4, validationError)
+          );
+        }
+        const startTime = Date.now();
+        const dryRun = params["dry-run"] === "true";
+        const force = params.force === "true";
+        const verbose = params.verbose === "true";
+        const includeVerbose = verbose && params.format !== "json";
+        const siteManager = new QuartzSyncerSiteManager(
+          plugin.app.metadataCache,
+          plugin.settings,
+          plugin.getGitSettingsWithSecret()
+        );
+        const publisher = new Publisher(
+          plugin.app,
+          plugin,
+          plugin.app.vault,
+          plugin.app.metadataCache,
+          plugin.settings,
+          plugin.datastore
+        );
+        const statusManager = new PublishStatusManager(
+          siteManager,
+          publisher
+        );
+        const controller = new CliProgressController();
+        const status = await statusManager.getPublishStatus(controller);
+        const notePaths = /* @__PURE__ */ new Set([
+          ...status.unpublishedNotes.map((f) => f.getPath()),
+          ...status.changedNotes.map((f) => f.getPath()),
+          ...status.publishedNotes.map((f) => f.getPath()),
+          ...status.deletedNotePaths.map((p) => p.path)
+        ]);
+        const filteredDeletedBlobs = status.deletedBlobPaths.filter(
+          (p) => !notePaths.has(p.path)
+        );
+        const deletions = [
+          ...status.deletedNotePaths.map((p) => p.path),
+          ...filteredDeletedBlobs.map((p) => p.path)
+        ];
+        const data = {
+          delete: deletions,
+          summary: {
+            deleted: deletions.length
+          }
+        };
+        const buildVerboseMessage = (deleted, fallback) => {
+          if (!includeVerbose || deleted.length === 0) {
+            return fallback;
+          }
+          return [
+            `Deleted ${deleted.length} file${deleted.length === 1 ? "" : "s"}:`,
+            ...deleted.map((path2) => `	${path2}`)
+          ].join("\n");
+        };
+        if (dryRun) {
+          const baseMessage2 = `Dry run: ${deletions.length} to delete.`;
+          const message2 = buildVerboseMessage(deletions, baseMessage2);
+          return formatCliOutput(
+            params,
+            cliSuccess(
+              COMMAND4,
+              message2,
+              data,
+              Date.now() - startTime
+            )
+          );
+        }
+        if (deletions.length === 0) {
+          return formatCliOutput(
+            params,
+            cliSuccess(
+              COMMAND4,
+              buildVerboseMessage([], "Nothing to delete."),
+              data,
+              Date.now() - startTime
+            )
+          );
+        }
+        if (!force) {
+          return formatCliOutput(
+            params,
+            cliError(
+              COMMAND4,
+              "Deletion requires the 'force' flag."
+            )
+          );
+        }
+        const connection = publisher.createConnection();
+        const deleteOk = await publisher.deleteBatch(
+          deletions,
+          connection
+        );
+        if (!deleteOk) {
+          throw new Error("Failed to delete files.");
+        }
+        const baseMessage = `Deleted ${deletions.length} file${deletions.length === 1 ? "" : "s"}.`;
+        const message = buildVerboseMessage(deletions, baseMessage);
+        return formatCliOutput(
+          params,
+          cliSuccess(COMMAND4, message, data, Date.now() - startTime)
+        );
+      } catch (error) {
+        return formatCliOutput(
+          params,
+          cliError(
+            COMMAND4,
+            error instanceof Error ? error.message : String(error)
+          )
+        );
+      }
+    }
+  );
+}
+
+// src/cli/handlers/markHandler.ts
+init_esbuild_buffer_shim();
+
+// src/cli/pathResolver.ts
+init_esbuild_buffer_shim();
+var import_obsidian27 = require("obsidian");
+
+// node_modules/minimatch/dist/esm/index.js
+init_esbuild_buffer_shim();
+
+// node_modules/minimatch/node_modules/brace-expansion/dist/esm/index.js
+init_esbuild_buffer_shim();
+
+// node_modules/minimatch/node_modules/balanced-match/dist/esm/index.js
+init_esbuild_buffer_shim();
+var balanced = (a, b, str) => {
+  const ma = a instanceof RegExp ? maybeMatch(a, str) : a;
+  const mb = b instanceof RegExp ? maybeMatch(b, str) : b;
+  const r = ma !== null && mb != null && range(ma, mb, str);
+  return r && {
+    start: r[0],
+    end: r[1],
+    pre: str.slice(0, r[0]),
+    body: str.slice(r[0] + ma.length, r[1]),
+    post: str.slice(r[1] + mb.length)
+  };
+};
+var maybeMatch = (reg, str) => {
+  const m = str.match(reg);
+  return m ? m[0] : null;
+};
+var range = (a, b, str) => {
+  let begs, beg, left, right = void 0, result;
+  let ai = str.indexOf(a);
+  let bi = str.indexOf(b, ai + 1);
+  let i = ai;
+  if (ai >= 0 && bi > 0) {
+    if (a === b) {
+      return [ai, bi];
+    }
+    begs = [];
+    left = str.length;
+    while (i >= 0 && !result) {
+      if (i === ai) {
+        begs.push(i);
+        ai = str.indexOf(a, i + 1);
+      } else if (begs.length === 1) {
+        const r = begs.pop();
+        if (r !== void 0)
+          result = [r, bi];
+      } else {
+        beg = begs.pop();
+        if (beg !== void 0 && beg < left) {
+          left = beg;
+          right = bi;
+        }
+        bi = str.indexOf(b, i + 1);
+      }
+      i = ai < bi && ai >= 0 ? ai : bi;
+    }
+    if (begs.length && right !== void 0) {
+      result = [left, right];
+    }
+  }
+  return result;
+};
+
+// node_modules/minimatch/node_modules/brace-expansion/dist/esm/index.js
+var escSlash = "\0SLASH" + Math.random() + "\0";
+var escOpen = "\0OPEN" + Math.random() + "\0";
+var escClose = "\0CLOSE" + Math.random() + "\0";
+var escComma = "\0COMMA" + Math.random() + "\0";
+var escPeriod = "\0PERIOD" + Math.random() + "\0";
+var escSlashPattern = new RegExp(escSlash, "g");
+var escOpenPattern = new RegExp(escOpen, "g");
+var escClosePattern = new RegExp(escClose, "g");
+var escCommaPattern = new RegExp(escComma, "g");
+var escPeriodPattern = new RegExp(escPeriod, "g");
+var slashPattern = /\\\\/g;
+var openPattern = /\\{/g;
+var closePattern = /\\}/g;
+var commaPattern = /\\,/g;
+var periodPattern = /\\\./g;
+var EXPANSION_MAX = 1e5;
+function numeric(str) {
+  return !isNaN(str) ? parseInt(str, 10) : str.charCodeAt(0);
+}
+function escapeBraces(str) {
+  return str.replace(slashPattern, escSlash).replace(openPattern, escOpen).replace(closePattern, escClose).replace(commaPattern, escComma).replace(periodPattern, escPeriod);
+}
+function unescapeBraces(str) {
+  return str.replace(escSlashPattern, "\\").replace(escOpenPattern, "{").replace(escClosePattern, "}").replace(escCommaPattern, ",").replace(escPeriodPattern, ".");
+}
+function parseCommaParts(str) {
+  if (!str) {
+    return [""];
+  }
+  const parts = [];
+  const m = balanced("{", "}", str);
+  if (!m) {
+    return str.split(",");
+  }
+  const { pre, body, post } = m;
+  const p = pre.split(",");
+  p[p.length - 1] += "{" + body + "}";
+  const postParts = parseCommaParts(post);
+  if (post.length) {
+    ;
+    p[p.length - 1] += postParts.shift();
+    p.push.apply(p, postParts);
+  }
+  parts.push.apply(parts, p);
+  return parts;
+}
+function expand(str, options = {}) {
+  if (!str) {
+    return [];
+  }
+  const { max = EXPANSION_MAX } = options;
+  if (str.slice(0, 2) === "{}") {
+    str = "\\{\\}" + str.slice(2);
+  }
+  return expand_(escapeBraces(str), max, true).map(unescapeBraces);
+}
+function embrace(str) {
+  return "{" + str + "}";
+}
+function isPadded(el) {
+  return /^-?0\d/.test(el);
+}
+function lte(i, y) {
+  return i <= y;
+}
+function gte(i, y) {
+  return i >= y;
+}
+function expand_(str, max, isTop) {
+  const expansions = [];
+  const m = balanced("{", "}", str);
+  if (!m)
+    return [str];
+  const pre = m.pre;
+  const post = m.post.length ? expand_(m.post, max, false) : [""];
+  if (/\$$/.test(m.pre)) {
+    for (let k = 0; k < post.length && k < max; k++) {
+      const expansion = pre + "{" + m.body + "}" + post[k];
+      expansions.push(expansion);
+    }
+  } else {
+    const isNumericSequence = /^-?\d+\.\.-?\d+(?:\.\.-?\d+)?$/.test(m.body);
+    const isAlphaSequence = /^[a-zA-Z]\.\.[a-zA-Z](?:\.\.-?\d+)?$/.test(m.body);
+    const isSequence = isNumericSequence || isAlphaSequence;
+    const isOptions = m.body.indexOf(",") >= 0;
+    if (!isSequence && !isOptions) {
+      if (m.post.match(/,(?!,).*\}/)) {
+        str = m.pre + "{" + m.body + escClose + m.post;
+        return expand_(str, max, true);
+      }
+      return [str];
+    }
+    let n2;
+    if (isSequence) {
+      n2 = m.body.split(/\.\./);
+    } else {
+      n2 = parseCommaParts(m.body);
+      if (n2.length === 1 && n2[0] !== void 0) {
+        n2 = expand_(n2[0], max, false).map(embrace);
+        if (n2.length === 1) {
+          return post.map((p) => m.pre + n2[0] + p);
+        }
+      }
+    }
+    let N;
+    if (isSequence && n2[0] !== void 0 && n2[1] !== void 0) {
+      const x = numeric(n2[0]);
+      const y = numeric(n2[1]);
+      const width = Math.max(n2[0].length, n2[1].length);
+      let incr = n2.length === 3 && n2[2] !== void 0 ? Math.max(Math.abs(numeric(n2[2])), 1) : 1;
+      let test = lte;
+      const reverse = y < x;
+      if (reverse) {
+        incr *= -1;
+        test = gte;
+      }
+      const pad = n2.some(isPadded);
+      N = [];
+      for (let i = x; test(i, y); i += incr) {
+        let c;
+        if (isAlphaSequence) {
+          c = String.fromCharCode(i);
+          if (c === "\\") {
+            c = "";
+          }
+        } else {
+          c = String(i);
+          if (pad) {
+            const need = width - c.length;
+            if (need > 0) {
+              const z = new Array(need + 1).join("0");
+              if (i < 0) {
+                c = "-" + z + c.slice(1);
+              } else {
+                c = z + c;
+              }
+            }
+          }
+        }
+        N.push(c);
+      }
+    } else {
+      N = [];
+      for (let j = 0; j < n2.length; j++) {
+        N.push.apply(N, expand_(n2[j], max, false));
+      }
+    }
+    for (let j = 0; j < N.length; j++) {
+      for (let k = 0; k < post.length && expansions.length < max; k++) {
+        const expansion = pre + N[j] + post[k];
+        if (!isTop || isSequence || expansion) {
+          expansions.push(expansion);
+        }
+      }
+    }
+  }
+  return expansions;
+}
+
+// node_modules/minimatch/dist/esm/assert-valid-pattern.js
+init_esbuild_buffer_shim();
+var MAX_PATTERN_LENGTH = 1024 * 64;
+var assertValidPattern = (pattern) => {
+  if (typeof pattern !== "string") {
+    throw new TypeError("invalid pattern");
+  }
+  if (pattern.length > MAX_PATTERN_LENGTH) {
+    throw new TypeError("pattern is too long");
+  }
+};
+
+// node_modules/minimatch/dist/esm/ast.js
+init_esbuild_buffer_shim();
+
+// node_modules/minimatch/dist/esm/brace-expressions.js
+init_esbuild_buffer_shim();
+var posixClasses = {
+  "[:alnum:]": ["\\p{L}\\p{Nl}\\p{Nd}", true],
+  "[:alpha:]": ["\\p{L}\\p{Nl}", true],
+  "[:ascii:]": ["\\x00-\\x7f", false],
+  "[:blank:]": ["\\p{Zs}\\t", true],
+  "[:cntrl:]": ["\\p{Cc}", true],
+  "[:digit:]": ["\\p{Nd}", true],
+  "[:graph:]": ["\\p{Z}\\p{C}", true, true],
+  "[:lower:]": ["\\p{Ll}", true],
+  "[:print:]": ["\\p{C}", true],
+  "[:punct:]": ["\\p{P}", true],
+  "[:space:]": ["\\p{Z}\\t\\r\\n\\v\\f", true],
+  "[:upper:]": ["\\p{Lu}", true],
+  "[:word:]": ["\\p{L}\\p{Nl}\\p{Nd}\\p{Pc}", true],
+  "[:xdigit:]": ["A-Fa-f0-9", false]
+};
+var braceEscape = (s2) => s2.replace(/[[\]\\-]/g, "\\$&");
+var regexpEscape = (s2) => s2.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+var rangesToString = (ranges) => ranges.join("");
+var parseClass = (glob, position2) => {
+  const pos = position2;
+  if (glob.charAt(pos) !== "[") {
+    throw new Error("not in a brace expression");
+  }
+  const ranges = [];
+  const negs = [];
+  let i = pos + 1;
+  let sawStart = false;
+  let uflag = false;
+  let escaping = false;
+  let negate = false;
+  let endPos = pos;
+  let rangeStart = "";
+  WHILE: while (i < glob.length) {
+    const c = glob.charAt(i);
+    if ((c === "!" || c === "^") && i === pos + 1) {
+      negate = true;
+      i++;
+      continue;
+    }
+    if (c === "]" && sawStart && !escaping) {
+      endPos = i + 1;
+      break;
+    }
+    sawStart = true;
+    if (c === "\\") {
+      if (!escaping) {
+        escaping = true;
+        i++;
+        continue;
+      }
+    }
+    if (c === "[" && !escaping) {
+      for (const [cls, [unip, u, neg]] of Object.entries(posixClasses)) {
+        if (glob.startsWith(cls, i)) {
+          if (rangeStart) {
+            return ["$.", false, glob.length - pos, true];
+          }
+          i += cls.length;
+          if (neg)
+            negs.push(unip);
+          else
+            ranges.push(unip);
+          uflag = uflag || u;
+          continue WHILE;
+        }
+      }
+    }
+    escaping = false;
+    if (rangeStart) {
+      if (c > rangeStart) {
+        ranges.push(braceEscape(rangeStart) + "-" + braceEscape(c));
+      } else if (c === rangeStart) {
+        ranges.push(braceEscape(c));
+      }
+      rangeStart = "";
+      i++;
+      continue;
+    }
+    if (glob.startsWith("-]", i + 1)) {
+      ranges.push(braceEscape(c + "-"));
+      i += 2;
+      continue;
+    }
+    if (glob.startsWith("-", i + 1)) {
+      rangeStart = c;
+      i += 2;
+      continue;
+    }
+    ranges.push(braceEscape(c));
+    i++;
+  }
+  if (endPos < i) {
+    return ["", false, 0, false];
+  }
+  if (!ranges.length && !negs.length) {
+    return ["$.", false, glob.length - pos, true];
+  }
+  if (negs.length === 0 && ranges.length === 1 && /^\\?.$/.test(ranges[0]) && !negate) {
+    const r = ranges[0].length === 2 ? ranges[0].slice(-1) : ranges[0];
+    return [regexpEscape(r), false, endPos - pos, false];
+  }
+  const sranges = "[" + (negate ? "^" : "") + rangesToString(ranges) + "]";
+  const snegs = "[" + (negate ? "" : "^") + rangesToString(negs) + "]";
+  const comb = ranges.length && negs.length ? "(" + sranges + "|" + snegs + ")" : ranges.length ? sranges : snegs;
+  return [comb, uflag, endPos - pos, true];
+};
+
+// node_modules/minimatch/dist/esm/unescape.js
+init_esbuild_buffer_shim();
+var unescape2 = (s2, { windowsPathsNoEscape = false, magicalBraces = true } = {}) => {
+  if (magicalBraces) {
+    return windowsPathsNoEscape ? s2.replace(/\[([^/\\])\]/g, "$1") : s2.replace(/((?!\\).|^)\[([^/\\])\]/g, "$1$2").replace(/\\([^/])/g, "$1");
+  }
+  return windowsPathsNoEscape ? s2.replace(/\[([^/\\{}])\]/g, "$1") : s2.replace(/((?!\\).|^)\[([^/\\{}])\]/g, "$1$2").replace(/\\([^/{}])/g, "$1");
+};
+
+// node_modules/minimatch/dist/esm/ast.js
+var _a;
+var types = /* @__PURE__ */ new Set(["!", "?", "+", "*", "@"]);
+var isExtglobType = (c) => types.has(c);
+var isExtglobAST = (c) => isExtglobType(c.type);
+var adoptionMap = /* @__PURE__ */ new Map([
+  ["!", ["@"]],
+  ["?", ["?", "@"]],
+  ["@", ["@"]],
+  ["*", ["*", "+", "?", "@"]],
+  ["+", ["+", "@"]]
+]);
+var adoptionWithSpaceMap = /* @__PURE__ */ new Map([
+  ["!", ["?"]],
+  ["@", ["?"]],
+  ["+", ["?", "*"]]
+]);
+var adoptionAnyMap = /* @__PURE__ */ new Map([
+  ["!", ["?", "@"]],
+  ["?", ["?", "@"]],
+  ["@", ["?", "@"]],
+  ["*", ["*", "+", "?", "@"]],
+  ["+", ["+", "@", "?", "*"]]
+]);
+var usurpMap = /* @__PURE__ */ new Map([
+  ["!", /* @__PURE__ */ new Map([["!", "@"]])],
+  [
+    "?",
+    /* @__PURE__ */ new Map([
+      ["*", "*"],
+      ["+", "*"]
+    ])
+  ],
+  [
+    "@",
+    /* @__PURE__ */ new Map([
+      ["!", "!"],
+      ["?", "?"],
+      ["@", "@"],
+      ["*", "*"],
+      ["+", "+"]
+    ])
+  ],
+  [
+    "+",
+    /* @__PURE__ */ new Map([
+      ["?", "*"],
+      ["*", "*"]
+    ])
+  ]
+]);
+var startNoTraversal = "(?!(?:^|/)\\.\\.?(?:$|/))";
+var startNoDot = "(?!\\.)";
+var addPatternStart = /* @__PURE__ */ new Set(["[", "."]);
+var justDots = /* @__PURE__ */ new Set(["..", "."]);
+var reSpecials = new Set("().*{}+?[]^$\\!");
+var regExpEscape = (s2) => s2.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+var qmark = "[^/]";
+var star = qmark + "*?";
+var starNoEmpty = qmark + "+?";
+var ID = 0;
+var AST = class {
+  type;
+  #root;
+  #hasMagic;
+  #uflag = false;
+  #parts = [];
+  #parent;
+  #parentIndex;
+  #negs;
+  #filledNegs = false;
+  #options;
+  #toString;
+  // set to true if it's an extglob with no children
+  // (which really means one child of '')
+  #emptyExt = false;
+  id = ++ID;
+  get depth() {
+    return (this.#parent?.depth ?? -1) + 1;
+  }
+  [Symbol.for("nodejs.util.inspect.custom")]() {
+    return {
+      "@@type": "AST",
+      id: this.id,
+      type: this.type,
+      root: this.#root.id,
+      parent: this.#parent?.id,
+      depth: this.depth,
+      partsLength: this.#parts.length,
+      parts: this.#parts
+    };
+  }
+  constructor(type, parent, options = {}) {
+    this.type = type;
+    if (type)
+      this.#hasMagic = true;
+    this.#parent = parent;
+    this.#root = this.#parent ? this.#parent.#root : this;
+    this.#options = this.#root === this ? options : this.#root.#options;
+    this.#negs = this.#root === this ? [] : this.#root.#negs;
+    if (type === "!" && !this.#root.#filledNegs)
+      this.#negs.push(this);
+    this.#parentIndex = this.#parent ? this.#parent.#parts.length : 0;
+  }
+  get hasMagic() {
+    if (this.#hasMagic !== void 0)
+      return this.#hasMagic;
+    for (const p of this.#parts) {
+      if (typeof p === "string")
+        continue;
+      if (p.type || p.hasMagic)
+        return this.#hasMagic = true;
+    }
+    return this.#hasMagic;
+  }
+  // reconstructs the pattern
+  toString() {
+    return this.#toString !== void 0 ? this.#toString : !this.type ? this.#toString = this.#parts.map((p) => String(p)).join("") : this.#toString = this.type + "(" + this.#parts.map((p) => String(p)).join("|") + ")";
+  }
+  #fillNegs() {
+    if (this !== this.#root)
+      throw new Error("should only call on root");
+    if (this.#filledNegs)
+      return this;
+    this.toString();
+    this.#filledNegs = true;
+    let n2;
+    while (n2 = this.#negs.pop()) {
+      if (n2.type !== "!")
+        continue;
+      let p = n2;
+      let pp = p.#parent;
+      while (pp) {
+        for (let i = p.#parentIndex + 1; !pp.type && i < pp.#parts.length; i++) {
+          for (const part of n2.#parts) {
+            if (typeof part === "string") {
+              throw new Error("string part in extglob AST??");
+            }
+            part.copyIn(pp.#parts[i]);
+          }
+        }
+        p = pp;
+        pp = p.#parent;
+      }
+    }
+    return this;
+  }
+  push(...parts) {
+    for (const p of parts) {
+      if (p === "")
+        continue;
+      if (typeof p !== "string" && !(p instanceof _a && p.#parent === this)) {
+        throw new Error("invalid part: " + p);
+      }
+      this.#parts.push(p);
+    }
+  }
+  toJSON() {
+    const ret = this.type === null ? this.#parts.slice().map((p) => typeof p === "string" ? p : p.toJSON()) : [this.type, ...this.#parts.map((p) => p.toJSON())];
+    if (this.isStart() && !this.type)
+      ret.unshift([]);
+    if (this.isEnd() && (this === this.#root || this.#root.#filledNegs && this.#parent?.type === "!")) {
+      ret.push({});
+    }
+    return ret;
+  }
+  isStart() {
+    if (this.#root === this)
+      return true;
+    if (!this.#parent?.isStart())
+      return false;
+    if (this.#parentIndex === 0)
+      return true;
+    const p = this.#parent;
+    for (let i = 0; i < this.#parentIndex; i++) {
+      const pp = p.#parts[i];
+      if (!(pp instanceof _a && pp.type === "!")) {
+        return false;
+      }
+    }
+    return true;
+  }
+  isEnd() {
+    if (this.#root === this)
+      return true;
+    if (this.#parent?.type === "!")
+      return true;
+    if (!this.#parent?.isEnd())
+      return false;
+    if (!this.type)
+      return this.#parent?.isEnd();
+    const pl = this.#parent ? this.#parent.#parts.length : 0;
+    return this.#parentIndex === pl - 1;
+  }
+  copyIn(part) {
+    if (typeof part === "string")
+      this.push(part);
+    else
+      this.push(part.clone(this));
+  }
+  clone(parent) {
+    const c = new _a(this.type, parent);
+    for (const p of this.#parts) {
+      c.copyIn(p);
+    }
+    return c;
+  }
+  static #parseAST(str, ast, pos, opt, extDepth) {
+    const maxDepth = opt.maxExtglobRecursion ?? 2;
+    let escaping = false;
+    let inBrace = false;
+    let braceStart = -1;
+    let braceNeg = false;
+    if (ast.type === null) {
+      let i2 = pos;
+      let acc2 = "";
+      while (i2 < str.length) {
+        const c = str.charAt(i2++);
+        if (escaping || c === "\\") {
+          escaping = !escaping;
+          acc2 += c;
+          continue;
+        }
+        if (inBrace) {
+          if (i2 === braceStart + 1) {
+            if (c === "^" || c === "!") {
+              braceNeg = true;
+            }
+          } else if (c === "]" && !(i2 === braceStart + 2 && braceNeg)) {
+            inBrace = false;
+          }
+          acc2 += c;
+          continue;
+        } else if (c === "[") {
+          inBrace = true;
+          braceStart = i2;
+          braceNeg = false;
+          acc2 += c;
+          continue;
+        }
+        const doRecurse = !opt.noext && isExtglobType(c) && str.charAt(i2) === "(" && extDepth <= maxDepth;
+        if (doRecurse) {
+          ast.push(acc2);
+          acc2 = "";
+          const ext2 = new _a(c, ast);
+          i2 = _a.#parseAST(str, ext2, i2, opt, extDepth + 1);
+          ast.push(ext2);
+          continue;
+        }
+        acc2 += c;
+      }
+      ast.push(acc2);
+      return i2;
+    }
+    let i = pos + 1;
+    let part = new _a(null, ast);
+    const parts = [];
+    let acc = "";
+    while (i < str.length) {
+      const c = str.charAt(i++);
+      if (escaping || c === "\\") {
+        escaping = !escaping;
+        acc += c;
+        continue;
+      }
+      if (inBrace) {
+        if (i === braceStart + 1) {
+          if (c === "^" || c === "!") {
+            braceNeg = true;
+          }
+        } else if (c === "]" && !(i === braceStart + 2 && braceNeg)) {
+          inBrace = false;
+        }
+        acc += c;
+        continue;
+      } else if (c === "[") {
+        inBrace = true;
+        braceStart = i;
+        braceNeg = false;
+        acc += c;
+        continue;
+      }
+      const doRecurse = !opt.noext && isExtglobType(c) && str.charAt(i) === "(" && /* c8 ignore start - the maxDepth is sufficient here */
+      (extDepth <= maxDepth || ast && ast.#canAdoptType(c));
+      if (doRecurse) {
+        const depthAdd = ast && ast.#canAdoptType(c) ? 0 : 1;
+        part.push(acc);
+        acc = "";
+        const ext2 = new _a(c, part);
+        part.push(ext2);
+        i = _a.#parseAST(str, ext2, i, opt, extDepth + depthAdd);
+        continue;
+      }
+      if (c === "|") {
+        part.push(acc);
+        acc = "";
+        parts.push(part);
+        part = new _a(null, ast);
+        continue;
+      }
+      if (c === ")") {
+        if (acc === "" && ast.#parts.length === 0) {
+          ast.#emptyExt = true;
+        }
+        part.push(acc);
+        acc = "";
+        ast.push(...parts, part);
+        return i;
+      }
+      acc += c;
+    }
+    ast.type = null;
+    ast.#hasMagic = void 0;
+    ast.#parts = [str.substring(pos - 1)];
+    return i;
+  }
+  #canAdoptWithSpace(child) {
+    return this.#canAdopt(child, adoptionWithSpaceMap);
+  }
+  #canAdopt(child, map5 = adoptionMap) {
+    if (!child || typeof child !== "object" || child.type !== null || child.#parts.length !== 1 || this.type === null) {
+      return false;
+    }
+    const gc = child.#parts[0];
+    if (!gc || typeof gc !== "object" || gc.type === null) {
+      return false;
+    }
+    return this.#canAdoptType(gc.type, map5);
+  }
+  #canAdoptType(c, map5 = adoptionAnyMap) {
+    return !!map5.get(this.type)?.includes(c);
+  }
+  #adoptWithSpace(child, index2) {
+    const gc = child.#parts[0];
+    const blank = new _a(null, gc, this.options);
+    blank.#parts.push("");
+    gc.push(blank);
+    this.#adopt(child, index2);
+  }
+  #adopt(child, index2) {
+    const gc = child.#parts[0];
+    this.#parts.splice(index2, 1, ...gc.#parts);
+    for (const p of gc.#parts) {
+      if (typeof p === "object")
+        p.#parent = this;
+    }
+    this.#toString = void 0;
+  }
+  #canUsurpType(c) {
+    const m = usurpMap.get(this.type);
+    return !!m?.has(c);
+  }
+  #canUsurp(child) {
+    if (!child || typeof child !== "object" || child.type !== null || child.#parts.length !== 1 || this.type === null || this.#parts.length !== 1) {
+      return false;
+    }
+    const gc = child.#parts[0];
+    if (!gc || typeof gc !== "object" || gc.type === null) {
+      return false;
+    }
+    return this.#canUsurpType(gc.type);
+  }
+  #usurp(child) {
+    const m = usurpMap.get(this.type);
+    const gc = child.#parts[0];
+    const nt = m?.get(gc.type);
+    if (!nt)
+      return false;
+    this.#parts = gc.#parts;
+    for (const p of this.#parts) {
+      if (typeof p === "object") {
+        p.#parent = this;
+      }
+    }
+    this.type = nt;
+    this.#toString = void 0;
+    this.#emptyExt = false;
+  }
+  static fromGlob(pattern, options = {}) {
+    const ast = new _a(null, void 0, options);
+    _a.#parseAST(pattern, ast, 0, options, 0);
+    return ast;
+  }
+  // returns the regular expression if there's magic, or the unescaped
+  // string if not.
+  toMMPattern() {
+    if (this !== this.#root)
+      return this.#root.toMMPattern();
+    const glob = this.toString();
+    const [re, body, hasMagic, uflag] = this.toRegExpSource();
+    const anyMagic = hasMagic || this.#hasMagic || this.#options.nocase && !this.#options.nocaseMagicOnly && glob.toUpperCase() !== glob.toLowerCase();
+    if (!anyMagic) {
+      return body;
+    }
+    const flags = (this.#options.nocase ? "i" : "") + (uflag ? "u" : "");
+    return Object.assign(new RegExp(`^${re}$`, flags), {
+      _src: re,
+      _glob: glob
+    });
+  }
+  get options() {
+    return this.#options;
+  }
+  // returns the string match, the regexp source, whether there's magic
+  // in the regexp (so a regular expression is required) and whether or
+  // not the uflag is needed for the regular expression (for posix classes)
+  // TODO: instead of injecting the start/end at this point, just return
+  // the BODY of the regexp, along with the start/end portions suitable
+  // for binding the start/end in either a joined full-path makeRe context
+  // (where we bind to (^|/), or a standalone matchPart context (where
+  // we bind to ^, and not /).  Otherwise slashes get duped!
+  //
+  // In part-matching mode, the start is:
+  // - if not isStart: nothing
+  // - if traversal possible, but not allowed: ^(?!\.\.?$)
+  // - if dots allowed or not possible: ^
+  // - if dots possible and not allowed: ^(?!\.)
+  // end is:
+  // - if not isEnd(): nothing
+  // - else: $
+  //
+  // In full-path matching mode, we put the slash at the START of the
+  // pattern, so start is:
+  // - if first pattern: same as part-matching mode
+  // - if not isStart(): nothing
+  // - if traversal possible, but not allowed: /(?!\.\.?(?:$|/))
+  // - if dots allowed or not possible: /
+  // - if dots possible and not allowed: /(?!\.)
+  // end is:
+  // - if last pattern, same as part-matching mode
+  // - else nothing
+  //
+  // Always put the (?:$|/) on negated tails, though, because that has to be
+  // there to bind the end of the negated pattern portion, and it's easier to
+  // just stick it in now rather than try to inject it later in the middle of
+  // the pattern.
+  //
+  // We can just always return the same end, and leave it up to the caller
+  // to know whether it's going to be used joined or in parts.
+  // And, if the start is adjusted slightly, can do the same there:
+  // - if not isStart: nothing
+  // - if traversal possible, but not allowed: (?:/|^)(?!\.\.?$)
+  // - if dots allowed or not possible: (?:/|^)
+  // - if dots possible and not allowed: (?:/|^)(?!\.)
+  //
+  // But it's better to have a simpler binding without a conditional, for
+  // performance, so probably better to return both start options.
+  //
+  // Then the caller just ignores the end if it's not the first pattern,
+  // and the start always gets applied.
+  //
+  // But that's always going to be $ if it's the ending pattern, or nothing,
+  // so the caller can just attach $ at the end of the pattern when building.
+  //
+  // So the todo is:
+  // - better detect what kind of start is needed
+  // - return both flavors of starting pattern
+  // - attach $ at the end of the pattern when creating the actual RegExp
+  //
+  // Ah, but wait, no, that all only applies to the root when the first pattern
+  // is not an extglob. If the first pattern IS an extglob, then we need all
+  // that dot prevention biz to live in the extglob portions, because eg
+  // +(*|.x*) can match .xy but not .yx.
+  //
+  // So, return the two flavors if it's #root and the first child is not an
+  // AST, otherwise leave it to the child AST to handle it, and there,
+  // use the (?:^|/) style of start binding.
+  //
+  // Even simplified further:
+  // - Since the start for a join is eg /(?!\.) and the start for a part
+  // is ^(?!\.), we can just prepend (?!\.) to the pattern (either root
+  // or start or whatever) and prepend ^ or / at the Regexp construction.
+  toRegExpSource(allowDot) {
+    const dot = allowDot ?? !!this.#options.dot;
+    if (this.#root === this) {
+      this.#flatten();
+      this.#fillNegs();
+    }
+    if (!isExtglobAST(this)) {
+      const noEmpty = this.isStart() && this.isEnd() && !this.#parts.some((s2) => typeof s2 !== "string");
+      const src = this.#parts.map((p) => {
+        const [re, _, hasMagic, uflag] = typeof p === "string" ? _a.#parseGlob(p, this.#hasMagic, noEmpty) : p.toRegExpSource(allowDot);
+        this.#hasMagic = this.#hasMagic || hasMagic;
+        this.#uflag = this.#uflag || uflag;
+        return re;
+      }).join("");
+      let start2 = "";
+      if (this.isStart()) {
+        if (typeof this.#parts[0] === "string") {
+          const dotTravAllowed = this.#parts.length === 1 && justDots.has(this.#parts[0]);
+          if (!dotTravAllowed) {
+            const aps = addPatternStart;
+            const needNoTrav = (
+              // dots are allowed, and the pattern starts with [ or .
+              dot && aps.has(src.charAt(0)) || // the pattern starts with \., and then [ or .
+              src.startsWith("\\.") && aps.has(src.charAt(2)) || // the pattern starts with \.\., and then [ or .
+              src.startsWith("\\.\\.") && aps.has(src.charAt(4))
+            );
+            const needNoDot = !dot && !allowDot && aps.has(src.charAt(0));
+            start2 = needNoTrav ? startNoTraversal : needNoDot ? startNoDot : "";
+          }
+        }
+      }
+      let end = "";
+      if (this.isEnd() && this.#root.#filledNegs && this.#parent?.type === "!") {
+        end = "(?:$|\\/)";
+      }
+      const final2 = start2 + src + end;
+      return [
+        final2,
+        unescape2(src),
+        this.#hasMagic = !!this.#hasMagic,
+        this.#uflag
+      ];
+    }
+    const repeated = this.type === "*" || this.type === "+";
+    const start = this.type === "!" ? "(?:(?!(?:" : "(?:";
+    let body = this.#partsToRegExp(dot);
+    if (this.isStart() && this.isEnd() && !body && this.type !== "!") {
+      const s2 = this.toString();
+      const me = this;
+      me.#parts = [s2];
+      me.type = null;
+      me.#hasMagic = void 0;
+      return [s2, unescape2(this.toString()), false, false];
+    }
+    let bodyDotAllowed = !repeated || allowDot || dot || !startNoDot ? "" : this.#partsToRegExp(true);
+    if (bodyDotAllowed === body) {
+      bodyDotAllowed = "";
+    }
+    if (bodyDotAllowed) {
+      body = `(?:${body})(?:${bodyDotAllowed})*?`;
+    }
+    let final = "";
+    if (this.type === "!" && this.#emptyExt) {
+      final = (this.isStart() && !dot ? startNoDot : "") + starNoEmpty;
+    } else {
+      const close2 = this.type === "!" ? (
+        // !() must match something,but !(x) can match ''
+        "))" + (this.isStart() && !dot && !allowDot ? startNoDot : "") + star + ")"
+      ) : this.type === "@" ? ")" : this.type === "?" ? ")?" : this.type === "+" && bodyDotAllowed ? ")" : this.type === "*" && bodyDotAllowed ? `)?` : `)${this.type}`;
+      final = start + body + close2;
+    }
+    return [
+      final,
+      unescape2(body),
+      this.#hasMagic = !!this.#hasMagic,
+      this.#uflag
+    ];
+  }
+  #flatten() {
+    if (!isExtglobAST(this)) {
+      for (const p of this.#parts) {
+        if (typeof p === "object") {
+          p.#flatten();
+        }
+      }
+    } else {
+      let iterations = 0;
+      let done = false;
+      do {
+        done = true;
+        for (let i = 0; i < this.#parts.length; i++) {
+          const c = this.#parts[i];
+          if (typeof c === "object") {
+            c.#flatten();
+            if (this.#canAdopt(c)) {
+              done = false;
+              this.#adopt(c, i);
+            } else if (this.#canAdoptWithSpace(c)) {
+              done = false;
+              this.#adoptWithSpace(c, i);
+            } else if (this.#canUsurp(c)) {
+              done = false;
+              this.#usurp(c);
+            }
+          }
+        }
+      } while (!done && ++iterations < 10);
+    }
+    this.#toString = void 0;
+  }
+  #partsToRegExp(dot) {
+    return this.#parts.map((p) => {
+      if (typeof p === "string") {
+        throw new Error("string type in extglob ast??");
+      }
+      const [re, _, _hasMagic, uflag] = p.toRegExpSource(dot);
+      this.#uflag = this.#uflag || uflag;
+      return re;
+    }).filter((p) => !(this.isStart() && this.isEnd()) || !!p).join("|");
+  }
+  static #parseGlob(glob, hasMagic, noEmpty = false) {
+    let escaping = false;
+    let re = "";
+    let uflag = false;
+    let inStar = false;
+    for (let i = 0; i < glob.length; i++) {
+      const c = glob.charAt(i);
+      if (escaping) {
+        escaping = false;
+        re += (reSpecials.has(c) ? "\\" : "") + c;
+        continue;
+      }
+      if (c === "*") {
+        if (inStar)
+          continue;
+        inStar = true;
+        re += noEmpty && /^[*]+$/.test(glob) ? starNoEmpty : star;
+        hasMagic = true;
+        continue;
+      } else {
+        inStar = false;
+      }
+      if (c === "\\") {
+        if (i === glob.length - 1) {
+          re += "\\\\";
+        } else {
+          escaping = true;
+        }
+        continue;
+      }
+      if (c === "[") {
+        const [src, needUflag, consumed, magic] = parseClass(glob, i);
+        if (consumed) {
+          re += src;
+          uflag = uflag || needUflag;
+          i += consumed - 1;
+          hasMagic = hasMagic || magic;
+          continue;
+        }
+      }
+      if (c === "?") {
+        re += qmark;
+        hasMagic = true;
+        continue;
+      }
+      re += regExpEscape(c);
+    }
+    return [re, unescape2(glob), !!hasMagic, uflag];
+  }
+};
+_a = AST;
+
+// node_modules/minimatch/dist/esm/escape.js
+init_esbuild_buffer_shim();
+var escape3 = (s2, { windowsPathsNoEscape = false, magicalBraces = false } = {}) => {
+  if (magicalBraces) {
+    return windowsPathsNoEscape ? s2.replace(/[?*()[\]{}]/g, "[$&]") : s2.replace(/[?*()[\]\\{}]/g, "\\$&");
+  }
+  return windowsPathsNoEscape ? s2.replace(/[?*()[\]]/g, "[$&]") : s2.replace(/[?*()[\]\\]/g, "\\$&");
+};
+
+// node_modules/minimatch/dist/esm/index.js
+var minimatch = (p, pattern, options = {}) => {
+  assertValidPattern(pattern);
+  if (!options.nocomment && pattern.charAt(0) === "#") {
+    return false;
+  }
+  return new Minimatch(pattern, options).match(p);
+};
+var starDotExtRE = /^\*+([^+@!?*[(]*)$/;
+var starDotExtTest = (ext2) => (f) => !f.startsWith(".") && f.endsWith(ext2);
+var starDotExtTestDot = (ext2) => (f) => f.endsWith(ext2);
+var starDotExtTestNocase = (ext2) => {
+  ext2 = ext2.toLowerCase();
+  return (f) => !f.startsWith(".") && f.toLowerCase().endsWith(ext2);
+};
+var starDotExtTestNocaseDot = (ext2) => {
+  ext2 = ext2.toLowerCase();
+  return (f) => f.toLowerCase().endsWith(ext2);
+};
+var starDotStarRE = /^\*+\.\*+$/;
+var starDotStarTest = (f) => !f.startsWith(".") && f.includes(".");
+var starDotStarTestDot = (f) => f !== "." && f !== ".." && f.includes(".");
+var dotStarRE = /^\.\*+$/;
+var dotStarTest = (f) => f !== "." && f !== ".." && f.startsWith(".");
+var starRE = /^\*+$/;
+var starTest = (f) => f.length !== 0 && !f.startsWith(".");
+var starTestDot = (f) => f.length !== 0 && f !== "." && f !== "..";
+var qmarksRE = /^\?+([^+@!?*[(]*)?$/;
+var qmarksTestNocase = ([$0, ext2 = ""]) => {
+  const noext = qmarksTestNoExt([$0]);
+  if (!ext2)
+    return noext;
+  ext2 = ext2.toLowerCase();
+  return (f) => noext(f) && f.toLowerCase().endsWith(ext2);
+};
+var qmarksTestNocaseDot = ([$0, ext2 = ""]) => {
+  const noext = qmarksTestNoExtDot([$0]);
+  if (!ext2)
+    return noext;
+  ext2 = ext2.toLowerCase();
+  return (f) => noext(f) && f.toLowerCase().endsWith(ext2);
+};
+var qmarksTestDot = ([$0, ext2 = ""]) => {
+  const noext = qmarksTestNoExtDot([$0]);
+  return !ext2 ? noext : (f) => noext(f) && f.endsWith(ext2);
+};
+var qmarksTest = ([$0, ext2 = ""]) => {
+  const noext = qmarksTestNoExt([$0]);
+  return !ext2 ? noext : (f) => noext(f) && f.endsWith(ext2);
+};
+var qmarksTestNoExt = ([$0]) => {
+  const len = $0.length;
+  return (f) => f.length === len && !f.startsWith(".");
+};
+var qmarksTestNoExtDot = ([$0]) => {
+  const len = $0.length;
+  return (f) => f.length === len && f !== "." && f !== "..";
+};
+var defaultPlatform = typeof process === "object" && process ? typeof process.env === "object" && process.env && process.env.__MINIMATCH_TESTING_PLATFORM__ || process.platform : "posix";
+var path = {
+  win32: { sep: "\\" },
+  posix: { sep: "/" }
+};
+var sep = defaultPlatform === "win32" ? path.win32.sep : path.posix.sep;
+minimatch.sep = sep;
+var GLOBSTAR = Symbol("globstar **");
+minimatch.GLOBSTAR = GLOBSTAR;
+var qmark2 = "[^/]";
+var star2 = qmark2 + "*?";
+var twoStarDot = "(?:(?!(?:\\/|^)(?:\\.{1,2})($|\\/)).)*?";
+var twoStarNoDot = "(?:(?!(?:\\/|^)\\.).)*?";
+var filter = (pattern, options = {}) => (p) => minimatch(p, pattern, options);
+minimatch.filter = filter;
+var ext = (a, b = {}) => Object.assign({}, a, b);
+var defaults = (def) => {
+  if (!def || typeof def !== "object" || !Object.keys(def).length) {
+    return minimatch;
+  }
+  const orig = minimatch;
+  const m = (p, pattern, options = {}) => orig(p, pattern, ext(def, options));
+  return Object.assign(m, {
+    Minimatch: class Minimatch extends orig.Minimatch {
+      constructor(pattern, options = {}) {
+        super(pattern, ext(def, options));
+      }
+      static defaults(options) {
+        return orig.defaults(ext(def, options)).Minimatch;
+      }
+    },
+    AST: class AST extends orig.AST {
+      /* c8 ignore start */
+      constructor(type, parent, options = {}) {
+        super(type, parent, ext(def, options));
+      }
+      /* c8 ignore stop */
+      static fromGlob(pattern, options = {}) {
+        return orig.AST.fromGlob(pattern, ext(def, options));
+      }
+    },
+    unescape: (s2, options = {}) => orig.unescape(s2, ext(def, options)),
+    escape: (s2, options = {}) => orig.escape(s2, ext(def, options)),
+    filter: (pattern, options = {}) => orig.filter(pattern, ext(def, options)),
+    defaults: (options) => orig.defaults(ext(def, options)),
+    makeRe: (pattern, options = {}) => orig.makeRe(pattern, ext(def, options)),
+    braceExpand: (pattern, options = {}) => orig.braceExpand(pattern, ext(def, options)),
+    match: (list4, pattern, options = {}) => orig.match(list4, pattern, ext(def, options)),
+    sep: orig.sep,
+    GLOBSTAR
+  });
+};
+minimatch.defaults = defaults;
+var braceExpand = (pattern, options = {}) => {
+  assertValidPattern(pattern);
+  if (options.nobrace || !/\{(?:(?!\{).)*\}/.test(pattern)) {
+    return [pattern];
+  }
+  return expand(pattern, { max: options.braceExpandMax });
+};
+minimatch.braceExpand = braceExpand;
+var makeRe = (pattern, options = {}) => new Minimatch(pattern, options).makeRe();
+minimatch.makeRe = makeRe;
+var match2 = (list4, pattern, options = {}) => {
+  const mm = new Minimatch(pattern, options);
+  list4 = list4.filter((f) => mm.match(f));
+  if (mm.options.nonull && !list4.length) {
+    list4.push(pattern);
+  }
+  return list4;
+};
+minimatch.match = match2;
+var globMagic = /[?*]|[+@!]\(.*?\)|\[|\]/;
+var regExpEscape2 = (s2) => s2.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+var Minimatch = class {
+  options;
+  set;
+  pattern;
+  windowsPathsNoEscape;
+  nonegate;
+  negate;
+  comment;
+  empty;
+  preserveMultipleSlashes;
+  partial;
+  globSet;
+  globParts;
+  nocase;
+  isWindows;
+  platform;
+  windowsNoMagicRoot;
+  maxGlobstarRecursion;
+  regexp;
+  constructor(pattern, options = {}) {
+    assertValidPattern(pattern);
+    options = options || {};
+    this.options = options;
+    this.maxGlobstarRecursion = options.maxGlobstarRecursion ?? 200;
+    this.pattern = pattern;
+    this.platform = options.platform || defaultPlatform;
+    this.isWindows = this.platform === "win32";
+    const awe = "allowWindowsEscape";
+    this.windowsPathsNoEscape = !!options.windowsPathsNoEscape || options[awe] === false;
+    if (this.windowsPathsNoEscape) {
+      this.pattern = this.pattern.replace(/\\/g, "/");
+    }
+    this.preserveMultipleSlashes = !!options.preserveMultipleSlashes;
+    this.regexp = null;
+    this.negate = false;
+    this.nonegate = !!options.nonegate;
+    this.comment = false;
+    this.empty = false;
+    this.partial = !!options.partial;
+    this.nocase = !!this.options.nocase;
+    this.windowsNoMagicRoot = options.windowsNoMagicRoot !== void 0 ? options.windowsNoMagicRoot : !!(this.isWindows && this.nocase);
+    this.globSet = [];
+    this.globParts = [];
+    this.set = [];
+    this.make();
+  }
+  hasMagic() {
+    if (this.options.magicalBraces && this.set.length > 1) {
+      return true;
+    }
+    for (const pattern of this.set) {
+      for (const part of pattern) {
+        if (typeof part !== "string")
+          return true;
+      }
+    }
+    return false;
+  }
+  debug(..._) {
+  }
+  make() {
+    const pattern = this.pattern;
+    const options = this.options;
+    if (!options.nocomment && pattern.charAt(0) === "#") {
+      this.comment = true;
+      return;
+    }
+    if (!pattern) {
+      this.empty = true;
+      return;
+    }
+    this.parseNegate();
+    this.globSet = [...new Set(this.braceExpand())];
+    if (options.debug) {
+      this.debug = (...args) => console.error(...args);
+    }
+    this.debug(this.pattern, this.globSet);
+    const rawGlobParts = this.globSet.map((s2) => this.slashSplit(s2));
+    this.globParts = this.preprocess(rawGlobParts);
+    this.debug(this.pattern, this.globParts);
+    let set2 = this.globParts.map((s2, _, __) => {
+      if (this.isWindows && this.windowsNoMagicRoot) {
+        const isUNC = s2[0] === "" && s2[1] === "" && (s2[2] === "?" || !globMagic.test(s2[2])) && !globMagic.test(s2[3]);
+        const isDrive = /^[a-z]:/i.test(s2[0]);
+        if (isUNC) {
+          return [
+            ...s2.slice(0, 4),
+            ...s2.slice(4).map((ss) => this.parse(ss))
+          ];
+        } else if (isDrive) {
+          return [s2[0], ...s2.slice(1).map((ss) => this.parse(ss))];
+        }
+      }
+      return s2.map((ss) => this.parse(ss));
+    });
+    this.debug(this.pattern, set2);
+    this.set = set2.filter((s2) => s2.indexOf(false) === -1);
+    if (this.isWindows) {
+      for (let i = 0; i < this.set.length; i++) {
+        const p = this.set[i];
+        if (p[0] === "" && p[1] === "" && this.globParts[i][2] === "?" && typeof p[3] === "string" && /^[a-z]:$/i.test(p[3])) {
+          p[2] = "?";
+        }
+      }
+    }
+    this.debug(this.pattern, this.set);
+  }
+  // various transforms to equivalent pattern sets that are
+  // faster to process in a filesystem walk.  The goal is to
+  // eliminate what we can, and push all ** patterns as far
+  // to the right as possible, even if it increases the number
+  // of patterns that we have to process.
+  preprocess(globParts) {
+    if (this.options.noglobstar) {
+      for (const partset of globParts) {
+        for (let j = 0; j < partset.length; j++) {
+          if (partset[j] === "**") {
+            partset[j] = "*";
+          }
+        }
+      }
+    }
+    const { optimizationLevel = 1 } = this.options;
+    if (optimizationLevel >= 2) {
+      globParts = this.firstPhasePreProcess(globParts);
+      globParts = this.secondPhasePreProcess(globParts);
+    } else if (optimizationLevel >= 1) {
+      globParts = this.levelOneOptimize(globParts);
+    } else {
+      globParts = this.adjascentGlobstarOptimize(globParts);
+    }
+    return globParts;
+  }
+  // just get rid of adjascent ** portions
+  adjascentGlobstarOptimize(globParts) {
+    return globParts.map((parts) => {
+      let gs = -1;
+      while (-1 !== (gs = parts.indexOf("**", gs + 1))) {
+        let i = gs;
+        while (parts[i + 1] === "**") {
+          i++;
+        }
+        if (i !== gs) {
+          parts.splice(gs, i - gs);
+        }
+      }
+      return parts;
+    });
+  }
+  // get rid of adjascent ** and resolve .. portions
+  levelOneOptimize(globParts) {
+    return globParts.map((parts) => {
+      parts = parts.reduce((set2, part) => {
+        const prev = set2[set2.length - 1];
+        if (part === "**" && prev === "**") {
+          return set2;
+        }
+        if (part === "..") {
+          if (prev && prev !== ".." && prev !== "." && prev !== "**") {
+            set2.pop();
+            return set2;
+          }
+        }
+        set2.push(part);
+        return set2;
+      }, []);
+      return parts.length === 0 ? [""] : parts;
+    });
+  }
+  levelTwoFileOptimize(parts) {
+    if (!Array.isArray(parts)) {
+      parts = this.slashSplit(parts);
+    }
+    let didSomething = false;
+    do {
+      didSomething = false;
+      if (!this.preserveMultipleSlashes) {
+        for (let i = 1; i < parts.length - 1; i++) {
+          const p = parts[i];
+          if (i === 1 && p === "" && parts[0] === "")
+            continue;
+          if (p === "." || p === "") {
+            didSomething = true;
+            parts.splice(i, 1);
+            i--;
+          }
+        }
+        if (parts[0] === "." && parts.length === 2 && (parts[1] === "." || parts[1] === "")) {
+          didSomething = true;
+          parts.pop();
+        }
+      }
+      let dd = 0;
+      while (-1 !== (dd = parts.indexOf("..", dd + 1))) {
+        const p = parts[dd - 1];
+        if (p && p !== "." && p !== ".." && p !== "**" && !(this.isWindows && /^[a-z]:$/i.test(p))) {
+          didSomething = true;
+          parts.splice(dd - 1, 2);
+          dd -= 2;
+        }
+      }
+    } while (didSomething);
+    return parts.length === 0 ? [""] : parts;
+  }
+  // First phase: single-pattern processing
+  // <pre> is 1 or more portions
+  // <rest> is 1 or more portions
+  // <p> is any portion other than ., .., '', or **
+  // <e> is . or ''
+  //
+  // **/.. is *brutal* for filesystem walking performance, because
+  // it effectively resets the recursive walk each time it occurs,
+  // and ** cannot be reduced out by a .. pattern part like a regexp
+  // or most strings (other than .., ., and '') can be.
+  //
+  // <pre>/**/../<p>/<p>/<rest> -> {<pre>/../<p>/<p>/<rest>,<pre>/**/<p>/<p>/<rest>}
+  // <pre>/<e>/<rest> -> <pre>/<rest>
+  // <pre>/<p>/../<rest> -> <pre>/<rest>
+  // **/**/<rest> -> **/<rest>
+  //
+  // **/*/<rest> -> */**/<rest> <== not valid because ** doesn't follow
+  // this WOULD be allowed if ** did follow symlinks, or * didn't
+  firstPhasePreProcess(globParts) {
+    let didSomething = false;
+    do {
+      didSomething = false;
+      for (let parts of globParts) {
+        let gs = -1;
+        while (-1 !== (gs = parts.indexOf("**", gs + 1))) {
+          let gss = gs;
+          while (parts[gss + 1] === "**") {
+            gss++;
+          }
+          if (gss > gs) {
+            parts.splice(gs + 1, gss - gs);
+          }
+          let next = parts[gs + 1];
+          const p = parts[gs + 2];
+          const p2 = parts[gs + 3];
+          if (next !== "..")
+            continue;
+          if (!p || p === "." || p === ".." || !p2 || p2 === "." || p2 === "..") {
+            continue;
+          }
+          didSomething = true;
+          parts.splice(gs, 1);
+          const other = parts.slice(0);
+          other[gs] = "**";
+          globParts.push(other);
+          gs--;
+        }
+        if (!this.preserveMultipleSlashes) {
+          for (let i = 1; i < parts.length - 1; i++) {
+            const p = parts[i];
+            if (i === 1 && p === "" && parts[0] === "")
+              continue;
+            if (p === "." || p === "") {
+              didSomething = true;
+              parts.splice(i, 1);
+              i--;
+            }
+          }
+          if (parts[0] === "." && parts.length === 2 && (parts[1] === "." || parts[1] === "")) {
+            didSomething = true;
+            parts.pop();
+          }
+        }
+        let dd = 0;
+        while (-1 !== (dd = parts.indexOf("..", dd + 1))) {
+          const p = parts[dd - 1];
+          if (p && p !== "." && p !== ".." && p !== "**") {
+            didSomething = true;
+            const needDot = dd === 1 && parts[dd + 1] === "**";
+            const splin = needDot ? ["."] : [];
+            parts.splice(dd - 1, 2, ...splin);
+            if (parts.length === 0)
+              parts.push("");
+            dd -= 2;
+          }
+        }
+      }
+    } while (didSomething);
+    return globParts;
+  }
+  // second phase: multi-pattern dedupes
+  // {<pre>/*/<rest>,<pre>/<p>/<rest>} -> <pre>/*/<rest>
+  // {<pre>/<rest>,<pre>/<rest>} -> <pre>/<rest>
+  // {<pre>/**/<rest>,<pre>/<rest>} -> <pre>/**/<rest>
+  //
+  // {<pre>/**/<rest>,<pre>/**/<p>/<rest>} -> <pre>/**/<rest>
+  // ^-- not valid because ** doens't follow symlinks
+  secondPhasePreProcess(globParts) {
+    for (let i = 0; i < globParts.length - 1; i++) {
+      for (let j = i + 1; j < globParts.length; j++) {
+        const matched = this.partsMatch(globParts[i], globParts[j], !this.preserveMultipleSlashes);
+        if (matched) {
+          globParts[i] = [];
+          globParts[j] = matched;
+          break;
+        }
+      }
+    }
+    return globParts.filter((gs) => gs.length);
+  }
+  partsMatch(a, b, emptyGSMatch = false) {
+    let ai = 0;
+    let bi = 0;
+    let result = [];
+    let which = "";
+    while (ai < a.length && bi < b.length) {
+      if (a[ai] === b[bi]) {
+        result.push(which === "b" ? b[bi] : a[ai]);
+        ai++;
+        bi++;
+      } else if (emptyGSMatch && a[ai] === "**" && b[bi] === a[ai + 1]) {
+        result.push(a[ai]);
+        ai++;
+      } else if (emptyGSMatch && b[bi] === "**" && a[ai] === b[bi + 1]) {
+        result.push(b[bi]);
+        bi++;
+      } else if (a[ai] === "*" && b[bi] && (this.options.dot || !b[bi].startsWith(".")) && b[bi] !== "**") {
+        if (which === "b")
+          return false;
+        which = "a";
+        result.push(a[ai]);
+        ai++;
+        bi++;
+      } else if (b[bi] === "*" && a[ai] && (this.options.dot || !a[ai].startsWith(".")) && a[ai] !== "**") {
+        if (which === "a")
+          return false;
+        which = "b";
+        result.push(b[bi]);
+        ai++;
+        bi++;
+      } else {
+        return false;
+      }
+    }
+    return a.length === b.length && result;
+  }
+  parseNegate() {
+    if (this.nonegate)
+      return;
+    const pattern = this.pattern;
+    let negate = false;
+    let negateOffset = 0;
+    for (let i = 0; i < pattern.length && pattern.charAt(i) === "!"; i++) {
+      negate = !negate;
+      negateOffset++;
+    }
+    if (negateOffset)
+      this.pattern = pattern.slice(negateOffset);
+    this.negate = negate;
+  }
+  // set partial to true to test if, for example,
+  // "/a/b" matches the start of "/*/b/*/d"
+  // Partial means, if you run out of file before you run
+  // out of pattern, then that's fine, as long as all
+  // the parts match.
+  matchOne(file, pattern, partial = false) {
+    let fileStartIndex = 0;
+    let patternStartIndex = 0;
+    if (this.isWindows) {
+      const fileDrive = typeof file[0] === "string" && /^[a-z]:$/i.test(file[0]);
+      const fileUNC = !fileDrive && file[0] === "" && file[1] === "" && file[2] === "?" && /^[a-z]:$/i.test(file[3]);
+      const patternDrive = typeof pattern[0] === "string" && /^[a-z]:$/i.test(pattern[0]);
+      const patternUNC = !patternDrive && pattern[0] === "" && pattern[1] === "" && pattern[2] === "?" && typeof pattern[3] === "string" && /^[a-z]:$/i.test(pattern[3]);
+      const fdi = fileUNC ? 3 : fileDrive ? 0 : void 0;
+      const pdi = patternUNC ? 3 : patternDrive ? 0 : void 0;
+      if (typeof fdi === "number" && typeof pdi === "number") {
+        const [fd, pd] = [
+          file[fdi],
+          pattern[pdi]
+        ];
+        if (fd.toLowerCase() === pd.toLowerCase()) {
+          pattern[pdi] = fd;
+          patternStartIndex = pdi;
+          fileStartIndex = fdi;
+        }
+      }
+    }
+    const { optimizationLevel = 1 } = this.options;
+    if (optimizationLevel >= 2) {
+      file = this.levelTwoFileOptimize(file);
+    }
+    if (pattern.includes(GLOBSTAR)) {
+      return this.#matchGlobstar(file, pattern, partial, fileStartIndex, patternStartIndex);
+    }
+    return this.#matchOne(file, pattern, partial, fileStartIndex, patternStartIndex);
+  }
+  #matchGlobstar(file, pattern, partial, fileIndex, patternIndex) {
+    const firstgs = pattern.indexOf(GLOBSTAR, patternIndex);
+    const lastgs = pattern.lastIndexOf(GLOBSTAR);
+    const [head, body, tail] = partial ? [
+      pattern.slice(patternIndex, firstgs),
+      pattern.slice(firstgs + 1),
+      []
+    ] : [
+      pattern.slice(patternIndex, firstgs),
+      pattern.slice(firstgs + 1, lastgs),
+      pattern.slice(lastgs + 1)
+    ];
+    if (head.length) {
+      const fileHead = file.slice(fileIndex, fileIndex + head.length);
+      if (!this.#matchOne(fileHead, head, partial, 0, 0)) {
+        return false;
+      }
+      fileIndex += head.length;
+      patternIndex += head.length;
+    }
+    let fileTailMatch = 0;
+    if (tail.length) {
+      if (tail.length + fileIndex > file.length)
+        return false;
+      let tailStart = file.length - tail.length;
+      if (this.#matchOne(file, tail, partial, tailStart, 0)) {
+        fileTailMatch = tail.length;
+      } else {
+        if (file[file.length - 1] !== "" || fileIndex + tail.length === file.length) {
+          return false;
+        }
+        tailStart--;
+        if (!this.#matchOne(file, tail, partial, tailStart, 0)) {
+          return false;
+        }
+        fileTailMatch = tail.length + 1;
+      }
+    }
+    if (!body.length) {
+      let sawSome = !!fileTailMatch;
+      for (let i2 = fileIndex; i2 < file.length - fileTailMatch; i2++) {
+        const f = String(file[i2]);
+        sawSome = true;
+        if (f === "." || f === ".." || !this.options.dot && f.startsWith(".")) {
+          return false;
+        }
+      }
+      return partial || sawSome;
+    }
+    const bodySegments = [[[], 0]];
+    let currentBody = bodySegments[0];
+    let nonGsParts = 0;
+    const nonGsPartsSums = [0];
+    for (const b of body) {
+      if (b === GLOBSTAR) {
+        nonGsPartsSums.push(nonGsParts);
+        currentBody = [[], 0];
+        bodySegments.push(currentBody);
+      } else {
+        currentBody[0].push(b);
+        nonGsParts++;
+      }
+    }
+    let i = bodySegments.length - 1;
+    const fileLength = file.length - fileTailMatch;
+    for (const b of bodySegments) {
+      b[1] = fileLength - (nonGsPartsSums[i--] + b[0].length);
+    }
+    return !!this.#matchGlobStarBodySections(file, bodySegments, fileIndex, 0, partial, 0, !!fileTailMatch);
+  }
+  // return false for "nope, not matching"
+  // return null for "not matching, cannot keep trying"
+  #matchGlobStarBodySections(file, bodySegments, fileIndex, bodyIndex, partial, globStarDepth, sawTail) {
+    const bs = bodySegments[bodyIndex];
+    if (!bs) {
+      for (let i = fileIndex; i < file.length; i++) {
+        sawTail = true;
+        const f = file[i];
+        if (f === "." || f === ".." || !this.options.dot && f.startsWith(".")) {
+          return false;
+        }
+      }
+      return sawTail;
+    }
+    const [body, after] = bs;
+    while (fileIndex <= after) {
+      const m = this.#matchOne(file.slice(0, fileIndex + body.length), body, partial, fileIndex, 0);
+      if (m && globStarDepth < this.maxGlobstarRecursion) {
+        const sub = this.#matchGlobStarBodySections(file, bodySegments, fileIndex + body.length, bodyIndex + 1, partial, globStarDepth + 1, sawTail);
+        if (sub !== false) {
+          return sub;
+        }
+      }
+      const f = file[fileIndex];
+      if (f === "." || f === ".." || !this.options.dot && f.startsWith(".")) {
+        return false;
+      }
+      fileIndex++;
+    }
+    return partial || null;
+  }
+  #matchOne(file, pattern, partial, fileIndex, patternIndex) {
+    let fi;
+    let pi;
+    let pl;
+    let fl;
+    for (fi = fileIndex, pi = patternIndex, fl = file.length, pl = pattern.length; fi < fl && pi < pl; fi++, pi++) {
+      this.debug("matchOne loop");
+      let p = pattern[pi];
+      let f = file[fi];
+      this.debug(pattern, p, f);
+      if (p === false || p === GLOBSTAR) {
+        return false;
+      }
+      let hit;
+      if (typeof p === "string") {
+        hit = f === p;
+        this.debug("string match", p, f, hit);
+      } else {
+        hit = p.test(f);
+        this.debug("pattern match", p, f, hit);
+      }
+      if (!hit)
+        return false;
+    }
+    if (fi === fl && pi === pl) {
+      return true;
+    } else if (fi === fl) {
+      return partial;
+    } else if (pi === pl) {
+      return fi === fl - 1 && file[fi] === "";
+    } else {
+      throw new Error("wtf?");
+    }
+  }
+  braceExpand() {
+    return braceExpand(this.pattern, this.options);
+  }
+  parse(pattern) {
+    assertValidPattern(pattern);
+    const options = this.options;
+    if (pattern === "**")
+      return GLOBSTAR;
+    if (pattern === "")
+      return "";
+    let m;
+    let fastTest = null;
+    if (m = pattern.match(starRE)) {
+      fastTest = options.dot ? starTestDot : starTest;
+    } else if (m = pattern.match(starDotExtRE)) {
+      fastTest = (options.nocase ? options.dot ? starDotExtTestNocaseDot : starDotExtTestNocase : options.dot ? starDotExtTestDot : starDotExtTest)(m[1]);
+    } else if (m = pattern.match(qmarksRE)) {
+      fastTest = (options.nocase ? options.dot ? qmarksTestNocaseDot : qmarksTestNocase : options.dot ? qmarksTestDot : qmarksTest)(m);
+    } else if (m = pattern.match(starDotStarRE)) {
+      fastTest = options.dot ? starDotStarTestDot : starDotStarTest;
+    } else if (m = pattern.match(dotStarRE)) {
+      fastTest = dotStarTest;
+    }
+    const re = AST.fromGlob(pattern, this.options).toMMPattern();
+    if (fastTest && typeof re === "object") {
+      Reflect.defineProperty(re, "test", { value: fastTest });
+    }
+    return re;
+  }
+  makeRe() {
+    if (this.regexp || this.regexp === false)
+      return this.regexp;
+    const set2 = this.set;
+    if (!set2.length) {
+      this.regexp = false;
+      return this.regexp;
+    }
+    const options = this.options;
+    const twoStar = options.noglobstar ? star2 : options.dot ? twoStarDot : twoStarNoDot;
+    const flags = new Set(options.nocase ? ["i"] : []);
+    let re = set2.map((pattern) => {
+      const pp = pattern.map((p) => {
+        if (p instanceof RegExp) {
+          for (const f of p.flags.split(""))
+            flags.add(f);
+        }
+        return typeof p === "string" ? regExpEscape2(p) : p === GLOBSTAR ? GLOBSTAR : p._src;
+      });
+      pp.forEach((p, i) => {
+        const next = pp[i + 1];
+        const prev = pp[i - 1];
+        if (p !== GLOBSTAR || prev === GLOBSTAR) {
+          return;
+        }
+        if (prev === void 0) {
+          if (next !== void 0 && next !== GLOBSTAR) {
+            pp[i + 1] = "(?:\\/|" + twoStar + "\\/)?" + next;
+          } else {
+            pp[i] = twoStar;
+          }
+        } else if (next === void 0) {
+          pp[i - 1] = prev + "(?:\\/|\\/" + twoStar + ")?";
+        } else if (next !== GLOBSTAR) {
+          pp[i - 1] = prev + "(?:\\/|\\/" + twoStar + "\\/)" + next;
+          pp[i + 1] = GLOBSTAR;
+        }
+      });
+      const filtered = pp.filter((p) => p !== GLOBSTAR);
+      if (this.partial && filtered.length >= 1) {
+        const prefixes = [];
+        for (let i = 1; i <= filtered.length; i++) {
+          prefixes.push(filtered.slice(0, i).join("/"));
+        }
+        return "(?:" + prefixes.join("|") + ")";
+      }
+      return filtered.join("/");
+    }).join("|");
+    const [open, close2] = set2.length > 1 ? ["(?:", ")"] : ["", ""];
+    re = "^" + open + re + close2 + "$";
+    if (this.partial) {
+      re = "^(?:\\/|" + open + re.slice(1, -1) + close2 + ")$";
+    }
+    if (this.negate)
+      re = "^(?!" + re + ").+$";
+    try {
+      this.regexp = new RegExp(re, [...flags].join(""));
+    } catch {
+      this.regexp = false;
+    }
+    return this.regexp;
+  }
+  slashSplit(p) {
+    if (this.preserveMultipleSlashes) {
+      return p.split("/");
+    } else if (this.isWindows && /^\/\/[^/]+/.test(p)) {
+      return ["", ...p.split(/\/+/)];
+    } else {
+      return p.split(/\/+/);
+    }
+  }
+  match(f, partial = this.partial) {
+    this.debug("match", f, this.pattern);
+    if (this.comment) {
+      return false;
+    }
+    if (this.empty) {
+      return f === "";
+    }
+    if (f === "/" && partial) {
+      return true;
+    }
+    const options = this.options;
+    if (this.isWindows) {
+      f = f.split("\\").join("/");
+    }
+    const ff = this.slashSplit(f);
+    this.debug(this.pattern, "split", ff);
+    const set2 = this.set;
+    this.debug(this.pattern, "set", set2);
+    let filename = ff[ff.length - 1];
+    if (!filename) {
+      for (let i = ff.length - 2; !filename && i >= 0; i--) {
+        filename = ff[i];
+      }
+    }
+    for (const pattern of set2) {
+      let file = ff;
+      if (options.matchBase && pattern.length === 1) {
+        file = [filename];
+      }
+      const hit = this.matchOne(file, pattern, partial);
+      if (hit) {
+        if (options.flipNegate) {
+          return true;
+        }
+        return !this.negate;
+      }
+    }
+    if (options.flipNegate) {
+      return false;
+    }
+    return this.negate;
+  }
+  static defaults(def) {
+    return minimatch.defaults(def).Minimatch;
+  }
+};
+minimatch.AST = AST;
+minimatch.Minimatch = Minimatch;
+minimatch.escape = escape3;
+minimatch.unescape = unescape2;
+
+// src/cli/pathResolver.ts
+function resolvePathPattern(app2, pattern) {
+  if (pattern.startsWith("~")) {
+    const query = pattern.slice(1).trim();
+    const search2 = (0, import_obsidian27.prepareFuzzySearch)(query);
+    const files = app2.vault.getFiles().map((f) => ({ file: f, result: search2(f.path) })).filter((r) => r.result !== null).sort((a, b) => b.result.score - a.result.score).map((r) => r.file);
+    return { files, mode: "fuzzy", pattern: query };
+  }
+  if (pattern.includes("*") || pattern.includes("?")) {
+    const normalizedGlob = pattern.replace(/\\/g, "/");
+    const files = app2.vault.getFiles().filter((f) => minimatch(f.path, normalizedGlob));
+    return { files, mode: "glob", pattern: normalizedGlob };
+  }
+  const normalized = (0, import_obsidian27.normalizePath)(pattern);
+  const file = app2.vault.getFileByPath(normalized);
+  return {
+    files: file ? [file] : [],
+    mode: "exact",
+    pattern: normalized
+  };
+}
+
+// src/cli/handlers/markHandler.ts
+var COMMAND5 = "quartz-syncer:mark";
+var FLAGS5 = {
+  path: {
+    value: "<vault-path|glob|~fuzzy>",
+    description: "File path, glob, or fuzzy query (prefix with ~)"
+  },
+  value: {
+    value: "<true|false|toggle>",
+    description: "Publish flag value (default: true)"
+  },
+  "dry-run": {
+    description: "Show matched files without modifying"
+  },
+  format: {
+    value: "<json|text>",
+    description: "Output format (default: text)"
+  }
+};
+function parseFlagValue(raw) {
+  if (!raw) return true;
+  if (raw === "true") return true;
+  if (raw === "false") return false;
+  if (raw === "toggle") return "toggle";
+  return null;
+}
+function getBooleanValue(value2) {
+  return value2 === true || value2 === "true" || value2 === 1;
+}
+function createMarkHandler(register, plugin) {
+  register(
+    COMMAND5,
+    "Set or toggle the publish flag for matching files",
+    FLAGS5,
+    async (params) => {
+      try {
+        const pathPattern = typeof params.path === "string" ? params.path : "";
+        if (!pathPattern) {
+          return formatCliOutput(
+            params,
+            cliError(COMMAND5, "Missing required flag: path")
+          );
+        }
+        const parsedValue = parseFlagValue(
+          typeof params.value === "string" ? params.value : void 0
+        );
+        if (parsedValue === null) {
+          return formatCliOutput(
+            params,
+            cliError(
+              COMMAND5,
+              "Invalid value. Use true, false, or toggle."
+            )
+          );
+        }
+        const dryRun = params["dry-run"] === "true";
+        const verbose = params.verbose === "true";
+        const includeVerbose = verbose && params.format !== "json";
+        const resolved = resolvePathPattern(plugin.app, pathPattern);
+        const vaultPath = plugin.settings.vaultPath;
+        const vaultIsRoot = vaultPath === "/";
+        const supportedExtensions = /* @__PURE__ */ new Set([
+          "md",
+          ...plugin.settings.useBases ? ["base"] : [],
+          ...plugin.settings.useCanvas ? ["canvas"] : [],
+          ...plugin.settings.useExcalidraw ? ["excalidraw"] : []
+        ]);
+        const files = resolved.files.filter(
+          (f) => supportedExtensions.has(f.extension) && (vaultIsRoot || f.path.startsWith(vaultPath))
+        );
+        if (files.length === 0) {
+          return formatCliOutput(
+            params,
+            cliError(
+              COMMAND5,
+              "No publishable files matched the provided path."
+            )
+          );
+        }
+        const updated = [];
+        const failed = [];
+        const appliedValues = [];
+        for (const file of files) {
+          try {
+            const engine = new ObsidianFrontMatterEngine(
+              plugin.app.vault,
+              plugin.app.metadataCache,
+              file,
+              plugin.app.fileManager
+            );
+            let nextValue;
+            if (parsedValue === "toggle") {
+              const current = engine.get(
+                plugin.settings.publishFrontmatterKey
+              );
+              nextValue = !getBooleanValue(current);
+            } else {
+              nextValue = parsedValue;
+            }
+            if (!dryRun) {
+              await engine.set(
+                plugin.settings.publishFrontmatterKey,
+                nextValue
+              ).apply();
+            }
+            updated.push(file.path);
+            appliedValues.push({
+              path: file.path,
+              value: nextValue
+            });
+          } catch (error) {
+            failed.push({
+              path: file.path,
+              error: error instanceof Error ? error.message : String(error)
+            });
+          }
+        }
+        const data = {
+          mode: resolved.mode,
+          pattern: resolved.pattern,
+          dryRun,
+          matched: files.map((f) => f.path),
+          updated,
+          failed,
+          appliedValues
+        };
+        const messageParts = [
+          dryRun ? `Dry run: ${updated.length} file${updated.length === 1 ? "" : "s"} matched` : `Updated ${updated.length} file${updated.length === 1 ? "" : "s"}`,
+          `Mode: ${resolved.mode}`
+        ];
+        if (failed.length > 0) {
+          messageParts.push(
+            `Failed: ${failed.length} file${failed.length === 1 ? "" : "s"}`
+          );
+        }
+        const baseMessage = messageParts.join(". ") + ".";
+        const verboseHeader = [
+          `Vault root: ${vaultIsRoot ? "/" : vaultPath}`,
+          `All notes publishable: ${plugin.settings.allNotesPublishableByDefault ? "yes" : "no"}`
+        ];
+        const message = includeVerbose ? [
+          baseMessage,
+          ...verboseHeader,
+          ...data.appliedValues.length > 0 ? data.appliedValues.map(
+            (entry) => `	${entry.path} \u2192 ${entry.value}`
+          ) : []
+        ].join("\n") : baseMessage;
+        const result = failed.length > 0 ? {
+          ok: false,
+          command: COMMAND5,
+          error: message,
+          data
+        } : cliSuccess(COMMAND5, message, data);
+        return formatCliOutput(params, result);
+      } catch (error) {
+        return formatCliOutput(
+          params,
+          cliError(
+            COMMAND5,
+            error instanceof Error ? error.message : String(error)
+          )
+        );
+      }
+    }
+  );
+}
+
+// src/cli/handlers/testHandler.ts
+init_esbuild_buffer_shim();
+var COMMAND6 = "quartz-syncer:test";
+var FLAGS6 = {
+  format: {
+    value: "<json|text>",
+    description: "Output format (default: text)"
+  }
+};
+function createTestHandler(register, plugin) {
+  register(
+    COMMAND6,
+    "Test repository connection and credentials",
+    FLAGS6,
+    async (params) => {
+      try {
+        const validationError = validatePreFlight(plugin);
+        if (validationError) {
+          return formatCliOutput(
+            params,
+            cliError(COMMAND6, validationError)
+          );
+        }
+        const gitSettings = plugin.getGitSettingsWithSecret();
+        const verbose = params.verbose === "true";
+        const includeVerbose = verbose && params.format !== "json";
+        const connection = new RepositoryConnection({
+          gitSettings,
+          contentFolder: plugin.settings.contentFolder,
+          vaultPath: plugin.settings.vaultPath
+        });
+        const canRead = await connection.testConnection();
+        const canWrite = canRead ? await RepositoryConnection.checkWriteAccess(
+          gitSettings.remoteUrl,
+          gitSettings.auth,
+          gitSettings.corsProxyUrl
+        ) : false;
+        const data = {
+          repository: connection.getRepositoryName(),
+          branch: gitSettings.branch,
+          readAccess: canRead,
+          writeAccess: canWrite
+        };
+        const baseMessage = canRead ? `Connection OK (read: ${canRead ? "yes" : "no"}, write: ${canWrite ? "yes" : "no"}).` : "Connection failed.";
+        const authParts = [
+          `type: ${gitSettings.auth?.type ?? "unknown"}`
+        ];
+        if (gitSettings.auth?.username) {
+          authParts.push(`username: ${gitSettings.auth.username}`);
+        }
+        const message = includeVerbose && canRead ? [
+          baseMessage,
+          `Repository: ${data.repository}`,
+          `Branch: ${data.branch}`,
+          `Auth: ${authParts.join(", ")}`
+        ].join("\n") : baseMessage;
+        return formatCliOutput(
+          params,
+          canRead ? cliSuccess(COMMAND6, message, data) : cliError(COMMAND6, message)
+        );
+      } catch (error) {
+        return formatCliOutput(
+          params,
+          cliError(
+            COMMAND6,
+            error instanceof Error ? error.message : String(error)
+          )
+        );
+      }
+    }
+  );
+}
+
+// src/cli/handlers/cacheHandler.ts
+init_esbuild_buffer_shim();
+var import_obsidian28 = require("obsidian");
+var COMMAND7 = "quartz-syncer:cache";
+var FLAGS7 = {
+  action: {
+    value: "<status|clear|clear-all>",
+    description: "Cache operation to perform"
+  },
+  path: {
+    value: "<vault-path>",
+    description: "File path (required for action=clear)"
+  },
+  force: {
+    description: "Skip confirmation for clear-all"
+  },
+  format: {
+    value: "<json|text>",
+    description: "Output format (default: text)"
+  }
+};
+function createCacheHandler(register, plugin) {
+  register(
+    COMMAND7,
+    "Manage the Quartz Syncer cache",
+    FLAGS7,
+    async (params) => {
+      try {
+        if (!plugin.settings.useCache || !plugin.datastore) {
+          return formatCliOutput(
+            params,
+            cliError(COMMAND7, "Cache is disabled.")
+          );
+        }
+        const verbose = params.verbose === "true";
+        const includeVerbose = verbose && params.format !== "json";
+        const action = typeof params.action === "string" ? params.action : "";
+        if (!action) {
+          return formatCliOutput(
+            params,
+            cliError(COMMAND7, "Missing required flag: action")
+          );
+        }
+        if (action === "status") {
+          const files = await plugin.datastore.allFiles();
+          const lastUpdated = await plugin.datastore.getLastUpdateTimestamp();
+          const data = {
+            count: files.length,
+            files,
+            lastUpdated
+          };
+          const baseMessage = `Cache contains ${files.length} file${files.length === 1 ? "" : "s"}.`;
+          const message = includeVerbose && files.length > 0 ? [
+            baseMessage,
+            ...files.map((path2) => `	${path2}`)
+          ].join("\n") : baseMessage;
+          return formatCliOutput(
+            params,
+            cliSuccess(COMMAND7, message, data)
+          );
+        }
+        if (action === "clear") {
+          const rawPath = typeof params.path === "string" ? params.path : "";
+          if (!rawPath) {
+            return formatCliOutput(
+              params,
+              cliError(COMMAND7, "Missing required flag: path")
+            );
+          }
+          const path2 = (0, import_obsidian28.normalizePath)(rawPath);
+          await plugin.datastore.persister.removeItem(
+            plugin.datastore.fileKey(path2)
+          );
+          await plugin.datastore.setLastUpdateTimestamp(
+            Date.now(),
+            plugin
+          );
+          const message = `Cache cleared for ${path2}.`;
+          return formatCliOutput(
+            params,
+            cliSuccess(COMMAND7, message, { path: path2 })
+          );
+        }
+        if (action === "clear-all") {
+          const force = params.force === "true";
+          if (!force) {
+            return formatCliOutput(
+              params,
+              cliError(
+                COMMAND7,
+                "Clearing all cache requires the 'force' flag."
+              )
+            );
+          }
+          await plugin.datastore.recreate();
+          await plugin.datastore.setLastUpdateTimestamp(
+            Date.now(),
+            plugin
+          );
+          const message = "Cache cleared for all files.";
+          return formatCliOutput(
+            params,
+            cliSuccess(COMMAND7, message, { cleared: true })
+          );
+        }
+        return formatCliOutput(
+          params,
+          cliError(
+            COMMAND7,
+            "Invalid action. Use status, clear, or clear-all."
+          )
+        );
+      } catch (error) {
+        return formatCliOutput(
+          params,
+          cliError(
+            COMMAND7,
+            error instanceof Error ? error.message : String(error)
+          )
+        );
+      }
+    }
+  );
+}
+
+// src/cli/handlers/configHandler.ts
+init_esbuild_buffer_shim();
+var import_obsidian29 = require("obsidian");
+
+// src/cli/configUtils.ts
+init_esbuild_buffer_shim();
+var FORBIDDEN_KEYS = /* @__PURE__ */ new Set(["__proto__", "constructor", "prototype"]);
+function isRecord(value2) {
+  return typeof value2 === "object" && value2 !== null && !Array.isArray(value2);
+}
+function getValueByPath(obj, path2) {
+  const segments = path2.split(".");
+  if (segments.some((s2) => FORBIDDEN_KEYS.has(s2))) return void 0;
+  let current = obj;
+  for (const segment of segments) {
+    if (!isRecord(current) || !Object.hasOwn(current, segment))
+      return void 0;
+    current = current[segment];
+  }
+  return current;
+}
+function setValueByPath(obj, path2, value2) {
+  const segments = path2.split(".");
+  if (segments.some((s2) => FORBIDDEN_KEYS.has(s2))) return false;
+  let current = obj;
+  for (let i = 0; i < segments.length - 1; i++) {
+    const segment = segments[i];
+    if (!isRecord(current) || !Object.hasOwn(current, segment))
+      return false;
+    current = current[segment];
+  }
+  if (!isRecord(current)) return false;
+  const lastSegment = segments[segments.length - 1];
+  current[lastSegment] = value2;
+  return true;
+}
+function flattenObject(obj, prefix = "", result = {}) {
+  if (!isRecord(obj)) {
+    if (prefix) result[prefix] = JSON.stringify(obj);
+    return result;
+  }
+  for (const [key, value2] of Object.entries(obj)) {
+    if (value2 === void 0) continue;
+    const nextPrefix = prefix ? `${prefix}.${key}` : key;
+    if (isRecord(value2)) {
+      flattenObject(value2, nextPrefix, result);
+    } else {
+      result[nextPrefix] = JSON.stringify(value2);
+    }
+  }
+  return result;
+}
+
+// src/cli/handlers/configHandler.ts
+var COMMAND8 = "quartz-syncer:config";
+var FLAGS8 = {
+  action: {
+    value: "<get|set|list>",
+    description: "Config operation"
+  },
+  key: {
+    value: "<setting-path>",
+    description: "Dot-notation setting key"
+  },
+  value: {
+    value: "<value>",
+    description: "Value for action=set"
+  },
+  format: {
+    value: "<json|text>",
+    description: "Output format (default: text)"
+  }
+};
+var WRITABLE_KEYS = {
+  "git.remoteUrl": "string",
+  "git.branch": "string",
+  "git.corsProxyUrl": "string",
+  "git.auth.type": "string",
+  "git.auth.username": "string",
+  "git.providerHint": "string",
+  contentFolder: "string",
+  vaultPath: "string",
+  publishFrontmatterKey: "string",
+  allNotesPublishableByDefault: "boolean",
+  useCache: "boolean",
+  syncCache: "boolean",
+  useDataview: "boolean",
+  useDatacore: "boolean",
+  useExcalidraw: "boolean",
+  useFantasyStatblocks: "boolean",
+  useBases: "boolean",
+  useCanvas: "boolean",
+  useThemes: "boolean",
+  frontmatterFormat: "string",
+  diffViewStyle: "string"
+};
+var VALID_VALUES = {
+  "git.auth.type": ["none", "basic", "bearer"],
+  "git.providerHint": ["github", "gitlab", "bitbucket", "gitea", "custom"],
+  frontmatterFormat: ["yaml", "json"],
+  diffViewStyle: ["split", "unified", "auto"]
+};
+function redactSettings(settings, hasToken) {
+  return {
+    ...settings,
+    git: {
+      ...settings.git,
+      auth: {
+        ...settings.git.auth,
+        secret: hasToken ? "***" : void 0
+      }
+    }
+  };
+}
+function parseValue(expectedType, raw) {
+  if (expectedType === "string") {
+    return raw;
+  }
+  if (raw === "true") return true;
+  if (raw === "false") return false;
+  return null;
+}
+function createConfigHandler(register, plugin) {
+  register(
+    COMMAND8,
+    "Read or update Quartz Syncer settings",
+    FLAGS8,
+    async (params) => {
+      try {
+        const verbose = params.verbose === "true";
+        const includeVerbose = verbose && params.format !== "json";
+        const action = typeof params.action === "string" ? params.action : "list";
+        const hasToken = !!plugin.getGitSettingsWithSecret().auth?.secret;
+        if (action === "list") {
+          const redacted = redactSettings(plugin.settings, hasToken);
+          const {
+            cache: _cache,
+            cacheTimestamp: _cacheTimestamp,
+            ...data
+          } = redacted;
+          const message = Object.entries(flattenObject(data)).map(([key2, value2]) => `${key2}=${value2}`).join("\n");
+          return formatCliOutput(
+            params,
+            cliSuccess(COMMAND8, message, data)
+          );
+        }
+        const key = typeof params.key === "string" ? params.key : "";
+        if (!key) {
+          return formatCliOutput(
+            params,
+            cliError(COMMAND8, "Missing required flag: key")
+          );
+        }
+        if (action === "get") {
+          if (key === "git.auth.secret") {
+            const display = hasToken ? "***" : "not set";
+            const data2 = { key, value: display };
+            const baseMessage2 = `${key}="${display}"`;
+            const message2 = includeVerbose ? `${baseMessage2} (type: string)` : baseMessage2;
+            return formatCliOutput(
+              params,
+              cliSuccess(COMMAND8, message2, data2)
+            );
+          }
+          const value2 = getValueByPath(plugin.settings, key);
+          if (value2 === void 0) {
+            return formatCliOutput(
+              params,
+              cliError(COMMAND8, "Unknown setting key.")
+            );
+          }
+          const data = { key, value: value2 };
+          const baseMessage = `${key}=${JSON.stringify(value2)}`;
+          const message = includeVerbose ? `${baseMessage} (type: ${typeof value2})` : baseMessage;
+          return formatCliOutput(
+            params,
+            cliSuccess(COMMAND8, message, data)
+          );
+        }
+        if (action === "set") {
+          if (key === "git.auth.secret") {
+            return formatCliOutput(
+              params,
+              cliError(
+                COMMAND8,
+                "git.auth.secret cannot be set via CLI."
+              )
+            );
+          }
+          const expectedType = WRITABLE_KEYS[key];
+          if (!expectedType) {
+            return formatCliOutput(
+              params,
+              cliError(
+                COMMAND8,
+                "Setting is not writable via CLI."
+              )
+            );
+          }
+          if (typeof params.value !== "string") {
+            return formatCliOutput(
+              params,
+              cliError(COMMAND8, "Missing required flag: value")
+            );
+          }
+          const rawValue = params.value;
+          const parsed = parseValue(expectedType, rawValue);
+          if (parsed === null) {
+            return formatCliOutput(
+              params,
+              cliError(
+                COMMAND8,
+                `Invalid value for ${key}. Expected ${expectedType}.`
+              )
+            );
+          }
+          const allowedValues = VALID_VALUES[key];
+          if (allowedValues && typeof parsed === "string" && !allowedValues.includes(parsed)) {
+            return formatCliOutput(
+              params,
+              cliError(
+                COMMAND8,
+                `Invalid value for ${key}. Expected one of: ${allowedValues.join(", ")}.`
+              )
+            );
+          }
+          let normalizedValue = parsed;
+          if (typeof parsed === "string") {
+            if (key === "vaultPath") {
+              const trimmed = parsed.trim();
+              if (trimmed === "/" || trimmed === "") {
+                normalizedValue = "/";
+              } else {
+                const np = (0, import_obsidian29.normalizePath)(trimmed);
+                normalizedValue = np.endsWith("/") ? np : np + "/";
+              }
+            } else if (key === "contentFolder") {
+              normalizedValue = (0, import_obsidian29.normalizePath)(parsed.trim());
+            }
+          }
+          const setOk = setValueByPath(
+            plugin.settings,
+            key,
+            normalizedValue
+          );
+          if (!setOk) {
+            return formatCliOutput(
+              params,
+              cliError(COMMAND8, "Failed to set value.")
+            );
+          }
+          await plugin.saveSettings();
+          const data = { key, value: normalizedValue };
+          const message = `Updated ${key}.`;
+          return formatCliOutput(
+            params,
+            cliSuccess(COMMAND8, message, data)
+          );
+        }
+        return formatCliOutput(
+          params,
+          cliError(COMMAND8, "Invalid action. Use get, set, or list.")
+        );
+      } catch (error) {
+        return formatCliOutput(
+          params,
+          cliError(
+            COMMAND8,
+            error instanceof Error ? error.message : String(error)
+          )
+        );
+      }
+    }
+  );
+}
+
+// src/cli/handlers/upgradeHandler.ts
+init_esbuild_buffer_shim();
+var COMMAND9 = "quartz-syncer:upgrade";
+var FLAGS9 = {
+  force: {
+    description: "Apply upgrade (required)"
+  },
+  "dry-run": {
+    description: "Check for updates without applying"
+  },
+  format: {
+    value: "<json|text>",
+    description: "Output format (default: text)"
+  }
+};
+function createUpgradeHandler(register, plugin) {
+  register(
+    COMMAND9,
+    "Upgrade the Quartz repository from upstream",
+    FLAGS9,
+    async (params) => {
+      try {
+        const validationError = validatePreFlight(plugin);
+        if (validationError) {
+          return formatCliOutput(
+            params,
+            cliError(COMMAND9, validationError)
+          );
+        }
+        const gitSettings = plugin.getGitSettingsWithSecret();
+        const connection = new RepositoryConnection({
+          gitSettings,
+          contentFolder: plugin.settings.contentFolder,
+          vaultPath: plugin.settings.vaultPath
+        });
+        const dryRun = params["dry-run"] === "true";
+        const verbose = params.verbose === "true";
+        const includeVerbose = verbose && params.format !== "json";
+        const buildVerboseMessage = (baseMessage2, shaLines) => {
+          if (!includeVerbose) {
+            return baseMessage2;
+          }
+          return [
+            baseMessage2,
+            `Upstream: ${UPSTREAM_REPO_URL}#${UPSTREAM_BRANCH}`,
+            ...shaLines
+          ].join("\n");
+        };
+        if (dryRun) {
+          const lastUpstream = plugin.settings.lastUpstreamCommitSha || null;
+          const upstreamHead = await RepositoryConnection.fetchRemoteHeadCommit(
+            UPSTREAM_REPO_URL,
+            UPSTREAM_AUTH,
+            UPSTREAM_BRANCH,
+            gitSettings.corsProxyUrl
+          );
+          if (upstreamHead === null) {
+            return formatCliOutput(
+              params,
+              cliError(
+                COMMAND9,
+                "Could not check upstream. The remote may be unreachable."
+              )
+            );
+          }
+          const hasUpdate = upstreamHead !== lastUpstream;
+          const baseMessage2 = hasUpdate ? "Upstream updates available." : "Already up to date.";
+          const shaLines = [
+            `Recorded SHA: ${lastUpstream ?? "none"}`,
+            `Upstream HEAD: ${upstreamHead}`
+          ];
+          const message2 = buildVerboseMessage(baseMessage2, shaLines);
+          return formatCliOutput(
+            params,
+            cliSuccess(COMMAND9, message2, {
+              lastUpstreamCommitSha: lastUpstream ?? null,
+              upstreamHead,
+              hasUpdate
+            })
+          );
+        }
+        const force = params.force === "true";
+        if (!force) {
+          return formatCliOutput(
+            params,
+            cliError(COMMAND9, "Upgrade requires the 'force' flag.")
+          );
+        }
+        const result = await connection.upgradeFromUpstream(
+          UPSTREAM_REPO_URL,
+          UPSTREAM_BRANCH
+        );
+        if (result.oid && plugin.settings.lastUpstreamCommitSha !== result.oid) {
+          plugin.settings.lastUpstreamCommitSha = result.oid;
+          await plugin.saveSettings();
+        }
+        const baseMessage = result.alreadyMerged ? "Already up to date." : `Upgraded to ${result.oid}.`;
+        const message = buildVerboseMessage(baseMessage, [
+          `Upstream SHA: ${result.oid}`,
+          `Recorded SHA: ${plugin.settings.lastUpstreamCommitSha || "none"}`
+        ]);
+        return formatCliOutput(
+          params,
+          cliSuccess(COMMAND9, message, result)
+        );
+      } catch (error) {
+        return formatCliOutput(
+          params,
+          cliError(
+            COMMAND9,
+            error instanceof Error ? error.message : String(error)
+          )
+        );
+      }
+    }
+  );
+}
+
+// src/cli/handlers/versionHandler.ts
+init_esbuild_buffer_shim();
+var import_obsidian30 = require("obsidian");
+var COMMAND10 = "quartz-syncer:version";
+var FLAGS10 = {
+  format: {
+    value: "<json|text>",
+    description: "Output format (default: text)"
+  }
+};
+var QUARTZ_CONFIG_DETAILS = {
+  "v5-yaml": "quartz.config.yaml",
+  "v5-json": "quartz.plugins.json",
+  v4: "quartz.config.ts",
+  unknown: "unknown"
+};
+function createVersionHandler(register, plugin) {
+  register(
+    COMMAND10,
+    "Show plugin, Obsidian, and Quartz version information",
+    FLAGS10,
+    async (params) => {
+      try {
+        const verbose = params.verbose === "true";
+        const includeVerbose = verbose && params.format !== "json";
+        const pluginVersion = plugin.appVersion;
+        const obsidianVersion = import_obsidian30.apiVersion ?? "unknown";
+        let quartzFormat = "unknown";
+        let quartzVersion = null;
+        let connection = null;
+        const validationError = validatePreFlight(plugin);
+        if (!validationError) {
+          const gitSettings = plugin.getGitSettingsWithSecret();
+          connection = new RepositoryConnection({
+            gitSettings,
+            contentFolder: plugin.settings.contentFolder,
+            vaultPath: plugin.settings.vaultPath
+          });
+          quartzFormat = await QuartzVersionDetector.detectQuartzVersion(
+            connection
+          );
+          quartzVersion = await QuartzVersionDetector.getQuartzPackageVersion(
+            connection
+          );
+        }
+        const displayQuartzVersion = quartzVersion ?? "unknown";
+        const displayQuartzFormat = quartzFormat ?? "unknown";
+        const quartzConfigDetails = QUARTZ_CONFIG_DETAILS[displayQuartzFormat] ?? "unknown";
+        const baseLines = [
+          `Quartz Syncer: ${pluginVersion}`,
+          `Obsidian: ${obsidianVersion}`,
+          `Quartz: ${displayQuartzVersion} (${displayQuartzFormat})`
+        ];
+        const verboseLines = connection ? [
+          `Repository: ${connection.getRepositoryName()}`,
+          `Branch: ${plugin.settings.git.branch}`,
+          `Quartz config: ${quartzConfigDetails}`
+        ] : [`Git: not configured`];
+        const message = includeVerbose ? [...baseLines, ...verboseLines].join("\n") : baseLines.join("\n");
+        const data = {
+          pluginVersion,
+          obsidianVersion,
+          quartzVersion,
+          quartzFormat: displayQuartzFormat
+        };
+        return formatCliOutput(
+          params,
+          cliSuccess(COMMAND10, message, data)
+        );
+      } catch (error) {
+        return formatCliOutput(
+          params,
+          cliError(
+            COMMAND10,
+            error instanceof Error ? error.message : String(error)
+          )
+        );
+      }
+    }
+  );
+}
+
+// src/cli/handlers/pluginHandler.ts
+init_esbuild_buffer_shim();
+var COMMAND11 = "quartz-syncer:plugin";
+var FLAGS11 = {
+  action: {
+    value: "<list|add|remove|updates|update|browse>",
+    description: "Plugin operation (default: list)"
+  },
+  source: {
+    value: "<github:org/repo>",
+    description: "Plugin source identifier"
+  },
+  force: {
+    description: "Required for plugin removal"
+  },
+  format: {
+    value: "<json|text>",
+    description: "Output format (default: text)"
+  }
+};
+function createConfigService(plugin) {
+  const gitSettings = plugin.getGitSettingsWithSecret();
+  const connection = new RepositoryConnection({
+    gitSettings,
+    contentFolder: plugin.settings.contentFolder,
+    vaultPath: plugin.settings.vaultPath
+  });
+  return new QuartzConfigService(connection);
+}
+function formatPluginList(plugins, includeVerbose) {
+  const lines = [];
+  for (const plugin of plugins) {
+    const name = getPluginName(plugin.source);
+    const status = plugin.enabled ? "enabled" : "disabled";
+    const order2 = plugin.order ?? DEFAULT_ORDER;
+    lines.push(`${name} [${status}] (order: ${order2})`);
+    if (includeVerbose) {
+      lines.push(`	Source: ${getPluginSourceKey(plugin.source)}`);
+      lines.push(`	Options: ${JSON.stringify(plugin.options ?? {})}`);
+    }
+  }
+  return lines.join("\n");
+}
+function formatUpdateList(statuses, includeVerbose) {
+  const lines = [];
+  for (const status of statuses) {
+    const label = status.hasUpdate ? "update available" : "up to date";
+    lines.push(`${status.name} [${label}]`);
+    if (includeVerbose) {
+      lines.push(`	Locked: ${status.lockedCommit ?? "none"}`);
+      lines.push(`	Remote: ${status.remoteCommit ?? "unknown"}`);
+      if (status.error) {
+        lines.push(`	Error: ${status.error}`);
+      }
+    }
+  }
+  return lines.join("\n");
+}
+function formatRegistryList(plugins, includeVerbose) {
+  const lines = [];
+  for (const plugin of plugins) {
+    const badge = plugin.official ? " [official]" : "";
+    lines.push(`${plugin.name} - ${plugin.description}${badge}`);
+    if (includeVerbose) {
+      lines.push(`	Source: ${getPluginSourceKey(plugin.source)}`);
+      lines.push(`	Tags: ${plugin.tags.join(", ") || "none"}`);
+    }
+  }
+  return lines.join("\n");
+}
+function createPluginHandler(register, plugin) {
+  register(
+    COMMAND11,
+    "Manage Quartz v5 plugins",
+    FLAGS11,
+    async (params) => {
+      try {
+        const verbose = params.verbose === "true";
+        const includeVerbose = verbose && params.format !== "json";
+        const action = typeof params.action === "string" ? params.action : "list";
+        if (action === "browse") {
+          const registry = new QuartzPluginRegistry();
+          const plugins = await registry.getPlugins();
+          const message = formatRegistryList(plugins, includeVerbose);
+          return formatCliOutput(
+            params,
+            cliSuccess(COMMAND11, message, { plugins })
+          );
+        }
+        const validationError = validatePreFlight(plugin);
+        if (validationError) {
+          return formatCliOutput(
+            params,
+            cliError(COMMAND11, validationError)
+          );
+        }
+        const configService = createConfigService(plugin);
+        const config = await configService.readConfig();
+        if (action === "list") {
+          const message = formatPluginList(
+            config.plugins,
+            includeVerbose
+          );
+          const data = {
+            plugins: config.plugins.map((pluginEntry) => ({
+              name: getPluginName(pluginEntry.source),
+              sourceKey: getPluginSourceKey(pluginEntry.source),
+              enabled: pluginEntry.enabled,
+              order: pluginEntry.order ?? DEFAULT_ORDER,
+              options: pluginEntry.options ?? {},
+              source: pluginEntry.source
+            }))
+          };
+          return formatCliOutput(
+            params,
+            cliSuccess(COMMAND11, message, data)
+          );
+        }
+        if (action === "updates") {
+          const lockFile = await configService.readLockFile();
+          const gitSettings = plugin.getGitSettingsWithSecret();
+          const checker = new QuartzPluginUpdateChecker(
+            gitSettings.auth,
+            gitSettings.corsProxyUrl || void 0
+          );
+          const updates = await checker.checkUpdates(
+            config.plugins,
+            lockFile
+          );
+          const updatable = updates.filter((u) => u.hasUpdate);
+          const displayList = includeVerbose ? updates : updatable;
+          const message = displayList.length > 0 ? formatUpdateList(displayList, includeVerbose) : "All plugins are up to date.";
+          return formatCliOutput(
+            params,
+            cliSuccess(COMMAND11, message, {
+              updates,
+              updatable: updatable.length
+            })
+          );
+        }
+        if (action === "update") {
+          const lockFile = await configService.readLockFile();
+          const gitSettings = plugin.getGitSettingsWithSecret();
+          const checker = new QuartzPluginUpdateChecker(
+            gitSettings.auth,
+            gitSettings.corsProxyUrl || void 0
+          );
+          const updates = await checker.checkUpdates(
+            config.plugins,
+            lockFile
+          );
+          const updatable = updates.filter(
+            (u) => u.hasUpdate && u.remoteCommit
+          );
+          if (updatable.length === 0) {
+            return formatCliOutput(
+              params,
+              cliSuccess(COMMAND11, "All plugins are up to date.", {
+                updated: 0
+              })
+            );
+          }
+          if (params.force !== "true") {
+            const names = updatable.map((u) => u.name).join(", ");
+            return formatCliOutput(
+              params,
+              cliError(
+                COMMAND11,
+                `${updatable.length} plugin${updatable.length === 1 ? "" : "s"} can be updated (${names}). Use 'force' to apply.`
+              )
+            );
+          }
+          const newLockFile = lockFile ?? {
+            version: "1.0.0",
+            plugins: {}
+          };
+          for (const update2 of updatable) {
+            const pluginEntry = config.plugins.find(
+              (p) => getPluginName(p.source) === update2.name
+            );
+            if (newLockFile.plugins[update2.name]) {
+              newLockFile.plugins[update2.name].commit = update2.remoteCommit;
+            } else if (pluginEntry) {
+              newLockFile.plugins[update2.name] = {
+                source: pluginEntry.source,
+                resolved: resolveSourceToGitUrl(
+                  pluginEntry.source
+                ),
+                commit: update2.remoteCommit,
+                installedAt: (/* @__PURE__ */ new Date()).toISOString()
+              };
+            }
+          }
+          await configService.writeLockFile(
+            newLockFile,
+            `Update ${updatable.length} plugin${updatable.length === 1 ? "" : "s"}`
+          );
+          const updatedNames = updatable.map((u) => u.name);
+          const message = `Updated ${updatable.length} plugin${updatable.length === 1 ? "" : "s"}: ${updatedNames.join(", ")}.`;
+          return formatCliOutput(
+            params,
+            cliSuccess(COMMAND11, message, {
+              updated: updatable.length,
+              plugins: updatable.map((u) => ({
+                name: u.name,
+                from: u.lockedCommit,
+                to: u.remoteCommit
+              }))
+            })
+          );
+        }
+        const source = typeof params.source === "string" ? params.source : "";
+        if (action === "add") {
+          if (!source) {
+            return formatCliOutput(
+              params,
+              cliError(COMMAND11, "Missing required flag: source")
+            );
+          }
+          const pluginManager = new QuartzPluginManager();
+          const entry = pluginManager.addPlugin(
+            config,
+            source
+          );
+          const name = getPluginName(entry.source);
+          await configService.writeConfig(
+            config,
+            `Add plugin: ${name}`
+          );
+          return formatCliOutput(
+            params,
+            cliSuccess(COMMAND11, `Added plugin ${name}.`, {
+              name,
+              source: entry.source
+            })
+          );
+        }
+        if (action === "remove") {
+          if (!source) {
+            return formatCliOutput(
+              params,
+              cliError(COMMAND11, "Missing required flag: source")
+            );
+          }
+          if (params.force !== "true") {
+            return formatCliOutput(
+              params,
+              cliError(
+                COMMAND11,
+                "Removing a plugin requires the 'force' flag."
+              )
+            );
+          }
+          const pluginManager = new QuartzPluginManager();
+          const sourceKey = getPluginSourceKey(source);
+          const removed = pluginManager.removePlugin(
+            config,
+            sourceKey
+          );
+          const name = getPluginName(removed.source);
+          await configService.writeConfig(
+            config,
+            `Remove plugin: ${name}`
+          );
+          return formatCliOutput(
+            params,
+            cliSuccess(COMMAND11, `Removed plugin ${name}.`, {
+              name,
+              source: removed.source
+            })
+          );
+        }
+        return formatCliOutput(
+          params,
+          cliError(
+            COMMAND11,
+            "Invalid action. Use list, add, remove, updates, update, or browse."
+          )
+        );
+      } catch (error) {
+        return formatCliOutput(
+          params,
+          cliError(
+            COMMAND11,
+            error instanceof Error ? error.message : String(error)
+          )
+        );
+      }
+    }
+  );
+}
+
+// src/cli/handlers/quartzConfigHandler.ts
+init_esbuild_buffer_shim();
+var COMMAND12 = "quartz-syncer:quartz-config";
+var FLAGS12 = {
+  action: {
+    value: "<list|get|set>",
+    description: "Config operation (default: list)"
+  },
+  key: {
+    value: "<config-path>",
+    description: "Dot-notation config key (e.g., pageTitle, theme.typography.header)"
+  },
+  value: {
+    value: "<value>",
+    description: "New value for action=set"
+  },
+  format: {
+    value: "<json|text>",
+    description: "Output format (default: text)"
+  }
+};
+var WRITABLE_KEYS2 = {
+  pageTitle: "string",
+  pageTitleSuffix: "string",
+  enableSPA: "boolean",
+  enablePopovers: "boolean",
+  locale: "string",
+  baseUrl: "string",
+  "theme.fontOrigin": "string",
+  "theme.cdnCaching": "boolean",
+  "theme.typography.header": "string",
+  "theme.typography.body": "string",
+  "theme.typography.code": "string",
+  "theme.colors.lightMode.light": "string",
+  "theme.colors.lightMode.lightgray": "string",
+  "theme.colors.lightMode.gray": "string",
+  "theme.colors.lightMode.darkgray": "string",
+  "theme.colors.lightMode.dark": "string",
+  "theme.colors.lightMode.secondary": "string",
+  "theme.colors.lightMode.tertiary": "string",
+  "theme.colors.lightMode.highlight": "string",
+  "theme.colors.lightMode.textHighlight": "string",
+  "theme.colors.darkMode.light": "string",
+  "theme.colors.darkMode.lightgray": "string",
+  "theme.colors.darkMode.gray": "string",
+  "theme.colors.darkMode.darkgray": "string",
+  "theme.colors.darkMode.dark": "string",
+  "theme.colors.darkMode.secondary": "string",
+  "theme.colors.darkMode.tertiary": "string",
+  "theme.colors.darkMode.highlight": "string",
+  "theme.colors.darkMode.textHighlight": "string"
+};
+var FONT_ORIGINS = /* @__PURE__ */ new Set(["googleFonts", "local"]);
+function parseConfigValue(expectedType, rawValue) {
+  if (expectedType === "string") {
+    return rawValue;
+  }
+  if (rawValue === "true") return true;
+  if (rawValue === "false") return false;
+  return null;
+}
+function createQuartzConfigHandler(register, plugin) {
+  register(
+    COMMAND12,
+    "Read or update Quartz v5 site configuration",
+    FLAGS12,
+    async (params) => {
+      try {
+        const validationError = validatePreFlight(plugin);
+        if (validationError) {
+          return formatCliOutput(
+            params,
+            cliError(COMMAND12, validationError)
+          );
+        }
+        const action = typeof params.action === "string" ? params.action : "list";
+        const gitSettings = plugin.getGitSettingsWithSecret();
+        const connection = new RepositoryConnection({
+          gitSettings,
+          contentFolder: plugin.settings.contentFolder,
+          vaultPath: plugin.settings.vaultPath
+        });
+        const configService = new QuartzConfigService(connection);
+        if (action === "list") {
+          const config = await configService.readConfig();
+          const flattened = flattenObject(config.configuration);
+          const message = Object.entries(flattened).map(([key2, value2]) => `${key2}=${value2}`).join("\n");
+          return formatCliOutput(
+            params,
+            cliSuccess(COMMAND12, message, config.configuration)
+          );
+        }
+        const key = typeof params.key === "string" ? params.key : "";
+        if (!key) {
+          return formatCliOutput(
+            params,
+            cliError(COMMAND12, "Missing required flag: key")
+          );
+        }
+        if (action === "get") {
+          const config = await configService.readConfig();
+          const value2 = getValueByPath(config.configuration, key);
+          if (value2 === void 0) {
+            return formatCliOutput(
+              params,
+              cliError(COMMAND12, "Unknown config key.")
+            );
+          }
+          const data = { key, value: value2 };
+          const message = `${key}=${JSON.stringify(value2)}`;
+          return formatCliOutput(
+            params,
+            cliSuccess(COMMAND12, message, data)
+          );
+        }
+        if (action === "set") {
+          const expectedType = WRITABLE_KEYS2[key];
+          if (!expectedType) {
+            return formatCliOutput(
+              params,
+              cliError(
+                COMMAND12,
+                "Config key is not writable via CLI."
+              )
+            );
+          }
+          if (typeof params.value !== "string") {
+            return formatCliOutput(
+              params,
+              cliError(COMMAND12, "Missing required flag: value")
+            );
+          }
+          const parsed = parseConfigValue(expectedType, params.value);
+          if (parsed === null) {
+            return formatCliOutput(
+              params,
+              cliError(
+                COMMAND12,
+                `Invalid value for ${key}. Expected ${expectedType}.`
+              )
+            );
+          }
+          if (key === "theme.fontOrigin" && typeof parsed === "string" && !FONT_ORIGINS.has(parsed)) {
+            return formatCliOutput(
+              params,
+              cliError(
+                COMMAND12,
+                "Invalid value for theme.fontOrigin. Expected googleFonts or local."
+              )
+            );
+          }
+          const config = await configService.readConfig();
+          const setOk = setValueByPath(
+            config.configuration,
+            key,
+            parsed
+          );
+          if (!setOk) {
+            return formatCliOutput(
+              params,
+              cliError(COMMAND12, "Failed to set value.")
+            );
+          }
+          await configService.writeConfig(
+            config,
+            `Update Quartz config: ${key}`
+          );
+          const data = { key, value: parsed };
+          const message = `Updated ${key}.`;
+          return formatCliOutput(
+            params,
+            cliSuccess(COMMAND12, message, data)
+          );
+        }
+        return formatCliOutput(
+          params,
+          cliError(COMMAND12, "Invalid action. Use get, set, or list.")
+        );
+      } catch (error) {
+        return formatCliOutput(
+          params,
+          cliError(
+            COMMAND12,
+            error instanceof Error ? error.message : String(error)
+          )
+        );
+      }
+    }
+  );
+}
+
+// src/cli/handlers/helpHandler.ts
+init_esbuild_buffer_shim();
+var COMMAND13 = "quartz-syncer";
+var FLAGS13 = {
+  format: {
+    value: "<json|text>",
+    description: "Output format (default: text)"
+  }
+};
+var HELP_TEXT = `Quartz Syncer CLI \u2014 Manage and publish notes to Quartz from the terminal.
+
+Usage: obsidian quartz-syncer[:<command>] [flags]
+
+Commands:
+  status         Show the publish status of all marked notes
+  sync           Publish pending notes and optionally delete removed notes
+  publish        Publish pending notes without deletions
+  delete         Delete removed notes from the remote repository
+  mark           Set or toggle the publish flag for matching files
+  test           Test repository connection and credentials
+  cache          Manage the Quartz Syncer cache
+  config         Read or update Quartz Syncer settings
+  upgrade        Upgrade the Quartz repository from upstream
+  version        Show plugin, Obsidian, and Quartz version information
+  plugin         Manage Quartz v5 plugins
+  quartz-config  Read or update Quartz v5 site configuration
+
+Global flags (all commands):
+  format=<json|text>   Output format (default: text)
+  help, h              Show command-specific help
+  verbose, v           Enable detailed output
+
+Command-specific flags:
+  dry-run              Preview changes (sync, publish, delete, mark, upgrade)
+  force                Required for destructive operations (sync, delete, upgrade, plugin)
+
+Examples:
+  obsidian quartz-syncer:status
+  obsidian quartz-syncer:status format=json
+  obsidian quartz-syncer:sync force
+  obsidian quartz-syncer:publish dry-run
+  obsidian quartz-syncer:mark path="notes/post.md"
+  obsidian quartz-syncer:mark path="blog/**/*.md" dry-run
+  obsidian quartz-syncer:config action=get key=git.branch
+
+Documentation: https://saberzero1.github.io/quartz-syncer-docs/`;
+function createHelpHandler(register, plugin) {
+  register(
+    COMMAND13,
+    "Show available commands and usage information",
+    FLAGS13,
+    (params) => {
+      if (params.format === "json") {
+        return formatCliOutput(
+          params,
+          cliSuccess(COMMAND13, HELP_TEXT, {
+            commands: [
+              {
+                name: "quartz-syncer:status",
+                description: "Show the publish status of all marked notes"
+              },
+              {
+                name: "quartz-syncer:sync",
+                description: "Publish pending notes and optionally delete removed notes"
+              },
+              {
+                name: "quartz-syncer:publish",
+                description: "Publish pending notes without deletions"
+              },
+              {
+                name: "quartz-syncer:delete",
+                description: "Delete removed notes from the remote repository"
+              },
+              {
+                name: "quartz-syncer:mark",
+                description: "Set or toggle the publish flag for matching files"
+              },
+              {
+                name: "quartz-syncer:test",
+                description: "Test repository connection and credentials"
+              },
+              {
+                name: "quartz-syncer:cache",
+                description: "Manage the Quartz Syncer cache"
+              },
+              {
+                name: "quartz-syncer:config",
+                description: "Read or update Quartz Syncer settings"
+              },
+              {
+                name: "quartz-syncer:upgrade",
+                description: "Upgrade the Quartz repository from upstream"
+              },
+              {
+                name: "quartz-syncer:version",
+                description: "Show plugin, Obsidian, and Quartz version information"
+              },
+              {
+                name: "quartz-syncer:plugin",
+                description: "Manage Quartz v5 plugins"
+              },
+              {
+                name: "quartz-syncer:quartz-config",
+                description: "Read or update Quartz v5 site configuration"
+              }
+            ],
+            version: plugin.appVersion
+          })
+        );
+      }
+      return HELP_TEXT;
+    }
+  );
+}
+
+// src/cli/registerCliHandlers.ts
+var import_js_logger20 = __toESM(require_logger());
+function registerCliHandlers(plugin) {
+  const target = plugin;
+  if (typeof target.registerCliHandler !== "function") {
+    import_js_logger20.default.debug(
+      "Skipping CLI handler registration: registerCliHandler is unavailable."
+    );
+    return false;
+  }
+  const rawRegister = target.registerCliHandler.bind(target);
+  const register = (command, description, flags, handler2) => {
+    const expandedFlags = withDashAliases(flags);
+    rawRegister(command, description, expandedFlags, (params) => {
+      const normalized = normalizeCliParams(params);
+      if (normalized.help === "true" && command !== "quartz-syncer") {
+        const helpText = generateCommandHelp(
+          command,
+          description,
+          flags
+        );
+        if (normalized.format === "json") {
+          return formatCliOutput(normalized, {
+            ok: true,
+            command,
+            message: helpText
+          });
+        }
+        return helpText;
+      }
+      return handler2(normalized);
+    });
+  };
+  createHelpHandler(register, plugin);
+  createStatusHandler(register, plugin);
+  createSyncHandler(register, plugin);
+  createPublishHandler(register, plugin);
+  createDeleteHandler(register, plugin);
+  createMarkHandler(register, plugin);
+  createTestHandler(register, plugin);
+  createCacheHandler(register, plugin);
+  createConfigHandler(register, plugin);
+  createUpgradeHandler(register, plugin);
+  createVersionHandler(register, plugin);
+  createPluginHandler(register, plugin);
+  createQuartzConfigHandler(register, plugin);
+  import_js_logger20.default.info("CLI handlers registered successfully.");
+  return true;
+}
+
+// main.ts
 var DEFAULT_SETTINGS = {
   git: {
     remoteUrl: "",
@@ -60994,7 +74772,6 @@ var DEFAULT_SETTINGS = {
   githubToken: void 0,
   /** Quartz settings */
   contentFolder: "content",
-  useFullResolutionImages: false,
   /** Frontmatter settings */
   publishFrontmatterKey: "publish",
   allNotesPublishableByDefault: false,
@@ -61084,20 +74861,22 @@ var DEFAULT_SETTINGS = {
   lastUsedSettingsTab: "git",
   noteSettingsIsInitialized: false,
   pluginVersion: "",
+  lastUpstreamCommitSha: "",
+  upgradeCheckStrategy: "version",
   /** UI settings */
   diffViewStyle: "auto",
   /** Developer settings */
   ENABLE_DEVELOPER_TOOLS: false,
-  logLevel: import_js_logger10.default.OFF
+  logLevel: import_js_logger21.default.OFF
 };
-import_js_logger10.default.useDefaults({
-  defaultLevel: import_js_logger10.default.WARN,
+import_js_logger21.default.useDefaults({
+  defaultLevel: import_js_logger21.default.WARN,
   formatter: function(messages, _context) {
     messages.unshift((/* @__PURE__ */ new Date()).toUTCString());
     messages.unshift("QS: ");
   }
 });
-var QuartzSyncer = class extends import_obsidian26.Plugin {
+var QuartzSyncer = class extends import_obsidian32.Plugin {
   settings;
   appVersion;
   datastore;
@@ -61110,12 +74889,13 @@ var QuartzSyncer = class extends import_obsidian26.Plugin {
   async onload() {
     this.appVersion = this.manifest.version;
     await this.loadSettings();
-    if (this.settings.logLevel) import_js_logger10.default.setLevel(this.settings.logLevel);
-    import_js_logger10.default.info("Initializing QuartzSyncer plugin v" + this.appVersion);
-    import_js_logger10.default.info("Quartz Syncer log level set to " + import_js_logger10.default.getLevel().name);
+    if (this.settings.logLevel) import_js_logger21.default.setLevel(this.settings.logLevel);
+    import_js_logger21.default.info("Initializing QuartzSyncer plugin v" + this.appVersion);
+    import_js_logger21.default.info("Quartz Syncer log level set to " + import_js_logger21.default.getLevel().name);
     this.addSettingTab(new QuartzSyncerSettingTab(this.app, this));
     await this.addCommands();
-    (0, import_obsidian26.addIcon)("quartz-syncer-icon", quartzSyncerIcon);
+    registerCliHandlers(this);
+    (0, import_obsidian32.addIcon)("quartz-syncer-icon", quartzSyncerIcon);
     this.addRibbonIcon(
       "quartz-syncer-icon",
       "Quartz Syncer publication center",
@@ -61139,7 +74919,7 @@ var QuartzSyncer = class extends import_obsidian26.Plugin {
    * This method can be used to handle changes made to the settings outside of the plugin.
    */
   async onExternalSettingsChange() {
-    import_js_logger10.default.info("External settings change detected, reloading settings.");
+    import_js_logger21.default.info("External settings change detected, reloading settings.");
     await this.compareDataToCache();
   }
   /**
@@ -61181,7 +74961,7 @@ var QuartzSyncer = class extends import_obsidian26.Plugin {
     const hasLegacySettings = this.settings.githubRepo || this.settings.githubUserName || this.settings.githubToken;
     const hasNewSettings = this.settings.git?.remoteUrl;
     if (hasLegacySettings && !hasNewSettings) {
-      import_js_logger10.default.info(
+      import_js_logger21.default.info(
         "Migrating legacy GitHub settings to generic Git settings"
       );
       const githubRepo = this.settings.githubRepo || "quartz";
@@ -61223,8 +75003,8 @@ var QuartzSyncer = class extends import_obsidian26.Plugin {
    * These commands can be triggered from the command palette or ribbon icon.
    */
   async addCommands() {
-    if (this.settings["ENABLE_DEVELOPER_TOOLS"] && import_obsidian26.Platform.isDesktop) {
-      import_js_logger10.default.info("Developer tools enabled");
+    if (this.settings["ENABLE_DEVELOPER_TOOLS"] && import_obsidian32.Platform.isDesktop) {
+      import_js_logger21.default.info("Developer tools enabled");
       const publisher = new Publisher(
         this.app,
         this,
@@ -61245,7 +75025,7 @@ var QuartzSyncer = class extends import_obsidian26.Plugin {
           }
         });
       }).catch((e) => {
-        import_js_logger10.default.error("Unable to load generateSyncerSnapshot", e);
+        import_js_logger21.default.error("Unable to load generateSyncerSnapshot", e);
       });
     }
     this.addCommand({
@@ -61303,7 +75083,7 @@ var QuartzSyncer = class extends import_obsidian26.Plugin {
   getActiveFile(workspace) {
     const activeFile = workspace.getActiveFile();
     if (!activeFile) {
-      new import_obsidian26.Notice(
+      new import_obsidian32.Notice(
         "Quartz Syncer: No file is open/active. Please open a file and try again."
       );
       return null;
@@ -61328,13 +75108,13 @@ var QuartzSyncer = class extends import_obsidian26.Plugin {
         this.settings.cacheTimestamp,
         this
       );
-      import_js_logger10.default.info(`Cache cleared for file: ${activeFile.path}`);
-      new import_obsidian26.Notice(
+      import_js_logger21.default.info(`Cache cleared for file: ${activeFile.path}`);
+      new import_obsidian32.Notice(
         `Quartz Syncer: Cache cleared for file: ${activeFile.path}`
       );
     } else {
-      import_js_logger10.default.warn("Cache is disabled, no action taken.");
-      new import_obsidian26.Notice("Quartz Syncer: Cache is disabled, no action taken.");
+      import_js_logger21.default.warn("Cache is disabled, no action taken.");
+      new import_obsidian32.Notice("Quartz Syncer: Cache is disabled, no action taken.");
     }
   }
   /**
@@ -61351,8 +75131,8 @@ var QuartzSyncer = class extends import_obsidian26.Plugin {
         "Are you sure you want to clear the Quartz Syncer cache for all files? This action cannot be undone."
       );
       if (!confirmation) {
-        import_js_logger10.default.info("Cache clearing cancelled by user.");
-        new import_obsidian26.Notice("Quartz Syncer: Cache clearing cancelled.");
+        import_js_logger21.default.info("Cache clearing cancelled by user.");
+        new import_obsidian32.Notice("Quartz Syncer: Cache clearing cancelled.");
         return;
       }
       if (this.settings.useCache) {
@@ -61364,11 +75144,11 @@ var QuartzSyncer = class extends import_obsidian26.Plugin {
           this
         );
         await this.datastore.recreate();
-        import_js_logger10.default.info("Cache cleared for all files.");
-        new import_obsidian26.Notice("Quartz Syncer: Cache cleared for all files.");
+        import_js_logger21.default.info("Cache cleared for all files.");
+        new import_obsidian32.Notice("Quartz Syncer: Cache cleared for all files.");
       } else {
-        import_js_logger10.default.warn("Cache is disabled, no action taken.");
-        new import_obsidian26.Notice(
+        import_js_logger21.default.warn("Cache is disabled, no action taken.");
+        new import_obsidian32.Notice(
           "Quartz Syncer: Cache is disabled, no action taken."
         );
       }
@@ -61466,24 +75246,27 @@ var QuartzSyncer = class extends import_obsidian26.Plugin {
     if (!this.settings.useCache || !this.settings.syncCache) {
       return;
     }
-    let timestamp = await this.datastore.getLastUpdateTimestamp();
-    if (timestamp === null) {
-      timestamp = 0;
+    let timestamp2 = await this.datastore.getLastUpdateTimestamp();
+    if (timestamp2 === null) {
+      timestamp2 = 0;
     }
-    if (timestamp < this.settings.cacheTimestamp) {
-      await this.datastore.saveToDataJson(timestamp, this);
+    if (timestamp2 < this.settings.cacheTimestamp) {
+      await this.datastore.saveToDataJson(timestamp2, this);
     } else {
-      await this.datastore.loadFromDataJson(timestamp, this);
+      await this.datastore.loadFromDataJson(timestamp2, this);
     }
   }
 };
 /*! Bundled license information:
 
-buffer-es6/index.js:
+ieee754/index.js:
+  (*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> *)
+
+buffer/index.js:
   (*!
    * The buffer module from node.js, for the browser.
    *
-   * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+   * @author   Feross Aboukhadijeh <https://feross.org>
    * @license  MIT
    *)
 
