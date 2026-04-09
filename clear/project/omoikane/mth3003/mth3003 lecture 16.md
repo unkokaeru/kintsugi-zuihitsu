@@ -1,0 +1,16 @@
+# MTH3003 Lecture 16
+
+> [!quote] …
+> …
+
+…
+
+## …
+
+…
+
+---
+
+## Pre-Lecture Notes from [[mth3003 lecture notes 16.pdf|University Notes]]
+
+- …
