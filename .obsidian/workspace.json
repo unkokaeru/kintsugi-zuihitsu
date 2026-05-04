@@ -8,20 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "3ab194dcb86201f9",
+            "id": "fc7d9a3b8186fcb9",
             "type": "leaf",
             "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "clear/project/omoikane/mth3008/mth3008.md",
+                "file": "To-Do List.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": false
               },
               "pinned": true,
               "icon": "lucide-file",
-              "title": "mth3008"
+              "title": "To-Do List"
             }
           }
         ]
@@ -148,7 +148,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -157,7 +157,6 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "janitor:Janitor: scan vault": false,
       "bases:Create new base": false,
       "command-palette:Open command palette": false,
       "workspaces:Manage workspace layouts": false,
@@ -175,10 +174,11 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "3ab194dcb86201f9",
+  "active": "fc7d9a3b8186fcb9",
   "lastOpenFiles": [
-    "clear/project/omoikane/mth3008/mth3008 lecture 18.md",
+    "attached/files/yata-flow.png",
     "clear/project/omoikane/mth3008/mth3008.md",
+    "clear/project/omoikane/mth3008/mth3008 lecture 18.md",
     "clear/project/omoikane/mth3008/mth3008 lecture 17.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 16.md",
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 15.md",
@@ -204,7 +204,6 @@
     "clear/project/omoikane/mth3008/lectures/mth3008 lecture 1.md",
     "attached/files/mth3008 lecture notes 12.pdf",
     "attached/files/mth3008 lecture notes 18.pdf",
-    "clear/project/omoikane/mth3008/mth3008 weekly problems 9.md",
     "attached/files/mth3003 lecture notes 15.pdf",
     "attached/files/mth3003 lecture notes 16.pdf",
     "attached/files/mth3003 weekly problem sheet 7 solutions.pdf",

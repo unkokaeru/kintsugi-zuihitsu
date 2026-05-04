@@ -8,6 +8,7 @@
 	- **Codebase review**: methodically go through everything, eliminating inconsistencies.
 	- **Platform testing**: Record the [[help videos]] for each feature of the platform.
 	- **Statistics**: checked shared stats spreadsheet for what should be actively collected.
+	- `contractor (different perms therapist) - remove travel, separate allocations weighting config` & [[yata-flow.png]]
 - Chill out and play some **Factorio**, hehe.
 - Do some **[[Omoikane]]** work - below.
 
