@@ -23,7 +23,6 @@
 	- Complete **final year project**.
 	- **Review and complete work**: [[MTH3011]] (two weeks) -> [[MTH3007B]] (three weeks) -> [[MTH3008]] (five weeks) -> [[MTH3003]] (six weeks); then work through all questions manually and refine notes/cheat sheet.
 - **Personal**
-	- Send bill to One Utility Bill (in my photos).
 	- Weekly shop.
 	- Take out trash.
 	- Do washing.
