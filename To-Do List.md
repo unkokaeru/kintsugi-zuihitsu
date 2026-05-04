@@ -4,13 +4,37 @@
 > Remember to draw back on literature more when writing within academia! - practice this?
 
 - Continuously work on **[[yatagarasu]]** work:
-	- **Spreadsheet integration**: set scope; push data in and map to existing platform structure.
+	- Send **Zoom links** for training.
+	- **Claude**:
+		- Enquiry -> Client creates work order but no client in client list; bill payers/contacts also not created/linked.
+		- Notifications go to notification centre but do not get emailed, even if email notifications are on (check email service is actually complete).
+		- Dashboard reloads/animates the widgets after every interaction on the page, even when not needed.
+		- Work order edit modal missing data: customer type blank; authorisation fields arbitrary; schedule unpopulated; concerns/areas of focus unpopulated; additional requirements currently free text that should be structured.
+		- Confirm client information "Confirm & Continue" button does nothing.
+		- Test data generation failing with no corresponding Sentry entries.
+		- System health widget constantly says API Down (confirm whether the four stats are real/fully developed).
+		- Fix current errors in Sentry.
+		- **Create contractor role**: Duplicate therapist role -> contractor role (no travel & separate allocations weighting config).
+	- **Training material**: cover everything, test next week with directors; define scope and create with Claude Design; after training, decide phases of individuals depending on technical literacy observed in sessions; record [[help videos]]. Heads up about slow rollout going live after - therapists -> admin, too.
+	- **Spreadsheet integration**: set scope; push data in and map to existing platform structure. Some parts need email notifications to line manager / `infoapp@`, like work order amendments for cancellations, frequency, location, therapy break, or discharge changes. After full integration, push back tidied spreadsheets.
 	- ==**Cliniko integration**: push data in and map to existing platform structure.==
-	- **Training material**: cover everything, test next week with directors; define scope and create with Claude Design; after training, decide phases of individuals depending on technical literacy observed in sessions; record [[help videos]].
-	- **Finish platform tweaks**: checked shared stats spreadsheet for what should be actively collected for statistics; duplicate therapist role -> contractor role (no travel & separate allocations weighting config).
 	- **Tidy and complete notes** within Obsidian, around the platform.
 - Do some **[[Omoikane]]** work - below.
+	- Complete **final year project**.
 	- **Review and complete work**: [[MTH3011]] (two weeks) -> [[MTH3007B]] (three weeks) -> [[MTH3008]] (five weeks) -> [[MTH3003]] (six weeks); then work through all questions manually and refine notes/cheat sheet.
+- **Personal**
+	- Send bill to One Utility Bill (in my photos).
+	- Weekly shop.
+	- Take out trash.
+	- Do washing.
+	- Complete my [routine app](https://github.com/unkokaeru/routine-app), then send to my brother.
+- **Shopping**
+	- Toilet spray.
+	- Linen spray.
+	- Room spray.
+	- Baking soda.
+	- Office furniture - sofa bed, desk, bookshelves.
+	- Maicey clothes.
 
 ```todo-wheel
 ```
