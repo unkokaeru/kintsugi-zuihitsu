@@ -6,7 +6,6 @@
 - Continuously work on **[[yatagarasu]]** work:
 	- Send **Zoom links** for training.
 	- **Claude**:
-		- Enquiry -> Client creates work order but no client in client list.
 		- Notifications go to notification centre but do not get emailed, even if email notifications are on (check email service is actually complete).
 		- Dashboard reloads/animates the widgets after every interaction on the page, even when not needed.
 		- Work order edit modal missing data: customer type blank; authorisation fields arbitrary; schedule unpopulated; concerns/areas of focus unpopulated; additional requirements currently free text that should be structured.
