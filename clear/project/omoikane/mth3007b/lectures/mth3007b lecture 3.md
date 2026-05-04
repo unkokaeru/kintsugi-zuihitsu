@@ -2,7 +2,7 @@
 
 > [!quote] Me, in the lecture
 >
-> zzzzz…
+> zzzzz...
 
 Again, this session began with recap. Then, we generalised the Runge-Kutta methods!
 
@@ -10,7 +10,7 @@ Again, this session began with recap. Then, we generalised the Runge-Kutta metho
 
 As stated before, any explicit Runge-Kutta method can be written in the form $y_{i+1} \approx y_i + \Delta t \cdot \phi(t_i, y_i, \Delta t)$, where $\phi$ is the **increment function**.
 
-For the second order, the increment function generalises to…
+For the second order, the increment function generalises to...
 
 $$
 \phi(y_i, t_i, \Delta t) = a_1 k_1(t_i, y_i) + a_2 k_2(t_i, y_i, \Delta t):k_1 = g(t_i, y_i), k_2 = g(t_i + p_1\Delta t,\; y_i + q_{11}\Delta t \cdot k_1)
@@ -44,7 +44,7 @@ This matters because many physically motivated ODEs are themselves reversible in
 
 > [!warning] All explicit Runge-Kutta methods are **not** symmetric, and therefore all suffer from long-time drift.
 
-An example of this is the **[[Implicit Trapezoid Method]]**, for $\dot{y}(t) = g(t, y(t))$, then…
+An example of this is the **[[Implicit Trapezoid Method]]**, for $\dot{y}(t) = g(t, y(t))$, then...
 
 $$
 y_{i+1} \approx y_i + \frac{\Delta t}{2}\!\left(g(t_i, y_i) + g(t_{i+1}, y_{i+1})\right)
@@ -80,6 +80,6 @@ These two are **not the same equation** - the backward step evaluates $g$ at $t_
 
 ---
 
-## Pre-Lecture Notes from [[mth3007b lecture notes 3.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3007b lecture notes 3.pdf]]
 
 - *No priming done or rough notes during - hopefully next week!*

@@ -1,13 +1,13 @@
 # MTH3003 Weekly Problems 2
 
-> **Original Documents**: [[mth3003 weekly problem sheet 2.pdf|Problem Sheet]] / [[Weekly Problems 2.pdf|Handwritten Solutions]] / [[mth3003 weekly problem sheet 2 solutions.pdf|Provided Solutions]]
+> **Original Documents**: [[mth3003 weekly problem sheet 2.pdf]] / [[mth3003 weekly problem sheet 2 solutions.pdf]]
 >
 > **Vibes**: Weird, but easy - just feels too easy and a lot of my initial solutions didn't feel very formal.
 >
 > **Used Techniques**:
->   - Basic definitions/properties of groups.
->   - [[Permutation]] definition and the [[Product of Permutations]].
->   - Definition of a [[cyclic group]].
+>  - Basic definitions/properties of groups.
+>  - [[Permutation]] definition and the [[Product of Permutations]].
+>  - Definition of a [[cyclic group]].
 
 ---
 
@@ -77,7 +77,7 @@ So $|\langle g\rangle|\le n$, hence $|\langle g\rangle|=n=o(g)$. $\boxed{}$
 ## 2.5. Find Elements of a Cyclic Group of Permutations
 
 > [!question]
-> Let $g\in S_{10}$ be the permutation $g=(1\\\)(2\)$. Write down all the elements in…
+> Let $g\in S_{10}$ be the permutation $g=(1\\\)(2\)$. Write down all the elements in...
 >
 > 1. $\langle g \rangle$.
 > 2. $\langle g^2 \rangle$

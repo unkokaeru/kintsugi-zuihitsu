@@ -1,13 +1,13 @@
 # MTH3003 Weekly Problems 1
 
-> **Original Documents**: [[mth3003 weekly problem sheet 1.pdf|Problem Sheet]] / [[mth3003 weekly problem sheet 1 handwritten solutions.pdf|My Handwritten Solutions]] / [[mth3003 weekly problem sheet 1 solutions.pdf|Provided Solutions]]
+> **Original Documents**: [[mth3003 weekly problem sheet 1.pdf]] / [[mth3003 weekly problem sheet 1 handwritten solutions.pdf]] / [[mth3003 weekly problem sheet 1 solutions.pdf]]
 >
 > **Vibes**: Super easy, just using the same techniques over and over again - the orders of permutations bits was really cool, though.
 >
 > **Used Techniques**:
->   - [[Product of Permutations]].
->   - [[Permutation#Quick Inverse Proposition]], directly and to solve equations.
->   - Orders of Permutations.
+>  - [[Product of Permutations]].
+>  - [[Permutation#Quick Inverse Proposition]], directly and to solve equations.
+>  - Orders of Permutations.
 
 ---
 
@@ -22,7 +22,7 @@
 >
 > Then do the opposite, writing this permutation out in full: $(1\,7\,2\,11\,9)(4\,10\,5)(3\,8\,6)\in S_{12}$.
 
-Calculating directly…
+Calculating directly...
 
 1. $\boxed{(1\,4)(2\,7\,5)\in S_{7}}$.
 2. $\boxed{(1\,3)(2\,5)\in S_{5}}$.
@@ -33,7 +33,7 @@ Calculating directly…
 ## 1.2. Calculating Inverse Permutations
 
 > [!question]
-> Let $g=(1\,4\,2\,7\,8)$, $h=(1\,4\,5)$, and $k=(5\,7\,9)(1\,3\,2)$. Write the following as a product of disjoint cycles…
+> Let $g=(1\,4\,2\,7\,8)$, $h=(1\,4\,5)$, and $k=(5\,7\,9)(1\,3\,2)$. Write the following as a product of disjoint cycles...
 >
 > 1. $k^{-1}$, *checked by calculating $kk^{-1}$*
 > 2. $ghk$,
@@ -48,7 +48,7 @@ Calculating directly…
 ## 1.3. Orders of Permutations
 
 > [!question]
-> The **order of a permutation** $\sigma$ is written as $o(\sigma)$, and is defined to be the smallest natural number $n\ge1$ such that $\sigma^n=e$, e.g., $o((1\,2\,3))=3$ and $o(e)=1$. Hence…
+> The **order of a permutation** $\sigma$ is written as $o(\sigma)$, and is defined to be the smallest natural number $n\ge1$ such that $\sigma^n=e$, e.g., $o((1\,2\,3))=3$ and $o(e)=1$. Hence...
 >
 > 1. What is the order of the permutation $(1\,2\,3\,4\,5)$?
 > 2. What is the order of the permutation $(1\,5\,7)(2\,3\,6)$?

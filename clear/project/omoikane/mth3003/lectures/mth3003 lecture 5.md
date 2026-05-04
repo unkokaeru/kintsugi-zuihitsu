@@ -1,6 +1,6 @@
 # MTH3003 Lecture 5
 
-Following on from permutations and subgroups, we can look at some groups that arise from geometry. Specifically, we can look at the symmetries of regular $n$-gons, which form an important class of groups known as **[[dihedral group|dihedral groups]]**.
+Following on from permutations and subgroups, we can look at some groups that arise from geometry. Specifically, we can look at the symmetries of regular $n$-gons, which form an important class of groups known as **[[dihedral group]]**.
 
 ## Symmetries of a Square
 
@@ -29,7 +29,7 @@ We can prove this is a group by applying the Quick Subgroup Test: the identity $
 
 ---
 
-## Pre-Lecture Notes from [[mth3003 lecture notes 5.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3003 lecture notes 5.pdf]]
 
 - Groups arising from geometry - looking at the symmetries of regular $n$-gons.
 - The dihedral group of order 8 (symmetries of a square), mapped to permutations in $S_4$.

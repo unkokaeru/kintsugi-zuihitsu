@@ -1,14 +1,14 @@
 # MTH3003 Weekly Problems 5
 
-> **Original Documents**: [[mth3003 weekly problem sheet 5.pdf|Problem Sheet]] / `[[mth3003 weekly problem sheet 5 handwritten solutions.pdf|My Handwritten Solutions]]` / [[mth3003 weekly problem sheet 5 solutions.pdf|Provided Solutions]]
+> **Original Documents**: [[mth3003 weekly problem sheet 5.pdf]] / [[mth3003 weekly problem sheet 5 handwritten solutions.pdf]] / [[mth3003 weekly problem sheet 5 solutions.pdf]]
 >
 > **Vibes**: More conceptual than Weeks 3 and 4, but the arguments are short once you lean on the definitions and the standard homomorphism propositions (identity, powers, kernel).
 >
 > **Used Techniques**:
->   - [[homomorphism]] definition: $\theta(g_1g_2)=\theta(g_1)\theta(g_2)$.
->   - Standard consequences: $\theta(e_G)=e_H$ and $\theta(g^m)=(\theta(g))^m$.
->   - Kernel method: show $g^{-1}kg\in\ker(\theta)$ for all $g\in G$, $k\in\ker(\theta)$.
->   - [[isomorphism]] definition: a bijective homomorphism.
+>  - [[homomorphism]] definition: $\theta(g_1g_2)=\theta(g_1)\theta(g_2)$.
+>  - Standard consequences: $\theta(e_G)=e_H$ and $\theta(g^m)=(\theta(g))^m$.
+>  - Kernel method: show $g^{-1}kg\in\ker(\theta)$ for all $g\in G$, $k\in\ker(\theta)$.
+>  - [[isomorphism]] definition: a bijective homomorphism.
 
 ***
 

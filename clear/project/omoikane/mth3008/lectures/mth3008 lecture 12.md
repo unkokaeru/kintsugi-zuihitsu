@@ -1,16 +1,16 @@
 # MTH3008 Lecture 12
 
 > [!quote]
-> …
+> ...
 
 Lecture 11 introduced tensors in generalised coordinate systems - covariant and contravariant components of first-rank tensors, and the basics of the metric tensor $g_{ik}$ and $g^{ik}$ for raising and lowering indices. This lecture continues Chapter 5, covering associated tensors, the metric tensor as a genuine second-rank tensor, and higher-order tensors in generalised coordinates.
 
 ## Covariant, Contravariant and Mixed Components of a Second-Rank Tensor
 
-In 3D generalised coordinates, a **[[second-rank tensor]]** has nine components. These come in four flavours:
+In 3D generalised coordinates, a **[[rank]]** has nine components. These come in four flavours:
 
-- **[[covariant components]]** $A_{ik}$ (both indices down),
-- **[[contravariant components]]** $A^{ik}$ (both indices up),
+- **[[Covariant and Contravariant Components]]** $A_{ik}$ (both indices down),
+- **[[Covariant and Contravariant Components]]** $A^{ik}$ (both indices up),
 - **[[mixed components]]** $A^{\cdot k}_{i}$ (first covariant, second contravariant),
 - mixed components $A^{i}_{\cdot k}$ (first contravariant, second covariant).
 
@@ -68,8 +68,8 @@ Every contraction with $g_{ik}$ lowers an index; every contraction with $g^{ik}$
 
 Symmetry and antisymmetry apply only to pairs of indices in the same position:
 
-- $A^{\cdot\cdot\ell}_{ik}$ is **[[symmetric]]** in $i$ and $k$ if $A^{\cdot\cdot\ell}_{ik} = A^{\cdot\cdot\ell}_{ki}$.
-- $B^{ik}_{\cdot\cdot\ell}$ is **[[antisymmetric]]** in $i$ and $k$ if $B^{ik}_{\cdot\cdot\ell} = -B^{ki}_{\cdot\cdot\ell}$.
+- $A^{\cdot\cdot\ell}_{ik}$ is **[[Symmetry and Antisymmetry]]** in $i$ and $k$ if $A^{\cdot\cdot\ell}_{ik} = A^{\cdot\cdot\ell}_{ki}$.
+- $B^{ik}_{\cdot\cdot\ell}$ is **[[Symmetry and Antisymmetry]]** in $i$ and $k$ if $B^{ik}_{\cdot\cdot\ell} = -B^{ki}_{\cdot\cdot\ell}$.
 
 You cannot compare symmetry between an upper and a lower index - the concept only makes sense for indices at the same level.
 
@@ -193,18 +193,18 @@ Both match the required forms. The **[[metric tensor]]** is a single second-rank
 
 ## Higher-Order Tensors in Generalised Coordinates
 
-In a generalised coordinate system (3D), a **[[tensor of rank n]]** has $3^n$ components. But unlike Cartesian tensors, these components come in multiple varieties - covariant, contravariant, and mixed - depending on the position of each index.
+In a generalised coordinate system (3D), a **[[rank]]** has $3^n$ components. But unlike Cartesian tensors, these components come in multiple varieties - covariant, contravariant, and mixed - depending on the position of each index.
 
 > [!example] Third-rank tensor
 > A third-rank tensor has $3^3 = 27$ components. Its mixed components $A^{\cdot\cdot\ell}_{ik}$, $A^{i\cdot\ell}_{\cdot k}$, etc. transform as:
 > $\displaystyle A'^{\cdot\cdot\ell}_{ik} = L^{m}_{i'}\, L^{n}_{k'}\, L^{\ell'}_{r}\, A^{\cdot\cdot r}_{mn}$
 > $\displaystyle A'^{i\cdot\ell}_{\cdot k} = L^{i'}_{m}\, L^{n}_{k'}\, L^{\ell'}_{r}\, A^{m\cdot r}_{\cdot n}$
 
-Here $A^{\cdot\cdot\ell}_{ik}$ is a **[[mixed tensor]]** with two covariant indices ($i$, $k$) and one contravariant index ($\ell$). The rule generalises directly: each index transforms with $L^{\ell}_{i'}$ if covariant, $L^{i'}_{\ell}$ if contravariant.
+Here $A^{\cdot\cdot\ell}_{ik}$ is a **[[Mixed Components]]** with two covariant indices ($i$, $k$) and one contravariant index ($\ell$). The rule generalises directly: each index transforms with $L^{\ell}_{i'}$ if covariant, $L^{i'}_{\ell}$ if contravariant.
 
 ---
 
-## Pre-Lecture Notes from [[mth3008 lecture notes 12.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3008 lecture notes 12.pdf]]
 
 - A second-rank tensor in 3D has nine components in four types: covariant $A_{ik}$, contravariant $A^{ik}$, and two mixed $A^{\cdot k}_{i}$, $A^{i}_{\cdot k}$ - dot notation tracks index order
 - Transformation laws: covariant indices contract with $L^{\ell}_{i'}$, contravariant with $L^{i'}_{\ell}$

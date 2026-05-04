@@ -1,14 +1,14 @@
 # MTH3003 Weekly Problems 3
 
-> **Original Documents**: [[mth3003 weekly problem sheet 3.pdf|Problem Sheet]] / `[[mth3003 weekly problem sheet 3 handwritten solutions.pdf|My Handwritten Solutions]]` / [[mth3003 weekly problem sheet 3 solutions.pdf|Provided Solutions]]
+> **Original Documents**: [[mth3003 weekly problem sheet 3.pdf]] / [[mth3003 weekly problem sheet 3 handwritten solutions.pdf]] / [[mth3003 weekly problem sheet 3 solutions.pdf]]
 >
 > **Vibes**: Medium difficulty, ramp up from Week 1 permutations - now geometric intuition for [[dihedral group]], cycle computations on shapes, first proofs using orders/inverses. Drawing diagrams essential for $D_{10}$/shapes.
 >
 > **Used Techniques**:
->   - [[Product of Permutations]] for equations, verifying forms like $\sigma\rho^i$.
->   - [[Permutation#Quick Inverse Proposition]] implicitly via $o(\sigma)=2$.
->   - Cycle notation for symmetries (rotations/reflections in $D_{2n}$).
->   - Relation $\rho\sigma=\sigma\rho^{-1}$ (L5 – Dihedral groups).
+>  - [[Product of Permutations]] for equations, verifying forms like $\sigma\rho^i$.
+>  - [[Permutation#Quick Inverse Proposition]] implicitly via $o(\sigma)=2$.
+>  - Cycle notation for symmetries (rotations/reflections in $D_{2n}$).
+>  - Relation $\rho\sigma=\sigma\rho^{-1}$ (L5 - Dihedral groups).
 
 ***
 

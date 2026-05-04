@@ -47,7 +47,7 @@ Identity: $\nabla \times (\nabla \times u) = \nabla(\nabla \cdot u) - \nabla^2 u
 
 ---
 
-## 1. Transformation Law — Tensor Character & Rank
+## 1. Transformation Law - Tensor Character & Rank
 
 **Goal**: Prove $Q$ is a scalar, vector, or rank-$n$ tensor under coordinate rotation.
 
@@ -75,7 +75,7 @@ Identity: $\nabla \times (\nabla \times u) = \nabla(\nabla \cdot u) - \nabla^2 u
 
 ---
 
-## 2. Suffix Notation — Simplification & Proofs
+## 2. Suffix Notation - Simplification & Proofs
 
 ### 2a. Simplifying $\delta$ and $\epsilon$ Expressions
 
@@ -87,14 +87,14 @@ Identity: $\nabla \times (\nabla \times u) = \nabla(\nabla \cdot u) - \nabla^2 u
 - **Product of two $\epsilon$s**:
 	1. Identify the shared dummy index (e.g., $k$).
 	2. Cyclically permute to move the shared index to the 3rd position of both $\epsilon$s (Rule 3 in §0).
-	3. Apply the $\delta$–$\epsilon$ identity (Rule 4 in §0).
+	3. Apply the $\delta$-$\epsilon$ identity (Rule 4 in §0).
 	4. Expand brackets and collapse $\delta$s ($\delta_{ab}c_b = c_a$, $\delta_{aa} = 3$).
 - **Standard deductions**:
 	- $\epsilon_{ijk}\epsilon_{ilm} = \delta_{jl}\delta_{km} - \delta_{jm}\delta_{kl}$
 	- $\epsilon_{ijk}\epsilon_{ijm} = 2\delta_{km}$
 	- $\epsilon_{ijk}\epsilon_{ijk} = 6$
 
-### 2b. Suffix Algebra Proofs ("Show that…")
+### 2b. Suffix Algebra Proofs ("Show that...")
 
 **Goal**: Prove vector/matrix identities (e.g., $(AB)^T = B^TA^T$, $a \times b = -b \times a$) or symmetry properties.
 

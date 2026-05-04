@@ -5,7 +5,7 @@
 
 A **[[Permutation]]** of a set $X$ is simply a **[[bijection]]** from $X$ to $X$ - a **rearrangement of itself**.
 
-Interestingly, we can use these to describe all groups, and hence all of group theory, but not without some simplified notation…
+Interestingly, we can use these to describe all groups, and hence all of group theory, but not without some simplified notation...
 
 ## Permutation Notation
 
@@ -34,7 +34,7 @@ $$
 \end{matrix}
 $$
 
-Into the following three [[disjoint cycle]]s…
+Into the following three [[disjoint cycle]]s...
 
 ```tikz
 \begin{document}
@@ -104,7 +104,7 @@ Normally, we do this process mentally, too, so it looks a lot like just writing 
 
 ---
 
-## Rough-Lecture Notes from [[mth3003 lecture notes 1.pdf|University Notes]]
+## Rough-Lecture Notes from [[mth3003 lecture notes 1.pdf]]
 
 *Didn't have access to lecture notes beforehand, so did rough notes during instead of pre-lecture notes - enjoy the yapping!*
 

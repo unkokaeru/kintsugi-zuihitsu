@@ -1,6 +1,6 @@
 # Kronecker Delta
 
-> [!tip] Relevant parts to questions…
+> [!tip] Relevant parts to questions...
 > - Using $\delta_{ij}a_{j}=a_{i}$.
 > - Using $\delta_{ij}\delta_{jk}=\delta_{ik}$.
 > - Using $\delta_{ii}=3$, if in three-dimensions (convention).
@@ -11,7 +11,7 @@ $$
 \delta_{ij}=\begin{bmatrix}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{bmatrix}
 $$
 
-The **Kronecker delta** hence has properties like its **continuous** equivalent, the **[[Dirac delta-function]]**::It replaces the repeated index with the free index, $\delta_{ij}a_{j}=a_{i}$, or symmetrically (using relabelling/reordering), $\delta_{ji}a_{i}=a_{j}$. Note that this can apply to other deltas, too.
+The **Kronecker delta** hence has properties like its **continuous** equivalent, the **Dirac delta-function**::It replaces the repeated index with the free index, $\delta_{ij}a_{j}=a_{i}$, or symmetrically (using relabelling/reordering), $\delta_{ji}a_{i}=a_{j}$. Note that this can apply to other deltas, too.
 
 This hence allows us to define the dot product as $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}=a_{i}(\delta_{ij}b_{j})=\delta_{ij}a_{i}b_{j}$, and vice versa.
 

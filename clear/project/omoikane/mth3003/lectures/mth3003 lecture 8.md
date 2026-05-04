@@ -1,6 +1,6 @@
 # MTH3003 Lecture 8
 
-Following on from [[mth3003 lecture 7|last lecture]], we can use our knowledge of Lagrange's theorem to prove a few more things about finite groups, and then apply it to the dihedral groups we looked at previously.
+Following on from [[mth3003 lecture 7]], we can use our knowledge of Lagrange's theorem to prove a few more things about finite groups, and then apply it to the dihedral groups we looked at previously.
 
 ## Consequences of Lagrange's Theorem
 
@@ -57,7 +57,7 @@ Using the rule $\rho\sigma = \sigma\rho^{-1}$, along with $\rho^n = e$ and $\sig
 
 ***
 
-## Pre-Lecture Notes from [[mth3003 lecture notes 8.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3003 lecture notes 8.pdf]]
 
 - Corollaries of Lagrange's Theorem: $[G:H] = |G|/|H|$ and $o(g)$ divides $|G|$.
 - Warning that the converse of Lagrange's Theorem is false (Alternating Group of degree 4 is a counterexample).

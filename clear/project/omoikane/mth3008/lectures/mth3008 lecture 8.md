@@ -91,20 +91,20 @@ Where $(i, j, k)$ is a cyclic permutation of $(1, 2, 3)$.
 
 ---
 
-## Pre-Lecture Notes from [[mth3008 lecture notes 8.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3008 lecture notes 8.pdf]]
 
 - Recap of dual bases and covariant/contravariant components from the previous lecture.
 - **Transformation rule** between two coordinate systems with bases $e_i$ and $e'_i$:
-  - Expansion coefficients defined as $L^j_{i'} = e'_i \cdot e^j$, with inverse $L^{j'}_i = e_i \cdot e'^j$.
-  - Covariant components transform as $A'_i = L^j_{i'} A_j$.
-  - Contravariant components transform as $A'^i = L^{i'}_j A^j$.
-  - Inverse formulas: $A_i = L^{j'}_i A'_j$ and $A^i = L^i_{j'} A'^j$.
+ - Expansion coefficients defined as $L^j_{i'} = e'_i \cdot e^j$, with inverse $L^{j'}_i = e_i \cdot e'^j$.
+ - Covariant components transform as $A'_i = L^j_{i'} A_j$.
+ - Contravariant components transform as $A'^i = L^{i'}_j A^j$.
+ - Inverse formulas: $A_i = L^{j'}_i A'_j$ and $A^i = L^i_{j'} A'^j$.
 - **Metric tensors** relate covariant and contravariant components within a system:
-  - $g_{ik} = e_i \cdot e_k$ (original basis), $g^{ik} = e^i \cdot e^k$ (dual basis), $g^{\phantom{i}k}_i = \delta^k_i$ (cross term).
-  - $A_i = g_{ik} A^k$ lowers an index; $A^i = g^{ik} A_k$ raises one.
+ - $g_{ik} = e_i \cdot e_k$ (original basis), $g^{ik} = e^i \cdot e^k$ (dual basis), $g^{\phantom{i}k}_i = \delta^k_i$ (cross term).
+ - $A_i = g_{ik} A^k$ lowers an index; $A^i = g^{ik} A_k$ raises one.
 - Applications - expressing standard operations in generalised coordinates:
-  - Dot product: $A \cdot B = A^i B_i = A_i B^i = g_{ik} A^i B^k$.
-  - Angle: $\cos(A, B) = A^i B_i / (\sqrt{A^i A_i}\sqrt{B^i B_i})$.
-  - Cross product: $C^i = (A^j B^k - A^k B^j) V$, for $(i, j, k)$ a cyclic permutation of $(1, 2, 3)$.
+ - Dot product: $A \cdot B = A^i B_i = A_i B^i = g_{ik} A^i B^k$.
+ - Angle: $\cos(A, B) = A^i B_i / (\sqrt{A^i A_i}\sqrt{B^i B_i})$.
+ - Cross product: $C^i = (A^j B^k - A^k B^j) V$, for $(i, j, k)$ a cyclic permutation of $(1, 2, 3)$.
 - In an orthonormal system, $g_{ik} = \delta_{ik}$, and covariant and contravariant components coincide.
 - Next lecture will cover arc length and the metric tensor.

@@ -7,8 +7,8 @@ title: "{{folderName}} overview"
 showTitle: true
 depth: 2
 includeTypes:
-  - folder
-  - markdown
+ - folder
+ - markdown
 style: list
 disableFileTag: false
 sortBy: name

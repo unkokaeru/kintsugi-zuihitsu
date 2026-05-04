@@ -3,7 +3,7 @@
 > [!quote] A.J. Rushworth
 > *Labubuuuuuuuuu*
 
-Using the content of the previous lecture, namely [[Suffix Notation]] and the [[Kronecker Delta]], we can explore the dot product and cross product. First, the dot product…
+Using the content of the previous lecture, namely [[Suffix Notation]] and the [[Kronecker Delta]], we can explore the dot product and cross product. First, the dot product...
 
 > [!warning] Vector vs Suffix notation
 > It should always be specified what is being worked in, as the difference in notation can lead to completely different answers. For example, in vector notation we specify all values at once, so $\delta_{ij}=1$, but in suffix notation we evaluate sums, so $\delta_{ij}=3$.
@@ -19,10 +19,10 @@ As mentioned, we can use vector notation to simplify expressions in suffix notat
 > [!example] In-Lecture Example (simplifying Kronecker delta expressions)
 > To simplify $\delta_{\ell \ell}\delta_{mn}\delta_{pp}\delta_{nq}$, we first rearrange due to its commutativity to get $\delta_{\ell \ell}\delta_{mn}\delta_{nq}\delta_{pp}=\delta_{\ell \ell}\delta_{mq}\delta_{pp}$ and then directly evaluate over three dimensions to get $9\delta_{mq}$
 
-> [!example] [[mth3008 weekly problems 1#1.6. Simplify Kronecker Delta Expression and Rewrite in Vector Form|Weekly Problem 1.6]] (simplifying to vector notation)
+> [!example] [[mth3008 weekly problems 1#1.6. Simplify Kronecker Delta Expression and Rewrite in Vector Form]] (simplifying to vector notation)
 > To simplify $\delta_{ij}a_{j}b_{\ell}c_{k}\delta_{i \ell}$, we rearrange using commutativity to get $\delta_{ij}a_{j}\delta_{i \ell}b_{\ell}c_{k}=a_{i}b_{i}c_{k}=(\mathbf{a}\cdot \mathbf{b})\mathbf{c}$.
 
-This hence allows us to define the **dot product** as $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}=a_{i}(\delta_{ij}b_{j})=\delta_{ij}a_{i}b_{j}$, and vice versa. Next, the cross product…
+This hence allows us to define the **dot product** as $\mathbf{a}\cdot \mathbf{b}=a_{i}b_{i}=a_{i}(\delta_{ij}b_{j})=\delta_{ij}a_{i}b_{j}$, and vice versa. Next, the cross product...
 
 ## The Alternating Tensor
 
@@ -41,19 +41,19 @@ We can then use these properties to simplify calculations, such as $\epsilon_{ij
 
 We can use this definition of the **Alternating Tensor** to define the **cross product of two vectors**, the **determinant of $3\times3$ matrices**, and the **scalar triple product**.
 
-We get these by substituting in the alternating tensor to allow for the $+/-$ patterns in each operation…
+We get these by substituting in the alternating tensor to allow for the $+/-$ patterns in each operation...
 
 1. $(\mathbf{a}\times \mathbf{b})_{i}=\epsilon_{ijk}a_{j}b_{k}$,
 2. $\epsilon_{pqr}|M|=\epsilon_{ijk}M_{pi}M_{qj}M_{rk}$,
 3. $\mathbf{a}\cdot(\mathbf{b}\times \mathbf{c})=\epsilon_{ijk}a_{i}b_{j}c_{k}$.
 
-These are then very useful for speeding up proofs, for instance showing that $\mathbf{a}\times \mathbf{b}=-\mathbf{b}\times \mathbf{a}$, proven in this week's problems ([[mth3008 weekly problems 1#1.8. Prove Antisymmetry of the Cross Product Using Suffix Notation|Weekly Problem 1.8]]).
+These are then very useful for speeding up proofs, for instance showing that $\mathbf{a}\times \mathbf{b}=-\mathbf{b}\times \mathbf{a}$, proven in this week's problems ([[mth3008 weekly problems 1#1.8. Prove Antisymmetry of the Cross Product Using Suffix Notation]]).
 
 ---
 
-## Pre-Lecture Notes from [[mth3008 lecture 2 notes.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3008 lecture 2 notes.pdf]]
 
-- First, recapped the [[mth3008 lecture 1|last lecture]]:
+- First, recapped the [[mth3008 lecture 1]]:
 	- Assume all vectors are three dimensional.
 	- [[Suffix Notation]] (definition, nomenclature, conversion steps, and examples).
 	- [[Kronecker Delta]] (definition and key property)
@@ -79,4 +79,4 @@ These are then very useful for speeding up proofs, for instance showing that $\m
 		- This is importantly related to the formula $\epsilon_{pqr}|M|=\epsilon_{ijk}M_{pi}M_{qj}M_{rk}$.
 	- The scalar triple product: $\mathbf{a}\cdot(\mathbf{b}\times \mathbf{c})$.
 		- Re-writing the product in suffix notation, $(\mathbf{b}\times \mathbf{c})_{i}=\epsilon_{ijk}b_{j}c_{k}$, we can simplify it to instead be $\epsilon_{ijk}a_{i}b_{j}c_{k}$, which could also be used to prove properties of the scalar triple product (using $\epsilon_{ijk}=\epsilon_{kij}$).
-- All then practised in [[mth3008 weekly problems 1|this week's problems]].
+- All then practised in [[mth3008 weekly problems 1]].

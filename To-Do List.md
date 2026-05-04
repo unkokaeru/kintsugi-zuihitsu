@@ -1,16 +1,16 @@
 # To-Do List
 
-> [[Organising my Life]]
+> [[Organising my Life]]: make areas of my life more distinct (personal, academic, work, financial)
 > Remember to draw back on literature more when writing within academia! - practice this?
 
-- Continuously work on **[[yatagarasu]]** work (incl. [[notes from meetings]]):
-	- **Work orders**: check coverage/functionality, match shared document and implement [[reasons to cancel work orders]].
-	- **Codebase review**: methodically go through everything, eliminating inconsistencies.
-	- **Platform testing**: Record the [[help videos]] for each feature of the platform.
-	- **Statistics**: checked shared stats spreadsheet for what should be actively collected.
-	- `contractor (different perms therapist) - remove travel, separate allocations weighting config` & [[yata-flow.png]]
-- Chill out and play some **Factorio**, hehe.
+- Continuously work on **[[yatagarasu]]** work:
+	- **Spreadsheet integration**: set scope; push data in and map to existing platform structure.
+	- ==**Cliniko integration**: push data in and map to existing platform structure.==
+	- **Training material**: cover everything, test next week with directors; define scope and create with Claude Design; after training, decide phases of individuals depending on technical literacy observed in sessions; record [[help videos]].
+	- **Finish platform tweaks**: checked shared stats spreadsheet for what should be actively collected for statistics; duplicate therapist role -> contractor role (no travel & separate allocations weighting config).
+	- **Tidy and complete notes** within Obsidian, around the platform.
 - Do some **[[Omoikane]]** work - below.
+	- **Review and complete work**: [[MTH3011]] (two weeks) -> [[MTH3007B]] (three weeks) -> [[MTH3008]] (five weeks) -> [[MTH3003]] (six weeks); then work through all questions manually and refine notes/cheat sheet.
 
 ```todo-wheel
 ```

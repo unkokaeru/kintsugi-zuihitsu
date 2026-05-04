@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "formal-toy"
+version = "0.1.0"
+description = "Minimal propositional-logic proof assistant for the MTH3011 project."
+requires-python = ">=3.11"
+authors = [{ name = "William Fayers" }]
+dependencies = ["lark>=1.1"]
+
+[project.optional-dependencies]
+dev = ["mypy>=1.8", "pytest>=7.4"]
+
+[project.scripts]
+formal-toy = "formal_toy.repl:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+formal_toy = ["py.typed"]
+
+[tool.mypy]
+strict = true
+python_version = "3.11"
+packages = ["formal_toy"]
+mypy_path = "src"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

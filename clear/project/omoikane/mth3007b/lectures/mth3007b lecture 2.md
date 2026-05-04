@@ -2,11 +2,11 @@
 
 > [!quote] Me, in the lecture
 >
-> zzzzz…
+> zzzzz...
 
 The beginning of this lecture started with a lot of recap of the last lecture and basic programming; like using integers for countable numbers and floats for non-countable numbers. Then, we quickly covered round-off errors - exactly what you'd assume, errors that occur due to rounding.
 
-After finishing that off, we dived into actual numerical methods: higher order integration methods…
+After finishing that off, we dived into actual numerical methods: higher order integration methods...
 
 ## Runge-Kutta Methods
 
@@ -38,7 +38,7 @@ $$
 
 ---
 
-## Pre-Lecture Notes from [[mth3007b lecture notes 2.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3007b lecture notes 2.pdf]]
 
 - Recalling Euler method and applications.
 - Discussing function value types: integers, floats, etc.

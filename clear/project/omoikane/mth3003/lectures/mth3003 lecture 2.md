@@ -3,7 +3,7 @@
 > [!quote] Simon Smith
 > I accidentally finished
 
-As discussed briefly in the [[mth3003 lecture 1|last lecture]], the set of all permutations of a set is a [[Group]], albeit not an Abelian (commutative) one, unless disjoint. To show these, we need to understand what the inverse of a cycle is…
+As discussed briefly in the [[mth3003 lecture 1]], the set of all permutations of a set is a [[Group]], albeit not an Abelian (commutative) one, unless disjoint. To show these, we need to understand what the inverse of a cycle is...
 
 ## Quick Inverse Proposition
 
@@ -16,7 +16,7 @@ This can be proven directly.
 
 ## Groups
 
-If we want to prove that the set $\text{Sym}(X)$ is a group, then we must recall the definition of a group…
+If we want to prove that the set $\text{Sym}(X)$ is a group, then we must recall the definition of a group...
 
 A **[[Group]]** is a set $G$ together with an operation $*$ on $G$ such that each of the following holds:
 
@@ -41,7 +41,7 @@ Given that a group $G$ follows these axioms for all $g\in G$, then that also giv
 
 ---
 
-## Rough-Lecture Notes from [[mth3003 lecture notes 2.pdf|University Notes]]
+## Rough-Lecture Notes from [[mth3003 lecture notes 2.pdf]]
 
 *Didn't have access to lecture notes beforehand, so did rough notes during instead of pre-lecture notes - enjoy the yapping!*
 

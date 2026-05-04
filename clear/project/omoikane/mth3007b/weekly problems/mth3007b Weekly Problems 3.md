@@ -3,8 +3,8 @@
 > **Vibes**: Super chill, just implement a single new method.
 >
 > **Used Techniques**:
->   - Finding the order of a numerical method
->   - Solving an ODE with the implicit trapezoid method
+>  - Finding the order of a numerical method
+>  - Solving an ODE with the implicit trapezoid method
 
 ---
 
@@ -33,7 +33,7 @@ Second-order, by definition.
 >
 > Then, find $z(t_{\text{max}})$ for the $\Delta t=0.001$.
 
-First, do our imports…
+First, do our imports...
 
 ```python
 import micropip
@@ -44,7 +44,7 @@ import numpy as np
 import numpy.typing as npt
 ```
 
-Then we can implement a new implicit trapezoid method function…
+Then we can implement a new implicit trapezoid method function...
 
 ```python runnable
 def implicit_trapezoid_method(
@@ -107,7 +107,7 @@ def implicit_trapezoid_method(
     return time_values, solution_values
 ```
 
-Which can then be run with the correct parameters…
+Which can then be run with the correct parameters...
 
 ```python runnable
 # Problem parameters

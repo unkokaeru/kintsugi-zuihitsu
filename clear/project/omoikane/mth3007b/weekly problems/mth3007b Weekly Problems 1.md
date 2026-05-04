@@ -1,6 +1,6 @@
 # MTH3007b Weekly Problems 1
 
-> **Original Documents**: [[mth3007b weekly problem sheet 1.pdf|Problem Sheet]] / [GitHub Solutions](https://github.com/unkokaeru/mth3007/blob/main/semester%20b/sessions/session%201%20-%20introduction/solutions.py)
+> **Original Documents**: [[mth3007b weekly problem sheet 1.pdf]] / [GitHub Solutions](https://github.com/unkokaeru/mth3007/blob/main/semester%20b/sessions/session%201%20-%20introduction/solutions.py)
 >
 > **Vibes**: Just quick definitions then the two methods outlined in the lecture - pretty simple!
 >
@@ -55,7 +55,7 @@ import numpy as np
 import numpy.typing as npt
 ```
 
-Then we can write our ODE as a Python function, just to make things a bit neater…
+Then we can write our ODE as a Python function, just to make things a bit neater...
 
 ```python runnable
 def general_derivative_function(
@@ -68,7 +68,7 @@ def general_derivative_function(
     return coefficient_b * time - coefficient_a * solution_value
 ```
 
-Then actually implement the Explicit Euler method…
+Then actually implement the Explicit Euler method...
 
 ```python runnable
 def explicit_euler_method(
@@ -107,7 +107,7 @@ def explicit_euler_method(
     return time_values, solution_values
 ```
 
-Then we can specify each of the variables for our specific ODE…
+Then we can specify each of the variables for our specific ODE...
 
 ```python runnable
 coefficient_a = 22.0
@@ -144,9 +144,9 @@ Resulting in two very different answers: approximately 0.043 and 6.2, respective
 ## 1.4. Formula Implementation (Implicit Euler Method)
 
 > [!question]
-> Implement the implicit Euler method in Python to solve the ODE from the [[#1.3. Formula Implementation (Explicit Euler Method)|previous question]].
+> Implement the implicit Euler method in Python to solve the ODE from the [[#1.3. Formula Implementation (Explicit Euler Method)]].
 
-Using the same cached code from the previous question, we can jump straight into the new method function…
+Using the same cached code from the previous question, we can jump straight into the new method function...
 
 ```python runnable
 def implicit_euler_method(
@@ -191,18 +191,18 @@ def implicit_euler_method(
         for _ in range(max_iterations):
             residual = (
                 next_value_guess
-                - previous_value
-                - time_step * derivative_function(current_time, next_value_guess)
+               - previous_value
+               - time_step * derivative_function(current_time, next_value_guess)
             )
             perturbation = 1e-8 * max(abs(next_value_guess), 1.0)
             derivative_approx = (
                 1.0
-                - time_step
+               - time_step
                 * (
                     derivative_function(
                         current_time, next_value_guess + perturbation
                     )
-                    - derivative_function(current_time, next_value_guess)
+                   - derivative_function(current_time, next_value_guess)
                 )
                 / perturbation
             )
@@ -216,7 +216,7 @@ def implicit_euler_method(
     return time_values, solution_values
 ```
 
-Which is quite a bit more mathematical than the last, given the implicit relation. This time, we can jump straight to the two solutions…
+Which is quite a bit more mathematical than the last, given the implicit relation. This time, we can jump straight to the two solutions...
 
 ```python runnable
 _, small_implicit_solution_values = implicit_euler_method(
@@ -238,13 +238,13 @@ Resulting in two very similar answers, rounding to 0.43.
 ## 1.5. Error Calculation Against Analytical Solution
 
 > [!question]
-> For the [[#1.3. Formula Implementation (Explicit Euler Method)|same ODE]] from the previous two questions, compare the errors between the implicit and explicit Euler methods and plot each solution against time, along with the analytical solution:
+> For the [[#1.3. Formula Implementation (Explicit Euler Method)]] from the previous two questions, compare the errors between the implicit and explicit Euler methods and plot each solution against time, along with the analytical solution:
 >
 > $$
 > y(t)=e^{-at}\left( y_{0}+ \frac{b}{a^2} \right)+ \frac{bt}{a}- \frac{b}{a^2}
 > $$
 
-We can now develop a function to find the analytical solution, directly from the question…
+We can now develop a function to find the analytical solution, directly from the question...
 
 ```python runnable
 def analytical_solution(
@@ -340,7 +340,7 @@ We can now compute the errors for all methods:
 ) = compute_error(big_implicit_solution_values, big_analytical_values)
 ```
 
-Let's now display the error stats…
+Let's now display the error stats...
 
 ```python runnable
 print("=" * 70)
@@ -443,7 +443,7 @@ def plot_errors(
 Finally, we can now generate the plots:
 
 ```python runnable
-print("\nGenerating solution comparison plots…")
+print("\nGenerating solution comparison plots...")
 plot_solutions(
     small_time_values,
     small_explicit_solution_values,
@@ -455,7 +455,7 @@ plot_solutions(
     big_analytical_values,
 )
 
-print("Generating error comparison plots…")
+print("Generating error comparison plots...")
 plot_errors(
     small_time_values,
     small_error_explicit,
@@ -468,4 +468,4 @@ plot_errors(
 print("=" * 70)
 ```
 
-These plots clearly demonstrate how the **implicit Euler method is more stable** with larger timesteps, while the **explicit Euler method becomes inaccurate** with the coarser discretization ($\Delta t = 0.1$). The implicit method's superior stability is crucial for stiff ODEs like this one.
+These plots show how the **implicit Euler method stays stable** with larger timesteps, while the **explicit Euler method becomes inaccurate** with the coarser discretisation ($\Delta t = 0.1$). The implicit method's stability is what makes it usable on stiff ODEs like this one.

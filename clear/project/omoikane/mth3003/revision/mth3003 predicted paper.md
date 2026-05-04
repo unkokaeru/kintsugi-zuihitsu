@@ -1,10 +1,10 @@
-# **MTH3003** Group Theory — Practice Exam
+# **MTH3003** Group Theory - Practice Exam
 
-> **Instructions**: Answer ALL questions. Show all working. This exam covers the material from Weeks 1–7 of the module.
+> **Instructions**: Answer ALL questions. Show all working. This exam covers the material from Weeks 1-7 of the module.
 
 ---
 
-## Question 1 — Permutation Computation [Sections 1a–1d]
+## Question 1 - Permutation Computation [Sections 1a-1d]
 
 Let $g = (1\ 6\ 3\ 8)(2\ 5\ 7)$ and $h = (1\ 4\ 2)(3\ 7\ 5\ 6)$ be elements of $S_9$.
 
@@ -20,7 +20,7 @@ Let $g = (1\ 6\ 3\ 8)(2\ 5\ 7)$ and $h = (1\ 4\ 2)(3\ 7\ 5\ 6)$ be elements of $
 
 ---
 
-## Question 2 — Solving a Permutation Equation [Section 1e]
+## Question 2 - Solving a Permutation Equation [Section 1e]
 
 Find $\sigma \in S_8$ satisfying
 
@@ -32,7 +32,7 @@ Verify your answer by substituting back. [6 marks]
 
 ---
 
-## Question 3 — Subgroups and Cyclic Groups [Sections 2a, 2c, 2d]
+## Question 3 - Subgroups and Cyclic Groups [Sections 2a, 2c, 2d]
 
 **(a)** Let $G$ be a group with subgroups $H \leq G$ and $K \leq G$. Prove that $H \cap K \leq G$. [4 marks]
 
@@ -42,7 +42,7 @@ Verify your answer by substituting back. [6 marks]
 
 ---
 
-## Question 4 — Dihedral Groups [Section 4]
+## Question 4 - Dihedral Groups [Section 4]
 
 Consider the dihedral group $D_{12}$ (symmetries of a regular hexagon), with vertices labelled $1, 2, 3, 4, 5, 6$ anticlockwise. Let $\rho$ denote anticlockwise rotation by $\pi/3$ and $\sigma$ the reflection through the axis passing through vertex 1.
 
@@ -56,7 +56,7 @@ Consider the dihedral group $D_{12}$ (symmetries of a regular hexagon), with ver
 
 ---
 
-## Question 5 — Normal Subgroups and Lagrange's Theorem [Sections 2b, 3]
+## Question 5 - Normal Subgroups and Lagrange's Theorem [Sections 2b, 3]
 
 **(a)** State Lagrange's Theorem. [2 marks]
 
@@ -68,7 +68,7 @@ Consider the dihedral group $D_{12}$ (symmetries of a regular hexagon), with ver
 
 ---
 
-## Question 6 — Homomorphisms and Isomorphisms [Section 5]
+## Question 6 - Homomorphisms and Isomorphisms [Section 5]
 
 **(a)** Define what it means for a map $\theta: G \to H$ to be a group homomorphism. [1 mark]
 
@@ -83,7 +83,7 @@ Consider the dihedral group $D_{12}$ (symmetries of a regular hexagon), with ver
 
 ---
 
-## Question 7 — Isomorphism Theorems and Quotient Groups [Sections 6, 10]
+## Question 7 - Isomorphism Theorems and Quotient Groups [Sections 6, 10]
 
 Let $\det: \text{GL}_2(\mathbb{R}) \to \mathbb{R}^*$ denote the determinant map, which is a surjective homomorphism.
 
@@ -103,7 +103,7 @@ Hence identify $\text{GL}_2(\mathbb{R})/P$ as a familiar group. [4 marks]
 
 ---
 
-## Question 8 — The Alternating Group and Signature Function [Section 7]
+## Question 8 - The Alternating Group and Signature Function [Section 7]
 
 **(a)** Let $g = (1\ 4\ 6\ 2\ 8)(3\ 9\ 7)(5\ 10)$ and $h = (1\ 3)(2\ 5)(4\ 6)(7\ 8)(9\ 10)$ be elements of $S_{10}$.
 

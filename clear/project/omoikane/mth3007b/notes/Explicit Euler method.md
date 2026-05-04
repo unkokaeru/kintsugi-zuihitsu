@@ -1,6 +1,6 @@
 # Explicit Euler Method
 
-Using the **[[Finite Differences|Finite Difference Method]]**, we can solve Ordinary Differential Equations (ODEs). For example with the Euler method, where we first replace the derivatives with finite differences.
+Using the **[[Finite Differences]]**, we can solve Ordinary Differential Equations (ODEs). For example with the Euler method, where we first replace the derivatives with finite differences.
 
 For an **initial value problem**, the ODE can be written as:
 

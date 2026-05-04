@@ -49,5 +49,6 @@
   "obsidian-tikzjax",
   "todo-wheel",
   "typewriter-mode",
-  "obsidian-wakatime"
+  "obsidian-wakatime",
+  "marp-slides"
 ]

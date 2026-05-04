@@ -1,6 +1,6 @@
 # MTH3008 Weekly Problems 1
 
-> **Original Documents**: [[mth3008 weekly problem sheet 1.pdf|Problem Sheet]] / [[Week One Problem Solutions.pdf|My Handwritten Solutions]]
+> **Original Documents**: [[mth3008 weekly problem sheet 1.pdf]]
 >
 > **Vibes**: Fairly low difficulty, just learning how to use new algebraic methods and using new formulae; occasionally deriving them from simple summation properties and hard-to-remember matrix properties.
 >
@@ -351,7 +351,7 @@ $$
 
 ---
 
-## 1.9. Convert Dot–Cross Vector Equation to Suffix Notation
+## 1.9. Convert Dot-Cross Vector Equation to Suffix Notation
 
 > [!question]
 > Write the vector equation

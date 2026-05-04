@@ -24,7 +24,7 @@ $\mathbf{e}_i' = L_{i1}\mathbf{e}_1 + L_{i2}\mathbf{e}_2 + L_{i3}\mathbf{e}_3$
 
 Just like in 2D, the 3D transformation matrix $L$ is orthogonal, meaning $L^T L = I = LL^T$, or in [[Suffix Notation]]: $L_{ij}L_{kj} = \delta_{ik} = L_{ji}L_{jk}$.
 
-Crucially, using $x_i' = L_{ik}x_k$, we can derive partial derivatives relating the two coordinate systems:
+Using $x_i' = L_{ik}x_k$, we can derive partial derivatives relating the two coordinate systems:
 
 $\frac{\partial x_i'}{\partial x_j} = \sum_{k=1}^3 \frac{\partial (L_{ik}x_k)}{\partial x_j} = \sum_{k=1}^3 \left( \frac{\partial L_{ik}}{\partial x_j}x_k + L_{ik}\frac{\partial x_k}{\partial x_j} \right) = \sum_{k=1}^3 L_{ik}\delta_{kj} = L_{ij}$
 
@@ -62,7 +62,7 @@ $\boxed{v_i' = L_{ij}v_j}$
 
 ---
 
-## Pre-Lecture Notes from [[mth3008 lecture notes 6.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3008 lecture notes 6.pdf]]
 
 - Recap of coordinate systems: definitions of orthogonal and orthonormal bases, and generalised coordinate systems.
 - Recap of Cartesian coordinate systems in 2D and the rotation matrix $L_{ij}$.

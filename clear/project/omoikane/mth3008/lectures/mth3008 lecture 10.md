@@ -1,7 +1,7 @@
 # MTH3008 Lecture 10
 
 > [!quote] Paula Lins
-> …
+> ...
 
 This lecture continues Chapter 4, building directly on last time's introduction of the rotation-based transformation law. We now consolidate what it means for a quantity to *be* a tensor, establish the **quotient rule** as a shortcut for proving tensor character, and introduce the **symmetric/antisymmetric decomposition** - a canonical way to split any second-rank tensor.
 
@@ -159,7 +159,7 @@ Repeating for $i=2$ and $i=3$ gives $T_{12} = T_{21}$ and $T_{13} = T_{31}$, so 
 
 ***
 
-## Pre-Lecture Notes from [[mth3008 lecture notes 10.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3008 lecture notes 10.pdf]]
 
 - **Tensor definition**: a quantity is a tensor if each free index transforms with one factor of the rotation matrix $L_{ij}$; rank = number of free indices; $3^r$ components in 3D
 - **Kronecker delta**: $L_{ik}L_{jm}\delta_{km} = L_{ik}L_{jk} = \delta_{ij}$ - same in all frames, so it's a rank-2 tensor ✓

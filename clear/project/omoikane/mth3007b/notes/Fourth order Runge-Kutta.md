@@ -1,6 +1,6 @@
 # Fourth Order Runge-Kutta
 
-The most common Runge-Kutta order…
+The most common Runge-Kutta order...
 
 $$
 y_{i+1} \approx y_i + \frac{\Delta t}{6}(k_1 + 2k_2 + 2k_3 + k_4):\begin{cases}

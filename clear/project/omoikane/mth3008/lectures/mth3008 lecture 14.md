@@ -1,7 +1,7 @@
 # MTH3008 Lecture 14
 
 > [!quote]
-> …
+> ...
 
 Lecture 13 began Chapter 6 (Tensor Algebra) with addition of tensors - we proved that the sum of tensors with the same rank and structure is again a tensor, and showed that sums of tensors with different structures fail to transform correctly. This lecture picks up the remaining two topics from Chapter 6: the outer product of tensors and contraction of tensors.
 
@@ -9,7 +9,7 @@ Lecture 13 began Chapter 6 (Tensor Algebra) with addition of tensors - we proved
 
 ### Definition and Basic Case
 
-The **[[outer product]]** (also called the **[[tensor product]]**) combines two tensors by multiplying their components index-by-index to produce a new tensor of higher rank.
+The **[[Outer Product]]** (also called the **[[Outer Product]]**) combines two tensors by multiplying their components index-by-index to produce a new tensor of higher rank.
 
 Consider two second-rank covariant tensors with components $A_{ik}$ and $B_{\ell m}$. Their outer product is defined as
 
@@ -79,7 +79,7 @@ Tensors of different ranks cannot be added, but they can be multiplied. The rank
 
 ### Non-Commutativity
 
-The outer product is **[[non-commutative]]**: in general, $A_{ik} B_{\ell m} \neq B_{ik} A_{\ell m}$, because the index positions matter.
+The outer product is **non-commutative**: in general, $A_{ik} B_{\ell m} \neq B_{ik} A_{\ell m}$, because the index positions matter.
 
 > [!example]
 > Take $A_{ik} = \begin{pmatrix} 0 & 1 & 2 \\ 1 & 0 & 0 \\ 1 & 3 & 4 \end{pmatrix}$ and $B_{\ell m} = \begin{pmatrix} 1 & 1 & 7 \\ 6 & 7 & 4 \\ 1 & 6 & 3 \end{pmatrix}$. Then $A_{12}B_{32} = 1 \cdot 6 = 6$, but $B_{12}A_{32} = 1 \cdot 3 = 3$.
@@ -98,7 +98,7 @@ $$
 \mathbf{v}_1 \otimes \mathbf{v}_2 = \begin{pmatrix} 2 \\ 0 \end{pmatrix} \otimes \begin{pmatrix} 1 & 7 \end{pmatrix} = \begin{pmatrix} 2 \cdot 1 & 2 \cdot 7 \\ 0 \cdot 1 & 0 \cdot 7 \end{pmatrix} = \begin{pmatrix} 2 & 14 \\ 0 & 0 \end{pmatrix}.
 $$
 
-For two $2 \times 2$ matrices, the outer product is the $4 \times 4$ block structure known as the **[[Kronecker product]]**:
+For two $2 \times 2$ matrices, the outer product is the $4 \times 4$ block structure known as the **[[Outer Product]]**:
 
 $$
 \mathbf{B} \otimes \mathbf{A} = \begin{pmatrix} b_{11} & b_{12} \\ b_{21} & b_{22} \end{pmatrix} \otimes \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix} = \begin{pmatrix} b_{11}a_{11} & b_{11}a_{12} & b_{12}a_{11} & b_{12}a_{12} \\ b_{11}a_{21} & b_{11}a_{22} & b_{12}a_{21} & b_{12}a_{22} \\ b_{21}a_{11} & b_{21}a_{12} & b_{22}a_{11} & b_{22}a_{12} \\ b_{21}a_{21} & b_{21}a_{22} & b_{22}a_{21} & b_{22}a_{22} \end{pmatrix}.
@@ -168,7 +168,7 @@ Since each contraction drops the rank by two, we can contract repeatedly (provid
 
 ### The Inner Product
 
-The **[[inner product]]** of two tensors is formed by taking their outer product and then contracting over one or more pairs of indices. Equivalently, it is the result of "contracting two tensors together."
+The **[[Contraction]]** of two tensors is formed by taking their outer product and then contracting over one or more pairs of indices. Equivalently, it is the result of "contracting two tensors together."
 
 > [!example]
 > The following are inner products:
@@ -205,7 +205,7 @@ The same rule applies to inner products: we can only sum over indices in differe
 
 ---
 
-## Pre-Lecture Notes from [[mth3008 lecture notes 14.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3008 lecture notes 14.pdf]]
 
 - **Outer product** (tensor product, $\otimes$): multiply components index-by-index; $C_{ik\ell m} = A_{ik}B_{\ell m}$ is rank four from two rank-two factors. Proved via transformation laws - each factor contributes its own $L$ matrices.
 - Works across **different structures** (covariant $\times$ mixed, etc.) and **different ranks**; the resulting rank is always the sum of factor ranks and the structure is the concatenation.

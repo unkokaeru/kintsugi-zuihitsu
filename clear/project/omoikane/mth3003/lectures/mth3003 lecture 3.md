@@ -30,7 +30,7 @@ A **[[cyclic group]]** is defined by a group $G$ with operation $*$. We say that
 
 ---
 
-## Pre-Lecture Notes from [[mth3003 lecture notes 3.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3003 lecture notes 3.pdf]]
 
 - Subgroups - bunch of definitions and theorems.
 - Cyclic groups - bunch of definitions and theorems.

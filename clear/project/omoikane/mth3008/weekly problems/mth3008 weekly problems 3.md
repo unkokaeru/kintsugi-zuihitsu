@@ -1,15 +1,15 @@
 # MTH3008 Weekly Problems 3
 
-> **Original Documents**: [[mth3008 weekly problem sheet 3.pdf|Problem Sheet]] / [[mth3008 weekly problem sheet 3 solutions.pdf|Provided Solutions]]
+> **Original Documents**: [[mth3008 weekly problem sheet 3.pdf]] / [[mth3008 weekly problem sheet 3 solutions.pdf]]
 >
 > **Vibes**: Builds directly on suffix notation for operators and coordinate transformation rules; proofs are mostly mechanical index substitution; medium difficulty, since recalling everything can be tricky.
 >
 > **Used Techniques**:
->   - Vector transformation law: $V'^i = L^i_j V^j$, where $L^i_j = \partial x'^i / \partial x^j$.
->   - Chain rule: $\partial / \partial x'^i = L^j_i \, \partial / \partial x^j$.
->   - Orthogonality: $L^i_j L^i_k = \delta_{jk}$.
->   - $\epsilon^{ijk}$ vanishes on any symmetric pair of indices.
->   - Mixed partials commute; $\nabla \cdot (\nabla \times v) = 0$; $\nabla^2 u = \nabla(\nabla \cdot u) - \nabla \times (\nabla \times u)$.
+>  - Vector transformation law: $V'^i = L^i_j V^j$, where $L^i_j = \partial x'^i / \partial x^j$.
+>  - Chain rule: $\partial / \partial x'^i = L^j_i \, \partial / \partial x^j$.
+>  - Orthogonality: $L^i_j L^i_k = \delta_{jk}$.
+>  - $\epsilon^{ijk}$ vanishes on any symmetric pair of indices.
+>  - Mixed partials commute; $\nabla \cdot (\nabla \times v) = 0$; $\nabla^2 u = \nabla(\nabla \cdot u) - \nabla \times (\nabla \times u)$.
 
 ***
 

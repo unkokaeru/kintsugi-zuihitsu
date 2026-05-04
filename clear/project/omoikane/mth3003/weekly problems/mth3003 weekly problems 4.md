@@ -1,14 +1,14 @@
 # MTH3003 Weekly Problems 4
 
-> **Original Documents**: [[mth3003 weekly problem sheet 4.pdf|Problem Sheet]] / `[[mth3003 weekly problem sheet 4 handwritten solutions.pdf|My Handwritten Solutions]]` / [[mth3003 weekly problem sheet 4 solutions.pdf|Provided Solutions]]
+> **Original Documents**: [[mth3003 weekly problem sheet 4.pdf]] / [[mth3003 weekly problem sheet 4 handwritten solutions.pdf]] / [[mth3003 weekly problem sheet 4 solutions.pdf]]
 >
 > **Vibes**: Pretty mechanical, meh.
 >
 > **Used Techniques**:
->   - Quick Subgroup Test (identity, closure, inverses).
->   - Lagrange's Theorem (order divisors; corollaries).
->   - Order Switching Lemma ($h^{-1}nh\in N$ for $n\in N$).
->   - Normality check: $g^{-1}Hg\leq H$ for all $g$.
+>  - Quick Subgroup Test (identity, closure, inverses).
+>  - Lagrange's Theorem (order divisors; corollaries).
+>  - Order Switching Lemma ($h^{-1}nh\in N$ for $n\in N$).
+>  - Normality check: $g^{-1}Hg\leq H$ for all $g$.
 
 ***
 
@@ -88,9 +88,9 @@ $NH\subseteq HN$: fix $kh\in NH$; $\exists k''\in N$ s.t. $kh=hk''$, so $kh\in H
 > Show that the cyclic subgroup $C_3$ is a normal subgroup of $S_3$.
 >
 > *Hint:* Write out all the elements of $S_3$ and of $C_3$, then consider:
-> – the product of a $2$-cycle with a $3$-cycle,
-> – the product of two $2$-cycles,
-> – the product of two $3$-cycles,
+> - the product of a $2$-cycle with a $3$-cycle,
+> - the product of two $2$-cycles,
+> - the product of two $3$-cycles,
 > and use this to prove normality.
 
 $S_3=\{e,(123),(132),(12),(13),(23)\}$, $C_3=\{e,(123),(132)\}$.

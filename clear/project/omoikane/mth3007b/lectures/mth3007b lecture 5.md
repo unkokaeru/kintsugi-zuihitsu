@@ -42,7 +42,7 @@ $$
 > [!important] Initial Value Problem
 > To solve this ODE, we need an initial condition. Since the integral from $a$ to $a$ represents an area of zero, our initial condition is naturally $\displaystyle F(a) = 0$.
 
-Once formulated this way, we can use any of our standard numerical methods - such as the **[[explicit Euler method]]**, **[[Implicit Trapezoid Method]]**, or **[[Runge-Kutta Methods|RK4]]** - to find the value of the integral by marching forward in $z$.
+Once formulated this way, we can use any of our standard numerical methods - such as the **[[explicit Euler method]]**, **[[Implicit Trapezoid Method]]**, or **[[Runge-Kutta Methods]]** - to find the value of the integral by marching forward in $z$.
 
 ---
 
@@ -144,7 +144,7 @@ def solve_second_order_ode_euler(
 
 ---
 
-## Pre-Lecture Notes from [[mth3007b lecture notes 5.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3007b lecture notes 5.pdf]]
 
 - **Stability Analysis**: Review of how $y(t + \Delta t) = (1 - a\Delta t)y(t)$ limits explicit Euler $\Delta t$ choices compared to the stable implicit approach.
 - **Integral as an ODE**: Converting $F(z) = \int_a^z f(x) \, dx$ into the initial value problem $dF/dz = f(z)$ with $F(a) = 0$.

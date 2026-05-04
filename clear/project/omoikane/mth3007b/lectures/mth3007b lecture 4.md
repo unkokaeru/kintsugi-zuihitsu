@@ -1,7 +1,7 @@
 # MTH3007B Lecture 4
 
 > [!quote] Me, in the lecture
-> zzzzz…
+> zzzzz...
 
 As usual, this session opened with feedback and recap - specifically clarifying a subtle distinction between Heun's method (explicit trapezoid - predicts next value) and the implicit trapezoid (uses exact next value), and working through a concrete implicit Euler derivation. Then, the main content: stability and convergence of both ODEs and their numerical methods, followed by generalising everything to systems of ODEs.
 
@@ -134,7 +134,7 @@ The scalar and vector forms are **identical in structure** - meaning the entire 
 
 ---
 
-## Pre-Lecture Notes from [[mth3007b lecture notes 4.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3007b lecture notes 4.pdf]]
 
 - Stability of ODEs and numerical methods.
 - Convergence, consistency, and the Lax Equivalence Theorem.

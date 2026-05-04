@@ -1,6 +1,6 @@
 # MTH3008 Weekly Problems 5
 
-> **Original Documents**: [[mth3008 weekly problem sheet 5.pdf|Problem Sheet]] / [[mth3008 weekly problem sheet 5 solutions.pdf|Provided Solutions]]
+> **Original Documents**: [[mth3008 weekly problem sheet 5.pdf]] / [[mth3008 weekly problem sheet 5 solutions.pdf]]
 >
 > **Vibes**: Index-gymnastics + "differentiate the position vector" to get bases/metrics, then use orthogonality to simplify everything.
 >

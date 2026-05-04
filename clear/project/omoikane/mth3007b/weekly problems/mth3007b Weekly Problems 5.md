@@ -1,9 +1,9 @@
 # MTH3007B Weekly Problems 5
 
-> **Vibes**: …
+> **Vibes**: ...
 >
 > **Used Techniques**:
->   - …
+>  - ...
 
 ***
 
@@ -19,7 +19,7 @@
 > 
 > *Hint: Choose $y_{1}(t) = y(t)$ and $y_{2}(t) = y'(t)$ to form the system.*
 
-… *full solution below*
+... *full solution below*
 
 ***
 
@@ -27,14 +27,14 @@
 
 > [!question]
 > Consider again the initial value problem $\frac{d^{2}y(t)}{dt^{2}} + 6 y(t) = 0$, $y(0) = 2$, $y'(0) = -3$, written as a first-order system as in Question 5.1.
-> 1. Implement the classical fourth-order Runge–Kutta (RK4) method with step size $h = 0.1$ for this first-order system on the interval $0 \le t \le 5$.
+> 1. Implement the classical fourth-order Runge-Kutta (RK4) method with step size $h = 0.1$ for this first-order system on the interval $0 \le t \le 5$.
 > 2. Using your implementation, compute the numerical approximation of $y(5)$.
 > 3. On a single plot, display the RK4 approximation, the forward Euler approximation from Question 5.1, and the exact solution $y(t) = -\frac{\sqrt{6}}{2}\sin(\sqrt{6}\,t) + 2\cos(\sqrt{6}\,t)$ over $0 \le t \le 5$.
 > 4. Compare the error at $t = 5$ for the forward Euler and RK4 methods, and discuss how the order of the methods is reflected in your numerical results and plots.
 > 
 > *Hint: Reuse your system formulation and only change the time-stepping method.*
 
-… *full solution below*
+... *full solution below*
 
 ```python runnable
 """Solutions for Session 5 - Higher Order ODEs."""

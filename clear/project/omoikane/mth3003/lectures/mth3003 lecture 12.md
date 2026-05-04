@@ -49,7 +49,7 @@ At this stage, the definition is conceptually nice but computationally horrible:
 
 ## Signature as a Homomorphism
 
-A crucial structural property is that the signature function respects the group operation.
+A central structural property is that the signature function respects the group operation.
 
 > [!important]
 > **Proposition.** The set $\{1,-1\}$ forms a group under multiplication, and the function $\sigma \colon S_n \to \{1,-1\}$ is a group homomorphism.
@@ -161,7 +161,7 @@ These become very useful when recognising elements of the alternating group late
 
 ---
 
-## Pre-Lecture Notes from [[Mth3003 Lecture Notes 12.pdf|University Notes]]
+## Pre-Lecture Notes from [[Mth3003 Lecture Notes 12.pdf]]
 
 - Action of $S_n$ on variables $x_1, \dots, x_n$ by $g x_k = x_{gk}$, setting up the polynomial viewpoint.
 - Definition of the Vandermonde-like polynomial $\Delta = \prod_{i<j} (x_i - x_j)$ and observation that any $g \in S_n$ sends $\Delta$ to either $\Delta$ or $-\Delta$.

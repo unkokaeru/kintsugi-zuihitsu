@@ -1,13 +1,13 @@
 # MTH3008 Lecture 16
 
 > [!quote]
-> …
+> ...
 
 Last time we began Chapter 7 on tensor fields, setting up vector fields, local bases, and the machinery of covariant differentiation - deriving the differential of a vector in Cartesian, fixed general, and local basis coordinate systems. This lecture picks up where we left off, introducing Christoffel symbols to package the geometry of the local basis, then deriving their connection to the metric tensor and extending covariant differentiation to tensors of arbitrary rank.
 
 ## Covariant Derivatives - Recap
 
-Recall from Lecture 15 that the **[[covariant derivative]]** of the covariant and contravariant components of a vector $\mathbf{A}$ are
+Recall from Lecture 15 that the **[[Covariant Differentiation]]** of the covariant and contravariant components of a vector $\mathbf{A}$ are
 
 $$
 A_{i,k} = \frac{\partial A_i}{\partial x^k} + A_j \frac{\partial \mathbf{e}^j}{\partial x^k} \cdot \mathbf{e}_i, \qquad A^i_{\ ,k} = \frac{\partial A^i}{\partial x^k} + A^j \frac{\partial \mathbf{e}_j}{\partial x^k} \cdot \mathbf{e}^i.
@@ -19,13 +19,13 @@ Each expression splits into a partial derivative of the component plus a correct
 
 ### Definition - Second Kind
 
-We define the **[[Christoffel symbols of the second kind]]** $\Gamma^i_{jk}$ by
+We define the **[[Christoffel Symbols]]** $\Gamma^i_{jk}$ by
 
 $$
 \boxed{\Gamma^i_{\ jk} = \mathbf{e}^i \cdot \frac{\partial \mathbf{e}_j}{\partial x^k}}
 $$
 
-These are the contravariant components of $\frac{\partial \mathbf{e}_j}{\partial x^k}$ expanded in the basis $\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3$. In other words, $\Gamma^i_{\ jk}$ are the **[[expansion coefficients]]** of the rate of change of the basis vectors:
+These are the contravariant components of $\frac{\partial \mathbf{e}_j}{\partial x^k}$ expanded in the basis $\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3$. In other words, $\Gamma^i_{\ jk}$ are the **[[Christoffel Symbols]]** of the rate of change of the basis vectors:
 
 $$
 \frac{\partial \mathbf{e}_j}{\partial x^k} = \Gamma^i_{\ jk}\, \mathbf{e}_i.
@@ -35,7 +35,7 @@ This follows directly from the definition: dotting both sides of the expansion $
 
 ### Definition - First Kind
 
-We can equally expand $\frac{\partial \mathbf{e}_j}{\partial x^k}$ with respect to the dual basis $\mathbf{e}^1, \mathbf{e}^2, \mathbf{e}^3$. The coefficients of that expansion are the **[[Christoffel symbols of the first kind]]** $\Gamma_{ijk}$:
+We can equally expand $\frac{\partial \mathbf{e}_j}{\partial x^k}$ with respect to the dual basis $\mathbf{e}^1, \mathbf{e}^2, \mathbf{e}^3$. The coefficients of that expansion are the **[[Christoffel Symbols]]** $\Gamma_{ijk}$:
 
 $$
 \frac{\partial \mathbf{e}_j}{\partial x^k} = \Gamma_{ijk}\, \mathbf{e}^i
@@ -213,7 +213,7 @@ $$
 All other $\Gamma^i_{\ jk} = 0$.
 
 > [!note]
-> The task at the end of the slides asks you to repeat this procedure for spherical coordinates with $g_{11} = 1$, $g_{22} = r^2$, $g_{33} = r^2\sin^2\phi$ - see [[mth3008 weekly problems 26#Exercise 5.5|Weekly Problem 26]].
+> The task at the end of the slides asks you to repeat this procedure for spherical coordinates with $g_{11} = 1$, $g_{22} = r^2$, $g_{33} = r^2\sin^2\phi$ - see [[mth3008 weekly problems 8#8.2. Christoffel Symbols in Spherical Coordinates]].
 
 ## Covariant Differentiation of Tensors
 
@@ -227,7 +227,7 @@ The pattern is: each covariant (lower) index generates a $-\Gamma$ term, and eac
 
 ### Second-Rank Tensors
 
-For a **[[covariant tensor]]** of rank 2:
+For a **[[Covariant and Contravariant Components]]** of rank 2:
 
 $$
 \boxed{T_{ik,\ell} = \frac{\partial T_{ik}}{\partial x^\ell} - \Gamma^m_{\ i\ell}\, T_{mk} - \Gamma^m_{\ k\ell}\, T_{im}}
@@ -235,7 +235,7 @@ $$
 
 Each lower index contributes its own $-\Gamma$ correction, with the dummy index $m$ contracting against the corresponding slot.
 
-For a **[[contravariant tensor]]** of rank 2:
+For a **[[Covariant and Contravariant Components]]** of rank 2:
 
 $$
 \boxed{T^{ik}_{\ \ ,\ell} = \frac{\partial T^{ik}}{\partial x^\ell} + \Gamma^i_{\ m\ell}\, T^{mk} + \Gamma^k_{\ m\ell}\, T^{im}}
@@ -243,7 +243,7 @@ $$
 
 Each upper index contributes a $+\Gamma$ correction.
 
-For a **[[mixed tensor]]** of rank 2:
+For a **[[Mixed Components]]** of rank 2:
 
 $$
 \boxed{T^i_{\ .k,\ell} = \frac{\partial T^i_{\ .k}}{\partial x^\ell} + \Gamma^i_{\ m\ell}\, T^m_{\ .k} - \Gamma^m_{\ k\ell}\, T^i_{\ .m}}
@@ -259,7 +259,7 @@ The upper index $i$ gives $+\Gamma$ and the lower index $k$ gives $-\Gamma$.
 
 ---
 
-## Pre-Lecture Notes from [[mth3008 lecture notes 16.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3008 lecture notes 16.pdf]]
 
 - **Christoffel symbols of the second kind**: $\Gamma^i_{\ jk} = \mathbf{e}^i \cdot \frac{\partial \mathbf{e}_j}{\partial x^k}$ - expansion coefficients of $\frac{\partial \mathbf{e}_j}{\partial x^k}$ in the basis $\{\mathbf{e}_i\}$
 - **Christoffel symbols of the first kind**: $\Gamma_{ijk} = \mathbf{e}_i \cdot \frac{\partial \mathbf{e}_j}{\partial x^k}$ - expansion coefficients of $\frac{\partial \mathbf{e}_j}{\partial x^k}$ in the dual basis $\{\mathbf{e}^i\}$

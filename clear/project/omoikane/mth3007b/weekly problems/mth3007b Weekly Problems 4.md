@@ -68,7 +68,7 @@ $$
 \mathbf{y}_{n+1} = \mathbf{y}_n + \Delta t \cdot \mathbf{g}(t_n, \mathbf{y}_n)
 $$
 
-So we can implement a system-level version of the method…
+So we can implement a system-level version of the method...
 
 ```python runnable
 def explicit_euler_system(
@@ -108,7 +108,7 @@ def explicit_euler_system(
     return time_values, solution_values
 ```
 
-Then we can write the Lorenz system derivatives as a Python function, just to make things a bit neater…
+Then we can write the Lorenz system derivatives as a Python function, just to make things a bit neater...
 
 ```python runnable
 def lorenz_derivatives(
@@ -137,7 +137,7 @@ def lorenz_derivatives(
     return np.array([dxdt, dydt, dzdt])
 ```
 
-Now we can specify each of the variables for our specific problem…
+Now we can specify each of the variables for our specific problem...
 
 ```python runnable
 sigma = 10.0

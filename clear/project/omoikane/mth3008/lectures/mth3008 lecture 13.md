@@ -1,7 +1,7 @@
 # MTH3008 Lecture 13
 
 > [!quote]
-> …
+> ...
 
 Last time we wrapped up Chapter 5 - tensors in generalised coordinate systems - covering covariant, contravariant, and mixed components of second-rank tensors, associated tensors (raising and lowering indices via the metric tensor), and symmetry/antisymmetry. We now open Chapter 6: Tensor Algebra, which asks a natural follow-up question - how do we build *new* tensors from existing ones?
 
@@ -9,10 +9,10 @@ Last time we wrapped up Chapter 5 - tensors in generalised coordinate systems - 
 
 Before defining new operations, recall the tensor-related products we already know:
 
-- The **[[scalar product]]** $\mathbb{R} \times \mathbb{R}^3 \to \mathbb{R}^3$: $(r, \mathbf{v}) \mapsto r\mathbf{v} = (rv_1, rv_2, rv_3)$.
-- The **[[dot product]]** $\mathbb{R}^3 \times \mathbb{R}^3 \to \mathbb{R}$: $(\mathbf{v}, \mathbf{u}) \mapsto \mathbf{v} \cdot \mathbf{u} = v_1 u_1 + v_2 u_2 + v_3 u_3$.
-- The **[[cross product]]** $\mathbb{R}^3 \times \mathbb{R}^3 \to \mathbb{R}^3$: $(\mathbf{v}, \mathbf{u}) \mapsto \mathbf{v} \times \mathbf{u}$.
-- The **[[matrix product]]** $\text{Mat}_{m \times k}(\mathbb{R}) \times \text{Mat}_{k \times n}(\mathbb{R}) \to \text{Mat}_{m \times n}(\mathbb{R})$: $(A, B) \mapsto AB$.
+- The **scalar product** $\mathbb{R} \times \mathbb{R}^3 \to \mathbb{R}^3$: $(r, \mathbf{v}) \mapsto r\mathbf{v} = (rv_1, rv_2, rv_3)$.
+- The **[[Kronecker Delta]]** $\mathbb{R}^3 \times \mathbb{R}^3 \to \mathbb{R}$: $(\mathbf{v}, \mathbf{u}) \mapsto \mathbf{v} \cdot \mathbf{u} = v_1 u_1 + v_2 u_2 + v_3 u_3$.
+- The **[[Alternating Tensor]]** $\mathbb{R}^3 \times \mathbb{R}^3 \to \mathbb{R}^3$: $(\mathbf{v}, \mathbf{u}) \mapsto \mathbf{v} \times \mathbf{u}$.
+- The **matrix product** $\text{Mat}_{m \times k}(\mathbb{R}) \times \text{Mat}_{k \times n}(\mathbb{R}) \to \text{Mat}_{m \times n}(\mathbb{R})$: $(A, B) \mapsto AB$.
 
 Each takes tensors of certain ranks and produces a tensor of (possibly different) rank. Chapter 6 formalises the general machinery behind this.
 
@@ -28,7 +28,7 @@ This lecture focuses on the first of these.
 
 ### Definition and Proof for Covariant Components
 
-Let $A_{ik}$ and $B_{ik}$ be the covariant components of two second-rank tensors. Define their **[[tensor addition|sum]]** componentwise:
+Let $A_{ik}$ and $B_{ik}$ be the covariant components of two second-rank tensors. Define their **[[tensor addition]]** componentwise:
 
 $$
 C_{ik} = A_{ik} + B_{ik}.
@@ -130,7 +130,7 @@ This is just ordinary matrix addition - nothing surprising. The point is that th
 
 ---
 
-## Pre-Lecture Notes from [[mth3008 lecture notes 13.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3008 lecture notes 13.pdf]]
 
 - **Chapter 6: Tensor Algebra** covers three operations for building new tensors: addition, outer product, and contraction.
 - Known products (scalar, dot, cross, matrix) are all special cases of tensor products of various ranks.

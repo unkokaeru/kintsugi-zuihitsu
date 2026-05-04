@@ -38,7 +38,7 @@ All other translations and reflections are powers or combinations of these, mean
 
 ---
 
-## Pre-Lecture Notes from [[mth3003 lecture notes 6.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3003 lecture notes 6.pdf]]
 
 - General shapes in $\mathbb{R}^n$ and defining $\text{Isom}(\Pi)$ for distance-preserving isometries.
 - Worked example of a cube: 48 total symmetries combining $D_8$ and 6 face rotations.

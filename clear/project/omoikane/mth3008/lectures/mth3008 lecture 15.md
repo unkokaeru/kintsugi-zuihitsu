@@ -1,7 +1,7 @@
 # MTH3008 Lecture 15
 
 > [!quote]
-> …
+> ...
 
 Lecture 14 wrapped up Chapter 6: Tensor Algebra with the outer product, non-commutativity of the tensor product, and contraction. We now open Chapter 7: Tensor Fields - where the bases themselves start to move.
 
@@ -29,7 +29,7 @@ $$
 
 This is a **fixed basis** - it does not depend on any parameter.
 
-A **[[vector field]]** assigns a vector to every point in a subset of space. Physical examples include velocity fields (fluid flow) and gravitational fields.
+A **[[Local Basis]]** assigns a vector to every point in a subset of space. Physical examples include velocity fields (fluid flow) and gravitational fields.
 
 The key new idea: we can define a **[[local basis]]** $\mathbf{e}_1(\mathbf{x}), \mathbf{e}_2(\mathbf{x}), \mathbf{e}_3(\mathbf{x})$ that depends on position.
 
@@ -77,7 +77,7 @@ $$
 \mathbf{A} = \mathbf{e}^1 A_1(\mathbf{r}) + \mathbf{e}^2 A_2(\mathbf{r}) + \mathbf{e}^3 A_3(\mathbf{r}) = \mathbf{e}_1 A^1(\mathbf{r}) + \mathbf{e}_2 A^2(\mathbf{r}) + \mathbf{e}_3 A^3(\mathbf{r}),
 $$
 
-where $A_1, A_2, A_3$ are the **[[covariant components]]** and $A^1, A^2, A^3$ are the **[[contravariant components]]**.
+where $A_1, A_2, A_3$ are the **[[Covariant and Contravariant Components]]** and $A^1, A^2, A^3$ are the **[[Covariant and Contravariant Components]]**.
 
 Because the basis is fixed ($d\mathbf{e}_j = d\mathbf{e}^j = 0$), the differentials reduce to:
 
@@ -165,7 +165,7 @@ $$
 A^i_{\cdot k} = (A_k)^i, \qquad A_{i,k} = (A_k)_i.
 $$
 
-These components $A^i_{\cdot k}$ and $A_{i,k}$ form a second-rank tensor called the **[[covariant derivative]]**.
+These components $A^i_{\cdot k}$ and $A_{i,k}$ form a second-rank tensor called the **[[Covariant Differentiation]]**.
 
 ### Extracting the Components
 
@@ -208,7 +208,7 @@ The correction terms above contain dot products of basis derivatives with basis 
 ### Christoffel Symbols of the Second Kind
 
 > [!important]
-> The **[[Christoffel symbols of the second kind]]** are defined by:
+> The **[[Christoffel Symbols]]** are defined by:
 > $\displaystyle \Gamma^i_{jk} = \mathbf{e}^i \cdot \frac{\partial \mathbf{e}_j}{\partial x^k}$
 > and the related identity $\displaystyle \Gamma^j_{ik} = -\mathbf{e}_i \cdot \frac{\partial \mathbf{e}^j}{\partial x^k}$.
 > Each symbol has 27 components (3 choices for each of the three indices).
@@ -254,7 +254,7 @@ But $\mathbf{e}^m \cdot \frac{\partial \mathbf{e}_j}{\partial x^k} = \Gamma^m_{j
 
 ### Christoffel Symbols of the First Kind
 
-We can also expand $\frac{\partial \mathbf{e}_j}{\partial x^k}$ in the dual basis. The resulting coefficients are the **[[Christoffel symbols of the first kind]]**:
+We can also expand $\frac{\partial \mathbf{e}_j}{\partial x^k}$ in the dual basis. The resulting coefficients are the **[[Christoffel Symbols]]**:
 
 $$
 \frac{\partial \mathbf{e}_j}{\partial x^k} = \Gamma_{ijk}\,\mathbf{e}^i \qquad \Longrightarrow \qquad \boxed{\Gamma_{ijk} = \mathbf{e}_i \cdot \frac{\partial \mathbf{e}_j}{\partial x^k}}
@@ -322,7 +322,7 @@ In both cases, the second term (involving a derivative of $L$) spoils the tensor
 
 ---
 
-## Pre-Lecture Notes from [[mth3008 lecture notes 15.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3008 lecture notes 15.pdf]]
 
 - **Chapter 7: Tensor Fields** opens with seven topics; this lecture covers Preliminary, Covariant Differentiation, and Christoffel Symbols
 - A **vector field** assigns a vector to each point in a region; a **local basis** $\mathbf{e}_j(x^1,x^2,x^3)$ varies with position, unlike a fixed basis

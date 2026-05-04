@@ -83,7 +83,7 @@ To find these coefficients practically, we take the dot product of the vector $A
 
 ---
 
-## Pre-Lecture Notes from [[mth3008 lecture notes 7.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3008 lecture notes 7.pdf]]
 
 - Recap of coordinate systems, orthonormal bases, transformations in 3D, and formal definitions of vectors and scalars.
 - Introduction to **Dual Bases**: Two bases $e_i$ and $e^k$ are dual if $e_i \cdot e^k = \delta_i^k$.

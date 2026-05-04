@@ -109,7 +109,7 @@ Recall that the rotation matrix $L_{ij} = \frac{\partial x'_i}{\partial x_j}$ ha
 
 ### Proving Kronecker Delta is a Tensor
 
-We can show that the **[[Kronecker delta]]** $\delta_{ij}$ is a rank-2 tensor. We must demonstrate that it transforms as:
+We can show that the **[[Kronecker delta]]** $\delta_{ij}$ is a rank-2 tensor. We must show that it transforms as:
 
 $$
 \delta'_{ij} = L_{ik} L_{jm} \delta_{km}
@@ -137,7 +137,7 @@ Thus, it transforms exactly as a rank-2 tensor should.
 
 ---
 
-## Pre-Lecture Notes from [[mth3008 lecture notes 9.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3008 lecture notes 9.pdf]]
 
 - **Arc Length**: Defined as $(ds)^2 = d\mathbf{r} \cdot d\mathbf{r} = g_{ik} dx^i dx^k = g^{ik} dx_i dx_k = dx_i dx^i$.
 - **Metric Tensor**: The quantities $g_{ik}$ (covariant), $g^{ik}$ (contravariant), and $g^i_{\;k}$ (mixed) determine the metric of the space.

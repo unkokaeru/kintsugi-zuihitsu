@@ -102,7 +102,7 @@ Hence, the inverse transformation is $\boxed{x_i = L_{ji} x_j'}$.
 
 ---
 
-## Pre-Lecture Notes from [[mth3008 lecture notes 5.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3008 lecture notes 5.pdf]]
 
 - Recap of combinations of grad, div, and curl on vector and scalar fields (div grad, curl grad, grad div, div curl, curl curl).
 - Application of differential operators to products of functions using suffix notation:

@@ -76,7 +76,7 @@ In particular, the order of $H$ divides the order of $G$.
 
 ***
 
-## Pre-Lecture Notes from [[mth3003 lecture notes 7.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3003 lecture notes 7.pdf]]
 
 - Definitions and examples of left cosets ($gH$) and the set of all cosets $G/H$.
 - Equivalent properties of cosets and the proof that cosets are either disjoint or equal.

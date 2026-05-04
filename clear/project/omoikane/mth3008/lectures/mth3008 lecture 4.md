@@ -1,6 +1,6 @@
 # MTH3008 Lecture 4
 
-Recall previous definitions…
+Recall previous definitions...
 
 - [[Kronecker Delta]],
 - [[Alternating Tensor]],
@@ -15,7 +15,7 @@ Then, we can start to consider combinations of these operators of the **position
 
 First, notice that the $\frac{\partial x_{1}}{\partial x_{1}}=1$ but $\frac{\partial x_{1}}{\partial x_{2}}=0$, so in general we have $\frac{\partial x_{i}}{\partial x_{j}}=\begin{cases}1 & \text{if } i=j \\ 0 & \text{if }i\ne j\end{cases}=\delta_{ij}$.
 
-Using this, and writing everything in index notation, we can derive each thing following their definitions to find…
+Using this, and writing everything in index notation, we can derive each thing following their definitions to find...
 
 - **Gradient of vector position**, $\nabla \underline{r}=\left[ \frac{\mathbf{r}}{\underline{r}} \right]_{i}$.
 - **Divergence of vector position**, $\nabla \cdot \mathbf{r}=\frac{\partial r_{i}}{\partial x_{i}}=\frac{\partial x_{i}}{\partial x_{i}}=\delta_{ii}=3$, by our convention.
@@ -35,7 +35,7 @@ There are only five combinations that we can have, due to domain/range mismatche
 
 ---
 
-## Pre-Lecture Notes from [[mth3008 lecture 4 notes.pdf|University Notes]]
+## Pre-Lecture Notes from [[mth3008 lecture 4 notes.pdf]]
 
 - Recall past definitions:
 	- [[Kronecker Delta]].

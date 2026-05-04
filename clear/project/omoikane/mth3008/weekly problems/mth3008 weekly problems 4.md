@@ -1,14 +1,14 @@
 # MTH3008 Weekly Problems 4
 
-> **Original Documents**: [[mth3008 weekly problem sheet 4.pdf|Problem Sheet]] / [[mth3008 weekly problem sheet 4 solutions.pdf|Provided Solutions]]
+> **Original Documents**: [[mth3008 weekly problem sheet 4.pdf]] / [[mth3008 weekly problem sheet 4 solutions.pdf]]
 >
 > **Vibes**: Dual-basis grind, then satisfying metric/index-raising consistency checks.
 >
 > **Used Techniques**:
->   - Dual basis via $\mathbf{e}^i = \dfrac{\mathbf{e}_j \times \mathbf{e}_k}{V}$ with $V=\mathbf{e}_1\cdot(\mathbf{e}_2\times\mathbf{e}_3)$ (cyclic $i,j,k$).
->   - Covariant/contravariant components: $A_i=\mathbf{A}\cdot \mathbf{e}_i$, $A^i=\mathbf{A}\cdot \mathbf{e}^i$.
->   - Expansion coefficients and transform rule: $L^n_{m'}=\mathbf{e}'_m\cdot \mathbf{i}_n$, $B'_i=L^j_{i'}B_j$.
->   - Metric: $g_{ik}=\mathbf{e}_i\cdot \mathbf{e}_k$, and raising/lowering via $A_i=g_{ik}A^k$, $A^i=g^{ik}A_k$.
+>  - Dual basis via $\mathbf{e}^i = \dfrac{\mathbf{e}_j \times \mathbf{e}_k}{V}$ with $V=\mathbf{e}_1\cdot(\mathbf{e}_2\times\mathbf{e}_3)$ (cyclic $i,j,k$).
+>  - Covariant/contravariant components: $A_i=\mathbf{A}\cdot \mathbf{e}_i$, $A^i=\mathbf{A}\cdot \mathbf{e}^i$.
+>  - Expansion coefficients and transform rule: $L^n_{m'}=\mathbf{e}'_m\cdot \mathbf{i}_n$, $B'_i=L^j_{i'}B_j$.
+>  - Metric: $g_{ik}=\mathbf{e}_i\cdot \mathbf{e}_k$, and raising/lowering via $A_i=g_{ik}A^k$, $A^i=g^{ik}A_k$.
 
 ---
 

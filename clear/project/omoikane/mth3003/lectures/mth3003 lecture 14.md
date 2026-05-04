@@ -198,7 +198,7 @@ $$
 
 ---
 
-## Pre-Lecture Notes from [[Mth3003 Lecture Notes 14.pdf|University Notes]]
+## Pre-Lecture Notes from [[Mth3003 Lecture Notes 14.pdf]]
 
 - Consider several new **group actions** of $S_{5}$ on different sets $X$ (extended finite sets, $\mathbb{Z}$ by residue decomposition, and sets of $2$-element subsets), and verify the action axioms in each case via the homomorphism viewpoint.
 - Define the **kernel of an action** $\lambda \colon G \to \operatorname{Sym}(X)$ as the subgroup of elements that fix every point, and note it coincides with the usual kernel of a group homomorphism.

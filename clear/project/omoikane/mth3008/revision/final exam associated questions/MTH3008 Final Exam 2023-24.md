@@ -1,11 +1,11 @@
 # MTH3008 Final Exam 2023-24
 
-> **Original Documents**: [[mth3008 final exam 2023-24.pdf|Exam Paper]] / [[mth3008 final exam 2023-24 solutions.pdf|Provided Solutions]]
+> **Original Documents**: [[mth3008 final exam 2023-24.pdf]] / [[mth3008 final exam 2023-24 solutions.pdf]]
 >
-> **Vibes**: …
+> **Vibes**: ...
 >
 > **Used Techniques**:
->   - …
+>  - ...
 
 ***
 
@@ -35,7 +35,7 @@
 > $\bigl(u \times (v \times w)\bigr) \cdot z$.
 > Write your final answer in vector notation, and show all intermediate steps of your working.
 
-…
+...
 
 ---
 
@@ -67,7 +67,7 @@
 >
 > Express the covariant components of this tensor in the coordinate system $K'$.
 
-…
+...
 
 ---
 
@@ -89,7 +89,7 @@
 > (c) Determine the following Christoffel symbols of the first kind for this coordinate system:
 > $\Gamma_{112}, \Gamma_{123}, \Gamma_{122}, \Gamma_{233}$.
 
-…
+...
 
 ---
 
@@ -112,4 +112,4 @@
 > (c) Let $f$ be a scalar field. Using suffix notation, evaluate the vector expression
 > $\nabla \times (\nabla f)$.
 
-…
+...

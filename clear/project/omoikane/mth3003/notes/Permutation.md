@@ -2,7 +2,7 @@
 
 A **Permutation** of a set $X$ is a bijection from $X$ to $X$, or more simply, a rearrangement of itself.
 
-There are various notations to show permutations, but we'll use three main ways: two graphical, one normal. In order of their importance…
+There are various notations to show permutations, but we'll use three main ways: two graphical, one normal. In order of their importance...
 
 1. Cycle notation: $\sigma=(2\,4\,3\,6\,7)$, read **right-to-left**.
 2. Bijection notation: $\quad\begin{matrix}1 & 2 & 3 & 4 & 5 & 6 & 7 \\\downarrow & \downarrow & \downarrow & \downarrow & \downarrow & \downarrow &\downarrow \\1 & 4 & 6 & 3 & 5 & 7 & 2\end{matrix}$
