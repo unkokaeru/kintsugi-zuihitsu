@@ -58,4 +58,7 @@ Hence, programming's response to these failures is usually to build on these lay
 
 ### 2.1 The Layers
 
-The current structure of these layers, used by modern production code, is split into six.
+The current structure of these layers, used by modern production code, is split into the following:
+
+1. **Types**: the most fundamental defence, enforced by the programming language itself. A Python `int` cannot be passed to a function expecting `str`, and a Rust `String` cannot be passed where an `&str` is expected. The check is mechanical and will reject many types of error at compile time, before even any tests can be run. Pierce [13] laid the foundational ideas for these type systems, which modern languages have made the first thing a programmer sees and the easiest thing to satisfy,
+2. **Tests**: for individual functions (unit tests), entire assemblies (integration tests), and the flows visible to the user (end-to-end tests). In some areas, types predate tests, and others tests predate types; but 

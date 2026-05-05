@@ -2,8 +2,6 @@
 
 ## 2.1 The Layers
 
-**Types.** The cheapest defence and the first. A Python `int` cannot be passed to a function expecting `str`; a Rust `String` cannot be passed where an `&str` is expected. The check is mechanical, runs at compile time, and rejects whole classes of error before any test runs. Pierce [13] is the canonical reference for the foundational ideas; modern industrial languages have made type systems the first thing a programmer sees and the cheapest thing to satisfy.
-
 **Tests.** Unit tests check individual functions, integration tests check assemblies, end-to-end tests check user-visible flows. The discipline pre-dates types in some communities and post-dates them in others; the consistent shape is the same - an executable assertion the writer cannot fool because it runs against the actual code. Test-driven development, popularised in the late 1990s, made the test the *first* thing written and the implementation the part that follows.
 
 **Continuous integration.** Every commit triggers a fresh build and the full test suite, in a clean environment, on every supported platform. The shift from "pre-release smoke test" to "per-commit verification" was the move that made trunk-based development workable at scale. CI catches integration errors that individual tests miss because individual tests run in isolation and CI runs the whole.
