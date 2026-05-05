@@ -1,15 +1,3 @@
-# Formal Methods as a Trust Layer for Mathematics
-
-**Name:** Wills Fayers
-
-**Module:** MTH3011 BSc Project Component
-
-**Supervisor:** [insert supervisor name]
-
-**Date:** May 2026
-
----
-
 # Abstract
 
 Mathematics still relies heavily on peer review as its main correctness filter, while software engineering has accumulated layers of mechanical checking: type systems, tests, continuous integration, fuzzing, and formal verification. This report asks where formal methods add value, and where they add overhead without a matching gain in rigour. It surveys proof assistants and landmark formalisations, then constructs a small propositional proof assistant in Python, formalising the Deduction Theorem and Glivenko's Theorem inside it. The same theorems are then formalised in Lean 4 and compared against the toy assistant. The comparison shows that a small kernel can make the trust boundary visible, while Lean supplies industrial-strength guarantees and library scale. Formal methods are most compelling for safety-critical systems, frontier research mathematics, pedagogy, and AI-assisted proof production.
