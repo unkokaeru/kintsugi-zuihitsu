@@ -1,9 +1,3 @@
-# 1. Introduction
-
-## Roadmap
-
-Sections 2-4 set up the framing: programming's defence in depth, mathematics' single layer of peer review, and the pressure created by AI-generated mathematics. Section 5 develops the formal foundations - logic, type theory, Curry-Howard, Gödel's caveat. Section 6 surveys the proof-assistant ecosystem from the literature. Section 7 takes five landmark formalisations as evidence: Feit-Thompson [7], Four Colour [8], Paulson's mechanisation of Gödel's incompleteness theorems [3], the PFR conjecture [10], and Needham-Schroeder [11], [12]. Section 8 builds the toy proof assistant on the page, walking the reader through each design choice as the implementation goes in. Section 9 uses the toy to formalise the two shortlisted theorems; Section 10 formalises them again in Lean 4; Section 11 compares the two side by side. Section 12 returns to the unit-test analogy with everything assembled, and Section 13 closes. The appendix reproduces the original Research Plan, the full listings, and the commands needed to verify both artefacts independently.
-
 # 2. Trust and Verification in Software Engineering
 
 The Knight Capital incident from Section 1 is a useful starting point because it was not caused by one programmer making one obvious mistake. The SEC's account describes old code, an incomplete deployment, missed automated warnings, and inadequate controls interacting under production load [18]. That is exactly the kind of compound failure for which engineering practice adds layers.
