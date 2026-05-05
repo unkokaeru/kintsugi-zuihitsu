@@ -6,7 +6,7 @@
 - Continuously work on **[[yatagarasu]]** work:
 	- Send **Zoom links** for training.
 	- **Claude**:
-		- Dashboard reloads/animates the widgets after every interaction on the page, even when not needed.
+		- ==Dashboard reloads/animates the widgets after every interaction on the page, even when not needed.==
 		- Work order edit modal missing data: customer type blank; authorisation fields arbitrary; schedule unpopulated; concerns/areas of focus unpopulated; additional requirements currently free text that should be structured.
 		- Confirm client information "Confirm & Continue" button does nothing.
 		- Test data generation failing with no corresponding Sentry entries.
