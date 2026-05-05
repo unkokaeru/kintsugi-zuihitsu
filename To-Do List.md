@@ -4,10 +4,8 @@
 > Remember to draw back on literature more when writing within academia! - practice this?
 
 - Continuously work on **[[yatagarasu]]** work:
-	- Send my **invoice** for the last two weeks (confirm attendees for training at the same time).
 	- Send **Zoom links** for training.
 	- **Claude**:
-		- ==Notifications go to notification centre but do not get emailed, even if email notifications are on (check email service is actually complete).==
 		- Dashboard reloads/animates the widgets after every interaction on the page, even when not needed.
 		- Work order edit modal missing data: customer type blank; authorisation fields arbitrary; schedule unpopulated; concerns/areas of focus unpopulated; additional requirements currently free text that should be structured.
 		- Confirm client information "Confirm & Continue" button does nothing.

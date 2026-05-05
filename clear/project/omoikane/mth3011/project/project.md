@@ -43,14 +43,6 @@ LOGBOOK ADVICE
 - record page numbers etc. for the full reference
 
 - emphasise active reading/writing, similar to how I normally write notes (like active questioning of the text, noting the process). critically meta-think if there is anything that isn't justified, any limitations, sample sizes, questioning method, etc. - any connections to other topics? WIDER CONTEXT, ETHICALLY ETC. I GUESS (history)
-
-- …
-
-
----
-
-
-S. Cottrell, The Study Skills Handbook, 6th edition, Bloomsbury Academic, London, UK, 2024.
 ```
 
 ## Finding Published Material
