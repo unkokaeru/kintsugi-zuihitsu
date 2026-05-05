@@ -797,7 +797,7 @@ The report opened with a programmer's response to errors - layers - and a claim 
 
 Three settings recur across the case studies and the project's own formalisations. In each, formal methods pay for their cost in a way informal methods cannot.
 
-**Safety- and security-critical systems.** Lowe's 1995 analysis caught what informal peer review had missed in Needham-Schroeder for seventeen years [11]; Smyth [12] surveys the family of cryptographic-protocol verifications built on the same methodology. The Intel Pentium FDIV bug [20], AWS's use of formal specification and model checking in critical systems [21], and NASA Langley's PVS-based theorem-proving work [22] each point the same direction. When an undetected error accumulates losses in the millions or risks human lives, formal verification stops being a tax and becomes an insurance premium. Programming's analogue is the test budget on a high-availability service: nobody complains about the cost when the alternative is downtime.
+**Safetyand security-critical systems.** Lowe's 1995 analysis caught what informal peer review had missed in Needham-Schroeder for seventeen years [11]; Smyth [12] surveys the family of cryptographic-protocol verifications built on the same methodology. The Intel Pentium FDIV bug [20], AWS's use of formal specification and model checking in critical systems [21], and NASA Langley's PVS-based theorem-proving work [22] each point the same direction. When an undetected error accumulates losses in the millions or risks human lives, formal verification stops being a tax and becomes an insurance premium. Programming's analogue is the test budget on a high-availability service: nobody complains about the cost when the alternative is downtime.
 
 **Frontier research mathematics.** The PFR formalisation [10] is the case that argues most strongly for a regime change. Three weeks from preprint to complete mechanical verification, coordinated across dozens of contributors via Tao's blueprint methodology, was not possible in Gonthier's Coq era; it became possible only once Lean 4 plus mathlib reached the scale they had in 2023-2024. The relevant comparison is the speed at which programming's CI pipelines went from overnight builds to per-commit checks - an order-of-magnitude shift in feedback loop that changed what kinds of work were tractable. PFR is the same shift for proof verification.
 
@@ -886,7 +886,7 @@ I am grateful to my supervisor, [insert supervisor name], for guidance throughou
 
 [9] R. P. Nederpelt and H. Geuvers, *Type Theory and Formal Proof: An Introduction*, 2nd ed. Cambridge University Press, 2023.
 
-[10] T. Tao, T. Gowers, B. Green, and F. Manners, "Marton's Polynomial Freiman-Ruzsa conjecture," preprint, 2024. [Online]. Available: https://teorth.github.io/pfr/
+[10] T. Tao, T. Gowers, B. Green, and F. Manners, "Marton's Polynomial Freiman-Ruzsa conjecture," preprint, 2024. [Online]. Available: <https://teorth.github.io/pfr/>
 
 [11] G. Lowe, "Breaking and fixing the Needham-Schroeder public-key protocol using FDR," in *Tools and Algorithms for the Construction and Analysis of Systems*, LNCS 1055, 1996, pp. 147-166.
 
@@ -896,13 +896,13 @@ I am grateful to my supervisor, [insert supervisor name], for guidance throughou
 
 [14] R. Harper, *Practical Foundations for Programming Languages*, 2nd ed. Cambridge University Press, 2016.
 
-[15] Google DeepMind, "AI achieves silver-medal standard solving International Mathematical Olympiad problems," 2024. [Online]. Available: https://deepmind.google/discover/blog/ai-solves-imo-problems-at-silver-medal-level/
+[15] Google DeepMind, "AI achieves silver-medal standard solving International Mathematical Olympiad problems," 2024. [Online]. Available: <https://deepmind.google/discover/blog/ai-solves-imo-problems-at-silver-medal-level/>
 
 [16] P. Song, K. Yang, and A. Anandkumar, "Lean Copilot: Large language models as copilots for theorem proving in Lean," arXiv:2404.12534, 2024.
 
 [17] N. G. Leveson and C. S. Turner, "An investigation of the Therac-25 accidents," *Computer*, vol. 26, no. 7, pp. 18-41, 1993.
 
-[18] U.S. Securities and Exchange Commission, "SEC charges Knight Capital with violations of market access rule," 2013. [Online]. Available: https://www.sec.gov/newsroom/press-releases/2013-222
+[18] U.S. Securities and Exchange Commission, "SEC charges Knight Capital with violations of market access rule," 2013. [Online]. Available: <https://www.sec.gov/newsroom/press-releases/2013-222>
 
 [19] J.-L. Lions et al., *Ariane 5 Flight 501 Failure: Report by the Inquiry Board*. ESA/CNES, 1996.
 
@@ -910,7 +910,7 @@ I am grateful to my supervisor, [insert supervisor name], for guidance throughou
 
 [21] C. Newcombe, T. Rath, F. Zhang, B. Munteanu, M. Brooker, and M. Deardeuff, "How Amazon Web Services uses formal methods," *Communications of the ACM*, vol. 58, no. 4, pp. 66-73, 2015.
 
-[22] NASA Langley Research Center, "Langley Formal Methods Program: Theorem Proving," 2024. [Online]. Available: https://shemesh.larc.nasa.gov/fm/pvs/
+[22] NASA Langley Research Center, "Langley Formal Methods Program: Theorem Proving," 2024. [Online]. Available: <https://shemesh.larc.nasa.gov/fm/pvs/>
 
 [23] A. Wiles, "Modular elliptic curves and Fermat's last theorem," *Annals of Mathematics*, vol. 141, no. 3, pp. 443-551, 1995; R. Taylor and A. Wiles, "Ring-theoretic properties of certain Hecke algebras," *Annals of Mathematics*, vol. 141, no. 3, pp. 553-572, 1995.
 

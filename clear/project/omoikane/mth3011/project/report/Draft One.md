@@ -1,7 +1,8 @@
-# Draft One
+# Formal Methods in Mathematics
 
-> [!abstract]
-> …
+> **Name**: William Fayers
+> **Module**: MTH3011 Project Component
+> **Supervisor**: Dr Yuri Santos Rego
 
 ## 1 Introduction
 
