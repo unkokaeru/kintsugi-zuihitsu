@@ -19,9 +19,11 @@
 
 > [!question]
 > Write the vector equation
+>
 > $$
 > \mathbf{u}+(\mathbf{a}\cdot\mathbf{b})\mathbf{v}=|\mathbf{a}|^{2}(\mathbf{b}\cdot\mathbf{v})\mathbf{a}
 > $$
+>
 > in suffix notation.
 
 Translate each piece using [[Suffix Notation]] and the [[Kronecker Delta]] / dot-product identity $\mathbf{x}\cdot\mathbf{y}=x_{j}y_{j}$:
@@ -151,9 +153,11 @@ $V_{i}=\mathbf{V}\cdot\mathbf{e}_{i}$:
 $$
 V_{1}=(1,0,-2)\cdot(1,0,1)=1+0-2=-1,
 $$
+
 $$
 V_{2}=(1,0,-2)\cdot(0,1,-1)=0+0+2=2,
 $$
+
 $$
 V_{3}=(1,0,-2)\cdot(1,-1,1)=1+0-2=-1.
 $$
@@ -172,9 +176,11 @@ $V^{i}=\mathbf{V}\cdot\mathbf{e}^{i}$:
 $$
 V^{1}=(1,0,-2)\cdot(0,1,1)=0+0-2=-2,
 $$
+
 $$
 V^{2}=(1,0,-2)\cdot(1,0,-1)=1+0+2=3,
 $$
+
 $$
 V^{3}=(1,0,-2)\cdot(1,-1,-1)=1+0+2=3.
 $$
@@ -200,9 +206,11 @@ $$
 
 > [!question]
 > Express the covariant components of the rank-2 tensor of $K$ with components
+>
 > $$
 > [P_{ik}]=[P^{ik}]=[P^{\cdot k}_{i}]=[P^{i}_{\cdot k}]=\begin{pmatrix}0&1&0\\-1&0&-1\\0&0&1\end{pmatrix}
 > $$
+>
 > in $K'$.
 
 Use the rank-2 transformation $P'_{ik}=L^{\ell}_{i'}L^{m}_{k'}P_{\ell m}=(LPL^{T})_{ik}$.
@@ -259,6 +267,7 @@ $g_{ik}=\mathbf{e}_{i}\cdot\mathbf{e}_{k}$:
 $$
 g_{11}=e^{2x}(\sin^{2}\theta+\cos^{2}\theta)=e^{2x},\qquad g_{22}=e^{2x}(\cos^{2}\theta+\sin^{2}\theta)=e^{2x},
 $$
+
 $$
 g_{12}=g_{21}=e^{2x}(\sin\theta\cos\theta-\cos\theta\sin\theta)=0.
 $$
@@ -282,7 +291,7 @@ $$
 \boxed{ds^{2}=e^{2x}\bigl(dx^{2}+d\theta^{2}\bigr).}
 $$
 
-### (4) [[Christoffel Symbols|Christoffel Symbols]] of the First Kind
+### (4) [[Christoffel Symbols|Christoffel Symbols]] Of the First Kind
 
 > [!question]
 > Determine $\Gamma_{ijk}$.
@@ -308,7 +317,7 @@ $$
 \boxed{\Gamma_{111}=e^{2x},\quad \Gamma_{122}=-e^{2x},\quad \Gamma_{212}=\Gamma_{221}=e^{2x},\quad \text{all others }=0.}
 $$
 
-### (5) [[Christoffel Symbols|Christoffel Symbols]] of the Second Kind
+### (5) [[Christoffel Symbols|Christoffel Symbols]] Of the Second Kind
 
 > [!question]
 > Determine $\Gamma^{i}_{jk}$.

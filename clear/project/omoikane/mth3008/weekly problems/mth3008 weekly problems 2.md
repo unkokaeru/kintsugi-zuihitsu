@@ -48,7 +48,7 @@ Slowly going through the expression, converting to [[Suffix Notation]], and then
 ## 2.4. Find the Gradient of a Dot Product
 
 > [!question]
-> Compute the gradient of a dot product, i.e. $\nabla(\mathbf{u}\cdot \mathbf{v})$, that is...
+> Compute the gradient of a dot product, i.e. $\nabla(\mathbf{u}\cdot \mathbf{v})$, that is…
 >
 > 1. Show that $[\mathbf{u}\times(\nabla\times \mathbf{v})]_{i}=u_{j} \frac{\partial v_{j}}{\partial x_{j}} - u_{j} \frac{\partial v_{i}}{\partial x_{j}}$.
 > 2. Use item (1) to show that $[\mathbf{u}\times(\nabla \times \mathbf{v})+\mathbf{v}\times(\nabla\times \mathbf{u})]_{i}=u_{j} \frac{\partial v_{j}}{\partial x_{j}} - u_{j} \frac{\partial u_{i}}{\partial x_{j}} + v_{j} \frac{\partial u_{j}}{\partial x_{j}} - v_{j} \frac{\partial v_{i}}{\partial x_{j}}$.
@@ -61,7 +61,7 @@ Loads of effort, but basically convert to [[Suffix Notation]] then simplify with
 ## 2.5. Check Relations Involving Tensors
 
 > [!question]
-> Recall the relation $\epsilon_{ijk}\epsilon_{k\ell m}=\delta_{i\ell}\delta_{jm}-\delta_{im}\delta_{j\ell}$ and check it for the following cases...
+> Recall the relation $\epsilon_{ijk}\epsilon_{k\ell m}=\delta_{i\ell}\delta_{jm}-\delta_{im}\delta_{j\ell}$ and check it for the following cases…
 >
 > 1. $i=1,j=2,k=3,\ell=1,m=2$,
 > 2. $i=2,j=1,k=3,\ell=2,m=1$.
@@ -73,7 +73,7 @@ Substitute then use the definitions of [[Alternating Tensor]] for the left side,
 ## 2.6. Simplify Suffix Notation Expressions
 
 > [!question]
-> Simplify the following suffix notation expressions...
+> Simplify the following suffix notation expressions…
 >
 > 1. $\delta_{ij}\epsilon_{ijk}$,
 > 2. $\epsilon_{ijk}\epsilon_{i\ell m}$,
@@ -92,7 +92,7 @@ Substitute then use the definitions of [[Alternating Tensor]] for the left side,
 ## 2.7. Prove Matrix Relations
 
 > [!question]
-> Use the formula, $\epsilon_{pqr}|M|=\epsilon_{ijk}M_{pi}M_{qj}M_{rk}$, to show that...
+> Use the formula, $\epsilon_{pqr}|M|=\epsilon_{ijk}M_{pi}M_{qj}M_{rk}$, to show that…
 >
 > 1. $6|M|=\epsilon_{pqr}\epsilon_{ijk}M_{pi}M_{qj}M_{rk}$,
 > 2. $|M^T|=|M|$,

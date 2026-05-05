@@ -41,6 +41,7 @@ All others vanish.
 For $R_{11}$: $\partial_{k}\Gamma^{k}_{11}=0$ ($\Gamma^{k}_{11}=0$ for all $k$). $\Gamma^{k}_{1k}=\Gamma^{2}_{12}=1$, so $\partial_{1}(1)=0$. Third term: $\Gamma^{p}_{11}=0$, gives $0$. Fourth term: $\Gamma^{p}_{1k}\Gamma^{k}_{p1}$ - only nonzero when $p=k=2$, giving $\Gamma^{2}_{12}\Gamma^{2}_{21}=1$. So $R_{11}=0-0+0-1=-1$.
 
 For $R_{22}$:
+
 - $\partial_{k}\Gamma^{k}_{22}$: only $\partial_{1}\Gamma^{1}_{22}=\partial_{x}(-e^{2x})=-2e^{2x}$.
 - $\partial_{2}\Gamma^{k}_{2k}=\partial_{y}(\Gamma^{2}_{22})=\partial_{y}(0)=0$.
 - $\Gamma^{p}_{22}\Gamma^{k}_{pk}$: $p=1$: $\Gamma^{1}_{22}\cdot\Gamma^{k}_{1k}=(-e^{2x})(1)=-e^{2x}$.
@@ -147,9 +148,11 @@ Useful identities: $f^{2}=1+\sin 2\theta$, $(f')^{2}=1-\sin 2\theta$, $f f'=\cos
 
 > [!question]
 > Coordinate system $(x^{1},x^{2},x^{3})=(\phi,\theta,z)$ with position vector
+>
 > $$
 > \mathbf{r}=\cos\phi\,(\sin\theta+\cos\theta)\mathbf{i}_{1}+\sin\phi\,(\sin\theta+\cos\theta)\mathbf{i}_{2}+z\,\mathbf{i}_{3}.
 > $$
+>
 > (1) Find basis vectors $\mathbf{e}_{1},\mathbf{e}_{2},\mathbf{e}_{3}$. (2) Show this system is orthogonal.
 
 **(1) Basis vectors.** Using $\mathbf{e}_{i}=\partial \mathbf{r}/\partial x^{i}$ with $f=\sin\theta+\cos\theta$:
@@ -286,25 +289,37 @@ $$
 
 - $\Gamma^{1}_{22}=0$, so $\partial_{1}(0)=0$.
 - $\Gamma^{1}_{21}=f'/f$. Using $f''=-f$:
+
   $$
   \partial_{\theta}\!\left(\frac{f'}{f}\right)=\frac{f''f-(f')^{2}}{f^{2}}=\frac{-f^{2}-(f')^{2}}{f^{2}}=-\frac{2}{f^{2}}.
-  $$
+
+$
+
+$
+
   So $-\partial_{2}\Gamma^{1}_{21}=2/f^{2}$.
+
 - $\Gamma^{p}_{22}\Gamma^{1}_{p1}$: only $p=2$ gives a nonzero factor: $\Gamma^{2}_{22}\Gamma^{1}_{21}=(-f/f')(f'/f)=-1$.
 - $\Gamma^{p}_{21}\Gamma^{1}_{p2}$: only $p=1$ contributes: $\Gamma^{1}_{21}\Gamma^{1}_{12}=(f'/f)^{2}$.
 
 Combining:
 
 $$
-R^{1}_{212}=0+\frac{2}{f^{2}}+(-1)-\frac{(f')^{2}}{f^{2}}=\frac{2-(f')^{2}}{f^{2}}-1.
+
+R^{1}*{212}=0+\frac{2}{f^{2}}+(-1)-\frac{(f')^{2}}{f^{2}}=\frac{2-(f')^{2}}{f^{2}}-1.
+
 $$
 
 Using $2-(f')^{2}=2-(1-\sin 2\theta)=1+\sin 2\theta=f^{2}$:
 
 $$
-R^{1}_{212}=\frac{f^{2}}{f^{2}}-1=1-1=0.\;\checkmark
+
+R^{1}*{212}=\frac{f^{2}}{f^{2}}-1=1-1=0.\;\checkmark
+
 $$
 
 $$
+
 \boxed{R^{r}_{ijk}=0\quad\text{for all }r,i,j,k\;-\;\text{the space is flat (Euclidean) in disguise.}}
+
 $$
