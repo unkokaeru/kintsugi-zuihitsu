@@ -2,12 +2,6 @@
 
 ## 1. Introduction
 
-- Proof assistants (Lean [5], Coq [6], Isabelle/HOL, Agda, PVS):
-	- Small trusted kernel checks each inference rule by rule
-	- Everything outside the kernel - tactics, automation, LLM suggestions - must produce a proof term the kernel accepts
-	- Analogous to unit tests, type checkers, CI in software
-- Report's thesis: mathematics is now in a similar position to programming around 1990 - tools exist, cost has fallen, the case for adoption has shifted from "academic rigour" to practical infrastructure
-- Project contribution: builds a proof assistant from scratch (~1,000 lines Python, 96-line kernel), formalises two theorems in both the toy and Lean 4, compares side by side
 - Two theorems chosen:
 	- **Deduction Theorem** - propositional logic metatheorem [4]; a result *about* the proof system
 	- **Glivenko's Theorem** (1929) - propositional formula is classically provable iff its double negation is intuitionistically provable; a result *inside* propositional logic
