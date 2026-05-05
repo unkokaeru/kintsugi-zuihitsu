@@ -32,4 +32,8 @@ For centuries, mathematics has relied on peer review to filter out invalid argum
 
 ## 1 Introduction
 
-On the 1st of August, 2012, Knight Capital started the first forty-five minutes of the trading day by losing more than $460 million. This was from a basic deployment fault which reactivated faulty routing code, and the engineers responded by covering the systems in even more layers: more tests, stricter types, tighter continuous integration, and additional gates for review. Programming has had monumental pressure to build defence
+On the 1st of August, 2012, Knight Capital started the first forty-five minutes of the trading day by losing more than $460 million. This was from a basic deployment fault which reactivated faulty routing code [18], and the engineers responded by covering the systems in even more layers: more tests, stricter types, tighter continuous integration, and additional gates for review. Programming has had monumental pressure to build defence-in-depth, often controlling enormous portions of the world's economy, because humans are fallible; they write buggy code.
+
+Mathematics had not responded the same way. A proof must pass peer review, sometimes several rounds of peer review, but are taken on trust thereafter. This system works by building a mixture of reasoning and trust, which works when each part of the system can fit comfortably in one head. It strains when they do not.
+
+Two events illustrate this problem clearly. First, in 1978, the Needham-Schroeder public-key protocol. For 17 years, this was accepted as secure based on design rationale and the routine peer review. Then,, only for Gavin Lowe in 1995 to find an explicit man-in-the-middle attack via formal analysis [11].
