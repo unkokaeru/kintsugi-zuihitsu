@@ -175,7 +175,7 @@ This is one place where the toy's transparency exceeds Lean's. In Lean, the same
 
 Proofs are written as Python values; formulae are parsed from strings. The parser uses Lark with a small grammar:
 
-```
+```python
 ?start:       implication
 ?implication: negation ("->" implication)?      -> maybe_imp
 ?negation:    "~" negation                       -> neg_form
@@ -203,7 +203,7 @@ Error messages aim at the cause. `rule AxiomA3 not allowed in calculus 'intuitio
 
 Pulled together, the toy is:
 
-```
+```python
 src/formal_toy/
 ├── ast.py              # Formula and Proof ADTs
 ├── parser.py           # Lark grammar
@@ -236,4 +236,4 @@ Second, the calculus distinction (classical vs intuitionistic) is data, not code
 
 Third, the trust chain is fully visible. A reader of this report can look at the kernel, see exactly what it does, and trust that nothing else in the toy can produce a `Formula` value that contradicts the kernel's verdict. This is what §1 promised: a layer of mechanical checking, transparent in every detail, that the reader can audit without specialist knowledge. §12.3 returns to this when arguing that the same explicit-everything design is what makes the toy LLM-emit-friendly: a model whose proof objects the kernel can check is a model whose outputs are auditable in a way tactic-script outputs are not.
 
-§9 puts the toy to work on the two shortlisted theorems.
+-9 puts the toy to work on the two shortlisted theorems.

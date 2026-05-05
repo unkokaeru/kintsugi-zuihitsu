@@ -1,6 +1,6 @@
 # The Proof-Assistant Ecosystem
 
-§5 gave the formal machinery; §6 surveys the tools that implement it. Two parts: Lean 4 in depth, because the project uses it hands-on, and the wider ecosystem in outline, because any serious answer to "where do formal methods matter?" has to acknowledge that different communities have chosen different tools.
+-5 gave the formal machinery; §6 surveys the tools that implement it. Two parts: Lean 4 in depth, because the project uses it hands-on, and the wider ecosystem in outline, because any serious answer to "where do formal methods matter?" has to acknowledge that different communities have chosen different tools.
 
 ## 6.1 What a Proof Assistant Is
 

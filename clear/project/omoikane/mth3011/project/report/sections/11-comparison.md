@@ -1,6 +1,6 @@
 # Cross-Tool Comparison
 
-§§9-10 produced two formalisations of the same two theorems. §11 lays them alongside each other and asks where each tool's affordances paid off and where they got in the way.
+-§9-10 produced two formalisations of the same two theorems. §11 lays them alongside each other and asks where each tool's affordances paid off and where they got in the way.
 
 ## 11.1 Side-by-Side Metrics
 
@@ -42,6 +42,6 @@ Real mathematical content. The toy is too small for anything beyond the chosen t
 
 Both tools share a common ancestor: a typed-core checker that reads a proof object and rejects anything not built by the allowed rules. Coq, Lean, Agda, Isabelle, and the toy are all implementations of this idea on different design budgets - dependent types vs simply-typed, industrial-library vs standalone, C++ kernel vs Python kernel. The toy makes this ancestor *visible* in a way Lean cannot: with elaboration, implicit resolution, and tactic metaprogramming on top, the kernel is not where the user lives. In the toy, the kernel *is* the interaction.
 
-§5's Curry-Howard correspondence and §8.5's kernel listing together capture what the family has in common. The differences sit in the layers above: how much elaboration, how aggressive the automation, how big the library. None of those layers add to soundness; they add to ergonomics. That is the trade industrial tools have made, and it is the trade the toy explicitly does not.
+-5's Curry-Howard correspondence and §8.5's kernel listing together capture what the family has in common. The differences sit in the layers above: how much elaboration, how aggressive the automation, how big the library. None of those layers add to soundness; they add to ergonomics. That is the trade industrial tools have made, and it is the trade the toy explicitly does not.
 
 One pedagogical suggestion follows, offered tentatively from one student's experience: a final-year logic or type-theory course could profitably put a build-a-minimal-kernel exercise before introducing Lean or Coq proper. The shift between "I can use the tactic language" and "I know what the kernel is doing under the tactics" is larger than expected, and hard to come at from reading alone. §12.1 picks the thread up under pedagogy as one of the three settings where formal methods earn their cost.

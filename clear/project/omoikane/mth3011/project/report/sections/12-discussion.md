@@ -6,7 +6,7 @@ The report opened with a programmer's response to errors - layers - and a claim 
 
 Three settings recur across the case studies and the project's own formalisations. In each, formal methods pay for their cost in a way informal methods cannot.
 
-**Safety- and security-critical systems.** Lowe's 1995 analysis caught what informal peer review had missed in Needham-Schroeder for seventeen years [11]; Smyth [12] surveys the family of cryptographic-protocol verifications built on the same methodology. The Intel Pentium FDIV bug ($475 million correction cost), AWS's TLA+ usage on core S3 storage, and NASA's PVS-based flight-system certification each point the same direction. When an undetected error accumulates losses in the millions or risks human lives, formal verification stops being a tax and becomes an insurance premium. Programming's analogue is the test budget on a high-availability service: nobody complains about the cost when the alternative is downtime.
+**Safetyand security-critical systems.** Lowe's 1995 analysis caught what informal peer review had missed in Needham-Schroeder for seventeen years [11]; Smyth [12] surveys the family of cryptographic-protocol verifications built on the same methodology. The Intel Pentium FDIV bug ($475 million correction cost), AWS's TLA+ usage on core S3 storage, and NASA's PVS-based flight-system certification each point the same direction. When an undetected error accumulates losses in the millions or risks human lives, formal verification stops being a tax and becomes an insurance premium. Programming's analogue is the test budget on a high-availability service: nobody complains about the cost when the alternative is downtime.
 
 **Frontier research mathematics.** The PFR formalisation [10] is the case that argues most strongly for a regime change. Three weeks from preprint to complete mechanical verification, coordinated across dozens of contributors via Tao's blueprint methodology, was not possible in Gonthier's Coq era; it became possible only once Lean 4 plus mathlib reached the scale they had in 2023-2024. The relevant comparison is the speed at which programming's CI pipelines went from overnight builds to per-commit checks - an order-of-magnitude shift in feedback loop that changed what kinds of work were tractable. PFR is the same shift for proof verification.
 
@@ -22,7 +22,7 @@ Two cases stand out where the analogy breaks the other way.
 
 ## 12.3 The AI Thread Reconsidered
 
-§1 framed AI as the inflection forcing the formalisation question now. Three observations follow from §§8-11 that would not have surfaced from a Lean-only project.
+-1 framed AI as the inflection forcing the formalisation question now. Three observations follow from §§8-11 that would not have surfaced from a Lean-only project.
 
 First, the toy's proof objects are emit-friendly for language models in a way Lean's tactic scripts are not. Tactic scripts depend on Lean's elaborator state, implicit-argument resolution, and goal-directed metaprogramming - all of which an LLM has to model in its head to produce a script that compiles. The toy's proofs are literal dataclass values: each `Proof` is a tree of named records with an explicit context. A model that emits `AxiomA1(ctx=…, a=…, b=…)` is making a claim the kernel can check in 96 lines of Python. The transparency cuts in the model's favour as much as the human auditor's.
 
