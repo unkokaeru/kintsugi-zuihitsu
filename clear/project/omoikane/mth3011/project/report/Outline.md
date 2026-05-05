@@ -2,18 +2,7 @@
 
 ## 1. Introduction
 
-- Knight Capital (1 August 2012): lost >$460m in 45 minutes due to a deployment fault reactivating defective routing code [18]
-	- Engineering response: more tests, stricter types, tighter CI, additional review gates
-	- Programming has built defence-in-depth over half a century because humans write buggy code
-- Mathematics has not responded the same way - proofs pass peer review and are taken on trust thereafter
-- Two concrete episodes illustrating the problem:
-	- Needham-Schroeder public-key protocol (1978): accepted as secure for 17 years; error found only by Gavin Lowe's 1995 formal analysis (explicit man-in-the-middle attack) [11]
-	- Feit-Thompson theorem (1963), 255 pages - no end-to-end individual verification until a Microsoft Research/INRIA team produced a 150,000-line machine-checked Coq proof in 2012 [7]
-	- General principle: when a proof outruns one reviewer's capacity, errors can hide for a long time; cost of missing them ranges from embarrassment to fatality
 - AI sharpens the issue:
-	- LLMs produce proofs and code faster than any human reviewer can match
-	- Failure mode is confident hallucination - alien to heuristics human reviewers have developed
-	- DeepMind AlphaProof/AlphaGeometry 2 [15]: reached medal-level IMO performance by emitting Lean tactic scripts and re-checking each via kernel
 	- PFR conjecture formalised in Lean 4 in three weeks [10] via parallel contributor blueprint
 	- The kernel is what turns "AI suggested a proof" into "the proof checks out"
 - Proof assistants (Lean [5], Coq [6], Isabelle/HOL, Agda, PVS):
