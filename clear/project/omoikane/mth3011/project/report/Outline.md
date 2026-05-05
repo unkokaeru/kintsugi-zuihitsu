@@ -1,64 +1,31 @@
 # Report Bullet Outline: Formal Methods in Mathematics
 
-## Abstract
-
-- Mathematics relies primarily on peer review for correctness; software engineering has layered mechanical checking (types, tests, CI, fuzzing, formal verification)
-- Report asks: where do formal methods add value, and where do they add overhead without matching rigour gain?
-- Surveys proof assistants and landmark formalisations
-- Builds a small propositional proof assistant in Python (~1,000 lines, 96-line kernel)
-- Formalises the Deduction Theorem and Glivenko's Theorem in the toy, then again in Lean 4
-- Key finding: small kernel makes the trust boundary visible; Lean provides industrial-strength guarantees and library scale
-- Formal methods most compelling for: safety-critical systems, frontier research mathematics, pedagogy, AI-assisted proof production
-
----
-
-## Table of Contents (section order to preserve)
-
-1. Introduction
-2. Trust and Verification in Software Engineering
-3. Trust and Verification in Mathematical Practice
-4. Artificial Intelligence and Mechanical Checking
-5. Logical and Type-Theoretic Background
-6. Proof Assistants
-7. Case Studies in Formal Verification
-8. Construction of a Toy Proof Assistant
-9. Formalising Two Theorems in the Toy Assistant
-10. Formalising the Same Theorems in Lean 4
-11. Comparison of the Two Formalisations
-12. Discussion
-13. Conclusion
-- Acknowledgements
-- References
-- Appendix
-
----
-
 ## 1. Introduction
 
 - Knight Capital (1 August 2012): lost >$460m in 45 minutes due to a deployment fault reactivating defective routing code [18]
-  - Engineering response: more tests, stricter types, tighter CI, additional review gates
-  - Programming has built defence-in-depth over half a century because humans write buggy code
+	- Engineering response: more tests, stricter types, tighter CI, additional review gates
+	- Programming has built defence-in-depth over half a century because humans write buggy code
 - Mathematics has not responded the same way - proofs pass peer review and are taken on trust thereafter
 - Two concrete episodes illustrating the problem:
-  - Needham-Schroeder public-key protocol (1978): accepted as secure for 17 years; error found only by Gavin Lowe's 1995 formal analysis (explicit man-in-the-middle attack) [11]
-  - Feit-Thompson theorem (1963), 255 pages - no end-to-end individual verification until a Microsoft Research/INRIA team produced a 150,000-line machine-checked Coq proof in 2012 [7]
-  - General principle: when a proof outruns one reviewer's capacity, errors can hide for a long time; cost of missing them ranges from embarrassment to fatality
+	- Needham-Schroeder public-key protocol (1978): accepted as secure for 17 years; error found only by Gavin Lowe's 1995 formal analysis (explicit man-in-the-middle attack) [11]
+	- Feit-Thompson theorem (1963), 255 pages - no end-to-end individual verification until a Microsoft Research/INRIA team produced a 150,000-line machine-checked Coq proof in 2012 [7]
+	- General principle: when a proof outruns one reviewer's capacity, errors can hide for a long time; cost of missing them ranges from embarrassment to fatality
 - AI sharpens the issue:
-  - LLMs produce proofs and code faster than any human reviewer can match
-  - Failure mode is confident hallucination - alien to heuristics human reviewers have developed
-  - DeepMind AlphaProof/AlphaGeometry 2 [15]: reached medal-level IMO performance by emitting Lean tactic scripts and re-checking each via kernel
-  - PFR conjecture formalised in Lean 4 in three weeks [10] via parallel contributor blueprint
-  - The kernel is what turns "AI suggested a proof" into "the proof checks out"
+	- LLMs produce proofs and code faster than any human reviewer can match
+	- Failure mode is confident hallucination - alien to heuristics human reviewers have developed
+	- DeepMind AlphaProof/AlphaGeometry 2 [15]: reached medal-level IMO performance by emitting Lean tactic scripts and re-checking each via kernel
+	- PFR conjecture formalised in Lean 4 in three weeks [10] via parallel contributor blueprint
+	- The kernel is what turns "AI suggested a proof" into "the proof checks out"
 - Proof assistants (Lean [5], Coq [6], Isabelle/HOL, Agda, PVS):
-  - Small trusted kernel checks each inference rule by rule
-  - Everything outside the kernel - tactics, automation, LLM suggestions - must produce a proof term the kernel accepts
-  - Analogous to unit tests, type checkers, CI in software
+	- Small trusted kernel checks each inference rule by rule
+	- Everything outside the kernel - tactics, automation, LLM suggestions - must produce a proof term the kernel accepts
+	- Analogous to unit tests, type checkers, CI in software
 - Report's thesis: mathematics is now in a similar position to programming around 1990 - tools exist, cost has fallen, the case for adoption has shifted from "academic rigour" to practical infrastructure
 - Project contribution: builds a proof assistant from scratch (~1,000 lines Python, 96-line kernel), formalises two theorems in both the toy and Lean 4, compares side by side
 - Two theorems chosen:
-  - **Deduction Theorem** - propositional logic metatheorem [4]; a result *about* the proof system
-  - **Glivenko's Theorem** (1929) - propositional formula is classically provable iff its double negation is intuitionistically provable; a result *inside* propositional logic
-  - Together they exercise proof-tree representation, classical-vs-intuitionistic distinction, and translation between two calculi
+	- **Deduction Theorem** - propositional logic metatheorem [4]; a result *about* the proof system
+	- **Glivenko's Theorem** (1929) - propositional formula is classically provable iff its double negation is intuitionistically provable; a result *inside* propositional logic
+	- Together they exercise proof-tree representation, classical-vs-intuitionistic distinction, and translation between two calculi
 
 ### Roadmap Note
 
@@ -92,10 +59,10 @@
 
 - Each layer was added because the previous layers missed a specific error class
 - Key failures referenced:
-  - Therac-25: race conditions and weak safety interlocks became lethal [17]
-  - Ariane 5 Flight 501: unprotected 64-bit float to 16-bit signed integer conversion in reused inertial-reference software; inquiry board recommended fuller testing and review of software assumptions [19]
-  - Intel Pentium FDIV flaw (1994): $475m pretax charge [20]
-  - AWS TLA+: formal specification of critical distributed-system designs before production [21]
+	- Therac-25: race conditions and weak safety interlocks became lethal [17]
+	- Ariane 5 Flight 501: unprotected 64-bit float to 16-bit signed integer conversion in reused inertial-reference software; inquiry board recommended fuller testing and review of software assumptions [19]
+	- Intel Pentium FDIV flaw (1994): $475m pretax charge [20]
+	- AWS TLA+: formal specification of critical distributed-system designs before production [21]
 - Cost of failure determines how aggressively a new layer is deployed
 
 ### 2.3 The Cumulative Effect
@@ -220,8 +187,8 @@
 - Reference: Mendelson [4, ch. 3]; first complete Isabelle/HOL formalisation by Paulson [3] (stated over hereditarily finite sets to keep syntactic coding manageable)
 - Practical consequence: every kernel sits on a trusted computing base it cannot verify from inside; confidence comes from the base being small, auditable, stable
 - **de Bruijn criterion**: a proof assistant is trustworthy if its kernel is small enough for a careful reader to audit by hand
-  - Lean 4 kernel: ~6,000 lines C++
-  - Toy kernel (Section 8): 96 lines Python, re-verified after every transformer's output
+	- Lean 4 kernel: ~6,000 lines C++
+	- Toy kernel (Section 8): 96 lines Python, re-verified after every transformer's output
 - Section 12.4 returns to this: Gödel does not let any system escape incompleteness, but a small kernel relocates trust from a distributed social process to a centralised auditable artefact
 
 ### 5.5 Short History of Proof Assistants
@@ -233,9 +200,9 @@
 - Isabelle/HOL - HOL + Isar structured-proof language
 - Lean (de Moura 2013; Lean 4, 2021) - CIC-based; mathlib library now the centre of gravity for contemporary formalised mathematics [2]
 - Two design families:
-  - Dependent type theory: Coq, Lean, Agda (descended from Automath/Coq)
-  - Higher-order logic: HOL Light, Isabelle/HOL (descended from LCF/HOL)
-  - PVS: classical HOL-family but with industrial-verification heritage; substantial NASA Langley use [22]
+	- Dependent type theory: Coq, Lean, Agda (descended from Automath/Coq)
+	- Higher-order logic: HOL Light, Isabelle/HOL (descended from LCF/HOL)
+	- PVS: classical HOL-family but with industrial-verification heritage; substantial NASA Langley use [22]
 - Hands-on scope here: dependent-type-theory family (Lean 4 + toy); Section 6 draws on wider ecosystem from literature
 
 ---
@@ -314,46 +281,46 @@ Five landmark formalisations spanning tools (Coq, Isabelle/HOL, Lean 4, CSP/FDR)
 - **Formalisation**: Microsoft Research/INRIA team led by Gonthier; 2006-2012; Coq + Ssreflect + Mathematical Components library (which they developed in parallel)
 - **Scale**: ~150,000 lines, ~4,000 definitions, ~13,000 lemmas, ~6 person-years
 - **What it shows**:
-  - Reorganised the classification infrastructure - exposed implicit dependencies between chapters
-  - Found no substantive mathematical error in the 1963 original - itself a finding at this length
-  - For Section 12 cost-benefit: 150,000-line figure includes the Mathematical Components infrastructure needed to *state* the proof, not just the proof itself
+	- Reorganised the classification infrastructure - exposed implicit dependencies between chapters
+	- Found no substantive mathematical error in the 1963 original - itself a finding at this length
+	- For Section 12 cost-benefit: 150,000-line figure includes the Mathematical Components infrastructure needed to *state* the proof, not just the proof itself
 
 ### 7.2 The Four Colour Theorem [8]
 
 - **Claim**: every planar map can be four-coloured (Appel and Haken, 1976; first major computer-assisted proof; case analysis of ~1,500 configurations could not be checked by hand)
 - **Formalisation**: Gonthier; Coq; ~2005; ~60,000 lines
 - **What it shows**:
-  - Closes the epistemic loop Appel and Haken opened - a computer-assisted proof can be verified by another system with a far smaller trusted base than the original C implementation
-  - For proofs whose shape is "check these many cases", marginal cost of formalisation is near-zero once the mathematical framework is in place - the case analysis becomes a decidable computation the kernel evaluates
-  - With Feit-Thompson, brackets the cost spectrum: mechanical case enumeration (cheap end) vs structural mathematical argument (expensive end)
+	- Closes the epistemic loop Appel and Haken opened - a computer-assisted proof can be verified by another system with a far smaller trusted base than the original C implementation
+	- For proofs whose shape is "check these many cases", marginal cost of formalisation is near-zero once the mathematical framework is in place - the case analysis becomes a decidable computation the kernel evaluates
+	- With Feit-Thompson, brackets the cost spectrum: mechanical case enumeration (cheap end) vs structural mathematical argument (expensive end)
 
 ### 7.3 Gödel's Incompleteness Theorems, Formalised [3]
 
 - **Claim**: Gödel's two incompleteness theorems are formally provable (Paulson, 2014; Isabelle/HOL)
 - **Formalisation**: stated over hereditarily finite sets rather than Peano arithmetic (simpler coding while results remain substantively equivalent); first complete machine-checked proof of both theorems
 - **What it shows**:
-  - Surfaced assumptions about syntactic substitution that informal treatments leave implicit - formalisation has no choice but to discharge them
-  - Proof assistants do not collapse at the meta-level: theorems *about* the limits of formal systems are formally checkable
-  - Prevents Section 12.4's Gödel caveat from being read as defeat: the practical benefit (small auditable kernel) does not require escaping the theoretical impossibility
+	- Surfaced assumptions about syntactic substitution that informal treatments leave implicit - formalisation has no choice but to discharge them
+	- Proof assistants do not collapse at the meta-level: theorems *about* the limits of formal systems are formally checkable
+	- Prevents Section 12.4's Gödel caveat from being read as defeat: the practical benefit (small auditable kernel) does not require escaping the theoretical impossibility
 
 ### 7.4 The PFR Conjecture in Lean 4 [10]
 
 - **Claim**: Marton's Polynomial Freiman-Ruzsa conjecture (resolved by Tao, Gowers, Green, Manners, late 2023)
 - **Formalisation**: within three weeks of preprint; Tao-coordinated community effort in Lean 4; blueprint methodology - paper decomposed into annotated lemma dependency graph, contributors discharge lemmas in parallel with mathlib automation; Lean's kernel certifies each before it counts
 - **What it shows**:
-  - Lean 4 + mathlib is mature enough to track active research in real time (Feit-Thompson: 6 years; Four Colour: multi-year; Gödel: Paulson's career attention; PFR: 3 weeks)
-  - Blueprint methodology is reusable infrastructure - changes "formalise a proof" from a single-author multi-year project to a distributed weeks-long effort
-  - Strongest argument among the five case studies that formal methods have crossed a threshold from specialist rigour-enhancement to everyday mathematical infrastructure
-  - Connects directly to Section 4's AI argument; Section 12 returns to it as the per-commit-CI shift transposed to mathematics
+	- Lean 4 + mathlib is mature enough to track active research in real time (Feit-Thompson: 6 years; Four Colour: multi-year; Gödel: Paulson's career attention; PFR: 3 weeks)
+	- Blueprint methodology is reusable infrastructure - changes "formalise a proof" from a single-author multi-year project to a distributed weeks-long effort
+	- Strongest argument among the five case studies that formal methods have crossed a threshold from specialist rigour-enhancement to everyday mathematical infrastructure
+	- Connects directly to Section 4's AI argument; Section 12 returns to it as the per-commit-CI shift transposed to mathematics
 
 ### 7.5 Needham-Schroeder and Formal Protocol Verification [11], [12]
 
 - **Claim**: the Needham-Schroeder public-key protocol (1978) was believed secure
 - **Formalisation / analysis**: Lowe (1995); CSP + FDR; produced an explicit man-in-the-middle attack trace [11]; also proposed a small repair (add responder's identity to second protocol message); Smyth's PhD thesis [12] generalises the methodology into a Dolev-Yao framework
 - **What it shows**:
-  - Only case study here where the original argument was *wrong* - formal method's contribution was falsification, not re-verification
-  - Seventeen-year gap matters: in safety-critical/security-critical settings, the cost of missing errors that peer review let through is not a rounding error
-  - Sets up Section 12.1's industrial-axis argument alongside Intel FDIV [20], AWS TLA+ [21], NASA PVS [22]: where mistakes are expensive, formal verification is an insurance premium not a tax
+	- Only case study here where the original argument was *wrong* - formal method's contribution was falsification, not re-verification
+	- Seventeen-year gap matters: in safety-critical/security-critical settings, the cost of missing errors that peer review let through is not a rounding error
+	- Sets up Section 12.1's industrial-axis argument alongside Intel FDIV [20], AWS TLA+ [21], NASA PVS [22]: where mistakes are expensive, formal verification is an insurance premium not a tax
 
 ### 7.6 Scale Comparison Table
 
@@ -386,10 +353,10 @@ Five landmark formalisations spanning tools (Coq, Isabelle/HOL, Lean 4, CSP/FDR)
 - Both shortlisted theorems (Deduction Theorem; Glivenko's) are pure propositional → toy stops at propositional logic
 - Primitive vocabulary: variables, falsum (`⊥`), implication (`→`); negation `¬A` defined as `A → ⊥`; no conjunction or disjunction (neither shortlisted theorem needs them)
 - Axiom schemas:
-  - A1: `A → (B → A)`
-  - A2: `(A → (B → C)) → ((A → B) → (A → C))`
-  - A3 (classical): `(¬B → ¬A) → (A → B)`
-  - ExFalso (intuitionistic, replaces A3): `⊥ → A`
+	- A1: `A → (B → A)`
+	- A2: `(A → (B → C)) → ((A → B) → (A → C))`
+	- A3 (classical): `(¬B → ¬A) → (A → B)`
+	- ExFalso (intuitionistic, replaces A3): `⊥ → A`
 - Classical: A1 + A2 + A3 + MP; Intuitionistic: A1 + A2 + ExFalso + MP
 - Supervisor's steer (March 2026 pivot): "don't overbuild the toy; it only needs to be big enough for the chosen theorems" - REMINDER: mention the pivot/supervisor steer explicitly
 
@@ -429,16 +396,16 @@ def not_not(a: Formula) -> Formula:
 
 - Proof is also a tree: tree of inference-rule applications
 - Five constructors for classical kernel, plus one for the intuitionistic-only rule:
-  - `Assumption(ctx, formula)` - an assumption drawn from context
-  - `AxiomA1(ctx, a, b)` - instance of axiom A1
-  - `AxiomA2(ctx, a, b, c)` - instance of axiom A2
-  - `AxiomA3(ctx, a, b)` - instance of axiom A3 (classical only)
-  - `ExFalso(ctx, a)` - ex falso quodlibet (intuitionistic only)
-  - `ModusPonens(ctx, imp, ant)` - MP application, imp and ant are sub-`Proof` objects
+	- `Assumption(ctx, formula)` - an assumption drawn from context
+	- `AxiomA1(ctx, a, b)` - instance of axiom A1
+	- `AxiomA2(ctx, a, b, c)` - instance of axiom A2
+	- `AxiomA3(ctx, a, b)` - instance of axiom A3 (classical only)
+	- `ExFalso(ctx, a)` - ex falso quodlibet (intuitionistic only)
+	- `ModusPonens(ctx, imp, ant)` - MP application, imp and ant are sub-`Proof` objects
 - Design choices:
-  - `ctx` is a **tuple** (not a list) - tuples are hashable; kernel compares contexts for equality during MP
-  - Every `Proof` subclass carries its own `ctx` - self-contained (no threaded state parameter); redundancy is what the kernel cross-checks
-  - A `ModusPonens` whose subproofs have a different context than the conclusion is rejected
+	- `ctx` is a **tuple** (not a list) - tuples are hashable; kernel compares contexts for equality during MP
+	- Every `Proof` subclass carries its own `ctx` - self-contained (no threaded state parameter); redundancy is what the kernel cross-checks
+	- A `ModusPonens` whose subproofs have a different context than the conclusion is rejected
 - Analogy: same shape as a typed AST in a compiler - each node carries type info the type-checker needs; proof object is a typed AST whose "type" is the formula it derives
 
 ### 8.5 Writing the Kernel
@@ -516,11 +483,11 @@ INTUITIONISTIC = Calculus(
 
 ```python
 ?start:       implication
-?implication: negation ("->'" implication)?   -> maybe_imp
-?negation:    "~" negation                    -> neg_form
+?implication: negation ("->'" implication)? 	- > maybe_imp
+?negation:    "~" negation                  	- > neg_form
             | atom
-?atom:        VAR                             -> var
-            | BOT                             -> bot
+?atom:        VAR                           	- > var
+            | BOT                           	- > bot
             | "(" implication ")"
 VAR:          "p" INT
 BOT:          "_|_" | "⊥"
@@ -555,8 +522,8 @@ src/formal_toy/
 
 - ~1,000 lines source + 470 tests; kernel is 96 lines
 - Verification:
-  - `python -m mypy --strict src/` → exhaustiveness + type correctness
-  - `python -m pytest -q` → 51 passed
+	- `python -m mypy --strict src/` → exhaustiveness + type correctness
+	- `python -m pytest -q` → 51 passed
 - Combination is the toy's correctness statement: types pass + tests pass = CI-equivalent
 
 ### 8.10 Consequences of the Construction
@@ -605,8 +572,8 @@ def deduction_transform(proof: Proof, hyp: Formula, calculus: Calculus) -> Proof
 
 - **Statement** (Glivenko 1929): for any propositional formula `A` and context `Γ` - `Γ ⊢_CL A` iff `Γ ⊢_INT ¬¬A`
 - Two functions in `formal_toy/theorems/glivenko.py`:
-  - `glivenko_translate`: classical proof → intuitionistic proof of double negation (forward direction)
-  - `glivenko_reverse`: back again (reverse direction)
+	- `glivenko_translate`: classical proof → intuitionistic proof of double negation (forward direction)
+	- `glivenko_reverse`: back again (reverse direction)
 - Forward direction recurses on structure of classical proof:
 
 ```python
@@ -690,12 +657,12 @@ private theorem deduction_aux {Γ' : List Formula} {B : Formula}
 - **Statement**: same as Section 9.2
 - `IntProof` (intuitionistic system) defined in `FormalMethods/Glivenko.lean` - replaces `axiom₃` with ex falso quodlibet; A1, A2, and MP shared with classical `Hilbert`; reuses `Hilbert` from `DeductionTheorem.lean` as classical system (no duplicate inductive)
 - Forward direction (`glivenko_forward`) by induction on classical derivation:
-  - `assumption`, `axiom₁`, `axiom₂`: fold into single application of `dni` (double-negation introduction)
-  - `modusPonens`: uses `dn_distrib` (distribution of `¬¬` over `⟹`) + two MP applications
-  - `axiom₃`: dedicated lemma `dn_axiom₃` - the single hardest piece in the file
+	- `assumption`, `axiom₁`, `axiom₂`: fold into single application of `dni` (double-negation introduction)
+	- `modusPonens`: uses `dn_distrib` (distribution of `¬¬` over `⟹`) + two MP applications
+	- `axiom₃`: dedicated lemma `dn_axiom₃` - the single hardest piece in the file
 - `dn_axiom₃` - intuitionistic proof of `¬¬((~B ⟹ ~A) ⟹ (A ⟹ B))`:
-  - Uses `neg_imp_dn_ant` and `neg_imp_neg_conseq` applied twice each to produce `¬¬(~B ⟹ ~A)`, `¬(A ⟹ B)`, `¬¬A`, `¬B` under hypothesis `¬X` where `X = (~B ⟹ ~A) ⟹ (A ⟹ B)`
-  - Short internal derivation builds `¬(~B ⟹ ~A)`, MP'd against `¬¬(~B ⟹ ~A)` yields `⊥`; one more `int_deduction` peels `¬X` to produce `¬¬X`
+	- Uses `neg_imp_dn_ant` and `neg_imp_neg_conseq` applied twice each to produce `¬¬(~B ⟹ ~A)`, `¬(A ⟹ B)`, `¬¬A`, `¬B` under hypothesis `¬X` where `X = (~B ⟹ ~A) ⟹ (A ⟹ B)`
+	- Short internal derivation builds `¬(~B ⟹ ~A)`, MP'd against `¬¬(~B ⟹ ~A)` yields `⊥`; one more `int_deduction` peels `¬X` to produce `¬¬X`
 - Reverse direction (`glivenko_reverse`): uses `int_to_cl` (lift intuitionistic to classical using A3 for `⊥ ⟹ A`) and `cl_dne` (classical double-negation elimination from A3)
 - Bundled biconditional:
 
@@ -848,18 +815,18 @@ Three observations from Sections 8-11 that would not surface from a Lean-only pr
 - Report opened with Knight Capital's loss of >$460m in 45 minutes due to compound deployment error - not one bad line, but an interaction of code reuse, deployment, monitoring, and control; post-mortem response was another layer [18]
 - Mathematics' equivalent: proof accepted on peer review, error hidden for years; examples: Wiles' 1993 announcement needing repair [23]; Needham-Schroeder's 17 years of false security [11]; community catches errors when it does and misses them when it does not - pattern of single-layer defence
 - Thesis: mathematics is now in the position programming was in around 1990 - tools exist, cost has fallen, the practical question is where to start
-  - PFR [10]: the layer can keep up with active research
-  - AlphaProof [15]: AI-generated proofs can be routed through the layer
-  - Toy (Section 8): the layer is small enough to read in one sitting
-  - None of these available in 1990; AI angle not available even in 2020
+	- PFR [10]: the layer can keep up with active research
+	- AlphaProof [15]: AI-generated proofs can be routed through the layer
+	- Toy (Section 8): the layer is small enough to read in one sitting
+	- None of these available in 1990; AI angle not available even in 2020
 - Project's contribution: toy assistant + comparison in Section 11; three things demonstrated that reading alone could not:
   1. Kernel really is small: 96 lines Python, auditable in an afternoon
   2. Size overlap between toy and Lean on these two theorems (within ~5% each) shows industrial tool pays no per-theorem tax at this complexity; overhead is toolchain setup and library scale
   3. Explicit-everything design making toy pedagogically transparent is the same property making it LLM-emit-friendly - "the loose end Section 12.6 most wants pulled"
 - Answer to headline question (*where do formal methods add value, and where do they add overhead without matching rigour gain?*):
-  - **Add value**: safety-critical systems, frontier research mathematics, pedagogy, and wherever the candidate proof came from a language model
-  - **Add overhead without gain**: routine proof reproduction, over-tooled small targets
-  - Everywhere formal methods earn their cost, the layer becomes infrastructure that gets taken for granted once it exists - the same way programmers stopped arguing about whether to write tests once tests were the default
+	- **Add value**: safety-critical systems, frontier research mathematics, pedagogy, and wherever the candidate proof came from a language model
+	- **Add overhead without gain**: routine proof reproduction, over-tooled small targets
+	- Everywhere formal methods earn their cost, the layer becomes infrastructure that gets taken for granted once it exists - the same way programmers stopped arguing about whether to write tests once tests were the default
 - Closing frame: Knight Capital lost >$460m because the deployment process had not forced the defective configuration to fail before production [18]; the fix was not better trust in the deployer, it was a new automated check; mathematics has spent decades trusting the deployer; the mechanical check is now practical enough to be part of the mathematical workflow
 
 ---
@@ -945,22 +912,22 @@ Three observations from Sections 8-11 that would not surface from a Lean-only pr
 - Source: `project/formalisations/lean/formal_methods/`
 - No mathlib dependency; `lake build` completes with zero `sorry` and zero `axiom` (outside comments)
 - Three files total: 508 lines
-  - `FormalMethods/Basic.lean` - shared `Formula` type, notation (`⟹`, `~`), `neg`/`notNot` abbreviations; 46 lines
-  - `FormalMethods/DeductionTheorem.lean` - classical `Hilbert` inductive, `arrow_self`, weakening (`weaken`, `weaken_cons`), `deduction_aux`, `deduction`; 139 lines
-  - `FormalMethods/Glivenko.lean` - `IntProof` inductive; intuitionistic infrastructure (`int_arrow_self`, `int_weaken`, `int_weaken_cons`, `int_deduction`); lifting `int_to_cl`; six helper lemmas (`dni`, `dni_of_proof`, `neg_imp_neg_conseq`, `neg_imp_dn_ant`, `dn_distrib`, `dn_axiom₃`); `cl_dne`; `glivenko_forward`, `glivenko_reverse`, `glivenko`; 323 lines
+	- `FormalMethods/Basic.lean` - shared `Formula` type, notation (`⟹`, `~`), `neg`/`notNot` abbreviations; 46 lines
+	- `FormalMethods/DeductionTheorem.lean` - classical `Hilbert` inductive, `arrow_self`, weakening (`weaken`, `weaken_cons`), `deduction_aux`, `deduction`; 139 lines
+	- `FormalMethods/Glivenko.lean` - `IntProof` inductive; intuitionistic infrastructure (`int_arrow_self`, `int_weaken`, `int_weaken_cons`, `int_deduction`); lifting `int_to_cl`; six helper lemmas (`dni`, `dni_of_proof`, `neg_imp_neg_conseq`, `neg_imp_dn_ant`, `dn_distrib`, `dn_axiom₃`); `cl_dne`; `glivenko_forward`, `glivenko_reverse`, `glivenko`; 323 lines
 
 ### C. Full Toy Proof Assistant Listings
 
 - Source: `project/formalisations/toy/`; ~1,470 lines Python (source + tests)
 - `mypy --strict src/` clean; `pytest -q tests/` reports 51 passed
-  - `src/formal_toy/kernel.py` - trusted core; one `match` over six proof-rule constructors; 96 lines including docstrings
-  - `src/formal_toy/ast.py` - `Formula` and `Proof` ADTs as frozen dataclasses; 162 lines
-  - `src/formal_toy/parser.py` - Lark grammar for formulae; 80 lines
-  - `src/formal_toy/calculus.py` - `CLASSICAL` and `INTUITIONISTIC` rule tables; 54 lines
-  - `src/formal_toy/theorems/deduction.py` - `arrow_self`, `weaken`, `weaken_cons`, `deduction_transform`; 145 lines
-  - `src/formal_toy/theorems/glivenko.py` - all Glivenko helpers and main functions; 343 lines
-  - `src/formal_toy/repl.py` - interactive front-end, four commands; 121 lines
-  - `tests/` - five test modules, 471 lines, 51 assertions, all green
+	- `src/formal_toy/kernel.py` - trusted core; one `match` over six proof-rule constructors; 96 lines including docstrings
+	- `src/formal_toy/ast.py` - `Formula` and `Proof` ADTs as frozen dataclasses; 162 lines
+	- `src/formal_toy/parser.py` - Lark grammar for formulae; 80 lines
+	- `src/formal_toy/calculus.py` - `CLASSICAL` and `INTUITIONISTIC` rule tables; 54 lines
+	- `src/formal_toy/theorems/deduction.py` - `arrow_self`, `weaken`, `weaken_cons`, `deduction_transform`; 145 lines
+	- `src/formal_toy/theorems/glivenko.py` - all Glivenko helpers and main functions; 343 lines
+	- `src/formal_toy/repl.py` - interactive front-end, four commands; 121 lines
+	- `tests/` - five test modules, 471 lines, 51 assertions, all green
 
 ### D. Supervision Meeting Log Excerpt
 
@@ -975,7 +942,7 @@ Three observations from Sections 8-11 that would not surface from a Lean-only pr
 ```bash
 cd project/formalisations/lean/formal_methods
 lake build
-# expect: "Build completed successfully."  -  no errors, no `sorry`
+# expect: "Build completed successfully."	-   no errors, no `sorry`
 ```
 
 **Python toy assistant (Python 3.11+):**

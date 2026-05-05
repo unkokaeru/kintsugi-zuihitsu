@@ -1,26 +1,3 @@
-# Abstract
-
-Mathematics has long relied on peer review as its main correctness filter. Peer review remains essential, but it is still a human process, and long or highly specialised proofs can exceed what any single reader can reliably audit. Software engineering has responded to similar fragility by building layers of mechanical checking: type systems, tests, continuous integration, fuzzing, and formal verification. This report asks what analogous robustness formal methods can offer mathematics, where they demonstrate value, and where they add overhead without a matching gain in rigour. It surveys proof assistants and landmark formalisations, builds a proof assistant for propositional logic, and uses it to formalise the Deduction Theorem and Glivenko's Theorem. The same theorems are then formalised in Lean 4, allowing a comparison between a transparent toy kernel and an industrial proof assistant. Formal methods emerge as most compelling for safety-critical systems, frontier research mathematics, pedagogy, and AI-assisted proof production.
-
-# Table of Contents
-
-1. Introduction
-2. Trust and Verification in Software Engineering
-3. Trust and Verification in Mathematical Practice
-4. Artificial Intelligence and Mechanical Checking
-5. Logical and Type-Theoretic Background
-6. Proof Assistants
-7. Case Studies in Formal Verification
-8. Construction of a Toy Proof Assistant
-9. Formalising Two Theorems in the Toy Assistant
-10. Formalising the Same Theorems in Lean 4
-11. Comparison of the Two Formalisations
-12. Discussion
-13. Conclusion
-Acknowledgements
-References
-Appendix
-
 # 1. Introduction
 
 On 1 August 2012, Knight Capital lost more than $460 million in the first forty-five minutes of trading after a deployment fault reactivated defective routing code [18]. The engineering response was the response engineering always gives to errors of this kind: more tests, stricter types, tighter CI, additional review gates between intent and production. Programming has spent half a century building defence in depth around the fact that humans write buggy code and compilers will run anything that parses.
