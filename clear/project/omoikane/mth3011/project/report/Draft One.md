@@ -1,7 +1,7 @@
 # Draft One
 
 > [!abstract]
-> ...
+> …
 
 ## 1 Introduction
 
@@ -15,5 +15,6 @@
 
 ### 1.3 Notation
 
-...
+…
 
+## 2
