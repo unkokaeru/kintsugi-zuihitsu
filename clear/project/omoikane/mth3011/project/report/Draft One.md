@@ -52,4 +52,10 @@ To begin this report, Sections 2-4 will set up the framing: programming's defenc
 
 ## 2. Trust and Verification in Software Engineering
 
-The Knight Capital incident is a useful case to begin with exploring, as it wasn't caused by an individual making an obvious mistake. Instead, the SEC descib
+The Knight Capital incident is a useful case to begin with exploring, as it wasn't caused by an individual making an obvious mistake. Instead, the SEC describes the cause as old code, mixed with an incomplete deployment, some missed automated warnings, and inadequate controls interacting under the load of production [18]. This myriad of factors is exactly the compound failure which is countered by the engineering practice of layers.
+
+Hence, programming's response to these failures is usually to build on these layers. Due to the many failures of other industries, modern best practice has standardised the feature flags, gated rollouts, and pre-production deployment that Knight's process missed. So, it repeats: a type of error is missed, a new layer of mechanical check is built, and over time the layers combine into a structure that catches almost everything.
+
+### 2.1 The Layers
+
+The current structure of these layers, used by modern production code, is split into six.

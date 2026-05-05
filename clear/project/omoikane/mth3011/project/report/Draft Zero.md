@@ -1,9 +1,5 @@
 # 2. Trust and Verification in Software Engineering
 
-The Knight Capital incident from Section 1 is a useful starting point because it was not caused by one programmer making one obvious mistake. The SEC's account describes old code, an incomplete deployment, missed automated warnings, and inadequate controls interacting under production load [18]. That is exactly the kind of compound failure for which engineering practice adds layers.
-
-Programming's response to such failures is usually to add another layer. Industry post-mortems standardised feature flags, gated rollouts, and the "deploy to one server first" pattern Knight's process had skipped. The shape repeats: a class of error gets missed, a new layer of mechanical checking is built, and over time the layers compose into something that catches almost everything. Modern production code typically passes through five or six of them before reaching users.
-
 ## 2.1 The Layers
 
 **Types.** The cheapest defence and the first. A Python `int` cannot be passed to a function expecting `str`; a Rust `String` cannot be passed where an `&str` is expected. The check is mechanical, runs at compile time, and rejects whole classes of error before any test runs. Pierce [13] is the canonical reference for the foundational ideas; modern industrial languages have made type systems the first thing a programmer sees and the cheapest thing to satisfy.
