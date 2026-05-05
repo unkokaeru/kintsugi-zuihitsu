@@ -49,3 +49,7 @@ The thesis of this report is that mathematics is now in a similar position to pr
 ### 1.2 Road Map
 
 To begin this report, Sections 2-4 will set up the framing: programming's defence in depth, mathematics' single layer of peer review, and the pressure thus created by AI-assisted mathematics. Then, Section 5 lays the foundations for formalisations with logic, type theory, Curry-Howard, and Gödel's caveat. Section 6 explores the current proof assistant ecosystem, and Section 7 discusses five landmark case studies within it, to prime the reader to develop a toy assistant in Section 8. Sections 9-10 then formalise two theorems in the toy assistant, then in Lean, and Section 11 compares the two. Finally, Section 12 returns to the opening analogy with everything assembled, and Section 13 closes the report.
+
+## 2. Trust and Verification in Software Engineering
+
+The Knight Capital incident is a useful case to begin with exploring, as it wasn't caused by an individual making an obvious mistake. Instead, the SEC descib
