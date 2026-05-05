@@ -2,9 +2,6 @@
 
 ## 1. Introduction
 
-- AI sharpens the issue:
-	- PFR conjecture formalised in Lean 4 in three weeks [10] via parallel contributor blueprint
-	- The kernel is what turns "AI suggested a proof" into "the proof checks out"
 - Proof assistants (Lean [5], Coq [6], Isabelle/HOL, Agda, PVS):
 	- Small trusted kernel checks each inference rule by rule
 	- Everything outside the kernel - tactics, automation, LLM suggestions - must produce a proof term the kernel accepts
