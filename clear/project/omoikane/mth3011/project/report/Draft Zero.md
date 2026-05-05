@@ -54,7 +54,7 @@ By 2026 the cumulative position is straightforward: a working programmer trusts 
 
 This is the trust model mathematics is missing. Peer review remains the only systematic layer between a proposed proof and the literature, and peer review is - by the lights of the programming model - one layer where six or seven would be standard practice. §3 takes up what mathematics has been doing instead, and where it has been working or failing, before §4 introduces the AI-era pressure that has made the gap more urgent than it has ever been.
 
-# One Layer of Defence: How Mathematics Has Done It
+# 3. One Layer of Defence: How Mathematics Has Done It
 
 Mathematics has, for most of its history, had one layer in the §2 sense. A proof is written; one or two referees read it; the journal accepts or rejects; the result enters the literature. The next reader is trusted to catch any further errors, and so is the reader after that. There is no analogue of types, no analogue of CI, no analogue of fuzzing. Peer review and downstream attention together carry the entire weight of trust.
 
@@ -84,7 +84,7 @@ What proof assistants offer that the earlier projects could not is mechanisation
 
 -4 takes up the AI inflection that has changed the cost-benefit calculus on installing the layer now, rather than at some indefinite future point.
 
-# The AI Inflection
+# 4. The AI Inflection
 
 The argument so far - mathematics has one layer, programming has six, the gap is the trust differential - holds independently of recent AI developments. Three things about the last three years sharpen it.
 
@@ -126,7 +126,7 @@ The programming community went through this transition ten years earlier with a 
 
 The remaining sections develop the argument in depth. §5 introduces the formal foundations a kernel rests on. §6 surveys the tools available. §7 examines five landmark cases. §8 builds a kernel from scratch on the page, so the reader can see what one looks like. §§9-11 use the kernel - and Lean's - to formalise two propositional theorems, with the comparison delivering on the central question.
 
-# Foundations of a Trust Layer
+# 5. Foundations of a Trust Layer
 
 -§2-4 argued that mathematics needs the kind of mechanical checking programming has. §5 sets out the formal machinery a checker rests on. The treatment is compact: specialised topics are taken only to the depth later sections draw on.
 
@@ -175,7 +175,7 @@ The line from idea to industrial artefact runs roughly: de Bruijn's Automath (19
 
 Two design families emerge. One, descended from Automath and Coq, sits on dependent type theory: Coq, Lean, Agda. The other, descended from LCF and HOL, sits on higher-order logic: HOL Light, Isabelle/HOL. PVS sits slightly outside this taxonomy - classical HOL-family, but with an industrial-verification heritage that gave it NASA flight-system certification work. This project's hands-on scope is the dependent-type-theory family (Lean 4 plus the toy); §6 draws on the wider ecosystem from the literature to calibrate later comparison.
 
-# The Proof-Assistant Ecosystem
+# 6. The Proof-Assistant Ecosystem
 
 -5 gave the formal machinery; §6 surveys the tools that implement it. Two parts: Lean 4 in depth, because the project uses it hands-on, and the wider ecosystem in outline, because any serious answer to "where do formal methods matter?" has to acknowledge that different communities have chosen different tools.
 
@@ -221,7 +221,7 @@ No single tool dominates every axis. Lean wins on research-mathematics momentum,
 
 For a project asking where formal methods matter, this matters: the answer depends on which community is being asked. Research mathematics today is making the case for Lean; industrial verification is making the case for Coq, Isabelle, or PVS depending on the domain; nobody is making the case that one tool should serve every use. §12 returns to this when separating "where formal proofs earn their cost" from "where they over-tool the target".
 
-# Case Studies: Formal Methods at Work
+# 7. Case Studies: Formal Methods at Work
 
 Five landmark formalisations, chosen to span tools (Coq, Isabelle/HOL, Lean 4, CSP/FDR), eras (1995-2024), and purposes (pure mathematics, foundational logic, security-protocol verification). Each case is presented with the same shape: claim, formalisation details, what it demonstrates for the report's thesis. Full reading notes back these summaries in `project/reading notes/case studies/`.
 
@@ -269,7 +269,7 @@ The five cases span tool, era, and kind-of-finding. The table below summarises; 
 | PFR conjecture          | 2024  | Lean 4 + blueprint | (distributed) | ~3 weeks (dozens of contributors) | Real-time formalisation        |
 | Needham-Schroeder       | 1995  | CSP + FDR          | small         | short                             | Falsified a 17-year-old result |
 
-# Build Your Own: A Proof Assistant From Scratch
+# 8. Build Your Own: A Proof Assistant From Scratch
 
 The chapter title commits to something specific: by the end of these pages, a reader who has been following along will understand what a proof assistant does internally, because the report has built one in front of them. The toy is small enough to make this feasible. Lean's kernel is around 6,000 lines of C++ and irreducible to a tutorial; the toy is around 100 lines of Python and reducible to one.
 
@@ -509,7 +509,7 @@ Third, the trust chain is fully visible. A reader of this report can look at the
 
 -9 puts the toy to work on the two shortlisted theorems.
 
-# Formalising Two Theorems in the Toy
+# 9. Formalising Two Theorems in the Toy
 
 The toy from §8 is a kernel and surrounding scaffolding; on its own it proves nothing. §9 puts it to work on the two shortlisted theorems: the Deduction Theorem (§9.1) and Glivenko's Theorem (§9.2). Both are written as Python transformers - functions that take a proof object and return another proof object - with the kernel re-checking every output to certify correctness.
 
@@ -584,7 +584,7 @@ Second, the AxiomA3 case in `glivenko_translate` is the only one that does subst
 
 Both observations matter for §11's cross-tool comparison and for §12.3's argument about LLM-emit-friendliness: the toy's style makes the structure of a proof transparent in a way that helps both human auditors and machine generators.
 
-# The Same Theorems in Lean 4
+# 10. The Same Theorems in Lean 4
 
 -9 proved the two theorems in the toy. §10 proves them again in Lean 4, the industrial counterpoint. The point of doing both is not redundancy but contrast: §11 will measure where each tool's affordances helped and where they got in the way. Both formalisations live in `project/formalisations/lean/formal_methods/FormalMethods/`. The development uses no mathlib dependency - it relies only on `List`, `Nat`, and `Prop` from Lean core. Keeping the build self-contained matches the propositional-only scope and makes the dependency tree auditable in full.
 
@@ -706,7 +706,7 @@ Second, the "prove a helper with a generic-context equality, then specialise" pa
 
 Full listings are in §14.B: 462 lines for the two theorem files, 508 including shared `Basic.lean`.
 
-# Cross-Tool Comparison
+# 11. Cross-Tool Comparison
 
 -§9-10 produced two formalisations of the same two theorems. §11 lays them alongside each other and asks where each tool's affordances paid off and where they got in the way.
 
@@ -754,7 +754,7 @@ Both tools share a common ancestor: a typed-core checker that reads a proof obje
 
 One pedagogical suggestion follows, offered tentatively from one student's experience: a final-year logic or type-theory course could profitably put a build-a-minimal-kernel exercise before introducing Lean or Coq proper. The shift between "I can use the tactic language" and "I know what the kernel is doing under the tactics" is larger than expected, and hard to come at from reading alone. §12.1 picks the thread up under pedagogy as one of the three settings where formal methods earn their cost.
 
-# Discussion: The Unit-Test Analogy Returns
+# 12. Discussion: The Unit-Test Analogy Returns
 
 The report opened with a programmer's response to errors - layers - and a claim that mathematics is now in the position programming was in around 1990. Six chapters of evidence later, the analogy can carry weight beyond rhetoric.
 
@@ -813,7 +813,7 @@ Four follow-ups would deepen the work.
 3. **Verify the toy's kernel in Lean.** 96 lines is small enough to state and prove kernel correctness in Lean against a formal model of the same Hilbert calculus. Self-referential but bounded, and the result is a Lean-backed correctness guarantee for the toy.
 4. **AI-assisted proof discovery on the toy.** PFR explored Lean-with-AI [10]; an analogous experiment in the toy would be smaller and more controlled. The toy's proof objects are easier for a language model to emit correctly than Lean's tactic scripts because every step is explicit, which makes the toy a candidate testbed for empirical work on LLM-assisted formalisation. This is the loose end the report most wants pulled.
 
-# Conclusion
+# 13. Conclusion
 
 The report opened with Knight Capital's $440 million loss in forty-five minutes. The cause was old code that had passed unit tests, integration tests, and review, defeated by a configuration error nobody had checked. The post-mortem response was another layer.
 
@@ -827,7 +827,7 @@ The headline question, *where do formal methods add value, and where do they add
 
 Knight Capital lost $440 million because nobody had run the deployment in the new configuration. The fix was not better trust in the deployer; it was a new automated check. Mathematics has spent decades trusting the deployer. The check has finally arrived.
 
-# Appendix
+# 14. Appendix
 
 Per supervisor advice (2026-03-04 email archived in `project/supervision.md`), lengthy code listings and original-plan material live here rather than in the main body. Pointers below; the files referenced are reproduced verbatim in the submitted PDF.
 
@@ -924,7 +924,7 @@ python -m pytest -q                # expect: 51 passed
 
 The REPL is launchable with `python -m formal_toy` (or `formal-toy` if the package has been installed with its console script).
 
-# References
+# 15. References
 
 IEEE-numbered reference list for the final report. This is the single source of truth: section files cite as `[N]` where `N` matches the number below. Obsidian will handle PDF / LaTeX export at submission time - no Pandoc or external bibliography tool is in the loop.
 
