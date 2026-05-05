@@ -1,21 +1,5 @@
 # Report Bullet Outline: Formal Methods in Mathematics
 
-## 1. Introduction
-
-### Roadmap Note
-
-- Sections 2-4: framing (software layers, maths single-layer, AI pressure)
-- Section 5: formal foundations
-- Section 6: proof-assistant ecosystem
-- Section 7: five landmark case studies
-- Section 8: build of toy assistant
-- Sections 9-10: formalise two theorems (toy, then Lean)
-- Section 11: side-by-side comparison
-- Section 12: discussion; Section 13: conclusion
-- Appendix: Research Plan, full Lean listings, full toy listings, supervision log excerpt, build/verification commands
-
----
-
 ## 2. Trust and Verification in Software Engineering
 
 - Knight Capital failure was compound - old code, incomplete deployment, missed automated warnings, inadequate controls interacting under load [18]
