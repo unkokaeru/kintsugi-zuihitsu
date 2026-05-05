@@ -18723,6 +18723,33 @@
         "nonWhitespaceCharacterCount": 0,
         "newlineCount": 0
       }
+    },
+    "clear/project/omoikane/mth3011/project/report/Outline.md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 9193,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 18.386,
+      "characterCount": 71054,
+      "nonWhitespaceCharacterCount": 58554,
+      "newlineCount": 1020,
+      "readingTimeInMinutes": 34.69056603773585,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1778004843946,
+      "modifiedDate": 1778004815003,
+      "sizeInBytes": 71459,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
+      }
     }
   }
 }
