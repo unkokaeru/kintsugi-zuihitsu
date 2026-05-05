@@ -32,6 +32,8 @@ For centuries, mathematics has relied on peer review to filter out invalid argum
 
 ## 1 Introduction
 
+### 1.1 Overview
+
 On the 1st of August, 2012, Knight Capital started the first forty-five minutes of the trading day by losing more than $460 million. This was from a basic deployment fault which reactivated faulty routing code [18], and the engineers responded by covering the systems in even more layers: more tests, stricter types, tighter continuous integration, and additional gates for review. Programming has had monumental pressure to build defence-in-depth, often controlling enormous portions of the world's economy, because humans are fallible; they write buggy code.
 
 Mathematics had not responded the same way. A proof must pass peer review, sometimes several rounds of peer review, but are taken on trust thereafter. This system works by building a mixture of reasoning and trust, which works when each part of the system can fit comfortably in one head. It strains when they do not.
@@ -40,4 +42,10 @@ Two events illustrate this problem clearly. First, in 1978, the Needham-Schroede
 
 Generally, the past demonstrates that when a proof overwhelms one review's capacity, errors can hide for a long time - ranging from embarrassment to fatality, depending on what's relying on the proof. With the recent rise in the use of AI, this capacity is overwhelmed even quicker. Large language models now produce proofs and code faster than any human review could possibly match, and with errors that reviewers aren't accustomed to catching: confident hallucinations. Despite this, DeepMind's AlphaProof and AlphaGeometry [15] have reached medal-level performance on Olympiad problems by writing Lean tactic scripts and rechecking each via the kernel - grounding the AI's output in formal methods. The PFR conjecture's three-week formalisation in Lean 4 [10] is the clearest recent example of the same trend in real research mathematics. Dozens of contributors decomposed Tao, Gowers, Green, and Manners' preprint into lemmas in parallel, with each lemma rechecked by Lean's kernel before counting towards the proof. The kernel transforms the AI's suggestion of a proof into a formally verified one, without need for manual human review.
 
-Proof assistants - Lean [5], Coq [6], Isabelle/HOL, Agda, PVS - are the analogous 
+Proof assistants - Lean [5], Coq [6], Isabelle/HOL, Agda, PVS - are the analogous layers to unit tests, type checkers, and continuous integration in software. A small trusted kernel checks each inference rule by rule, and all tactics, automation, and LLM suggestions outside the kernel must produce part of the proof the kernel accepts.
+
+The thesis of this report is that mathematics is now in a similar position to programming around 1990: the tools exist, the cost of usage has fallen, and they've elevated from academic rigour to practical infrastructure. To demonstrate this, this report builds a proof assistant from scratch, formalises two theorems inside it, and formalises the same two theorems in the industry-standard Lean 4. The build is kept deliberately small - around 1,000 lines of Python with a 96-line kernel - to ensure trust from a single sitting's reading. By the end of Section 8, the reader has, in effect, watched a proof assistant get assembled from first principles, and can understand the renewed value of proof assistants under the reframing of AI.
+
+### 1.2 Road Map
+
+This report 

@@ -2,11 +2,6 @@
 
 ## 1. Introduction
 
-- Two theorems chosen:
-	- **Deduction Theorem** - propositional logic metatheorem [4]; a result *about* the proof system
-	- **Glivenko's Theorem** (1929) - propositional formula is classically provable iff its double negation is intuitionistically provable; a result *inside* propositional logic
-	- Together they exercise proof-tree representation, classical-vs-intuitionistic distinction, and translation between two calculi
-
 ### Roadmap Note
 
 - Sections 2-4: framing (software layers, maths single-layer, AI pressure)
