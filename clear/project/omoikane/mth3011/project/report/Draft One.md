@@ -48,7 +48,7 @@ The thesis of this report is that mathematics is now in a similar position to pr
 
 To begin this report, Sections 2-4 will set up the framing: programming's defence in depth, mathematics' single layer of peer review, and the pressure thus created by AI-assisted mathematics. Then, Section 5 lays the foundations for formalisations with logic, type theory, Curry-Howard, and Gödel's caveat. Section 6 explores the current proof assistant ecosystem, and Section 7 discusses five landmark case studies within it, to prime the reader to develop a toy assistant in Section 8. Sections 9-10 then formalise two theorems in the toy assistant, then in Lean, and Section 11 compares the two. Finally, Section 12 returns to the opening analogy with everything assembled, and Section 13 closes the report.
 
-## 2. Trust and Verification in Software Engineering
+## 2 Trust and Verification in Software Engineering
 
 The Knight Capital incident is a useful case to begin with exploring, as it wasn't caused by an individual making an obvious mistake. Instead, the SEC describes the cause as old code, mixed with an incomplete deployment, some missed automated warnings, and inadequate controls interacting under the load of production [18]. This myriad of factors is exactly the compound failure which is countered by the engineering practice of layers.
 
@@ -68,3 +68,17 @@ The current structure of these layers, used by modern production code, is split 
 ### 2.2 Why Each Layer Exists
 
 Each layer was added because the previous layers missed a class of error. As time goes on, the strategy of code review moves farther away from trusting humans and closer towards relying on tools.
+
+Multiple failures have become well-known for pushing towards this trend. The Therac 25 became lethal due to weak safety interlocks and race conditions. On the launch of the Ariance 5 Flight 501, an unprotected 64-bit float converted to a 16-bit signed integer within reused inertial-reference software caused the rocked to self-destruct [19]. In 1994, Intel's 1994 Pentium floating-point division flaw led to a $475 million pretax charge [20]. All of these cases teach the same lesson: within critical systems, creating formal specifications for design questions is much cheaper than the alternative [21].
+
+So, each time, a mechanical layer was built to catch a repeat of that error next time. If the cost was particularly high, like in the aforementioned examples, the next layer would be even more aggressively deployed.
+
+### 2.3 The Cumulative Effect
+
+By 2026, after decades of errors and retaliatory layers, industrial programmers only trust code that has passed through these layers: they don't just rely on the writer anymore. A code review first checks that types, tests, and continuous integration are all complete, passing, and meaningful before ensuring the design fits the codebase.
+
+Mathematics is far different. Peer review in mathematics is the sole point of trust, while programming treats trust as a product of several mechanical checks.
+
+## 3 Trust and Verification in Mathematical Practice
+
+…

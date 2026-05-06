@@ -1,25 +1,5 @@
 # Report Bullet Outline: Formal Methods in Mathematics
 
-## 2. Trust and Verification in Software Engineering
-
-### 2.2 Why Each Layer Exists
-
-- Each layer was added because the previous layers missed a specific error class
-- Key failures referenced:
-	- Therac-25: race conditions and weak safety interlocks became lethal [17]
-	- Ariane 5 Flight 501: unprotected 64-bit float to 16-bit signed integer conversion in reused inertial-reference software; inquiry board recommended fuller testing and review of software assumptions [19]
-	- Intel Pentium FDIV flaw (1994): $475m pretax charge [20]
-	- AWS TLA+: formal specification of critical distributed-system designs before production [21]
-- Cost of failure determines how aggressively a new layer is deployed
-
-### 2.3 The Cumulative Effect
-
-- By 2026: working programmers trust code that has passed through the layers; trust is in the chain, not the author
-- Senior engineers reviewing PRs do not re-derive correctness - they confirm types pass, tests meaningful, CI green, design fits codebase
-- This is the trust model mathematics is missing
-
----
-
 ## 3. Trust and Verification in Mathematical Practice
 
 - Mathematics has had one layer in the Section 2 sense: write proof → referees read → journal accepts/rejects → enters literature

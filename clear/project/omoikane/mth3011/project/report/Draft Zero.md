@@ -1,21 +1,5 @@
 # Draft Zero
 
-## 2.2 Why Each Layer Exists
-
-Each layer was added because the previous layers missed a specific error class. The trajectory is consistently away from "trust the writer" and towards "let a tool check it".
-
-Some well-known failures show this pattern. Therac-25: race conditions and weak safety interlocks became lethal [17]. Ariane 5 Flight 501: an unprotected 64-bit float to 16-bit signed integer conversion in reused inertial-reference software caused the rocket to self-destruct; the inquiry board explicitly recommended fuller testing and review of software assumptions [19]. Intel's 1994 Pentium floating-point division flaw led to a $475 million pretax charge [20]. AWS's use of TLA+ is the positive version of the same lesson: for critical distributed systems, moving design questions into a formal specification before production is cheaper than the alternative [21].
-
-In each case, an error class slipped past the existing checks, and a mechanical layer was built to catch the same class next time. The cost of the failure determined how aggressively the new layer was deployed.
-
-## 2.3 The Cumulative Effect
-
-By 2026, a working programmer trusts code that has passed through the layers and is wary of code that hasn't. The trust is not in the writer; it's in the chain. A senior engineer reviewing a pull request doesn't re-derive correctness - they check that types pass, tests are present and meaningful, CI is green, and the design fits the codebase.
-
-This is the trust model mathematics is missing. Peer review carries the entire trust weight in mathematics, while programming treats trust as a product of several independent checks. Section 3 takes up what mathematics has tried instead, and where the single layer has and hasn't been enough.
-
----
-
 # 3. Trust and Verification in Mathematical Practice
 
 Mathematics has, for most of its history, had one layer in the Section 2 sense: write a proof, referees read it, the journal accepts or rejects, the result enters the literature. The next reader is trusted to catch further errors, as is the reader after that. There's no analogue of types, no analogue of CI, no analogue of fuzzing. Peer review carries the whole trust weight.
