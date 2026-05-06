@@ -15,7 +15,7 @@
 - Do some **[[Omoikane]]** work - below.
 	- Complete **final year project**:
 		- **Logbook** completion.
-		- First redraft: [[Outline]] -> [[Draft Zero]] -> [[Draft One]].
+		- First redraft: [[Outline]] -> [[Draft Zero]] -> [[Draft One]]; four sections a day?
 		- Complete **propositional logic proof assistant** and push to GitHub.
 		- Complete **viva slides**.
 	- **Review and complete work**: [[MTH3011]] (one week) -> [[MTH3007B]] (one week) -> [[MTH3008]] (three weeks) -> [[MTH3003]] (four weeks); then work through all questions manually and refine notes/cheat sheet.
