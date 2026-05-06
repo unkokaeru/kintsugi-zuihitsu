@@ -81,4 +81,12 @@ Mathematics is far different. Peer review in mathematics is the sole point of tr
 
 ## 3 Trust and Verification in Mathematical Practice
 
-For most of its history, mathematics has had one layer comparable to what was discussed in Section 2: peer review. An academic writes a proof, referees read it, the journal accepts or rejects, and then the result enters the literature. There isn't an equivalent to types, continuous integration, or fuzzing
+For most of its history, mathematics has had one layer comparable to what was discussed in Section 2: peer review. An academic writes a proof, referees read it, the journal accepts or rejects, and then the result enters the literature. There isn't an equivalent to types, continuous integration, or fuzzing, peer review carries the entire weight of trust - unless a later reader catches additional errors.
+
+This worked for centuries, since proofs fit in journals, journals fit in libraries, and a competent reader could verify a result in a few sittings. Before the twentieth century, mathematics was largely human-scaled in this manner, with the exception of a few famous results in the nineteenth century, such as Kempe's four colour theorem "proof" in 1879 that had a flaw spotted eleven years later. Still, this system eventually caught its own mistakes.
+
+Recently, though, three things have changed.
+
+### 3.1 Scale
+
+The Feit-Thompson theorem [7] is a landmark proof that conveys the new scales mathematicians work with: 255 pages of dense character theory. The classification of finite simple groups that this theorem supports is tens of thousands of pages, across hundreds of papers and several decades. No individual can read through so much information carefully, so the community trusts that the relevant experts have read the relevant pieces, and this works enough of the time. But, the Coq formalisation of the theorem [7] - 150,000 lines over six years with multiple collaborators - is surprising that it found no substantive errors in the 1963 original; it's certainly not the default. The formalisation also still explicitly benefited the proof, reorganising the classification infrastructure to expose dependencies between chapters of the original that before had been implicit.

@@ -2,16 +2,6 @@
 
 # 3. Trust and Verification in Mathematical Practice
 
-Mathematics has, for most of its history, had one layer in the Section 2 sense: write a proof, referees read it, the journal accepts or rejects, the result enters the literature. The next reader is trusted to catch further errors, as is the reader after that. There's no analogue of types, no analogue of CI, no analogue of fuzzing. Peer review carries the whole trust weight.
-
-This worked for a long time. Pre-twentieth-century mathematics was largely human-scaled: proofs fit in journals, journals fit in libraries, and a competent reader could verify a result in a sitting or two. The handful of famous nineteenth-century exceptions - Kempe's 1879 four-colour "proof", with a flaw spotted by Heawood eleven years later; Russell's paradox in Frege's formal arithmetic, surfaced just as Frege was finishing the second volume of *Grundgesetze* - were exceptions sufficient to clarify the rule. The system caught its own mistakes, eventually.
-
-Three things have changed since.
-
-## 3.1 Scale
-
-The Feit-Thompson theorem [7] runs to 255 pages of dense character theory; the classification of finite simple groups, which Feit-Thompson supports, spans tens of thousands of pages across hundreds of papers and several decades. No individual reads such an artefact carefully. The community trusts that the relevant experts read the relevant pieces, and the community is right often enough that the system hasn't collapsed. But the Feit-Thompson Coq formalisation [7] - six person-years, 150,000 lines - still matters: finding no substantive error in the 1963 original is a substantive finding at this length, not a default. The formalisation also reorganised the classification infrastructure, exposing dependencies between chapters of the informal proof that had been implicit.
-
 ## 3.2 Specialisation
 
 Modern mathematics has the same fragmentation problem as modern software. Specialists in one subfield cannot, in practice, audit specialists in an adjacent one. Wiles' first announcement of a proof of Fermat's Last Theorem in 1993 contained a gap that even his immediate collaborators didn't catch immediately; it took Richard Taylor's joint work to repair, and the eventual 1994 proof is what entered the canon [23]. The error existed because the level of specialisation had outpaced the audit network. The community pulled through, but it pulled through on the strength of the result's profile - a less famous gap might still be there.
