@@ -4,7 +4,6 @@
 > Remember to draw back on literature more when writing within academia! - practice this?
 
 - Continuously work on **[[yatagarasu]]** work:
-	- Send **Zoom links** for training.
 	- **Claude**:
 		- Work order edit modal missing data: customer type blank; authorisation fields arbitrary; schedule unpopulated; concerns/areas of focus unpopulated; additional requirements currently free text that should be structured.
 		- Confirm client information "Confirm & Continue" button does nothing.
@@ -17,9 +16,10 @@
 	- **Tidy and complete notes** within Obsidian, around the platform.
 - Do some **[[Omoikane]]** work - below.
 	- Complete **final year project**:
-		- Logbook completion.
-		- First redraft.
+		- **Logbook** completion.
+		- First redraft: [[Outline]] -> [[Draft Zero]] -> [[Draft One]].
 		- Complete **propositional logic proof assistant** and push to GitHub.
+		- Complete **viva slides**.
 	- **Review and complete work**: [[MTH3011]] (one week) -> [[MTH3007B]] (one week) -> [[MTH3008]] (three weeks) -> [[MTH3003]] (four weeks); then work through all questions manually and refine notes/cheat sheet.
 - **Shopping**
 	- Office furniture - sofa bed, desk, bookshelves.
