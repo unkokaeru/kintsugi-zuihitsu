@@ -9,7 +9,6 @@
 		- Work order edit modal missing data: customer type blank; authorisation fields arbitrary; schedule unpopulated; concerns/areas of focus unpopulated; additional requirements currently free text that should be structured.
 		- Confirm client information "Confirm & Continue" button does nothing.
 		- Test data generation failing with no corresponding Sentry entries.
-		- ==System health widget constantly says API Down (confirm whether the four stats are real/fully developed).==
 		- Fix current errors in Sentry.
 		- **Create contractor role**: Duplicate therapist role -> contractor role (no travel & separate allocations weighting config).
 	- **Training material**: ==cover everything, define scope and create with Claude Design==; after training, decide phases of individuals depending on technical literacy observed in sessions; record [[help videos]]. Heads up about slow rollout going live after - therapists -> admin, too.
@@ -17,8 +16,11 @@
 	- ==**Cliniko integration**: push data in and map to existing platform structure.==
 	- **Tidy and complete notes** within Obsidian, around the platform.
 - Do some **[[Omoikane]]** work - below.
-	- Complete **final year project**.
-	- **Review and complete work**: [[MTH3011]] (two weeks) -> [[MTH3007B]] (three weeks) -> [[MTH3008]] (five weeks) -> [[MTH3003]] (six weeks); then work through all questions manually and refine notes/cheat sheet.
+	- Complete **final year project**:
+		- Logbook completion.
+		- First redraft.
+		- Complete **propositional logic proof assistant** and push to GitHub.
+	- **Review and complete work**: [[MTH3011]] (one week) -> [[MTH3007B]] (one week) -> [[MTH3008]] (three weeks) -> [[MTH3003]] (four weeks); then work through all questions manually and refine notes/cheat sheet.
 - **Shopping**
 	- Office furniture - sofa bed, desk, bookshelves.
 	- Maicey clothes.

@@ -2,11 +2,6 @@
 
 ## 3. Trust and Verification in Mathematical Practice
 
-- Mathematics has had one layer in the Section 2 sense: write proof → referees read → journal accepts/rejects → enters literature
-- No analogue of types, CI, or fuzzing; peer review carries the entire trust weight
-- Worked when proofs were human-scaled (fit in journals, verifiable in a sitting or two)
-- Famous 19th-century exceptions: Kempe's 1879 four-colour "proof" (flaw spotted by Heawood 11 years later); Russell's paradox in Frege's Grundgesetze
-
 ### 3.1 Scale
 
 - Feit-Thompson [7]: 255 pages of dense character theory - no individual reads it carefully
