@@ -81,4 +81,4 @@ Mathematics is far different. Peer review in mathematics is the sole point of tr
 
 ## 3 Trust and Verification in Mathematical Practice
 
-…
+For most of its history, mathematics has had one layer comparable to what was discussed in Section 2: peer review. An academic writes a proof, referees read it, the journal accepts or rejects, and then the result enters the literature. There isn't an equivalent to types, continuous integration, or fuzzing
