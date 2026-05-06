@@ -2,13 +2,8 @@
 
 ## 2. Trust and Verification in Software Engineering
 
-- Knight Capital failure was compound - old code, incomplete deployment, missed automated warnings, inadequate controls interacting under load [18]
-- Engineering response is always to add another layer; over time layers compose into something that catches almost everything
-
 ### 2.1 The Layers
 
-- **Types** - cheapest; mechanical; compile-time rejection of whole error classes; Pierce [13] canonical reference
-- **Tests** - unit, integration, end-to-end; executable assertions that run against actual code; test-driven development (late 1990s) made the test come first
 - **Continuous integration** - every commit triggers full build + test suite in a clean environment; shift from pre-release smoke test to per-commit verification; enables trunk-based development at scale
 - **Code review** - catches design issues, security implications, confusion; human, slow, expensive; sits last so reviewers focus on what tools cannot reach
 - **Fuzzing and property-based testing** - random/constrained-random inputs; catches what unit tests miss because authors cannot enumerate all inputs; Hypothesis-style property testing
