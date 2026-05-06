@@ -1,10 +1,5 @@
 # Draft Zero
 
-1. **Continuous integration**: every commit triggers a complete build and test suite in a clean environment, on every supported platform. The shift from running a smoke test before release to running the full suite on every commit was what made trunk-based development workable at scale. CI catches integration errors that individual tests miss because individual tests run in isolation; CI runs the whole. This is the layer Knight's deployment was missing - had the defective configuration been forced through a gated rollout in a staging environment, the fault would have surfaced before production [18].
-2. **Code review**: catches design issues, security implications, and things that work but will confuse the next reader. Review is human, slow, and expensive, which is why it sits at the end of the chain - by the time a change reaches review, the mechanical layers have already filtered out anything they can catch. Reviewers focus on what tools cannot reach.
-3. **Fuzzing and property-based testing**: a fuzzer feeds random or constrained-random inputs into a function and watches for crashes, assertion violations, or invariant breaches. Hypothesis-style property testing makes this structured: state the invariant, generate inputs, check it survives. This catches what unit tests miss because the test author cannot enumerate every possible input; the fuzzer doesn't need to enumerate, it just generates.
-4. **Formal verification**: at the safety-critical end, the layers above are not sufficient. NASA Langley's PVS work and AWS's use of TLA+ show the same pattern - once failure is expensive enough, parts of the design move into a formal specification that can be checked mechanically [21], [22]. Formal verification is expensive, but for systems where bugs cost lives or millions, the cost is paid.
-
 ## 2.2 Why Each Layer Exists
 
 Each layer was added because the previous layers missed a specific error class. The trajectory is consistently away from "trust the writer" and towards "let a tool check it".

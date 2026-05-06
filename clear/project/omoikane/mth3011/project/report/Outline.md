@@ -2,13 +2,6 @@
 
 ## 2. Trust and Verification in Software Engineering
 
-### 2.1 The Layers
-
-- **Continuous integration** - every commit triggers full build + test suite in a clean environment; shift from pre-release smoke test to per-commit verification; enables trunk-based development at scale
-- **Code review** - catches design issues, security implications, confusion; human, slow, expensive; sits last so reviewers focus on what tools cannot reach
-- **Fuzzing and property-based testing** - random/constrained-random inputs; catches what unit tests miss because authors cannot enumerate all inputs; Hypothesis-style property testing
-- **Formal verification** - safety-critical end; NASA Langley PVS work; AWS use of TLA+ [21], [22]; expensive but cost is paid when failures cost lives or millions
-
 ### 2.2 Why Each Layer Exists
 
 - Each layer was added because the previous layers missed a specific error class
