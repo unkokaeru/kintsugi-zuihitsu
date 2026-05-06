@@ -2,10 +2,6 @@
 
 # 3. Trust and Verification in Mathematical Practice
 
-## 3.2 Specialisation
-
-Modern mathematics has the same fragmentation problem as modern software. Specialists in one subfield cannot, in practice, audit specialists in an adjacent one. Wiles' first announcement of a proof of Fermat's Last Theorem in 1993 contained a gap that even his immediate collaborators didn't catch immediately; it took Richard Taylor's joint work to repair, and the eventual 1994 proof is what entered the canon [23]. The error existed because the level of specialisation had outpaced the audit network. The community pulled through, but it pulled through on the strength of the result's profile - a less famous gap might still be there.
-
 ## 3.3 Speed
 
 The pace at which results enter the literature has accelerated, and the pace of careful audit has not. The Needham-Schroeder protocol [11] is the cleanest case study of all three pressures interacting at once. Published in 1978, accepted as secure for seventeen years, broken by Lowe's formal analysis in 1995. The protocol was specialist enough that the cryptographers reading it took the security argument on the strength of the rationale; the result was important enough to be widely cited and built on; the field moved fast enough that nobody re-audited until Lowe arrived with FDR and a different tool. One layer of defence missed an error that compromised seventeen years of downstream work.

@@ -90,3 +90,11 @@ Recently, though, three things have changed.
 ### 3.1 Scale
 
 The Feit-Thompson theorem [7] is a landmark proof that conveys the new scales mathematicians work with: 255 pages of dense character theory. The classification of finite simple groups that this theorem supports is tens of thousands of pages, across hundreds of papers and several decades. No individual can read through so much information carefully, so the community trusts that the relevant experts have read the relevant pieces, and this works enough of the time. But, the Coq formalisation of the theorem [7] - 150,000 lines over six years with multiple collaborators - is surprising that it found no substantive errors in the 1963 original; it's certainly not the default. The formalisation also still explicitly benefited the proof, reorganising the classification infrastructure to expose dependencies between chapters of the original that before had been implicit.
+
+### 3.2 Specialisation
+
+Modern mathematics can be highly specialised, creating subfields with specialists that cannot even review related subfields, in practice. A famous example of this would be Wiles' first announcement of a proof of Fermat's Last Theorem in 1993. Despite immediately collaborators not noticing any errors right away, a gap was found that took the help of Richard Taylor to repair and finally publish in 1994 [23]. The level of specialism required to review the location of the error exceeded the capacity of reviewers. Yet, the community recovered, but only due to the high profile result, and a less famous gap could still exist.
+
+### 3.3 Speed
+
+…
