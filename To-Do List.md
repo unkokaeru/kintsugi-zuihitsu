@@ -7,7 +7,6 @@
 	- **Claude**:
 		- Work order edit modal missing data: customer type blank; authorisation fields arbitrary; schedule unpopulated; concerns/areas of focus unpopulated; additional requirements currently free text that should be structured.
 		- Confirm client information "Confirm & Continue" button does nothing.
-		- ==**Create contractor role**: Duplicate therapist role -> contractor role (no travel & separate allocations weighting config).==
 	- **Training material**: ==cover everything, define scope and create with Claude Design==; after training, decide phases of individuals depending on technical literacy observed in sessions; record [[help videos]]. Heads up about slow rollout going live after - therapists -> admin, too.
 	- **Spreadsheet integration**: set scope; push data in and map to existing platform structure. Some parts need email notifications to line manager / `infoapp@`, like work order amendments for cancellations, frequency, location, therapy break, or discharge changes. After full integration, push back tidied spreadsheets.
 	- ==**Cliniko integration**: push data in and map to existing platform structure.==
