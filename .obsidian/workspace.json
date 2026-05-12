@@ -157,6 +157,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "marp-slides:Show Slide Preview": false,
       "bases:Create new base": false,
       "command-palette:Open command palette": false,
       "workspaces:Manage workspace layouts": false,

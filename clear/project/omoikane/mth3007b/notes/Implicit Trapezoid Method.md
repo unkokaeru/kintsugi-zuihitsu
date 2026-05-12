@@ -1,6 +1,6 @@
 # Implicit Trapezoid Method
 
-For $\dot{y}(t) = g(t, y(t))$, then...
+For $\dot{y}(t) = g(t, y(t))$, then…
 
 $$
 y_{i+1} \approx y_i + \frac{\Delta t}{2}\!\left(g(t_i, y_i) + g(t_{i+1}, y_{i+1})\right)

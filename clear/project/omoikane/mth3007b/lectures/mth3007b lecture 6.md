@@ -41,9 +41,11 @@ Here $\alpha>0$ is the diffusion constant, $u$ is typically temperature, and the
 
 > [!note] The Laplacian $\nabla^{2}$
 > The nabla $\nabla=(\partial/\partial x,\partial/\partial y,\partial/\partial z)^{T}$ is the gradient. Its self-dot-product is the **Laplacian**:
+>
 > $$
 > \nabla^{2}=\nabla\cdot\nabla=\frac{\partial^{2}}{\partial x^{2}}+\frac{\partial^{2}}{\partial y^{2}}+\frac{\partial^{2}}{\partial z^{2}}.
 > $$
+>
 > In one spatial dimension ($\mathbf{r}=x$) this collapses to $\nabla^{2}=\partial^{2}/\partial x^{2}$.
 
 The diffusion equation needs both kinds of conditions:
@@ -190,7 +192,7 @@ This is the **FTCS** scheme - *Forward Time, Central Space*. To advance $u$ at $
 2. For each $i=0,1,2,\ldots,N_{t}-2$:
   - For each interior $n=1,\ldots,N_{x}-2$, update $u_{i+1,n}$ using the FTCS formula above.
   - Pin $u_{i+1,0}=u_{L}$ and $u_{i+1,N_{x}-1}=u_{R}$.
-3. Stop at $t=t_{\max}$.
+1. Stop at $t=t_{\max}$.
 
 The result is a 2D array $u_{i,n}$ - temperature as a function of position and time. As $t$ increases the profile relaxes towards the steady-state Laplace solution (a straight line between $u_{L}$ and $u_{R}$ in this 1D Dirichlet case).
 

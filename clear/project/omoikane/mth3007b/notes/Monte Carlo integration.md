@@ -1,4 +1,4 @@
-# Monte Carlo integration
+# Monte Carlo Integration
 
 A stochastic numerical-integration method that estimates an integral by averaging the integrand at uniformly distributed random sample points.
 
@@ -24,14 +24,16 @@ $$
 \sigma_{F}\sim \frac{L\,\sigma(f)}{\sqrt{N}}=O(N^{-1/2}).
 $$
 
-## Rate Comparison vs Deterministic Methods
+## Rate Comparison Vs Deterministic Methods
 
 In 1D, deterministic quadrature wins decisively:
+
 - [[Explicit Euler method]]: $O(N^{-1})$.
 - [[Fourth order Runge-Kutta]]: $O(N^{-4})$.
 - Monte Carlo: $O(N^{-1/2})$.
 
 But in $D$ dimensions, deterministic schemes scale as $O(N^{-p/D})$ for a $p$-th order method, while Monte Carlo's rate is **independent of $D$**. Crossover:
+
 - MC beats Euler when $D>2$.
 - MC beats RK4 when $D>8$.
 

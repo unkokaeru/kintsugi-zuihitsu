@@ -28,6 +28,7 @@ def first_passage_time(initial_state, threshold, time_step, max_time, rng):
 ## Heavy-Tailed Distribution
 
 For threshold-crossing problems where $b$ lies in the tail of the equilibrium distribution, the first-passage time is **heavy-tailed**: a few realisations cross quickly, but a long tail of realisations take much longer. Practical consequence:
+
 - Single realisations have very high variance.
 - Mean first-passage time $\langle\tau\rangle$ is well-defined but the standard deviation $\sigma_{\tau}$ is of the same order as $\langle\tau\rangle$ itself.
 - To estimate $\langle\tau\rangle$ reliably, simulate **many** independent walkers ($M\sim 10^{4}$ for 2-significant-figure accuracy).
