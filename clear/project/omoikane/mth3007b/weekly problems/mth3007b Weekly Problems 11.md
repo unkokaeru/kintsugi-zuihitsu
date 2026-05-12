@@ -2,10 +2,10 @@
 
 > **Original Documents**: [[mth3007b weekly problem sheet 11.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 11 solutions.pdf|Provided Solutions]]
 >
-> **Vibes**: …
+> **Vibes**: ...
 >
 > **Used Techniques**:
->   - …
+>   - ...
 
 ---
 
@@ -19,7 +19,6 @@
 The following exercises are recommended from Chapra & Canale *Numerical Methods for Engineers*:
 
 ### 1st Order ODEs (Chapter 25)
-
 | Exercise | Type |
 |----------|------|
 | 25.1 | Solve a simple 1st order IVP numerically, compare methods |
@@ -32,7 +31,6 @@ The following exercises are recommended from Chapra & Canale *Numerical Methods 
 | 25.21 | Comparison of methods: accuracy and computational cost |
 
 ### Systems of 1st Order ODEs (Chapters 25, 28)
-
 | Exercise | Type |
 |----------|------|
 | 25.7 | Predator-prey or coupled ODE system |
@@ -40,7 +38,6 @@ The following exercises are recommended from Chapra & Canale *Numerical Methods 
 | 28.10 | Boundary value problem reduced to system of ODEs |
 
 ### 2nd Order ODEs Reduced to 1st Order Systems (Chapter 25)
-
 | Exercise | Type |
 |----------|------|
 | 25.16 | Second-order ODE: reduce to system, solve numerically |
@@ -48,7 +45,6 @@ The following exercises are recommended from Chapra & Canale *Numerical Methods 
 | 25.22 | Higher-order ODE reduction with initial conditions |
 
 ### 1D Monte Carlo Integration (Chapter 22)
-
 | Exercise | Type |
 |----------|------|
 | 22.1 | MC estimate of a definite integral, assess error |
@@ -56,13 +52,11 @@ The following exercises are recommended from Chapra & Canale *Numerical Methods 
 | 22.3 | Comparison: MC integration vs quadrature rules |
 
 ### PDEs: FTCS and BTCS (Chapter 30)
-
 | Exercise | Type |
 |----------|------|
 | 30.7 | 1D heat equation: FTCS implementation and stability |
 
 ### PDEs with Neumann BCs (Chapter 30)
-
 | Exercise | Type |
 |----------|------|
 | 30.16 | 1D heat equation with insulated boundary (Neumann BC) |
@@ -76,12 +70,15 @@ The following exercises are recommended from Chapra & Canale *Numerical Methods 
 **RK4 template** - the pattern to memorise:
 
 ```python
-def rk4_step(g, t, y, dt):
+import numpy as np
+
+def rk4_step(g, t: float, y: float, time_step: float) -> float:
+    """Advance one step using the classical fourth-order Runge-Kutta method."""
     k1 = g(t, y)
-    k2 = g(t + dt/2, y + dt*k1/2)
-    k3 = g(t + dt/2, y + dt*k2/2)
-    k4 = g(t + dt, y + dt*k3)
-    return y + dt/6 * (k1 + 2*k2 + 2*k3 + k4)
+    k2 = g(t + time_step / 2, y + time_step * k1 / 2)
+    k3 = g(t + time_step / 2, y + time_step * k2 / 2)
+    k4 = g(t + time_step, y + time_step * k3)
+    return y + time_step / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
 ```
 
 For **systems**, $y$ becomes a numpy array `Z` and $g$ returns an array. The step function is identical.
@@ -166,34 +163,44 @@ $$
 import numpy as np
 import matplotlib.pyplot as plt
 
-m = 1.0; c_damp = 0.5; k = 4.0; F0 = 1.0
-omega = 2.0  # forcing frequency
+mass = 1.0
+damping_coefficient = 0.5
+spring_constant = 4.0
+forcing_amplitude = 1.0
+forcing_frequency = 2.0
 
-def g_system(t, Z):
-    z1, z2 = Z
-    F = F0 * np.cos(omega * t)
-    dz1 = z2
-    dz2 = (F - c_damp * z2 - k * z1) / m
-    return np.array([dz1, dz2])
+def g_system(t: float, state: np.ndarray) -> np.ndarray:
+    displacement, velocity = state
+    forcing = forcing_amplitude * np.cos(forcing_frequency * t)
+    d_displacement = velocity
+    d_velocity = (forcing - damping_coefficient * velocity - spring_constant * displacement) / mass
+    return np.array([d_displacement, d_velocity])
 
-def rk4_step_vec(g, t, Z, dt):
-    k1 = g(t, Z)
-    k2 = g(t + dt/2, Z + dt*k1/2)
-    k3 = g(t + dt/2, Z + dt*k2/2)
-    k4 = g(t + dt, Z + dt*k3)
-    return Z + dt/6 * (k1 + 2*k2 + 2*k3 + k4)
+def rk4_step_vec(g, t: float, state: np.ndarray, time_step: float) -> np.ndarray:
+    k1 = g(t, state)
+    k2 = g(t + time_step / 2, state + time_step * k1 / 2)
+    k3 = g(t + time_step / 2, state + time_step * k2 / 2)
+    k4 = g(t + time_step, state + time_step * k3)
+    return state + time_step / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
 
-dt = 0.01; tmax = 20.0
-Nint = int(round(tmax / dt))
-t = np.zeros(Nint + 1); Z = np.zeros((2, Nint + 1))
-t[0] = 0.0; Z[:, 0] = np.array([0.0, 0.0])  # starts at rest
+time_step = 0.01
+time_end = 20.0
+number_of_steps = int(round(time_end / time_step))
+t_values = np.zeros(number_of_steps + 1)
+state_array = np.zeros((2, number_of_steps + 1))
+t_values[0] = 0.0
+state_array[:, 0] = np.array([0.0, 0.0])  # starts at rest
 
-for n in range(Nint):
-    t[n + 1] = t[n] + dt
-    Z[:, n + 1] = rk4_step_vec(g_system, t[n], Z[:, n], dt)
+for step_index in range(number_of_steps):
+    t_values[step_index + 1] = t_values[step_index] + time_step
+    state_array[:, step_index + 1] = rk4_step_vec(
+        g_system, t_values[step_index], state_array[:, step_index], time_step
+    )
 
-plt.plot(t, Z[0, :], label='Displacement x(t)')
-plt.xlabel('t'); plt.ylabel('x'); plt.legend()
-plt.title('Spring-Mass-Damper (C&C style, RK4)')
+plt.plot(t_values, state_array[0, :], label='Displacement x(t)')
+plt.xlabel('t')
+plt.ylabel('x')
+plt.legend()
+plt.title('Spring-Mass-Damper (RK4)')
 plt.show()
 ```

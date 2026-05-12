@@ -1,9 +1,9 @@
 # MTH3007b Lecture 3
 
 > [!quote] Me, in the lecture
-> zzzzz...
+> zzzzz…
 
-Lecture 2 introduced the midpoint and Ralston methods as second-order alternatives to explicit Euler, with global error $O(dt^2)$. This session derives the conditions that make a two-stage RK method second-order, presents the fourth-order Runge-Kutta formula (RK4), and then introduces **[[symmetric methods]]** and the **[[implicit trapezoid method]]** as a practically useful symmetric scheme.
+Lecture 2 introduced the midpoint and Ralston methods as second-order alternatives to explicit Euler, with global error $O(dt^2)$. This session derives the conditions that make a two-stage RK method second-order, presents the fourth-order Runge-Kutta formula (RK4), and then introduces **[[Implicit Trapezoid Method|symmetric methods]]** and the **[[Implicit Trapezoid Method]]** as a practically useful symmetric scheme.
 
 ## Derivation of Second-Order RK Coefficients
 
@@ -55,7 +55,7 @@ Both satisfy the three coefficient equations, confirming they are second-order.
 
 ## RK4 - The Fourth-Order Method
 
-**[[RK4]]** (the classical fourth-order Runge-Kutta method) uses four stages:
+**[[Fourth order Runge-Kutta|RK4]]** (the classical fourth-order Runge-Kutta method) uses four stages:
 
 $$
 k_1 = g(t_i, y_i)
@@ -84,7 +84,7 @@ $$
 
 ### Definition
 
-A numerical method is **[[symmetric]]** (or time-reversible) if running the method forward by one step and then backward by one step returns exactly to the starting point. More precisely, a method $y_{i+1} = \Phi(y_i, dt)$ is symmetric if
+A numerical method is **[[Implicit Trapezoid Method|symmetric]]** (or time-reversible) if running the method forward by one step and then backward by one step returns exactly to the starting point. More precisely, a method $y_{i+1} = \Phi(y_i, dt)$ is symmetric if
 
 $$
 \Phi(\Phi(y_i, dt), -dt) = y_i
@@ -106,7 +106,7 @@ This is not equal to $y_i$ in general - explicit Euler is not symmetric.
 
 ### Implicit Trapezoid is Symmetric
 
-The **[[implicit trapezoid method]]** (also called the trapezoidal method) averages the right-hand side at both endpoints:
+The **[[Implicit Trapezoid Method]]** (also called the trapezoidal method) averages the right-hand side at both endpoints:
 
 $$
 \frac{y_{i+1} - y_i}{dt} = \frac{1}{2}\bigl[g(t_i, y_i) + g(t_{i+1}, y_{i+1})\bigr]
@@ -119,9 +119,9 @@ This can be verified by swapping $i \leftrightarrow i+1$ and $dt \leftrightarrow
 
 ### Other Preserved Quantities
 
-**[[Symplectic methods]]** (Verlet integrators and their relatives) preserve the symplectic structure of Hamiltonian systems exactly. These are not covered in this module - they exist and are important in molecular dynamics and celestial mechanics, but we do not derive or implement them here.
+**symplectic methods** (Verlet integrators and their relatives) preserve the symplectic structure of Hamiltonian systems exactly. These are not covered in this module - they exist and are important in molecular dynamics and celestial mechanics, but we do not derive or implement them here.
 
-## Heun's Method vs Implicit Trapezoid
+## Heun's Method Vs Implicit Trapezoid
 
 > [!warning]
 > **Heun's method** (also called the explicit trapezoid method) is NOT the same as the implicit trapezoid method. Heun's method is an explicit predictor-corrector that approximates $g(t_{i+1}, y_{i+1})$ using an Euler predictor step, then averages. The implicit trapezoid solves for $y_{i+1}$ simultaneously - it is a genuinely implicit method.
@@ -130,7 +130,7 @@ The distinction matters for stability: the implicit trapezoid is unconditionally
 
 ## Implicit Trapezoid: Worked Example
 
-### Problem: $dy/dt = bt - ay$
+### Problem: $dy/dt = Bt - ay$
 
 With $g(t, y) = bt - ay$, the implicit trapezoid equation becomes:
 

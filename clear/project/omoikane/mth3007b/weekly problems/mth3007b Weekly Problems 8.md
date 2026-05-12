@@ -22,13 +22,13 @@ $$
 
 where $\xi(t)$ is Gaussian white noise with $\langle \xi(t) \rangle = 0$ and $\langle \xi(t)\xi(t') \rangle = \delta(t - t')$.
 
-Using the **[[Euler-Maruyama method]]**, the discrete update is:
+Using the **[[Euler-Maruyama scheme|Euler-Maruyama method]]**, the discrete update is:
 
 $$
 V_{n+1} = (1 - k\,dt)\,V_n + \sqrt{dt}\,\xi_n, \quad \xi_n \sim \mathcal{N}(0, 1)
 $$
 
-The **[[first-passage time]]** $\tau$ is the time at which $V$ first reaches or exceeds the threshold $b$:
+The **[[First-passage time]]** $\tau$ is the time at which $V$ first reaches or exceeds the threshold $b$:
 
 $$
 \tau = \min\{t : V(t) \geq b\}
@@ -37,20 +37,24 @@ $$
 ```python
 import numpy as np
 
-k = 3.0; threshold = 1.35; dt = 0.001; tmax = 1000.0
+mean_reversion_rate = 3.0
+threshold = 1.35
+time_step = 0.001
+max_time = 1000.0
 rng = np.random.default_rng(0)
-decay = 1.0 - k * dt
+decay_factor = 1.0 - mean_reversion_rate * time_step
 
-V = -0.5; elapsed = 0.0
+velocity = -0.5
+elapsed_time = 0.0
 
-while elapsed < tmax:
-    if V >= threshold:
-        print(f"First-passage time: tau = {elapsed:.3f} s")
+while elapsed_time < max_time:
+    if velocity >= threshold:
+        print(f"First-passage time: tau = {elapsed_time:.3f} s")
         break
-    V = decay * V + np.sqrt(dt) * rng.standard_normal()
-    elapsed += dt
+    velocity = decay_factor * velocity + np.sqrt(time_step) * rng.standard_normal()
+    elapsed_time += time_step
 else:
-    print("Threshold not reached within tmax")
+    print("Threshold not reached within max_time")
 ```
 
 The OU process fluctuates around its mean $V = 0$ (since there is no external force term here) and occasionally makes large excursions. The first-passage time is a random variable - run the cell again with a different seed to get a different $\tau$.
@@ -67,33 +71,47 @@ To achieve 2 significant figures, we need the **standard error** $\sigma_\tau / 
 ```python
 import numpy as np
 
-def first_passage_ou(k, V0, threshold, dt, tmax, seed):
+def first_passage_ou(
+    mean_reversion_rate: float,
+    initial_velocity: float,
+    threshold: float,
+    time_step: float,
+    max_time: float,
+    seed: int,
+) -> float:
+    """Simulate one OU walker and return its first-passage time."""
     rng = np.random.default_rng(seed)
-    decay = 1.0 - k * dt
-    V = V0; elapsed = 0.0
-    while elapsed < tmax:
-        if V >= threshold:
-            return elapsed
-        V = decay * V + np.sqrt(dt) * rng.standard_normal()
-        elapsed += dt
-    return tmax  # cap at tmax if threshold not reached
+    decay_factor = 1.0 - mean_reversion_rate * time_step
+    velocity = initial_velocity
+    elapsed_time = 0.0
+    while elapsed_time < max_time:
+        if velocity >= threshold:
+            return elapsed_time
+        velocity = decay_factor * velocity + np.sqrt(time_step) * rng.standard_normal()
+        elapsed_time += time_step
+    return max_time  # cap at max_time if threshold not reached
 
-k = 3.0; threshold = 1.35; dt = 0.001; tmax = 1000.0
-Nwalkers = 1000
+mean_reversion_rate = 3.0
+threshold = 1.35
+time_step = 0.001
+max_time = 1000.0
+number_of_walkers = 1000
 master_rng = np.random.default_rng(42)
 
-times = np.array([
-    first_passage_ou(k, -0.5, threshold, dt, tmax,
-                     int(master_rng.integers(2**32)))
-    for walker in range(Nwalkers)
+passage_times = np.array([
+    first_passage_ou(
+        mean_reversion_rate, -0.5, threshold, time_step, max_time,
+        int(master_rng.integers(2 ** 32))
+    )
+    for _ in range(number_of_walkers)
 ])
 
-mean_tau = times.mean()
-se = times.std() / np.sqrt(Nwalkers)
-print(f"Mean tau = {mean_tau:.2f} s")
-print(f"Standard error = {se:.2f} s")
-print(f"Relative SE = {se/mean_tau*100:.1f}%")
-print(f"95% CI: ({mean_tau - 2*se:.2f}, {mean_tau + 2*se:.2f})")
+mean_passage_time = passage_times.mean()
+standard_error = passage_times.std() / np.sqrt(number_of_walkers)
+print(f"Mean tau = {mean_passage_time:.2f} s")
+print(f"Standard error = {standard_error:.2f} s")
+print(f"Relative SE = {standard_error / mean_passage_time * 100:.1f}%")
+print(f"95% CI: ({mean_passage_time - 2*standard_error:.2f}, {mean_passage_time + 2*standard_error:.2f})")
 ```
 
 To assess accuracy: the standard error $\sigma/\sqrt{N}$ decreases as $O(N^{-1/2})$. Quadrupling $N$ halves the SE. For 2 significant figures, aim for relative SE $\lesssim 1\%$. If the relative SE is too large, increase $N$.
@@ -102,6 +120,6 @@ Note that walkers which do not reach the threshold within $t_{\max}$ are capped 
 
 ```python
 # Diagnostics
-capped = np.sum(times == tmax)
-print(f"Walkers capped at tmax: {capped} / {Nwalkers}")
+number_capped = np.sum(passage_times == max_time)
+print(f"Walkers capped at max_time: {number_capped} / {number_of_walkers}")
 ```

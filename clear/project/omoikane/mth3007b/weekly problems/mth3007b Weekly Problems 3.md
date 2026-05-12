@@ -19,7 +19,7 @@
 > [!question]
 > Implement the **fourth-order Runge-Kutta method** (RK4) for $\dot{y} = bt - ay$ with $b = 1$, $a = 22$, $y(0) = 1$, $t_{\max} = 1$.
 
-**[[RK4]]** is the standard four-stage explicit Runge-Kutta method. It evaluates the slope function $g(t, y)$ at four points per step and combines them with weights $1/6, 2/6, 2/6, 1/6$:
+**[[Fourth order Runge-Kutta|RK4]]** is the standard four-stage explicit Runge-Kutta method. It evaluates the slope function $g(t, y)$ at four points per step and combines them with weights $1/6, 2/6, 2/6, 1/6$:
 
 $$
 k_1 = g(t_n,\; y_n)
@@ -46,39 +46,48 @@ This is a fourth-order method: GTE $= O(dt^4)$. Each halving of $dt$ reduces the
 ```python
 import numpy as np
 
-b = 1.0; a = 22.0; t0 = 0.0; tmax = 1.0; y0 = 1.0
+forcing_coefficient = 1.0
+decay_rate = 22.0
+time_start = 0.0
+time_end = 1.0
+initial_value = 1.0
 
-def g(t, y):
-    return b * t - a * y
+def g(t: float, y: float) -> float:
+    return forcing_coefficient * t - decay_rate * y
 
-def y_exact(t):
-    return np.exp(-a * t) * (y0 + b / a**2) + b * t / a - b / a**2
+def y_exact(t: float) -> float:
+    return (
+        np.exp(-decay_rate * t) * (initial_value + forcing_coefficient / decay_rate ** 2)
+        + forcing_coefficient * t / decay_rate
+        - forcing_coefficient / decay_rate ** 2
+    )
 
-def rk4_step(g, t, y, dt):
+def rk4_step(g, t: float, y: float, time_step: float) -> float:
     k1 = g(t, y)
-    k2 = g(t + dt / 2, y + dt * k1 / 2)
-    k3 = g(t + dt / 2, y + dt * k2 / 2)
-    k4 = g(t + dt, y + dt * k3)
-    return y + dt / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
+    k2 = g(t + time_step / 2, y + time_step * k1 / 2)
+    k3 = g(t + time_step / 2, y + time_step * k2 / 2)
+    k4 = g(t + time_step, y + time_step * k3)
+    return y + time_step / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
 
-def run_rk4(dt):
-    Nint = int(round((tmax - t0) / dt))
-    t = t0; y = y0
-    for n in range(Nint):
-        y = rk4_step(g, t, y, dt)
-        t += dt
-    return y
+def run_rk4(time_step: float) -> float:
+    number_of_steps = int(round((time_end - time_start) / time_step))
+    current_t = time_start
+    current_y = initial_value
+    for _ in range(number_of_steps):
+        current_y = rk4_step(g, current_t, current_y, time_step)
+        current_t += time_step
+    return current_y
 
-y_true = y_exact(tmax)
+y_true = y_exact(time_end)
 print(f"Exact y(1) = {y_true:.10f}")
 print(f"{'dt':>10} {'error':>14} {'ratio':>8}")
-prev_error = None
-for dt in [0.1, 0.05, 0.025, 0.0125]:
-    y_num = run_rk4(dt)
-    error = abs(y_num - y_true)
-    ratio = prev_error / error if prev_error is not None else float('nan')
-    print(f"{dt:>10.4f} {error:>14.6e} {ratio:>8.2f}")
-    prev_error = error
+previous_error = None
+for time_step in [0.1, 0.05, 0.025, 0.0125]:
+    y_numerical = run_rk4(time_step)
+    error = abs(y_numerical - y_true)
+    ratio = previous_error / error if previous_error is not None else float('nan')
+    print(f"{time_step:>10.4f} {error:>14.6e} {ratio:>8.2f}")
+    previous_error = error
 ```
 
 The error ratio should converge to $\approx 16$, confirming fourth-order convergence.
@@ -90,7 +99,7 @@ The error ratio should converge to $\approx 16$, confirming fourth-order converg
 > [!question]
 > Derive and implement the **implicit trapezoid method** for $\dot{y} = bt - ay$ with $b = 1$, $a = 22$, $y(0) = 1$, $t_{\max} = 1$.
 
-The **[[implicit trapezoid method]]** averages the slopes at both ends of the step:
+The **[[Implicit Trapezoid Method]]** averages the slopes at both ends of the step:
 
 $$
 y_{n+1} = y_n + \frac{dt}{2}\bigl[g(t_n, y_n) + g(t_{n+1}, y_{n+1})\bigr]
@@ -117,31 +126,43 @@ $$
 ```python
 import numpy as np
 
-b = 1.0; a = 22.0; t0 = 0.0; tmax = 1.0; y0 = 1.0
+forcing_coefficient = 1.0
+decay_rate = 22.0
+time_start = 0.0
+time_end = 1.0
+initial_value = 1.0
 
-def trap_step(t, y, dt, a, b):
-    return (y * (1 - a * dt / 2.0) + dt * b * (t + dt / 2.0)) / (1.0 + a * dt / 2.0)
+def trap_step(t: float, y: float, time_step: float) -> float:
+    return (
+        y * (1 - decay_rate * time_step / 2.0)
+        + time_step * forcing_coefficient * (t + time_step / 2.0)
+    ) / (1.0 + decay_rate * time_step / 2.0)
 
-def y_exact(t):
-    return np.exp(-a * t) * (y0 + b / a**2) + b * t / a - b / a**2
+def y_exact(t: float) -> float:
+    return (
+        np.exp(-decay_rate * t) * (initial_value + forcing_coefficient / decay_rate ** 2)
+        + forcing_coefficient * t / decay_rate
+        - forcing_coefficient / decay_rate ** 2
+    )
 
-def run_trap(dt):
-    Nint = int(round((tmax - t0) / dt))
-    t = t0; y = y0
-    for n in range(Nint):
-        y = trap_step(t, y, dt, a, b)
-        t += dt
-    return y
+def run_trap(time_step: float) -> float:
+    number_of_steps = int(round((time_end - time_start) / time_step))
+    current_t = time_start
+    current_y = initial_value
+    for _ in range(number_of_steps):
+        current_y = trap_step(current_t, current_y, time_step)
+        current_t += time_step
+    return current_y
 
-y_true = y_exact(tmax)
+y_true = y_exact(time_end)
 print(f"{'dt':>10} {'error':>14} {'ratio':>8}")
-prev_error = None
-for dt in [0.1, 0.05, 0.025, 0.0125]:
-    y_num = run_trap(dt)
-    error = abs(y_num - y_true)
-    ratio = prev_error / error if prev_error is not None else float('nan')
-    print(f"{dt:>10.4f} {error:>14.6e} {ratio:>8.2f}")
-    prev_error = error
+previous_error = None
+for time_step in [0.1, 0.05, 0.025, 0.0125]:
+    y_numerical = run_trap(time_step)
+    error = abs(y_numerical - y_true)
+    ratio = previous_error / error if previous_error is not None else float('nan')
+    print(f"{time_step:>10.4f} {error:>14.6e} {ratio:>8.2f}")
+    previous_error = error
 ```
 
 The ratio should converge to $\approx 4$, confirming second-order convergence (the implicit trapezoid is a second-order method with unconditional stability).
@@ -156,56 +177,70 @@ The ratio should converge to $\approx 4$, confirming second-order convergence (t
 ```python
 import numpy as np
 
-b = 1.0; a = 22.0; t0 = 0.0; tmax = 1.0; y0 = 1.0
+forcing_coefficient = 1.0
+decay_rate = 22.0
+time_start = 0.0
+time_end = 1.0
+initial_value = 1.0
 
-def g(t, y):
-    return b * t - a * y
+def g(t: float, y: float) -> float:
+    return forcing_coefficient * t - decay_rate * y
 
-def y_exact(t):
-    return np.exp(-a * t) * (y0 + b / a**2) + b * t / a - b / a**2
+def y_exact(t: float) -> float:
+    return (
+        np.exp(-decay_rate * t) * (initial_value + forcing_coefficient / decay_rate ** 2)
+        + forcing_coefficient * t / decay_rate
+        - forcing_coefficient / decay_rate ** 2
+    )
 
-def run_euler(dt):
-    Nint = int(round((tmax - t0) / dt))
-    t = t0; y = y0
-    for n in range(Nint):
-        y = y + dt * g(t, y)
-        t += dt
-    return y
+def run_euler(time_step: float) -> float:
+    number_of_steps = int(round((time_end - time_start) / time_step))
+    current_t = time_start
+    current_y = initial_value
+    for _ in range(number_of_steps):
+        current_y = current_y + time_step * g(current_t, current_y)
+        current_t += time_step
+    return current_y
 
-def rk4_step(g, t, y, dt):
+def rk4_step(g, t: float, y: float, time_step: float) -> float:
     k1 = g(t, y)
-    k2 = g(t + dt/2, y + dt*k1/2)
-    k3 = g(t + dt/2, y + dt*k2/2)
-    k4 = g(t + dt, y + dt*k3)
-    return y + dt/6*(k1 + 2*k2 + 2*k3 + k4)
+    k2 = g(t + time_step / 2, y + time_step * k1 / 2)
+    k3 = g(t + time_step / 2, y + time_step * k2 / 2)
+    k4 = g(t + time_step, y + time_step * k3)
+    return y + time_step / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
 
-def run_rk4(dt):
-    Nint = int(round((tmax - t0) / dt))
-    t = t0; y = y0
-    for n in range(Nint):
-        y = rk4_step(g, t, y, dt)
-        t += dt
-    return y
+def run_rk4(time_step: float) -> float:
+    number_of_steps = int(round((time_end - time_start) / time_step))
+    current_t = time_start
+    current_y = initial_value
+    for _ in range(number_of_steps):
+        current_y = rk4_step(g, current_t, current_y, time_step)
+        current_t += time_step
+    return current_y
 
-def trap_step(t, y, dt):
-    return (y*(1 - a*dt/2.0) + dt*b*(t + dt/2.0)) / (1.0 + a*dt/2.0)
+def trap_step(t: float, y: float, time_step: float) -> float:
+    return (
+        y * (1 - decay_rate * time_step / 2.0)
+        + time_step * forcing_coefficient * (t + time_step / 2.0)
+    ) / (1.0 + decay_rate * time_step / 2.0)
 
-def run_trap(dt):
-    Nint = int(round((tmax - t0) / dt))
-    t = t0; y = y0
-    for n in range(Nint):
-        y = trap_step(t, y, dt)
-        t += dt
-    return y
+def run_trap(time_step: float) -> float:
+    number_of_steps = int(round((time_end - time_start) / time_step))
+    current_t = time_start
+    current_y = initial_value
+    for _ in range(number_of_steps):
+        current_y = trap_step(current_t, current_y, time_step)
+        current_t += time_step
+    return current_y
 
-y_true = y_exact(tmax)
+y_true = y_exact(time_end)
 step_sizes = [0.04, 0.02, 0.01, 0.005]
 print(f"{'dt':>8}  {'Euler err':>14}  {'RK4 err':>14}  {'Trap err':>14}")
-for dt in step_sizes:
-    e_euler = abs(run_euler(dt) - y_true)
-    e_rk4   = abs(run_rk4(dt)   - y_true)
-    e_trap  = abs(run_trap(dt)  - y_true)
-    print(f"{dt:>8.4f}  {e_euler:>14.4e}  {e_rk4:>14.4e}  {e_trap:>14.4e}")
+for time_step in step_sizes:
+    euler_error = abs(run_euler(time_step) - y_true)
+    rk4_error   = abs(run_rk4(time_step)   - y_true)
+    trap_error  = abs(run_trap(time_step)   - y_true)
+    print(f"{time_step:>8.4f}  {euler_error:>14.4e}  {rk4_error:>14.4e}  {trap_error:>14.4e}")
 ```
 
 Expected observations:

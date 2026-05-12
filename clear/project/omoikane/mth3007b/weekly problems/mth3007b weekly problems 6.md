@@ -25,37 +25,52 @@ $$
 u_i^{n+1} = u_i^n + r\!\left(u_{i+1}^n - 2u_i^n + u_{i-1}^n\right), \quad r = \frac{\alpha\,dt}{dx^2}
 $$
 
-Boundary conditions are applied by fixing $u_0 = 0$ and $u_{N_x - 1} = 0$ at every time step (**[[Dirichlet boundary conditions]]**).
+Boundary conditions are applied by fixing $u_0 = 0$ and $u_{N_x - 1} = 0$ at every time step (**[[Boundary conditions|Dirichlet boundary conditions]]**).
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 
-L = 10.0; dx = 0.5; Nx = int(np.round(L / dx) + 1)
-tmax = 1.0; dt = 0.001; Nt = int(np.round(tmax / dt) + 1)
-alpha = 0.835
-r = alpha * dt / dx**2
-print(f"r = {r:.5f}  (must be <= 0.5 for stability)")
+domain_length = 10.0
+spatial_step = 0.5
+number_of_spatial_nodes = int(np.round(domain_length / spatial_step) + 1)
+time_end = 1.0
+time_step = 0.001
+number_of_time_steps = int(np.round(time_end / time_step) + 1)
+diffusivity = 0.835
+stability_parameter = diffusivity * time_step / spatial_step ** 2
+print(f"r = {stability_parameter:.5f}  (must be <= 0.5 for stability)")
 
-# Initial condition: sinusoidal, matching BC u(0)=u(L)=0
-x = np.linspace(0, L, Nx)
-u = np.sin(np.pi * x / L)
-u[0] = 0.0; u[Nx - 1] = 0.0
+x_values = np.linspace(0, domain_length, number_of_spatial_nodes)
+u_profile = np.sin(np.pi * x_values / domain_length)
+u_profile[0] = 0.0
+u_profile[number_of_spatial_nodes - 1] = 0.0
 
 plt.figure(figsize=(8, 4))
-plt.plot(x, u, label='t=0', linestyle='--')
+plt.plot(x_values, u_profile, label='t=0', linestyle='--')
 
-for it in range(Nt - 1):
-    unext = np.zeros(Nx)
-    unext[0] = u[0]; unext[Nx - 1] = u[Nx - 1]
-    for i in range(1, Nx - 1):
-        unext[i] = u[i] + r * (u[i + 1] - 2 * u[i] + u[i - 1])
-    u = 1.0 * unext
+for time_index in range(number_of_time_steps - 1):
+    u_next = np.zeros(number_of_spatial_nodes)
+    u_next[0] = u_profile[0]
+    u_next[number_of_spatial_nodes - 1] = u_profile[number_of_spatial_nodes - 1]
+    for node_index in range(1, number_of_spatial_nodes - 1):
+        u_next[node_index] = (
+            u_profile[node_index]
+            + stability_parameter * (
+                u_profile[node_index + 1]
+                - 2 * u_profile[node_index]
+                + u_profile[node_index - 1]
+            )
+        )
+    u_profile = 1.0 * u_next
 
-plt.plot(x, u, label=f't={tmax}')
-plt.xlabel('x (cm)'); plt.ylabel('u (temperature)')
+plt.plot(x_values, u_profile, label=f't={time_end}')
+plt.xlabel('x (cm)')
+plt.ylabel('u (temperature)')
 plt.title('FTCS Heat Equation (stable, r <= 0.5)')
-plt.legend(); plt.tight_layout(); plt.show()
+plt.legend()
+plt.tight_layout()
+plt.show()
 ```
 
 With $\alpha = 0.835$, $dt = 0.001$, $dx = 0.5$:
@@ -112,4 +127,4 @@ $$
 
 Any $dt > 0.150$ will cause instability. In the unstable case the solution rapidly exhibits alternating signs and grows exponentially.
 
-The Richardson method (symmetric: use central time difference instead of forward) is **[[unconditionally unstable]]** for the heat equation for any $dt > 0$. This illustrates that symmetry in time discretisation does not guarantee stability; BTCS (backward time, centred space) is the implicit method that achieves unconditional stability.
+The Richardson method (symmetric: use central time difference instead of forward) is **[[Stability of a method|unconditionally unstable]]** for the heat equation for any $dt > 0$. This illustrates that symmetry in time discretisation does not guarantee stability; BTCS (backward time, centred space) is the implicit method that achieves unconditional stability.

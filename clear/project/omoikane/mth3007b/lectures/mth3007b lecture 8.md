@@ -24,7 +24,7 @@ $$
 \int_{-\infty}^{\infty} \delta(x - x_M)\,dx = 1
 $$
 
-The **[[sifting property]]** states that for any smooth function $f$:
+The **[[Dirac delta function|sifting property]]** states that for any smooth function $f$:
 
 $$
 \int_{-\infty}^{\infty} f(x)\,\delta(x - x_M)\,dx = f(x_M)
@@ -42,7 +42,7 @@ This ensures the discrete sum approximates the integral: $\sum_i u[x_i]\,\Delta 
 
 ### Analytical Solution
 
-The analytical solution to the diffusion equation with a delta function initial condition is a **[[Gaussian solution|Gaussian]]**:
+The analytical solution to the diffusion equation with a delta function initial condition is a **Gaussian**:
 
 $$
 \rho(x, t) = \frac{1}{\sqrt{4\pi\alpha t}}\,\exp\!\left(-\frac{x^2}{4\alpha t}\right)
@@ -52,7 +52,7 @@ Running FTCS with the discrete delta IC recovers this spreading Gaussian numeric
 
 ## Stochastic Processes: Continued
 
-The following topics continue from lecture 7. Recall that a **[[random variable]]** takes values drawn from a probability distribution, and that the Wiener and OU processes are built from Gaussian increments $Z \sim \mathcal{N}(0,1)$.
+The following topics continue from lecture 7. Recall that a **a random variable** takes values drawn from a probability distribution, and that the Wiener and OU processes are built from Gaussian increments $Z \sim \mathcal{N}(0,1)$.
 
 ### Recap: Gaussian Random Numbers
 
@@ -65,7 +65,7 @@ If $X \sim \mathcal{N}(0,1)$, then $kX \sim \mathcal{N}(0, k^2)$. In Python: `np
 
 ## First-Passage Time
 
-The **[[first-passage time]]** is the time at which a stochastic process first reaches or exceeds a threshold $b$. For the OU process $V(t)$:
+The **[[First-passage time]]** is the time at which a stochastic process first reaches or exceeds a threshold $b$. For the OU process $V(t)$:
 
 1. Run the OU simulation with the standard update: $V(t+\Delta t) = (1-k\Delta t)\,V(t) + \sqrt{\Delta t}\,Z$.
 2. At each step, check whether $V(t) \geq b$.

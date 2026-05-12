@@ -14,7 +14,7 @@
 > [!question]
 > What is **Liebmann's method** and what type of equation can it solve?
 
-**[[Liebmann's method]]** (also called Gauss-Seidel iteration applied to PDEs, or successive overrelaxation at $\omega = 1$) is an iterative scheme for solving **elliptic PDEs**, specifically the **[[2D Laplace equation]]** and **[[2D Poisson equation]]**:
+**[[Liebmann's method]]** (also called Gauss-Seidel iteration applied to PDEs, or successive overrelaxation at $\omega = 1$) is an iterative scheme for solving **elliptic PDEs**, specifically the **[[Laplace equation|2D Laplace equation]]** and **[[Poisson equation|2D Poisson equation]]**:
 
 $$
 \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0 \quad \text{(Laplace)}
@@ -38,7 +38,7 @@ $$
 \max_{i,j} |u_{i,j}^{\text{new}} - u_{i,j}^{\text{old}}| < \varepsilon
 $$
 
-The boundary nodes are fixed at their prescribed **[[Dirichlet boundary conditions]]** throughout.
+The boundary nodes are fixed at their prescribed **[[Boundary conditions|Dirichlet boundary conditions]]** throughout.
 
 ---
 
@@ -50,36 +50,36 @@ The boundary nodes are fixed at their prescribed **[[Dirichlet boundary conditio
 ```python
 import numpy as np
 
-L = 10; dx = 1; Nx = L // dx + 1  # 11 nodes in each direction
+domain_size = 10    # cm
+spatial_step = 1    # cm
+number_of_nodes = domain_size // spatial_step + 1  # 11 nodes in each direction
 
-# Initialise grid to zero
-u = np.zeros((Nx, Nx))
+u_grid = np.zeros((number_of_nodes, number_of_nodes))
+u_grid[0, :]                          = 100.0  # top boundary
+u_grid[number_of_nodes - 1, :]        = 0.0   # bottom boundary
+u_grid[:, 0]                          = 75.0  # left boundary
+u_grid[:, number_of_nodes - 1]        = 50.0  # right boundary
 
-# Dirichlet BCs (using row index = x, column index = y convention)
-# top = row 0, bottom = row Nx-1, left = col 0, right = col Nx-1
-u[0, :]      = 100.0   # top boundary
-u[Nx - 1, :] = 0.0    # bottom boundary
-u[:, 0]      = 75.0   # left boundary
-u[:, Nx - 1] = 50.0   # right boundary
+convergence_tolerance = 1e-4
+max_iterations = 10000
 
-# Fix corner conflicts (use average of adjacent BCs, or just accept one value)
-# Here the assignment order above means corners follow the last assignment.
-
-epsilon = 1e-4
-max_iter = 10000
-
-for iteration in range(max_iter):
-    unew = u.copy()
-    for i in range(1, Nx - 1):
-        for j in range(1, Nx - 1):
-            unew[i, j] = (u[i + 1, j] + u[i - 1, j] + u[i, j + 1] + u[i, j - 1]) / 4.0
-    max_error = np.amax(np.abs(unew - u))
-    u = unew.copy()
-    if max_error < epsilon:
+for iteration in range(max_iterations):
+    u_new = u_grid.copy()
+    for row_index in range(1, number_of_nodes - 1):
+        for col_index in range(1, number_of_nodes - 1):
+            u_new[row_index, col_index] = (
+                u_grid[row_index + 1, col_index]
+                + u_grid[row_index - 1, col_index]
+                + u_grid[row_index, col_index + 1]
+                + u_grid[row_index, col_index - 1]
+            ) / 4.0
+    max_error = np.amax(np.abs(u_new - u_grid))
+    u_grid = u_new.copy()
+    if max_error < convergence_tolerance:
         print(f"Converged in {iteration + 1} iterations (max_error = {max_error:.2e})")
         break
 
-print(f"u(5, 5) = {u[5, 5]:.2f} degrees C")
+print(f"u(5, 5) = {u_grid[5, 5]:.2f} degrees C")
 ```
 
 **Grid convention:** with $dx = 1$ and $11 \times 11$ nodes, the node at $(i=5, j=5)$ corresponds to the physical centre of the plate at $(x=5, y=5)$ cm.
@@ -96,9 +96,11 @@ The **[[Lax Equivalence Theorem]]** guarantees that because the Liebmann iterati
 import matplotlib.pyplot as plt
 
 fig, ax = plt.subplots(figsize=(6, 5))
-im = ax.imshow(u, origin='upper', extent=[0, L, 0, L], cmap='hot')
+im = ax.imshow(u_grid, origin='upper', extent=[0, domain_size, 0, domain_size], cmap='hot')
 plt.colorbar(im, ax=ax, label='Temperature (deg C)')
-ax.set_xlabel('x (cm)'); ax.set_ylabel('y (cm)')
+ax.set_xlabel('x (cm)')
+ax.set_ylabel('y (cm)')
 ax.set_title('Steady-state temperature distribution (Liebmann)')
-plt.tight_layout(); plt.show()
+plt.tight_layout()
+plt.show()
 ```

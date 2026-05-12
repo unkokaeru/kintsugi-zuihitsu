@@ -7,23 +7,23 @@ This session opens the PDE strand of the module. We look at how partial differen
 
 ## PDEs: Introduction and Classification
 
-A **[[partial differential equation]]** (PDE) involves an unknown function of two or more variables and its partial derivatives. The classic example in this module is the **[[diffusion equation]]** (also called the heat equation):
+A partial differential equation (PDE) involves an unknown function of two or more variables and its partial derivatives. The classic example in this module is the **[[Heat equation]]** (also called the diffusion equation):
 
 $$
 \frac{\partial u}{\partial t} = \alpha \frac{\partial^2 u}{\partial x^2}
 $$
 
-where $\alpha > 0$ is the **[[diffusion coefficient]]**. This governs, for example, how temperature $u(x,t)$ spreads along a rod over time.
+where $\alpha > 0$ is the diffusion coefficient. This governs, for example, how temperature $u(x,t)$ spreads along a rod over time.
 
 ### Initial and Boundary Conditions
 
-To have a unique solution, a PDE needs both an **[[initial condition]]** (IC) - the state of $u$ at $t=0$ across the whole domain - and **[[boundary conditions]]** (BCs) at the edges of the spatial domain.
+To have a unique solution, a PDE needs both an initial condition (the state of $u$ at $t=0$ across the whole domain) and **[[Boundary conditions]]** at the edges of the spatial domain.
 
 The three standard types of boundary condition are:
 
-- **[[Dirichlet boundary condition]]**: the value of $u$ is fixed at the boundary, e.g. $u(0,t) = u_L$.
-- **[[Neumann boundary condition]]**: the normal derivative $\partial u / \partial n$ is fixed at the boundary.
-- **[[Mixed boundary condition]]**: Dirichlet on part of the boundary and Neumann on the rest.
+- **Dirichlet BC**: the value of $u$ is fixed at the boundary, e.g. $u(0,t) = u_L$.
+- **Neumann BC**: the normal derivative $\partial u / \partial n$ is fixed at the boundary.
+- **Mixed BC**: Dirichlet on part of the boundary and Neumann on the rest.
 
 ## The Laplace and Poisson Equations
 
@@ -47,7 +47,7 @@ $$
 
 ### Finite Difference Second Derivative
 
-We discretise the second derivative using the standard centred **[[second derivative finite difference stencil]]**:
+We discretise the second derivative using the standard centred stencil (see [[Finite differences]]):
 
 $$
 \frac{d^2 u}{d x^2} \approx \frac{u_{n+1} - 2u_n + u_{n-1}}{(\Delta x)^2}
@@ -57,7 +57,7 @@ This follows from combining the forward and backward first-difference approximat
 
 ## The FTCS Scheme for 1D Diffusion
 
-**[[FTCS]]** stands for Forward-Time Centred-Space. We use a forward (explicit) difference in time and the centred stencil in space.
+**[[FTCS scheme|FTCS]]** stands for Forward-Time Centred-Space. We use a forward (explicit) difference in time and the centred stencil in space.
 
 Starting from the diffusion equation and applying both discretisations:
 
@@ -71,13 +71,13 @@ $$
 \boxed{u_{i,n+1} = (1 - 2r)\, u_{i,n} + r\,(u_{i+1,n} + u_{i-1,n})}
 $$
 
-where the **[[mesh ratio]]** $r$ is defined as:
+where the stability parameter $r$ is defined as:
 
 $$
 r = \frac{\alpha \,\Delta t}{(\Delta x)^2}
 $$
 
-Here $i$ indexes space and $n$ indexes time. The new value at each interior point is computed entirely from old (known) values - this is what makes the scheme **explicit**.
+Here $i$ indexes space and $n$ indexes time. The new value at each interior point is computed entirely from old (known) values - this is what makes the scheme explicit.
 
 ### Algorithm
 
@@ -92,31 +92,39 @@ Here $i$ indexes space and $n$ indexes time. The new value at each interior poin
 ```python runnable
 import numpy as np
 import matplotlib.pyplot as plt
-L=10.0
-xmax=L
-dx=0.5
-Nx=int(np.round(xmax/dx)+1)
-tmax=1.0
-t=0
-dt=0.001
-Nt=int(np.round(tmax/dt)+1)
-alpha=1.0
-r=alpha*dt/(dx*dx)
-u=np.zeros(Nx)
-for i in range(Nx):
-    u[i]=np.sin(np.pi*i*dx/L)
-u[0]=0.0
-u[Nx-1]=0.0
-for it in range(Nt-1):
-    unext=np.zeros(Nx)
-    unext[0]=u[0]
-    unext[Nx-1]=u[Nx-1]
-    for i in range(1,Nx-1):
-        unext[i]=u[i]+r*(u[i+1]-2*u[i]+u[i-1])
-    u=1.0*unext
+
+domain_length = 10.0
+spatial_step = 0.5
+number_of_spatial_nodes = int(np.round(domain_length / spatial_step) + 1)
+time_end = 1.0
+time_step = 0.001
+number_of_time_steps = int(np.round(time_end / time_step) + 1)
+diffusivity = 1.0
+stability_parameter = diffusivity * time_step / spatial_step ** 2
+
+u_profile = np.zeros(number_of_spatial_nodes)
+for node_index in range(number_of_spatial_nodes):
+    u_profile[node_index] = np.sin(np.pi * node_index * spatial_step / domain_length)
+u_profile[0] = 0.0
+u_profile[number_of_spatial_nodes - 1] = 0.0
+
+for time_index in range(number_of_time_steps - 1):
+    u_next = np.zeros(number_of_spatial_nodes)
+    u_next[0] = u_profile[0]
+    u_next[number_of_spatial_nodes - 1] = u_profile[number_of_spatial_nodes - 1]
+    for node_index in range(1, number_of_spatial_nodes - 1):
+        u_next[node_index] = (
+            u_profile[node_index]
+            + stability_parameter * (
+                u_profile[node_index + 1]
+                - 2 * u_profile[node_index]
+                + u_profile[node_index - 1]
+            )
+        )
+    u_profile = 1.0 * u_next
 ```
 
-The initial condition here is $u(x,0) = \sin(\pi x / L)$ with Dirichlet conditions $u(0,t) = u(L,t) = 0$. Note that `u=1.0*unext` copies the array by value rather than creating an alias - this is important for correctness.
+The initial condition here is $u(x,0) = \sin(\pi x / L)$ with Dirichlet conditions $u(0,t) = u(L,t) = 0$. Note that `u_profile = 1.0 * u_next` copies the array by value rather than creating an alias - this is important for correctness.
 
 ---
 

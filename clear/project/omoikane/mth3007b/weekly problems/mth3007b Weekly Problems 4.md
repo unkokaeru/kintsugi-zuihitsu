@@ -47,7 +47,7 @@ $$
 by^2 - cy + (ax - dx - e) = 0 \implies by^2 - cy + (a - d)x - e = 0
 $$
 
-Applying the **[[quadratic formula]]**:
+Applying the **quadratic formula**:
 
 $$
 y = \frac{c \pm \sqrt{c^2 - 4b\bigl[(a - d)x - e\bigr]}}{2b}
@@ -81,7 +81,7 @@ $$
 y_{i+1} = \frac{y_i}{1 + a\,dt}
 $$
 
-This is the **[[implicit Euler method]]** for the decay ODE $\dot{y} = -ay$.
+This is the **[[Implicit Euler method]]** for the decay ODE $\dot{y} = -ay$.
 
 ---
 
@@ -137,34 +137,51 @@ where $x$ = prey population, $y$ = predator population.
 import numpy as np
 import matplotlib.pyplot as plt
 
-a = 1.2; b = 0.6; c = 0.8; d = 0.3
-t0 = 0.0; tmax = 30.0; dt = 0.001; y0 = np.array([2.0, 1.0])
+prey_birth_rate = 1.2
+predation_rate = 0.6
+predator_death_rate = 0.8
+predator_growth_rate = 0.3
+time_start = 0.0
+time_end = 30.0
+time_step = 0.001
+initial_state = np.array([2.0, 1.0])
 
-def g(t, Z):
-    x, y = Z
-    return np.array([a*x - b*x*y, -c*y + d*x*y])
+def g(t: float, state: np.ndarray) -> np.ndarray:
+    prey_population, predator_population = state
+    return np.array([
+        prey_birth_rate * prey_population - predation_rate * prey_population * predator_population,
+        -predator_death_rate * predator_population + predator_growth_rate * prey_population * predator_population,
+    ])
 
-Nint = int(round((tmax - t0) / dt))
-t = np.zeros(Nint + 1)
-Z = np.zeros((2, Nint + 1))
-t[0] = t0; Z[:, 0] = y0
+number_of_steps = int(round((time_end - time_start) / time_step))
+t_values = np.zeros(number_of_steps + 1)
+state_array = np.zeros((2, number_of_steps + 1))
+t_values[0] = time_start
+state_array[:, 0] = initial_state
 
-for n in range(Nint):
-    t[n + 1] = t[n] + dt
-    Z[:, n + 1] = Z[:, n] + dt * g(t[n], Z[:, n])
+for step_index in range(number_of_steps):
+    t_values[step_index + 1] = t_values[step_index] + time_step
+    state_array[:, step_index + 1] = (
+        state_array[:, step_index]
+        + time_step * g(t_values[step_index], state_array[:, step_index])
+    )
 
 plt.figure(figsize=(10, 4))
 plt.subplot(1, 2, 1)
-plt.plot(t, Z[0, :], label='Prey (x)')
-plt.plot(t, Z[1, :], label='Predator (y)')
-plt.xlabel('t'); plt.ylabel('Population'); plt.legend()
+plt.plot(t_values, state_array[0, :], label='Prey')
+plt.plot(t_values, state_array[1, :], label='Predator')
+plt.xlabel('t')
+plt.ylabel('Population')
+plt.legend()
 plt.title('Predator-Prey Dynamics')
 
 plt.subplot(1, 2, 2)
-plt.plot(Z[0, :], Z[1, :])
-plt.xlabel('Prey (x)'); plt.ylabel('Predator (y)')
+plt.plot(state_array[0, :], state_array[1, :])
+plt.xlabel('Prey population')
+plt.ylabel('Predator population')
 plt.title('Phase Plane')
-plt.tight_layout(); plt.show()
+plt.tight_layout()
+plt.show()
 ```
 
 The system exhibits periodic oscillations: prey increase, then predators increase (eating prey), then prey decrease, then predators decrease (starving), and the cycle repeats. In the phase plane, the trajectory forms a closed orbit.
@@ -178,7 +195,7 @@ The system exhibits periodic oscillations: prey increase, then predators increas
 
 **[[Stability of an ODE]]**: A differential equation is stable if small perturbations to the initial condition remain bounded over time. For a linear ODE $\dot{y} = \lambda y$, the solution is stable if and only if $\text{Re}(\lambda) < 0$.
 
-**[[Stability of a numerical method]]**: A method is stable if small perturbations in the numerical solution do not grow unboundedly as the time-stepping proceeds. The stability condition depends on the method and the step size. The **[[amplification factor]]** $G$ (ratio $y_{n+1}/y_n$ for the test equation $\dot{y} = \lambda y$) must satisfy $|G| \leq 1$ for stability:
+**[[Stability of a method]]**: A method is stable if small perturbations in the numerical solution do not grow unboundedly as the time-stepping proceeds. The stability condition depends on the method and the step size. The **amplification factor** $G$ (ratio $y_{n+1}/y_n$ for the test equation $\dot{y} = \lambda y$) must satisfy $|G| \leq 1$ for stability:
 
 - Explicit Euler: $G = 1 + \lambda\,dt$, so stability requires $|\!1 + \lambda\,dt\!| \leq 1$.
 - Implicit Euler: $G = 1/(1 - \lambda\,dt)$, so $|G| < 1$ for all $\text{Re}(\lambda) < 0$ (unconditionally stable).

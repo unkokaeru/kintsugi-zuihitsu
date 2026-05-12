@@ -29,14 +29,16 @@ The exact value is $\displaystyle\int_0^1 x^2\,dx = \left[\frac{x^3}{3}\right]_0
 ```python
 import numpy as np
 
-N = 1000
+number_of_samples = 1000
 np.random.seed(0)
-x = np.random.uniform(0, 1, N)
-f = x**2
+x_samples = np.random.uniform(0, 1, number_of_samples)
+f_values = x_samples ** 2
 
-F = (1 - 0) * np.mean(f)
-error = (1 - 0) * np.sqrt((np.mean(f**2) - np.mean(f)**2) / N)
-print(f"F = {F:.4f}, error = {error:.4f}, exact = 0.3333")
+integral_estimate = (1 - 0) * np.mean(f_values)
+error_estimate = (1 - 0) * np.sqrt(
+    (np.mean(f_values ** 2) - np.mean(f_values) ** 2) / number_of_samples
+)
+print(f"F = {integral_estimate:.4f}, error = {error_estimate:.4f}, exact = 0.3333")
 ```
 
 Expected output: $F \approx 0.3333$ with error $\approx 0.0083$ (varies with seed). The error is of order $1/\sqrt{N} \approx 0.032$; the prefactor depends on the variance of $f$.
@@ -48,7 +50,7 @@ Expected output: $F \approx 0.3333$ with error $\approx 0.0083$ (varies with see
 > [!question]
 > Verify numerically that the Monte Carlo error scales as $O(N^{-1/2})$ by running the estimator for several values of $N$.
 
-The **[[Monte Carlo error scaling]]** is:
+The **[[Monte Carlo integration|Monte Carlo error scaling]]** is:
 
 $$
 \sigma_{\hat{I}} \propto N^{-1/2}
@@ -60,15 +62,17 @@ This is a consequence of the central limit theorem. Doubling $N$ reduces the err
 import numpy as np
 
 np.random.seed(42)
-exact = 1.0 / 3.0
+exact_value = 1.0 / 3.0
 
 print(f"{'N':>8}  {'Estimate':>10}  {'Error (SE)':>12}  {'|estimate - exact|':>20}")
-for N in [100, 1000, 10000, 100000]:
-    x = np.random.uniform(0, 1, N)
-    f = x**2
-    F = np.mean(f)
-    se = np.sqrt((np.mean(f**2) - np.mean(f)**2) / N)
-    print(f"{N:>8}  {F:>10.5f}  {se:>12.5f}  {abs(F - exact):>20.5f}")
+for number_of_samples in [100, 1000, 10000, 100000]:
+    x_samples = np.random.uniform(0, 1, number_of_samples)
+    f_values = x_samples ** 2
+    estimate = np.mean(f_values)
+    standard_error = np.sqrt(
+        (np.mean(f_values ** 2) - np.mean(f_values) ** 2) / number_of_samples
+    )
+    print(f"{number_of_samples:>8}  {estimate:>10.5f}  {standard_error:>12.5f}  {abs(estimate - exact_value):>20.5f}")
 ```
 
 The standard error column should decrease by a factor of $\approx \sqrt{10} \approx 3.16$ each time $N$ increases by a factor of 10, confirming $O(N^{-1/2})$ convergence.
@@ -90,38 +94,44 @@ $$
 W_{n+1} = W_n + \sqrt{dt}\,\xi_n, \quad \xi_n \sim \mathcal{N}(0, 1)
 $$
 
-The **[[Euler-Maruyama method]]** for a Wiener process is exact (not an approximation) because the process itself has independent increments.
+The **[[Euler-Maruyama scheme|Euler-Maruyama method]]** for a Wiener process is exact (not an approximation) because the process itself has independent increments.
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 
-dt = 0.01; tmax = 10.0; Nsteps = int(round(tmax / dt))
-Nwalkers = 100
+time_step = 0.01
+time_end = 10.0
+number_of_steps = int(round(time_end / time_step))
+number_of_walkers = 100
 np.random.seed(0)
 
-W = np.zeros((Nwalkers, Nsteps + 1))
-t = np.linspace(0, tmax, Nsteps + 1)
+W_paths = np.zeros((number_of_walkers, number_of_steps + 1))
+t_values = np.linspace(0, time_end, number_of_steps + 1)
 
-for walker in range(Nwalkers):
-    for i in range(Nsteps):
-        W[walker, i + 1] = W[walker, i] + np.sqrt(dt) * np.random.normal()
+for walker_index in range(number_of_walkers):
+    for step_index in range(number_of_steps):
+        W_paths[walker_index, step_index + 1] = (
+            W_paths[walker_index, step_index]
+            + np.sqrt(time_step) * np.random.normal()
+        )
 
 # Vectorised equivalent (more efficient):
-# increments = np.sqrt(dt) * np.random.normal(size=(Nwalkers, Nsteps))
-# W = np.concatenate([np.zeros((Nwalkers, 1)), np.cumsum(increments, axis=1)], axis=1)
+# increments = np.sqrt(time_step) * np.random.normal(size=(number_of_walkers, number_of_steps))
+# W_paths = np.concatenate([np.zeros((number_of_walkers, 1)), np.cumsum(increments, axis=1)], axis=1)
 
 plt.figure(figsize=(10, 5))
-for walker in range(Nwalkers):
-    plt.plot(t, W[walker, :], alpha=0.3, linewidth=0.5)
-plt.xlabel('t'); plt.ylabel('W(t)')
+for walker_index in range(number_of_walkers):
+    plt.plot(t_values, W_paths[walker_index, :], alpha=0.3, linewidth=0.5)
+plt.xlabel('t')
+plt.ylabel('W(t)')
 plt.title('100 Wiener process realisations')
-plt.tight_layout(); plt.show()
+plt.tight_layout()
+plt.show()
 
-# Verify variance grows linearly in t
-variance = np.var(W, axis=0)
-print(f"Var[W(t=5)] = {variance[500]:.3f}, expected 5.000")
-print(f"Var[W(t=10)] = {variance[-1]:.3f}, expected 10.000")
+variance_over_time = np.var(W_paths, axis=0)
+print(f"Var[W(t=5)] = {variance_over_time[500]:.3f}, expected 5.000")
+print(f"Var[W(t=10)] = {variance_over_time[-1]:.3f}, expected 10.000")
 ```
 
 Key statistical properties visible from the plot:

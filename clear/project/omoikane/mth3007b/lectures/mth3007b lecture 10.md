@@ -7,7 +7,7 @@ This session moves from 1D time-dependent PDEs to a 2D steady-state problem: the
 
 ## The 2D Laplace Equation
 
-The **[[2D Laplace equation]]** is the steady-state condition $\partial u / \partial t = 0$ applied to the 2D diffusion equation:
+The **[[Laplace equation|2D Laplace equation]]** is the steady-state condition $\partial u / \partial t = 0$ applied to the 2D diffusion equation:
 
 $$
 \nabla^2 u = 0 \qquad \Longleftrightarrow \qquad \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0
@@ -47,21 +47,21 @@ $$
 
 A typical value is $\varepsilon = 10^{-4}$.
 
-Convergence is guaranteed because the resulting matrix is **[[diagonally dominant]]**: the diagonal entry $(-4)$ has magnitude greater than the sum of the absolute values of the off-diagonal entries $(1+1+1+1 = 4)$ - just at the boundary of strict diagonal dominance, but the fixed boundary conditions ensure convergence.
+Convergence is guaranteed because the resulting matrix is **[[Diagonal dominance|diagonally dominant]]**: the diagonal entry $(-4)$ has magnitude greater than the sum of the absolute values of the off-diagonal entries $(1+1+1+1 = 4)$ - just at the boundary of strict diagonal dominance, but the fixed boundary conditions ensure convergence.
 
 ### Computing the Maximum Error
 
 Two equivalent approaches:
 
 ```python runnable
-max_error=0.0
-for i in range(Nr):
-    for j in range(Nc):
-        current_error=np.abs(unew_xy[i,j]-u_xy[i,j])
-        if current_error>max_error:
-            max_error=current_error
-# Alternative:
-max_error=np.amax(np.abs(unew_xy-u_xy))
+max_error = 0.0
+for row_index in range(number_of_rows):
+    for col_index in range(number_of_cols):
+        current_error = np.abs(u_new[row_index, col_index] - u_old[row_index, col_index])
+        if current_error > max_error:
+            max_error = current_error
+# Alternative (preferred):
+max_error = np.amax(np.abs(u_new - u_old))
 ```
 
 The `np.amax` version is more concise and vectorised.
@@ -83,15 +83,21 @@ The `np.amax` version is more concise and vectorised.
 
 ```python runnable
 import numpy as np
-M=np.zeros((Nr,Nc))   # matrix of size Nr x Nc, all zero
-M[2,4]=10             # set element in row 3, col 5
-v=np.zeros(N)         # vector of size N
-v[3]=5
-v[-1]=10              # last element
-# Copy array (important - B=A is an alias, not a copy)
-B=1.0*A
-# Alternative: B=A.copy()
-# Note: B=A is WRONG for copying
+
+number_of_rows = 5
+number_of_cols = 6
+number_of_elements = 10
+M = np.zeros((number_of_rows, number_of_cols))  # matrix, all zero
+M[2, 4] = 10                                    # set element in row 3, col 5
+v = np.zeros(number_of_elements)                # vector of zeros
+v[3] = 5
+v[-1] = 10                                      # last element
+
+# Copy array correctly (B=A is an alias, not a copy):
+original = np.array([1.0, 2.0, 3.0])
+copy_correct = 1.0 * original     # independent copy
+copy_also_ok = original.copy()    # also independent
+alias_wrong  = original           # WRONG for copying - same data
 ```
 
 > [!warning] Array copying

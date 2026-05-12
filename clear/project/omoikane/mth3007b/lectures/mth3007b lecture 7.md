@@ -1,7 +1,7 @@
 # MTH3007b Lecture 7
 
 > [!quote] Me, in the lecture
-> zzzzz…
+> zzzzz...
 
 This session covers two distinct but related threads: Monte Carlo integration as a numerical quadrature technique, and stochastic processes starting with the random walk and building up to the Ornstein-Uhlenbeck process. Both rely heavily on the machinery of pseudo-random number generation.
 
@@ -11,11 +11,12 @@ This session covers two distinct but related threads: Monte Carlo integration as
 
 ### Pseudo-Random Numbers
 
-**[[Pseudo-random numbers]]** are generated deterministically by an algorithm but pass statistical tests for randomness. In Python, `numpy.random` provides a uniform distribution on $[0,1]$ via `np.random.uniform(a, b, N)`.
+**[[Pseudo-random number generation|Pseudo-random numbers]]** are generated deterministically by an algorithm but pass statistical tests for randomness. In Python, `numpy.random` provides a uniform distribution on $[a,b]$ via `np.random.uniform(a, b, N)`.
 
-A **[[seed]]** fixes the starting point of the random number generator, giving reproducible results:
+A seed fixes the starting point of the random number generator, giving reproducible results:
 
 ```python runnable
+import numpy as np
 np.random.seed(0)
 ```
 
@@ -29,7 +30,7 @@ $$
 \boxed{F \approx (b - a)\,\langle f \rangle_N}
 $$
 
-where $\langle f \rangle_N = \frac{1}{N}\sum_{i=1}^N f(x_i)$ is the sample mean. The **[[Monte Carlo error]]** on this estimate is:
+where $\langle f \rangle_N = \frac{1}{N}\sum_{i=1}^N f(x_i)$ is the sample mean. The error on this estimate is:
 
 $$
 \boxed{\sigma_F = (b-a)\sqrt{\frac{\langle f^2 \rangle_N - \langle f \rangle_N^2}{N}}}
@@ -52,25 +53,28 @@ The error is still $O(N^{-1/2})$, regardless of the dimension $d$. This is the k
 ```python runnable
 import numpy as np
 import matplotlib.pyplot as plt
-N=1000
+
+number_of_samples = 1000
 np.random.seed(0)
-x=np.random.uniform(0,1,N)
-f=x**2
-F=(1-0)*np.mean(f)
-print("F=",F)
-error=(1-0)*np.sqrt((np.mean(f**2)-np.mean(f)**2)/N)
-print("error=",error)
+x_samples = np.random.uniform(0, 1, number_of_samples)
+f_values = x_samples ** 2
+
+integral_estimate = (1 - 0) * np.mean(f_values)
+print("F =", integral_estimate)
+
+error_estimate = (1 - 0) * np.sqrt(
+    (np.mean(f_values ** 2) - np.mean(f_values) ** 2) / number_of_samples
+)
+print("error =", error_estimate)
 ```
 
 The exact answer is $\int_0^1 x^2\,dx = 1/3 \approx 0.333$.
 
 ## Stochastic Processes
 
-A **[[random variable]]** is a variable whose value is drawn from a probability distribution. If $X \sim \mathcal{N}(0,1)$ (standard normal), then $kX \sim \mathcal{N}(0, k^2)$ - multiplying by a constant $k$ scales the variance by $k^2$.
-
 ### Discrete Random Walk
 
-The **[[random walk]]** is the simplest discrete stochastic process. At each step, a particle moves $+1$ or $-1$ with equal probability:
+The **[[Random walks|random walk]]** is the simplest discrete stochastic process. At each step, a particle moves $+1$ or $-1$ with equal probability:
 
 $$
 X_{n+1} = X_n \pm 1
@@ -82,9 +86,9 @@ The **[[Wiener process]]** $W(t)$ is the continuous-time limit of the random wal
 
 - $W(0) = 0$
 - $W(t) - W(s) \sim \mathcal{N}(0,\, t-s)$ for $t > s$
-- Increments over non-overlapping intervals are **[[independent increments|independent]]**
+- Increments over non-overlapping intervals are independent
 
-The numerical **[[Euler-Maruyama]]** scheme for the Wiener process is:
+The numerical [[Euler-Maruyama scheme]] for the Wiener process is:
 
 $$
 \boxed{W(t + \Delta t) = W(t) + \sqrt{\Delta t}\, Z}
@@ -95,15 +99,22 @@ where $Z \sim \mathcal{N}(0,1)$.
 ```python runnable
 import numpy as np
 import matplotlib.pyplot as plt
-dt=0.01
-tmax=10.0
-Nsteps=int(round(tmax/dt))
-W=np.zeros(Nsteps+1)
-t=np.zeros(Nsteps+1)
-for i in range(Nsteps):
-    t[i+1]=t[i]+dt
-    W[i+1]=W[i]+np.sqrt(dt)*np.random.normal()
-plt.plot(t,W)
+
+time_step = 0.01
+time_end = 10.0
+number_of_steps = int(round(time_end / time_step))
+W_path = np.zeros(number_of_steps + 1)
+t_values = np.zeros(number_of_steps + 1)
+
+for step_index in range(number_of_steps):
+    t_values[step_index + 1] = t_values[step_index] + time_step
+    W_path[step_index + 1] = W_path[step_index] + np.sqrt(time_step) * np.random.normal()
+
+plt.plot(t_values, W_path)
+plt.xlabel('t')
+plt.ylabel('W(t)')
+plt.tight_layout()
+plt.show()
 ```
 
 ### The Ornstein-Uhlenbeck Process
@@ -122,16 +133,21 @@ $$
 
 ```python runnable
 import numpy as np
-k=1.0
-dt=0.01
-tmax=10.0
-Nsteps=int(round(tmax/dt))
-V=np.zeros(Nsteps+1)
-t=np.zeros(Nsteps+1)
-V[0]=0.0
-for i in range(Nsteps):
-    t[i+1]=t[i]+dt
-    V[i+1]=(1-k*dt)*V[i]+np.sqrt(dt)*np.random.normal()
+
+mean_reversion_rate = 1.0
+time_step = 0.01
+time_end = 10.0
+number_of_steps = int(round(time_end / time_step))
+velocity_path = np.zeros(number_of_steps + 1)
+t_values = np.zeros(number_of_steps + 1)
+velocity_path[0] = 0.0
+
+for step_index in range(number_of_steps):
+    t_values[step_index + 1] = t_values[step_index] + time_step
+    velocity_path[step_index + 1] = (
+        (1 - mean_reversion_rate * time_step) * velocity_path[step_index]
+        + np.sqrt(time_step) * np.random.normal()
+    )
 ```
 
 ### The Langevin Equation
@@ -142,7 +158,7 @@ $$
 \frac{dV}{dt} = -kV + \xi(t)
 $$
 
-where $\xi(t)$ is **[[white noise]]** with the correlation:
+where $\xi(t)$ is white noise with the correlation:
 
 $$
 \langle \xi(t)\,\xi(t') \rangle = 2\,\delta(t - t')

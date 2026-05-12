@@ -1,13 +1,13 @@
 # MTH3007b Lecture 1
 
 > [!quote] Me, in the lecture
-> zzzzz…
+> zzzzz...
 
-This session opens the module by establishing the core framework for numerically solving ordinary differential equations. We derive the **[[explicit Euler method]]** from first principles via finite differences, examine its errors, then introduce the **[[implicit Euler method]]** as a stability-motivated alternative. There is no previous lecture to connect to - this is the starting point.
+This session opens the module by establishing the core framework for numerically solving ordinary differential equations. We derive the **[[Explicit Euler method]]** from first principles via finite differences, examine its errors, then introduce the **[[Implicit Euler method]]** as a stability-motivated alternative. There is no previous lecture to connect to - this is the starting point.
 
 ## The Finite Difference Approach
 
-The starting point for all ODE solvers in this module is the **[[finite difference method]]**. Rather than working with the derivative $\dot{y} = g(t, y)$ as a limit, we approximate it using a discrete grid of time points.
+The starting point for all ODE solvers in this module is the **[[Finite differences]]** approach. Rather than working with the derivative $\dot{y} = g(t, y)$ as a limit, we approximate it using a discrete grid of time points.
 
 Partition time into steps of size $dt$, so $t_n = t_0 + n \cdot dt$. The forward difference approximation to the first derivative at $t_n$ is
 
@@ -27,7 +27,7 @@ $$
 \frac{y_{n+1} - y_n}{dt} = g(t_n, y_n)
 $$
 
-Rearranging gives the **[[explicit Euler method]]** (also called the forward Euler method):
+Rearranging gives the **[[Explicit Euler method]]** (also called the forward Euler method):
 
 > [!important]
 > The explicit Euler update rule:
@@ -40,54 +40,58 @@ The method is called "explicit" because $y_{n+1}$ is expressed directly in terms
 The practical implementation stores the full solution array:
 
 ```python runnable
-# Basic explicit Euler (storing whole function)
-y0=1.0
-dt=0.01
-t0=0.0
-tmax=10.0
-Nint=int(round(tmax/dt))
-y=np.zeros(Nint+1)
-t=np.zeros(Nint+1)
-y[0]=y0
-t[0]=t0
-for n in range(Nint):
-    t[n+1]=t[n]+dt
-    y[n+1]=y[n]*(1+dt)
+import numpy as np
+
+initial_value = 1.0
+time_step = 0.01
+time_start = 0.0
+time_end = 10.0
+number_of_steps = int(round(time_end / time_step))
+y_values = np.zeros(number_of_steps + 1)
+t_values = np.zeros(number_of_steps + 1)
+y_values[0] = initial_value
+t_values[0] = time_start
+for step_index in range(number_of_steps):
+    t_values[step_index + 1] = t_values[step_index] + time_step
+    y_values[step_index + 1] = y_values[step_index] * (1 + time_step)
 ```
 
 > [!note]
-> `int(round(tmax/dt))` is used rather than a bare integer division because floating-point division can produce results like $9.999\ldots$ which would truncate incorrectly.
+> `int(round(time_end/time_step))` is used rather than bare integer division because floating-point division can produce results like $9.999\ldots$ which would truncate incorrectly.
 
 A more general version using a right-hand-side function $g(t, y)$:
 
 ```python runnable
-# Explicit Euler for dy/dt = bt - ay
 import numpy as np
-import matplotlib.pyplot as plt
-t0=0.0
-tmax=1.0
-dt=0.01
-y0=1.0
-Nint=int(round((tmax-t0)/dt))
-t=np.zeros(Nint+1)
-y=np.zeros(Nint+1)
-t[0]=t0
-y[0]=y0
-def g(t, y):
-    b=1.0
-    a=22.0
-    return b*t-a*y
-for n in range(Nint):
-    t[n+1]=t[n]+dt
-    y[n+1]=y[n]+ dt * g(t[n], y[n])
-print("y(t=tmax)=",y[Nint])
+
+time_start = 0.0
+time_end = 1.0
+time_step = 0.01
+initial_value = 1.0
+number_of_steps = int(round((time_end - time_start) / time_step))
+t_values = np.zeros(number_of_steps + 1)
+y_values = np.zeros(number_of_steps + 1)
+t_values[0] = time_start
+y_values[0] = initial_value
+
+decay_rate = 22.0
+forcing_coefficient = 1.0
+
+def g(t: float, y: float) -> float:
+    return forcing_coefficient * t - decay_rate * y
+
+for step_index in range(number_of_steps):
+    t_values[step_index + 1] = t_values[step_index] + time_step
+    y_values[step_index + 1] = y_values[step_index] + time_step * g(t_values[step_index], y_values[step_index])
+
+print("y(t_end) =", y_values[number_of_steps])
 ```
 
 ## Errors in Explicit Euler
 
 ### Local Truncation Error
 
-The **[[local truncation error]]** is the error introduced in a single step, assuming the previous value $y_n$ is exact. Expanding $y(t_{n+1})$ as a Taylor series:
+The **[[Local truncation error]]** is the error introduced in a single step, assuming the previous value $y_n$ is exact. Expanding $y(t_{n+1})$ as a Taylor series:
 
 $$
 y(t_{n+1}) = y(t_n) + dt \cdot y'(t_n) + \frac{dt^2}{2} y''(t_n) + \cdots
@@ -101,7 +105,7 @@ $$
 
 ### Global Truncation Error
 
-The **[[global truncation error]]** (GTE) accumulates over all steps from $t_0$ to $t_{\text{max}}$. The number of steps is $N \sim t_{\text{max}}/dt$, so
+The **[[Global truncation error]]** (GTE) accumulates over all steps from $t_0$ to $t_{\text{max}}$. The number of steps is $N \sim t_{\text{max}}/dt$, so
 
 $$
 \text{GTE} \sim N \cdot \text{LTE} \sim \frac{t_{\text{max}}}{dt} \cdot O(dt^2) = O(dt)
@@ -128,7 +132,7 @@ $$
 y_{n+1} = y_n(1 - a \cdot dt)
 $$
 
-The factor $(1 - a \cdot dt)$ is the **[[amplification factor]]**. For stability we need $|1 - a \cdot dt| \leq 1$, which requires $a \cdot dt \leq 2$.
+The factor $(1 - a \cdot dt)$ is the amplification factor. For stability we need $|1 - a \cdot dt| \leq 1$, which requires $a \cdot dt \leq 2$.
 
 > [!warning]
 > Explicit Euler applied to $\dot{y} = -ay$ is **conditionally stable**. If $a \cdot dt > 2$ the amplification factor exceeds 1 in magnitude and the solution grows without bound - even though the true solution decays.
@@ -137,13 +141,13 @@ The factor $(1 - a \cdot dt)$ is the **[[amplification factor]]**. For stability
 
 ### Motivation
 
-The instability of explicit Euler for stiff problems motivates using a **backward difference** instead of a forward difference. Approximating the derivative at $t_{n+1}$:
+The instability of explicit Euler for stiff problems motivates using a backward difference instead of a forward difference. Approximating the derivative at $t_{n+1}$:
 
 $$
 \frac{y_{n+1} - y_n}{dt} = g(t_{n+1}, y_{n+1})
 $$
 
-This is the **[[implicit Euler method]]** (backward Euler), since $y_{n+1}$ appears on both sides and must be solved for.
+This is the **[[Implicit Euler method]]** (backward Euler), since $y_{n+1}$ appears on both sides and must be solved for.
 
 ### Example: $dy/dt = -ay$
 
@@ -159,17 +163,25 @@ $$
 
 The amplification factor is $1/(1 + a \cdot dt)$, which is always less than 1 for $a > 0$ and any $dt > 0$. Backward Euler is therefore unconditionally stable for this equation.
 
-### Example: $dy/dt = Bt - ay$ (implicit update)
+### Example: $dy/dt = bt - ay$ (implicit update)
 
-When $g(t, y) = bt - ay$, the implicit Euler step at step $n$ is:
+When $g(t, y) = bt - ay$, the implicit Euler step rearranges to:
 
 ```python runnable
-y[n+1]=(y[n]+dt*b*t[n+1])/(1.0+a*dt)
+# Implicit Euler update for dy/dt = b*t - a*y
+# y_next = (y_now + dt * b * t_next) / (1 + a * dt)
+decay_rate = 22.0
+forcing_coefficient = 1.0
+# example single step:
+y_now = 1.0
+t_next = 0.01
+time_step = 0.01
+y_next = (y_now + time_step * forcing_coefficient * t_next) / (1.0 + decay_rate * time_step)
 ```
 
 Note that $t_{n+1}$ is known before solving - only $y_{n+1}$ is the unknown.
 
-## Round-off Errors
+## Round-Off Errors
 
 **[[Round-off error]]** arises from finite-precision floating-point arithmetic, distinct from the truncation error above.
 

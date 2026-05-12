@@ -19,9 +19,9 @@ MTH3007b *Numerical Methods* covers three main blocks, each building on the last
 - **[[Local truncation error]]** (LTE): error in one step assuming the previous value is exact.
 - **[[Global truncation error]]** (GTE): accumulated error over all steps. GTE is one order lower in $dt$ than LTE (because there are $\sim 1/dt$ steps).
 - **[[Order of a method]]**: GTE $= O(dt^p)$. Doubling $N$ (halving $dt$) reduces error by $2^p$.
-- **[[Explicit methods]]**: update $y_{n+1}$ directly from $y_n$. Simple but conditionally stable.
-- **[[Implicit methods]]**: update involves $y_{n+1}$ on both sides; must be solved. Unconditionally stable.
-- **[[Stability]]**: method is stable if small perturbations do not grow. Characterised by the amplification factor $G$ for the test equation $\dot{y} = \lambda y$.
+- **[[Runge-Kutta methods|explicit methods]]**: update $y_{n+1}$ directly from $y_n$. Simple but conditionally stable.
+- **[[Implicit Euler method|implicit methods]]**: update involves $y_{n+1}$ on both sides; must be solved. Unconditionally stable.
+- **[[Stability of a method|stability]]**: method is stable if small perturbations do not grow. Characterised by the amplification factor $G$ for the test equation $\dot{y} = \lambda y$.
 - **[[Lax Equivalence Theorem]]**: consistency + stability $\iff$ convergence (for linear problems).
 
 **Methods covered:**
@@ -36,7 +36,6 @@ MTH3007b *Numerical Methods* covers three main blocks, each building on the last
 | RK4 | 4 | Explicit |
 
 **Systems and reductions:**
-
 - A $p$-th order ODE reduces to a system of $p$ first-order ODEs by introducing intermediate derivatives as new state variables.
 - Predator-prey (Lotka-Volterra) as a worked example of a coupled 2D system.
 
@@ -48,12 +47,12 @@ MTH3007b *Numerical Methods* covers three main blocks, each building on the last
 
 **Key concepts:**
 
-- **[[FTCS]]** (Forward Time, Centred Space): explicit, simple, but requires $r = \alpha\,dt/dx^2 \leq 1/2$ for stability.
-- **[[BTCS]]** (Backward Time, Centred Space): implicit, unconditionally stable, requires solving a tridiagonal linear system at each step.
+- **[[FTCS scheme|FTCS]]** (Forward Time, Centred Space): explicit, simple, but requires $r = \alpha\,dt/dx^2 \leq 1/2$ for stability.
+- **[[BTCS scheme|BTCS]]** (Backward Time, Centred Space): implicit, unconditionally stable, requires solving a tridiagonal linear system at each step.
 - **[[Richardson method]]**: symmetric (central) time difference - unconditionally unstable despite higher formal accuracy. Not used in practice.
-- **[[Dirichlet BC]]**: fix $u$ at boundary.
-- **[[Neumann BC]]**: fix $du/dx$ at boundary. Implemented via the imaginary point method.
-- **[[2D Laplace equation]]**: steady-state problem. Solved by Liebmann iteration (Gauss-Seidel) to convergence.
+- **[[Boundary conditions|Dirichlet BC]]**: fix $u$ at boundary.
+- **[[Boundary conditions|Neumann BC]]**: fix $du/dx$ at boundary. Implemented via the imaginary point method.
+- **[[Laplace equation|2D Laplace equation]]**: steady-state problem. Solved by Liebmann iteration (Gauss-Seidel) to convergence.
 - **[[Lax Equivalence Theorem]]**: applies to PDEs too - consistency + stability gives convergence.
 
 ---
@@ -67,7 +66,7 @@ MTH3007b *Numerical Methods* covers three main blocks, each building on the last
 - **[[Monte Carlo integration]]**: sample $f$ at $N$ random points, average. Error $\propto N^{-1/2}$ regardless of dimension.
 - **[[Wiener process]]** $W(t)$: the fundamental stochastic process. Increments are independent Gaussian with variance $dt$. Update: $W_{n+1} = W_n + \sqrt{dt}\,\xi_n$.
 - **[[Ornstein-Uhlenbeck process]]**: mean-reverting SDE, $dV = -kV\,dt + dW$. Euler-Maruyama: $V_{n+1} = (1-k\,dt)V_n + \sqrt{dt}\,\xi_n$.
-- **[[Euler-Maruyama method]]**: the stochastic analogue of explicit Euler. For an SDE $dX = f(X)\,dt + \sigma\,dW$: $X_{n+1} = X_n + f(X_n)\,dt + \sigma\sqrt{dt}\,\xi_n$.
+- **[[Euler-Maruyama scheme|Euler-Maruyama method]]**: the stochastic analogue of explicit Euler. For an SDE $dX = f(X)\,dt + \sigma\,dW$: $X_{n+1} = X_n + f(X_n)\,dt + \sigma\sqrt{dt}\,\xi_n$.
 - **[[First-passage time]]**: stop the simulation when a threshold is crossed; average $\tau$ over many walkers.
 
 **Note from the PDF:** Stochastic ODEs are not included in the Chapra & Canale exercise list for the revision session but could be asked in the test.

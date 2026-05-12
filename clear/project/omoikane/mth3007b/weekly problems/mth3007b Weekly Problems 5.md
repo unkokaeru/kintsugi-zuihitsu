@@ -33,36 +33,43 @@ $$
 ```python
 import numpy as np
 
-def g_integral(t, y):
-    return -2*t**3 + 12*t**2 - 20*t + 8.5
+time_end = 1.0
+initial_value = 0.0
+time_step = 0.01
 
-tmax = 1.0; y0 = 0.0
+def integrand(t: float, y: float) -> float:
+    """RHS: dF/dt = f(t), independent of F."""
+    return -2 * t ** 3 + 12 * t ** 2 - 20 * t + 8.5
 
 # --- Forward Euler ---
-dt = 0.01
-Nint = int(round(tmax / dt))
-t = np.zeros(Nint + 1); y = np.zeros(Nint + 1)
-t[0] = 0.0; y[0] = y0
-for n in range(Nint):
-    t[n + 1] = t[n] + dt
-    y[n + 1] = y[n] + dt * g_integral(t[n], y[n])
-print(f"Forward Euler (dt={dt}): I = {y[Nint]:.6f}")
+number_of_steps = int(round(time_end / time_step))
+t_values = np.zeros(number_of_steps + 1)
+y_values = np.zeros(number_of_steps + 1)
+t_values[0] = 0.0
+y_values[0] = initial_value
+for step_index in range(number_of_steps):
+    t_values[step_index + 1] = t_values[step_index] + time_step
+    y_values[step_index + 1] = (
+        y_values[step_index]
+        + time_step * integrand(t_values[step_index], y_values[step_index])
+    )
+print(f"Forward Euler (dt={time_step}): I = {y_values[number_of_steps]:.6f}")
 
 # --- RK4 ---
-def rk4_step(g, t, y, dt):
+def rk4_step(g, t: float, y: float, time_step: float) -> float:
     k1 = g(t, y)
-    k2 = g(t + dt/2, y + dt*k1/2)
-    k3 = g(t + dt/2, y + dt*k2/2)
-    k4 = g(t + dt, y + dt*k3)
-    return y + dt/6*(k1 + 2*k2 + 2*k3 + k4)
+    k2 = g(t + time_step / 2, y + time_step * k1 / 2)
+    k3 = g(t + time_step / 2, y + time_step * k2 / 2)
+    k4 = g(t + time_step, y + time_step * k3)
+    return y + time_step / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
 
-Nint = int(round(tmax / dt))
-t_val = 0.0; y_val = y0
-for n in range(Nint):
-    y_val = rk4_step(g_integral, t_val, y_val, dt)
-    t_val += dt
-print(f"RK4 (dt={dt}): I = {y_val:.6f}")
-print(f"Analytical: I = 2.0")
+current_t = 0.0
+current_y = initial_value
+for _ in range(int(round(time_end / time_step))):
+    current_y = rk4_step(integrand, current_t, current_y, time_step)
+    current_t += time_step
+print(f"RK4 (dt={time_step}): I = {current_y:.6f}")
+print("Analytical: I = 2.0")
 ```
 
 Both methods should give values close to $2.0$. RK4 achieves higher accuracy for the same step size because the integrand is a polynomial (degree 3), which RK4 integrates exactly.
@@ -101,25 +108,31 @@ $$
 ```python
 import numpy as np
 
-def g_system(t, Z):
-    return np.array([Z[1], Z[0]])
+def g_system(t: float, state: np.ndarray) -> np.ndarray:
+    """RHS for y'' = y reduced to [y', y''] = [z2, z1]."""
+    return np.array([state[1], state[0]])
 
-dt = 0.01; tmax = 5.0
-Nint = int(round(tmax / dt))
-Z = np.zeros((2, Nint + 1))
-t = np.zeros(Nint + 1)
-Z[0, 0] = 1.0; Z[1, 0] = 1.0  # y(0)=1, y'(0)=1
+time_step = 0.01
+time_end = 5.0
+number_of_steps = int(round(time_end / time_step))
+state_array = np.zeros((2, number_of_steps + 1))
+t_values = np.zeros(number_of_steps + 1)
+state_array[0, 0] = 1.0  # y(0) = 1
+state_array[1, 0] = 1.0  # y'(0) = 1
 
-for n in range(Nint):
-    t[n + 1] = t[n] + dt
-    Z[:, n + 1] = Z[:, n] + dt * g_system(t[n], Z[:, n])
+for step_index in range(number_of_steps):
+    t_values[step_index + 1] = t_values[step_index] + time_step
+    state_array[:, step_index + 1] = (
+        state_array[:, step_index]
+        + time_step * g_system(t_values[step_index], state_array[:, step_index])
+    )
 
-print(f"y(5) numerical = {Z[0, -1]:.6f}")
+print(f"y(5) numerical = {state_array[0, -1]:.6f}")
 print(f"y(5) exact     = {np.exp(5):.6f}")
-print(f"Error = {abs(Z[0, -1] - np.exp(5)):.4e}")
+print(f"Error = {abs(state_array[0, -1] - np.exp(5)):.4e}")
 ```
 
-Note: **[[systems of ODEs]]** follow exactly the same structure as scalar ODEs - the state vector $\mathbf{Z}$ replaces the scalar $y$, and $g$ returns a vector of derivatives. The same solvers (Euler, RK4, etc.) apply by operating componentwise.
+Note: **[[Systems of ODEs]]** follow exactly the same structure as scalar ODEs - the state vector $\mathbf{Z}$ replaces the scalar $y$, and $g$ returns a vector of derivatives. The same solvers (Euler, RK4, etc.) apply by operating componentwise.
 
 ---
 
@@ -140,9 +153,9 @@ $$
 u_i^{n+1} = u_i^n + r\!\left(u_{i+1}^n - 2u_i^n + u_{i-1}^n\right)
 $$
 
-where the **[[diffusion number]]** is $r = \dfrac{\alpha\,dt}{dx^2}$.
+where the **diffusion number** is $r = \dfrac{\alpha\,dt}{dx^2}$.
 
-**[[FTCS stability condition]]:** The method is stable if and only if:
+**[[FTCS scheme|FTCS stability condition]]:** The method is stable if and only if:
 
 $$
 r = \frac{\alpha\,dt}{dx^2} \leq \frac{1}{2}
@@ -154,25 +167,39 @@ Equivalently: $dt \leq \dfrac{dx^2}{2\alpha}$. This is a conditional stability c
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Parameters
-alpha = 0.835; L = 1.0; dx = 0.05; Nx = int(np.round(L / dx) + 1)
-dt = 0.001; tmax = 0.1; Nt = int(np.round(tmax / dt) + 1)
-r = alpha * dt / dx**2
-print(f"r = {r:.4f}  (must be <= 0.5 for stability)")
+diffusivity = 0.835
+domain_length = 1.0
+spatial_step = 0.05
+number_of_spatial_nodes = int(np.round(domain_length / spatial_step) + 1)
+time_step = 0.001
+time_end = 0.1
+number_of_time_steps = int(np.round(time_end / time_step) + 1)
+stability_parameter = diffusivity * time_step / spatial_step ** 2
+print(f"r = {stability_parameter:.4f}  (must be <= 0.5 for stability)")
 
-# Initial condition: sinusoidal
-x = np.linspace(0, L, Nx)
-u = np.sin(np.pi * x / L)
-u[0] = 0.0; u[-1] = 0.0  # Dirichlet BCs
+x_values = np.linspace(0, domain_length, number_of_spatial_nodes)
+u_profile = np.sin(np.pi * x_values / domain_length)
+u_profile[0] = 0.0
+u_profile[-1] = 0.0
 
-for it in range(Nt - 1):
-    unext = u.copy()
-    for i in range(1, Nx - 1):
-        unext[i] = u[i] + r * (u[i + 1] - 2 * u[i] + u[i - 1])
-    u = unext
+for time_index in range(number_of_time_steps - 1):
+    u_next = u_profile.copy()
+    for node_index in range(1, number_of_spatial_nodes - 1):
+        u_next[node_index] = (
+            u_profile[node_index]
+            + stability_parameter * (
+                u_profile[node_index + 1]
+                - 2 * u_profile[node_index]
+                + u_profile[node_index - 1]
+            )
+        )
+    u_profile = u_next
 
-plt.plot(x, u, label=f't={tmax}')
-plt.xlabel('x'); plt.ylabel('u'); plt.legend(); plt.show()
+plt.plot(x_values, u_profile, label=f't={time_end}')
+plt.xlabel('x')
+plt.ylabel('u')
+plt.legend()
+plt.show()
 ```
 
-If $r > 0.5$, the solution will oscillate and grow without bound - this is **[[numerical instability]]** for FTCS.
+If $r > 0.5$, the solution will oscillate and grow without bound - this is **[[Stability of a method|numerical instability]]** for FTCS.

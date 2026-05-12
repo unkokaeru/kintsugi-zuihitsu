@@ -3,7 +3,7 @@
 > [!quote] Me, in the lecture
 > zzzzz...
 
-Lecture 4 formalised stability and convergence, analysed the Richardson method, and extended explicit RK methods to systems of ODEs. This session covers three further topics: computing definite integrals by recasting them as ODEs, reducing higher-order ODEs to first-order systems, and an introduction to **[[partial differential equations]]** (PDEs) including the derivation and implementation of the FTCS scheme for the diffusion equation.
+Lecture 4 formalised stability and convergence, analysed the Richardson method, and extended explicit RK methods to systems of ODEs. This session covers three further topics: computing definite integrals by recasting them as ODEs, reducing higher-order ODEs to first-order systems, and an introduction to partial differential equations including the derivation and implementation of the FTCS scheme for the diffusion equation.
 
 ## Numerical Integration via ODE
 
@@ -40,7 +40,7 @@ $$
 z_2' = f(t, z_1, z_2)
 $$
 
-This is a system of two first-order ODEs in $\mathbf{z} = (z_1, z_2)^T$, of exactly the form treated in Lecture 4.
+This is a system of two first-order ODEs in $\mathbf{z} = (z_1, z_2)^\top$, of exactly the form treated in Lecture 4. See [[Reducing a Second-Order ODE]] for the general pattern.
 
 ### General n-th Order Case
 
@@ -56,18 +56,18 @@ All initial conditions $y(t_0), y'(t_0), \ldots, y^{(n-1)}(t_0)$ become initial 
 
 ### Classification
 
-An **[[ordinary differential equation]]** (ODE) involves derivatives with respect to a single independent variable. A **[[partial differential equation]]** (PDE) involves partial derivatives with respect to two or more independent variables (typically space and time, or multiple spatial coordinates).
+An ordinary differential equation involves derivatives with respect to a single independent variable. A partial differential equation (PDE) involves partial derivatives with respect to two or more independent variables (typically space and time, or multiple spatial coordinates).
 
-The **order** of a PDE is the order of the highest partial derivative appearing in it.
+The order of a PDE is the order of the highest partial derivative appearing in it.
 
 ### Side Conditions
 
-Solutions to PDEs require **[[side conditions]]** to be uniquely specified. These fall into two categories:
+Solutions to PDEs require side conditions to be uniquely specified. These fall into two categories:
 
-- **[[Initial conditions]]**: specify the solution at a starting time $t = t_0$ (for time-dependent problems)
+- **Initial conditions**: specify the solution at a starting time $t = t_0$ (for time-dependent problems)
 - **[[Boundary conditions]]**: specify the solution (or its derivatives) on the spatial boundary of the domain for all time
 
-A problem with both initial and boundary conditions is an **initial-boundary value problem (IBVP)**.
+A problem with both initial and boundary conditions is an initial-boundary value problem.
 
 ### Types of Boundary Conditions
 
@@ -81,13 +81,13 @@ A problem with both initial and boundary conditions is an **initial-boundary val
 
 ### Formulation
 
-The **[[diffusion equation]]** (or heat equation) in one spatial dimension is
+The **[[Heat equation]]** (diffusion equation) in one spatial dimension is
 
 $$
 \frac{\partial u}{\partial t} = \alpha \frac{\partial^2 u}{\partial x^2}
 $$
 
-where $\alpha > 0$ is the **[[diffusivity]]**. This is a second-order PDE in $x$ and first-order in $t$.
+where $\alpha > 0$ is the diffusion coefficient. This is a second-order PDE in $x$ and first-order in $t$.
 
 ### Related Equations
 
@@ -102,17 +102,15 @@ Discretise the spatial domain $[0, L]$ with grid spacing $dx$, so $x_n = n\,dx$ 
 
 ### Second-Derivative Stencil
 
-The **[[second-derivative finite difference stencil]]** (three-point central difference) approximates $\partial^2 u/\partial x^2$ at interior point $x_n$:
+The centred second-derivative approximation to $\partial^2 u/\partial x^2$ at interior point $x_n$ (see [[Finite differences]]):
 
 $$
 \frac{\partial^2 u}{\partial x^2}\bigg|_{x_n} \approx \frac{u_{n+1} - 2u_n + u_{n-1}}{dx^2}
 $$
 
-This is the 1D Poisson finite difference approximation for $\partial_{xx} u$.
-
 ### FTCS Scheme
 
-**[[FTCS]]** stands for Forward-Time Central-Space. Applying a forward difference in time and the central stencil in space to the diffusion equation:
+**[[FTCS scheme|FTCS]]** stands for Forward-Time Central-Space. Applying a forward difference in time and the central stencil in space to the diffusion equation:
 
 $$
 \frac{u_n^{i+1} - u_n^i}{dt} = \alpha \frac{u_{n+1}^i - 2u_n^i + u_{n-1}^i}{dx^2}
@@ -134,34 +132,40 @@ This is explicit in time: the solution at the new time level is computed directl
 ```python runnable
 import numpy as np
 import matplotlib.pyplot as plt
-L=10.0
-xmax=L
-dx=0.5
-Nx=int(np.round(xmax/dx)+1)
-tmax=1.0
-t=0
-dt=0.001
-Nt=int(np.round(tmax/dt)+1)
-alpha=1.0
-r=alpha*dt/(dx*dx)
-u=np.zeros(Nx)
-# Set initial condition
-for i in range(Nx):
-    u[i]=np.sin(np.pi*i*dx/L)
-# Set boundary conditions
-u[0]=0.0
-u[Nx-1]=0.0
-for it in range(Nt-1):
-    unext=np.zeros(Nx)
-    unext[0]=u[0]
-    unext[Nx-1]=u[Nx-1]
-    for i in range(1,Nx-1):
-        unext[i]=u[i]+r*(u[i+1]-2*u[i]+u[i-1])
-    u=1.0*unext
+
+domain_length = 10.0
+spatial_step = 0.5
+number_of_spatial_nodes = int(np.round(domain_length / spatial_step) + 1)
+time_end = 1.0
+time_step = 0.001
+number_of_time_steps = int(np.round(time_end / time_step) + 1)
+diffusivity = 1.0
+stability_parameter = diffusivity * time_step / spatial_step ** 2
+
+u_profile = np.zeros(number_of_spatial_nodes)
+for node_index in range(number_of_spatial_nodes):
+    u_profile[node_index] = np.sin(np.pi * node_index * spatial_step / domain_length)
+u_profile[0] = 0.0
+u_profile[number_of_spatial_nodes - 1] = 0.0
+
+for time_index in range(number_of_time_steps - 1):
+    u_next = np.zeros(number_of_spatial_nodes)
+    u_next[0] = u_profile[0]
+    u_next[number_of_spatial_nodes - 1] = u_profile[number_of_spatial_nodes - 1]
+    for node_index in range(1, number_of_spatial_nodes - 1):
+        u_next[node_index] = (
+            u_profile[node_index]
+            + stability_parameter * (
+                u_profile[node_index + 1]
+                - 2 * u_profile[node_index]
+                + u_profile[node_index - 1]
+            )
+        )
+    u_profile = 1.0 * u_next
 ```
 
 > [!note]
-> The line `u=1.0*unext` copies `unext` into `u` (multiplying by `1.0` forces a copy rather than a reference assignment in some contexts). The boundary values are set once on `u` before the loop and then copied into `unext[0]` and `unext[Nx-1]` each iteration.
+> The line `u_profile = 1.0 * u_next` copies `u_next` into `u_profile` (multiplying by `1.0` forces a copy rather than a reference assignment). The boundary values are set once on `u_profile` before the loop and then copied into `u_next[0]` and `u_next[Nx-1]` each iteration.
 
 ---
 

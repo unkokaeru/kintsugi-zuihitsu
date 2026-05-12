@@ -13,13 +13,13 @@ $$
 y_{i+1} = y_i + dt \cdot \phi(t_i, y_i, dt)
 $$
 
-where $\phi$ is called the **[[increment function]]**. For explicit Euler, $\phi = g(t_i, y_i)$. Higher-order methods use more sophisticated choices of $\phi$ that incorporate information about $g$ at multiple points.
+where $\phi$ is called the **the increment function**. For explicit Euler, $\phi = g(t_i, y_i)$. Higher-order methods use more sophisticated choices of $\phi$ that incorporate information about $g$ at multiple points.
 
 ## Midpoint Method
 
 ### Formula
 
-The **[[midpoint method]]** evaluates $g$ at the midpoint of the interval $[t_i, t_{i+1}]$:
+The **[[Midpoint method]]** evaluates $g$ at the midpoint of the interval $[t_i, t_{i+1}]$:
 
 $$
 \boxed{y_{i+1} = y_i + dt \cdot g\!\left(t_i + \frac{dt}{2},\; y_i + g(t_i, y_i)\frac{dt}{2}\right)}
@@ -38,7 +38,7 @@ The key idea is that by evaluating $g$ at the midpoint rather than the left endp
 
 ### Formula
 
-**[[Ralston's method]]** is another second-order Runge-Kutta scheme. It uses two stages:
+**[[Ralston method|Ralston's method]]** is another second-order Runge-Kutta scheme. It uses two stages:
 
 $$
 k_1 = g(t_i, y_i)

@@ -192,64 +192,95 @@ Choose $N$ such that $\text{SE}/\langle\tau\rangle \lesssim 1\%$ for 2 significa
 
 ## 13. Python Quick Reference
 
-### FTCS loop
+### FTCS Loop
+
 ```python
-for it in range(Nt - 1):
-    unext = u.copy()
-    for i in range(1, Nx - 1):
-        unext[i] = u[i] + r * (u[i+1] - 2*u[i] + u[i-1])
-    u = unext
+for time_index in range(number_of_time_steps - 1):
+    u_next = u_profile.copy()
+    for node_index in range(1, number_of_spatial_nodes - 1):
+        u_next[node_index] = (
+            u_profile[node_index]
+            + stability_parameter * (
+                u_profile[node_index + 1]
+                - 2 * u_profile[node_index]
+                + u_profile[node_index - 1]
+            )
+        )
+    u_profile = u_next
 ```
 
-### BTCS matrix setup and solve
+### BTCS Matrix Setup and Solve
+
 ```python
 import numpy as np
-A = np.zeros((Nx, Nx))
-A[0, 0] = 1.0; A[-1, -1] = 1.0
-for i in range(1, Nx - 1):
-    A[i, i-1] = -c; A[i, i] = 1 + 2*c; A[i, i+1] = -c
+coefficient_matrix = np.zeros((number_of_spatial_nodes, number_of_spatial_nodes))
+coefficient_matrix[0, 0] = 1.0
+coefficient_matrix[-1, -1] = 1.0
+for node_index in range(1, number_of_spatial_nodes - 1):
+    coefficient_matrix[node_index, node_index - 1] = -diffusion_number
+    coefficient_matrix[node_index, node_index]     = 1 + 2 * diffusion_number
+    coefficient_matrix[node_index, node_index + 1] = -diffusion_number
 # Each step:
-rhs = u.copy(); rhs[0] = u_L; rhs[-1] = u_R
-u = np.linalg.solve(A, rhs)
+right_hand_side = u_profile.copy()
+right_hand_side[0] = left_temperature
+right_hand_side[-1] = right_temperature
+u_profile = np.linalg.solve(coefficient_matrix, right_hand_side)
 ```
 
-### MC integration
+### MC Integration
+
 ```python
 import numpy as np
-x = np.random.uniform(a, b, N)
-f = func(x)
-I = (b - a) * np.mean(f)
-err = (b - a) * np.sqrt((np.mean(f**2) - np.mean(f)**2) / N)
+x_samples = np.random.uniform(lower_bound, upper_bound, number_of_samples)
+f_values = func(x_samples)
+integral_estimate = (upper_bound - lower_bound) * np.mean(f_values)
+error_estimate = (upper_bound - lower_bound) * np.sqrt(
+    (np.mean(f_values ** 2) - np.mean(f_values) ** 2) / number_of_samples
+)
 ```
 
-### Wiener / OU loop
+### Wiener / OU Loop
+
 ```python
-W = 0.0; V = V0
-for i in range(Nsteps):
-    xi = np.random.normal()
-    W += np.sqrt(dt) * xi          # Wiener
-    V = (1 - k*dt)*V + np.sqrt(dt)*xi  # OU
+W = 0.0
+velocity = initial_velocity
+for _ in range(number_of_steps):
+    noise = np.random.normal()
+    W += np.sqrt(time_step) * noise                                    # Wiener
+    velocity = (1 - mean_reversion_rate * time_step) * velocity + np.sqrt(time_step) * noise  # OU
 ```
 
-### Liebmann loop
+### Liebmann Loop
+
 ```python
-for iteration in range(max_iter):
-    unew = u.copy()
-    for i in range(1, Nx-1):
-        for j in range(1, Ny-1):
-            unew[i,j] = (u[i+1,j] + u[i-1,j] + u[i,j+1] + u[i,j-1]) / 4.0
-    max_error = np.amax(np.abs(unew - u))
-    u = unew.copy()
-    if max_error < epsilon:
+for iteration in range(max_iterations):
+    u_new = u_grid.copy()
+    for row_index in range(1, number_of_rows - 1):
+        for col_index in range(1, number_of_cols - 1):
+            u_new[row_index, col_index] = (
+                u_grid[row_index + 1, col_index]
+                + u_grid[row_index - 1, col_index]
+                + u_grid[row_index, col_index + 1]
+                + u_grid[row_index, col_index - 1]
+            ) / 4.0
+    max_error = np.amax(np.abs(u_new - u_grid))
+    u_grid = u_new.copy()
+    if max_error < convergence_tolerance:
         break
 ```
 
 ### First-passage time
+
 ```python
-V = V0; elapsed = 0.0
-while elapsed < tmax:
-    if V >= threshold:
-        tau = elapsed; break
-    V = (1 - k*dt)*V + np.sqrt(dt)*rng.standard_normal()
-    elapsed += dt
+velocity = initial_velocity
+elapsed_time = 0.0
+while elapsed_time < max_time:
+    if velocity >= threshold:
+        first_passage_time = elapsed_time
+        break
+    velocity = (
+        (1 - mean_reversion_rate * time_step) * velocity
+        + np.sqrt(time_step) * rng.standard_normal()
+    )
+    elapsed_time += time_step
 ```

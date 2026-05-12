@@ -1,9 +1,9 @@
 # MTH3007b Lecture 4
 
 > [!quote] Me, in the lecture
-> zzzzz…
+> zzzzz...
 
-Lecture 3 derived the family of second-order RK schemes, presented RK4, and introduced symmetric methods including the implicit trapezoid. This session makes the notion of **[[stability]]** precise - for both the ODE and the numerical method - then applies these ideas to evaluate the methods seen so far. We also extend all explicit RK methods to **[[systems of ODEs]]** and implement a predator-prey model.
+Lecture 3 derived the family of second-order RK schemes, presented RK4, and introduced symmetric methods including the implicit trapezoid. This session makes the notion of **[[Stability of an ODE]]** precise - for both the ODE and the numerical method - then applies these ideas to evaluate the methods seen so far. We also extend all explicit RK methods to **[[Systems of ODEs]]** and implement a predator-prey model.
 
 ## Stability of an ODE
 
@@ -24,7 +24,7 @@ An ODE $\dot{y} = g(t, y)$ is **stable** at a solution $y^*(t)$ if small perturb
 A numerical method is **stable** for a given ODE if, for a stable ODE, the numerical solution remains bounded for all time (i.e., the numerical difference between two solutions with slightly different initial conditions stays bounded).
 
 > [!warning]
-> A method can be stable for small $dt$ and unstable for large $dt$ - this is **conditional stability**. A method that is stable for all $dt > 0$ is **unconditionally stable**.
+> A method can be stable for small $dt$ and unstable for large $dt$ - this is **conditional stability**. A method that is stable for all $dt > 0$ is unconditionally stable.
 
 ## Stability Analysis: Test Equation $\dot{y} = -ay$
 
@@ -38,7 +38,7 @@ $$
 y_N = y_0 (1 - a\,dt)^N
 $$
 
-The **[[amplification factor]]** is $|1 - a\,dt|$. This must satisfy $|1 - a\,dt| \leq 1$ for stability, which requires
+The amplification factor is $|1 - a\,dt|$. This must satisfy $|1 - a\,dt| \leq 1$ for stability, which requires
 
 $$
 0 \leq a\,dt \leq 2
@@ -67,7 +67,7 @@ All explicit RK methods (midpoint, Ralston, RK4) are **conditionally stable** - 
 **[[Consistency]]** means the local truncation error per step satisfies $\text{LTE}/dt \to 0$ as $dt \to 0$ (i.e., the scheme is at least first-order).
 
 > [!important]
-> **Lax equivalence theorem**: for a consistent, linear numerical scheme, stability is equivalent to convergence. In short: consistent + stable $\Rightarrow$ convergent.
+> **[[Lax Equivalence Theorem]]**: for a consistent, linear numerical scheme, stability is equivalent to convergence. In short: consistent + stable $\Rightarrow$ convergent.
 
 This formalises the practical observation that methods which do not blow up (stable) and which correctly approximate the derivative (consistent) will converge to the right answer.
 
@@ -79,7 +79,7 @@ $$
 \boxed{y_{i+1} - y_{i-1} = 2\,dt\,g(t_i, y_i)}
 $$
 
-This is a **symmetric method** (time-reversible), which is appealing. However:
+This is a symmetric method (time-reversible), which is appealing. However:
 
 > [!warning]
 > The Richardson method is **unconditionally unstable** for $\dot{y} = -y$. Despite being symmetric and consistent, it has a parasitic growing mode that cannot be suppressed for any choice of $dt$. It is not used in practice.
@@ -90,7 +90,7 @@ This is a cautionary example: symmetry does not guarantee stability.
 
 ### Generalisation
 
-All the single-equation methods generalise directly to **[[systems of ODEs]]** by replacing the scalar $y$ with a vector $\mathbf{y}$ and $g$ with a vector-valued function $\mathbf{g}$.
+All the single-equation methods generalise directly to **[[Systems of ODEs]]** by replacing the scalar $y$ with a vector $\mathbf{y}$ and $g$ with a vector-valued function $\mathbf{g}$.
 
 For explicit Euler:
 
@@ -117,32 +117,51 @@ where $a, b, c, d > 0$ are parameters. The nonlinear coupling terms $bxy$ and $d
 ```python runnable
 import numpy as np
 import matplotlib.pyplot as plt
-neq=2
-tmax=30.0
-dt=0.01
-t0=0.0
-x0=2.0
-y0=1.0
-def gx(t, x, y):
-    a=1.2; b=0.6
-    return a*x-b*x*y
-def gy(t, x, y):
-    c=0.8; d=0.3
-    return -c*y+d*x*y
-def g(t, X):
-    return np.array([gx(t, X[0], X[1]), gy(t, X[0], X[1])])
-nint=int(round((tmax-t0)/dt))
-X=np.zeros((neq,nint+1))
-t=np.zeros(nint+1)
-X[0,0]=x0; X[1,0]=y0
-for n in range(nint):
-    t[n+1]=t[n]+dt
-    X[:,n+1]=X[:,n]+dt*g(t[n], X[:,n])
-plt.plot(X[0,:],X[1,:])
+
+number_of_equations = 2
+time_end = 30.0
+time_step = 0.01
+time_start = 0.0
+initial_prey = 2.0
+initial_predator = 1.0
+
+prey_birth_rate = 1.2
+predation_rate = 0.6
+predator_death_rate = 0.8
+predator_growth_rate = 0.3
+
+def d_prey(t: float, prey: float, predator: float) -> float:
+    return prey_birth_rate * prey - predation_rate * prey * predator
+
+def d_predator(t: float, prey: float, predator: float) -> float:
+    return -predator_death_rate * predator + predator_growth_rate * prey * predator
+
+def g(t: float, state: np.ndarray) -> np.ndarray:
+    return np.array([d_prey(t, state[0], state[1]), d_predator(t, state[0], state[1])])
+
+number_of_steps = int(round((time_end - time_start) / time_step))
+state_array = np.zeros((number_of_equations, number_of_steps + 1))
+t_values = np.zeros(number_of_steps + 1)
+state_array[0, 0] = initial_prey
+state_array[1, 0] = initial_predator
+
+for step_index in range(number_of_steps):
+    t_values[step_index + 1] = t_values[step_index] + time_step
+    state_array[:, step_index + 1] = (
+        state_array[:, step_index]
+        + time_step * g(t_values[step_index], state_array[:, step_index])
+    )
+
+plt.plot(state_array[0, :], state_array[1, :])
+plt.xlabel('Prey population')
+plt.ylabel('Predator population')
+plt.title('Predator-prey phase plane (Lotka-Volterra, explicit Euler)')
+plt.tight_layout()
+plt.show()
 ```
 
 > [!note]
-> The state vector `X` has shape `(neq, nint+1)`. The function `g` returns a NumPy array, so the slice `X[:,n]` picks out the full state at step $n$. This vectorised structure works equally for any explicit RK method by replacing the update line.
+> The state vector `state_array` has shape `(number_of_equations, number_of_steps+1)`. The function `g` returns a NumPy array, so the slice `state_array[:,step_index]` picks out the full state at step $n$. This vectorised structure works equally for any explicit RK method by replacing the update line.
 
 ---
 

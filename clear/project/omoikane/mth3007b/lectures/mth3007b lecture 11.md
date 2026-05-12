@@ -12,14 +12,14 @@ This is a revision session. The structure is: feedback on the Python arrays/matr
 Two approaches for finding the maximum absolute difference between two arrays, as introduced in lecture 10:
 
 ```python runnable
-max_error=0.0
-for i in range(Nr):
-    for j in range(Nc):
-        current_error=np.abs(unew_xy[i,j]-u_xy[i,j])
-        if current_error>max_error:
-            max_error=current_error
-# Alternative:
-max_error=np.amax(np.abs(unew_xy-u_xy))
+max_error = 0.0
+for row_index in range(number_of_rows):
+    for col_index in range(number_of_cols):
+        current_error = np.abs(u_new[row_index, col_index] - u_old[row_index, col_index])
+        if current_error > max_error:
+            max_error = current_error
+# Alternative (preferred):
+max_error = np.amax(np.abs(u_new - u_old))
 ```
 
 The iterative loop and the `np.amax` version are equivalent. The vectorised form is preferred for clarity and speed.
@@ -33,35 +33,42 @@ The full BTCS implementation using matrix inversion is:
 
 ```python runnable
 import numpy as np
-L=10.0
-xmax=L
-dx=0.2
-Nx=int(np.round(xmax/dx)+1)
-tmax=12.0
-t=0
-dt=0.01
-Nt=int(np.round(tmax/dt)+1)
-u_L=100.
-u_R=30.
-alpha=0.835
-c=alpha*dt/(dx*dx)
-u=np.zeros(Nx)
-u[0]=u_L
-u[Nx-1]=u_R
-A=np.zeros((Nx,Nx))
-A[0,0]=1.0
-A[Nx-1,Nx-1]=1
-for i in range(1,Nx-1):
-    A[i,i]=1+2*c
-    A[i,i-1]=-c
-    A[i,i+1]=-c
-Ainv=np.linalg.inv(A)
-for it in range(Nt-1):
-    t+=dt
-    unext=np.matmul(Ainv,u)
-    u=1.0*unext
-print("The solution at t="+str(np.round(t,3))+" for u at 7 cm is "
-      +str(u[np.int32(np.round(7.0/L*(Nx-1)))]))
+
+domain_length = 10.0
+spatial_step = 0.2
+number_of_spatial_nodes = int(np.round(domain_length / spatial_step) + 1)
+time_end = 12.0
+time_step = 0.01
+number_of_time_steps = int(np.round(time_end / time_step) + 1)
+left_temperature = 100.0
+right_temperature = 30.0
+diffusivity = 0.835
+diffusion_number = diffusivity * time_step / spatial_step ** 2
+
+u_profile = np.zeros(number_of_spatial_nodes)
+u_profile[0] = left_temperature
+u_profile[number_of_spatial_nodes - 1] = right_temperature
+
+coefficient_matrix = np.zeros((number_of_spatial_nodes, number_of_spatial_nodes))
+coefficient_matrix[0, 0] = 1.0
+coefficient_matrix[number_of_spatial_nodes - 1, number_of_spatial_nodes - 1] = 1.0
+for node_index in range(1, number_of_spatial_nodes - 1):
+    coefficient_matrix[node_index, node_index] = 1 + 2 * diffusion_number
+    coefficient_matrix[node_index, node_index - 1] = -diffusion_number
+    coefficient_matrix[node_index, node_index + 1] = -diffusion_number
+
+inverse_matrix = np.linalg.inv(coefficient_matrix)
+
+elapsed_time = 0.0
+for time_index in range(number_of_time_steps - 1):
+    elapsed_time += time_step
+    u_profile = 1.0 * np.matmul(inverse_matrix, u_profile)
+
+print(
+    "The solution at t=" + str(np.round(elapsed_time, 3))
+    + " for u at 7 cm is "
+    + str(u_profile[int(np.round(7.0 / domain_length * (number_of_spatial_nodes - 1)))])
+)
 ```
 
 Key points from the feedback: the matrix $A$ is built once before the time loop; `np.linalg.inv(A)` is called once; `np.matmul(Ainv, u)` advances the solution at each step. BTCS is unconditionally stable so no $r \leq 1/2$ check is needed.
