@@ -1,17 +1,35 @@
 # Implicit Euler Method
 
-Aside from the [[Explicit Euler method]], we may also have an implicit relation where a dependent variable is not isolated in the equation; sometimes we can convert between the two, but this is not always possible.
-
-In these cases, we can write the definition of a derivative slightly differently, replacing $h$ with $-h$. This creates a completely different equation, but one that is evaluated identically under the limit:
+The **implicit Euler method** (also called backward Euler) uses the [[Finite differences|backward difference approximation]] for the time derivative.
 
 $$
-\frac{df(x)}{dx}=\lim_{ h \to 0 } \frac{f(x)-f(x-h)}{h}\approx \frac{f(x)-f(x-\Delta x)}{\Delta x}
+y_{i+1} = y_i + dt \cdot g(t_{i+1}, y_{i+1})
 $$
 
-This is again a **finite difference**, but a **backward difference approximation (BDA)** instead of a **forward difference approximation (FDA)**.
+Unlike the [[Explicit Euler method]], $y_{i+1}$ appears on both sides, so the equation must be solved (e.g. algebraically or iteratively) to isolate $y_{i+1}$ at each step.
 
-For implicit relations, this can give rise to the **implicit Euler method**, or aptly named **backward Euler method**, similar to before (just shifting time forwards slightly to neaten the formula)...
+## Example: Linear Test ODE
+
+For $\dot{y} = -ay$, the implicit Euler method gives
 
 $$
-\frac{y(t)-y(t-\Delta t)}{\Delta t}\approx g(t,y(t))\implies\boxed{y(t+\Delta t)_{\text{approx}}\approx y(t)+\Delta t \cdot g(t+\Delta t,y(t+\Delta t))}
+y_{i+1} = y_i + dt \cdot (-a \cdot y_{i+1})
 $$
+
+$$
+y_{i+1}(1 + a \cdot dt) = y_i
+$$
+
+$$
+y_{i+1} = \frac{y_i}{1 + a \cdot dt}
+$$
+
+## Stability
+
+The amplification factor is $\frac{1}{1 + a \cdot dt}$. Since $a > 0$ and $dt > 0$, this is always less than 1 in magnitude, so the implicit Euler method is **unconditionally stable** - it remains stable for any step size.
+
+This comes at the cost of needing to solve for $y_{i+1}$ at each step, which for nonlinear $g$ requires a root-finding method.
+
+See [[Stability of a method]] for the general framework.
+
+[[Explicit Euler method]] | [[Finite differences]] | [[Stability of a method]] | [[BTCS scheme]]

@@ -1,200 +1,198 @@
 # MTH3007b Weekly Problems 4
 
-> **Vibes**: Stiff systems and chaotic attractors - stability bounds keep things from blowing up, then the Lorenz system makes butterflies cause storms!
+> **Original Documents**: [[mth3007b weekly problem sheet 4.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 4 solutions.pdf|Provided Solutions]]
+>
+> **Vibes**: ...
 >
 > **Used Techniques**:
-> 	- Stability analysis of the explicit Euler method.
-> 	- Explicit Euler method for systems of ODEs.
-> 	- Lorenz system visualisation (phase portraits).
-
-## 4.1. Solving an ODE
-
-> [!question]
-> What is the upper bound for the integration step-size to maintain stability using the explicit Euler method, for $\frac{dy}{dt}=-200000y+200000e^{-t}-e^{-t}$.
->
-> Give a numerical answer and motivation for solution.
-
-The explicit Euler method applied to $\frac{dy}{dt} = -ay + f(t)$ gives the recurrence:
-
-$$
-y_{n+1} = y_n + \Delta t \left(-a y_n + f(t_n)\right) = (1 - a\Delta t)\, y_n + \Delta t \, f(t_n)
-$$
-
-For stability we need the amplification factor to satisfy $|1 - a\Delta t| \leq 1$, which requires:
-
-$$
-a \Delta t \leq 2 \quad \Longrightarrow \quad \Delta t \leq \frac{2}{a}
-$$
-
-Here $a = 200000$, so we can quickly compute the bound:
-
-```python runnable
-stiff_coefficient = 200000.0
-max_step_size = 2.0 / stiff_coefficient
-print(f"Δt_max = 2/a = 2/{stiff_coefficient:f} = {max_step_size}")
-```
-
-Giving us $\Delta t_{\max} = \frac{2}{200000} = 0.00001$ - a tiny step size, highlighting how **stiff** this ODE is for explicit methods.
+>   - ...
 
 ---
 
-## 4.2. Solving a System of ODEs
+## 4.1. Isolating Variables in Linear and Nonlinear Equations
 
 > [!question]
-> Implement a numerical solver for the Lorenz equations:
+> Isolate $y$ in each of the following:
 >
-> $$
-> \begin{cases}\frac{dx}{dt}=-\sigma x+\sigma y \\\frac{dy}{dt}=rx-y-xz \\\frac{dz}{dt}=-bz+xy\end{cases}
-> $$
+> 1. $x + y = 4$
+> 2. $ax + by = c$
+> 3. $ax + by = cy + dx + e$
+> 4. $ax + by^2 = cy + dx + e$
+
+**Part 1.** $x + y = 4$:
+
+$$
+y = 4 - x
+$$
+
+**Part 2.** $ax + by = c$:
+
+$$
+by = c - ax \implies y = \frac{c - ax}{b}
+$$
+
+**Part 3.** $ax + by = cy + dx + e$ - collect all $y$ terms on one side:
+
+$$
+by - cy = dx - ax + e \implies y(b - c) = (d - a)x + e
+$$
+
+$$
+y = \frac{(d - a)x + e}{b - c}
+$$
+
+**Part 4.** $ax + by^2 = cy + dx + e$ - rearrange as a quadratic in $y$:
+
+$$
+by^2 - cy + (ax - dx - e) = 0 \implies by^2 - cy + (a - d)x - e = 0
+$$
+
+Applying the **[[quadratic formula]]**:
+
+$$
+y = \frac{c \pm \sqrt{c^2 - 4b\bigl[(a - d)x - e\bigr]}}{2b}
+$$
+
+This gives two branches; the physical one is selected by boundary/initial conditions.
+
+---
+
+## 4.2. Isolating the Next Step in Discrete Recurrences
+
+> [!question]
+> Isolate $y_{i+1}$ in each of the following:
 >
-> Use the explicit Euler method with the parameters $\sigma=10,b=2.666667,r=28$, initial conditions $x(0)=y(0)=z(0)=5.1$, and integrate from $t=0$ to $t=20$ with integration time-step of $\Delta t=0.004$.
->
-> Then, plot $x$ against $t$ and $x$ against $y$, before finding the numerical answer for $y(20)$ to 7 significant figures.
+> 1. $y_{i+1} + y_i = 4$
+> 2. $\dfrac{y_{i+1} - y_i}{dt} = -a\,y_{i+1}$
 
-First, we should do all required imports.
+**Part 1.** $y_{i+1} + y_i = 4$:
 
-```python runnable
-import micropip
-await micropip.install("numpy")
+$$
+y_{i+1} = 4 - y_i
+$$
 
-from collections.abc import Callable
+**Part 2.** $\dfrac{y_{i+1} - y_i}{dt} = -a\,y_{i+1}$ - multiply both sides by $dt$ and collect $y_{i+1}$:
+
+$$
+y_{i+1} - y_i = -a\,dt\,y_{i+1} \implies y_{i+1}(1 + a\,dt) = y_i
+$$
+
+$$
+y_{i+1} = \frac{y_i}{1 + a\,dt}
+$$
+
+This is the **[[implicit Euler method]]** for the decay ODE $\dot{y} = -ay$.
+
+---
+
+## 4.3. Implicit Euler for a Polynomial-Forced ODE
+
+> [!question]
+> Apply implicit Euler to $\dot{z} = 4c_1 z - 8c_2 t^2$ and isolate $z_{i+1}$.
+
+Using implicit Euler, $\dot{z}$ is approximated at $t_{i+1}$:
+
+$$
+\frac{z_{i+1} - z_i}{dt} = 4c_1\,z_{i+1} - 8c_2\,t_{i+1}^2
+$$
+
+Multiply through by $dt$ and collect $z_{i+1}$:
+
+$$
+z_{i+1} - z_i = dt\!\left(4c_1\,z_{i+1} - 8c_2\,t_{i+1}^2\right)
+$$
+
+$$
+z_{i+1}(1 - 4c_1\,dt) = z_i - dt \cdot 8c_2\,t_{i+1}^2
+$$
+
+$$
+\boxed{z_{i+1} = \frac{z_i - 8c_2\,dt\,(t_i + dt)^2}{1 - 4c_1\,dt}}
+$$
+
+where $t_{i+1} = t_i + dt$.
+
+Note: if $c_1 > 0$, the denominator $1 - 4c_1\,dt$ can become zero or negative for large $dt$, but implicit Euler is still more stable than explicit for stiff problems.
+
+---
+
+## 4.4. Predator-Prey Model
+
+> [!question]
+> Implement the **Lotka-Volterra predator-prey** system with $a = 1.2$, $b = 0.6$, $c = 0.8$, $d = 0.3$, initial conditions $x(0) = 2$, $y(0) = 1$, $t_{\max} = 30$.
+
+The **[[Lotka-Volterra equations]]** (predator-prey model) are:
+
+$$
+\dot{x} = ax - bxy \quad \text{(prey growth - predation)}
+$$
+
+$$
+\dot{y} = -cy + dxy \quad \text{(predator death + predation benefit)}
+$$
+
+where $x$ = prey population, $y$ = predator population.
+
+```python
 import numpy as np
-import numpy.typing as npt
-```
-
-The explicit Euler method generalises to vector-valued ODEs as:
-
-$$
-\mathbf{y}_{n+1} = \mathbf{y}_n + \Delta t \cdot \mathbf{g}(t_n, \mathbf{y}_n)
-$$
-
-So we can implement a system-level version of the method...
-
-```python runnable
-def explicit_euler_system(
-    derivative_function: Callable[
-        [float, npt.NDArray[np.float64]], npt.NDArray[np.float64]
-    ],
-    initial_values: npt.NDArray[np.float64],
-    time_start: float,
-    time_end: float,
-    time_step: float,
-) -> tuple[npt.NDArray[np.float64], npt.NDArray[np.float64]]:
-    """Solve a system of ODEs using the explicit Euler method.
-
-    Args:
-        derivative_function: Function g(t, y) that computes dy/dt as a vector.
-        initial_values: Initial condition vector y(t_0).
-        time_start: Starting time t_0.
-        time_end: Ending time t_max.
-        time_step: Time step size h (Delta t).
-
-    Returns:
-        Tuple of (time_values, solution_values) where solution_values has
-        shape (number_of_steps + 1, number_of_equations).
-    """
-    number_of_steps = int((time_end - time_start) / time_step)
-    time_values = np.linspace(time_start, time_end, number_of_steps + 1)
-    number_of_equations = len(initial_values)
-    solution_values = np.zeros((number_of_steps + 1, number_of_equations))
-    solution_values[0] = initial_values
-
-    for step_index in range(number_of_steps):
-        current_time = time_values[step_index]
-        current_values = solution_values[step_index]
-        derivatives = derivative_function(current_time, current_values)
-        solution_values[step_index + 1] = current_values + time_step * derivatives
-
-    return time_values, solution_values
-```
-
-Then we can write the Lorenz system derivatives as a Python function, just to make things a bit neater...
-
-```python runnable
-def lorenz_derivatives(
-    _time: float,
-    state: npt.NDArray[np.float64],
-    sigma: float = 10.0,
-    b: float = 2.666667,
-    r: float = 28.0,
-) -> npt.NDArray[np.float64]:
-    """Compute the derivatives for the Lorenz system.
-
-    Args:
-        _time: Current time (unused, system is autonomous).
-        state: Current state vector [x, y, z].
-        sigma: Lorenz parameter sigma.
-        b: Lorenz parameter b.
-        r: Lorenz parameter r.
-
-    Returns:
-        Derivative vector [dx/dt, dy/dt, dz/dt].
-    """
-    x, y, z = state
-    dxdt = -sigma * x + sigma * y
-    dydt = r * x - y - x * z
-    dzdt = -b * z + x * y
-    return np.array([dxdt, dydt, dzdt])
-```
-
-Now we can specify each of the variables for our specific problem...
-
-```python runnable
-sigma = 10.0
-b = 2.666667
-r = 28.0
-initial_conditions = np.array([5.1, 5.1, 5.1])
-time_step = 0.004
-
-def lorenz(
-    t: float, state: npt.NDArray[np.float64]
-) -> npt.NDArray[np.float64]:
-    return lorenz_derivatives(t, state, sigma, b, r)
-```
-
-Which allows us to solve the system and find $y(20)$!
-
-```python runnable
-time_values, solution_values = explicit_euler_system(
-    lorenz, initial_conditions, 0.0, 20.0, time_step
-)
-
-print(f"y(20) = {solution_values[-1, 1]:g}")
-```
-
-Now let's visualise the chaotic behaviour. First, importing `matplotlib`:
-
-```python runnable
-await micropip.install("matplotlib")
 import matplotlib.pyplot as plt
+
+a = 1.2; b = 0.6; c = 0.8; d = 0.3
+t0 = 0.0; tmax = 30.0; dt = 0.001; y0 = np.array([2.0, 1.0])
+
+def g(t, Z):
+    x, y = Z
+    return np.array([a*x - b*x*y, -c*y + d*x*y])
+
+Nint = int(round((tmax - t0) / dt))
+t = np.zeros(Nint + 1)
+Z = np.zeros((2, Nint + 1))
+t[0] = t0; Z[:, 0] = y0
+
+for n in range(Nint):
+    t[n + 1] = t[n] + dt
+    Z[:, n + 1] = Z[:, n] + dt * g(t[n], Z[:, n])
+
+plt.figure(figsize=(10, 4))
+plt.subplot(1, 2, 1)
+plt.plot(t, Z[0, :], label='Prey (x)')
+plt.plot(t, Z[1, :], label='Predator (y)')
+plt.xlabel('t'); plt.ylabel('Population'); plt.legend()
+plt.title('Predator-Prey Dynamics')
+
+plt.subplot(1, 2, 2)
+plt.plot(Z[0, :], Z[1, :])
+plt.xlabel('Prey (x)'); plt.ylabel('Predator (y)')
+plt.title('Phase Plane')
+plt.tight_layout(); plt.show()
 ```
 
-Then plotting $x$ against $t$:
+The system exhibits periodic oscillations: prey increase, then predators increase (eating prey), then prey decrease, then predators decrease (starving), and the cycle repeats. In the phase plane, the trajectory forms a closed orbit.
 
-```python runnable
-fig, ax = plt.subplots(figsize=(10, 6))
-ax.plot(time_values, solution_values[:, 0], "b-", linewidth=0.5)
-ax.set_xlabel("Time t")
-ax.set_ylabel("x(t)")
-ax.set_title(f"Lorenz System: x vs t (Explicit Euler, Δt = {time_step})")
-ax.grid(True, alpha=0.3)
-plt.tight_layout()
-plt.show()
-```
+---
 
-And the phase portrait of $x$ against $y$:
+## 4.5. Stability Concepts
 
-```python runnable
-fig, ax = plt.subplots(figsize=(10, 8))
-ax.plot(
-    solution_values[:, 0], solution_values[:, 1], "b-", linewidth=0.3, alpha=0.7
-)
-ax.set_xlabel("x")
-ax.set_ylabel("y")
-ax.set_title(f"Lorenz System: x vs y (Explicit Euler, Δt = {time_step})")
-ax.grid(True, alpha=0.3)
-plt.tight_layout()
-plt.show()
-```
+> [!question]
+> Define and distinguish between: **stability of an ODE**, **stability of a numerical method**, **convergence**, **consistency**, and **order of convergence**.
 
-Both plots clearly show the **chaotic behaviour** of the Lorenz system - the trajectory oscillates unpredictably between two lobes of the famous butterfly attractor, sensitive to initial conditions as expected.
+**[[Stability of an ODE]]**: A differential equation is stable if small perturbations to the initial condition remain bounded over time. For a linear ODE $\dot{y} = \lambda y$, the solution is stable if and only if $\text{Re}(\lambda) < 0$.
+
+**[[Stability of a numerical method]]**: A method is stable if small perturbations in the numerical solution do not grow unboundedly as the time-stepping proceeds. The stability condition depends on the method and the step size. The **[[amplification factor]]** $G$ (ratio $y_{n+1}/y_n$ for the test equation $\dot{y} = \lambda y$) must satisfy $|G| \leq 1$ for stability:
+
+- Explicit Euler: $G = 1 + \lambda\,dt$, so stability requires $|\!1 + \lambda\,dt\!| \leq 1$.
+- Implicit Euler: $G = 1/(1 - \lambda\,dt)$, so $|G| < 1$ for all $\text{Re}(\lambda) < 0$ (unconditionally stable).
+
+**[[Consistency]]**: A method is consistent if the truncation error goes to zero as $dt \to 0$. Equivalently, the discrete equations converge to the correct differential equation in the limit of fine resolution.
+
+**[[Convergence]]**: A method is convergent if the numerical solution converges to the exact solution as $dt \to 0$. By the **[[Lax Equivalence Theorem]]**, for linear problems: consistency + stability $\iff$ convergence.
+
+**[[Order of convergence]]**: The integer $p$ such that GTE $= O(dt^p)$. Methods with higher order require fewer steps to achieve the same accuracy.
+
+| Method | Order | Stability |
+|--------|-------|-----------|
+| Explicit Euler | 1 | Conditional |
+| Implicit Euler | 1 | Unconditional |
+| Ralston | 2 | Conditional |
+| Implicit Trapezoid | 2 | Unconditional |
+| RK4 | 4 | Conditional |

@@ -1,98 +1,255 @@
 # MTH3007b Final Exam Cheat Sheet
 
-Complete formula and method reference for the final in-class test. Ordered by course chapter.
+---
 
-## 1. ODE Schemes
+## 1. ODE Methods
 
-For $\dot{y}=g(t,y)$, step from $y_{i}$ at $t_{i}$ to $y_{i+1}$ at $t_{i+1}=t_{i}+\Delta t$.
+| Method | Update Formula | Order | Stability |
+|--------|---------------|-------|-----------|
+| **Explicit Euler** | $y_{n+1} = y_n + dt\,g(t_n, y_n)$ | 1 | Conditional: $\|1 + \lambda\,dt\| \leq 1$ |
+| **Implicit Euler** | $y_{n+1} = y_n + dt\,g(t_{n+1}, y_{n+1})$ | 1 | Unconditional |
+| **Midpoint** | $k_1 = g(t_n,y_n)$; $y_{n+1} = y_n + dt\,g(t_n + dt/2,\, y_n + dt\,k_1/2)$ | 2 | Conditional |
+| **Ralston** | $k_1 = g(t_n,y_n)$; $k_2 = g(t_n+\frac{2dt}{3}, y_n + \frac{2dt\,k_1}{3})$; $y_{n+1} = y_n + dt(\frac{k_1}{4} + \frac{3k_2}{4})$ | 2 | Conditional |
+| **Implicit Trapezoid** | $y_{n+1} = y_n + \frac{dt}{2}[g(t_n,y_n) + g(t_{n+1},y_{n+1})]$ | 2 | Unconditional |
+| **RK4** | $k_1=g(t_n,y_n)$; $k_2=g(t_n+\frac{dt}{2}, y_n+\frac{dt\,k_1}{2})$; $k_3=g(t_n+\frac{dt}{2}, y_n+\frac{dt\,k_2}{2})$; $k_4=g(t_n+dt, y_n+dt\,k_3)$; $y_{n+1}=y_n+\frac{dt}{6}(k_1+2k_2+2k_3+k_4)$ | 4 | Conditional |
 
-| Method | Update | Order | Stability |
-|---|---|---|---|
-| [[Explicit Euler method]] | $y_{i+1}=y_{i}+\Delta t\,g(t_{i},y_{i})$ | 1 | Conditional |
-| [[Implicit Euler method]] | $y_{i+1}=y_{i}+\Delta t\,g(t_{i+1},y_{i+1})$ | 1 | Unconditional |
-| [[Midpoint method]] | $y_{i+1}=y_{i}+\Delta t\,g(t_{i}+\Delta t/2,\,y_{i}+\frac{\Delta t}{2}g(t_{i},y_{i}))$ | 2 | Conditional |
-| [[Ralston method]] | $y_{i+1}=y_{i}+\Delta t(\tfrac{1}{4}k_{1}+\tfrac{3}{4}k_{2})$, $k_{1}=g(t_{i},y_{i})$, $k_{2}=g(t_{i}+\frac{2\Delta t}{3},y_{i}+\frac{2\Delta t}{3}k_{1})$ | 2 | Conditional |
-| [[Implicit Trapezoid Method]] | $y_{i+1}=y_{i}+\frac{\Delta t}{2}(g(t_{i},y_{i})+g(t_{i+1},y_{i+1}))$ | 2 | Unconditional (A-stable) |
-| [[Fourth order Runge-Kutta]] | $y_{i+1}=y_{i}+\frac{\Delta t}{6}(k_{1}+2k_{2}+2k_{3}+k_{4})$ - see RK4 note for stages | 4 | Conditional, large region |
+For linear ODE $\dot{y} = bt - ay$:
 
-**[[Stability of an ODE]]:** $\dot{y}=\lambda y$, $\lambda<0$. Method amplification factor $R(\lambda\Delta t)$ must satisfy $|R|\leq 1$.
+- **Implicit Euler closed form:** $y_{n+1} = \dfrac{y_n + dt\,b\,t_{n+1}}{1 + a\,dt}$
+- **Implicit Trapezoid closed form:** $y_{n+1} = \dfrac{y_n(1 - a\,dt/2) + dt\,b(t_n + dt/2)}{1 + a\,dt/2}$
 
-- Forward Euler: $R=1+\lambda\Delta t$ - stable for $\lambda\Delta t\in[-2,0]$.
-- Backward Euler / Trapezoid: $|R|\leq 1$ for all $\lambda\Delta t<0$ - A-stable.
+---
 
-**[[Order of a method]] / [[Order of convergence]]:** A method of order $p$ has [[Global truncation error]] $O(\Delta t^{p})$. Halving $\Delta t$ reduces error by $2^{p}$.
+## 2. Stability Analysis (Amplification Factor)
 
-**Higher-order ODE reduction.** $y^{(n)}=g(t,y,y',\ldots,y^{(n-1)})$ becomes a system of $n$ first-order equations via $z_{m}=y^{(m-1)}$.
-
-## 2. PDE Schemes (1D Diffusion Equation)
-
-[[Heat equation]] in 1D: $\partial u/\partial t=\alpha\,\partial^{2}u/\partial x^{2}$, $r=\alpha\Delta t/\Delta x^{2}$.
-
-**Symmetric second-derivative stencil:** $\frac{\partial^{2}u}{\partial x^{2}}\approx \frac{u_{n+1}-2u_{n}+u_{n-1}}{\Delta x^{2}}$.
-
-| Scheme | Update | Stability | GTE |
-|---|---|---|---|
-| [[FTCS scheme]] | $u_{i+1,n}=(1-2r)u_{i,n}+r(u_{i,n+1}+u_{i,n-1})$ | $r\leq 1/2$ | $O(\Delta t+\Delta x^{2})$ |
-| [[BTCS scheme]] | $-cu_{i+1,n-1}+(1+2c)u_{i+1,n}-cu_{i+1,n+1}=u_{i,n}$, $c=\alpha\Delta t/\Delta x^{2}$ | Unconditional | $O(\Delta t+\Delta x^{2})$ |
-| [[Crank-Nicolson scheme]] | Average of FTCS and BTCS | Unconditional | $O(\Delta t^{2}+\Delta x^{2})$ |
-
-**[[Boundary conditions]]:**
-
-- Dirichlet $u\big|_{\partial\Omega}=f_{2}$: pin grid values.
-- Neumann $\partial u/\partial \mathbf{n}\big|_{\partial\Omega}=f_{3}$: imaginary point $u_{-1}=u_{1}-2\Delta x\,d$, substitute into boundary row → $-2u_{0}+2u_{1}=2\Delta x\,d$. Insulation $\Rightarrow d=0\Rightarrow u_{0}=u_{1}$.
-
-**[[Lax Equivalence Theorem]]:** consistent + stable $\Leftrightarrow$ convergent.
-
-**[[von Neumann stability]] technique:** sub $u_{i,n}=G^{i}e^{ikn\Delta x}$ into the scheme, derive $G(k)$, demand $|G|\leq 1$.
-
-**Steady state ($\partial u/\partial t=0$):** Laplace equation $\nabla^{2}u=0$; with source, Poisson $\nabla^{2}u=g$. Tridiagonal $\mathbf{A}\mathbf{u}=\mathbf{g}$ in 1D, solve once.
-
-## 3. Stochastic Methods
-
-### Random Numbers
-
-- Uniform: `np.random.uniform(a, b, n)` - samples from $[a,b]$.
-- Gaussian: `np.random.normal(mu, sigma, n)` - samples from $\mathrm{Norm}(\mu,\sigma^{2})$.
-- Linear scaling: $kZ\sim\mathrm{Norm}(k\mu,\,k^{2}\sigma^{2})$.
-
-### [[Monte Carlo integration]]
+For the test equation $\dot{y} = \lambda y$ (with $\lambda < 0$ for stability of the ODE):
 
 $$
-F=\int_{a}^{b}f(x)\,dx\;\approx\;L\,\langle f\rangle_{N}\;\pm\;L\sqrt{\tfrac{1}{N}(\langle f^{2}\rangle_{N}-\langle f\rangle_{N}^{2})}.
+y_{n+1} = G\,y_n
 $$
 
-In $D$ dimensions, $L\to V$ (hypervolume). Error $O(N^{-1/2})$ - independent of $D$. Beats Euler for $D>2$, beats RK4 for $D>8$.
+A method is stable if $|G| \leq 1$.
 
-### [[Wiener process]] (Brownian motion)
+| Method | Amplification factor $G$ | Stable region |
+|--------|--------------------------|---------------|
+| Explicit Euler | $1 + \lambda\,dt$ | $\|1 + \lambda\,dt\| \leq 1$ |
+| Implicit Euler | $\dfrac{1}{1 - \lambda\,dt}$ | All $\text{Re}(\lambda) < 0$ (unconditional) |
+| Implicit Trapezoid | $\dfrac{1 + \lambda\,dt/2}{1 - \lambda\,dt/2}$ | All $\text{Re}(\lambda) < 0$ (unconditional) |
 
-$W(0)=0$; $W(t)-W(s)\sim\mathrm{Norm}(0,t-s)$; independent increments.
+For a real negative $\lambda = -a$ ($a > 0$), explicit Euler requires $dt \leq 2/a$.
 
-PDF: $\rho_{W}(x,t)=(2\pi t)^{-1/2}\exp(-x^{2}/2t)$ - same as diffusion equation with $\alpha=1/2$, $u(0,x)=\delta(x)$.
+---
 
-[[Euler-Maruyama scheme]]: $W(t+\Delta t)=W(t)+\sqrt{\Delta t}\,Z(t)$, $Z\sim\mathrm{Norm}(0,1)$.
+## 3. Systems of ODEs
 
-### [[Ornstein-Uhlenbeck process]]
+Introduce state vector $\mathbf{Z} = (z_1, z_2, \ldots)^\top$. Write:
 
-SDE: $dV=-kV\,dt+dW$, $k>0$.
+$$
+\dot{\mathbf{Z}} = G(t, \mathbf{Z})
+$$
 
-[[Euler-Maruyama scheme]]: $V(t+\Delta t)=(1-k\Delta t)V(t)+\sqrt{\Delta t}\,Z(t)$.
+Apply any scalar ODE method componentwise. The step function is identical - just replace $y$ with $\mathbf{Z}$ and $g$ with $G$ returning a vector.
 
-Equilibrium: $V(\infty)\sim\mathrm{Norm}(0,1/(2k))$.
+**Reduction of 2nd order ODE** $\ddot{y} = F(t, y, \dot{y})$: set $z_1 = y$, $z_2 = \dot{y}$:
 
-[[Langevin equation]] form: $dV/dt=-kV+\xi(t)$ with $\langle\xi(t)\xi(t')\rangle=2\delta(t-t')$. Numerically $\xi\to Z/\sqrt{\Delta t}$.
+$$
+\dot{z}_1 = z_2, \quad \dot{z}_2 = F(t, z_1, z_2)
+$$
 
-### Dirac Delta Initial Condition
+---
 
-For diffusion with $u(0,x)=\delta(x-x_{M})$, discretise as $u(x_{n}=x_{M})=1/\Delta x$ at the central grid point, $0$ elsewhere - area is $1$ on the grid.
+## 4. Numerical Integration via ODE
 
-### [[First-passage time]]
+To compute $I = \displaystyle\int_{t_0}^{T} f(t)\,dt$, define $y(t)$ with:
 
-Numerically: simulate the SDE, stop when $V(t)\geq b$, record $t$. Mean over many walkers ($\sim 10^{4}$) for 2-significant-figure accuracy. Distribution is heavy-tailed when threshold is several equilibrium-standard-deviations from the start.
+$$
+\frac{dy}{dt} = f(t), \quad y(t_0) = 0 \implies y(T) = I
+$$
 
-## Common Tricks
+Apply any ODE solver; result at $T$ is the integral estimate.
 
-- **Halving $\Delta x$ in FTCS** requires $\Delta t\to \Delta t/4$, not $\Delta t/2$.
-- **Tridiagonal matrices** can be solved in $O(N)$ by the Thomas algorithm - `scipy.linalg.lapack.dgtsv`.
-- **Initial conditions for the diffusion equation**: pin the initial profile $f_{0}(x)$, including any boundary values, before the first time step.
-- **MC error in 4D**: same recipe as 1D, just sample 4-component vectors. Volume is the product of side lengths.
-- **OU equilibrium variance** $1/(2k)$ - useful for calibrating threshold position relative to typical excursion.
+---
+
+## 5. PDE Schemes
+
+| Scheme | Update | Order (GTE) | Stability |
+|--------|--------|-------------|-----------|
+| **FTCS** (explicit) | $u_i^{n+1} = u_i^n + r(u_{i+1}^n - 2u_i^n + u_{i-1}^n)$, $r = \alpha dt/dx^2$ | $O(dt + dx^2)$ | Conditional: $r \leq 1/2$ |
+| **BTCS** (implicit) | Solve $-c\,u_{i-1}^{n+1} + (1+2c)u_i^{n+1} - c\,u_{i+1}^{n+1} = u_i^n$, $c = \alpha dt/dx^2$ | $O(dt + dx^2)$ | Unconditional |
+| **Richardson** (symmetric) | Centred time + centred space | $O(dt^2 + dx^2)$ | Unconditionally **unstable** |
+
+---
+
+## 6. FTCS Stability Condition
+
+$$
+r = \frac{\alpha\,dt}{dx^2} \leq \frac{1}{2} \iff dt \leq \frac{dx^2}{2\alpha}
+$$
+
+For small $dx$, this forces very small $dt$ (a severe constraint for fine spatial grids).
+
+---
+
+## 7. Boundary Conditions
+
+**Dirichlet:** fix $u$ at boundary nodes. Applied by setting $A[0,0] = 1$, all other entries in row 0 zero, and $\text{rhs}[0] = u_L$ (similarly for right end).
+
+**Neumann ($du/dx = 0$ at $x = L$, insulated end):** imaginary point method. The ghost node value is $u_{N_x} = u_{N_x - 2}$. This modifies the last interior row of $A$:
+
+$$
+\text{replace } [\ldots, -c, 1+2c, -c] \to [\ldots, -2c, 1+2c]
+$$
+
+In the FTCS scheme, the Neumann update at the last interior node becomes:
+
+$$
+u_{N_x - 1}^{n+1} = u_{N_x - 1}^n + 2r(u_{N_x - 2}^n - u_{N_x - 1}^n)
+$$
+
+---
+
+## 8. Lax Equivalence Theorem
+
+> For a well-posed linear PDE problem and a consistent discretisation: **stability $\iff$ convergence.**
+
+In other words, a consistent method converges to the true solution as $dt, dx \to 0$ if and only if it is stable.
+
+---
+
+## 9. 2D Laplace and Liebmann's Method
+
+**2D Laplace equation:** $\nabla^2 u = \dfrac{\partial^2 u}{\partial x^2} + \dfrac{\partial^2 u}{\partial y^2} = 0$
+
+**Finite difference (uniform $dx = dy$):**
+
+$$
+u_{i,j} = \frac{u_{i+1,j} + u_{i-1,j} + u_{i,j+1} + u_{i,j-1}}{4}
+$$
+
+**Liebmann iteration:** update each interior node using the above formula (Gauss-Seidel: use in-place updates). Repeat until:
+
+$$
+\max_{i,j}\bigl|u_{i,j}^{\text{new}} - u_{i,j}^{\text{old}}\bigr| < \varepsilon
+$$
+
+Convergence is guaranteed for Dirichlet BCs by the maximum principle for elliptic equations.
+
+---
+
+## 10. Monte Carlo Integration
+
+$$
+\hat{I} = (b - a)\,\overline{f}, \quad \overline{f} = \frac{1}{N}\sum_{j=1}^N f(x_j),\quad x_j \sim U[a,b]
+$$
+
+**Standard error:**
+
+$$
+\sigma_{\hat{I}} = (b - a)\sqrt{\frac{\overline{f^2} - \overline{f}^2}{N}}
+$$
+
+**Error scaling:** $\sigma \propto N^{-1/2}$. Quadrupling $N$ halves the error. This holds regardless of the dimension of the integral - the key advantage of MC for high-dimensional problems.
+
+---
+
+## 11. Stochastic Methods
+
+**Wiener process** (discrete update, exact):
+
+$$
+W_{n+1} = W_n + \sqrt{dt}\,\xi_n, \quad \xi_n \sim \mathcal{N}(0,1)
+$$
+
+Properties: $\langle W(t) \rangle = 0$, $\text{Var}[W(t)] = t$.
+
+**Ornstein-Uhlenbeck process** (Euler-Maruyama):
+
+$$
+V_{n+1} = (1 - k\,dt)\,V_n + \sqrt{dt}\,\xi_n
+$$
+
+Mean-reverting: fluctuates around $V = 0$ with restoring force $-kV$.
+
+**General Langevin SDE** $dV = f(V)\,dt + \sigma\,dW$, Euler-Maruyama:
+
+$$
+V_{n+1} = V_n + f(V_n)\,dt + \sigma\sqrt{dt}\,\xi_n
+$$
+
+---
+
+## 12. First-Passage Time (Numerical)
+
+Run the OU (or other) simulation. At each step, check $V \geq b$. Record $\tau = t$ when threshold first crossed. Average over $N$ walkers:
+
+$$
+\langle\tau\rangle \approx \frac{1}{N}\sum_{j=1}^N \tau_j, \quad \text{SE} = \frac{\sigma_\tau}{\sqrt{N}}
+$$
+
+Choose $N$ such that $\text{SE}/\langle\tau\rangle \lesssim 1\%$ for 2 significant figures.
+
+---
+
+## 13. Python Quick Reference
+
+### FTCS loop
+```python
+for it in range(Nt - 1):
+    unext = u.copy()
+    for i in range(1, Nx - 1):
+        unext[i] = u[i] + r * (u[i+1] - 2*u[i] + u[i-1])
+    u = unext
+```
+
+### BTCS matrix setup and solve
+```python
+import numpy as np
+A = np.zeros((Nx, Nx))
+A[0, 0] = 1.0; A[-1, -1] = 1.0
+for i in range(1, Nx - 1):
+    A[i, i-1] = -c; A[i, i] = 1 + 2*c; A[i, i+1] = -c
+# Each step:
+rhs = u.copy(); rhs[0] = u_L; rhs[-1] = u_R
+u = np.linalg.solve(A, rhs)
+```
+
+### MC integration
+```python
+import numpy as np
+x = np.random.uniform(a, b, N)
+f = func(x)
+I = (b - a) * np.mean(f)
+err = (b - a) * np.sqrt((np.mean(f**2) - np.mean(f)**2) / N)
+```
+
+### Wiener / OU loop
+```python
+W = 0.0; V = V0
+for i in range(Nsteps):
+    xi = np.random.normal()
+    W += np.sqrt(dt) * xi          # Wiener
+    V = (1 - k*dt)*V + np.sqrt(dt)*xi  # OU
+```
+
+### Liebmann loop
+```python
+for iteration in range(max_iter):
+    unew = u.copy()
+    for i in range(1, Nx-1):
+        for j in range(1, Ny-1):
+            unew[i,j] = (u[i+1,j] + u[i-1,j] + u[i,j+1] + u[i,j-1]) / 4.0
+    max_error = np.amax(np.abs(unew - u))
+    u = unew.copy()
+    if max_error < epsilon:
+        break
+```
+
+### First-passage time
+```python
+V = V0; elapsed = 0.0
+while elapsed < tmax:
+    if V >= threshold:
+        tau = elapsed; break
+    V = (1 - k*dt)*V + np.sqrt(dt)*rng.standard_normal()
+    elapsed += dt
+```

@@ -1,37 +1,47 @@
 # Stability of a Method
 
-A method $T$ is **stable** if, for a [[Stability of an ODE]], two slightly different initial conditions $y_{A}(0)$ and $y_{B}(0)=y_{A}(0)+\epsilon$ produce numerical solutions $y_{T,A}(t)$ and $y_{T,B}(t)$ whose difference stays bounded:
+A numerical method is **stable** if, when applied to a [[Stability of an ODE|stable ODE]], the difference between solutions computed from slightly different initial conditions remains bounded.
+
+The standard test case is $\dot{y} = -ay$ with $a > 0$, which is trivially stable. The amplification factor $A$ is defined by $y_{i+1} = A \cdot y_i$. Stability requires $|A| \leq 1$.
+
+## Stability of Common Methods
+
+### Explicit Euler
 
 $$
-|y_{T,A}(t)-y_{T,B}(t)|<M(\epsilon)\quad\text{for all }t>0.
+y_{i+1} = (1 - a \cdot dt) \, y_i, \qquad A = 1 - a \cdot dt
 $$
 
-Stability of the method means the *numerical* scheme doesn't amplify perturbations beyond what the underlying ODE does. Without stability, even arbitrarily small initial errors blow up - and so do floating-point round-off errors.
+Stable when $|1 - a \cdot dt| \leq 1$, i.e. $a \cdot dt \leq 2$. **Conditionally stable.**
 
-## Linear Stability Test
+### Implicit Euler
 
-The standard test problem is the linear scalar ODE $\dot{y}=\lambda y$ with $\mathrm{Re}(\lambda)<0$ (so the true solution decays). Apply the method to this problem; the scheme produces an iteration $y_{i+1}=R(\lambda\Delta t)\,y_{i}$ for some **amplification factor** $R(z)$. The scheme is **A-stable** if $|R(z)|\leq 1$ in the entire left half-plane $\mathrm{Re}(z)\leq 0$.
+$$
+y_{i+1} = \frac{y_i}{1 + a \cdot dt}, \qquad A = \frac{1}{1 + a \cdot dt}
+$$
 
-| Method | Amplification factor | Stability region |
-|---|---|---|
-| [[Explicit Euler method]] | $R(z)=1+z$ | Disk $|1+z|\leq 1$ - small region |
-| [[Implicit Euler method]] | $R(z)=1/(1-z)$ | Outside disk $|1-z|\geq 1$ - entire LHP |
-| [[Implicit Trapezoid Method]] | $R(z)=(1+z/2)/(1-z/2)$ | Entire LHP - A-stable |
-| [[Fourth order Runge-Kutta]] | quartic in $z$ | Larger than Euler, but bounded |
+Since $a, dt > 0$, we always have $|A| < 1$. **Unconditionally stable.**
 
-A-stable methods (implicit Euler, trapezoid) are unconditionally stable for any $\Delta t$; explicit methods (Euler, RK4) are only conditionally stable - must keep $\lambda\Delta t$ in the stability region.
+### Explicit Runge-Kutta (general)
 
-## For PDE Schemes
+All explicit Runge-Kutta methods (including [[Midpoint method]], [[Ralston method]], [[Fourth order Runge-Kutta]]) are **conditionally stable** - there is a maximum step size, though the stability region grows with the order of the method.
 
-The [[FTCS scheme]] for the [[Heat equation]] is conditionally stable with $\Delta t\leq \Delta x^{2}/(2\alpha)$; the [[BTCS scheme]] is unconditionally stable. See [[von Neumann stability]] for the analytical procedure.
+### Implicit Trapezoid Method
 
-## Stiff Equations
+$$
+A = \frac{1 - a \cdot dt / 2}{1 + a \cdot dt / 2}
+$$
 
-A "stiff" ODE has multiple disparate timescales - the fastest mode forces $\Delta t$ to be tiny under explicit methods even when the slow mode dominates the dynamics of interest. Implicit methods handle this gracefully because their large stability regions allow $\Delta t$ to be sized by accuracy rather than stability.
+Since $a, dt > 0$, $|A| < 1$ always. **Unconditionally stable.**
 
-## Practical Consequence
+### Richardson Method
 
-When a scheme blows up:
-1. Check the stability constraint (if any) for the method/problem.
-2. Reduce $\Delta t$ or switch to an implicit scheme.
-3. Verify the underlying ODE is itself stable - an unstable ODE's solution genuinely diverges, no method can fix that.
+The Richardson method uses a centred difference in time:
+
+$$
+y_{i+1} - y_{i-1} = 2 \, dt \cdot g(t_i, y_i)
+$$
+
+For $\dot{y} = -y$, analysis shows this method is **unconditionally unstable**: solutions from nearby initial conditions always diverge, regardless of step size. This makes Richardson's method unsuitable in practice.
+
+[[Stability of an ODE]] | [[Explicit Euler method]] | [[Implicit Euler method]] | [[Implicit Trapezoid Method]] | [[Convergence]] | [[Lax Equivalence Theorem]]

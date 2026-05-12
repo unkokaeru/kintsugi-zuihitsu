@@ -1,67 +1,24 @@
 # Runge-Kutta Methods
 
-A family of one-step explicit (or implicit) methods for ODEs $\dot{y}=g(t,y)$ of the form
+**Runge-Kutta methods** are a family of explicit numerical methods for solving ODEs of the form $\dot{y} = g(t, y)$. They generalise the [[Explicit Euler method]] by evaluating $g$ at multiple intermediate points within each step.
+
+The general form is
 
 $$
-y_{i+1}\approx y_{i}+\Delta t\cdot \phi(t_{i},y_{i},\Delta t),
+y_{i+1} = y_i + dt \cdot \phi(t_i, y_i, dt)
 $$
 
-where $\phi$ - the **increment function** - is a weighted average of $g$ evaluated at several points within the interval $[t_{i},t_{i}+\Delta t]$. By choosing the points and weights, you trade computational cost for [[Order of a method]].
+where $\phi$ is the **increment function**, which depends on the specific method. Higher-order Runge-Kutta methods achieve smaller [[Global truncation error]] by choosing $\phi$ to match more terms of the Taylor expansion of the exact solution.
 
-## The Family
+## Examples
 
-| Stages | Method | Order | LTE |
-|---|---|---|---|
-| 1 | [[Explicit Euler method]] | 1 | $O(\Delta t^{2})$ |
-| 2 | [[Midpoint method]], [[Ralston method]] | 2 | $O(\Delta t^{3})$ |
-| 3 | Heun's third-order, Kutta's | 3 | $O(\Delta t^{4})$ |
-| 4 | [[Fourth order Runge-Kutta]] (the classic) | 4 | $O(\Delta t^{5})$ |
+| Method | Order | Notes |
+|---|---|---|
+| [[Explicit Euler method]] | 1 | $\phi = g(t_i, y_i)$ |
+| [[Midpoint method]] | 2 | Single intermediate evaluation |
+| [[Ralston method]] | 2 | Minimises LTE bound |
+| [[Fourth order Runge-Kutta]] | 4 | Four stage evaluations |
 
-The number of *stages* (function evaluations of $g$ per step) equals the order of the method up to order 4. Above order 4, more stages are needed (Butcher's bound).
+All explicit Runge-Kutta methods are conditionally stable - see [[Stability of a method]].
 
-## RK4 in Detail
-
-The most popular general-purpose ODE solver:
-
-$$
-k_{1}=g(t_{i},y_{i})
-$$
-
-$$
-k_{2}=g\!\left(t_{i}+\tfrac{\Delta t}{2},\,y_{i}+\tfrac{\Delta t}{2}k_{1}\right)
-$$
-
-$$
-k_{3}=g\!\left(t_{i}+\tfrac{\Delta t}{2},\,y_{i}+\tfrac{\Delta t}{2}k_{2}\right)
-$$
-
-$$
-k_{4}=g(t_{i}+\Delta t,\,y_{i}+\Delta t\,k_{3})
-$$
-
-$$
-y_{i+1}=y_{i}+\frac{\Delta t}{6}(k_{1}+2k_{2}+2k_{3}+k_{4}).
-$$
-
-Four function evaluations per step; global error $O(\Delta t^{4})$. See [[Fourth order Runge-Kutta]].
-
-## General Construction
-
-A general explicit $s$-stage RK method has Butcher tableau
-
-$$
-\begin{array}{c|cccc}
-c_{1} & 0 & & & \\
-c_{2} & a_{21} & 0 & & \\
-\vdots & \vdots & \ddots & \ddots & \\
-c_{s} & a_{s1} & \cdots & a_{s,s-1} & 0\\
-\hline
-& b_{1} & b_{2} & \cdots & b_{s}
-\end{array}
-$$
-
-with stages $k_{j}=g(t_{i}+c_{j}\Delta t,\,y_{i}+\Delta t\sum_{\ell<j}a_{j\ell}k_{\ell})$ and update $y_{i+1}=y_{i}+\Delta t\sum_{j}b_{j}k_{j}$. The order conditions on $\{c,a,b\}$ are derived by matching Taylor expansions to the desired order.
-
-## Implicit Variants
-
-[[Implicit Euler method]] and the [[Implicit Trapezoid Method]] are implicit RK methods. They have larger stability regions (often unconditionally stable) at the cost of solving an implicit equation per step. Implicit RK methods like Gauss-Legendre, Radau, SDIRK are workhorses for stiff problems.
+[[Explicit Euler method]] | [[Midpoint method]] | [[Ralston method]] | [[Fourth order Runge-Kutta]] | [[Order of a method]] | [[Global truncation error]] | [[Stability of a method]]

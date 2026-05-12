@@ -1,51 +1,75 @@
-# First-passage time
+# First-Passage Time
 
-For a stochastic process $X(t)$ and a threshold $b$ (or general boundary), the **first-passage time** is
+The **first-passage time** $\tau$ of a stochastic process $X(t)$ to a threshold $b$ is defined as the first time the process reaches or exceeds $b$:
 
 $$
-\tau=\inf\{t\geq 0:X(t)\geq b\}\;\;\text{(or }X(t)\in B\text{ for some set }B).
+\tau = \inf\{t \geq 0 : X(t) \geq b\}
 $$
 
-The earliest time the process crosses the threshold. A random variable depending on the realisation.
+## Numerical Method
 
-## Numerical Computation
+To estimate the mean first-passage time numerically:
 
-Run an [[Euler-Maruyama scheme]] simulation, monitor $X$ at each step, and stop the first time $X_{i}\geq b$. Record the elapsed time.
+1. Run an [[Euler-Maruyama scheme]] simulation of the process (e.g. the [[Ornstein-Uhlenbeck process]]).
+2. At each time step, check whether $X \geq b$.
+3. When the condition is met, record the elapsed time $t$ as $\tau$ for that walker.
+4. Average $\tau$ over many independent simulations (walkers) to obtain the mean first-passage time $\langle \tau \rangle$.
 
-```python
-def first_passage_time(initial_state, threshold, time_step, max_time, rng):
-    state = initial_state
-    elapsed = 0.0
-    while elapsed < max_time:
-        if state >= threshold:
-            return elapsed
-        # Update via Euler-Maruyama (e.g. for OU with k):
-        state = (1 - k * time_step) * state + np.sqrt(time_step) * rng.standard_normal()
-        elapsed += time_step
-    return None  # never crossed within max_time
+## Python
+
+```python runnable
+import numpy as np
+
+def first_passage_time_ou(
+    initial_velocity: float,
+    mean_reversion_rate: float,
+    threshold: float,
+    time_step: float,
+    max_time: float,
+    seed: int = 0,
+) -> float | None:
+    """Estimate the first-passage time for a single OU walker.
+
+    Args:
+        initial_velocity: Starting value V(0).
+        mean_reversion_rate: Rate k > 0.
+        threshold: Threshold b; simulation stops when V >= b.
+        time_step: Time step dt for the Euler-Maruyama scheme.
+        max_time: Maximum simulation time before giving up.
+        seed: Random seed for reproducibility.
+
+    Returns:
+        First-passage time tau, or None if threshold not reached within max_time.
+    """
+    rng = np.random.default_rng(seed)
+    velocity = initial_velocity
+    current_time = 0.0
+    while current_time < max_time:
+        if velocity >= threshold:
+            return current_time
+        velocity = (
+            (1 - mean_reversion_rate * time_step) * velocity
+            + np.sqrt(time_step) * rng.standard_normal()
+        )
+        current_time += time_step
+    return None
+
+
+# Example: OU process with k=3.0, threshold=1.35
+mean_reversion_rate = 3.0
+threshold = 1.35
+time_step = 0.001
+max_time = 1000.0
+tau = first_passage_time_ou(
+    initial_velocity=-0.5,
+    mean_reversion_rate=mean_reversion_rate,
+    threshold=threshold,
+    time_step=time_step,
+    max_time=max_time,
+    seed=0,
+)
+if tau is not None:
+    print(f"tau = {tau:.3f}")
 ```
 
-## Heavy-Tailed Distribution
-
-For threshold-crossing problems where $b$ lies in the tail of the equilibrium distribution, the first-passage time is **heavy-tailed**: a few realisations cross quickly, but a long tail of realisations take much longer. Practical consequence:
-
-- Single realisations have very high variance.
-- Mean first-passage time $\langle\tau\rangle$ is well-defined but the standard deviation $\sigma_{\tau}$ is of the same order as $\langle\tau\rangle$ itself.
-- To estimate $\langle\tau\rangle$ reliably, simulate **many** independent walkers ($M\sim 10^{4}$ for 2-significant-figure accuracy).
-
-## Analytical Results
-
-For the [[Ornstein-Uhlenbeck process]] $dV=-kV\,dt+dW$ starting at $V(0)=x_{0}<b$, the mean first-passage time to $b$ is
-
-$$
-\langle\tau\rangle=\frac{\sqrt{\pi}}{k}\int_{x_{0}\sqrt{k}}^{b\sqrt{k}}e^{u^{2}}\mathrm{erfc}(-u)\,du.
-$$
-
-For thresholds many equilibrium standard deviations from zero, this grows roughly as $\exp(b^{2}k)$ - the Kramers escape rate. For [[Wiener process]]-style processes (no restoring force), $\langle\tau\rangle$ from $x_{0}<b$ is *infinite* in the unbounded case (the walker drifts off in the wrong direction with positive probability).
-
-## Applications
-
-- Neuron firing models: $V$ is membrane voltage, $b$ is the firing threshold; $\tau$ is the inter-spike interval.
-- Default times in finance: $V$ is firm value, $b$ is the default barrier.
-- Chemical reaction times: escape from a metastable potential well.
-- Ruin theory: time until accumulated losses reach a critical level.
+[[Euler-Maruyama scheme]] | [[Ornstein-Uhlenbeck process]] | [[Langevin equation]] | [[Wiener process]] | [[Stochastic differential equation]]

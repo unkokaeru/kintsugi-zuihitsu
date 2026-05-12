@@ -1,27 +1,27 @@
 # Convergence
 
-A numerical algorithm **converges** if, when continually refined with a smaller step size, the approximate solutions converge to the exact solution - i.e., the true solution is recovered in the limit $\Delta t\to 0$:
+A numerical algorithm **converges** if the numerical solution approaches the exact solution as the step size $dt \to 0$.
+
+Formally, a method converges if
 
 $$
-\lim_{\Delta t\to 0}|y_{N}-y(t_{N})|=0.
+\max_i |y_i - y(t_i)| \to 0 \quad \text{as } dt \to 0
 $$
 
-> [!note] In convergence proofs, only the truncation error is considered - round-off errors are discarded.
+The rate at which this occurs is the [[Order of convergence]].
 
-## [[Lax Equivalence Theorem]]
+## Consistency
 
-For a well-posed initial-boundary-value problem, a finite-difference method is convergent if and only if it is both **consistent** (the exact solution satisfies the scheme as $\Delta t\to 0$) and **stable** (errors don't blow up).
+A method is **consistent** if the exact solution satisfies the numerical scheme as $dt \to 0$. Informally, the discretisation must become exact in the limit of infinitely fine resolution.
 
-This is why understanding stability matters as much as understanding [[Order of a method]] - without stability, no amount of consistency yields a convergent method.
+## Relationship to Stability
 
-## Order of Convergence
-
-The rate at which the error vanishes - see [[Order of convergence]]. For a method of order $p$:
+Convergence, consistency, and [[Stability of a method|stability]] are linked by the [[Lax Equivalence Theorem]]:
 
 $$
-|y_{N}-y(t_{N})|=O(\Delta t^{p}).
+\text{consistent} + \text{stable} \iff \text{convergent}
 $$
 
-## Round-Off Floor
+This is useful because consistency and stability are often easier to check individually than convergence directly. Proving stability via the amplification factor and checking that the [[Local truncation error]] vanishes as $dt \to 0$ (consistency) together guarantee convergence.
 
-In practice, error decreases as $\Delta t\to 0$ until **round-off error** (from finite-precision arithmetic) becomes dominant. Below that threshold, smaller $\Delta t$ actually *increases* error because more steps means more accumulated round-off. The optimal step size is roughly where truncation error equals round-off error - typically $\Delta t\sim 10^{-8}$ to $10^{-4}$ for double precision, depending on the method.
+[[Lax Equivalence Theorem]] | [[Stability of a method]] | [[Order of convergence]] | [[Local truncation error]] | [[Global truncation error]]

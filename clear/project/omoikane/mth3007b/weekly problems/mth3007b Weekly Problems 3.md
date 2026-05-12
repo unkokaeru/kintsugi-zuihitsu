@@ -1,134 +1,216 @@
-# MTH3007B Weekly Problems 3
+# MTH3007b Weekly Problems 3
 
-> **Vibes**: Super chill, just implement a single new method.
+> **Original Documents**: [[mth3007b weekly problem sheet 3.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 3 solutions.pdf|Provided Solutions]]
+>
+> **Vibes**: ...
 >
 > **Used Techniques**:
->  - Finding the order of a numerical method
->  - Solving an ODE with the implicit trapezoid method
+>   - ...
 
 ---
 
-## 1.1. Order of an Euler Method
-
-> [!question]
-> What is the order of the implicit Euler method? (i.e., the global truncation error)
-
-First-order, by definition.
+> [!note]
+> The original exercises for session 3 are posted on Blackboard (assessment section). The problems below cover the core session 3 content: deriving and implementing RK4, the implicit trapezoid method, and comparing their accuracy.
 
 ---
 
-## 1.2. Order of a Non-Symmetrical Method
+## 3.1. Implementing RK4
 
 > [!question]
-> What is the order of the implicit trapezoid method? (i.e., the global truncation error)
+> Implement the **fourth-order Runge-Kutta method** (RK4) for $\dot{y} = bt - ay$ with $b = 1$, $a = 22$, $y(0) = 1$, $t_{\max} = 1$.
 
-Second-order, by definition.
+**[[RK4]]** is the standard four-stage explicit Runge-Kutta method. It evaluates the slope function $g(t, y)$ at four points per step and combines them with weights $1/6, 2/6, 2/6, 1/6$:
 
----
+$$
+k_1 = g(t_n,\; y_n)
+$$
 
-## 1.3. Solving an ODE with the Implicit Trapezoid Method
+$$
+k_2 = g\!\left(t_n + \tfrac{dt}{2},\; y_n + \tfrac{dt}{2}k_1\right)
+$$
 
-> [!question]
-> Solve the ordinary differential equation $\frac{dz(t)}{dt}=\exp(-3t)+t^2- \frac{1}{2}z(t)$ using the implicit trapezoid method up to $t=t_{\text{max}}=1$, given that $z(0)=2.5$.
->
-> Then, find $z(t_{\text{max}})$ for the $\Delta t=0.001$.
+$$
+k_3 = g\!\left(t_n + \tfrac{dt}{2},\; y_n + \tfrac{dt}{2}k_2\right)
+$$
 
-First, do our imports...
+$$
+k_4 = g(t_n + dt,\; y_n + dt\,k_3)
+$$
+
+$$
+y_{n+1} = y_n + \frac{dt}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+$$
+
+This is a fourth-order method: GTE $= O(dt^4)$. Each halving of $dt$ reduces the error by $2^4 = 16$.
 
 ```python
-import micropip
-await micropip.install("numpy")
-
-from collections.abc import Callable
 import numpy as np
-import numpy.typing as npt
+
+b = 1.0; a = 22.0; t0 = 0.0; tmax = 1.0; y0 = 1.0
+
+def g(t, y):
+    return b * t - a * y
+
+def y_exact(t):
+    return np.exp(-a * t) * (y0 + b / a**2) + b * t / a - b / a**2
+
+def rk4_step(g, t, y, dt):
+    k1 = g(t, y)
+    k2 = g(t + dt / 2, y + dt * k1 / 2)
+    k3 = g(t + dt / 2, y + dt * k2 / 2)
+    k4 = g(t + dt, y + dt * k3)
+    return y + dt / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
+
+def run_rk4(dt):
+    Nint = int(round((tmax - t0) / dt))
+    t = t0; y = y0
+    for n in range(Nint):
+        y = rk4_step(g, t, y, dt)
+        t += dt
+    return y
+
+y_true = y_exact(tmax)
+print(f"Exact y(1) = {y_true:.10f}")
+print(f"{'dt':>10} {'error':>14} {'ratio':>8}")
+prev_error = None
+for dt in [0.1, 0.05, 0.025, 0.0125]:
+    y_num = run_rk4(dt)
+    error = abs(y_num - y_true)
+    ratio = prev_error / error if prev_error is not None else float('nan')
+    print(f"{dt:>10.4f} {error:>14.6e} {ratio:>8.2f}")
+    prev_error = error
 ```
 
-Then we can implement a new implicit trapezoid method function...
+The error ratio should converge to $\approx 16$, confirming fourth-order convergence.
 
-```python runnable
-def implicit_trapezoid_method(
-    derivative_function: Callable[[float, float], float],
-    initial_value: float,
-    time_start: float,
-    time_end: float,
-    time_step: float,
-    max_iterations: int = 100,
-    tolerance: float = 1e-10,
-) -> tuple[npt.NDArray[np.float64], npt.NDArray[np.float64]]:
-    """Solve an ODE using the implicit trapezoid method.
+---
 
-    The implicit trapezoid method (trapezoidal rule) uses the approximation:
-    y_{n+1} = y_n + (h/2) * [f(t_n, y_n) + f(t_{n+1}, y_{n+1})]
+## 3.2. Implicit Trapezoid Method
 
-    This requires solving a nonlinear equation at each step using
-    fixed-point iteration.
+> [!question]
+> Derive and implement the **implicit trapezoid method** for $\dot{y} = bt - ay$ with $b = 1$, $a = 22$, $y(0) = 1$, $t_{\max} = 1$.
 
-    Args:
-        derivative_function: Function f(t, y) that computes dy/dt.
-        initial_value: Initial condition y(t_0).
-        time_start: Starting time t_0.
-        time_end: Ending time t_max.
-        time_step: Time step size h (Delta t).
-        max_iterations: Maximum iterations for fixed-point solver.
-        tolerance: Convergence tolerance for fixed-point solver.
+The **[[implicit trapezoid method]]** averages the slopes at both ends of the step:
 
-    Returns:
-        Tuple of (time_values, solution_values) arrays.
-    """
-    number_of_steps = int((time_end - time_start) / time_step)
-    time_values = np.linspace(time_start, time_end, number_of_steps + 1)
-    solution_values = np.zeros(number_of_steps + 1)
-    solution_values[0] = initial_value
+$$
+y_{n+1} = y_n + \frac{dt}{2}\bigl[g(t_n, y_n) + g(t_{n+1}, y_{n+1})\bigr]
+$$
 
-    for step_index in range(number_of_steps):
-        current_time = time_values[step_index]
-        next_time = time_values[step_index + 1]
-        previous_value = solution_values[step_index]
+For $g(t, y) = bt - ay$ this becomes:
 
-        # Compute the derivative at the current step
-        current_derivative = derivative_function(current_time, previous_value)
+$$
+y_{n+1} = y_n + \frac{dt}{2}\bigl[(bt_n - ay_n) + (bt_{n+1} - ay_{n+1})\bigr]
+$$
 
-        # Fixed-point iteration to solve:
-        # y_{n+1} = y_n + (h/2) * [f(t_n, y_n) + f(t_{n+1}, y_{n+1})]
-        next_value_guess = previous_value + time_step * current_derivative
-        for _ in range(max_iterations):
-            next_derivative = derivative_function(next_time, next_value_guess)
-            next_value_new = (
-                previous_value + (time_step / 2) * (current_derivative + next_derivative)
-            )
-            correction = abs(next_value_new - next_value_guess)
-            next_value_guess = next_value_new
-            if correction < tolerance:
-                break
+Collecting $y_{n+1}$ terms on the left:
 
-        solution_values[step_index + 1] = next_value_guess
+$$
+y_{n+1}\!\left(1 + \frac{a\,dt}{2}\right) = y_n\!\left(1 - \frac{a\,dt}{2}\right) + \frac{dt\,b}{2}(t_n + t_{n+1})
+$$
 
-    return time_values, solution_values
+Since $t_{n+1} = t_n + dt$, we have $t_n + t_{n+1} = 2t_n + dt$, so:
+
+$$
+y_{n+1} = \frac{y_n\!\left(1 - \dfrac{a\,dt}{2}\right) + dt\,b\!\left(t_n + \dfrac{dt}{2}\right)}{1 + \dfrac{a\,dt}{2}}
+$$
+
+```python
+import numpy as np
+
+b = 1.0; a = 22.0; t0 = 0.0; tmax = 1.0; y0 = 1.0
+
+def trap_step(t, y, dt, a, b):
+    return (y * (1 - a * dt / 2.0) + dt * b * (t + dt / 2.0)) / (1.0 + a * dt / 2.0)
+
+def y_exact(t):
+    return np.exp(-a * t) * (y0 + b / a**2) + b * t / a - b / a**2
+
+def run_trap(dt):
+    Nint = int(round((tmax - t0) / dt))
+    t = t0; y = y0
+    for n in range(Nint):
+        y = trap_step(t, y, dt, a, b)
+        t += dt
+    return y
+
+y_true = y_exact(tmax)
+print(f"{'dt':>10} {'error':>14} {'ratio':>8}")
+prev_error = None
+for dt in [0.1, 0.05, 0.025, 0.0125]:
+    y_num = run_trap(dt)
+    error = abs(y_num - y_true)
+    ratio = prev_error / error if prev_error is not None else float('nan')
+    print(f"{dt:>10.4f} {error:>14.6e} {ratio:>8.2f}")
+    prev_error = error
 ```
 
-Which can then be run with the correct parameters...
+The ratio should converge to $\approx 4$, confirming second-order convergence (the implicit trapezoid is a second-order method with unconditional stability).
 
-```python runnable
-# Problem parameters
-time_start = 0.0
-time_end = 1.0
-initial_condition = 2.5
-time_step = 0.001
+---
 
-# Define the derivative function
-def derivative(time: float, solution_value: float) -> float:
-    return np.exp(-3 * time) + time**2 - 0.5 * solution_value
+## 3.3. Comparing Euler, RK4, and Implicit Trapezoid
 
-# Solve using implicit trapezoid method
-time_values, solution_values = implicit_trapezoid_method(
-    derivative, initial_condition, time_start, time_end, time_step
-)
+> [!question]
+> Compare the errors of explicit Euler, RK4, and the implicit trapezoid method for $\dot{y} = bt - ay$ at several step sizes. What do you observe?
 
-# Find z(t_max)
-z_final = solution_values[-1]
+```python
+import numpy as np
 
-print(f"Solution at t = {time_end}: z({time_end}) = {z_final:f}")
+b = 1.0; a = 22.0; t0 = 0.0; tmax = 1.0; y0 = 1.0
+
+def g(t, y):
+    return b * t - a * y
+
+def y_exact(t):
+    return np.exp(-a * t) * (y0 + b / a**2) + b * t / a - b / a**2
+
+def run_euler(dt):
+    Nint = int(round((tmax - t0) / dt))
+    t = t0; y = y0
+    for n in range(Nint):
+        y = y + dt * g(t, y)
+        t += dt
+    return y
+
+def rk4_step(g, t, y, dt):
+    k1 = g(t, y)
+    k2 = g(t + dt/2, y + dt*k1/2)
+    k3 = g(t + dt/2, y + dt*k2/2)
+    k4 = g(t + dt, y + dt*k3)
+    return y + dt/6*(k1 + 2*k2 + 2*k3 + k4)
+
+def run_rk4(dt):
+    Nint = int(round((tmax - t0) / dt))
+    t = t0; y = y0
+    for n in range(Nint):
+        y = rk4_step(g, t, y, dt)
+        t += dt
+    return y
+
+def trap_step(t, y, dt):
+    return (y*(1 - a*dt/2.0) + dt*b*(t + dt/2.0)) / (1.0 + a*dt/2.0)
+
+def run_trap(dt):
+    Nint = int(round((tmax - t0) / dt))
+    t = t0; y = y0
+    for n in range(Nint):
+        y = trap_step(t, y, dt)
+        t += dt
+    return y
+
+y_true = y_exact(tmax)
+step_sizes = [0.04, 0.02, 0.01, 0.005]
+print(f"{'dt':>8}  {'Euler err':>14}  {'RK4 err':>14}  {'Trap err':>14}")
+for dt in step_sizes:
+    e_euler = abs(run_euler(dt) - y_true)
+    e_rk4   = abs(run_rk4(dt)   - y_true)
+    e_trap  = abs(run_trap(dt)  - y_true)
+    print(f"{dt:>8.4f}  {e_euler:>14.4e}  {e_rk4:>14.4e}  {e_trap:>14.4e}")
 ```
 
-Given the final solution, `Solution at t = 1.0: z(1.0) = 2.034534`.
+Expected observations:
+
+- Explicit Euler errors halve as $dt$ halves (first order).
+- RK4 errors decrease by a factor of $16$ per halving of $dt$ (fourth order) - far more accurate for the same step size.
+- Implicit trapezoid errors decrease by a factor of $4$ per halving (second order), and remain stable even for large $dt$ since it is unconditionally stable.
+- At small $dt$ all methods converge, but RK4 reaches machine precision fastest.

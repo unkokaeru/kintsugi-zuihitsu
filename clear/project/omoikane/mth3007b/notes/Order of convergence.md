@@ -1,33 +1,15 @@
 # Order of Convergence
 
-The rate at which the global error decreases as $\Delta t\to 0$. For a method of [[Order of a method]] $p$:
+**Order of convergence** describes how quickly a sequence of numerical approximations approaches the exact solution as the step size $dt \to 0$. If the error $E(dt)$ satisfies
 
 $$
-|y_{N}-y(t_{N})|\to 0\quad\text{like }O(\Delta t^{p}).
+E(dt) = O(dt^p)
 $$
 
-Halving $\Delta t$ reduces the error by a factor of $2^{p}$.
+then the method has order of convergence $p$.
 
-For [[Convergence]], the order of convergence equals the order of the method. The [[Lax Equivalence Theorem]] establishes the equivalence between consistency, stability, and convergence - without stability, convergence fails even for arbitrarily small $\Delta t$.
+This is closely related to the [[Order of a method]], which is defined in terms of the [[Global truncation error]]. A method of order $p$ converges at rate $p$: halving $dt$ reduces the error by a factor of $2^p$.
 
-## Empirical Estimation
+Convergence requires both [[Convergence|consistency and stability]] (see the [[Lax Equivalence Theorem]]).
 
-Run the method at several step sizes $\Delta t_{1}>\Delta t_{2}>\ldots$ and measure the error $E_{i}$ at each. Plot $\log E$ vs $\log\Delta t$ - the slope is the order of convergence:
-
-$$
-\log E\approx \log C+p\log\Delta t.
-$$
-
-In Python:
-
-```python
-import numpy as np
-
-step_sizes = np.array([0.1, 0.05, 0.025, 0.0125])
-errors = np.array([...])  # measured global errors
-
-slope, intercept = np.polyfit(np.log(step_sizes), np.log(errors), 1)
-print(f"Order of convergence: {slope:.2f}")
-```
-
-The slope should match the theoretical order. Discrepancies indicate either (i) the method is not yet in the asymptotic regime ($\Delta t$ too large), (ii) round-off error is dominating ($\Delta t$ too small - error stops decreasing), or (iii) a bug in the implementation.
+[[Order of a method]] | [[Global truncation error]] | [[Convergence]] | [[Lax Equivalence Theorem]]

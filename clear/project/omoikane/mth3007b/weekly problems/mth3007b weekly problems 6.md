@@ -1,91 +1,115 @@
-# MTH3007B Weekly Problems 6
+# MTH3007b Weekly Problems 6
 
-> **Vibes**: A single FTCS-explicit solve of the heat equation on a rod, plus a temperature read-out at one space-time point. Stability check first ($r=\alpha\Delta t/\Delta x^{2}=0.184<0.5$, well within the FTCS criterion), then march in time using the recurrence $u_{i+1,n}=(1-2r)u_{i,n}+r(u_{i,n+1}+u_{i,n-1})$.
+> **Original Documents**: [[mth3007b weekly problem sheet 6.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 6 solutions.pdf|Provided Solutions]]
+>
+> **Vibes**: ...
 >
 > **Used Techniques**:
->  - [[FTCS scheme]] with $r=\alpha\Delta t/\Delta x^{2}$.
->  - Stability check: $r\leq 1/2$ (see [[Stability of a method]]).
->  - Pin Dirichlet boundary values at every time step.
->  - Steady-state sanity check: $u_{\infty}(x)$ is the linear interpolant between $u_{L}$ and $u_{R}$.
+>   - ...
 
-***
+---
 
-## 6.1. Explicit Scheme for 1D Heat Equation
+> [!note]
+> Some exercises for session 6 are posted on Blackboard (assessment section). The problems below cover the key session 6 content: implementing FTCS for the heat equation and demonstrating instability.
+
+---
+
+## 6.1. FTCS for the Heat Equation with Physical Parameters
 
 > [!question]
-> Consider a rod of length $L = 10\ \text{cm}$ with heat diffusion coefficient $\alpha = 0.735\ \text{cm}^2\text{s}^{-1}$.
-> Assume boundary conditions $u(t) = 100^\circ\text{C}$ and $u(t) = 25^\circ\text{C}$ for all $t \geq 0$.
-> The initial condition at $t = 0$ is $u(0,x) = 0^\circ\text{C}$ for $0 < x < 10$, with the boundaries fixed at the given temperatures.
-> Take spatial step $\Delta x = 0.2\ \text{cm}$ and time step $\Delta t = 0.01\ \text{s}$ and solve the one-dimensional heat equation
->
-> $$
-> \frac{\partial u}{\partial t} = \alpha\,\frac{\partial^2 u}{\partial x^2}
-> $$
->
-> using the explicit (forward Euler in time, central difference in space) finite-difference scheme.
->
-> 1. Implement the explicit scheme with the given parameters, enforcing the boundary conditions at each time step and using the recurrence
->
-> $$
->    u_j^{n+1} = u_j^{n} + \alpha\,\frac{\Delta t}{\Delta x^2}\,\bigl(u_{j-1}^{n} - 2u_j^{n} + u_{j+1}^{n}\bigr),
->    $$
->
-> for interior grid points $j$.
-> 2. Plot $u(t,x)$ as a function of $x$ at $t = 0\ \text{s}$, $t = 6\ \text{s}$, and $t = 12\ \text{s}$ on a single graph, and include this plot together with your code in the extra material.
-> 3. Determine the temperature of the rod at time $t = 12\ \text{s}$ and position $x = 4\ \text{cm}$, i.e. compute $u(12\ \text{s}, 4\ \text{cm})$, from your numerical solution.
+> Implement the **FTCS** scheme for the 1D heat equation $\partial u/\partial t = \alpha\,\partial^2 u/\partial x^2$ with the following parameters: $L = 10$ cm, $\alpha = 0.835$ cm$^2$/s, Dirichlet boundary conditions $u(0, t) = 0$ and $u(L, t) = 0$, sinusoidal initial condition, $dx = 0.5$, $dt = 0.001$. Verify that $r \leq 0.5$.
 
-**Stability.** $r=\alpha\Delta t/\Delta x^{2}=0.735\cdot 0.01/0.04=0.184<0.5$ ✓. The FTCS scheme is stable here.
+The **[[FTCS scheme]]** update rule for an interior point $i$ at time step $n$ is:
 
-**Setup.** $N_{x}=L/\Delta x+1=51$ grid points $x_{0}=0,\,x_{1}=0.2,\,\ldots,\,x_{50}=10$. Number of time steps $N_{t}=t_{\max}/\Delta t+1=1201$ for $t_{\max}=12$ s.
+$$
+u_i^{n+1} = u_i^n + r\!\left(u_{i+1}^n - 2u_i^n + u_{i-1}^n\right), \quad r = \frac{\alpha\,dt}{dx^2}
+$$
 
-**Implementation.**
+Boundary conditions are applied by fixing $u_0 = 0$ and $u_{N_x - 1} = 0$ at every time step (**[[Dirichlet boundary conditions]]**).
 
-```python runnable
+```python
 import numpy as np
+import matplotlib.pyplot as plt
 
-length = 10.0
-diffusion = 0.735
-space_step = 0.2
-time_step = 0.01
-final_time = 12.0
-left_temperature = 100.0
-right_temperature = 25.0
+L = 10.0; dx = 0.5; Nx = int(np.round(L / dx) + 1)
+tmax = 1.0; dt = 0.001; Nt = int(np.round(tmax / dt) + 1)
+alpha = 0.835
+r = alpha * dt / dx**2
+print(f"r = {r:.5f}  (must be <= 0.5 for stability)")
 
-number_of_space_points = int(round(length / space_step)) + 1  # 51
-number_of_time_points = int(round(final_time / time_step)) + 1  # 1201
-ratio = diffusion * time_step / space_step**2
+# Initial condition: sinusoidal, matching BC u(0)=u(L)=0
+x = np.linspace(0, L, Nx)
+u = np.sin(np.pi * x / L)
+u[0] = 0.0; u[Nx - 1] = 0.0
 
-assert ratio <= 0.5, f"FTCS unstable: r = {ratio:.3f} > 0.5"
+plt.figure(figsize=(8, 4))
+plt.plot(x, u, label='t=0', linestyle='--')
 
-solution = np.zeros((number_of_time_points, number_of_space_points))
-solution[:, 0] = left_temperature
-solution[:, -1] = right_temperature
+for it in range(Nt - 1):
+    unext = np.zeros(Nx)
+    unext[0] = u[0]; unext[Nx - 1] = u[Nx - 1]
+    for i in range(1, Nx - 1):
+        unext[i] = u[i] + r * (u[i + 1] - 2 * u[i] + u[i - 1])
+    u = 1.0 * unext
 
-for i in range(number_of_time_points - 1):
-    solution[i + 1, 1:-1] = (
-        (1.0 - 2.0 * ratio) * solution[i, 1:-1]
-        + ratio * (solution[i, 2:] + solution[i, :-2])
-    )
-
-space_grid = np.linspace(0.0, length, number_of_space_points)
-target_index = int(round(4.0 / space_step))  # x = 4 cm
-print(f"u(12 s, 4 cm) = {solution[-1, target_index]:.2f} °C")
+plt.plot(x, u, label=f't={tmax}')
+plt.xlabel('x (cm)'); plt.ylabel('u (temperature)')
+plt.title('FTCS Heat Equation (stable, r <= 0.5)')
+plt.legend(); plt.tight_layout(); plt.show()
 ```
 
-**Profile shapes.** At $t=0$: hard step from $100$ at $x=0$, drop to $0$ for interior, jump up to $25$ at $x=10$. At $t=6$ s: smooth concave decay from $100$ to a minimum, rising back to $25$. At $t=12$ s: closer to the steady-state line $u_{\infty}(x)=100-7.5x$ but not yet reached.
-
-**Steady-state reference.** Linear: $u_{\infty}(x)=100+(25-100)x/10=100-7.5x$, so $u_{\infty}(4)=70^{\circ}\text{C}$.
-
-**Result.** Running the simulation:
+With $\alpha = 0.835$, $dt = 0.001$, $dx = 0.5$:
 
 $$
-\boxed{u(12\ \text{s},4\ \text{cm})\approx 38^{\circ}\text{C}.}
+r = \frac{0.835 \times 0.001}{0.5^2} = \frac{0.000835}{0.25} = 0.00334 \ll 0.5
 $$
 
-The transient is dominated by the lowest Fourier mode $\sin(\pi x/L)$, which decays as $e^{-\alpha\pi^{2}t/L^{2}}=e^{-0.870}\approx 0.42$ at $t=12$ s. Hence at $x=4$ the temperature is approximately
+The scheme is well within the stability limit. The sinusoidal mode decays exponentially in time.
+
+---
+
+## 6.2. Demonstrating FTCS Instability When $r > 0.5$
+
+> [!question]
+> What happens when the stability condition is violated ($r > 0.5$)? Demonstrate numerically by increasing $dt$ until instability occurs.
+
+When $r > 0.5$, the coefficient of $u_{i,n}$ in the FTCS update is $1-2r < -1$, meaning the scheme amplifies errors rather than damping them. This produces wild oscillations that grow without bound and bear no resemblance to the true solution.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+L = 10.0; dx = 0.5; Nx = int(np.round(L / dx) + 1)
+alpha = 0.835
+x = np.linspace(0, L, Nx)
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+
+for ax, dt, label in zip(axes, [0.001, 0.4], ['Stable (r=0.003)', 'Unstable (r=0.267...)']):
+    r = alpha * dt / dx**2
+    print(f"dt={dt}, r={r:.4f}")
+    u = np.sin(np.pi * x / L)
+    u[0] = 0.0; u[-1] = 0.0
+    # run 10 steps
+    for it in range(10):
+        unext = np.zeros(Nx)
+        unext[0] = u[0]; unext[-1] = u[-1]
+        for i in range(1, Nx - 1):
+            unext[i] = u[i] + r * (u[i + 1] - 2 * u[i] + u[i - 1])
+        u = unext
+    ax.plot(x, u)
+    ax.set_title(f'{label}\ndt={dt}, r={r:.3f}')
+    ax.set_xlabel('x'); ax.set_ylabel('u')
+
+plt.tight_layout(); plt.show()
+```
+
+Note: for $dx = 0.5$ and $\alpha = 0.835$, the critical $dt$ is:
 
 $$
-u(12,4)\approx u_{\infty}(4)+B_{1}\sin(2\pi/5)\,e^{-\alpha\pi^{2}t/L^{2}}\approx 70-79.6\cdot 0.951\cdot 0.42\approx 38^{\circ}\text{C},
+dt_{\text{crit}} = \frac{dx^2}{2\alpha} = \frac{0.25}{2 \times 0.835} \approx 0.150 \text{ s}
 $$
 
-matching the simulation. The system is at roughly $58\%$ of the way from initial state to steady state at this point.
+Any $dt > 0.150$ will cause instability. In the unstable case the solution rapidly exhibits alternating signs and grows exponentially.
+
+The Richardson method (symmetric: use central time difference instead of forward) is **[[unconditionally unstable]]** for the heat equation for any $dt > 0$. This illustrates that symmetry in time discretisation does not guarantee stability; BTCS (backward time, centred space) is the implicit method that achieves unconditional stability.

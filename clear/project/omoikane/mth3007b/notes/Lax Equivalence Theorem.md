@@ -1,34 +1,22 @@
 # Lax Equivalence Theorem
 
-For a well-posed initial-boundary-value problem, a consistent finite-difference method is **convergent** if and only if it is **stable**:
+The **Lax equivalence theorem** states that for a well-posed initial value problem and a consistent numerical method:
 
 $$
-\boxed{\text{Consistency}+\text{Stability}\;\Longleftrightarrow\;\text{Convergence}.}
+\text{stable} \iff \text{convergent}
 $$
 
-## Definitions
+In full: a consistent method is convergent if and only if it is stable.
 
-- **Consistency**: the exact solution of the PDE/ODE satisfies the discrete scheme in the limit $\Delta t\to 0$ (and $\Delta x\to 0$ for PDE schemes). Equivalently, the [[Local truncation error]] tends to zero faster than $\Delta t$.
-- **Stability**: numerical errors don't grow without bound under the scheme - see [[Stability of a method]].
-- **[[Convergence]]**: numerical solution approaches the exact solution as $\Delta t\to 0$.
+## Why It Is Useful
 
-## Why It Matters
+[[Convergence]] is what we ultimately care about, but it is often difficult to prove directly. [[Stability of a method|Stability]] and consistency are each easier to verify:
 
-The theorem reduces the (hard) question "is this scheme convergent?" to two easier checks. Consistency is direct - compare the scheme to a Taylor expansion of the PDE. Stability is harder but tractable - apply [[von Neumann stability]] analysis or compute amplification factors. If both hold, convergence follows automatically.
+- **Consistency**: check that the [[Local truncation error]] vanishes as $dt \to 0$ (typically by Taylor expanding the method).
+- **Stability**: check that the amplification factor satisfies $|A| \leq 1$.
 
-## Caveats
+The Lax equivalence theorem lets us prove convergence by establishing these two properties separately, rather than estimating the global error directly.
 
-- The theorem assumes the underlying problem is **well-posed** - solutions exist, are unique, and depend continuously on the data. Ill-posed problems (e.g. backward heat equation) defeat numerical methods regardless of consistency or stability.
-- Applies to **linear** schemes. Nonlinear analogues exist but are case-by-case.
-- "Stability" here is in the Lax sense - boundedness of numerical solutions for fixed final time as the grid is refined. Distinct from stiffness considerations.
+Note: the theorem applies to well-posed problems, meaning the underlying ODE must itself be [[Stability of an ODE|stable]] (solutions don't blow up from small perturbations in initial conditions).
 
-## Implications
-
-| Method | Consistent? | Stable? | Convergent? |
-|---|---|---|---|
-| [[FTCS scheme]] (with $r\leq 1/2$) | ✓ | ✓ | ✓ |
-| FTCS (with $r>1/2$) | ✓ | ✗ | ✗ - solution blows up |
-| [[BTCS scheme]] | ✓ | ✓ (always) | ✓ |
-| Forward in time, forward in space | ✗ | - | ✗ |
-
-Hence the universal rule: check consistency, check stability, then convergence is guaranteed.
+[[Convergence]] | [[Stability of a method]] | [[Stability of an ODE]] | [[Local truncation error]] | [[Order of convergence]]

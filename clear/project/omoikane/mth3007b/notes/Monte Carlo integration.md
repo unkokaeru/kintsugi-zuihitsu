@@ -1,59 +1,66 @@
 # Monte Carlo Integration
 
-A stochastic numerical-integration method that estimates an integral by averaging the integrand at uniformly distributed random sample points.
+**Monte Carlo integration** estimates a definite integral by averaging the integrand over random sample points.
 
-For $F=\int_{a}^{b}f(x)\,dx$ in 1D, sample $X_{1},\ldots,X_{N}$ uniformly from $[a,b]$ and compute
-
-$$
-\boxed{F\approx F_{N}=L\,\langle f\rangle_{N}=L\cdot \frac{1}{N}\sum_{n=1}^{N}f(X_{n}),\qquad L=b-a.}
-$$
-
-For a $D$-dimensional integral over a region $\Omega$ of hypervolume $V$, replace $L$ by $V$ and sample $D$-component random vectors uniformly inside $\Omega$.
-
-## Error Estimate
-
-One-standard-deviation error from sample variance:
+## 1D Case
 
 $$
-\sigma_{F}=L\sqrt{\frac{1}{N}\bigl(\langle f^{2}\rangle_{N}-\langle f\rangle_{N}^{2}\bigr)}.
+F = \int_a^b f(x) \, dx \approx (b - a) \cdot \langle f \rangle_N
 $$
 
-So the typical accuracy scales as
+where $\langle f \rangle_N = \frac{1}{N} \sum_{k=1}^N f(x_k)$ is the sample mean over $N$ uniformly distributed random points $x_k \in [a, b]$.
+
+## Error
 
 $$
-\sigma_{F}\sim \frac{L\,\sigma(f)}{\sqrt{N}}=O(N^{-1/2}).
+\sigma_F = (b - a) \sqrt{\frac{\langle f^2 \rangle - \langle f \rangle^2}{N}}
 $$
 
-## Rate Comparison Vs Deterministic Methods
+The error scales as $O(N^{-1/2})$, regardless of the dimension of the integral.
 
-In 1D, deterministic quadrature wins decisively:
+## High-Dimensional Integrals
 
-- [[Explicit Euler method]]: $O(N^{-1})$.
-- [[Fourth order Runge-Kutta]]: $O(N^{-4})$.
-- Monte Carlo: $O(N^{-1/2})$.
+In $D$ dimensions, the estimate is
 
-But in $D$ dimensions, deterministic schemes scale as $O(N^{-p/D})$ for a $p$-th order method, while Monte Carlo's rate is **independent of $D$**. Crossover:
+$$
+F = V \cdot \langle f \rangle_N
+$$
 
-- MC beats Euler when $D>2$.
-- MC beats RK4 when $D>8$.
+where $V$ is the volume of the integration domain. The $O(N^{-1/2})$ error rate is independent of $D$. For $D \gtrsim 8$, Monte Carlo outperforms deterministic quadrature methods, which suffer from the curse of dimensionality.
 
-Hence MC is the method of choice for high-dimensional integrals (statistical mechanics, financial derivatives, particle physics).
+## Python
 
-## Variance Reduction
-
-Vanilla MC can be improved with *importance sampling* (sample where $f$ is large), *stratified sampling* (force points into bins), *control variates* (subtract a known correlated function), or *quasi-MC* sequences (low-discrepancy points instead of pure random). These can drop the constant in the $O(N^{-1/2})$ rate but rarely change the rate itself.
-
-## Implementation Sketch
-
-```python
+```python runnable
 import numpy as np
 
-def monte_carlo_integral(f, lower, upper, n_samples, rng_seed=None):
-    rng = np.random.default_rng(rng_seed)
-    samples = rng.uniform(lower, upper, size=(n_samples, lower.size))
-    values = f(samples)
-    mean = values.mean()
-    variance = (values**2).mean() - mean**2
-    volume = float(np.prod(upper - lower))
-    return volume * mean, volume * np.sqrt(variance / n_samples)
+def monte_carlo_integrate(
+    function: callable,
+    lower_bound: float,
+    upper_bound: float,
+    number_of_samples: int,
+    seed: int = 0,
+) -> tuple[float, float]:
+    """Estimate a 1D integral using Monte Carlo sampling.
+
+    Args:
+        function: The integrand f(x).
+        lower_bound: Lower limit of integration.
+        upper_bound: Upper limit of integration.
+        number_of_samples: Number of random sample points N.
+        seed: Random seed for reproducibility.
+
+    Returns:
+        Tuple of (estimate, error_estimate).
+    """
+    rng = np.random.default_rng(seed)
+    x_samples = rng.uniform(lower_bound, upper_bound, number_of_samples)
+    f_values = function(x_samples)
+    mean_f = np.mean(f_values)
+    mean_f_squared = np.mean(f_values ** 2)
+    width = upper_bound - lower_bound
+    estimate = width * mean_f
+    error = width * np.sqrt((mean_f_squared - mean_f ** 2) / number_of_samples)
+    return estimate, error
 ```
+
+[[Pseudo-random number generation]] | [[Random walks]]

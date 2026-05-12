@@ -1,54 +1,28 @@
-# Stochastic differential equation
+# Stochastic Differential Equation
 
-A differential equation whose evolution depends on a stochastic noise term - typically a [[Wiener process]] $dW(t)$.
+A **stochastic differential equation** (SDE) is an equation that involves increments of a stochastic process (typically the [[Wiener process]]) alongside deterministic terms.
 
-The general 1D Itô SDE has the form
+The general form is
 
 $$
-\boxed{dX(t)=\mu(X,t)\,dt+\sigma(X,t)\,dW(t),}
+dX = f(X, t) \, dt + g(X, t) \, dW
 $$
 
 where:
-- $\mu(X,t)$ is the **drift** - the deterministic part of the evolution.
-- $\sigma(X,t)$ is the **diffusion coefficient** (or *volatility*).
-- $dW(t)$ is the Wiener increment with $\mathrm{Norm}(0,dt)$ distribution.
+- $f(X, t)$ is the **drift** term (deterministic)
+- $g(X, t)$ is the **diffusion** term (stochastic coefficient)
+- $dW$ is an increment of the [[Wiener process]]
 
-## Why Differential Form?
+## Example: Ornstein-Uhlenbeck Process
 
-The Wiener process is **continuous but nowhere differentiable**, so $dW/dt$ does not exist as a classical derivative. SDEs are written in differential form, interpreted as the integral equation
-
-$$
-X(t)=X(0)+\int_{0}^{t}\mu(X,s)\,ds+\int_{0}^{t}\sigma(X,s)\,dW(s),
-$$
-
-where the second integral is the Itô stochastic integral.
-
-## Examples in the Module
-
-| SDE | Drift | Diffusion |
-|---|---|---|
-| Wiener process: $dW=dW$ | 0 | 1 |
-| [[Ornstein-Uhlenbeck process]]: $dV=-kV\,dt+dW$ | $-kV$ | 1 |
-| Geometric Brownian motion: $dS=\mu S\,dt+\sigma S\,dW$ | $\mu S$ | $\sigma S$ |
-| Black-Scholes price evolution | drift = risk-free rate | proportional to price |
-
-## Numerical Solution: [[Euler-Maruyama scheme]]
-
-The simplest discretisation:
+The [[Ornstein-Uhlenbeck process]] is the SDE
 
 $$
-X(t+\Delta t)=X(t)+\mu(X,t)\,\Delta t+\sigma(X,t)\sqrt{\Delta t}\,Z(t),
+dV = -k V \, dt + dW
 $$
 
-with $Z(t)\sim\mathrm{Norm}(0,1)$. First-order strong convergence ($\sqrt{\Delta t}$).
+with drift $f(V, t) = -kV$ and diffusion $g(V, t) = 1$.
 
-Higher-order schemes (Milstein, stochastic Runge-Kutta) require derivatives of $\sigma$ and are generally more delicate than their deterministic counterparts.
+SDEs are solved numerically using the [[Euler-Maruyama scheme]], which is the stochastic analogue of the [[Explicit Euler method]].
 
-## Comparison with ODEs
-
-| ODE | SDE |
-|---|---|
-| Solution is a function | Solution is a *stochastic process* - a different function for each realisation |
-| One initial condition determines the trajectory | Initial condition + noise sequence determine the trajectory |
-| Order-$p$ method has error $O(\Delta t^{p})$ | Order-$p$ scheme has *strong* error $O(\Delta t^{p/2})$ - slower convergence |
-| Average over runs is meaningless (no randomness) | Average over many runs $\to$ ensemble mean |
+[[Wiener process]] | [[Ornstein-Uhlenbeck process]] | [[Euler-Maruyama scheme]] | [[Langevin equation]] | [[Explicit Euler method]]

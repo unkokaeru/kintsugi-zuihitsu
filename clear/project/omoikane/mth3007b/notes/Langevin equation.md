@@ -1,55 +1,27 @@
-# Langevin equation
+# Langevin Equation
 
-An ODE-style description of a stochastic process driven by a delta-correlated noise term.
-
-For the [[Ornstein-Uhlenbeck process]]:
+The **Langevin equation** is a stochastic ODE describing the velocity $V$ of a particle subject to friction and random thermal forcing:
 
 $$
-\boxed{\frac{dV(t)}{dt}=-kV(t)+\xi(t),}
+\frac{dV}{dt} = -k V + \xi(t)
 $$
 
-where $\xi(t)$ is **delta-correlated Gaussian white noise**: $\langle \xi(t)\rangle=0$ and $\langle\xi(t)\xi(t')\rangle=2\delta(t-t')$.
-
-Equivalent SDE form (Ito): $dV=-kV\,dt+dW$.
-
-## Why Two Forms
-
-The Langevin form looks like Newton's law with a random force: position evolves under a deterministic force plus stochastic kicks. Familiar to physicists.
-
-The Ito form is mathematically rigorous: the [[Wiener process]] $W(t)$ is continuous but nowhere differentiable, so $dW/dt$ does not exist as a classical derivative. The Ito differential $dV=\ldots\,dt+\ldots\,dW$ avoids that pitfall by writing increments rather than rates.
-
-The two are equivalent shorthand for the same process. Use the Langevin form for intuition, the Ito form for proofs.
-
-## Numerical Scheme
-
-Discretising directly:
+where $\xi(t)$ is **white noise** with correlation
 
 $$
-\frac{V(t+\Delta t)-V(t)}{\Delta t}=-kV(t)+\frac{Z(t)}{\sqrt{\Delta t}},
+\langle \xi(t) \xi(t') \rangle = 2 \, \delta(t - t')
 $$
 
-where $Z(t)\sim\mathrm{Norm}(0,1)$. So $\xi(t)$ becomes $Z(t)/\sqrt{\Delta t}$ (the $\sqrt{\Delta t}$ is what makes the discrete noise approximate delta-correlated continuous noise as $\Delta t\to 0$). Multiplying through by $\Delta t$:
+## Equivalence to the Ornstein-Uhlenbeck SDE
+
+The Langevin equation is equivalent to the [[Ornstein-Uhlenbeck process]] SDE $dV = -kV \, dt + dW$. The connection is that $\xi(t)$ is the formal derivative of the [[Wiener process]], $\xi(t) = dW/dt$, which does not exist as a classical function but is defined in the distributional sense.
+
+## Numerical Discretisation
+
+In a time step $dt$, white noise is represented as $\xi(t_i) \to Z_i / \sqrt{dt}$ where $Z_i \sim N(0,1)$. Substituting into the Langevin equation and rearranging gives the [[Euler-Maruyama scheme]]:
 
 $$
-V(t+\Delta t)=(1-k\Delta t)V(t)+\sqrt{\Delta t}\,Z(t),
+V(t + dt) = (1 - k \, dt) \, V(t) + \sqrt{dt} \cdot Z
 $$
 
-matching the [[Euler-Maruyama scheme]] applied to the Ito form.
-
-## More General Langevin Equations
-
-A particle of mass $m$ at position $X(t)$ with deterministic force $F(X)$, friction $\zeta$, and stochastic kicks $\xi(t)$:
-
-$$
-m\frac{d^{2}X(t)}{dt^{2}}=-\zeta\frac{dX}{dt}+F(X(t))+\xi(t).
-$$
-
-This is the workhorse of **molecular dynamics** simulations and many statistical-physics models. The deterministic force can come from a potential, $F=-dU/dX$.
-
-## Pros and Cons
-
-| Pros | Cons |
-|---|---|
-| Closer to Newton's law, intuitive | Singular noise term needs care in $\Delta t\to 0$ limit |
-| Familiar from physics | Less rigorous than Ito calculus |
-| Easy to extend (add more forces, multiple particles) | Cannot rigorously differentiate $W(t)$ |
+[[Ornstein-Uhlenbeck process]] | [[Wiener process]] | [[Stochastic differential equation]] | [[Euler-Maruyama scheme]] | [[First-passage time]]

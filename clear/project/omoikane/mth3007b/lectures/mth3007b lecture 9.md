@@ -1,248 +1,185 @@
-# MTH3007B Lecture 9
+# MTH3007b Lecture 9
 
-This is the final lecture on PDEs. We diagnose the **stability constraint** of the FTCS explicit scheme - proving the famous $\Delta t\leq \Delta x^{2}/(2\alpha)$ rule by examining the update coefficients - then derive the **implicit (BTCS) scheme** which is unconditionally stable but requires solving a tridiagonal linear system at each time step. We close with how to handle **Neumann boundary conditions** (derivative prescribed) using imaginary points.
+> [!quote] Me, in the lecture
+> zzzzz...
 
-> [!note] Course administration
-> 13/05/2026: in-class final test.
+This session recaps the FTCS scheme with a fuller implementation, analyses its stability, and introduces the implicit BTCS scheme as an unconditionally stable alternative. We also cover Neumann boundary conditions and how to incorporate them numerically.
 
-## Recap: 1D Diffusion + FTCS
+## FTCS Recap and Full Implementation
 
-The 1D diffusion equation
-$$
-\frac{\partial u(t,x)}{\partial t}=\alpha\,\frac{\partial^{2}u(t,x)}{\partial x^{2}}
-$$
-with Dirichlet boundary conditions $u(t,x_{L})=u_{L}$, $u(t,x_{R})=u_{R}$ and initial profile $u(0,x)=f_{0}(x)$, discretised on a $\Delta x\times\Delta t$ grid via the **FTCS** ([[Explicit Euler method]] in time, central in space) scheme is
+The **[[FTCS scheme]]** update is:
 
 $$
-u_{i+1,n}=u_{i,n}+\Delta t\cdot \alpha\frac{u_{i,n+1}-2u_{i,n}+u_{i,n-1}}{\Delta x^{2}}.
+\boxed{u_{i,n+1} = (1 - 2r)\,u_{i,n} + r\,(u_{i+1,n} + u_{i-1,n})}
 $$
 
-Defining $r=\alpha\,\Delta t/\Delta x^{2}$:
+with $r = \alpha\,\Delta t / (\Delta x)^2$. Here $i$ is the spatial index and $n$ is the time index.
 
-$$
-\boxed{u_{i+1,n}=(1-2r)\,u_{i,n}+r\bigl(u_{i,n+1}+u_{i,n-1}\bigr).}
-$$
-
-## Refinement Doesn't Always Help - Halving $\Delta x$ Wrecks the FTCS Solution
-
-A natural instinct: refine $\Delta x$ and $\Delta t$ together by a factor of 2, expect a more accurate answer. Tested numerically with the heat equation $u(t,x_{L})=100$, $u(t,x_{R})=30$, $\alpha=0.735$, $u(0,x)=0$:
-
-| $\Delta x$ | $\Delta t$ | Result |
-|---|---|---|
-| 2.0 | 0.2 | Coarse but stable; smooth profile. |
-| 1.0 | 0.1 | Smoother. |
-| 0.5 | 0.05 | Better. |
-| 0.25 | 0.025 | Better still. |
-| **0.125** | **0.0125** | **Catastrophic blow-up - values of order $10^{212}$, oscillating sign every grid point.** |
-
-Decreasing both step sizes by a factor of 2 each time, the scheme suddenly **goes unstable**. Why?
-
-## Stability Criterion for FTCS
-
-> [!important] FTCS stability constraint
-> The explicit FTCS scheme for the 1D diffusion equation is stable and convergent if and only if
-> $$
-> \boxed{\Delta t\;\leq\;\frac{\Delta x^{2}}{2\alpha}\quad\Longleftrightarrow\quad \Delta x\;\geq\;\sqrt{\frac{2\,\Delta t}{\alpha}}.}
-> $$
-
-**Why?** Look at the coefficient of $u_{i,n}$ in the update: $1-2r=1-2\alpha\Delta t/\Delta x^{2}$. For the scheme to not amplify errors, this must satisfy $|1-2r|\leq 1$, i.e. $0\leq 2r\leq 2$, i.e. $r\leq 1$. The full proof (Hoffman 2001) uses Fourier-mode analysis (von Neumann stability) and tightens this to $r\leq 1/2$.
-
-> [!warning] Not a linear refinement
-> If you halve $\Delta x$, you must reduce $\Delta t$ by **a factor of $4$** (not $2$) to preserve stability. The relation is $\Delta t\sim \Delta x^{2}$, so reducing $\Delta x$ to $\Delta x/2$ requires $\Delta t\to \Delta t/4$.
-
-This explains the table above: $\Delta x:\Delta t$ ratios were $2:0.2\Rightarrow r=0.0368$, $1:0.1\Rightarrow r=0.0735$, ... $0.25:0.025\Rightarrow r=0.294$, $0.125:0.0125\Rightarrow r=0.588>0.5$. The last one **violates** the stability criterion - and the solution explodes.
-
-> [!note]
-> Conversely, the explicit method can be stable for very large $\Delta x$ and modest $\Delta t$ - e.g. $\Delta x=5,\Delta t=6$ gives $r=0.176<0.5$, so it's stable, just inaccurate (a Lego version of the answer).
-
-## The Implicit (BTCS) Scheme
-
-Idea: replace the **forward** difference for $\partial u/\partial t$ with a **backward** difference, i.e. evaluate the spatial second derivative at the *new* time level $t_{i+1}$ instead of the current one.
-
-### Derivation
-
-The forward (explicit) discretisation was
-
-$$
-\frac{\partial u(t,x)}{\partial t}\approx \frac{u_{i+1,n}-u_{i,n}}{\Delta t}.
-$$
-
-Use the backward difference instead:
-
-$$
-\frac{\partial u(t,x)}{\partial t}\approx \frac{u_{i,n}-u_{i-1,n}}{\Delta t}.
-$$
-
-The PDE becomes (at time level $i$):
-
-$$
-\frac{u_{i,n}-u_{i-1,n}}{\Delta t}\approx \alpha\frac{u_{i,n+1}-2u_{i,n}+u_{i,n-1}}{\Delta x^{2}},
-$$
-
-or equivalently, shifting the time index up by $1$:
-
-$$
-\boxed{\frac{u_{i+1,n}-u_{i,n}}{\Delta t}\approx \alpha\frac{u_{i+1,n+1}-2u_{i+1,n}+u_{i+1,n-1}}{\Delta x^{2}}.}
-$$
-
-This is **BTCS** - *Backward Time, Central Space*.
-
-> [!note] Stencil comparison
-> - **Explicit (FTCS)**: $u_{i+1,n}$ at the new time depends solely on three neighbours at the old time. One step, no system to solve.
-> - **Implicit (BTCS)**: relates three unknowns $u_{i+1,n-1}, u_{i+1,n}, u_{i+1,n+1}$ at the new time to *one* known $u_{i,n}$ at the old time. We can't isolate $u_{i+1,n}$ - must solve a system simultaneously.
-
-### Solving Implicit: Tridiagonal System
-
-Let $c=\alpha\,\Delta t/\Delta x^{2}$. Rearranging (unknowns left, knowns right):
-
-$$
--c\,u_{i+1,n-1}+(1+2c)u_{i+1,n}-c\,u_{i+1,n+1}=u_{i,n}.
-$$
-
-Combined with Dirichlet BCs $u_{i+1,0}=u_{L}$ and $u_{i+1,N_{x}-1}=u_{R}$, this is one equation per spatial grid point - packaged as a tridiagonal system $\mathbf{A}\,\mathbf{u}_{i+1}=\mathbf{u}_{i}$ where
-
-$$
-\mathbf{A}=\begin{pmatrix}1 & 0 & & & & \\ -c & 1+2c & -c & & & \\ & -c & 1+2c & -c & & \\ & & \ddots & \ddots & \ddots & \\ & & & -c & 1+2c & -c \\ & & & & 0 & 1\end{pmatrix},
-$$
-
-and $\mathbf{u}_{i}=(u_{L},\,u_{i,1},\,u_{i,2},\,\ldots,\,u_{i,N_{x}-2},\,u_{R})^{T}$ (boundary rows pinned).
-
-### Time-Stepping Algorithm
-
-The matrix $\mathbf{A}$ is constant - invert it (or factor it) once, then march in time:
-
-$$
-\mathbf{u}_{0}\;\to\;\mathbf{u}_{1}=\mathbf{A}^{-1}\mathbf{u}_{0}\;\to\;\mathbf{u}_{2}=\mathbf{A}^{-1}\mathbf{u}_{1}\;\to\;\cdots
-$$
-
-This is the same machinery as the **1D Poisson** boundary-value problem from lecture 6 - the only new feature is that we re-solve a system *at every time step*.
-
-### Solving the Linear System: Gaussian Elimination, Inversion, or Thomas
-
-**Gaussian elimination.** Standard $O(N^{3})$ procedure. A self-contained Python implementation:
+The full implementation below uses physically motivated parameters (aluminium rod, fixed boundary temperatures):
 
 ```python runnable
 import numpy as np
-
-def gaussian_elimination(augmented_matrix):
-    """
-    Solves Ax = b given the augmented matrix [A | b] via in-place elimination + back-substitution.
-    """
-    rows, cols = augmented_matrix.shape
-
-    for pivot_index in range(rows - 1):
-        for elimination_row in range(pivot_index + 1, rows):
-            multiplier = augmented_matrix[elimination_row, pivot_index] / augmented_matrix[pivot_index, pivot_index]
-            augmented_matrix[elimination_row, pivot_index:] -= multiplier * augmented_matrix[pivot_index, pivot_index:]
-
-    solution = np.zeros(rows)
-    for i in range(rows - 1, -1, -1):
-        solution[i] = (augmented_matrix[i, -1] - np.dot(augmented_matrix[i, i+1:cols-1], solution[i+1:rows])) / augmented_matrix[i, i]
-    return solution
+L=10.0
+xmax=L
+dx=0.2
+Nx=int(np.round(xmax/dx)+1)
+tmax=12.0
+t=0
+dt=0.01
+Nt=int(np.round(tmax/dt)+1)
+u_L=100.
+u_R=50.
+alpha=0.835
+r=alpha*dt/(dx*dx)
+u=np.zeros(Nx)
+u[0]=u_L
+u[Nx-1]=u_R
+for it in range(Nt-1):
+    unext=np.zeros(Nx)
+    unext[0]=u[0]
+    unext[Nx-1]=u[Nx-1]
+    for i in range(1,Nx-1):
+        unext[i]=u[i]+r*(u[i+1]-2*u[i]+u[i-1])
+    u=1.0*unext
+print("The solution at t="+str(np.round(t+dt*(Nt-1),3))+" for u at 7 cm is "
+      +str(u[int(np.round(7.0/L*(Nx-1)))]))
 ```
 
-**Library matrix inversion.** Easier to read but $O(N^{3})$:
+## FTCS Stability
+
+### Stability Argument
+
+Look at the coefficient of $u_{i,n}$ in the FTCS update: it is $(1 - 2r)$. For the scheme to be non-amplifying, we need:
+
+$$
+|1 - 2r| \leq 1
+$$
+
+This gives $r \leq 1$. The full stability proof (see Hoffman 2001) tightens this result. The FTCS scheme is **stable and convergent** if and only if:
+
+$$
+\boxed{r = \frac{\alpha\,\Delta t}{(\Delta x)^2} \leq \frac{1}{2}}
+$$
+
+Equivalently, the time step must satisfy:
+
+$$
+\Delta t \leq \frac{(\Delta x)^2}{2\alpha}
+$$
+
+> [!warning] Stability of FTCS
+> If $r > 1/2$, the FTCS solution will grow without bound and become meaningless. Always check $r$ before running.
+
+## Implicit Scheme: BTCS
+
+**[[BTCS]]** (Backward-Time Centred-Space) uses a backward (implicit) difference in time:
+
+$$
+\frac{u_{i,n+1} - u_{i,n}}{\Delta t} = \alpha \frac{u_{i+1,n+1} - 2u_{i,n+1} + u_{i-1,n+1}}{(\Delta x)^2}
+$$
+
+Rearranging (with $c = \alpha\,\Delta t / (\Delta x)^2$):
+
+$$
+-c\,u_{i+1,n+1} + (1 + 2c)\,u_{i,n+1} - c\,u_{i-1,n+1} = u_{i,n}
+$$
+
+The new unknowns $u_{i,n+1}$ appear on the left-hand side for all $i$ simultaneously, so we cannot update point by point. Instead, the equations form a **[[tridiagonal matrix system]]**:
+
+$$
+A\,\mathbf{u}_{n+1} = \mathbf{u}_n
+$$
+
+where $A$ is a tridiagonal matrix with $(1+2c)$ on the diagonal and $-c$ on the off-diagonals.
+
+### Solving the System
+
+One option is standard **[[Gaussian elimination]]**. The following function solves $Ax = b$ given the augmented matrix $[A|b]$:
+
+```python runnable
+def Gauss_elim(M):
+    """
+    Solves Ax=b where last column of M (augmented matrix) is b.
+    Uses Gaussian elimination with in-place triangularisation.
+    """
+    n=M.shape[0]
+    for col in range(n):
+        for row in range(col+1,n):
+            factor=M[row,col]/M[col,col]
+            M[row,:]=M[row,:]-factor*M[col,:]
+    # Back substitution
+    x=np.zeros(n)
+    for row in range(n-1,-1,-1):
+        x[row]=(M[row,n]-np.dot(M[row,row+1:n],x[row+1:n]))/M[row,row]
+    return x
+```
+
+Another option is to invert $A$ once using `numpy.linalg.inv` and then apply $A^{-1}$ at every time step - efficient when $A$ is fixed:
 
 ```python runnable
 import numpy as np
-
-# Set up a small example tridiagonal A (Nx = 5) for illustration.
-Nx = 5
-c = 0.4
-A = np.zeros((Nx, Nx))
-A[0, 0] = 1.0
-A[-1, -1] = 1.0
-for n in range(1, Nx - 1):
-    A[n, n - 1] = -c
-    A[n, n] = 1.0 + 2.0 * c
-    A[n, n + 1] = -c
-
-A_inv = np.linalg.inv(A)
-u_now = np.array([100.0, 0.0, 0.0, 0.0, 30.0])
-u_next = A_inv @ u_now
-print(u_next)
+L=10.0
+xmax=L
+dx=0.2
+Nx=int(np.round(xmax/dx)+1)
+tmax=12.0
+t=0
+dt=0.01
+Nt=int(np.round(tmax/dt)+1)
+u_L=100.
+u_R=30.
+alpha=0.835
+c=alpha*dt/(dx*dx)
+u=np.zeros(Nx)
+u[0]=u_L
+u[Nx-1]=u_R
+A=np.zeros((Nx,Nx))
+A[0,0]=1.0
+A[Nx-1,Nx-1]=1
+for i in range(1,Nx-1):
+    A[i,i]=1+2*c
+    A[i,i-1]=-c
+    A[i,i+1]=-c
+Ainv=np.linalg.inv(A)
+for it in range(Nt-1):
+    t+=dt
+    unext=np.matmul(Ainv,u)
+    u=1.0*unext
+print("The solution at t="+str(np.round(t,3))+" for u at 7 cm is "
+      +str(u[np.int32(np.round(7.0/L*(Nx-1)))]))
 ```
 
-**Thomas algorithm.** Specialised for tridiagonal $\mathbf{A}$, runs in $O(N)$ instead of $O(N^{3})$ - exploits the all-zeros structure outside the three diagonals. Available in SciPy as `scipy.linalg.lapack.dgtsv`. We won't derive it; see Chapra et al. §11.1.1 or the [Wikipedia tridiagonal-matrix algorithm](https://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm) page for details.
+> [!note] Thomas algorithm
+> The **[[Thomas algorithm]]** is a specialised $O(N)$ solver for tridiagonal systems. It is mentioned here for completeness - we won't discuss the algorithm in detail.
 
-### BTCS Stability and Accuracy
+### Unconditional Stability of BTCS
 
-> [!important]
-> The BTCS scheme is **unconditionally stable** - any $\Delta t$ works, no constraint relating $\Delta t$ and $\Delta x$. This is the headline win.
-
-Demonstrated empirically: with $\Delta t=1, \Delta x=1$ (so $r=0.735>0.5$, FTCS would explode) the implicit scheme remains smooth and physically sensible.
-
-> [!warning] Trade-off - accuracy
-> The BTCS global truncation error is $O(\Delta t+\Delta x^{2})$. That is, **second order in space but only first order in time** - using a larger $\Delta t$ keeps the scheme stable but loses temporal accuracy. **[[Crank-Nicolson scheme]]** (averaging FTCS and BTCS) is the usual upgrade - second-order in both space and time, still unconditionally stable.
+**[[BTCS]]** is **unconditionally stable**: there is no restriction on $\Delta t$. Large time steps can be used without the solution blowing up, which is a major practical advantage over FTCS.
 
 ## Neumann Boundary Conditions
 
-So far all examples used **Dirichlet** boundaries (value of $u$ pinned). What if the boundary condition prescribes the **derivative** of $u$ instead - for instance, an insulated wall $\partial u/\partial \mathbf{n}=0$, or a prescribed flux $\partial u/\partial \mathbf{n}=d$?
+A Neumann BC specifies the gradient at the boundary rather than the value. At the left boundary, $\partial u / \partial x = d$. To implement this numerically, we introduce an **[[ghost point]]** $u_{-1}$ just outside the domain.
 
-### Setup
-
-Take the simple ODE $u''(x)=0$ as a stand-in. The standard interior finite-difference equation reads
+Using the centred difference approximation for the derivative at $i = 0$:
 
 $$
-\frac{u_{n+1}-2u_{n}+u_{n-1}}{\Delta x^{2}}\approx 0.
+\frac{u_1 - u_{-1}}{2\,\Delta x} = d \implies u_{-1} = u_1 - 2\,\Delta x\,d
 $$
 
-Now suppose the left-boundary condition is
+For an **[[insulating boundary]]** ($d = 0$), this simplifies to:
 
 $$
-\frac{du}{dx}\bigg|_{x=x_{L}}=d.
+u_{-1} = u_1 \implies u_0 = u_1
 $$
-
-A central-difference approximation centred on $x_{0}=x_{L}$ would be
-
-$$
-\frac{u_{1}-u_{-1}}{2\Delta x}=d,
-$$
-
-introducing the **imaginary point** $u_{-1}$ at $x=x_{L}-\Delta x$ - outside the physical domain.
-
-### Eliminating the Imaginary Point
-
-Solve for $u_{-1}$ from the BC:
-
-$$
-u_{-1}=u_{1}-2\Delta x\,d.
-$$
-
-Substitute into the interior equation centred at $n=0$ (which would normally use $u_{-1}$):
-
-$$
-\frac{u_{1}-2u_{0}+u_{-1}}{\Delta x^{2}}\approx 0\;\;\Longrightarrow\;\; \frac{2u_{1}-2u_{0}-2\Delta x\,d}{\Delta x^{2}}\approx 0,
-$$
-
-which simplifies to
-
-$$
-\boxed{-2u_{0}+2u_{1}=2\Delta x\,d.}
-$$
-
-This replaces the boundary equation $u_{0}=u_{L}$ from the Dirichlet case. The system of equations becomes:
-
-$$
-\begin{cases}-2u_{0}+2u_{1}=2\Delta x\,d, & \text{(Neumann at }x_{L}\text{)}\\u_{n+1}-2u_{n}+u_{n-1}=0\quad\text{for }n=1,\ldots,N-2,\\u_{N-1}=u_{R}. & \text{(Dirichlet at }x_{R}\text{)}\end{cases}
-$$
-
-Same matrix machinery as before - just a modified first row. Solve via Gaussian elimination / matrix inversion / Thomas.
-
-> [!note]
-> An **insulated** boundary corresponds to $d=0$ (no flux through the wall). In that case the first equation simplifies to $-2u_{0}+2u_{1}=0$, i.e. $u_{0}=u_{1}$ - the value at the boundary equals the value at the next interior point, as expected for a perfectly reflecting wall.
-
-The same idea extends to the right boundary using $u_{N}$ as the imaginary point - and to two-sided Neumann problems, mixed BCs, time-dependent BCs, etc. The recipe is always: write the BC as a finite difference, solve for the imaginary point, substitute into the boundary-row equation.
 
 ---
 
-## Pre-Lecture Notes from [[mth3007b lecture notes 9.pdf]]
+## Pre-Lecture Notes from [[mth3007b lecture notes 9.pdf|University Notes]]
 
-- **FTCS stability**: $\Delta t\leq \Delta x^{2}/(2\alpha)$ - equivalently $r=\alpha\Delta t/\Delta x^{2}\leq 1/2$. Halving $\Delta x$ requires $\Delta t\to \Delta t/4$, not $\Delta t/2$.
-- **Why**: the explicit-update coefficient of $u_{i,n}$ is $1-2r$. For non-amplification of errors we need $|1-2r|\leq 1$, i.e. $r\leq 1$ as a necessary condition; full Fourier analysis tightens to $r\leq 1/2$.
-- **BTCS scheme**: backward time, central space - $\frac{u_{i+1,n}-u_{i,n}}{\Delta t}=\alpha\frac{u_{i+1,n+1}-2u_{i+1,n}+u_{i+1,n-1}}{\Delta x^{2}}$.
-- **Tridiagonal system**: with $c=\alpha\Delta t/\Delta x^{2}$, the implicit equation reads $-c\,u_{i+1,n-1}+(1+2c)\,u_{i+1,n}-c\,u_{i+1,n+1}=u_{i,n}$, packaged as $\mathbf{A}\mathbf{u}_{i+1}=\mathbf{u}_{i}$.
-- **Stability vs accuracy**: BTCS is **unconditionally stable**; global truncation error is $O(\Delta t+\Delta x^{2})$ - second order in space, only first order in time. Crank-Nicolson upgrades to $O(\Delta t^{2}+\Delta x^{2})$.
-- **Solver options**: Gaussian elimination ($O(N^{3})$), library matrix inversion (`np.linalg.inv`, $O(N^{3})$), or **Thomas algorithm** specialised to tridiagonal systems ($O(N)$ - `scipy.linalg.lapack.dgtsv`).
-- **Neumann boundary conditions**: derivative prescribed at the boundary; introduce an imaginary point $u_{-1}$ via a central difference for $du/dx$, then eliminate by substituting $u_{-1}=u_{1}-2\Delta x\,d$ into the boundary-row equation, giving $-2u_{0}+2u_{1}=2\Delta x\,d$. Insulation $\Rightarrow d=0\Rightarrow u_{0}=u_{1}$.
-- **Course summary**: ODEs (lectures 1-5) → PDEs (lectures 6, 9) → Stochastic methods (lectures 7-8). FTCS, BTCS, Crank-Nicolson, Monte Carlo, Wiener, Ornstein-Uhlenbeck - full toolkit for numerical methods of differential and stochastic equations.
+- FTCS update: $u_{i,n+1}=(1-2r)u_{i,n}+r(u_{i+1,n}+u_{i-1,n})$, $r=\alpha\Delta t/(\Delta x)^2$.
+- Stability: coefficient of $u_{i,n}$ is $(1-2r)$; require $|1-2r|\leq 1$; full proof (Hoffman 2001) gives $r\leq 1/2$.
+- BTCS: backward time difference gives tridiagonal system $Au_{n+1}=u_n$; solved by Gaussian elimination or matrix inversion.
+- BTCS is unconditionally stable - no $\Delta t$ restriction.
+- Thomas algorithm ($O(N)$ tridiagonal solver) exists but is not covered in this module.
+- Neumann BC: ghost point $u_{-1}=u_1-2\Delta x\,d$; insulation ($d=0$) gives $u_0=u_1$.
+- Next session: the 2D Laplace equation and Liebmann's iterative method.

@@ -1,13 +1,23 @@
 # Ralston Method
 
-Similar to the [[Midpoint method]], but modifying by evaluating two-thirds through the interval instead of halfway. This is called **Ralston's method**:
+The **Ralston method** is a second-order [[Runge-Kutta methods|Runge-Kutta method]] designed to minimise the bound on the [[Local truncation error]].
 
 $$
-y_{i+1}\approx y_{i}+\Delta t\cdot \left( \frac{1}{4}g(t_{i},y_{i}) + \frac{3}{4}g\left( t_{i}+ \frac{2}{3}\Delta t,y_{i}+ \frac{2}{3}g(t_{i},y_{i})\Delta t \right) \right)
+k_1 = g(t_i, y_i)
 $$
 
-However, this is a bit easier to implement by breaking it into intermediate variables, namely $k_{1}=g(t_{i},y_{i})$ and $k_{2}=g\left(  t_{i}+ \frac{2}{3}\Delta t,y_{i}+ \frac{2}{3}\Delta t\cdot k_{1} \right)$:
+$$
+k_2 = g\!\left(t_i + \tfrac{2}{3}dt,\; y_i + \tfrac{2}{3} dt \cdot k_1\right)
+$$
 
 $$
-y_{i+1}\approx y_{i}+\Delta t\cdot \left( \frac{1}{4}k_{1}+ \frac{3}{4}k_{2} \right)
+y_{i+1} = y_i + dt \left(\frac{k_1}{4} + \frac{3k_2}{4}\right)
 $$
+
+## Order
+
+Second-order: [[Global truncation error]] $O(dt^2)$, [[Local truncation error]] $O(dt^3)$.
+
+Like the [[Midpoint method]], the Ralston method uses two evaluations of $g$ per step. The difference lies in where the intermediate point is sampled ($2dt/3$ rather than $dt/2$) and in the weighted combination of $k_1$ and $k_2$. The Ralston method is preferred when minimising the local error bound is important.
+
+[[Runge-Kutta methods]] | [[Midpoint method]] | [[Fourth order Runge-Kutta]] | [[Local truncation error]] | [[Order of a method]]

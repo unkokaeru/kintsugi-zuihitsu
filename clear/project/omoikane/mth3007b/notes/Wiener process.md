@@ -1,47 +1,58 @@
-# Wiener process
+# Wiener Process
 
-Also called **Brownian motion**. The continuous-time, continuous-state random process $W(t)$ that is the limit of an unbiased random walk as the step size and step time go to zero.
+The **Wiener process** (also called Brownian motion) $W(t)$ is a continuous-time stochastic process with the following properties:
 
-## Definition
+1. $W(0) = 0$
+2. Increments are independent: $W(t) - W(s)$ is independent of $W(s) - W(r)$ for $r < s < t$
+3. Increments are normally distributed: $W(t) - W(s) \sim N(0, t - s)$
 
-$W(t)$ is a Wiener process if for all $0\leq s<t$:
+## Numerical Simulation
 
-1. **Initial condition**: $W(0)=0$.
-2. **Gaussian increments**: $W(t)-W(s)\sim\mathrm{Norm}(0,\,t-s)$.
-3. **Independent increments**: $W(t)-W(s)$ is independent of $W(u)$ for all $u\leq s$.
-
-Setting $s=0$: $W(t)\sim\mathrm{Norm}(0,t)$. Probability density at time $t$:
+Discretise time with step $dt$. At each step draw $Z \sim N(0,1)$ and update:
 
 $$
-\rho_{W}(x,t)=\frac{1}{\sqrt{2\pi t}}\exp\!\left(-\frac{x^{2}}{2t}\right).
+W(t + dt) = W(t) + \sqrt{dt} \cdot Z
 $$
 
-## Connection to the Diffusion Equation
+This is the [[Euler-Maruyama scheme]] applied to $dW = dW$ (trivially).
 
-$\rho_{W}(x,t)$ satisfies the [[Heat equation]] $\partial \rho/\partial t=\tfrac{1}{2}\partial^{2}\rho/\partial x^{2}$ with initial condition $\rho(x,0)=\delta(x)$. So:
+## Connection to Diffusion
 
-> A histogram of many independent Wiener walkers at time $t$ equals the solution of the diffusion equation with delta-function initial condition.
-
-The deterministic PDE picture and the stochastic-process picture describe the same thing - one in averaged density, the other one walker at a time.
-
-## Numerical Scheme
-
-By property 2, $W(t+\Delta t)-W(t)\sim\mathrm{Norm}(0,\Delta t)$. Generate this as $\sqrt{\Delta t}\,Z(t)$ with $Z(t)\sim\mathrm{Norm}(0,1)$ - the [[Euler-Maruyama scheme]] for $dW=dW$:
+The probability density function of $W(t)$ is Gaussian with variance $t$:
 
 $$
-\boxed{W(t+\Delta t)=W(t)+\sqrt{\Delta t}\,Z(t),\qquad W(0)=0.}
+p(w, t) = \frac{1}{\sqrt{2\pi t}} \exp\!\left(-\frac{w^2}{2t}\right)
 $$
 
-## Properties
+This is the solution to the [[Heat equation]] with diffusion coefficient $\alpha = 1/2$ and a delta-function initial condition $p(w, 0) = \delta(w)$.
 
-- **Continuous but nowhere differentiable**: $W(t)$ has continuous paths almost surely, but $dW/dt$ does not exist as a classical derivative. Hence stochastic differential equations are written in differential form $dV=\ldots\,dt+\ldots\,dW$, not as ODEs.
-- **Self-similar**: $W(at)$ has the same distribution as $\sqrt{a}\,W(t)$.
-- **Variance grows linearly**: $\mathrm{Var}(W(t))=t$ - typical excursions scale as $\sqrt{t}$.
-- **Returns to origin**: in 1D, $W(t)$ is recurrent - it will revisit any neighbourhood of the origin infinitely often (with probability 1).
+## Python
 
-## Applications
+```python runnable
+import numpy as np
+import matplotlib.pyplot as plt
 
-- [[Ornstein-Uhlenbeck process]] - Wiener with restoring force.
-- [[Random walks]] - Wiener is the continuum limit.
-- Geometric Brownian motion in finance - $dS/S=\mu\,dt+\sigma\,dW$.
-- Brownian dynamics in physics - overdamped Langevin equation.
+def simulate_wiener_process(
+    time_end: float,
+    number_of_steps: int,
+    seed: int = 0,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Simulate a single Wiener process path.
+
+    Args:
+        time_end: End time T.
+        number_of_steps: Number of time steps.
+        seed: Random seed for reproducibility.
+
+    Returns:
+        Tuple of (time_array, W_array).
+    """
+    rng = np.random.default_rng(seed)
+    dt = time_end / number_of_steps
+    time_array = np.linspace(0, time_end, number_of_steps + 1)
+    increments = np.sqrt(dt) * rng.standard_normal(number_of_steps)
+    W_array = np.concatenate([[0.0], np.cumsum(increments)])
+    return time_array, W_array
+```
+
+[[Random walks]] | [[Euler-Maruyama scheme]] | [[Ornstein-Uhlenbeck process]] | [[Heat equation]] | [[Stochastic differential equation]]

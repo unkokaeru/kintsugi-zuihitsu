@@ -1,32 +1,15 @@
-# Diagonal dominance
+# Diagonal Dominance
 
-A square matrix $\mathbf{A}=(a_{ij})$ is **(weakly) diagonally dominant** if for every row, the magnitude of the diagonal entry is at least the sum of magnitudes of the other entries in that row:
+A square matrix $A$ is **diagonally dominant** if, for every row $i$, the magnitude of the diagonal entry is greater than or equal to the sum of the magnitudes of all off-diagonal entries in that row:
 
 $$
-\boxed{|a_{ii}|\;\geq\;\sum_{j\neq i}|a_{ij}|\qquad\text{for all }i.}
+|a_{ii}| \geq \sum_{j \neq i} |a_{ij}| \quad \text{for all } i
 $$
 
-**Strictly** diagonally dominant if the inequality is strict for all $i$.
+## Significance
 
-## Why It Matters
+Diagonal dominance guarantees the convergence of iterative solvers such as [[Liebmann's method]] (Gauss-Seidel iteration). The matrix arising from the [[Laplacian difference equation]] satisfies this property: the diagonal entry is $-4$ (or $4$ in magnitude), and the four off-diagonal entries each have magnitude 1, so $4 \geq 4$ with equality - the matrix is weakly diagonally dominant.
 
-Diagonal dominance is the standard sufficient condition guaranteeing convergence of **iterative linear solvers** like Jacobi and Gauss-Seidel ([[Liebmann's method]]) to the unique solution of $\mathbf{A}\mathbf{x}=\mathbf{b}$ from *any* starting guess.
+For the [[BTCS scheme]], the tridiagonal matrix has diagonal entries $1 + 2c$ and off-diagonal entries $-c$, giving $1 + 2c \geq 2c$, which holds strictly. This is one reason the BTCS system is well-conditioned and solvable.
 
-## Where It Shows Up
-
-For the discretised [[Laplace equation]] via the [[Laplacian difference equation]] $u_{i+1,j}+u_{i-1,j}+u_{i,j+1}+u_{i,j-1}-4u_{i,j}=0$, the system matrix $\mathbf{A}$ has $-4$ on the diagonal and at most four $+1$'s off-diagonal per row, so $|a_{ii}|=4\geq 4=\sum_{j\neq i}|a_{ij}|$. Diagonally dominant - so Liebmann iteration converges.
-
-Boundary rows (which encode Dirichlet pinning $u_{0}=u_{L}$) have $|a_{ii}|=1$ and zero off-diagonals, comfortably dominant. Discretised second-derivative operators in 1D ([[FTCS scheme]] / [[BTCS scheme]] tridiagonals) are similarly diagonally dominant.
-
-## Other Convergence Conditions
-
-Diagonal dominance is sufficient but not necessary. Other convergence guarantees for iterative solvers:
-
-- **Symmetric positive definite** $\mathbf{A}$: Gauss-Seidel converges (Jacobi may not).
-- **Spectral radius** $\rho(\mathbf{M})<1$ where $\mathbf{M}$ is the iteration matrix - the *exact* necessary-and-sufficient condition.
-
-For the matrices arising from finite-difference discretisations of elliptic PDEs, diagonal dominance + symmetry are usually both available, so iterative methods always work.
-
-## Direct Solver Connection
-
-Diagonally dominant matrices also have a useful property for direct solvers: they are guaranteed to admit **LU decomposition without pivoting**. Round-off behaves better than for general matrices.
+[[Liebmann's method]] | [[Laplacian difference equation]] | [[BTCS scheme]]

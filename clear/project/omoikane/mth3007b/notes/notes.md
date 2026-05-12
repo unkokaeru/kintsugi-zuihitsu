@@ -1,30 +1,41 @@
-# Notes
+# MTH3007b Notes
 
-```folder-overview
-id: 3afbc3da-6070-429a-bc7f-d12b85defde0
-folderPath: ""
-title: "{{folderName}} overview"
-showTitle: true
-depth: 2
-includeTypes:
- - folder
- - markdown
-style: list
-disableFileTag: false
-sortBy: name
-sortByAsc: true
-showEmptyFolders: true
-onlyIncludeSubfolders: false
-storeFolderCondition: true
-showFolderNotes: false
-disableCollapseIcon: true
-alwaysCollapse: false
-autoSync: true
-allowDragAndDrop: true
-hideLinkList: true
-hideFolderOverview: false
-useActualLinks: false
-fmtpIntegration: false
-titleSize: 1
-isInCallout: false
-```
+Index of atomic notes for this module.
+
+- [[Absolute error]]
+- [[Relative error]]
+- [[Order of magnitude]]
+- [[Order of a method]]
+- [[Order of convergence]]
+- [[Local truncation error]]
+- [[Global truncation error]]
+- [[Finite differences]]
+- [[Explicit Euler method]]
+- [[Implicit Euler method]]
+- [[Runge-Kutta methods]]
+- [[Midpoint method]]
+- [[Ralston method]]
+- [[Fourth order Runge-Kutta]]
+- [[Implicit Trapezoid Method]]
+- [[Stability of an ODE]]
+- [[Stability of a method]]
+- [[Convergence]]
+- [[Lax Equivalence Theorem]]
+- [[Reducing a Second-Order ODE]]
+- [[Boundary conditions]]
+- [[Heat equation]]
+- [[FTCS scheme]]
+- [[BTCS scheme]]
+- [[Laplace equation]]
+- [[Laplacian difference equation]]
+- [[Liebmann's method]]
+- [[Diagonal dominance]]
+- [[Monte Carlo integration]]
+- [[Pseudo-random number generation]]
+- [[Random walks]]
+- [[Wiener process]]
+- [[Ornstein-Uhlenbeck process]]
+- [[Stochastic differential equation]]
+- [[Euler-Maruyama scheme]]
+- [[Langevin equation]]
+- [[First-passage time]]

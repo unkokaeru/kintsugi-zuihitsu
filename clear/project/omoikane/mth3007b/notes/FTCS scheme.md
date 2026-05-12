@@ -1,42 +1,59 @@
-# FTCS scheme
+# FTCS Scheme
 
-**Forward Time, Central Space.** The standard *explicit* finite-difference scheme for the 1D [[Heat equation]] $\partial u/\partial t=\alpha\,\partial^{2}u/\partial x^{2}$:
+The **FTCS scheme** (Forward-Time Centred-Space) is an explicit finite difference method for the [[Heat equation]].
+
+## Discretisation
+
+Using a forward difference in time and a centred second difference in space:
 
 $$
-\boxed{u_{i+1,n}=(1-2r)\,u_{i,n}+r\,(u_{i,n+1}+u_{i,n-1}),\qquad r=\frac{\alpha\,\Delta t}{\Delta x^{2}}.}
+u_{i+1,n} = (1 - 2r) \, u_{i,n} + r \left(u_{i,n+1} + u_{i,n-1}\right)
 $$
 
-Forward [[Explicit Euler method]] in time; symmetric three-point central difference in space.
+where the parameter $r$ is
 
-## Stencil
+$$
+r = \frac{\alpha \, dt}{dx^2}
+$$
 
-Two grid points at the new time level $t_{i+1}$ are not involved - the update at $u_{i+1,n}$ depends only on three points at the current time $t_{i}$:
-
-```
-  ·    x    ·       t_{i+1}   (1 unknown)
-  o    x    o       t_i       (3 knowns)
-n-1    n   n+1
-```
+Here $i$ is the time index and $n$ is the spatial index. The right-hand side contains only values at time step $i$, making this a fully **explicit** scheme.
 
 ## Stability
 
-Conditionally stable: requires
+The FTCS scheme is **conditionally stable**. The stability condition is
 
 $$
-\boxed{r=\frac{\alpha\,\Delta t}{\Delta x^{2}}\leq \frac{1}{2}.}
+r \leq \frac{1}{2} \quad \Longleftrightarrow \quad dt \leq \frac{dx^2}{2\alpha}
 $$
 
-If $r>1/2$ the scheme amplifies high-frequency errors, leading to oscillating, exponentially growing solutions. (See [[Stability of a method]].) Halving $\Delta x$ requires $\Delta t$ to drop by a factor of $4$, not $2$, to stay stable.
+Violating this condition leads to exponentially growing oscillations. (Details of the stability proof via Fourier analysis are in Hoffman (2001) and are not covered here.)
 
-## Truncation Error
+## Accuracy
 
-Global error is $O(\Delta t+\Delta x^{2})$ - first-order in time, second-order in space.
+- First-order in time: $O(dt)$
+- Second-order in space: $O(dx^2)$
 
-## Pros and Cons
+## Python
 
-| Pros | Cons |
-|---|---|
-| Simple - no system to solve. | Stability constraint $r\leq 1/2$ severely limits $\Delta t$ for fine spatial grids. |
-| Vectorises trivially in NumPy. | Only first-order accurate in time. |
+```python runnable
+import numpy as np
 
-For unconditional stability use [[BTCS scheme]] or the [[Crank-Nicolson scheme]].
+def ftcs_step(
+    u_current: np.ndarray,
+    r: float,
+) -> np.ndarray:
+    """Advance the heat equation one time step using the FTCS scheme.
+
+    Args:
+        u_current: Spatial profile at the current time step (interior points only).
+        r: Stability parameter alpha * dt / dx**2. Must satisfy r <= 0.5.
+
+    Returns:
+        Spatial profile at the next time step.
+    """
+    u_next = np.empty_like(u_current)
+    u_next[1:-1] = (1 - 2 * r) * u_current[1:-1] + r * (u_current[2:] + u_current[:-2])
+    return u_next
+```
+
+[[Heat equation]] | [[BTCS scheme]] | [[Finite differences]] | [[Boundary conditions]] | [[Stability of a method]]

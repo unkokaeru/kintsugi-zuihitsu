@@ -1,67 +1,106 @@
-# MTH3007B Weekly Problems 2
+# MTH3007b Weekly Problems 2
 
-> **Original Documents**: [[mth3007b weekly problem sheet 2.pdf]]
+> **Original Documents**: [[mth3007b weekly problem sheet 2.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 2 solutions.pdf|Provided Solutions]]
 >
-> **Vibes**: Pretty chill, basically just the same as last week and scaling errors.
+> **Vibes**: ...
 >
 > **Used Techniques**:
->  - Scaling errors.
->  - Implementing Euler methods.
+>   - ...
 
 ---
 
-## 2.1. Scaling Error in Different Methods
+## 2.1. Error Scaling for Forward Euler
 
 > [!question]
-> Assume you solve a differential equation, $y^{\prime} (t)=g(t,y(t))$, using the [[Explicit Euler method]] using a step size of $\Delta t=0.01$. Also assume the (global) error is exactly as in the linear regime and the error in $y(t_{\text{max}})$ is $0.04$.
->
-> 1. What would the error be if $\Delta t=0.005$?
-> 2. What would the error be if $\Delta t=0.005$ and Ralston is used, instead? Assume an error of $0.03$ for $\Delta t=0.01$.
+> You run forward Euler with $dt = 0.01$ and find an error of $0.04$ in $y(t_{\max})$. What error would you expect if you halved the step size to $dt = 0.005$?
 
-The global error scales with the timestep according to the order of the method...
-
-1. For Forward Euler, a first order method, then $E \propto \Delta t$. Hence, halving the step size halves the error: $E_{\text{new}}=E_{\text{old}}\cdot \frac{\Delta t_{\text{new}}}{\Delta t_{\text{old}}}=0.04\times \frac{0.005}{0.01}=\boxed{0.02}$.
-2. For Ralston, a second order method, then $E\propto \Delta t^2$. Hence, halving the step size quarters the error: $E_{\text{new}}=E_{\text{old}}\cdot \left( \frac{\Delta t_{\text{new}}}{\Delta t_{\text{old}}} \right)^2=0.03\times \left( \frac{0.005}{0.01} \right)^2=0.03\times 0.25=\boxed{0.0075}$.
-
----
-
-## 2.2. Numerical Solutions of an ODE
-
-> [!question]
-> Consider the ordinary differential equation, $\frac{dy(t)}{dt}=bt-ay(t)$ with $a=8$, $b=1$, and $y(0)=4$.
->
-> 1. By using a numerical algorithm, solve the ODE till $t_\mathrm{max}=1$, then compare $y(t_\mathrm{max})$ with the analytical solution $y(t)=\exp(-at)\left(y(0)+b/a^2\right)+bt/a-b/a^2$.
-> 2. What is $y(t_\mathrm{max})$ for the Ralston method for $\Delta t=0.01$?
-
-1. Using the [[Explicit Euler method]], the solution is $\boxed{0.1103355852}$. Analytically, the solution is approximately $0.1107220921$ - a difference of about $3.865\times 10^{-4}$
-2. Instead, using the [[Ralston method]], the solution is instead $\boxed{0.1107343545}$, giving a smaller max error of $1.226\times 10^{-5}$.
-
----
-
-## 2.3. Finding Maximum Timestep for a Given Error in Euler
-
-> [!question]
-> Assume you want to have an accuracy in the final solution of $0.001$, such that the numerical result of $y(t_{\text{max}})$ can deviate at most $0.001$ from the analytical solution.
->
-> What is the maximum timestep $\Delta t$ for the [[Explicit Euler method]] to achieve the $0.001$ accuracy in $y(t_{\text{max}})$, with one significant figure accuracy?
-
-Using the linear error scaling for Euler with the known error at $\Delta t=0.01$...
+Forward (explicit) Euler is a **[[first-order method]]**, meaning its **[[global truncation error]]** scales as $O(dt^1)$. Halving $dt$ therefore halves the error.
 
 $$
-\Delta t_{\text{max}}=\Delta t\cdot \frac{0.001}{E(\Delta t)}=0.01\times \frac{0.001}{3.865\times 10^{-4}}\approx \boxed{0.03}
+\text{GTE} \propto dt^1
+$$
+
+So if error at $dt = 0.01$ is $0.04$:
+
+$$
+\text{error at } dt = 0.005 = 0.04 \times \frac{0.005}{0.01} = 0.04 \times \frac{1}{2} = \boxed{0.02}
 $$
 
 ---
 
-## 2.4. Finding Maximum Timestep for a Given Error in Ralston
+## 2.2. Error Scaling for Ralston's Method
 
 > [!question]
-> What is the maximum timestep $\Delta t$ for Ralston's method to achieve the $0.001$ accuracy in $y(t_{\text{max}})$, with one significant figure accuracy?
+> You run Ralston's method with $dt = 0.01$ and find an error of $0.03$. What error would you expect for $dt = 0.005$?
 
-Using the quadratic error scaling of Ralston with the known error at $\Delta t=0.01$...
+**[[Ralston's method]]** is a second-order Runge-Kutta method, so its GTE scales as $O(dt^2)$. Halving $dt$ reduces the error by a factor of $2^2 = 4$.
 
 $$
-\Delta t_{\text{max}}=\Delta t \cdot \sqrt{ \frac{0.001}{E(\Delta t)} }=0.01\times \sqrt{ \frac{0.001}{1.226\times 10^{-5}} }\approx \boxed{0.09}
+\text{GTE} \propto dt^2
 $$
 
-> [!note] This is apparently incorrect - naive scaling?
+So if error at $dt = 0.01$ is $0.03$:
+
+$$
+\text{error at } dt = 0.005 = 0.03 \times \left(\frac{0.005}{0.01}\right)^2 = 0.03 \times \frac{1}{4} = \boxed{0.0075}
+$$
+
+---
+
+## 2.3. Implementing Ralston's Method and Verifying Second-Order Convergence
+
+> [!question]
+> Implement Ralston's method for $\dot{y} = bt - ay$ with $b = 1$, $a = 22$, $y(0) = 1$, $t_{\max} = 1$. Verify numerically that the method is second order by checking the error ratio as $dt$ is halved.
+
+**[[Ralston's method]]** is a two-stage Runge-Kutta scheme with coefficients chosen to minimise the truncation error bound. The update is:
+
+$$
+k_1 = g(t_n, y_n)
+$$
+
+$$
+k_2 = g\!\left(t_n + \tfrac{2}{3}dt,\; y_n + \tfrac{2}{3}dt \cdot k_1\right)
+$$
+
+$$
+y_{n+1} = y_n + dt\!\left(\tfrac{1}{4}k_1 + \tfrac{3}{4}k_2\right)
+$$
+
+```python
+import numpy as np
+
+b = 1.0; a = 22.0; t0 = 0.0; tmax = 1.0; y0 = 1.0
+
+def g(t, y):
+    return b * t - a * y
+
+def y_exact(t):
+    return np.exp(-a * t) * (y0 + b / a**2) + b * t / a - b / a**2
+
+def ralston_step(g, t, y, dt):
+    k1 = g(t, y)
+    k2 = g(t + 2 * dt / 3, y + 2 * dt * k1 / 3)
+    return y + dt * (k1 / 4 + 3 * k2 / 4)
+
+def run_ralston(dt):
+    Nint = int(round((tmax - t0) / dt))
+    t = t0; y = y0
+    for n in range(Nint):
+        y = ralston_step(g, t, y, dt)
+        t += dt
+    return y
+
+y_true = y_exact(tmax)
+print(f"{'dt':>10} {'y(1)':>14} {'error':>14} {'ratio':>8}")
+prev_error = None
+for dt in [0.1, 0.05, 0.025, 0.0125]:
+    y_num = run_ralston(dt)
+    error = abs(y_num - y_true)
+    ratio = prev_error / error if prev_error is not None else float('nan')
+    print(f"{dt:>10.4f} {y_num:>14.8f} {error:>14.6e} {ratio:>8.2f}")
+    prev_error = error
+```
+
+The ratio column should converge to $\approx 4$ as $dt$ decreases, confirming second-order convergence - each halving of $dt$ reduces the error by a factor of $4 = 2^2$.
+
+**Why second order?** The **[[local truncation error]]** of Ralston's method is $O(dt^3)$ per step (it matches the Taylor series up to and including the $dt^2$ term). With $\sim 1/dt$ steps, the **[[global truncation error]]** is $O(dt^2)$.

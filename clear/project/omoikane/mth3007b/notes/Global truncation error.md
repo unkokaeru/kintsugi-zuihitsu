@@ -1,34 +1,21 @@
 # Global Truncation Error
 
-The accumulated error after marching the numerical scheme over many time steps:
+**Global truncation error** (GTE) is the total accumulated error after integrating over the entire interval, and it determines the [[Order of a method]].
+
+For a method with [[Local truncation error]] $O(dt^{p+1})$ per step, integrating over $N = T/dt$ steps gives
 
 $$
-\boxed{\text{GTE}_{N}=y(t_{N})-y_{N},\qquad t_{N}=t_{0}+N\Delta t.}
+E_{\text{global}} \approx N \cdot O(dt^{p+1}) = \frac{T}{dt} \cdot O(dt^{p+1}) = O(dt^p)
 $$
 
-The error at the final time relative to the exact solution.
+so the method is order $p$.
 
-## Relationship to [[Local truncation error]]
-
-The local truncation error is the per-step error; the global error is its accumulation over $N=O(1/\Delta t)$ steps. Heuristically:
-
-$$
-\text{GTE}\sim N\cdot \text{LTE}=\frac{T-t_{0}}{\Delta t}\cdot O(\Delta t^{p+1})=O(\Delta t^{p}).
-$$
-
-So if the LTE is $O(\Delta t^{p+1})$, the GTE is $O(\Delta t^{p})$ - **one order lower than LTE**. This is the [[Order of a method]] of the method.
-
-## Method Orders
-
-| Method | LTE | GTE |
+| Method | LTE per step | GTE (order) |
 |---|---|---|
-| [[Explicit Euler method]] | $O(\Delta t^{2})$ | $O(\Delta t)$ |
-| [[Implicit Euler method]] | $O(\Delta t^{2})$ | $O(\Delta t)$ |
-| [[Midpoint method]] | $O(\Delta t^{3})$ | $O(\Delta t^{2})$ |
-| [[Implicit Trapezoid Method]] | $O(\Delta t^{3})$ | $O(\Delta t^{2})$ |
-| [[Ralston method]] | $O(\Delta t^{3})$ | $O(\Delta t^{2})$ |
-| [[Fourth order Runge-Kutta]] | $O(\Delta t^{5})$ | $O(\Delta t^{4})$ |
+| [[Explicit Euler method]] | $O(dt^2)$ | $O(dt)$ - first order |
+| [[Midpoint method]], [[Ralston method]], [[Implicit Trapezoid Method]] | $O(dt^3)$ | $O(dt^2)$ - second order |
+| [[Fourth order Runge-Kutta]] | $O(dt^5)$ | $O(dt^4)$ - fourth order |
 
-## In PDE Schemes
+The GTE is what we measure in practice by comparing numerical solutions at different step sizes.
 
-For PDE finite-difference schemes (e.g. [[FTCS scheme]], [[BTCS scheme]]) the GTE has separate $\Delta t$ and $\Delta x$ scaling. FTCS and BTCS both have GTE $O(\Delta t+\Delta x^{2})$; [[Crank-Nicolson scheme]] gives $O(\Delta t^{2}+\Delta x^{2})$.
+[[Local truncation error]] | [[Order of a method]] | [[Order of convergence]] | [[Convergence]]

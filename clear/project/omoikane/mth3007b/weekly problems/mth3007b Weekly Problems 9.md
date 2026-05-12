@@ -1,151 +1,150 @@
 # MTH3007b Weekly Problems 9
 
-> **Vibes**: Two solves of the heat equation on a $L=10$ cm rod, this time using the implicit (BTCS) scheme so we can ignore the FTCS stability constraint and pick whatever $\Delta t$ we like. Problem 1 is two-sided Dirichlet ($100$ left, $30$ right); problem 2 swaps the left for an insulated wall (Neumann), which gives a uniform steady state of $30^{\circ}\text{C}$ once everything has equilibrated.
+> **Original Documents**: [[mth3007b weekly problem sheet 9.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 9 solutions.pdf|Provided Solutions]]
+>
+> **Vibes**: …
 >
 > **Used Techniques**:
->  - [[BTCS scheme]]: $-c\,u_{i+1,n-1}+(1+2c)u_{i+1,n}-c\,u_{i+1,n+1}=u_{i,n}$ with $c=\alpha\Delta t/\Delta x^{2}$.
->  - Solve $\mathbf{A}\mathbf{u}_{i+1}=\mathbf{u}_{i}$ at each step; the matrix is constant, so factor or invert once.
->  - [[Boundary conditions]] handling via the imaginary-point trick: $\partial u/\partial x|_{x_{L}}=0$ converts the boundary row to $-2u_{0}+2u_{1}=0$, i.e. $u_{0}=u_{1}$.
->  - Steady-state checks: linear interpolation for two-sided Dirichlet; uniform value for one-sided Dirichlet + Neumann.
+>   - …
 
 ---
 
-## 9.1. Implicit Heat Diffusion in Rod with Fixed Boundaries
+## 9.1. BTCS for the Heat Equation
 
 > [!question]
-> Consider a rod of $L=10$ cm long with heat diffusion coefficient $\alpha=0.835$ cm$^2$/s. The boundary conditions are $u(t\text{ cm})=100$ degrees Celsius and $u(t\text{ cm})=30$ degrees Celsius. The initial condition is $u(0\text{ s},x)=0$ degrees Celsius (except at boundaries). Using $\Delta x=0.2$ cm and $\Delta t=0.01$ s, solve the diffusion equation with the **implicit scheme**. Plot $u(t,x)$ vs $x$ at $t=0,3,6,9,12$ s. What is the temperature at 12 s and 7 cm from the left?
+> Implement the **BTCS** (Backward Time, Centred Space) scheme for the 1D heat equation $\partial u/\partial t = \alpha\,\partial^2 u/\partial x^2$ with $L = 10$ cm, $\alpha = 0.835$ cm$^2$/s, $u(0, t) = 100$, $u(L, t) = 30$, $dx = 0.2$, $dt = 0.01$, $t_{\max} = 12$. Show that BTCS remains stable even for large $dt$.
 
-**Setup.** $N_{x}=51$, $c=\alpha\,\Delta t/\Delta x^{2}=0.835\cdot 0.01/0.04=0.209$. (No stability constraint for implicit, but $c$ controls accuracy and conditioning.) Steady state: $u_{\infty}(x)=100-7x$, so $u_{\infty}(7)=51^{\circ}\text{C}$.
+The **[[BTCS scheme]]** discretises the heat equation using a backward difference in time and centred difference in space, evaluating the spatial term at $t_{n+1}$:
 
-**Tridiagonal matrix.** $\mathbf{A}$ has $1$ in the corners (boundary rows), $1+2c$ on the main diagonal, $-c$ on the off-diagonals.
+$$
+\frac{u_i^{n+1} - u_i^n}{dt} = \alpha\,\frac{u_{i+1}^{n+1} - 2u_i^{n+1} + u_{i-1}^{n+1}}{dx^2}
+$$
 
-```python runnable
+With $c = \alpha\,dt/dx^2$, rearranging gives:
+
+$$
+-c\,u_{i-1}^{n+1} + (1 + 2c)\,u_i^{n+1} - c\,u_{i+1}^{n+1} = u_i^n
+$$
+
+This is a tridiagonal system $A\,\mathbf{u}^{n+1} = \mathbf{u}^n$ where:
+
+$$
+A = \begin{pmatrix} 1 & 0 & \cdots \\ -c & 1+2c & -c & \cdots \\ & \ddots & \ddots & \ddots \\ & \cdots & & 0 & 1 \end{pmatrix}
+$$
+
+The first and last rows enforce the **[[Dirichlet boundary conditions]]** $u_0 = u_L = $ const.
+
+```python
 import numpy as np
+import matplotlib.pyplot as plt
 
-length = 10.0
-diffusion = 0.835
-space_step = 0.2
-time_step = 0.01
-final_time = 12.0
-left_temperature = 100.0
-right_temperature = 30.0
+L = 10.0; dx = 0.2; Nx = int(np.round(L / dx) + 1)
+tmax = 12.0; dt = 0.01; Nt = int(np.round(tmax / dt) + 1)
+u_L = 100.0; u_R = 30.0; alpha = 0.835
+c = alpha * dt / dx**2
+print(f"c (diffusion number) = {c:.4f}  (BTCS is stable for all c > 0)")
 
-number_of_space_points = int(round(length / space_step)) + 1  # 51
-number_of_time_points = int(round(final_time / time_step)) + 1  # 1201
-ratio = diffusion * time_step / space_step**2
+# Initial condition: linear from u_L to u_R
+x = np.linspace(0, L, Nx)
+u = u_L + (u_R - u_L) * x / L
 
-implicit_matrix = np.zeros((number_of_space_points, number_of_space_points))
-implicit_matrix[0, 0] = 1.0
-implicit_matrix[-1, -1] = 1.0
-for n in range(1, number_of_space_points - 1):
-    implicit_matrix[n, n - 1] = -ratio
-    implicit_matrix[n, n] = 1.0 + 2.0 * ratio
-    implicit_matrix[n, n + 1] = -ratio
+# Build the coefficient matrix A (static - computed once)
+A = np.zeros((Nx, Nx))
+A[0, 0] = 1.0          # left BC row
+A[Nx - 1, Nx - 1] = 1.0  # right BC row
+for i in range(1, Nx - 1):
+    A[i, i - 1] = -c
+    A[i, i]     = 1 + 2 * c
+    A[i, i + 1] = -c
 
-inverse_matrix = np.linalg.inv(implicit_matrix)
+Ainv = np.linalg.inv(A)
 
-solution = np.zeros((number_of_time_points, number_of_space_points))
-solution[0, 0] = left_temperature
-solution[0, -1] = right_temperature
+# Time stepping
+for it in range(Nt - 1):
+    rhs = u.copy()
+    rhs[0] = u_L; rhs[Nx - 1] = u_R  # enforce BCs on RHS
+    u = np.matmul(Ainv, rhs)
 
-for i in range(number_of_time_points - 1):
-    rhs = solution[i].copy()
-    rhs[0] = left_temperature
-    rhs[-1] = right_temperature
-    solution[i + 1] = inverse_matrix @ rhs
+# Report temperature at x=7cm
+idx_7 = int(np.round(7.0 / dx))
+print(f"u at x=7cm after t={tmax}s: {u[idx_7]:.4f} deg C")
 
-target_index = int(round(7.0 / space_step))  # x = 7 cm
-print(f"u(12 s, 7 cm) = {solution[-1, target_index]:.2f} °C")
+plt.plot(x, u)
+plt.xlabel('x (cm)'); plt.ylabel('u (deg C)')
+plt.title(f'BTCS Heat Equation at t={tmax}s')
+plt.show()
 ```
 
-**Profile shapes.** At $t=0$: 100 at the left end, 30 at the right, zero in between. By $t=3$ s, the heat has spread inward; by $t=6, 9$ s the profile becomes increasingly smooth concave; by $t=12$ s it is approaching the steady-state line.
+BTCS is **[[unconditionally stable]]**: the update factor is $1/(1+2c)$, which is always less than 1 for $c > 0$, so errors never grow regardless of $dt$.
 
-**Result.**
-
-$$
-\boxed{u(12\ \text{s},7\ \text{cm})\approx 26^{\circ}\text{C}.}
-$$
-
-The relaxation time $L^{2}/(\alpha\pi^{2})\approx 12.1$ s is comparable to the simulation time, so we are partway to the steady-state value of $51^{\circ}\text{C}$. The dominant transient mode contributes $-260/\pi\cdot\sin(7\pi/10)\cdot e^{-\alpha\pi^{2}\cdot 12/100}\approx -25^{\circ}$, giving $u(12,7)\approx 51-25=26^{\circ}\text{C}$. Implicit scheme matches this analytical estimate to within the discretisation error.
+Note: in practice, instead of computing $A^{-1}$ explicitly, it is more efficient to use `numpy.linalg.solve(A, rhs)` at each step, or a dedicated tridiagonal solver (`scipy.linalg.solve_banded`).
 
 ---
 
-## 9.2. Implicit or Explicit Heat Diffusion with Insulated Left Boundary
+## 9.2. Neumann Boundary Condition: Insulated End
 
 > [!question]
-> Solve the same heat diffusion problem as before, but now with the left boundary **insulated**: $\frac{\partial u(t,x)}{\partial x}\bigg|_{x=0}=0$, keeping the right boundary at $u(t\text{ cm})=30$ degrees Celsius and the same initial condition $u(0\text{ s},x)=0$. Use the same steps $\Delta x=0.2$ cm and $\Delta t=0.01$ s, with **either the explicit or implicit method**. What is the temperature at 12 s and 7 cm from the left?
+> Modify the BTCS implementation to apply a **Neumann boundary condition** $\partial u/\partial x = 0$ at $x = L$ (insulated right end), while keeping $u(0, t) = 100$.
 
-**Setup.** Insulated left boundary means $\partial u/\partial x|_{x=0}=0$, i.e. zero flux. Apply the imaginary-point recipe from lecture 9: $u_{-1}=u_{1}$, so the boundary-row equation becomes $-2u_{0}+2u_{1}=0$, equivalently $u_{0}=u_{1}$ (the boundary value floats and equals the next interior value at every step).
+A **[[Neumann boundary condition]]** specifies the derivative (flux) rather than the value. $\partial u/\partial x = 0$ at $x = L$ means no heat flows out through the right boundary - the right end is thermally insulated.
 
-For the implicit scheme, modify the first row of $\mathbf{A}$ so that the equation at $n=0$ uses the imaginary-point substitution applied to the BTCS spatial stencil. Working through:
-
-$$
-\frac{u_{i+1,0}-u_{i,0}}{\Delta t}=\alpha\frac{u_{i+1,1}-2u_{i+1,0}+u_{i+1,-1}}{\Delta x^{2}}
-$$
-
-with $u_{i+1,-1}=u_{i+1,1}$ (Neumann, flux zero):
+**Imaginary point method:** Introduce a ghost (imaginary) node at $x = L + dx$ with value $u_{N_x}$. The centred difference for the derivative at the boundary gives:
 
 $$
-\frac{u_{i+1,0}-u_{i,0}}{\Delta t}=\alpha\frac{2u_{i+1,1}-2u_{i+1,0}}{\Delta x^{2}}
+\frac{u_{N_x} - u_{N_x - 2}}{2\,dx} = 0 \implies u_{N_x} = u_{N_x - 2}
 $$
 
+Substituting into the standard BTCS equation for the last interior node $i = N_x - 1$:
+
 $$
-(1+2c)u_{i+1,0}-2c\,u_{i+1,1}=u_{i,0}.
+-c\,u_{N_x - 2}^{n+1} + (1 + 2c)\,u_{N_x - 1}^{n+1} - c\,u_{N_x}^{n+1} = u_{N_x - 1}^n
 $$
 
-So the first row of $\mathbf{A}$ becomes $(1+2c,\,-2c,\,0,\,\ldots,\,0)$ and the corresponding RHS entry is $u_{i,0}$ (no longer pinned).
+Using $u_{N_x} = u_{N_x - 2}$:
 
-**Steady state.** With one Dirichlet ($u_{R}=30$) and one Neumann ($\partial u/\partial x=0$), the steady-state solution to $u''=0$ is $u_{\infty}(x)=30$ everywhere (constant - flux is zero at the wall, so heat flows in from the right until the rod equilibrates with the right-end temperature).
+$$
+-2c\,u_{N_x - 2}^{n+1} + (1 + 2c)\,u_{N_x - 1}^{n+1} = u_{N_x - 1}^n
+$$
 
-**Implementation.**
+So the last row of $A$ (for the last interior node) becomes $[\cdots, -2c, 1+2c]$ instead of $[\cdots, -c, 1+2c, -c]$. The matrix size stays the same - no ghost column is needed.
 
-```python runnable
+```python
 import numpy as np
+import matplotlib.pyplot as plt
 
-length = 10.0
-diffusion = 0.835
-space_step = 0.2
-time_step = 0.01
-final_time = 12.0
-right_temperature = 30.0
+L = 10.0; dx = 0.2; Nx = int(np.round(L / dx) + 1)
+tmax = 12.0; dt = 0.01; Nt = int(np.round(tmax / dt) + 1)
+u_L = 100.0; alpha = 0.835
+c = alpha * dt / dx**2
 
-number_of_space_points = int(round(length / space_step)) + 1  # 51
-number_of_time_points = int(round(final_time / time_step)) + 1  # 1201
-ratio = diffusion * time_step / space_step**2
+x = np.linspace(0, L, Nx)
+u = np.zeros(Nx); u[0] = u_L  # initial: only left BC set
 
-implicit_matrix = np.zeros((number_of_space_points, number_of_space_points))
-# Neumann row at the left boundary
-implicit_matrix[0, 0] = 1.0 + 2.0 * ratio
-implicit_matrix[0, 1] = -2.0 * ratio
-# Dirichlet row at the right boundary
-implicit_matrix[-1, -1] = 1.0
-# Interior rows
-for n in range(1, number_of_space_points - 1):
-    implicit_matrix[n, n - 1] = -ratio
-    implicit_matrix[n, n] = 1.0 + 2.0 * ratio
-    implicit_matrix[n, n + 1] = -ratio
+# Build A with Neumann BC at right end
+A = np.zeros((Nx, Nx))
+A[0, 0] = 1.0  # left Dirichlet BC row
+# Interior nodes
+for i in range(1, Nx - 1):
+    A[i, i - 1] = -c
+    A[i, i]     = 1 + 2 * c
+    A[i, i + 1] = -c
+# Last node: Neumann BC (imaginary point gives -2c on u[Nx-2])
+A[Nx - 1, Nx - 2] = -2 * c
+A[Nx - 1, Nx - 1] = 1 + 2 * c
 
-inverse_matrix = np.linalg.inv(implicit_matrix)
+Ainv = np.linalg.inv(A)
 
-solution = np.zeros((number_of_time_points, number_of_space_points))
-solution[0, -1] = right_temperature
+for it in range(Nt - 1):
+    rhs = u.copy()
+    rhs[0] = u_L  # enforce left Dirichlet BC
+    u = np.matmul(Ainv, rhs)
 
-for i in range(number_of_time_points - 1):
-    rhs = solution[i].copy()
-    rhs[-1] = right_temperature  # Dirichlet at right pinned every step
-    solution[i + 1] = inverse_matrix @ rhs
+plt.plot(x, u)
+plt.xlabel('x (cm)'); plt.ylabel('u (deg C)')
+plt.title('BTCS with Neumann BC at x=L (insulated right end)')
+plt.show()
 
-target_index = int(round(7.0 / space_step))
-print(f"u(12 s, 7 cm) = {solution[-1, target_index]:.2f} °C")
+print(f"u at x=L: {u[-1]:.4f} (should equal u at x=L-dx={u[-2]:.4f} in steady state)")
 ```
 
-**Result.**
-
-$$
-\boxed{u(12\ \text{s},7\ \text{cm})\approx 15^{\circ}\text{C}.}
-$$
-
-**Why so low.** The Neumann + Dirichlet eigenfunctions are $\cos((2n-1)\pi x/(2L))$ with eigenvalues $\alpha[(2n-1)\pi/(2L)]^{2}$. The lowest mode decays as $e^{-\alpha\pi^{2}t/(4L^{2})}=e^{-0.247}\approx 0.78$ at $t=12$ s - much slower than the two-sided Dirichlet case (relaxation time is $4\times$ longer), since the insulated boundary doesn't drain heat. Plugging into the Fourier expansion at $x=7$ gives approximately $30+(-13.6)+(-1.4)+\cdots\approx 15^{\circ}\text{C}$, matching the simulation.
-
-> [!note]
-> The system is only $\sim 22\%$ of the way to the steady state $30^{\circ}\text{C}$ at $t=12$ s - much further from equilibrium than the two-sided case in 9.1, despite using the same $\alpha$ and total time. Insulation slows everything down.
+In steady state, the solution will approach $u = u_L = 100$ everywhere (no heat escapes through the right end, so the rod equilibrates to the left boundary temperature).

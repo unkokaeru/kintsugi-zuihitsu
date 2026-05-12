@@ -1,24 +1,13 @@
 # Absolute Error
 
-The magnitude of the difference between an approximation $v_{\text{approx}}$ and the true value $v$:
+**Absolute error** is the magnitude of the difference between an approximate value and the exact value.
 
 $$
-\boxed{\epsilon=|v-v_{\text{approx}}|.}
+E_{\text{abs}} = |y_{\text{approx}} - y_{\text{exact}}|
 $$
 
-Always non-negative, with the same units as $v$. Useful when $v$ is bounded away from zero or when an absolute tolerance matters (e.g. position errors in a metric).
+Absolute error gives a straightforward measure of how far off an approximation is, in the same units as the quantity being measured. It does not account for the scale of the quantity itself - see [[Relative error]] for a scale-independent measure.
 
-## Versus [[Relative error]]
+Absolute error appears naturally in the definition of [[Local truncation error]] and [[Global truncation error]], and in the convergence analysis of numerical ODE methods.
 
-| | Absolute | Relative |
-|---|---|---|
-| Formula | $\|v-v_{\text{approx}}\|$ | $\|v-v_{\text{approx}}\|/\|v\|$ |
-| Units | Same as $v$ | Dimensionless |
-| Use when... | True value is order-1 or near zero | True value spans many orders of magnitude |
-| Breaks when... | $v$ varies hugely in size across runs | $v\to 0$ |
-
-## Example
-
-Approximating $\pi=3.14159265\ldots$ by $\pi_{\text{approx}}=3.14$: $\epsilon=0.00159\ldots$
-
-A general-purpose error-handling rule of thumb in numerics combines both: report `max(absolute_error, relative_error * |v|)` as the effective error, ensuring sensible behaviour as $v\to 0$.
+[[Relative error]] | [[Local truncation error]] | [[Global truncation error]] | [[Order of a method]]

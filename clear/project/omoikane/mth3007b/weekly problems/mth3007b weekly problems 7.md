@@ -1,138 +1,130 @@
-# MTH3007B Weekly Problems 7
+# MTH3007b Weekly Problems 7
 
-> **Vibes**: Three Monte Carlo integration problems that exercise the same algorithm at different dimensions. Sample uniformly, average $f$, multiply by the (hyper)volume - same recipe whether $D=1$ or $D=4$. The error tracks $L\sqrt{\text{var}/N}$ and goes as $1/\sqrt{N}$.
+> **Original Documents**: [[mth3007b weekly problem sheet 7.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 7 solutions.pdf|Provided Solutions]]
+>
+> **Vibes**: ...
 >
 > **Used Techniques**:
->  - [[Monte Carlo integration]]: $F\approx V\,\langle f\rangle_{N}\pm V\sqrt{(\langle f^{2}\rangle_{N}-\langle f\rangle_{N}^{2})/N}$.
->  - Sample uniformly with `np.random.uniform(low, high, size)` (or `default_rng().uniform`) for arbitrary box domains.
->  - For $D$-dimensional integrals, sample $D$-component vectors uniformly inside the hyper-rectangle and average $f$ at those points.
-
-***
-
-## 7.1. MC Estimate of a One-Dimensional Integral
-
-> [!question]
-> Approximate the following expression involving an integral using your own routines for Monte Carlo integration:
->
-> $\displaystyle 5 \int_{0}^{\pi/2} \cos(x)\,\mathrm{d}x.$
->
-> Also determine an error estimate for this quantity.
->
-> For this part, use $100000$ random numbers in your Monte Carlo routine. What is your numerical estimate for the expression?
-
-**Setup.** The factor $5$ can be absorbed into the integrand: $f(x)=5\cos(x)$. The MC estimator is
-
-$$
-F_{N}=L\,\langle f\rangle_{N}=\frac{\pi}{2}\cdot \frac{1}{N}\sum_{n=1}^{N}5\cos(X_{n}),\qquad X_{n}\sim\mathrm{Uniform}(0,\pi/2).
-$$
-
-```python runnable
-import numpy as np
-
-def mc_one_dimensional(rng_seed):
-    rng = np.random.default_rng(rng_seed)
-    interval_length = np.pi / 2
-    samples = rng.uniform(0.0, interval_length, 100_000)
-    function_values = 5.0 * np.cos(samples)
-
-    mean_value = function_values.mean()
-    variance = (function_values**2).mean() - mean_value**2
-
-    estimate = interval_length * mean_value
-    error = interval_length * np.sqrt(variance / samples.size)
-    return estimate, error
-
-est, err = mc_one_dimensional(rng_seed=0)
-print(f"MC estimate: {est:.4f} ± {err:.4f}")
-print(f"Analytical:  {5.0:.4f}")
-```
-
-**Analytical answer.** $5\int_{0}^{\pi/2}\cos(x)\,dx=5[\sin(x)]_{0}^{\pi/2}=5$.
-
-**MC result.** With $N=10^{5}$ and seed $0$:
-
-$$
-\boxed{F_{N}\approx 4.997\,\pm\,0.008.}
-$$
-
-(The estimate fluctuates around $5$ by roughly the $\pm 0.008$ error bar - see 7.2 for the analytical-error derivation.)
+>   - ...
 
 ---
 
-## 7.2. Standard Deviation Error Estimate
+## 7.1. Monte Carlo Integration
 
 > [!question]
-> Using the same Monte Carlo computation as in [[#7.1. MC Estimate of a One-Dimensional Integral]], what is your estimate of the error (one standard deviation) in the expression
->
-> $\displaystyle 5 \int_{0}^{\pi/2} \cos(x)\,\mathrm{d}x$
->
-> when you use $100000$ random numbers in your Monte Carlo integration?
+> Use **Monte Carlo integration** to estimate $\displaystyle\int_0^1 x^2\,dx$ with $N = 1000$ random samples. Report the estimate and its error.
 
-**Theoretical answer.** With $f(x)=5\cos(x)$ on $[0,\pi/2]$ under uniform measure,
+**[[Monte Carlo integration]]** estimates $\displaystyle\int_a^b f(x)\,dx \approx (b - a)\,\langle f \rangle$ where $\langle f \rangle$ is the sample mean of $f$ evaluated at $N$ uniformly random points in $[a, b]$.
+
+The estimate and its standard error are:
 
 $$
-\langle f\rangle=\frac{2}{\pi}\int_{0}^{\pi/2}5\cos(x)\,dx=\frac{10}{\pi},\qquad \langle f^{2}\rangle=\frac{2}{\pi}\int_{0}^{\pi/2}25\cos^{2}(x)\,dx=\frac{25}{2}.
+\hat{I} = (b - a)\,\overline{f}, \quad \sigma_{\hat{I}} = (b - a)\sqrt{\frac{\overline{f^2} - \overline{f}^2}{N}}
 $$
 
-Variance: $\langle f^{2}\rangle-\langle f\rangle^{2}=12.5-100/\pi^{2}=2.366$.
+where $\overline{f} = \dfrac{1}{N}\sum_{j=1}^N f(x_j)$ and $\overline{f^2} = \dfrac{1}{N}\sum_{j=1}^N f(x_j)^2$.
 
-One-sigma MC error:
+The exact value is $\displaystyle\int_0^1 x^2\,dx = \left[\frac{x^3}{3}\right]_0^1 = \frac{1}{3} \approx 0.3333$.
 
-$$
-\sigma_{F}=L\sqrt{\frac{\text{var}(f)}{N}}=\frac{\pi}{2}\sqrt{\frac{2.366}{10^{5}}}=1.5708\cdot 0.00487\approx 0.0076.
-$$
+```python
+import numpy as np
 
-$$
-\boxed{\sigma_{F}\approx 0.008\quad\text{(or, equivalently, the integral is }5.00\pm 0.01\text{ to two significant figures).}}
-$$
+N = 1000
+np.random.seed(0)
+x = np.random.uniform(0, 1, N)
+f = x**2
 
-The output of the code in 7.1 reports the same magnitude - the empirical sample-variance estimator agrees with the analytical variance to within a few percent at $N=10^{5}$.
+F = (1 - 0) * np.mean(f)
+error = (1 - 0) * np.sqrt((np.mean(f**2) - np.mean(f)**2) / N)
+print(f"F = {F:.4f}, error = {error:.4f}, exact = 0.3333")
+```
+
+Expected output: $F \approx 0.3333$ with error $\approx 0.0083$ (varies with seed). The error is of order $1/\sqrt{N} \approx 0.032$; the prefactor depends on the variance of $f$.
 
 ---
 
-## 7.3. MC Approximation of a Four-Dimensional Integral
+## 7.2. Error Scaling for Monte Carlo: $O(N^{-1/2})$
 
 > [!question]
-> Approximate the following four-dimensional integral using your own routines for Monte Carlo integration:
->
-> $\displaystyle \int_{0}^{3} \int_{0}^{1} \int_{0}^{1} \int_{0}^{1} \frac{\mathrm{d}A\,\mathrm{d}B\,\mathrm{d}C\,\mathrm{d}D}{1 + A + B + 2C^{2} + D^{3}}.$
->
-> In doing so, sample the function
->
-> $\displaystyle \frac{1}{1 + A + B + 2C^{2} + D^{3}}$
->
-> exactly $100000$ times using Monte Carlo integration. What is your numerical estimate for the value of the integral?
+> Verify numerically that the Monte Carlo error scales as $O(N^{-1/2})$ by running the estimator for several values of $N$.
 
-**Setup.** Domain hypervolume $V=3\cdot 1\cdot 1\cdot 1=3$. Sample uniform vectors $(A,B,C,D)$ with bounds $(3,1,1,1)$.
+The **[[Monte Carlo error scaling]]** is:
 
-```python runnable
+$$
+\sigma_{\hat{I}} \propto N^{-1/2}
+$$
+
+This is a consequence of the central limit theorem. Doubling $N$ reduces the error by $\sqrt{2} \approx 1.41$, regardless of the dimension of the integral.
+
+```python
 import numpy as np
 
-def mc_four_dimensional(rng_seed):
-    rng = np.random.default_rng(rng_seed)
-    lower_bounds = np.array([0.0, 0.0, 0.0, 0.0])
-    upper_bounds = np.array([3.0, 1.0, 1.0, 1.0])
+np.random.seed(42)
+exact = 1.0 / 3.0
 
-    samples = rng.uniform(lower_bounds, upper_bounds, size=(100_000, 4))
-    A, B, C, D = samples.T
-
-    function_values = 1.0 / (1.0 + A + B + 2.0 * C**2 + D**3)
-    mean_value = function_values.mean()
-    variance = (function_values**2).mean() - mean_value**2
-
-    hyper_volume = float(np.prod(upper_bounds - lower_bounds))
-    estimate = hyper_volume * mean_value
-    error = hyper_volume * np.sqrt(variance / samples.shape[0])
-    return estimate, error
-
-est, err = mc_four_dimensional(rng_seed=0)
-print(f"MC estimate: {est:.4f} ± {err:.4f}")
+print(f"{'N':>8}  {'Estimate':>10}  {'Error (SE)':>12}  {'|estimate - exact|':>20}")
+for N in [100, 1000, 10000, 100000]:
+    x = np.random.uniform(0, 1, N)
+    f = x**2
+    F = np.mean(f)
+    se = np.sqrt((np.mean(f**2) - np.mean(f)**2) / N)
+    print(f"{N:>8}  {F:>10.5f}  {se:>12.5f}  {abs(F - exact):>20.5f}")
 ```
 
-**Result.** With $N=10^{5}$ and seed $0$:
+The standard error column should decrease by a factor of $\approx \sqrt{10} \approx 3.16$ each time $N$ increases by a factor of 10, confirming $O(N^{-1/2})$ convergence.
+
+---
+
+## 7.3. Wiener Process Simulation
+
+> [!question]
+> Implement a **Wiener process** simulation and plot 100 independent realisations.
+
+A **[[Wiener process]]** (standard Brownian motion) $W(t)$ satisfies:
+- $W(0) = 0$
+- Increments $W(t + dt) - W(t)$ are independent and normally distributed with mean 0 and variance $dt$.
+
+The discrete update rule is:
 
 $$
-\boxed{F\approx 0.842\,\pm\,0.003.}
+W_{n+1} = W_n + \sqrt{dt}\,\xi_n, \quad \xi_n \sim \mathcal{N}(0, 1)
 $$
 
-**Sanity check.** The integrand ranges from $1/(1+3+1+2+1)=0.125$ (worst case at $A=3,B=C=D=1$) up to $1$ (at the origin). Averaging across the box gives roughly $0.28$, so the integral is approximately $V\cdot 0.28\approx 0.84$ - consistent with the MC value. The relative error is $\sim 0.4\%$, demonstrating that MC remains useful in moderate dimensions despite its $1/\sqrt{N}$ rate.
+The **[[Euler-Maruyama method]]** for a Wiener process is exact (not an approximation) because the process itself has independent increments.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+dt = 0.01; tmax = 10.0; Nsteps = int(round(tmax / dt))
+Nwalkers = 100
+np.random.seed(0)
+
+W = np.zeros((Nwalkers, Nsteps + 1))
+t = np.linspace(0, tmax, Nsteps + 1)
+
+for walker in range(Nwalkers):
+    for i in range(Nsteps):
+        W[walker, i + 1] = W[walker, i] + np.sqrt(dt) * np.random.normal()
+
+# Vectorised equivalent (more efficient):
+# increments = np.sqrt(dt) * np.random.normal(size=(Nwalkers, Nsteps))
+# W = np.concatenate([np.zeros((Nwalkers, 1)), np.cumsum(increments, axis=1)], axis=1)
+
+plt.figure(figsize=(10, 5))
+for walker in range(Nwalkers):
+    plt.plot(t, W[walker, :], alpha=0.3, linewidth=0.5)
+plt.xlabel('t'); plt.ylabel('W(t)')
+plt.title('100 Wiener process realisations')
+plt.tight_layout(); plt.show()
+
+# Verify variance grows linearly in t
+variance = np.var(W, axis=0)
+print(f"Var[W(t=5)] = {variance[500]:.3f}, expected 5.000")
+print(f"Var[W(t=10)] = {variance[-1]:.3f}, expected 10.000")
+```
+
+Key statistical properties visible from the plot:
+- All paths start at $W(0) = 0$.
+- The spread (standard deviation) of the ensemble grows as $\sqrt{t}$ (variance grows linearly).
+- Individual paths are continuous but nowhere differentiable.

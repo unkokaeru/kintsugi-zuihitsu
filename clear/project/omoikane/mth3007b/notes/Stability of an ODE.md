@@ -1,30 +1,17 @@
 # Stability of an ODE
 
-An ODE is stable if, given any $\epsilon > 0$, there exists a $\delta(\epsilon) > 0$ such that for two solutions $y_A(t)$ and $y_B(t)$ with $|y_A(t_0) - y_B(t_0)| \leq \delta$:
+An ODE is **stable** if small perturbations in the initial condition remain bounded for all future time.
+
+Formally, the ODE $\dot{y} = g(t, y)$ is stable if: for any $\varepsilon > 0$ there exists $\delta > 0$ such that
 
 $$
-|y_A(t) - y_B(t)| \leq \epsilon \quad \text{for all } t > t_0
+|y_A(t_0) - y_B(t_0)| < \delta \implies |y_A(t) - y_B(t)| < \varepsilon \quad \text{for all } t > t_0
 $$
 
-So a stable ODE is one where small differences in initial conditions are not amplified.
+where $y_A$ and $y_B$ are two solutions starting from nearby initial conditions.
 
-> [!example] Unstable ODE: $\dot{y} = y$
->
-> The solution is $y(t) = y_0 e^t$. For two solutions with slightly different initial conditions:
->
-> $$
-> |y_A(t) - y_B(t)| = |y_{0,A} - y_{0,B}|\,e^t \to \infty
-> $$
->
-> There is no finite upper bound, so no valid $\delta$ can be found - this ODE is **unstable**.
+In other words, two solutions that start close together do not diverge from each other. This is a property of the ODE itself, independent of the numerical method used to solve it.
 
-> [!example] Stable ODE: $\dot{y} = -y$
->
-> The solution is $y(t) = y_0 e^{-t}$. For two solutions with slightly different initial conditions:
->
-> $$
-> |y_A(t) - y_B(t)| = |y_{0,A} - y_{0,B}|\,e^{-t} \to 0
-> $$
->
-> This goes to zero as $t \to \infty$, so we can simply take $\delta = \epsilon$. The initial
-> difference is attenuated (damped), and hence this ODE is **stable**.
+The stability of the ODE is a prerequisite for the [[Lax Equivalence Theorem|Lax equivalence theorem]]: we need the problem to be well-posed before asking whether a numerical method converges. The stability of the numerical method itself is a separate question - see [[Stability of a method]].
+
+[[Stability of a method]] | [[Convergence]] | [[Lax Equivalence Theorem]]

@@ -1,142 +1,192 @@
 # MTH3007b Lecture 1
 
 > [!quote] Me, in the lecture
-> zzzzz...
+> zzzzz…
 
-Various techniques can be used to find numerical solutions to analytical problems. However, there will always be slight inaccuracy; so, let's first discover how to measure that...
+This session opens the module by establishing the core framework for numerically solving ordinary differential equations. We derive the **[[explicit Euler method]]** from first principles via finite differences, examine its errors, then introduce the **[[implicit Euler method]]** as a stability-motivated alternative. There is no previous lecture to connect to - this is the starting point.
 
-## Approximations and Errors
+## The Finite Difference Approach
 
-There are three main ways to measure error:
+The starting point for all ODE solvers in this module is the **[[finite difference method]]**. Rather than working with the derivative $\dot{y} = g(t, y)$ as a limit, we approximate it using a discrete grid of time points.
 
-1. **[[Order of magnitude]]**: defined as a non-negative function $g(h)$ for a function $f(h)$ as $h\to 0$, where $\lim_{ h \to 0 } \frac{f(h)}{g(h)}=\text{finite constant}$; also written in "big O" notation as $f(h)=O(g(h)):h\to0$.
-2. **[[Absolute error]]**: defined as $\epsilon=|v-v_{\text{approx}}|$ for some approximation $v_{\text{approx}}$ of a quantity $v$.
-3. **[[Relative error]]**: defined for nonzero values of $v$, $\eta= \frac{|v-v_{\text{approx}}|}{|v|}=\frac{\epsilon}{|v|}$.
-
-> [!example] Order of Magnitude (Taylor series of $\cos(x)$ around $x=0$)
-> We define the Taylor series of cosine as $\cos(x)=1-\frac{1}{2}x^2+\frac{1}{24}x^4+\dots+\frac{(-1)^n}{(2n)!}x^{2n}+\dots$.
->
-> If we only choose to use the first to terms of the expansion, such that $\cos(x)\approx1-\frac{1}{2}x^2$, then we can determine that there is an inaccuracy of exactly the next terms: $\frac{1}{24}x^4+\dots$. In the limit of $x\to 0$, we can write this inaccuracy as $O(x^4)$, and hence determine the constant (in this case $\frac{1}{24}$ by using the formula definition), or simply write...
->
-> $\cos(x)=1- \frac{1}{2}x^2+O(x^4)$, or even $\cos(x)=1- \frac{1}{2}x^2+O(x^3)$ by determining that it also satisfies the equation with a constant of $0$, in this case.
-
-## Differential Equations (RECAP)
-
-Now that we can measure the accuracy of our numerical solutions, we might want to find some actual solutions. First, to recall some basic information on differential equations:
-
-1. An **Ordinary Differential Equation (ODE)** is an equation involving the derivative(s) of an unknown function with respect to **one** independent variable.
-2. A **Partial Differential Equation (ODE)** is an equation involving the derivative(s) of an unknown function with respect to **multiple** independent variables.
-3. The **Order of a Differential Equation** is the highest occurring derivative in the equation; normally first or second order.
-
-There are various real-world examples of each of these, such as the Navier-Stokes equation, Euler-Lagrange equations, chemistry rate equations, biology predator-prey equations, the Solow-Swan ODE in economics, or the Black-Scholes PDE in finance.
-
-Often these equations will have families of solutions with parameter(s), not just a unique solution. To find a single solution, we'll impose **side conditions**: an initial conditions, such as the value of a function at its origin, or boundary conditions, such as giving two values of the function at arbitrary, distinct points.
-
-## Finite Difference Method
-
-We can then estimate ordinary derivatives by using their analytical formula, and approximating it with **[[Finite differences]]**:
+Partition time into steps of size $dt$, so $t_n = t_0 + n \cdot dt$. The forward difference approximation to the first derivative at $t_n$ is
 
 $$
-\frac{df(x)}{dx}=\lim_{ h \to 0 } \frac{f(x+h)-f(x)}{h}\approx \frac{f(x+\Delta x)-f(x)}{\Delta x}
+\frac{dy}{dt}\bigg|_{t_n} \approx \frac{y_{n+1} - y_n}{dt}
 $$
 
-Essentially, this is the difference between a tangent (the perfect analytical solution, touching the function at only one point) and a secant (the approximated numerical solution, touching the function at two points - preferably very close together, if accurate).
+This is the foundation of the explicit Euler method.
 
 ## Explicit Euler Method
 
-Using this **Finite Difference Method**, we can solve Ordinary Differential Equations (ODEs). For example with the Euler method, where we first replace the derivatives with finite differences.
+### Derivation
 
-For an **initial value problem**, the ODE can be written as:
+Starting from $\dot{y} = g(t, y)$ and replacing the left-hand side with the forward difference:
 
 $$
-\frac{f(x+\Delta x)-f(x)}{\Delta x}\approx g(x,f(x))\implies\boxed{f(x+\Delta x)_{\text{approx}}\approx f(x)+\Delta x \cdot g(x,f(x))}
+\frac{y_{n+1} - y_n}{dt} = g(t_n, y_n)
 $$
 
-This is called the **[[Explicit Euler method]]**, or the **forward Euler method**, and we can calculate the total number of integration steps as $N_{\text{int}}=\frac{|x_{\text{end}}-x_{\text{start}}|}{\Delta x}$ and hence $x_{\text{end}}=xN_{\text{int}}=x_{0}+N_{\text{int}}\Delta x$. A smaller $\Delta x$ we hence naturally improve the accuracy, but at a computational cost.
+Rearranging gives the **[[explicit Euler method]]** (also called the forward Euler method):
 
-> [!note] Explore the rest of the notes separate to the lecture notes, or hope he recaps - the lecture notes aren't very well-written from this point.
+> [!important]
+> The explicit Euler update rule:
+> $y_{n+1} = y_n + dt \cdot g(t_n, y_n)$
 
-However, this also introduces new types of error that we can quantise. For instance, the **[[Local truncation error]]**: the error after **one integration step** due to truncating a function, for instance a Taylor series. Similarly, the **[[Global truncation error]]** is the error due to integrating over the whole interval.
+The method is called "explicit" because $y_{n+1}$ is expressed directly in terms of known quantities at step $n$ - no equation needs to be solved.
 
-Both of these errors can be calculated directly using the "Big O" notation from before, and can then give us the **[[Order of a method]]**: how the global truncation error varies with integration step. For instance, the Euler method is a **first order algorithm**.
+### Algorithm
 
-If we wanted to program this, then we could use the following Python code:
+The practical implementation stores the full solution array:
 
 ```python runnable
-def explicit_euler_method(
-    derivative_function: callable,
-    initial_value: float,
-    time_start: float,
-    time_end: float,
-    time_step: float,
-) -> tuple[list[float], list[float]]:
-    """Solve an ODE using the explicit Euler method.
-
-    The explicit Euler method uses the approximation:
-    y_{n+1} = y_n + h * f(t_n, y_n)
-
-    Args:
-        derivative_function: Function f(t, y) that computes dy/dt.
-        initial_value: Initial condition y(t_0).
-        time_start: Starting time t_0.
-        time_end: Ending time t_max.
-        time_step: Time step size h (Delta t).
-
-    Returns:
-        Tuple of (time_values, solution_values) lists.
-    """
-    number_of_steps = int((time_end - time_start) / time_step)
-    time_values = [
-        time_start + i * (time_end - time_start) / number_of_steps
-        for i in range(number_of_steps + 1)
-    ]
-    solution_values = [0.0] * (number_of_steps + 1)
-    solution_values[0] = initial_value
-
-    for step_index in range(number_of_steps):
-        current_time = time_values[step_index]
-        current_value = solution_values[step_index]
-        derivative = derivative_function(current_time, current_value)
-        solution_values[step_index + 1] = current_value + time_step * derivative
-
-    return time_values, solution_values
-
-
-# dy/dt = -2y, y(0) = 1  →  exact solution: y = e^(-2t)
-time, y = explicit_euler_method(
-    derivative_function=lambda t, y: -2 * y,
-    initial_value=1.0,
-    time_start=0.0,
-    time_end=1.0,
-    time_step=0.1,
-)
-
-for t_i, y_i in zip(time, y):
-    print(f"t={t_i:f}  y≈{y_i:f}")
+# Basic explicit Euler (storing whole function)
+y0=1.0
+dt=0.01
+t0=0.0
+tmax=10.0
+Nint=int(round(tmax/dt))
+y=np.zeros(Nint+1)
+t=np.zeros(Nint+1)
+y[0]=y0
+t[0]=t0
+for n in range(Nint):
+    t[n+1]=t[n]+dt
+    y[n+1]=y[n]*(1+dt)
 ```
 
-After using this algorithm however, you may observe that it becomes **unstable** for $a \Delta t>2$ and shows **oscillatory behaviour** for $a \Delta t>1$; it isn't great for large timesteps!
+> [!note]
+> `int(round(tmax/dt))` is used rather than a bare integer division because floating-point division can produce results like $9.999\ldots$ which would truncate incorrectly.
+
+A more general version using a right-hand-side function $g(t, y)$:
+
+```python runnable
+# Explicit Euler for dy/dt = bt - ay
+import numpy as np
+import matplotlib.pyplot as plt
+t0=0.0
+tmax=1.0
+dt=0.01
+y0=1.0
+Nint=int(round((tmax-t0)/dt))
+t=np.zeros(Nint+1)
+y=np.zeros(Nint+1)
+t[0]=t0
+y[0]=y0
+def g(t, y):
+    b=1.0
+    a=22.0
+    return b*t-a*y
+for n in range(Nint):
+    t[n+1]=t[n]+dt
+    y[n+1]=y[n]+ dt * g(t[n], y[n])
+print("y(t=tmax)=",y[Nint])
+```
+
+## Errors in Explicit Euler
+
+### Local Truncation Error
+
+The **[[local truncation error]]** is the error introduced in a single step, assuming the previous value $y_n$ is exact. Expanding $y(t_{n+1})$ as a Taylor series:
+
+$$
+y(t_{n+1}) = y(t_n) + dt \cdot y'(t_n) + \frac{dt^2}{2} y''(t_n) + \cdots
+$$
+
+The explicit Euler step uses only the first two terms. The error per step is therefore
+
+$$
+\text{LTE} = \frac{dt^2}{2} y''(t_n) + O(dt^3) = O(dt^2)
+$$
+
+### Global Truncation Error
+
+The **[[global truncation error]]** (GTE) accumulates over all steps from $t_0$ to $t_{\text{max}}$. The number of steps is $N \sim t_{\text{max}}/dt$, so
+
+$$
+\text{GTE} \sim N \cdot \text{LTE} \sim \frac{t_{\text{max}}}{dt} \cdot O(dt^2) = O(dt)
+$$
+
+> [!important]
+> Explicit Euler is a **first-order method**: global error $\sim O(dt)$. Halving $dt$ halves the error.
+
+### Example: $dy/dt = y$, $y(0) = 1$
+
+The exact solution is $y(t) = e^t$. The explicit Euler step gives $y_{n+1} = y_n(1 + dt)$, so after $N$ steps:
+
+$$
+y_N = y_0 (1 + dt)^N
+$$
+
+As $dt \to 0$ with $N \cdot dt = t$ fixed, $(1 + dt)^N \to e^t$, confirming convergence.
+
+### Stability Example: $dy/dt = -ay$, $a > 0$
+
+The exact solution decays: $y(t) = y_0 e^{-at}$. The Euler step gives
+
+$$
+y_{n+1} = y_n(1 - a \cdot dt)
+$$
+
+The factor $(1 - a \cdot dt)$ is the **[[amplification factor]]**. For stability we need $|1 - a \cdot dt| \leq 1$, which requires $a \cdot dt \leq 2$.
+
+> [!warning]
+> Explicit Euler applied to $\dot{y} = -ay$ is **conditionally stable**. If $a \cdot dt > 2$ the amplification factor exceeds 1 in magnitude and the solution grows without bound - even though the true solution decays.
 
 ## Implicit Euler Method
 
-Aside from this explicit method, we may also have an implicit relation where a dependent variable is not isolated in the equation; sometimes we can convert between the two, but this is not always possible.
+### Motivation
 
-In these cases, we can write the definition of a derivative slightly differently, replacing $h$ with $-h$. This creates a completely different equation, but one that is evaluated identically under the limit:
-
-$$
-\frac{df(x)}{dx}=\lim_{ h \to 0 } \frac{f(x)-f(x-h)}{h}\approx \frac{f(x)-f(x-\Delta x)}{\Delta x}
-$$
-
-This is again a **finite difference**, but a **backward difference approximation (BDA)** instead of a **forward difference approximation (FDA)**.
-
-For implicit relations, this can give rise to the **[[Implicit Euler method]]**, or aptly named **backward Euler method**, similar to before (just shifting time forwards slightly to neaten the formula)...
+The instability of explicit Euler for stiff problems motivates using a **backward difference** instead of a forward difference. Approximating the derivative at $t_{n+1}$:
 
 $$
-\frac{y(t)-y(t-\Delta t)}{\Delta t}\approx g(t,y(t))\implies\boxed{y(t+\Delta t)_{\text{approx}}\approx y(t)+\Delta t \cdot g(t+\Delta t,y(t+\Delta t))}
+\frac{y_{n+1} - y_n}{dt} = g(t_{n+1}, y_{n+1})
 $$
+
+This is the **[[implicit Euler method]]** (backward Euler), since $y_{n+1}$ appears on both sides and must be solved for.
+
+### Example: $dy/dt = -ay$
+
+Substituting $g(t, y) = -ay$:
+
+$$
+\frac{y_{n+1} - y_n}{dt} = -a \cdot y_{n+1}
+$$
+
+$$
+y_{n+1}(1 + a \cdot dt) = y_n \implies \boxed{y_{n+1} = \frac{y_n}{1 + a \cdot dt}}
+$$
+
+The amplification factor is $1/(1 + a \cdot dt)$, which is always less than 1 for $a > 0$ and any $dt > 0$. Backward Euler is therefore unconditionally stable for this equation.
+
+### Example: $dy/dt = Bt - ay$ (implicit update)
+
+When $g(t, y) = bt - ay$, the implicit Euler step at step $n$ is:
+
+```python runnable
+y[n+1]=(y[n]+dt*b*t[n+1])/(1.0+a*dt)
+```
+
+Note that $t_{n+1}$ is known before solving - only $y_{n+1}$ is the unknown.
+
+## Round-off Errors
+
+**[[Round-off error]]** arises from finite-precision floating-point arithmetic, distinct from the truncation error above.
+
+> [!warning]
+> Python integers are exact (arbitrary precision), but Python floats follow IEEE 754 double precision: roughly 15-16 significant decimal digits. Accumulating many small floating-point operations introduces round-off that can dominate if $dt$ is taken too small.
+
+This means there is a practical lower bound on $dt$: below some threshold, reducing $dt$ no longer improves accuracy because round-off error grows faster than truncation error shrinks.
 
 ---
 
-## Pre-Lecture Notes from [[mth3007b lecture 1 notes.pdf]]
+## Pre-Lecture Notes from [[mth3007b lecture notes 1.pdf|University Notes]]
 
-- *Missing due to how late the notes were released - no rough notes taken during class either, due to incredibly slow pace*.
+- **Finite difference method**: replace $dy/dt$ with $(y_{n+1} - y_n)/dt$ (forward difference) to get the explicit Euler update $y_{n+1} = y_n + dt \cdot g(t_n, y_n)$
+- **Local truncation error** is $O(dt^2)$ (one step); **global truncation error** is $O(dt)$ (first-order method)
+- Example $\dot{y} = y$, $y(0)=1$: Euler gives $(1+dt)^N \to e^t$ - qualitatively correct but first-order convergence
+- Stability of explicit Euler on $\dot{y} = -ay$: amplification factor $|1 - a\,dt|$; unstable when $a \cdot dt > 2$
+- **Implicit (backward) Euler**: use backward difference, evaluate $g$ at $t_{n+1}$; requires solving for $y_{n+1}$ each step
+- Backward Euler on $\dot{y} = -ay$: $y_{n+1} = y_n/(1+a\,dt)$, amplification factor always $< 1$ - unconditionally stable
+- **Round-off error**: floats have ~15 significant digits; taking $dt$ too small causes round-off to dominate
+- Next session: higher-order Runge-Kutta methods that achieve $O(dt^2)$ global error

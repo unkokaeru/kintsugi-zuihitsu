@@ -1,27 +1,17 @@
 # Order of a Method
 
-The exponent in the [[Global truncation error]]: a method has **order $p$** if $\text{GTE}=O(\Delta t^{p})$. Halving $\Delta t$ then reduces the error by a factor of $2^{p}$.
+The **order of a method** is determined by how the [[Global truncation error]] varies with step size $dt$. A method is order $p$ if the global truncation error is $O(dt^p)$.
 
-## Practical Interpretation
-
-| Order | Halving $\Delta t$ reduces error by | Examples |
+| Method | Order | Global truncation error |
 |---|---|---|
-| 1 | $2\times$ | [[Explicit Euler method]], [[Implicit Euler method]] |
-| 2 | $4\times$ | [[Midpoint method]], [[Ralston method]], [[Implicit Trapezoid Method]] |
-| 3 | $8\times$ | Generic third-order Runge-Kutta |
-| 4 | $16\times$ | [[Fourth order Runge-Kutta]] |
+| [[Explicit Euler method]] | 1 | $O(dt)$ |
+| [[Midpoint method]] | 2 | $O(dt^2)$ |
+| [[Ralston method]] | 2 | $O(dt^2)$ |
+| [[Implicit Trapezoid Method]] | 2 | $O(dt^2)$ |
+| [[Fourth order Runge-Kutta]] | 4 | $O(dt^4)$ |
 
-So a fourth-order method achieving the same error as Euler can use a step size $2^{3}=8$ times larger when error is to be reduced by a factor of 16.
+Higher order means that reducing the step size gives a much greater reduction in error. A method of order $p$ roughly multiplies error by $(dt'/dt)^p$ when the step size is changed from $dt$ to $dt'$.
 
-## Caveat: Doesn't Subsume Stability
+The order is related to how many terms of the Taylor expansion are matched by the method's increment function. See [[Local truncation error]] for the single-step version of this.
 
-Order describes accuracy in the $\Delta t\to 0$ limit *for a fixed problem*. A higher-order method is not always better in practice - it can be unstable for large $\Delta t$ or expensive per step. Compare:
-- [[Explicit Euler method]]: order 1, conditionally stable for stiff problems, requires tiny $\Delta t$.
-- [[Implicit Euler method]]: order 1, unconditionally stable, can use any $\Delta t$ but loses accuracy.
-- [[Implicit Trapezoid Method]]: order 2, unconditionally stable, the best of both - but requires solving an implicit equation per step.
-
-Choosing a method is always a trade-off between order, stability region, per-step cost, and problem stiffness.
-
-## Empirical Order Test
-
-Run the method at $\Delta t$ and $\Delta t/2$, compare errors. If error halves $4\times$, order is 2; if it halves $16\times$, order is 4. A log-log plot of error vs $\Delta t$ has slope $p$.
+[[Global truncation error]] | [[Local truncation error]] | [[Order of magnitude]] | [[Order of convergence]] | [[Runge-Kutta methods]]

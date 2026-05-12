@@ -1,34 +1,67 @@
-# Euler-Maruyama scheme
+# Euler-Maruyama Scheme
 
-The stochastic-differential-equation analogue of the [[Explicit Euler method]] - a first-order discretisation of an [[Stochastic differential equation]] $dX=\mu(X,t)\,dt+\sigma(X,t)\,dW$.
+The **Euler-Maruyama scheme** is the numerical method for integrating [[Stochastic differential equation|stochastic differential equations]] (SDEs). It is the stochastic analogue of the [[Explicit Euler method]].
+
+## General Form
+
+For the SDE $dX = f(X, t) \, dt + g(X, t) \, dW$:
 
 $$
-\boxed{X(t+\Delta t)=X(t)+\mu(X,t)\,\Delta t+\sigma(X,t)\,\sqrt{\Delta t}\,Z(t),}
+X_{i+1} = X_i + f(X_i, t_i) \, dt + g(X_i, t_i) \sqrt{dt} \cdot Z_i
 $$
 
-where $Z(t)\sim\mathrm{Norm}(0,1)$ is an independent standard-normal draw at each step.
+where $Z_i \sim N(0,1)$ are independent standard normal random variables drawn at each step.
 
-## Where the $\sqrt{\Delta t}$ Comes From
+## Specific Cases
 
-A Wiener increment $\Delta W$ over a step $\Delta t$ has $\Delta W\sim\mathrm{Norm}(0,\Delta t)$. Generating $\Delta W$ as $k\,Z$ with $Z\sim\mathrm{Norm}(0,1)$ requires $k=\sqrt{\Delta t}$ (since variance scales as $k^{2}$). Substituting $\Delta W=\sqrt{\Delta t}\,Z$ into the SDE gives the Euler-Maruyama formula.
+### Wiener Process ($dW = dW$)
 
-## Convergence
+$$
+W_{i+1} = W_i + \sqrt{dt} \cdot Z
+$$
 
-- **Strong convergence**: $\mathbb{E}|X_{N}-X(T)|\sim O(\sqrt{\Delta t})$ - half-order in $\Delta t$. (Compare ODE Euler: full first order.)
-- **Weak convergence**: $|\mathbb{E}f(X_{N})-\mathbb{E}f(X(T))|\sim O(\Delta t)$ - first-order.
+### Ornstein-Uhlenbeck Process ($dV = -kV \, dt + dW$)
 
-So Euler-Maruyama is half-order strong, first-order weak. For ensemble-average quantities (which is most physical applications), weak convergence is what matters.
+$$
+V_{i+1} = (1 - k \, dt) \, V_i + \sqrt{dt} \cdot Z
+$$
 
-## Applications
+## Python
 
-| SDE | Update |
-|---|---|
-| [[Wiener process]] $dW=dW$ | $W(t+\Delta t)=W(t)+\sqrt{\Delta t}\,Z(t)$ |
-| [[Ornstein-Uhlenbeck process]] $dV=-kV\,dt+dW$ | $V(t+\Delta t)=(1-k\Delta t)V(t)+\sqrt{\Delta t}\,Z(t)$ |
-| Geometric Brownian motion $dS=\mu S\,dt+\sigma S\,dW$ | $S(t+\Delta t)=S(t)(1+\mu\Delta t+\sigma\sqrt{\Delta t}\,Z(t))$ |
+```python runnable
+import numpy as np
 
-## Pitfalls
+def euler_maruyama_ou(
+    initial_velocity: float,
+    mean_reversion_rate: float,
+    time_end: float,
+    number_of_steps: int,
+    seed: int = 0,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Simulate the Ornstein-Uhlenbeck process using the Euler-Maruyama scheme.
 
-- **Step-size choice**: $\Delta t$ must resolve the dominant deterministic timescale. Stiff drifts ($k\Delta t$ near $1$ for OU) demand small steps.
-- **Stability**: explicit Euler-Maruyama can be conditionally unstable for stiff SDEs - implicit variants exist.
-- **Higher-order**: Milstein adds a $\sigma\sigma'(\Delta W^{2}-\Delta t)/2$ correction, raising strong convergence to $O(\Delta t)$ but requiring derivatives of $\sigma$.
+    Args:
+        initial_velocity: Starting value V(0).
+        mean_reversion_rate: Rate k > 0 controlling mean reversion strength.
+        time_end: End time T.
+        number_of_steps: Number of time steps.
+        seed: Random seed for reproducibility.
+
+    Returns:
+        Tuple of (time_array, velocity_array).
+    """
+    rng = np.random.default_rng(seed)
+    dt = time_end / number_of_steps
+    time_array = np.linspace(0, time_end, number_of_steps + 1)
+    velocity_array = np.empty(number_of_steps + 1)
+    velocity_array[0] = initial_velocity
+    for step_index in range(number_of_steps):
+        noise = rng.standard_normal()
+        velocity_array[step_index + 1] = (
+            (1 - mean_reversion_rate * dt) * velocity_array[step_index]
+            + np.sqrt(dt) * noise
+        )
+    return time_array, velocity_array
+```
+
+[[Stochastic differential equation]] | [[Wiener process]] | [[Ornstein-Uhlenbeck process]] | [[Explicit Euler method]] | [[First-passage time]]
