@@ -448,7 +448,96 @@ standard_error = np.std(passage_times) / np.sqrt(number_of_walkers)
 
 ---
 
-## 15. Quick Formula Index
+## 15. RK2 Coefficient Derivation
+
+All 2nd-order RK methods have the form $y_{n+1} = y_n + \Delta t(a_1 k_1 + a_2 k_2)$ where $k_1 = g(t_n, y_n)$ and $k_2 = g(t_n + p_1\Delta t,\, y_n + q_{11}\Delta t\,k_1)$. Matching Taylor series to order $\Delta t^2$ gives three equations in four unknowns:
+
+$$a_1 + a_2 = 1, \quad a_2 p_1 = \tfrac{1}{2}, \quad a_2 q_{11} = \tfrac{1}{2}$$
+
+One parameter is free, giving infinitely many 2nd-order methods. The two covered in the lecture:
+
+| Method | $a_2$ | $a_1$ | $p_1 = q_{11}$ |
+|--------|--------|--------|----------------|
+| Midpoint | $1$ | $0$ | $1/2$ |
+| Ralston | $3/4$ | $1/4$ | $2/3$ |
+
+Ralston's choice of $a_2 = 3/4$ minimises the local truncation error bound.
+
+---
+
+## 16. Dirac Delta as Initial Condition
+
+For the ink-diffusion problem: $u(0, x) = \delta(x - x_M)$.
+
+In a finite-difference scheme, set the height of the peak so the discrete area equals 1:
+
+$$u(x_M) = \frac{1}{\Delta x}$$
+
+All other nodes start at zero. The sifting property $\int f(x)\delta(x-x_0)\,dx = f(x_0)$ verifies area preservation.
+
+```python
+u_profile = np.zeros(number_of_spatial_nodes)
+middle_node = number_of_spatial_nodes // 2
+u_profile[middle_node] = 1.0 / spatial_step   # area = (1/dx)*dx = 1
+```
+
+---
+
+## 17. Poisson Equation (1D)
+
+**Poisson:** $d^2u/dx^2 = g(x)$. Finite difference: $\dfrac{u_{i+1} - 2u_i + u_{i-1}}{\Delta x^2} = g_i$.
+
+Rearranged to matrix form $A\mathbf{u} = \mathbf{b}$: interior rows carry the $[-1,\ 2,\ -1]$ stencil (scaled by $\Delta x^2$); boundary rows enforce Dirichlet conditions. Solved with Gaussian elimination or `np.linalg.inv` + `matmul`.
+
+**Laplace (1D)** is the special case $g = 0$ -- covered in semester A.
+
+---
+
+## 18. Round-off Errors and Number Types
+
+**Two distinct error types in any numerical method:**
+1. **Truncation error** -- from cutting the Taylor series. Reducible by decreasing $\Delta t$.
+2. **Round-off error** -- from finite floating-point precision. Accumulates as $\Delta t \to 0$ (more steps). The two effects compete: there is an optimal $\Delta t$.
+
+**Float precision:** 32-bit ~7 decimal digits; 64-bit ~16 decimal digits. Always use 64-bit.
+
+**Critical `int` pitfall:** `int(tmax / dt)` can be off-by-one because `1.0 / 0.01` may evaluate to `99.9999...`. Always use:
+
+```python
+number_of_steps = int(round(tmax / dt))       # correct
+Nx = int(np.round(xmax / dx) + 1)             # correct for spatial grid
+number_of_steps = int(tmax / dt)              # WRONG: may be off by one
+```
+
+**Array alias pitfall:** `B = A` does NOT copy -- it is an alias. Modifying `B` also changes `A`. Use `B = A.copy()` or `B = 1.0 * A`.
+
+---
+
+## 19. Random Walk and Wiener Process Properties
+
+**Discrete random walk:** steps of $\pm 1$ with equal probability. After $N$ steps: $\langle x \rangle = 0$, $\text{Var}(x) = N$.
+
+**Wiener process $W(t)$** -- three defining properties:
+1. $W(0) = 0$
+2. $W(t) - W(s) \sim \mathcal{N}(0,\ t-s)$ for all $s < t$
+3. Non-overlapping increments are independent
+
+Consequently: $\langle W(t)\rangle = 0$, $\text{Var}[W(t)] = t$.
+
+**Connection to diffusion:** the pdf of $W(t)$ satisfies the diffusion equation with $\alpha = 1/2$ and a delta-function IC. A histogram of many Brownian walkers is identical to the FTCS solution.
+
+**Gaussian RNG in Python:**
+
+```python
+rng = np.random.default_rng(seed)
+noise_single = rng.standard_normal()       # one N(0,1) draw
+noise_array  = rng.standard_normal(N)      # N draws
+# If Z ~ N(0,1) then k*Z ~ N(0, k^2) -- scale standard deviation by k
+```
+
+---
+
+## 20. Quick Formula Index
 
 | Quantity | Formula |
 |----------|---------|
