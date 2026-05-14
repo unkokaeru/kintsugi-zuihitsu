@@ -36,7 +36,7 @@
 - Do some **[[Omoikane]]** work - below.
 	- Complete **final year [[mth3011]] project**:
 		- **Logbook** completion.
-		- First redraft: [[Outline]] -> [[Draft Zero]] -> [[Draft One]]; trade with Alex for proofreading?
+		- First redraft: [[Outline]] -> [[Draft One]]; trade with Alex for proofreading?
 		- Complete **propositional logic proof assistant** and push to GitHub.
 		- Complete **viva slides**.
 	- **Review and complete work**: [[MTH3007B]] -> [[MTH3008]] (two weeks) -> [[MTH3003]] (three weeks); then work through all questions manually and refine notes/cheat sheet.

@@ -1,7 +1,7 @@
 # MTH3007b Lecture 10
 
 > [!quote] Me, in the lecture
-> zzzzz...
+> zzzzz…
 
 This session moves from 1D time-dependent PDEs to a 2D steady-state problem: the Laplace equation. We solve it iteratively using Liebmann's method (Gauss-Seidel applied to PDEs) and cover the Python array/matrix tools needed to implement it.
 

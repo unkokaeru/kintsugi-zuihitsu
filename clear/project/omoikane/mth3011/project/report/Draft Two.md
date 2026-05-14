@@ -1,0 +1,100 @@
+# Formal Methods in Mathematics
+
+> **Name**: William Fayers
+> **Module**: MTH3011 Project Component
+> **Supervisor**: Dr Yuri Santos Rego
+> **Date**: May 2026
+
+## Abstract
+
+For centuries, mathematics has relied on peer review to filter out invalid arguments, but peer review alone cannot catch every mistake - especially in long, or highly specialised, proofs. Other fields face similar problems, and we'll explore software engineering's response - layers of mechanical checks: type systems, tests, continuous integration, fuzzing, and formal verification. This report asks what comparable systems exist in mathematics, then evaluating where they add value and where they add overhead without a matching gain in rigour. It explores proof assistants and the key moments that proved their worth to the mathematical community, then develops a proof assistant for propositional logic to formalise the Deduction Theorem and Glivenko's Theorem. The same results are then formalised in Lean 4, showing how these ideas extend into contemporary formal methods in mathematics to develop safety-critical systems, support the frontier of research mathematics, and ground AI-assisted proof production.
+
+## Table of Contents
+
+1. Introduction
+2. Trust and Verification in Software Engineering
+3. Trust and Verification in Mathematical Practice
+4. Artificial Intelligence and Mechanical Checking
+5. Logical and Type-Theoretic Background
+6. Proof Assistants
+7. Case Studies in Formal Verification
+8. Construction of a Toy Proof Assistant
+9. Formalising Two Theorems in the Toy Assistant
+10. Formalising the Same Theorems in Lean 4
+11. Comparison of the Two Formalisations
+12. Discussion
+13. Conclusion
+- Acknowledgements
+- References
+- Appendix
+
+## 1 Introduction
+
+### 1.1 Overview
+
+On the 1st of August, 2012, Knight Capital started the first forty-five minutes of the trading day by losing more than $460 million. This was from a basic deployment fault which reactivated faulty routing code [18], and the engineers responded by covering the systems in even more layers: more tests, stricter types, tighter continuous integration, and additional gates for review. Programming has had monumental pressure to build defence-in-depth, often controlling enormous portions of the world's economy, because humans are fallible; they write buggy code.
+
+Mathematics had not responded the same way. A proof must pass peer review, sometimes several rounds of peer review, but are taken on trust thereafter. This system works by building a mixture of reasoning and trust, which works when each part of the system can fit comfortably in one head. It strains when they do not.
+
+Two events clearly illustrate this problem. First, the Needham-Schroeder public key protocol in 1978, which was accepted as secure based on the routine peer review and design rationale. However, in 1995, Gavin Lowe exposed an explicit man-in-the-middle attack via formal analysis [11]: a critical vulnerability standing for 17 years. Prior to this, in 1963, the Feit-Thompson theorem - a monolithic 255 page proof, foundational for the classification of finite single groups - was accepted, without a single end-to-end verification by an individual; the size exceeded an individual's capacity. This verification was only completed in 2012 by a 150,000-line machine-checked Coq proof, developed by a Microsoft Research/INRIA team [7].
+
+Generally, the past demonstrates that when a proof overwhelms one review's capacity, errors can hide for a long time - ranging from embarrassment to fatality, depending on what's relying on the proof. With the recent rise in the use of AI, this capacity is overwhelmed even quicker. Large language models now produce proofs and code faster than any human review could possibly match, and with errors that reviewers aren't accustomed to catching: confident hallucinations. Despite this, DeepMind's AlphaProof and AlphaGeometry [15] have reached medal-level performance on Olympiad problems by writing Lean tactic scripts and rechecking each via the kernel - grounding the AI's output in formal methods. A similar trend is emerging in research mathematics, the most recent example being the PFR conjecture's three-week formalisation in Learn 4 [10]. In parallel, dozens of contributors decomposed Tao, Gowers, Green, and Manners' preprint into lemmas; rechecked by Lean's kernel before counting towards the proof. The kernel allows the AI proof suggestion to be transformed into a formally verified one, without the need for manual human review at every step.
+
+Proof assistants, such as Lean [5], Coq [6], Isabelle/HOL, Agda, or PVS, are all the analogous layers to software's unit tests, type checkers, and continuous integration. They mechanically enforce validity with a small, trusted kernel, which checks each inference rule by rule; all tactics, automation, and LLM suggestions outside of the kernel must produce a part of the proof that the kernel accepts.
+
+The thesis of this report is that mathematics is now in a similar position to programming around 1990: the tools exist, the cost of usage has fallen, and they've elevated from academic rigour to practical infrastructure. To demonstrate this, this report builds a proof assistant from scratch, formalises two theorems inside it, and formalises the same two theorems in the industry-standard Lean 4. The build is deliberately kept small to be digestible in a single sitting of reading - around 1,000 lines of Python with a 96-line kernel. By the end of Section 8, the reader has, in effect, watched a proof assistant get assembled from first principles, and can understand the renewed value of proof assistants under the reframing of AI.
+
+### 1.2 Road Map
+
+To begin this report, Sections 2-4 will set up the framing: programming's defence in depth, mathematics' single layer of peer review, and the pressure thus created by AI-assisted mathematics. Then, Section 5 lays the foundations for formalisations with logic, type theory, Curry-Howard, and Gödel's caveat. Section 6 explores the current proof assistant ecosystem, and Section 7 discusses five landmark case studies within it, to prime the reader to develop a toy assistant in Section 8. Sections 9-10 then formalise two theorems in the toy assistant, then in Lean, and Section 11 compares the two. Finally, Section 12 returns to the opening analogy with everything assembled, and Section 13 closes the report.
+
+## 2 Trust and Verification in Software Engineering
+
+The Knight Capital incident is a useful case to begin with exploring, as it wasn't caused by an individual making an obvious mistake. Instead, the SEC describes the cause as old code, mixed with an incomplete deployment, some missed automated warnings, and inadequate controls interacting under the load of production [18]. This myriad of factors is exactly the compound failure which is countered by the engineering practice of layers.
+
+Hence, programming's response to these failures is usually to build on these layers. Due to the many failures of other industries, modern best practice has standardised the feature flags, gated rollouts, and pre-production deployment that Knight's process missed. So, it repeats: a type of error is missed, a new layer of mechanical check is built, and over time the layers combine into a structure that catches almost everything.
+
+### 2.1 The Layers
+
+The current structure of these layers, used by modern production code, is split into the following:
+
+1. **Types**: the most fundamental defence, enforced by the programming language itself. A Python `int` cannot be passed to a function expecting `str`, and a Rust `String` cannot be passed where an `&str` is expected. The check is mechanical and will reject many types of error at compile time, before even any tests can be run. Pierce [13] laid the foundational ideas for these type systems, which modern languages have made the first thing a programmer sees and the easiest thing to satisfy,
+2. **Tests**: for individual functions (unit tests), entire assemblies (integration tests), and the flows visible to the user (end-to-end tests). In some communities, types predate tests, and others tests predate types; but either way, the final shape is the same - an objective assertion that runs against the actual code.
+3. **Continuous integration**: every piece of work committed to the final codebase triggers a full build, alongside the aforementioned test suite, within a clean environment reproducing the potential production environments. This hence tests how all parts of the code work together before releasing, instead of each part in isolation; it is also the layer that Knight's deployment was missing. If the defective configuration was deployed in a staging environment, the fault would have been noticed before users noticed in production [18].
+4. **Code review**: essentially peer review, used to catch overall design issues, niche security implications, and parts that might not cause errors but could confuse future contributors. These reviews are slow and expensive, containing all the flaws mentioned in the introduction, but reach what tools cannot.
+5. **Fuzzing and property-based testing**: a fuzzer finds more edge-case errors by feeding random inputs into a function and watching for crashes, test failure, or other breaches within the code. Essentially, this is a more verbose unit test, as it catches input that the test author might not have considered.
+6. **Formal verification**: within high stakes environments, like NASA Langley's PVS work and AWS's use of TLA+, failure can be so expensive that it earns this additional layer. While expensive, this moves parts of the design into a formal specification that can be checked even more mechanically [21], [22].
+
+### 2.2 Why Each Layer Exists
+
+Each layer was added because the previous layers missed a class of error. As time goes on, the strategy of code review moves farther away from trusting humans and closer towards relying on tools.
+
+Multiple failures have become well-known for pushing towards this trend. The Therac 25 became lethal due to weak safety interlocks and race conditions. On the launch of the Ariance 5 Flight 501, an unprotected 64-bit float converted to a 16-bit signed integer within reused inertial-reference software caused the rocked to self-destruct [19]. In 1994, Intel's 1994 Pentium floating-point division flaw led to a $475 million pretax charge [20]. All of these cases teach the same lesson: within critical systems, creating formal specifications for design questions is much cheaper than the alternative [21].
+
+So, each time, a mechanical layer was built to catch a repeat of that error next time. If the cost was particularly high, like in the aforementioned examples, the next layer would be even more aggressively deployed.
+
+### 2.3 The Cumulative Effect
+
+By 2026, after decades of errors and retaliatory layers, industrial programmers only trust code that has passed through these layers: they don't just rely on the writer anymore. A code review first checks that types, tests, and continuous integration are all complete, passing, and meaningful before ensuring the design fits the codebase.
+
+Mathematics is far different. Peer review in mathematics is the sole point of trust, while programming treats trust as a product of several mechanical checks.
+
+## 3 Trust and Verification in Mathematical Practice
+
+For most of its history, mathematics has had one layer comparable to what was discussed in Section 2: peer review. An academic writes a proof, referees read it, the journal accepts or rejects, and then the result enters the literature. There isn't an equivalent to types, continuous integration, or fuzzing, peer review carries the entire weight of trust - unless a later reader catches additional errors.
+
+This worked for centuries, since proofs fit in journals, journals fit in libraries, and a competent reader could verify a result in a few sittings. Before the twentieth century, mathematics was largely human-scaled in this manner, with the exception of a few famous results in the nineteenth century, such as Kempe's four colour theorem "proof" in 1879 that had a flaw spotted eleven years later. Still, this system eventually caught its own mistakes.
+
+Recently, though, three things have changed.
+
+### 3.1 Scale
+
+The Feit-Thompson theorem [7] is a landmark proof that conveys the new scales mathematicians work with: 255 pages of dense character theory. The classification of finite simple groups that this theorem supports is tens of thousands of pages, across hundreds of papers and several decades. No individual can read through so much information carefully, so the community trusts that the relevant experts have read the relevant pieces, and this works enough of the time. But, the Coq formalisation of the theorem [7] - 150,000 lines over six years with multiple collaborators - is surprising that it found no substantive errors in the 1963 original; it's certainly not the default. The formalisation also still explicitly benefited the proof, reorganising the classification infrastructure to expose dependencies between chapters of the original that before had been implicit.
+
+### 3.2 Specialisation
+
+Modern mathematics can be highly specialised, creating subfields with specialists that cannot even review related subfields, in practice. A famous example of this would be Wiles' first announcement of a proof of Fermat's Last Theorem in 1993. Despite immediately collaborators not noticing any errors right away, a gap was found that took the help of Richard Taylor to repair and finally publish in 1994 [23]. The level of specialism required to review the location of the error exceeded the capacity of reviewers. Yet, the community recovered, but only due to the high profile result, and a less famous gap could still exist.
+
+### 3.3 Speed
+
+…
