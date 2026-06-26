@@ -1,0 +1,12 @@
+{
+  "shrinkPinnedTabs": true,
+  "pinnedTabWidth": 40,
+  "showDefaultIcon": true,
+  "defaultIcon": "lucide:star",
+  "enableFrontmatter": false,
+  "frontmatterProperty": "pinned-icon",
+  "iconMappings": [],
+  "recentIcons": [
+    "lucide:star"
+  ]
+}

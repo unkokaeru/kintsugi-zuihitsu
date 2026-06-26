@@ -1,14 +1,5 @@
 # MTH3007b Weekly Problems 4
 
-> **Original Documents**: [[mth3007b weekly problem sheet 4.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 4 solutions.pdf|Provided Solutions]]
->
-> **Vibes**: ...
->
-> **Used Techniques**:
->   - ...
-
----
-
 ## 4.1. Isolating Variables in Linear and Nonlinear Equations
 
 > [!question]

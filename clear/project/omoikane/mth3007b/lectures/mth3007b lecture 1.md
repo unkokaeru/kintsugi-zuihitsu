@@ -1,7 +1,7 @@
 # MTH3007b Lecture 1
 
 > [!quote] Me, in the lecture
-> zzzzz...
+> zzzzz…
 
 This session opens the module by establishing the core framework for numerically solving ordinary differential equations. We derive the **[[Explicit Euler method]]** from first principles via finite differences, examine its errors, then introduce the **[[Implicit Euler method]]** as a stability-motivated alternative. There is no previous lecture to connect to - this is the starting point.
 
@@ -163,7 +163,7 @@ $$
 
 The amplification factor is $1/(1 + a \cdot dt)$, which is always less than 1 for $a > 0$ and any $dt > 0$. Backward Euler is therefore unconditionally stable for this equation.
 
-### Example: $dy/dt = bt - ay$ (implicit update)
+### Example: $dy/dt = Bt - ay$ (implicit update)
 
 When $g(t, y) = bt - ay$, the implicit Euler step rearranges to:
 
@@ -192,7 +192,7 @@ This means there is a practical lower bound on $dt$: below some threshold, reduc
 
 ---
 
-## Pre-Lecture Notes from [[mth3007b lecture notes 1.pdf|University Notes]]
+## Pre-Lecture Notes from University Notes
 
 - **Finite difference method**: replace $dy/dt$ with $(y_{n+1} - y_n)/dt$ (forward difference) to get the explicit Euler update $y_{n+1} = y_n + dt \cdot g(t_n, y_n)$
 - **Local truncation error** is $O(dt^2)$ (one step); **global truncation error** is $O(dt)$ (first-order method)

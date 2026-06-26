@@ -1,6 +1,6 @@
-# Daily Routine
+	# Daily Routine
 
-## Monday - Friday
+# Monday - Friday
 
 - Drink a glass of water, open curtains for natural light.
 - **06:30 - 07:00** Head to the bathroom…
@@ -41,7 +41,7 @@
 - **20:30 - 20:45** Brush teeth, floss, and tongue scrape. Then, evening skincare (toner -> serum -> moisturiser -> eye cream) followed by some gentle stretching.
 - **20:45 - 21:15** Settle down, fall asleep.
 
-## Saturday - Sunday
+# Saturday - Sunday
 
 - Drink a glass of water, open curtains for natural light.
 - **08:00 - 09:00** Head to the bathroom…

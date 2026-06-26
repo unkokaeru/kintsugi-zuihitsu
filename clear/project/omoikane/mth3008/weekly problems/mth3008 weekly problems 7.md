@@ -1,6 +1,6 @@
 # MTH3008 Weekly Problems 7
 
-> **Original Documents**: [[mth3008 weekly problem sheet 7.pdf]] / [[mth3008 weekly problem sheet 7 handwritten solutions.pdf]] / [[mth3008 weekly problem sheet 7 solutions.pdf]]
+> **Original Documents**: [[mth3008 weekly problem sheet 7.pdf]] / `[[mth3008 weekly problem sheet 7 handwritten solutions.pdf]]` / [[mth3008 weekly problem sheet 7 solutions.pdf]]
 >
 > **Vibes**: Tensor-algebra bookkeeping - outer products stack indices, contractions collapse them, inner products do both at once. Mostly mechanical once you settle on the index convention, with one short proof (7.2) in the style of 6.2.
 >

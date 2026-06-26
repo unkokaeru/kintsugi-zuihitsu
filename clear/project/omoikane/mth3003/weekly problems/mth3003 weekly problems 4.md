@@ -1,6 +1,6 @@
 # MTH3003 Weekly Problems 4
 
-> **Original Documents**: [[mth3003 weekly problem sheet 4.pdf]] / [[mth3003 weekly problem sheet 4 handwritten solutions.pdf]] / [[mth3003 weekly problem sheet 4 solutions.pdf]]
+> **Original Documents**: [[mth3003 weekly problem sheet 4.pdf]] / `[[mth3003 weekly problem sheet 4 handwritten solutions.pdf]]` / [[mth3003 weekly problem sheet 4 solutions.pdf]]
 >
 > **Vibes**: Pretty mechanical, meh.
 >

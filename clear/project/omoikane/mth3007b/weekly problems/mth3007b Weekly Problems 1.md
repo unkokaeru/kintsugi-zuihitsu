@@ -1,14 +1,5 @@
 # MTH3007b Weekly Problems 1
 
-> **Original Documents**: [[mth3007b weekly problem sheet 1.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 1 solutions.pdf|Provided Solutions]]
->
-> **Vibes**: ...
->
-> **Used Techniques**:
->   - ...
-
----
-
 ## 1.1. Key Definitions in Numerical Methods
 
 > [!question]
@@ -180,7 +171,7 @@ Note that implicit Euler remains stable for large $dt$: the amplification factor
 ## 1.5. Analytical Solution and Error Comparison
 
 > [!question]
-> The analytical solution to $\dot{y} = bt - ay$, $y(0) = y_0$ is $y(t) = e^{-at}\!\left(y_0 + \dfrac{b}{a^2} + \dfrac{bt}{a} - \dfrac{b}{a^2}\right)$... wait, re-read:
+> The analytical solution to $\dot{y} = bt - ay$, $y(0) = y_0$ is $y(t) = e^{-at}\!\left(y_0 + \dfrac{b}{a^2} + \dfrac{bt}{a} - \dfrac{b}{a^2}\right)$… wait, re-read:
 >
 > $y(t) = e^{-at}\!\left(y_0 + \dfrac{b}{a^2}\right) + \dfrac{bt}{a} - \dfrac{b}{a^2}$
 >

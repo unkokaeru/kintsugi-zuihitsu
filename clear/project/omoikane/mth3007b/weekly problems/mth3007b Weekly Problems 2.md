@@ -1,14 +1,5 @@
 # MTH3007b Weekly Problems 2
 
-> **Original Documents**: [[mth3007b weekly problem sheet 2.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 2 solutions.pdf|Provided Solutions]]
->
-> **Vibes**: …
->
-> **Used Techniques**:
->   - …
-
----
-
 ## 2.1. Error Scaling for Forward Euler
 
 > [!question]

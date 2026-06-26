@@ -94,7 +94,7 @@ Identity: $\nabla \times (\nabla \times u) = \nabla(\nabla \cdot u) - \nabla^2 u
 	- $\epsilon_{ijk}\epsilon_{ijm} = 2\delta_{km}$
 	- $\epsilon_{ijk}\epsilon_{ijk} = 6$
 
-### 2b. Suffix Algebra Proofs ("Show that...")
+### 2b. Suffix Algebra Proofs ("Show that…")
 
 **Goal**: Prove vector/matrix identities (e.g., $(AB)^T = B^TA^T$, $a \times b = -b \times a$) or symmetry properties.
 

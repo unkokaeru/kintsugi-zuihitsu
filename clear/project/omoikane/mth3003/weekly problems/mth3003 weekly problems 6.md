@@ -1,6 +1,6 @@
 # MTH3003 Weekly Problems 6
 
-> **Original Documents**: [[mth3003 weekly problem sheet 6.pdf]] / [[mth3003 weekly problem sheet 6 handwritten solutions.pdf]] / [[mth3003 weekly problem sheet 6 solutions.pdf]]
+> **Original Documents**: [[mth3003 weekly problem sheet 6.pdf]] / `[[mth3003 weekly problem sheet 6 handwritten solutions.pdf]]` / [[mth3003 weekly problem sheet 6 solutions.pdf]]
 >
 > **Vibes**: Four short proofs around the [[homomorphism]] machinery: image is a subgroup, signature gives a $C_{2}$ quotient, restriction-to-quotient maps are homomorphisms, and a determinant case study using all three [[Isomorphism theorems]]. Mostly Quick-Subgroup-Test or First-Isomorphism-Theorem applications.
 >
@@ -73,7 +73,7 @@ using the multiplication rule in the quotient group. Hence $\varphi$ is a homomo
 > 1. Prove that $P$ and $\operatorname{SL}_{2}(\mathbb{R})$ are normal subgroups of $\operatorname{GL}_{2}(\mathbb{R})$.
 > 2. Give an intuitive description of the quotient groups $\operatorname{GL}_{2}(\mathbb{R}) / \operatorname{SL}_{2}(\mathbb{R})$, $P / \operatorname{SL}_{2}(\mathbb{R})$, and $\operatorname{GL}_{2}(\mathbb{R}) / P$.
 > 3. Prove that
->
+> 
 > $$
 > \operatorname{GL}_{2}(\mathbb{R}) / \operatorname{SL}_{2}(\mathbb{R})
 > \;\big/\;
@@ -95,7 +95,9 @@ since determinants are real numbers and multiplication is commutative in $\mathb
 - If $A\in P$, $\det(M^{-1}AM)=\det(A)>0$, so $M^{-1}AM\in P$. So $P\trianglelefteq G$.
 - If $A\in K$, $\det(M^{-1}AM)=\det(A)=1$, so $M^{-1}AM\in K$. So $K\trianglelefteq G$.
 
-$$\boxed{P\trianglelefteq G,\quad K\trianglelefteq G.}$$
+$$
+\boxed{P\trianglelefteq G,\quad K\trianglelefteq G.}
+$$
 
 **Part 2: Quotient descriptions.** The determinant map $\det\colon G\to\mathbb{R}^{*}$ (the multiplicative group of nonzero reals) is a surjective homomorphism with $\ker(\det)=K$. By the First Isomorphism Theorem,
 

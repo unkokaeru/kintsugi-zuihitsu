@@ -1,6 +1,6 @@
 # MTH3008 Weekly Problems 8
 
-> **Original Documents**: [[mth3008 weekly problem sheet 8.pdf]] / [[mth3008 weekly problem sheet 8 handwritten solutions.pdf]] / [[mth3008 weekly problem sheet 8 solutions.pdf]]
+> **Original Documents**: [[mth3008 weekly problem sheet 8.pdf]] / `[[mth3008 weekly problem sheet 8 handwritten solutions.pdf]]` / [[mth3008 weekly problem sheet 8 solutions.pdf]]
 >
 > **Vibes**: Christoffel-symbol computation at scale. Once the four orthogonal-coordinate cases from 8.1 are internalised, the later problems reduce to "find the nonzero metric derivatives, drop them into the right slot, raise with $g^{ii}$." The final problem 8.5 is a standalone proof showing the covariant derivative really is a tensor.
 >

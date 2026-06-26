@@ -1,6 +1,6 @@
 # MTH3003 Weekly Problems 3
 
-> **Original Documents**: [[mth3003 weekly problem sheet 3.pdf]] / [[mth3003 weekly problem sheet 3 handwritten solutions.pdf]] / [[mth3003 weekly problem sheet 3 solutions.pdf]]
+> **Original Documents**: [[mth3003 weekly problem sheet 3.pdf]] / `[[mth3003 weekly problem sheet 3 handwritten solutions.pdf]]` / [[mth3003 weekly problem sheet 3 solutions.pdf]]
 >
 > **Vibes**: Medium difficulty, ramp up from Week 1 permutations - now geometric intuition for [[dihedral group]], cycle computations on shapes, first proofs using orders/inverses. Drawing diagrams essential for $D_{10}$/shapes.
 >

@@ -1,6 +1,6 @@
 # MTH3008 Weekly Problems 10
 
-> **Original Documents**: [[mth3008 weekly problem sheet 10.pdf]] / [[mth3008 weekly problem sheet 10 handwritten solutions.pdf]]
+> **Original Documents**: [[mth3008 weekly problem sheet 10.pdf]] / `[[mth3008 weekly problem sheet 10 handwritten solutions.pdf]]`
 >
 > **Vibes**: Three Ricci-tensor calculations followed by a five-part revision sweep through the whole course (basis vectors, orthogonality, covariant components, metric, Christoffel symbols, Riemann-Christoffel tensor) on one bizarre coordinate system parametrising flat space. Every "compute the Ricci tensor" reduces to: list nonzero $\Gamma$, plug into $R_{ij}=\partial_{k}\Gamma^{k}_{ji}-\partial_{j}\Gamma^{k}_{ik}+\Gamma^{p}_{ij}\Gamma^{k}_{pk}-\Gamma^{p}_{ik}\Gamma^{k}_{pj}$. The revision exercises 10.4-10.8 all sit on the same coordinate system, so the work compounds.
 >
@@ -305,21 +305,15 @@ $
 Combining:
 
 $$
-
 R^{1}*{212}=0+\frac{2}{f^{2}}+(-1)-\frac{(f')^{2}}{f^{2}}=\frac{2-(f')^{2}}{f^{2}}-1.
-
 $$
 
 Using $2-(f')^{2}=2-(1-\sin 2\theta)=1+\sin 2\theta=f^{2}$:
 
 $$
-
 R^{1}*{212}=\frac{f^{2}}{f^{2}}-1=1-1=0.\;\checkmark
-
 $$
 
 $$
-
 \boxed{R^{r}_{ijk}=0\quad\text{for all }r,i,j,k\;-\;\text{the space is flat (Euclidean) in disguise.}}
-
 $$

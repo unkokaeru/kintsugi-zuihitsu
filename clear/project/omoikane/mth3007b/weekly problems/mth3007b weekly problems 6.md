@@ -1,14 +1,5 @@
 # MTH3007b Weekly Problems 6
 
-> **Original Documents**: [[mth3007b weekly problem sheet 6.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 6 solutions.pdf|Provided Solutions]]
->
-> **Vibes**: ...
->
-> **Used Techniques**:
->   - ...
-
----
-
 > [!note]
 > Some exercises for session 6 are posted on Blackboard (assessment section). The problems below cover the key session 6 content: implementing FTCS for the heat equation and demonstrating instability.
 

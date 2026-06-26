@@ -1,6 +1,6 @@
 # MTH3008 Weekly Problems 9
 
-> **Original Documents**: [[mth3008 weekly problem sheet 9.pdf]] / [[mth3008 weekly problem sheet 9 handwritten solutions.pdf]] / [[mth3008 weekly problem sheet 9 solutions.pdf]]
+> **Original Documents**: [[mth3008 weekly problem sheet 9.pdf]] / `[[mth3008 weekly problem sheet 9 handwritten solutions.pdf]]` / [[mth3008 weekly problem sheet 9 solutions.pdf]]
 >
 > **Vibes**: More Christoffel-symbol marathon, now with a final payoff - the [[Riemann-Christoffel Tensor]] for two surfaces. Every problem reduces to "find the diagonal metric, read off $\partial g_{ii}/\partial x^{k}$, drop into 8.1's four cases." The curvature calculations in 9.4 and 9.6 follow the unit-sphere template from lecture 18.
 >

@@ -1,6 +1,6 @@
 # MTH3003 Weekly Problems 7
 
-> **Original Documents**: [[mth3003 weekly problem sheet 7.pdf]] / [[mth3003 weekly problem sheet 7 handwritten solutions.pdf]] / [[mth3003 weekly problem sheet 7 solutions.pdf]]
+> **Original Documents**: [[mth3003 weekly problem sheet 7.pdf]] / `[[mth3003 weekly problem sheet 7 handwritten solutions.pdf]]` / [[mth3003 weekly problem sheet 7 solutions.pdf]]
 >
 > **Vibes**: All five problems are exercises in the [[Signature]] / [[Alternating group]]. Once you have the recipe - the signature of a permutation in disjoint-cycle form is $(-1)^{\sum(r_{i}-1)}$ - everything is mechanical. Builds toward systematically listing the 60 elements of $A_{5}$.
 >
@@ -137,17 +137,25 @@ So the cycle shapes in $A_{5}$ are: $\emptyset,\;(2,2),\;(3),\;(5)$.
 **Shape $(3)$ (20 elements).** Choose 3 of 5 elements ($\binom{5}{3}=10$), then 2 cyclic orientations per choice: $10\cdot 2=20$. Listed by selected triple:
 
 $\{1,2,3\}:\ (1\,2\,3),(1\,3\,2)$;
+
 $\{1,2,4\}:\ (1\,2\,4),(1\,4\,2)$; $\{1,2,5\}:\ (1\,2\,5),(1\,5\,2)$;
+
 $\{1,3,4\}:\ (1\,3\,4),(1\,4\,3)$; $\{1,3,5\}:\ (1\,3\,5),(1\,5\,3)$;
+
 $\{1,4,5\}:\ (1\,4\,5),(1\,5\,4)$; $\{2,3,4\}:\ (2\,3\,4),(2\,4\,3)$;
+
 $\{2,3,5\}:\ (2\,3\,5),(2\,5\,3)$; $\{2,4,5\}:\ (2\,4\,5),(2\,5\,4)$;
+
 $\{3,4,5\}:\ (3\,4\,5),(3\,5\,4)$.
 
 **Shape $(5)$ (24 elements).** $5!/5=24$ (divide by $5$ for rotations of the same cycle). Listed by writing each $5$-cycle starting at $1$:
 
 $(1\,2\,3\,4\,5),(1\,2\,3\,5\,4),(1\,2\,4\,3\,5),(1\,2\,4\,5\,3),(1\,2\,5\,3\,4),(1\,2\,5\,4\,3)$;
+
 $(1\,3\,2\,4\,5),(1\,3\,2\,5\,4),(1\,3\,4\,2\,5),(1\,3\,4\,5\,2),(1\,3\,5\,2\,4),(1\,3\,5\,4\,2)$;
+
 $(1\,4\,2\,3\,5),(1\,4\,2\,5\,3),(1\,4\,3\,2\,5),(1\,4\,3\,5\,2),(1\,4\,5\,2\,3),(1\,4\,5\,3\,2)$;
+
 $(1\,5\,2\,3\,4),(1\,5\,2\,4\,3),(1\,5\,3\,2\,4),(1\,5\,3\,4\,2),(1\,5\,4\,2\,3),(1\,5\,4\,3\,2)$.
 
 **Total.** $1+15+20+24=60=|A_{5}|$. ✓

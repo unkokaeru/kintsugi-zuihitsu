@@ -47,3 +47,8 @@ If $M_{1},\ldots,M_{k}\trianglelefteq G$ have pairwise trivial intersections (an
 The technical heart of the theorem: if $M,N\trianglelefteq G$ with $M\cap N=\{e\}$, then $mn=nm$ for all $m\in M$, $n\in N$ - they commute. Proof: $n^{-1}mnm^{-1}\in M\cap N=\{e\}$ via the commutator argument.
 
 This commuting is what makes the multiplication in $MN$ behave like componentwise multiplication in $M\times N$, giving the isomorphism $\theta\colon MN\to M\times N$, $\theta(mn)=(m,n)$.
+
+## Source Sections
+
+- [[mth3003 11.2 abelian groups of prime power order.pdf|11.2 Abelian Groups of Prime Power Order]] - uses the internal direct product to prove $C_{n}\times C_{m}\cong C_{nm}$ when $\gcd(m,n)=1$.
+- See also [[Fundamental Theorem of Finite Abelian Groups]].

@@ -34,27 +34,39 @@ For $\dot{y} = g(t, y)$, $y(t_0) = y_0$.
 
 **RK4 in full:**
 
-$$k_1 = g(t_n, y_n), \quad k_2 = g\!\left(t_n + \tfrac{\Delta t}{2},\, y_n + \tfrac{\Delta t}{2}k_1\right)$$
+$$
+k_1 = g(t_n, y_n), \quad k_2 = g\!\left(t_n + \tfrac{\Delta t}{2},\, y_n + \tfrac{\Delta t}{2}k_1\right)
+$$
 
-$$k_3 = g\!\left(t_n + \tfrac{\Delta t}{2},\, y_n + \tfrac{\Delta t}{2}k_2\right), \quad k_4 = g(t_n + \Delta t,\, y_n + \Delta t\, k_3)$$
+$$
+k_3 = g\!\left(t_n + \tfrac{\Delta t}{2},\, y_n + \tfrac{\Delta t}{2}k_2\right), \quad k_4 = g(t_n + \Delta t,\, y_n + \Delta t\, k_3)
+$$
 
-$$y_{n+1} = y_n + \frac{\Delta t}{6}(k_1 + 2k_2 + 2k_3 + k_4)$$
+$$
+y_{n+1} = y_n + \frac{\Delta t}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+$$
 
-### Closed forms for $\dot{y} = bt - ay$
+### Closed Forms for $\dot{y} = Bt - ay$
 
 These are derived by solving the implicit equations algebraically for $y_{n+1}$.
 
-$$\text{Implicit Euler:} \quad y_{n+1} = \frac{y_n + \Delta t\, b\, t_{n+1}}{1 + a\,\Delta t}$$
+$$
+\text{Implicit Euler:} \quad y_{n+1} = \frac{y_n + \Delta t\, b\, t_{n+1}}{1 + a\,\Delta t}
+$$
 
-$$\text{Implicit Trapezoid:} \quad y_{n+1} = \frac{y_n(1 - a\,\Delta t/2) + \Delta t\, b\,(t_n + \Delta t/2)}{1 + a\,\Delta t/2}$$
+$$
+\text{Implicit Trapezoid:} \quad y_{n+1} = \frac{y_n(1 - a\,\Delta t/2) + \Delta t\, b\,(t_n + \Delta t/2)}{1 + a\,\Delta t/2}
+$$
 
-### Heun's method vs implicit trapezoid
+### Heun's Method Vs Implicit Trapezoid
 
 The **implicit trapezoid** uses the true $y_{n+1}$ on the right-hand side and is implicit and symmetric.
 
 **Heun's method** (explicit trapezoid) is different - it uses a forward-Euler predictor $\tilde{y}_{n+1} = y_n + \Delta t\,g(t_n, y_n)$ to evaluate the derivative at the next step:
 
-$$y_{n+1} = y_n + \frac{\Delta t}{2}\!\left[g(t_n, y_n) + g(t_{n+1}, \tilde{y}_{n+1})\right]$$
+$$
+y_{n+1} = y_n + \frac{\Delta t}{2}\!\left[g(t_n, y_n) + g(t_{n+1}, \tilde{y}_{n+1})\right]
+$$
 
 Heun's method is 2nd order but is **not** symmetric. The implicit trapezoid method **is** symmetric (it is the same under the exchange $n \leftrightarrow n+1$, $\Delta t \leftrightarrow -\Delta t$).
 
@@ -62,11 +74,11 @@ Heun's method is 2nd order but is **not** symmetric. The implicit trapezoid meth
 
 ## 3. Stability of ODEs and Methods
 
-### ODE stability
+### ODE Stability
 
 An ODE is **stable** if small perturbations to initial conditions remain bounded for all $t > t_0$. For $\dot{y} = \lambda y$: stable when $\lambda < 0$ (solution decays), unstable when $\lambda > 0$ (solution grows).
 
-### Amplification factor $G$
+### Amplification Factor $G$
 
 For the test equation $\dot{y} = \lambda y$ ($\lambda < 0$), each method produces $y_{n+1} = G\,y_n$. The method is stable when $|G| \leq 1$.
 
@@ -77,9 +89,11 @@ For the test equation $\dot{y} = \lambda y$ ($\lambda < 0$), each method produce
 | Implicit Trapezoid | $\dfrac{1 + \lambda\,\Delta t/2}{1 - \lambda\,\Delta t/2}$ | All $\text{Re}(\lambda) < 0$ (unconditional) |
 | Explicit RK methods | (more complex) | Conditional only |
 
-### Richardson method (symmetric, but unstable)
+### Richardson Method (symmetric, but unstable)
 
-$$\frac{y_{n+1} - y_{n-1}}{2\,\Delta t} \approx g(t_n, y_n)$$
+$$
+\frac{y_{n+1} - y_{n-1}}{2\,\Delta t} \approx g(t_n, y_n)
+$$
 
 This is 2nd order in $\Delta t$, but is **unconditionally unstable** for ODEs like $\dot{y} = -y$ - for any $\Delta t$ the numerical solution diverges. Not useful in practice.
 
@@ -93,7 +107,9 @@ This is 2nd order in $\Delta t$, but is **unconditionally unstable** for ODEs li
 
 **Lax Equivalence Theorem:** for a well-posed linear IVP/BVP and a consistent discretisation,
 
-$$\text{stability} \iff \text{convergence}$$
+$$
+\text{stability} \iff \text{convergence}
+$$
 
 Both explicit and implicit Euler are consistent, so they converge for sufficiently small $\Delta t$.
 
@@ -105,7 +121,9 @@ Introduce state vector $\mathbf{Z} = (z_1, z_2, \ldots)^\top$ and vector field $
 
 **Predator-prey (Lotka-Volterra), lecture parameters:**
 
-$$\dot{x} = ax - bxy, \quad \dot{y} = -cy + dxy$$
+$$
+\dot{x} = ax - bxy, \quad \dot{y} = -cy + dxy
+$$
 
 with $a = 1.2$, $b = 0.6$, $c = 0.8$, $d = 0.3$, $x_0 = 2$, $y_0 = 1$, $\Delta t = 0.01$, $t_\text{max} = 30$.
 
@@ -136,7 +154,9 @@ for step_index in range(number_of_steps):
 
 For $\ddot{y} = F(t, y, \dot{y})$, set $z_1 = y$, $z_2 = \dot{y}$:
 
-$$\dot{z}_1 = z_2, \quad \dot{z}_2 = F(t, z_1, z_2)$$
+$$
+\dot{z}_1 = z_2, \quad \dot{z}_2 = F(t, z_1, z_2)
+$$
 
 Then solve as a 2-component system with any ODE method.
 
@@ -153,7 +173,9 @@ def second_order_system(time: float, state: np.ndarray) -> np.ndarray:
 
 To compute $I = \int_{t_0}^{T} f(t)\,dt$, define $y(t)$ by:
 
-$$\frac{dy}{dt} = f(t), \quad y(t_0) = 0 \implies y(T) = I$$
+$$
+\frac{dy}{dt} = f(t), \quad y(t_0) = 0 \implies y(T) = I
+$$
 
 Apply any ODE solver; $y(T)$ gives the integral. Order of the integral estimate matches the order of the ODE solver used.
 
@@ -184,7 +206,9 @@ Define $r = c = \dfrac{\alpha\,\Delta t}{\Delta x^2}$ (the diffusion number / Fo
 
 **FTCS stability condition:**
 
-$$r = \frac{\alpha\,\Delta t}{\Delta x^2} \leq \frac{1}{2} \iff \Delta t \leq \frac{\Delta x^2}{2\alpha}$$
+$$
+r = \frac{\alpha\,\Delta t}{\Delta x^2} \leq \frac{1}{2} \iff \Delta t \leq \frac{\Delta x^2}{2\alpha}
+$$
 
 For fine grids (small $\Delta x$), this forces very small $\Delta t$ - the key disadvantage of FTCS.
 
@@ -203,17 +227,19 @@ right_hand_side[0] = left_temperature
 right_hand_side[-1] = right_temperature
 ```
 
-### Neumann ($\partial u / \partial x = 0$ at $x = L$, insulated end)
+### Neumann ($\partial U / \partial X = 0$ at $x = L$, Insulated end)
 
 Use the ghost/imaginary point method: $u_{N} = u_{N-2}$. This modifies the last interior row of the BTCS matrix from $[-c,\ 1+2c,\ -c]$ to $[-2c,\ 1+2c]$. For FTCS at the last interior node:
 
-$$u_{N-1}^{n+1} = u_{N-1}^n + 2r\!\left(u_{N-2}^n - u_{N-1}^n\right)$$
+$$
+u_{N-1}^{n+1} = u_{N-1}^n + 2r\!\left(u_{N-2}^n - u_{N-1}^n\right)
+$$
 
 ---
 
 ## 9. FTCS and BTCS Code
 
-### FTCS loop
+### FTCS Loop
 
 ```python
 stability_parameter = diffusivity * time_step / spatial_step ** 2   # must be <= 0.5
@@ -232,7 +258,7 @@ for time_index in range(number_of_time_steps - 1):
     u_profile = u_next
 ```
 
-### BTCS matrix setup and solve (lecture §42.5 — use `inv` + `matmul`)
+### BTCS Matrix Setup and Solve (lecture §42.5 — Use `inv` + `matmul`)
 
 ```python
 import numpy as np
@@ -304,7 +330,9 @@ def gaussian_elimination(augmented_matrix: np.ndarray) -> np.ndarray:
 
 **Finite difference (uniform $\Delta x = \Delta y$):**
 
-$$u_{i,j} = \frac{u_{i+1,j} + u_{i-1,j} + u_{i,j+1} + u_{i,j-1}}{4}$$
+$$
+u_{i,j} = \frac{u_{i+1,j} + u_{i-1,j} + u_{i,j+1} + u_{i,j-1}}{4}
+$$
 
 **Liebmann's method (two-array, lecture §46.4):** compute all $u^\text{new}$ from $u^\text{old}$, then replace. Convergence tolerance $\varepsilon = 10^{-4}$.
 
@@ -333,11 +361,15 @@ Convergence is guaranteed for Dirichlet BCs by the maximum principle for ellipti
 
 ## 12. Monte Carlo Integration
 
-$$\hat{I} = (b - a)\,\overline{f}, \quad \overline{f} = \frac{1}{N}\sum_{j=1}^{N} f(x_j), \quad x_j \sim U[a, b]$$
+$$
+\hat{I} = (b - a)\,\overline{f}, \quad \overline{f} = \frac{1}{N}\sum_{j=1}^{N} f(x_j), \quad x_j \sim U[a, b]
+$$
 
 **One-sigma error estimate (lecture §32.4):**
 
-$$\sigma_{\hat{I}} = (b - a)\sqrt{\frac{\overline{f^2} - \overline{f}^{\,2}}{N}}$$
+$$
+\sigma_{\hat{I}} = (b - a)\sqrt{\frac{\overline{f^2} - \overline{f}^{\,2}}{N}}
+$$
 
 **Order:** $O(N^{-1/2})$, or equivalently $O(\langle\Delta x\rangle^{1/2})$. Much worse than deterministic methods for 1D, but the order is **dimension-independent** - the key advantage for high-dimensional integrals.
 
@@ -363,17 +395,21 @@ def monte_carlo_integrate(
 
 ## 13. Stochastic Methods
 
-### Wiener process (Brownian motion)
+### Wiener Process (Brownian motion)
 
 Discrete update (exact):
 
-$$W_{n+1} = W_n + \sqrt{\Delta t}\,\xi_n, \quad \xi_n \sim \mathcal{N}(0, 1)$$
+$$
+W_{n+1} = W_n + \sqrt{\Delta t}\,\xi_n, \quad \xi_n \sim \mathcal{N}(0, 1)
+$$
 
 Properties: $\langle W(t)\rangle = 0$, $\text{Var}[W(t)] = t$.
 
-### Ornstein-Uhlenbeck process (lecture §38.6.1)
+### Ornstein-Uhlenbeck Process (lecture §38.6.1)
 
-$$V_{n+1} = (1 - k\,\Delta t)\,V_n + \sqrt{\Delta t}\,\xi_n$$
+$$
+V_{n+1} = (1 - k\,\Delta t)\,V_n + \sqrt{\Delta t}\,\xi_n
+$$
 
 Mean-reverting: fluctuates around $V = 0$ with restoring force $-kV$. No drift parameter $\mu$ in the lecture version.
 
@@ -381,7 +417,9 @@ Mean-reverting: fluctuates around $V = 0$ with restoring force $-kV$. No drift p
 
 For $dV = f(V)\,dt + \sigma\,dW$:
 
-$$V_{n+1} = V_n + f(V_n)\,\Delta t + \sigma\sqrt{\Delta t}\,\xi_n$$
+$$
+V_{n+1} = V_n + f(V_n)\,\Delta t + \sigma\sqrt{\Delta t}\,\xi_n
+$$
 
 ```python
 import numpy as np
@@ -399,7 +437,7 @@ def wiener_and_ou_step(
     return next_velocity, next_wiener
 ```
 
-### Gaussian random numbers
+### Gaussian Random Numbers
 
 Generated from uniform random numbers via the Box-Muller transform or `np.random.normal()` / `rng.standard_normal()`. A Gaussian with mean $\mu$ and variance $\sigma^2$: use $\mu + \sigma \cdot \xi$ where $\xi \sim \mathcal{N}(0,1)$.
 
@@ -409,7 +447,9 @@ Generated from uniform random numbers via the Box-Muller transform or `np.random
 
 Run the OU (or other) simulation. At each step, check if $V \geq b$ (threshold). Record $\tau = t$ when the threshold is first crossed. Average over $N$ walkers:
 
-$$\langle\tau\rangle \approx \frac{1}{N}\sum_{j=1}^{N} \tau_j, \quad \text{SE} = \frac{\sigma_\tau}{\sqrt{N}}$$
+$$
+\langle\tau\rangle \approx \frac{1}{N}\sum_{j=1}^{N} \tau_j, \quad \text{SE} = \frac{\sigma_\tau}{\sqrt{N}}
+$$
 
 Choose $N$ so that $\text{SE}/\langle\tau\rangle \lesssim 1\%$ for two significant figures.
 
@@ -452,7 +492,9 @@ standard_error = np.std(passage_times) / np.sqrt(number_of_walkers)
 
 All 2nd-order RK methods have the form $y_{n+1} = y_n + \Delta t(a_1 k_1 + a_2 k_2)$ where $k_1 = g(t_n, y_n)$ and $k_2 = g(t_n + p_1\Delta t,\, y_n + q_{11}\Delta t\,k_1)$. Matching Taylor series to order $\Delta t^2$ gives three equations in four unknowns:
 
-$$a_1 + a_2 = 1, \quad a_2 p_1 = \tfrac{1}{2}, \quad a_2 q_{11} = \tfrac{1}{2}$$
+$$
+a_1 + a_2 = 1, \quad a_2 p_1 = \tfrac{1}{2}, \quad a_2 q_{11} = \tfrac{1}{2}
+$$
 
 One parameter is free, giving infinitely many 2nd-order methods. The two covered in the lecture:
 
@@ -471,7 +513,9 @@ For the ink-diffusion problem: $u(0, x) = \delta(x - x_M)$.
 
 In a finite-difference scheme, set the height of the peak so the discrete area equals 1:
 
-$$u(x_M) = \frac{1}{\Delta x}$$
+$$
+u(x_M) = \frac{1}{\Delta x}
+$$
 
 All other nodes start at zero. The sifting property $\int f(x)\delta(x-x_0)\,dx = f(x_0)$ verifies area preservation.
 
@@ -496,12 +540,13 @@ Rearranged to matrix form $A\mathbf{u} = \mathbf{b}$: interior rows carry the $[
 ## 18. Round-off Errors and Number Types
 
 **Two distinct error types in any numerical method:**
+
 1. **Truncation error** -- from cutting the Taylor series. Reducible by decreasing $\Delta t$.
 2. **Round-off error** -- from finite floating-point precision. Accumulates as $\Delta t \to 0$ (more steps). The two effects compete: there is an optimal $\Delta t$.
 
 **Float precision:** 32-bit ~7 decimal digits; 64-bit ~16 decimal digits. Always use 64-bit.
 
-**Critical `int` pitfall:** `int(tmax / dt)` can be off-by-one because `1.0 / 0.01` may evaluate to `99.9999...`. Always use:
+**Critical `int` pitfall:** `int(tmax / dt)` can be off-by-one because `1.0 / 0.01` may evaluate to `99.9999…`. Always use:
 
 ```python
 number_of_steps = int(round(tmax / dt))       # correct
@@ -518,6 +563,7 @@ number_of_steps = int(tmax / dt)              # WRONG: may be off by one
 **Discrete random walk:** steps of $\pm 1$ with equal probability. After $N$ steps: $\langle x \rangle = 0$, $\text{Var}(x) = N$.
 
 **Wiener process $W(t)$** -- three defining properties:
+
 1. $W(0) = 0$
 2. $W(t) - W(s) \sim \mathcal{N}(0,\ t-s)$ for all $s < t$
 3. Non-overlapping increments are independent

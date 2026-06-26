@@ -1,6 +1,6 @@
 # MTH3008 Weekly Problems 11
 
-> **Original Documents**: [[mth3008 weekly problem sheet 11.pdf|Problem Sheet]] / [[mth3008 weekly problem sheet 11 handwritten solutions.pdf|My Handwritten Solutions]]
+> **Original Documents**: [[mth3008 weekly problem sheet 11.pdf|Problem Sheet]] / [[mth3008 weekly problem sheet 11 solutions.pdf|Provided Solutions]] / `[[mth3008 weekly problem sheet 11 handwritten solutions.pdf|My Handwritten Solutions]]`
 >
 > **Vibes**: Whole-module revision in five problems. Two warm-ups (rewriting a vector identity in suffix notation; re-deriving $\nabla\times\nabla f=0$); a transformation-rule recipe for an arbitrary mixed rank-5 tensor; a full dual-basis exercise (cross products, components, transformation matrix, and second-rank tensor in the new system); and a 2D coordinate-system grind (basis, metric, arc length, both kinds of Christoffel symbols, three Riemann components). The 2D system in 11.5 is just flat $\mathbb{R}^{2}$ in disguise (set $X=e^{x}\sin\theta$, $Y=e^{x}\cos\theta$), so all Riemann components vanish.
 >

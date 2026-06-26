@@ -1,14 +1,5 @@
 # MTH3007b Weekly Problems 5
 
-> **Original Documents**: [[mth3007b weekly problem sheet 5.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 5 solutions.pdf|Provided Solutions]]
->
-> **Vibes**: ...
->
-> **Used Techniques**:
->   - ...
-
----
-
 ## 5.1. Numerical Integration via ODE
 
 > [!question]

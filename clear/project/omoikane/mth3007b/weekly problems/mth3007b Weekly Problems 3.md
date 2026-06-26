@@ -1,14 +1,5 @@
 # MTH3007b Weekly Problems 3
 
-> **Original Documents**: [[mth3007b weekly problem sheet 3.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 3 solutions.pdf|Provided Solutions]]
->
-> **Vibes**: ...
->
-> **Used Techniques**:
->   - ...
-
----
-
 > [!note]
 > The original exercises for session 3 are posted on Blackboard (assessment section). The problems below cover the core session 3 content: deriving and implementing RK4, the implicit trapezoid method, and comparing their accuracy.
 

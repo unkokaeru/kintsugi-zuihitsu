@@ -3,14 +3,22 @@
 /*
  * To-Do Wheel - Obsidian Plugin
  *
- * Parses bullet lists under a configurable heading into
- * an interactive two-stage spinning picker wheel.
+ * Parses nested bullet lists under a configurable heading
+ * into an interactive, uncapped spinning picker wheel that
+ * descends sublevel by sublevel.
  *
  * Embed with a ```todo-wheel``` code block in any note.
- * Override the heading: heading: Custom Text
+ * Code-block options (one per line, "key: value"):
+ *   heading: Custom Text   - parse a different heading
+ *   accent:  #rrggbb       - override the wheel colour
+ *   only:    ! %           - spin only items with these markers
+ *   exclude: ?             - hide items with these markers
+ *
+ * Weighting mode, recently-picked cooldown and history
+ * logging are configured in the plugin settings.
  */
 
-const { Plugin, PluginSettingTab, Setting, Notice } = require("obsidian");
+const { Plugin, PluginSettingTab, Setting, Notice, MarkdownRenderChild } = require("obsidian");
 
 /* =============================================
    User-facing labels (single source for i18n)
@@ -18,38 +26,118 @@ const { Plugin, PluginSettingTab, Setting, Notice } = require("obsidian");
 
 const LABELS = {
     PLUGIN_TITLE:           "To-Do Wheel",
-    SPIN_PROMPT:            "Spin to choose a project",
-    CHOOSING_PROJECT:       "Choosing a project...",
-    CHOOSING_TASK:          "Choosing a task...",
-    PROJECT_CHOSEN_HEADER:  "Project chosen",
-    PICK_TASK_BUTTON:       "Now pick a task",
+    SPIN_PROMPT:            "Spin to choose",
+    CHOOSING:               "Choosing\u2026",
+    ITEM_CHOSEN_HEADER:     "Chosen",
     DONE:                   "Done",
     YOUR_TASK:              "Your task",
     TRY_AGAIN:              "Try again",
-    BACK_TO_PROJECTS:       "Back to projects",
+    REROLL:                 "Reroll",
+    MARK_DONE:              "Mark done \u2713",
+    BACK_ONE_LEVEL:         "Back a level",
+    START_OVER:             "Start over",
     NOTHING_TO_SPIN:        "Nothing to spin",
     SPIN_BUTTON:            "SPIN",
-    SPINNING_INDICATOR:     "...",
+    SPINNING_INDICATOR:     "\u2026",
     FILE_READ_ERROR:        "Could not read this file.",
+    NO_MATCHES:             "Nothing matches this filter.",
     SETTINGS_TITLE:         "To-Do Wheel",
     SETTING_HEADING_NAME:   "Target heading",
     SETTING_HEADING_DESC:   "Bullet lists under headings matching this text will be parsed. Case-insensitive.",
+    SETTING_MODE_NAME:      "Weighting mode",
+    SETTING_MODE_DESC:      "How sector sizes (and odds) are decided when spinning.",
+    SETTING_COOLDOWN_NAME:  "Recently-picked cooldown",
+    SETTING_COOLDOWN_DESC:  "Temporarily shrink the last N picks so the wheel stops repeating itself. Set to 0 to disable.",
+    SETTING_LOG_NAME:       "Log spin history",
+    SETTING_LOG_DESC:       "Append every pick (and completion) to a note in your vault.",
+    SETTING_LOG_PATH_NAME:  "History note path",
+    SETTING_LOG_PATH_DESC:  "Vault-relative path of the log note. Created automatically if missing.",
+    SETTING_STREAK_NAME:    "Momentum",
+    HISTORY_HEADING:        "# To-Do Wheel History\n",
 
-    projectLabel:           (name) => "Project: " + name,
-    chooseTaskFrom:         (name) => 'Choose a task from "' + name + '"',
+    chooseFrom:             (breadcrumb) => "Choose from " + breadcrumb,
+    choosingFrom:           (breadcrumb) => "Choosing from " + breadcrumb + "\u2026",
+    pickFrom:               (name) => 'Pick from "' + name + '"',
+    itemChosen:             (name) => "Chosen: " + name,
     noTasksFound:           (heading) => 'No tasks found under a "' + heading + '" heading. Add a matching heading with bullet points beneath it.',
-    noticeProjectChosen:    (name) => "Project chosen: " + name,
     noticeStandaloneTask:   (name) => "Your task: " + name,
     noticeTask:             (name, description) => "Task: " + name + (description ? " - " + description : ""),
-    resultHeader:           (project) => project,
+    resultHeader:           (parent) => parent,
+    noticeDone:             (name) => "Nice \u2014 done: " + name,
+    streakBadge:            (days) => "\uD83D\uDD25 " + days,
+    streakNotice:           (days) => days <= 1 ? "Streak started \u2014 1 day" : "\uD83D\uDD25 " + days + "-day streak!",
+    streakSummary:          (current, longest) => "Current streak: " + current + " day" + (current === 1 ? "" : "s") + "  \u00b7  Best: " + longest,
 };
+
+/* =============================================
+   Weighting modes (Feature: weighting modes)
+   - chars    : sector size ~ subtree characters (the
+                amount of work) x marker priority.
+   - equal    : every sibling equally likely.
+   - priority : marker priority only; length ignored.
+   - shallow  : favour small / near-done items.
+   ============================================= */
+
+const WEIGHT_MODE_CHARS              = "chars";
+const WEIGHT_MODE_EQUAL              = "equal";
+const WEIGHT_MODE_PRIORITY           = "priority";
+const WEIGHT_MODE_SHALLOW            = "shallow";
+const WEIGHT_MODE_VALUES             = [WEIGHT_MODE_CHARS, WEIGHT_MODE_EQUAL, WEIGHT_MODE_PRIORITY, WEIGHT_MODE_SHALLOW];
+const WEIGHT_MODE_LABELS             = {
+    [WEIGHT_MODE_CHARS]:    "By size (characters \u00d7 priority)",
+    [WEIGHT_MODE_EQUAL]:    "Equal (pure random)",
+    [WEIGHT_MODE_PRIORITY]: "Priority only (markers)",
+    [WEIGHT_MODE_SHALLOW]:  "Shallow (favour quick wins)"
+};
+const EQUAL_WEIGHT_VALUE             = 1;
+const SHALLOW_REFERENCE_CHARS        = 40;
+
+/* =============================================
+   Recently-picked cooldown
+   ============================================= */
+
+const DEFAULT_COOLDOWN_COUNT         = 3;
+const COOLDOWN_MIN_MULTIPLIER        = 0.15;
+
+/* =============================================
+   Marker glyphs shown on the result card
+   ============================================= */
+
+const MARKER_EMOJI = {
+    "!": "\u2757",
+    "%": "\u23F3",
+    "?": "\u2753"
+};
+
+/* =============================================
+   Confetti celebration on completion
+   ============================================= */
+
+const CONFETTI_PARTICLE_COUNT        = 90;
+const CONFETTI_DURATION_MS           = 1300;
+const CONFETTI_GRAVITY               = 0.16;
+const CONFETTI_DRAG                  = 0.985;
+const CONFETTI_MIN_SPEED             = 3;
+const CONFETTI_SPEED_VARIANCE        = 7;
+const CONFETTI_MIN_SIZE              = 4;
+const CONFETTI_SIZE_VARIANCE         = 5;
+const CONFETTI_COLORS                = ["#FFD700", "#FF6B6B", "#4ECDC4", "#7b6cd9", "#52D273", "#FF9F1C"];
+const MILLISECONDS_PER_DAY           = 86400000;
 
 /* =============================================
    Default settings
    ============================================= */
 
 const DEFAULT_HEADING_TEXT = "To-Do List";
-const DEFAULT_SETTINGS     = { heading: DEFAULT_HEADING_TEXT };
+const DEFAULT_HISTORY_PATH = "To-Do Wheel History.md";
+const DEFAULT_SETTINGS     = {
+    heading:        DEFAULT_HEADING_TEXT,
+    weightMode:     WEIGHT_MODE_CHARS,
+    cooldownCount:  DEFAULT_COOLDOWN_COUNT,
+    logHistory:     true,
+    historyLogPath: DEFAULT_HISTORY_PATH,
+    streak:         { last: "", current: 0, longest: 0 }
+};
 
 /* =============================================
    Layout dimensions
@@ -172,14 +260,36 @@ const HEX_RADIX                      = 16;
    ============================================= */
 
 const TAB_WIDTH_IN_SPACES            = 4;
-const TOP_LEVEL_INDENT               = 0;
+const BULLET_LINE_PATTERN            = /^(\s*)([-*+])\s+(.+)$/;
+const LEADING_MARKER_PATTERN         = /^([!?%])\s+/;
+const MARKER_IMPORTANT               = "!";
+const MARKER_IN_PROGRESS             = "%";
+const MARKER_UNCERTAIN               = "?";
+
+/* =============================================
+   Sector weighting
+   - A sector's angular size is proportional to the
+     total character count of its subtree (the item
+     plus everything nested beneath it), scaled by a
+     priority multiplier for a leading marker:
+       "!" important   -> larger  (surfaced more often)
+       "%" in progress -> larger  (finish what was started)
+       "?" uncertain   -> smaller (deferred)
+     A larger sector is therefore more likely to be
+     landed on.
+   ============================================= */
+
+const WEIGHT_MULTIPLIER_IMPORTANT    = 1.8;
+const WEIGHT_MULTIPLIER_IN_PROGRESS  = 1.5;
+const WEIGHT_MULTIPLIER_UNCERTAIN    = 0.55;
+const WEIGHT_MULTIPLIER_NEUTRAL      = 1.0;
+const MIN_SUBTREE_CHAR_COUNT         = 1;
+const MIN_SECTOR_ANGLE_FRACTION      = 0.035;
 
 /* =============================================
    Wheel state values
    ============================================= */
 
-const PROJECT_SELECTION_STAGE        = 1;
-const TASK_SELECTION_STAGE           = 2;
 const NO_HIGHLIGHT_INDEX             = -1;
 const DEFAULT_DEVICE_PIXEL_RATIO     = 1;
 const CANVAS_RENDERING_CONTEXT_TYPE  = "2d";
@@ -434,8 +544,120 @@ function splitAtFirstColon(text) {
 }
 
 /* =============================================
-   Parse bullet lists under a target heading
-   into a project-to-tasks map
+   Create a single to-do node from a bullet's raw
+   text. Captures a leading "!"/"%"/"?" priority marker
+   (stripped from the label) and the character count
+   of the cleaned text used for sector sizing.
+   ============================================= */
+
+function createTodoNode(rawBulletText) {
+    const markerMatch       = rawBulletText.match(LEADING_MARKER_PATTERN);
+    const marker            = markerMatch ? markerMatch[1] : null;
+    const textWithoutMarker = marker ? rawBulletText.replace(LEADING_MARKER_PATTERN, "") : rawBulletText;
+
+    const strippedText                = stripMarkdownFormatting(textWithoutMarker);
+    const boldLabel                   = extractFirstBoldPhrase(textWithoutMarker);
+    const [taskName, taskDescription] = splitAtFirstColon(strippedText);
+
+    return {
+        label:            fixCapitalisation(boldLabel || taskName),
+        fullName:         fixCapitalisation(taskName),
+        description:      taskDescription,
+        marker:           marker,
+        ownCharCount:     strippedText.length,
+        subtreeCharCount: 0,
+        children:         []
+    };
+}
+
+/* =============================================
+   Map a leading priority marker to its weight
+   multiplier
+   ============================================= */
+
+function markerWeightMultiplier(marker) {
+    if (marker === MARKER_IMPORTANT)   return WEIGHT_MULTIPLIER_IMPORTANT;
+    if (marker === MARKER_IN_PROGRESS) return WEIGHT_MULTIPLIER_IN_PROGRESS;
+    if (marker === MARKER_UNCERTAIN)   return WEIGHT_MULTIPLIER_UNCERTAIN;
+    return WEIGHT_MULTIPLIER_NEUTRAL;
+}
+
+/* =============================================
+   Resolve a node's base sector weight under the
+   chosen weighting mode (before any cooldown).
+     chars    : subtree characters x marker priority
+     equal    : the same for every sibling
+     priority : marker priority only (length ignored)
+     shallow  : favour small / near-done subtrees
+   ============================================= */
+
+function weightForNode(node, weightMode) {
+    const markerMultiplier = markerWeightMultiplier(node.marker);
+    const subtreeChars     = Math.max(node.subtreeCharCount, MIN_SUBTREE_CHAR_COUNT);
+
+    if (weightMode === WEIGHT_MODE_EQUAL)    return EQUAL_WEIGHT_VALUE;
+    if (weightMode === WEIGHT_MODE_PRIORITY) return markerMultiplier;
+    if (weightMode === WEIGHT_MODE_SHALLOW) {
+        return markerMultiplier * (SHALLOW_REFERENCE_CHARS / (subtreeChars + SHALLOW_REFERENCE_CHARS));
+    }
+    return subtreeChars * markerMultiplier;
+}
+
+/* =============================================
+   Recursively total a node's whole-subtree
+   character count (itself plus everything nested
+   beneath it). Used by every weighting mode.
+   ============================================= */
+
+function computeSubtreeWeights(node) {
+    let subtreeCharCount = Math.max(node.ownCharCount, 0);
+    for (const child of node.children) {
+        computeSubtreeWeights(child);
+        subtreeCharCount += child.subtreeCharCount;
+    }
+    node.subtreeCharCount = subtreeCharCount;
+    return node;
+}
+
+/* =============================================
+   Build an uncapped tree of to-do nodes from the
+   bullet lines of a section. Indentation governs
+   parent/child relationships with no depth limit,
+   so every sublevel is preserved rather than being
+   flattened into a single list.
+   ============================================= */
+
+function buildTodoTree(sectionLines) {
+    const rootNodes = [];
+    const ancestry  = [];
+
+    for (const line of sectionLines) {
+        const bulletMatch = line.match(BULLET_LINE_PATTERN);
+        if (!bulletMatch) continue;
+
+        const indentSpaces = bulletMatch[1].replace(/\t/g, " ".repeat(TAB_WIDTH_IN_SPACES)).length;
+        const node         = createTodoNode(bulletMatch[3]);
+
+        while (ancestry.length > 0 && ancestry[ancestry.length - 1].indent >= indentSpaces) {
+            ancestry.pop();
+        }
+
+        if (ancestry.length === 0) {
+            rootNodes.push(node);
+        } else {
+            ancestry[ancestry.length - 1].node.children.push(node);
+        }
+        ancestry.push({ indent: indentSpaces, node });
+    }
+
+    for (const rootNode of rootNodes) computeSubtreeWeights(rootNode);
+    return rootNodes;
+}
+
+/* =============================================
+   Parse the bullet list under the first heading
+   matching the target text into an uncapped tree
+   of to-do nodes
    ============================================= */
 
 function parseTodoSection(noteContent, targetHeadingText) {
@@ -458,31 +680,135 @@ function parseTodoSection(noteContent, targetHeadingText) {
         if (insideSection) sectionLines.push(line);
     }
 
-    const todosByProject     = {};
-    const fullNameForLabel   = {};
-    let   currentProjectName = null;
+    return { rootNodes: buildTodoTree(sectionLines) };
+}
 
-    for (const line of sectionLines) {
-        const bulletMatch = line.match(/^(\s*)([-*+])\s+(.+)$/);
-        if (!bulletMatch) continue;
+/* =============================================
+   Parse a marker filter option value such as
+   "! %", "!,%" or "!%" into a set of marker
+   characters, plus whether unmarked items count
+   (via the keyword "none"/"neutral").
+   ============================================= */
 
-        const strippedText   = stripMarkdownFormatting(bulletMatch[3]);
-        const boldLabel      = extractFirstBoldPhrase(bulletMatch[3]);
-        const indentSpaces   = bulletMatch[1].replace(/\t/g, " ".repeat(TAB_WIDTH_IN_SPACES)).length;
-        const [taskName, taskDescription] = splitAtFirstColon(strippedText);
-        const wheelLabel     = fixCapitalisation(boldLabel || taskName);
-        const fullName       = fixCapitalisation(taskName);
-
-        if (indentSpaces === TOP_LEVEL_INDENT) {
-            currentProjectName = wheelLabel;
-            todosByProject[currentProjectName] = {};
-            fullNameForLabel[wheelLabel] = fullName;
-        } else if (currentProjectName) {
-            todosByProject[currentProjectName][wheelLabel] = taskDescription;
-            fullNameForLabel[wheelLabel] = fullName;
+function parseMarkerFilter(rawValue) {
+    const lower          = rawValue.toLowerCase();
+    const includeUnmarked = /\bnone\b/.test(lower) || /\bneutral\b/.test(lower);
+    const stripped        = lower.replace(/\bnone\b/g, "").replace(/\bneutral\b/g, "");
+    const markerChars     = new Set();
+    for (const character of stripped) {
+        if (character !== " " && character !== "," && character !== "\t") {
+            markerChars.add(character);
         }
     }
-    return { todosByProject, fullNameForLabel };
+    return { markerChars, includeUnmarked };
+}
+
+/* =============================================
+   Does a node's own marker satisfy a filter spec?
+   ============================================= */
+
+function nodeMarkerMatches(node, filterSpec) {
+    return node.marker
+        ? filterSpec.markerChars.has(node.marker)
+        : filterSpec.includeUnmarked;
+}
+
+/* =============================================
+   Keep only items matching the filter. A matching
+   item keeps its whole subtree (so you can still
+   descend into its real subtasks); a non-matching
+   item survives only as a path to matching
+   descendants.
+   ============================================= */
+
+function filterTreeOnly(nodes, filterSpec) {
+    const kept = [];
+    for (const node of nodes) {
+        if (nodeMarkerMatches(node, filterSpec)) {
+            kept.push(node);
+        } else {
+            const keptChildren = filterTreeOnly(node.children, filterSpec);
+            if (keptChildren.length > 0) {
+                kept.push(Object.assign({}, node, { children: keptChildren }));
+            }
+        }
+    }
+    return kept;
+}
+
+/* =============================================
+   Drop items matching the filter, along with
+   everything nested beneath them.
+   ============================================= */
+
+function filterTreeExclude(nodes, filterSpec) {
+    const kept = [];
+    for (const node of nodes) {
+        if (nodeMarkerMatches(node, filterSpec)) continue;
+        kept.push(Object.assign({}, node, {
+            children: filterTreeExclude(node.children, filterSpec)
+        }));
+    }
+    return kept;
+}
+
+/* =============================================
+   Apply optional "only" / "exclude" marker filters
+   from a code block, then recompute subtree totals
+   so weighting reflects the pruned tree.
+   ============================================= */
+
+function applyMarkerFilters(rootNodes, onlyValue, excludeValue) {
+    let nodes = rootNodes;
+    if (onlyValue) {
+        nodes = filterTreeOnly(nodes, parseMarkerFilter(onlyValue));
+    }
+    if (excludeValue) {
+        nodes = filterTreeExclude(nodes, parseMarkerFilter(excludeValue));
+    }
+    if (nodes !== rootNodes) {
+        for (const node of nodes) computeSubtreeWeights(node);
+    }
+    return nodes;
+}
+
+/* =============================================
+   Format a Date as "YYYY-MM-DD" (local time)
+   ============================================= */
+
+function formatDate(date) {
+    const pad = (value) => String(value).padStart(2, "0");
+    return date.getFullYear() + "-" + pad(date.getMonth() + 1) + "-" + pad(date.getDate());
+}
+
+/* =============================================
+   Format a Date as "YYYY-MM-DD HH:mm" (local time)
+   ============================================= */
+
+function formatDateTime(date) {
+    const pad = (value) => String(value).padStart(2, "0");
+    return formatDate(date) + " " + pad(date.getHours()) + ":" + pad(date.getMinutes());
+}
+
+/* =============================================
+   Update a streak record given a completion today.
+   Returns a new record; never mutates the input.
+   ============================================= */
+
+function advanceStreak(streak, todayString, yesterdayString) {
+    const safe = {
+        last:    (streak && streak.last) || "",
+        current: (streak && streak.current) || 0,
+        longest: (streak && streak.longest) || 0
+    };
+    if (safe.last === todayString) return safe;
+
+    const current = safe.last === yesterdayString ? safe.current + 1 : 1;
+    return {
+        last:    todayString,
+        current: current,
+        longest: Math.max(safe.longest, current)
+    };
 }
 
 /* =============================================
@@ -500,30 +826,92 @@ function truncateTextToFit(renderingContext, text, maximumWidth) {
 }
 
 /* =============================================
+   Convert sector weights into cumulative angular
+   segments. Every sector keeps at least a minimum
+   fraction of the circle so thin slices stay
+   readable; the remainder is shared proportionally
+   to weight. Sweeps always sum to a full circle.
+   ============================================= */
+
+function computeSegmentAngles(weights) {
+    const segmentCount = weights.length;
+    if (segmentCount === 0) return [];
+
+    const totalWeight    = weights.reduce((sum, weight) => sum + Math.max(weight, 0), 0);
+    const floorFraction  = Math.min(MIN_SECTOR_ANGLE_FRACTION, 1 / segmentCount);
+    const sharedFraction = 1 - floorFraction * segmentCount;
+
+    const segments = [];
+    let   cumulativeOffset = 0;
+    for (let index = 0; index < segmentCount; index++) {
+        const weightFraction = totalWeight > 0
+            ? Math.max(weights[index], 0) / totalWeight
+            : 1 / segmentCount;
+        const sweep = (floorFraction + sharedFraction * weightFraction) * FULL_CIRCLE;
+        segments.push({ start: cumulativeOffset, sweep: sweep, end: cumulativeOffset + sweep });
+        cumulativeOffset += sweep;
+    }
+    return segments;
+}
+
+/* =============================================
    Determine which segment the pointer rests on
    after the wheel stops spinning
    ============================================= */
 
-function calculateWinnerIndex(currentRotation, itemCount) {
-    const segmentAngle = FULL_CIRCLE / itemCount;
-    let normalizedAngle = (POINTER_ANGLE - currentRotation) % FULL_CIRCLE;
-    if (normalizedAngle < 0) normalizedAngle += FULL_CIRCLE;
-    return Math.floor(normalizedAngle / segmentAngle) % itemCount;
+function calculateWinnerIndex(currentRotation, segments) {
+    let pointerLocalAngle = (POINTER_ANGLE - currentRotation) % FULL_CIRCLE;
+    if (pointerLocalAngle < 0) pointerLocalAngle += FULL_CIRCLE;
+    for (let index = 0; index < segments.length; index++) {
+        if (pointerLocalAngle >= segments[index].start && pointerLocalAngle < segments[index].end) {
+            return index;
+        }
+    }
+    return segments.length - 1;
 }
 
 /* =============================================
-   Compute total rotation delta for a fair
-   random spin with extra full rotations
+   Pick a segment index at random, weighted so a
+   larger sector is proportionally more likely
    ============================================= */
 
-function calculateSpinDelta(currentRotation, itemCount) {
-    const segmentAngle   = FULL_CIRCLE / itemCount;
-    const winnerSegment  = Math.floor(Math.random() * itemCount);
-    const targetAngle    = POINTER_ANGLE
-        - (winnerSegment + LANDING_CENTER_OFFSET) * segmentAngle
-        + (Math.random() - LANDING_CENTER_OFFSET) * segmentAngle * LANDING_JITTER_FACTOR;
-    let rotationDelta    = ((targetAngle - currentRotation) % FULL_CIRCLE + FULL_CIRCLE) % FULL_CIRCLE;
-    rotationDelta       += (MINIMUM_EXTRA_FULL_ROTATIONS + Math.floor(Math.random() * EXTRA_ROTATION_VARIANCE)) * FULL_CIRCLE;
+function pickWeightedIndex(weights, totalWeight) {
+    if (totalWeight <= 0) return Math.floor(Math.random() * weights.length);
+    let threshold = Math.random() * totalWeight;
+    for (let index = 0; index < weights.length; index++) {
+        threshold -= Math.max(weights[index], 0);
+        if (threshold < 0) return index;
+    }
+    return weights.length - 1;
+}
+
+/* =============================================
+   Compute total rotation delta for a weighted
+   random spin with extra full rotations. The
+   winning sector is chosen in proportion to its
+   drawn size, and the landing target is biased
+   toward the centre of that sector. An optional
+   excludeIndex is never chosen (used by "Reroll"
+   to guarantee a different result).
+   ============================================= */
+
+function calculateSpinDelta(currentRotation, segments, excludeIndex) {
+    const sweeps = segments.map((segment, index) =>
+        index === excludeIndex ? 0 : segment.sweep
+    );
+    let totalSweep = sweeps.reduce((sum, sweep) => sum + sweep, 0);
+    if (totalSweep <= 0) {
+        for (let index = 0; index < sweeps.length; index++) sweeps[index] = segments[index].sweep;
+        totalSweep = sweeps.reduce((sum, sweep) => sum + sweep, 0);
+    }
+    const winnerSegment = segments[pickWeightedIndex(sweeps, totalSweep)];
+
+    const landingWithinSegment = LANDING_CENTER_OFFSET
+        + (Math.random() - LANDING_CENTER_OFFSET) * LANDING_JITTER_FACTOR;
+    const targetLocalAngle = winnerSegment.start + winnerSegment.sweep * landingWithinSegment;
+
+    let rotationDelta = ((POINTER_ANGLE - targetLocalAngle - currentRotation) % FULL_CIRCLE + FULL_CIRCLE) % FULL_CIRCLE;
+    rotationDelta    += (MINIMUM_EXTRA_FULL_ROTATIONS + Math.floor(Math.random() * EXTRA_ROTATION_VARIANCE)) * FULL_CIRCLE;
     return rotationDelta;
 }
 
@@ -565,24 +953,135 @@ function segmentFontSize(itemCount) {
 }
 
 /* =============================================
+   Launch a brief, dependency-free confetti burst
+   over a (position: relative) parent element.
+   Self-cleans when the animation finishes.
+   ============================================= */
+
+function launchConfetti(parentElement) {
+    if (!parentElement) return;
+
+    const width  = parentElement.clientWidth  || CANVAS_PIXEL_SIZE;
+    const height = parentElement.clientHeight || CANVAS_PIXEL_SIZE;
+
+    const confettiCanvas = parentElement.createEl("canvas", { cls: "todo-wheel-confetti" });
+    confettiCanvas.width  = width;
+    confettiCanvas.height = height;
+    const context = confettiCanvas.getContext(CANVAS_RENDERING_CONTEXT_TYPE);
+
+    const particles = [];
+    for (let index = 0; index < CONFETTI_PARTICLE_COUNT; index++) {
+        const angle = Math.random() * FULL_CIRCLE;
+        const speed = CONFETTI_MIN_SPEED + Math.random() * CONFETTI_SPEED_VARIANCE;
+        particles.push({
+            x:        width / 2,
+            y:        height / 2,
+            velocityX: Math.cos(angle) * speed,
+            velocityY: Math.sin(angle) * speed - speed,
+            size:     CONFETTI_MIN_SIZE + Math.random() * CONFETTI_SIZE_VARIANCE,
+            color:    CONFETTI_COLORS[index % CONFETTI_COLORS.length],
+            spin:     Math.random() * FULL_CIRCLE,
+            spinRate: (Math.random() - 0.5) * 0.3
+        });
+    }
+
+    const startTimestamp = performance.now();
+    const tick = () => {
+        if (!confettiCanvas.isConnected) return;
+        const elapsed = performance.now() - startTimestamp;
+        context.clearRect(0, 0, width, height);
+
+        for (const particle of particles) {
+            particle.velocityX *= CONFETTI_DRAG;
+            particle.velocityY  = particle.velocityY * CONFETTI_DRAG + CONFETTI_GRAVITY * 3;
+            particle.x         += particle.velocityX;
+            particle.y         += particle.velocityY;
+            particle.spin      += particle.spinRate;
+
+            context.save();
+            context.globalAlpha = Math.max(0, 1 - elapsed / CONFETTI_DURATION_MS);
+            context.translate(particle.x, particle.y);
+            context.rotate(particle.spin);
+            context.fillStyle = particle.color;
+            context.fillRect(-particle.size / 2, -particle.size / 2, particle.size, particle.size * 0.6);
+            context.restore();
+        }
+
+        if (elapsed < CONFETTI_DURATION_MS) {
+            requestAnimationFrame(tick);
+        } else {
+            confettiCanvas.remove();
+        }
+    };
+    requestAnimationFrame(tick);
+}
+
+/* =============================================
    WheelRenderer - builds and drives the wheel
    ============================================= */
 
 class WheelRenderer {
-    constructor(rootElement, todosByProject, fullNameForLabel, application, accentRgb) {
-        this.application          = application;
-        this.todosByProject       = todosByProject;
-        this.fullNameForLabel     = fullNameForLabel;
-        this.accentRgb            = accentRgb;
-        this.currentStage         = PROJECT_SELECTION_STAGE;
-        this.selectedProjectName  = null;
-        this.currentRotation      = Math.random() * FULL_CIRCLE;
-        this.isSpinning           = false;
-        this.highlightedIndex     = NO_HIGHLIGHT_INDEX;
-        this.animationFrameId     = null;
+    constructor(rootElement, rootNodes, application, accentRgb, options) {
+        options = options || {};
+        this.application      = application;
+        this.rootNodes        = rootNodes;
+        this.accentRgb        = accentRgb;
+        this.weightMode       = WEIGHT_MODE_VALUES.includes(options.weightMode) ? options.weightMode : WEIGHT_MODE_CHARS;
+        this.cooldownCount    = Math.max(0, Math.floor(options.cooldownCount || 0));
+        this.onStateChange    = typeof options.onStateChange === "function" ? options.onStateChange : null;
+        this.onPick           = typeof options.onPick === "function" ? options.onPick : null;
+        this.onComplete       = typeof options.onComplete === "function" ? options.onComplete : null;
+        this.streakDays       = Math.max(0, Math.floor(options.streakDays || 0));
+        this.recent           = [];
+        this.path             = [];
+        this.segments         = [];
+        this.currentRotation  = Math.random() * FULL_CIRCLE;
+        this.isSpinning       = false;
+        this.highlightedIndex = NO_HIGHLIGHT_INDEX;
+        this.animationFrameId = null;
 
         this._buildLayout(rootElement);
+        this._restoreState(options.savedState);
+        this._recomputeSegments();
         this._drawWheel();
+    }
+
+    /* Restore a previously saved descent path (by sibling indices) and rotation
+       so an Obsidian re-render of the code block does not reset progress. */
+    _restoreState(savedState) {
+        if (!savedState) return;
+        if (Array.isArray(savedState.pathIndices)) {
+            let level = this.rootNodes;
+            for (const childIndex of savedState.pathIndices) {
+                if (!Number.isInteger(childIndex) || childIndex < 0 || childIndex >= level.length) break;
+                const node = level[childIndex];
+                if (node.children.length === 0) break;
+                this.path.push(node);
+                level = node.children;
+            }
+        }
+        if (typeof savedState.rotation === "number" && isFinite(savedState.rotation)) {
+            this.currentRotation = savedState.rotation;
+        }
+        if (Array.isArray(savedState.recent)) {
+            this.recent = savedState.recent.filter((name) => typeof name === "string");
+        }
+        this.stageIndicator.setText(this._promptText());
+    }
+
+    /* Persist the current descent path (as sibling indices), rotation and the
+       recently-picked list (for cooldown). */
+    _persist() {
+        if (!this.onStateChange) return;
+        const pathIndices = [];
+        let level = this.rootNodes;
+        for (const node of this.path) {
+            const childIndex = level.indexOf(node);
+            if (childIndex === -1) break;
+            pathIndices.push(childIndex);
+            level = node.children;
+        }
+        this.onStateChange({ pathIndices, rotation: this.currentRotation, recent: this.recent.slice() });
     }
 
     _buildLayout(rootElement) {
@@ -590,7 +1089,10 @@ class WheelRenderer {
         rootElement.classList.add("todo-wheel-container");
 
         const headerContainer = rootElement.createDiv({ cls: "todo-wheel-header" });
-        headerContainer.createEl("h3", { text: LABELS.PLUGIN_TITLE });
+        const titleRow        = headerContainer.createDiv({ cls: "todo-wheel-title-row" });
+        titleRow.createEl("h3", { text: LABELS.PLUGIN_TITLE });
+        this.streakBadge = titleRow.createEl("span", { cls: "todo-wheel-streak" });
+        this._renderStreakBadge();
         this.stageIndicator = headerContainer.createEl("p", {
             text: LABELS.SPIN_PROMPT,
             cls: "todo-wheel-stage"
@@ -616,14 +1118,65 @@ class WheelRenderer {
         this.actionsContainer = rootElement.createDiv({ cls: "todo-wheel-actions" });
     }
 
-    _currentItems() {
-        if (this.currentStage === PROJECT_SELECTION_STAGE) {
-            return Object.keys(this.todosByProject);
+    _currentNodes() {
+        if (this.path.length === 0) return this.rootNodes;
+        return this.path[this.path.length - 1].children;
+    }
+
+    _breadcrumb() {
+        return this.path.map((node) => node.fullName).join(" \u203a ");
+    }
+
+    _promptText() {
+        return this.path.length === 0
+            ? LABELS.SPIN_PROMPT
+            : LABELS.chooseFrom(this._breadcrumb());
+    }
+
+    _choosingText() {
+        return this.path.length === 0
+            ? LABELS.CHOOSING
+            : LABELS.choosingFrom(this._breadcrumb());
+    }
+
+    _renderStreakBadge() {
+        if (!this.streakBadge) return;
+        if (this.streakDays > 0) {
+            this.streakBadge.setText(LABELS.streakBadge(this.streakDays));
+            this.streakBadge.style.display = "";
+            this.streakBadge.setAttribute("aria-label", LABELS.streakSummary(this.streakDays, this.streakDays));
+        } else {
+            this.streakBadge.setText("");
+            this.streakBadge.style.display = "none";
         }
-        if (this.currentStage === TASK_SELECTION_STAGE && this.selectedProjectName) {
-            return Object.keys(this.todosByProject[this.selectedProjectName]);
-        }
-        return [];
+    }
+
+    /* Down-weight a node that was picked recently so the wheel stops
+       repeating itself. The most recent pick is damped most, easing
+       back to full weight as it ages out of the cooldown window. */
+    _cooldownMultiplier(node) {
+        if (this.cooldownCount <= 0 || this.recent.length === 0) return 1;
+        const positionFromOldest = this.recent.lastIndexOf(node.fullName);
+        if (positionFromOldest === -1) return 1;
+        const recencyFromNewest = this.recent.length - 1 - positionFromOldest;
+        const easing = Math.min(1, recencyFromNewest / this.cooldownCount);
+        return COOLDOWN_MIN_MULTIPLIER + (1 - COOLDOWN_MIN_MULTIPLIER) * easing;
+    }
+
+    _effectiveWeights(nodes) {
+        return nodes.map((node) =>
+            Math.max(0, weightForNode(node, this.weightMode)) * this._cooldownMultiplier(node)
+        );
+    }
+
+    _recomputeSegments() {
+        this.segments = computeSegmentAngles(this._effectiveWeights(this._currentNodes()));
+    }
+
+    _recordRecent(node) {
+        if (this.cooldownCount <= 0) return;
+        this.recent.push(node.fullName);
+        while (this.recent.length > this.cooldownCount) this.recent.shift();
     }
 
     _canvasOffsetFromCenter(event) {
@@ -646,26 +1199,30 @@ class WheelRenderer {
             Math.hypot(offsetX, offsetY) <= CENTER_BUTTON_RADIUS ? "pointer" : "default";
     }
 
-    _startSpin() {
-        const items = this._currentItems();
-        if (items.length === 0 || this.isSpinning) return;
+    _startSpin(options) {
+        options = options || {};
+        const nodes = this._currentNodes();
+        if (nodes.length === 0 || this.isSpinning) return;
+
+        this._recomputeSegments();
+        const segments = this.segments;
 
         this.isSpinning       = true;
         this.highlightedIndex = NO_HIGHLIGHT_INDEX;
         this.resultContainer.style.display = "none";
         this.actionsContainer.empty();
-        this.stageIndicator.setText(
-            this.currentStage === PROJECT_SELECTION_STAGE
-                ? LABELS.CHOOSING_PROJECT
-                : LABELS.CHOOSING_TASK
-        );
+        this.stageIndicator.setText(this._choosingText());
 
-        const totalDelta           = calculateSpinDelta(this.currentRotation, items.length);
+        const excludeIndex        = Number.isInteger(options.excludeIndex) ? options.excludeIndex : -1;
+        const totalDelta          = calculateSpinDelta(this.currentRotation, segments, excludeIndex);
         const rotationAtSpinStart  = this.currentRotation;
         const spinStartTimestamp   = performance.now();
 
         const animationTick = () => {
-            if (!this.wheelCanvas.isConnected) return;
+            if (!this.wheelCanvas.isConnected) {
+                this.isSpinning = false;
+                return;
+            }
 
             const elapsedProgress = Math.min(
                 (performance.now() - spinStartTimestamp) / SPIN_DURATION_MS,
@@ -678,111 +1235,179 @@ class WheelRenderer {
                 this.animationFrameId = requestAnimationFrame(animationTick);
             } else {
                 this.isSpinning       = false;
-                this.highlightedIndex = calculateWinnerIndex(this.currentRotation, items.length);
+                this.highlightedIndex = calculateWinnerIndex(this.currentRotation, segments);
                 this._drawWheel();
-                this._announceResult(items);
+                this._recordRecent(nodes[this.highlightedIndex]);
+                this._persist();
+                this._announceResult(nodes);
             }
         };
         this.animationFrameId = requestAnimationFrame(animationTick);
     }
 
-    _announceResult(items) {
-        const winningWheelLabel = items[this.highlightedIndex];
-        const winningFullName   = this.fullNameForLabel[winningWheelLabel] || winningWheelLabel;
+    _announceResult(nodes) {
+        const winner = nodes[this.highlightedIndex];
 
-        if (this.currentStage === PROJECT_SELECTION_STAGE) {
-            const projectTasks = this.todosByProject[winningWheelLabel];
-            const taskNames    = Object.keys(projectTasks);
+        if (winner.children.length > 0) {
+            this.stageIndicator.setText(LABELS.itemChosen(winner.fullName));
+            this._displayResult(LABELS.ITEM_CHOSEN_HEADER, winner.fullName, null, winner.marker);
 
-            if (taskNames.length > 0) {
-                this.stageIndicator.setText(LABELS.projectLabel(winningFullName));
-                this._displayResult(LABELS.PROJECT_CHOSEN_HEADER, winningFullName, null);
+            const descendButton = this.actionsContainer.createEl("button", {
+                text: LABELS.pickFrom(winner.fullName),
+                cls: "todo-wheel-btn todo-wheel-primary"
+            });
+            descendButton.addEventListener("click", () => {
+                this.path.push(winner);
+                this._returnToSelection();
+            });
 
-                const pickTaskButton = this.actionsContainer.createEl("button", {
-                    text: LABELS.PICK_TASK_BUTTON,
-                    cls: "todo-wheel-btn todo-wheel-primary"
-                });
-                pickTaskButton.addEventListener("click", () => {
-                    this.selectedProjectName = winningWheelLabel;
-                    this.currentStage        = TASK_SELECTION_STAGE;
-                    this.highlightedIndex    = NO_HIGHLIGHT_INDEX;
-                    this.resultContainer.style.display = "none";
-                    this.actionsContainer.empty();
-                    this.stageIndicator.setText(LABELS.chooseTaskFrom(winningFullName));
-                    this.currentRotation = Math.random() * FULL_CIRCLE;
-                    this._drawWheel();
-                });
-
-                this._addTryAgainButton();
-                new Notice(LABELS.noticeProjectChosen(winningFullName));
-            } else {
-                this.stageIndicator.setText(LABELS.DONE);
-                this._displayResult(LABELS.YOUR_TASK, winningFullName, null);
-                this._addResetButtons();
-                new Notice(LABELS.noticeStandaloneTask(winningFullName));
-            }
+            this._addRerollButton();
+            this._addBackButton();
+            this._addStartOverButton();
+            new Notice(LABELS.itemChosen(winner.fullName));
         } else {
-            const taskDescription     = this.todosByProject[this.selectedProjectName][winningWheelLabel];
-            const selectedProjectFull = this.fullNameForLabel[this.selectedProjectName] || this.selectedProjectName;
+            const parentName = this.path.length === 0
+                ? LABELS.YOUR_TASK
+                : LABELS.resultHeader(this.path[this.path.length - 1].fullName);
             this.stageIndicator.setText(LABELS.DONE);
-            this._displayResult(
-                LABELS.resultHeader(selectedProjectFull),
-                winningFullName,
-                taskDescription
+            this._displayResult(parentName, winner.fullName, winner.description, winner.marker);
+            this._addLeafButtons(winner);
+            new Notice(
+                this.path.length === 0
+                    ? LABELS.noticeStandaloneTask(winner.fullName)
+                    : LABELS.noticeTask(winner.fullName, winner.description)
             );
-            this._addResetButtons();
-            new Notice(LABELS.noticeTask(winningFullName, taskDescription));
+            this._logPick(winner);
         }
     }
 
-    _displayResult(labelText, mainText, descriptionText) {
+    _displayResult(labelText, mainText, descriptionText, marker) {
         this.resultContainer.empty();
         this.resultContainer.style.display = "block";
-        this.resultContainer.createEl("div", { text: labelText,   cls: "todo-wheel-result-label" });
-        this.resultContainer.createEl("div", { text: mainText,    cls: "todo-wheel-result-text"  });
+        this.resultContainer.classList.remove("todo-wheel-pop");
+        void this.resultContainer.offsetWidth;
+        this.resultContainer.classList.add("todo-wheel-pop");
+
+        const labelRow = this.resultContainer.createEl("div", { cls: "todo-wheel-result-label" });
+        if (marker && MARKER_EMOJI[marker]) {
+            labelRow.createEl("span", { text: MARKER_EMOJI[marker], cls: "todo-wheel-result-marker" });
+        }
+        labelRow.createSpan({ text: labelText });
+
+        this.resultContainer.createEl("div", { text: mainText, cls: "todo-wheel-result-text" });
         if (descriptionText) {
             this.resultContainer.createEl("div", { text: descriptionText, cls: "todo-wheel-result-desc" });
         }
     }
 
-    _addTryAgainButton() {
-        const tryAgainButton = this.actionsContainer.createEl("button", {
-            text: LABELS.TRY_AGAIN,
+    _returnToSelection() {
+        this.highlightedIndex = NO_HIGHLIGHT_INDEX;
+        this.resultContainer.style.display = "none";
+        this.actionsContainer.empty();
+        this.stageIndicator.setText(this._promptText());
+        this.currentRotation = Math.random() * FULL_CIRCLE;
+        this._recomputeSegments();
+        this._persist();
+        this._drawWheel();
+    }
+
+    /* Respin the current level. When excludeCurrent is set, the item just
+       landed on is never chosen again, guaranteeing a different result
+       within the same branch (Feature: reroll within branch). */
+    _addRerollButton(excludeCurrent) {
+        const rerollButton = this.actionsContainer.createEl("button", {
+            text: excludeCurrent ? LABELS.REROLL : LABELS.TRY_AGAIN,
             cls: "todo-wheel-btn"
         });
-        tryAgainButton.addEventListener("click", () => {
+        const excludeIndex = excludeCurrent ? this.highlightedIndex : -1;
+        rerollButton.addEventListener("click", () => {
             this.highlightedIndex = NO_HIGHLIGHT_INDEX;
             this.resultContainer.style.display = "none";
             this.actionsContainer.empty();
-            this._startSpin();
+            this._startSpin({ excludeIndex });
         });
     }
 
-    _addResetButtons() {
-        this.actionsContainer.empty();
-
+    _addBackButton() {
+        if (this.path.length === 0) return;
         const backButton = this.actionsContainer.createEl("button", {
-            text: LABELS.BACK_TO_PROJECTS,
+            text: LABELS.BACK_ONE_LEVEL,
             cls: "todo-wheel-btn"
         });
         backButton.addEventListener("click", () => {
-            this.currentStage        = PROJECT_SELECTION_STAGE;
-            this.selectedProjectName = null;
-            this.highlightedIndex    = NO_HIGHLIGHT_INDEX;
-            this.resultContainer.style.display = "none";
-            this.actionsContainer.empty();
-            this.stageIndicator.setText(LABELS.SPIN_PROMPT);
-            this.currentRotation = Math.random() * FULL_CIRCLE;
-            this._drawWheel();
+            this.path.pop();
+            this._returnToSelection();
         });
+    }
 
-        this._addTryAgainButton();
+    _addStartOverButton() {
+        if (this.path.length === 0) return;
+        const startOverButton = this.actionsContainer.createEl("button", {
+            text: LABELS.START_OVER,
+            cls: "todo-wheel-btn"
+        });
+        startOverButton.addEventListener("click", () => {
+            this.path = [];
+            this._returnToSelection();
+        });
+    }
+
+    /* Buttons shown when the wheel lands on an actual task (a leaf):
+       a celebratory "Mark done", a guaranteed-different "Reroll", and
+       the usual navigation. */
+    _addLeafButtons(winner) {
+        this.actionsContainer.empty();
+
+        const markDoneButton = this.actionsContainer.createEl("button", {
+            text: LABELS.MARK_DONE,
+            cls: "todo-wheel-btn todo-wheel-primary"
+        });
+        markDoneButton.addEventListener("click", () => this._markDone(winner, markDoneButton));
+
+        this._addRerollButton(true);
+        this._addBackButton();
+        this._addStartOverButton();
+    }
+
+    _markDone(winner, button) {
+        button.disabled = true;
+        button.classList.add("todo-wheel-done");
+        button.setText(LABELS.DONE);
+
+        const wrapper = this.wheelCanvas && this.wheelCanvas.parentElement;
+        launchConfetti(wrapper);
+        new Notice(LABELS.noticeDone(winner.fullName));
+
+        if (this.onComplete) {
+            Promise.resolve(this.onComplete(this._taskInfo(winner))).then((streakDays) => {
+                if (typeof streakDays === "number") {
+                    this.streakDays = streakDays;
+                    this._renderStreakBadge();
+                    if (streakDays > 0) new Notice(LABELS.streakNotice(streakDays));
+                }
+            }).catch(() => { /* logging is best-effort */ });
+        }
+    }
+
+    _taskInfo(winner) {
+        return {
+            name:        winner.fullName,
+            description: winner.description || "",
+            marker:      winner.marker || "",
+            breadcrumb:  this._breadcrumb()
+        };
+    }
+
+    _logPick(winner) {
+        if (this.onPick) {
+            Promise.resolve(this.onPick(this._taskInfo(winner))).catch(() => { /* best-effort */ });
+        }
     }
 
     _drawWheel() {
         const context   = this.renderingContext;
-        const items     = this._currentItems();
-        const itemCount = items.length;
+        const nodes     = this._currentNodes();
+        const itemCount = nodes.length;
 
         context.clearRect(0, 0, CANVAS_PIXEL_SIZE, CANVAS_PIXEL_SIZE);
 
@@ -794,14 +1419,19 @@ class WheelRenderer {
             return;
         }
 
-        const segmentAngle      = FULL_CIRCLE / itemCount;
+        const weights            = this._effectiveWeights(nodes);
+        const segments           = (this.segments && this.segments.length === itemCount)
+            ? this.segments
+            : computeSegmentAngles(weights);
+        this.segments            = segments;
         const fontSize           = segmentFontSize(itemCount);
         const maximumLabelWidth  = WHEEL_RADIUS - CENTER_BUTTON_RADIUS - LABEL_OUTER_MARGIN;
         const segmentPalette     = generatePaletteFromAccent(itemCount, this.accentRgb);
 
         for (let segmentIndex = 0; segmentIndex < itemCount; segmentIndex++) {
-            const segmentStartAngle = this.currentRotation + segmentIndex * segmentAngle;
-            const segmentEndAngle   = segmentStartAngle + segmentAngle;
+            const segment           = segments[segmentIndex];
+            const segmentStartAngle = this.currentRotation + segment.start;
+            const segmentEndAngle   = segmentStartAngle + segment.sweep;
             const segmentColor      = segmentPalette[segmentIndex];
 
             context.beginPath();
@@ -828,7 +1458,7 @@ class WheelRenderer {
                 context.restore();
             }
 
-            const segmentMidAngle    = segmentStartAngle + segmentAngle / 2;
+            const segmentMidAngle    = segmentStartAngle + segment.sweep / 2;
             const normalizedMidAngle = ((segmentMidAngle % FULL_CIRCLE) + FULL_CIRCLE) % FULL_CIRCLE;
 
             context.save();
@@ -842,7 +1472,7 @@ class WheelRenderer {
                 context.textAlign    = "right";
                 context.textBaseline = "middle";
                 context.fillText(
-                    truncateTextToFit(context, items[segmentIndex], maximumLabelWidth),
+                    truncateTextToFit(context, nodes[segmentIndex].label, maximumLabelWidth),
                     -(CENTER_BUTTON_RADIUS + LABEL_INNER_OFFSET),
                     0
                 );
@@ -850,7 +1480,7 @@ class WheelRenderer {
                 context.textAlign    = "left";
                 context.textBaseline = "middle";
                 context.fillText(
-                    truncateTextToFit(context, items[segmentIndex], maximumLabelWidth),
+                    truncateTextToFit(context, nodes[segmentIndex].label, maximumLabelWidth),
                     CENTER_BUTTON_RADIUS + LABEL_INNER_OFFSET,
                     0
                 );
@@ -903,6 +1533,7 @@ class WheelRenderer {
     }
 
     destroy() {
+        this.isSpinning = false;
         if (this.animationFrameId) cancelAnimationFrame(this.animationFrameId);
     }
 }
@@ -934,6 +1565,65 @@ class TodoWheelSettingTab extends PluginSettingTab {
                         await this.plugin.saveSettings();
                     })
             );
+
+        new Setting(containerEl)
+            .setName(LABELS.SETTING_MODE_NAME)
+            .setDesc(LABELS.SETTING_MODE_DESC)
+            .addDropdown((dropdown) => {
+                for (const mode of WEIGHT_MODE_VALUES) {
+                    dropdown.addOption(mode, WEIGHT_MODE_LABELS[mode]);
+                }
+                dropdown
+                    .setValue(this.plugin.settings.weightMode)
+                    .onChange(async (value) => {
+                        this.plugin.settings.weightMode = value;
+                        await this.plugin.saveSettings();
+                    });
+            });
+
+        new Setting(containerEl)
+            .setName(LABELS.SETTING_COOLDOWN_NAME)
+            .setDesc(LABELS.SETTING_COOLDOWN_DESC)
+            .addText((textInput) =>
+                textInput
+                    .setPlaceholder(String(DEFAULT_COOLDOWN_COUNT))
+                    .setValue(String(this.plugin.settings.cooldownCount))
+                    .onChange(async (value) => {
+                        const parsed = parseInt(value, 10);
+                        this.plugin.settings.cooldownCount = isNaN(parsed) || parsed < 0 ? 0 : parsed;
+                        await this.plugin.saveSettings();
+                    })
+            );
+
+        new Setting(containerEl)
+            .setName(LABELS.SETTING_LOG_NAME)
+            .setDesc(LABELS.SETTING_LOG_DESC)
+            .addToggle((toggle) =>
+                toggle
+                    .setValue(this.plugin.settings.logHistory)
+                    .onChange(async (value) => {
+                        this.plugin.settings.logHistory = value;
+                        await this.plugin.saveSettings();
+                    })
+            );
+
+        new Setting(containerEl)
+            .setName(LABELS.SETTING_LOG_PATH_NAME)
+            .setDesc(LABELS.SETTING_LOG_PATH_DESC)
+            .addText((textInput) =>
+                textInput
+                    .setPlaceholder(DEFAULT_HISTORY_PATH)
+                    .setValue(this.plugin.settings.historyLogPath)
+                    .onChange(async (value) => {
+                        this.plugin.settings.historyLogPath = value.trim() || DEFAULT_HISTORY_PATH;
+                        await this.plugin.saveSettings();
+                    })
+            );
+
+        const streak = this.plugin.settings.streak || { current: 0, longest: 0 };
+        new Setting(containerEl)
+            .setName(LABELS.SETTING_STREAK_NAME)
+            .setDesc(LABELS.streakSummary(streak.current || 0, streak.longest || 0));
     }
 }
 
@@ -944,6 +1634,7 @@ class TodoWheelSettingTab extends PluginSettingTab {
 class TodoWheelPlugin extends Plugin {
     async onload() {
         this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+        this.wheelStates = new Map();
         this.addSettingTab(new TodoWheelSettingTab(this.app, this));
 
         this.registerMarkdownCodeBlockProcessor("todo-wheel", async (source, containerElement, processorContext) => {
@@ -967,11 +1658,25 @@ class TodoWheelPlugin extends Plugin {
             }
 
             const fileContent    = await this.app.vault.cachedRead(sourceFile);
-            const { todosByProject, fullNameForLabel } = parseTodoSection(fileContent, headingText);
+            const parsed         = parseTodoSection(fileContent, headingText);
+            const hasFilter      = codeBlockOptions.only || codeBlockOptions.exclude;
+            const rootNodes      = applyMarkerFilters(
+                parsed.rootNodes,
+                codeBlockOptions.only || "",
+                codeBlockOptions.exclude || ""
+            );
 
-            if (Object.keys(todosByProject).length === 0) {
+            if (parsed.rootNodes.length === 0) {
                 containerElement.createEl("p", {
                     text: LABELS.noTasksFound(headingText),
+                    cls: "todo-wheel-empty"
+                });
+                return;
+            }
+
+            if (rootNodes.length === 0) {
+                containerElement.createEl("p", {
+                    text: hasFilter ? LABELS.NO_MATCHES : LABELS.noTasksFound(headingText),
                     cls: "todo-wheel-empty"
                 });
                 return;
@@ -984,8 +1689,59 @@ class TodoWheelPlugin extends Plugin {
             if (!accentRgb) {
                 accentRgb = await readAccentColorFromVault(this.app.vault.adapter);
             }
-            new WheelRenderer(containerElement, todosByProject, fullNameForLabel, this.app, accentRgb);
+
+            const stateKey = processorContext.sourcePath + "::" + headingText.toLowerCase()
+                + "::" + (codeBlockOptions.only || "") + "::" + (codeBlockOptions.exclude || "");
+            const renderer = new WheelRenderer(containerElement, rootNodes, this.app, accentRgb, {
+                weightMode:    this.settings.weightMode,
+                cooldownCount: this.settings.cooldownCount,
+                streakDays:    (this.settings.streak && this.settings.streak.current) || 0,
+                savedState:    this.wheelStates.get(stateKey) || null,
+                onStateChange: (state) => this.wheelStates.set(stateKey, state),
+                onPick:        (taskInfo) => this.recordPick(taskInfo),
+                onComplete:    (taskInfo) => this.recordCompletion(taskInfo)
+            });
+
+            const renderChild = new MarkdownRenderChild(containerElement);
+            renderChild.onunload = () => renderer.destroy();
+            processorContext.addChild(renderChild);
         });
+    }
+
+    /* Append a single line to the history note, creating it if missing. */
+    async appendHistoryLine(line) {
+        const path = this.settings.historyLogPath || DEFAULT_HISTORY_PATH;
+        try {
+            const existing = this.app.vault.getAbstractFileByPath(path);
+            if (existing) {
+                await this.app.vault.append(existing, line + "\n");
+            } else {
+                await this.app.vault.create(path, LABELS.HISTORY_HEADING + line + "\n");
+            }
+        } catch (error) {
+            new Notice("To-Do Wheel: could not write history note (" + path + ").");
+        }
+    }
+
+    /* Log a picked task (Feature: spin history log). */
+    async recordPick(taskInfo) {
+        if (!this.settings.logHistory) return;
+        const where = taskInfo.breadcrumb ? " (" + taskInfo.breadcrumb + ")" : "";
+        await this.appendHistoryLine("- " + formatDateTime(new Date()) + " \u00b7 picked \u00b7 " + taskInfo.name + where);
+    }
+
+    /* Log a completion and advance the daily streak
+       (Features: spin history log + momentum counter). */
+    async recordCompletion(taskInfo) {
+        if (this.settings.logHistory) {
+            await this.appendHistoryLine("- " + formatDateTime(new Date()) + " \u00b7 \u2705 done \u00b7 " + taskInfo.name);
+        }
+        const now      = new Date();
+        const today    = formatDate(now);
+        const yesterday = formatDate(new Date(now.getTime() - MILLISECONDS_PER_DAY));
+        this.settings.streak = advanceStreak(this.settings.streak, today, yesterday);
+        await this.saveSettings();
+        return this.settings.streak.current;
     }
 
     async saveSettings() {

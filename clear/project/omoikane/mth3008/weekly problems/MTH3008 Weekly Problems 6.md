@@ -1,6 +1,6 @@
 # MTH3008 Weekly Problems 6
 
-> **Original Documents**: [[mth3008 weekly problem sheet 6.pdf]] / [[mth3008 weekly problem sheet 6 handwritten solutions.pdf]] / [[mth3008 weekly problem sheet 6 solutions.pdf]]
+> **Original Documents**: [[mth3008 weekly problem sheet 6.pdf]] / `[[mth3008 weekly problem sheet 6 handwritten solutions.pdf]]` / [[mth3008 weekly problem sheet 6 solutions.pdf]]
 >
 > **Vibes**: Heavy mix of index-chasing proofs and grindy coordinate-change computations - for proofs, lean on the chain rule, $L^{i'}_{j}L^{j}_{k'}=\delta^{i'}_{k'}$, and the [[Quotient Rule]]; for computation, grind through $P'=LPL^{T}$ with dual bases.
 >

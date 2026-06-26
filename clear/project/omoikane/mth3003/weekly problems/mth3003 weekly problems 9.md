@@ -1,6 +1,6 @@
 # MTH3003 Weekly Problems 9
 
-> **Original Documents**: [[mth3003 weekly problem sheet 9.pdf]] / [[mth3003 weekly problem sheet 9 handwritten solutions.pdf]] / [[mth3003 weekly problem sheet 9 solutions.pdf]]
+> **Original Documents**: [[mth3003 weekly problem sheet 9.pdf]] / `[[mth3003 weekly problem sheet 9 handwritten solutions.pdf]]` / [[mth3003 weekly problem sheet 9 solutions.pdf]]
 >
 > **Vibes**: A drill on the [[Orbit-Stabiliser theorem]] and the [[Orbit counting theorem]]. Mix of computation, divisibility-style reasoning, and combinatorial applications (necklaces, fixed-point counting). Final problem is a foundational proof that orbits partition $X$.
 >

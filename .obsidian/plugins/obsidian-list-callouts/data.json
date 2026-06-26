@@ -25,7 +25,8 @@
   },
   {
     "color": "158, 158, 158",
-    "char": "%"
+    "char": "%",
+    "icon": "lucide-loader"
   },
   {
     "char": "£",

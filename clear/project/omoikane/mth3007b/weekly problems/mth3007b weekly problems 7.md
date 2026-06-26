@@ -1,14 +1,5 @@
 # MTH3007b Weekly Problems 7
 
-> **Original Documents**: [[mth3007b weekly problem sheet 7.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 7 solutions.pdf|Provided Solutions]]
->
-> **Vibes**: ...
->
-> **Used Techniques**:
->   - ...
-
----
-
 ## 7.1. Monte Carlo Integration
 
 > [!question]
@@ -85,6 +76,7 @@ The standard error column should decrease by a factor of $\approx \sqrt{10} \app
 > Implement a **Wiener process** simulation and plot 100 independent realisations.
 
 A **[[Wiener process]]** (standard Brownian motion) $W(t)$ satisfies:
+
 - $W(0) = 0$
 - Increments $W(t + dt) - W(t)$ are independent and normally distributed with mean 0 and variance $dt$.
 
@@ -135,6 +127,7 @@ print(f"Var[W(t=10)] = {variance_over_time[-1]:.3f}, expected 10.000")
 ```
 
 Key statistical properties visible from the plot:
+
 - All paths start at $W(0) = 0$.
 - The spread (standard deviation) of the ensemble grows as $\sqrt{t}$ (variance grows linearly).
 - Individual paths are continuous but nowhere differentiable.

@@ -1,6 +1,6 @@
 # MTH3003 Weekly Problems 8
 
-> **Original Documents**: [[mth3003 weekly problem sheet 8.pdf]] / [[mth3003 weekly problem sheet 8 handwritten solutions.pdf]] / [[mth3003 weekly problem sheet 8 solutions.pdf]]
+> **Original Documents**: [[mth3003 weekly problem sheet 8.pdf]] / `[[mth3003 weekly problem sheet 8 handwritten solutions.pdf]]` / [[mth3003 weekly problem sheet 8 solutions.pdf]]
 >
 > **Vibes**: All eight problems are about [[Group action]]s - verifying actions, computing orbits and stabilisers in $S_{3}$, and proving that stabilisers are subgroups. Foundational drilling on the group-action axioms.
 >
@@ -174,7 +174,9 @@ So $\lambda$ is an action of $G$ on $X$. $\blacksquare$
 
 > [!note]
 > Combined with the previous direction (every action is a homomorphism into $\mathrm{Sym}(X)$, lecture 8.1), we have a **bijection**:
+>
 > $$
 > \{\text{actions of }G\text{ on }X\}\;\longleftrightarrow\;\{\text{homomorphisms }G\to \mathrm{Sym}(X)\}.
 > $$
+>
 > Two equivalent ways of viewing the same data.

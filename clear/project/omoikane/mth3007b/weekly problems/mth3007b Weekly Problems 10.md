@@ -1,14 +1,5 @@
 # MTH3007b Weekly Problems 10
 
-> **Original Documents**: [[mth3007b weekly problem sheet 10.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 10 solutions.pdf|Provided Solutions]]
->
-> **Vibes**: ...
->
-> **Used Techniques**:
->   - ...
-
----
-
 ## 10.1. Liebmann's Method: Definition and Scope
 
 > [!question]

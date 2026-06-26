@@ -1,14 +1,5 @@
 # MTH3007b Weekly Problems 9
 
-> **Original Documents**: [[mth3007b weekly problem sheet 9.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 9 solutions.pdf|Provided Solutions]]
->
-> **Vibes**: ...
->
-> **Used Techniques**:
->   - ...
-
----
-
 ## 9.1. BTCS for the Heat Equation
 
 > [!question]

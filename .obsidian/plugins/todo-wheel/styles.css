@@ -13,10 +13,30 @@
     margin-bottom: 8px;
 }
 
+.todo-wheel-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
 .todo-wheel-header h3 {
     margin: 0 0 4px 0;
     font-size: 18px;
     color: var(--text-normal);
+}
+
+.todo-wheel-streak {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 4px;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-normal);
+    background: var(--background-modifier-border);
+    cursor: default;
 }
 
 .todo-wheel-stage {
@@ -31,6 +51,15 @@
     display: flex;
     justify-content: center;
     margin: 8px 0 12px 0;
+}
+
+.todo-wheel-confetti {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
 }
 
 .todo-wheel-canvas {
@@ -60,6 +89,12 @@
     letter-spacing: 0.04em;
     color: var(--text-muted);
     margin-bottom: 4px;
+}
+
+.todo-wheel-result-marker {
+    margin-right: 5px;
+    font-size: 14px;
+    vertical-align: -1px;
 }
 
 .todo-wheel-result-text {
@@ -112,6 +147,14 @@
     opacity: 0.9;
 }
 
+.todo-wheel-btn.todo-wheel-done {
+    background: var(--color-green, #52d273);
+    border-color: var(--color-green, #52d273);
+    color: #fff;
+    cursor: default;
+    opacity: 1;
+}
+
 /* --- Empty state --- */
 .todo-wheel-empty {
     color: var(--text-muted);
@@ -124,4 +167,14 @@
 @keyframes todo-wheel-fadein {
     from { opacity: 0; transform: translateY(6px); }
     to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes todo-wheel-pop {
+    0%   { transform: scale(0.96); }
+    60%  { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.todo-wheel-pop {
+    animation: todo-wheel-fadein 0.35s ease-out, todo-wheel-pop 0.35s ease-out;
 }

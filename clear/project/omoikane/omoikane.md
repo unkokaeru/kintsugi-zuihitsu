@@ -25,7 +25,7 @@ In the context of academic mathematics work, Omoikane embodies the systematic me
 - [[mth3008]] - Tensor Analysis
 - [[mth3007b]] - Numerical Methods
 - [[mth3003]] - Group Theory
-- [[mth3011]] - Advanced Project and Communication
+- [[mth3011]] - Advanced Project and Communication; hidden to avoid self-plagiarism
 
 ---
 

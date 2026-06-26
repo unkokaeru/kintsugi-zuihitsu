@@ -1,7 +1,7 @@
 # MTH3007b Lecture 11
 
 > [!quote] Me, in the lecture
-> zzzzz...
+> zzzzz…
 
 This is a revision session. The structure is: feedback on the Python arrays/matrices exercise from lecture 10, feedback on the implicit BTCS code, then a list of revision exercises to consolidate the whole module.
 
@@ -106,7 +106,7 @@ Additionally, work through the following exercises from Chapra & Canale:
 
 ---
 
-## Pre-Lecture Notes from [[mth3007b lecture notes 11.pdf|University Notes]]
+## Pre-Lecture Notes from University Notes
 
 - Feedback on array/matrix Python: `np.amax` vs iterative loop for max difference; array copy pitfalls.
 - BTCS feedback: build $A$ once, invert once with `np.linalg.inv`, apply `np.matmul` each time step.

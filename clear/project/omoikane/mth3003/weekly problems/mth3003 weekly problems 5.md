@@ -1,6 +1,6 @@
 # MTH3003 Weekly Problems 5
 
-> **Original Documents**: [[mth3003 weekly problem sheet 5.pdf]] / [[mth3003 weekly problem sheet 5 handwritten solutions.pdf]] / [[mth3003 weekly problem sheet 5 solutions.pdf]]
+> **Original Documents**: [[mth3003 weekly problem sheet 5.pdf]] / `[[mth3003 weekly problem sheet 5 handwritten solutions.pdf]]` / [[mth3003 weekly problem sheet 5 solutions.pdf]]
 >
 > **Vibes**: More conceptual than Weeks 3 and 4, but the arguments are short once you lean on the definitions and the standard homomorphism propositions (identity, powers, kernel).
 >

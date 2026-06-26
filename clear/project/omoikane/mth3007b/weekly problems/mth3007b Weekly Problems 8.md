@@ -1,14 +1,5 @@
 # MTH3007b Weekly Problems 8
 
-> **Original Documents**: [[mth3007b weekly problem sheet 8.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 8 solutions.pdf|Provided Solutions]]
->
-> **Vibes**: ...
->
-> **Used Techniques**:
->   - ...
-
----
-
 ## 8.1. Single First-Passage Time for an Ornstein-Uhlenbeck Process
 
 > [!question]

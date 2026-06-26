@@ -1,48 +1,56 @@
 # To-Do List
 
 > [[Organising my Life]]: make areas of my life more distinct (personal, academic, work, financial)
-> Remember to draw back on literature more when writing within academia! - practice this?
 
 - Continuously work on **[[yatagarasu]]** work:
-	- **Immediate code changes**:
-		- Work order edit modal missing data: customer type blank; authorisation fields arbitrary; schedule unpopulated; concerns/areas of focus unpopulated; additional requirements currently free text that should be structured.
-		- Make sure that the rooms page is dynamic and actually shows the rooms from platform settings' locations, and shows real bookings from the appointments scheduled, too.
-		- Confirm visibility: seniors see all clients/caseloads even from other teams, therapists see other therapists on the appointments calendar (but not work orders, and no edit permissions).
-		- Move the leave calendar to a standalone page with anonymisation at therapist-level, and full detail at senior or above.
-		- Overhaul the time range selector at the top of the dashboard to be more powerful, either with additional options like daily and/or full time range selection abilities. Ensure this reflects across ALL widgets, too.
-		- Complete the room booking system, ensuring that rooms can have accurate amenities etc. and this is displayed on the rooms page and everywhere the rooms appear. Also, add pods to the booking system.
-		- Overhaul widgets: consider visibility, requirements, etc. - add an expenses widget, overhaul mileage to make manual/automatic use-cases more obvious (e.g., military bases where Google Maps doesn't work).
-			- Add functionality to allow therapists to record and track resource preparation/making tasks linked to appointments in the platform - from the dashboard. Extra widget? Plan it first, come up with some different ideas.
-			- Consider and implement a way to reflect time spent on assessment write-ups, correspondence (e.g., letters to paediatricians), and similar tasks in the platform's time tracking or dashboard.
-			- Add functionality for therapists to record, track, and submit supervision notes linked to supervision appointments, with notification to supervisors for review/sign-off.
-		- Complete note writing functionality on the platform, ensuring draft/final/lock functionality, HCPC compliance, and the same functionality as Cliniko, including templates.
-		- Daily briefings for summarised email notifications; overhaul the whole notification system, too, and what notifications are sent for each thing.
-	- **Integrations**:
-		- **Clarify existing company processes** and how they may have to change during platform rollout.
-		- **Cliniko**: push data in and map to existing platform structure - appointment scheduling, note writing, client information, files (initial assessment, assessments, letters, EHCPs, etc.)
-		- **Google Sheets**: set scope - work order tracker, mileage & expenses, room booking, Tricare authorisations, caseload allocations; push data in and map to existing platform structure. Some parts need email notifications to line manager / `infoapp@`, like work order amendments for cancellations, frequency, location, therapy break, or discharge changes. After full integration, push back tidied spreadsheets. REQUEST ALL STAFF-ACCESSIBLE SPREADSHEETS/LOOKER STUDIO DASHBOARDS ETC.
-	- **Training**:
-		- Decide phases of individuals depending on technical literacy observed in sessions; therapists -> admin, with onboarding sessions at the beginning of each staff member's roll-out to set-up accounts, refresh, and clarify any questions.
-		- Record [[help videos]].
+	- % Keep finishing the **Kanban board**…
+		- % Review that **[[minor code changes]]** all are implemented.
+			- ? Where you are -> appointments calendar (at Mildenhall for the day).
+		- **Complete integrations** to clarify existing processes, complete read-only spreadsheet sync, then move two-way with Cliniko sync.
+			- % *Modify plans away from "live syncing" to "**prioritised syncing**" - default to once a day at 3am, with the exception of high importance items (like cancellations etc.).*
+			- ! Confirm active therapists using active emails.
+			- ! Get a list of rooms and pods for each clinic.
+			- **Set scope** - work order tracker, mileage & expenses, room booking, Tricare authorisations, caseload allocations; push data in and map to existing platform structure. Some parts need email notifications to line manager / `infoapp@`, like work order amendments for cancellations, frequency, location, therapy break, or discharge changes. After full integration, push back tidied spreadsheets. REQUEST ALL STAFF-ACCESSIBLE SPREADSHEETS/LOOKER STUDIO DASHBOARDS ETC.
+			- Live on the week commencing the 22nd? Check with participant availability for **onboarding call**.
+	- ? Verify @tctspeechtherapy.co.uk domain on Resend.
+	- ? Use <https://mail.google.com/mail/u/2/#inbox> (bot@tct…) for automation instead of will@…
 	- **Stretch goals**:
-		- Add mileage report downloading, with specifiable formats (e.g., CSV) for integration with payroll software.
-		- LEA information: class, teacher, likes/dislikes?
-		- When are reports due? Invoicing / pricing matrix?
-		- Asana-like abilities too and stronger staff onboarding (including documents, like driving licenses etc.).
-		- Support peer supervision sessions as part of a user's caseload and calendar.
-		- Check mobile view, look into persistent notifications for work order tracking, too.
-	- **Fix the AP** in the senior room at the new clinic.
+		- Record **[[help videos]]**.
+		- **Resource management page** (for toys & assessments leaving the clinic): QR codes attached where possible, otherwise a list of QR codes similar to shops.
+		- Add **mileage report** downloading, with specifiable formats (e.g., CSV) for integration with payroll software.
+		- **LEA information**: class, teacher, likes/dislikes?
+		- When are **reports** due? Invoicing / pricing matrix?
+		- **Asana**-like abilities too and stronger staff onboarding (including documents, like driving licenses etc.).
+		- Support **peer supervision** sessions as part of a user's caseload and calendar.
+		- **Check mobile view**, look into persistent notifications for work order tracking, too.
+		- Consider adding some sort of emphasis/**tagline for the platform** that it removes admin from therapists and enables suggestion-based processes instead of automatic, to retain oversight and autonomy.
+	- Prep for **finance meeting** mid-July.
 	- **Tidy and complete notes** within Obsidian, around the platform.
-- Do some **[[Omoikane]]** work - below.
-	- Complete **final year [[mth3011]] project**:
-		- **Logbook** completion.
-		- First redraft: [[Outline]] -> [[Draft One]]; trade with Alex for proofreading?
-		- Complete **propositional logic proof assistant** and push to GitHub.
-		- Complete **viva slides**.
-	- **Review and complete work**: [[MTH3007B]] -> [[MTH3008]] (two weeks) -> [[MTH3003]] (three weeks); then work through all questions manually and refine notes/cheat sheet.
-- **Shopping**
-	- Office furniture - sofa bed, desk, bookshelves.
-	- Maicey clothes.
+	- ? Complete the **main website SEO** overhaul based on [[website-audit_tctspeechtherapy_co_uk_2026-05-12.pdf|this document]]; do something similar for the temporary Yatagarasu domain.
+- **Clean up personal bits**.
+	- ! **Sort out the plants** - watering stakes etc. + update app.
+	- ! Move everything out of NordLocker.
+	- ! Help Zac: budget & maths materials.
+	- Reset **Gmail password**.
+	- Pump up **tyres**.
+	- Add **Japan photos** to <https://immich.mycode.rocks>.
+	- Plan when to go **bouldering & the gym**.
+	- Cancel **old car insurance** & complain.
+	- Book **window shield repair** (<https://nationalwindscreens.co.uk/hastingdirect>).
+	- Swap IKEA bulbs @ **Kirkby** & generally finish moving.
+	- Contact HMRC regarding VAT gap.
+	- Follow up on Maicey ADHD/ASC paperwork.
+	- ? Make my CV public and schedule something (AI agent?) to check how up-to-date it is regularly against my LinkedIn and notes etc.
+- **Shopping for essentials** - face wash, etc.
+- **Overhaul williamfayers.com** based on [[website-audit_williamfayers_com_2026-05-12.pdf|this document]].
+- Play Minecraft (**Sniffers**!).
+- ? Watch "Good Luck Have Fun Don't Die" **film**.
+- Complete **Home Assistant**/Dokploy/Spare Laptop stuff + Ruview.
+- % Complete **routine app** (ebisu) -> send to brother.
+- Tidy up and update **this vault**.
+- **Prep for year 4 of my degree**:
+	- **Financial Kinetics** - the main ideas/methods of the mathematical theory of financial markets, the methods of practical calculations of traded asset volatilities from historical data, and the volatilities of option price.
+	- **Lie Algebras** - originated frorm the theory of continuous transformation groups to introduce more linear structure and facilitate the classification of "simple Lie groups". Focus on abstract Lie algebras to learn the basic properties of various classes of Lie algebras - soluble, nilpotent, semisimple, graded, etc. -, important automorphism results, derivations of Lie algebras, and the classification of finite-dimensional simple complex Lie algebras.
 
 ```todo-wheel
 ```

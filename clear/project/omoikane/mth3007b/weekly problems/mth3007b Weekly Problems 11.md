@@ -1,14 +1,5 @@
 # MTH3007b Weekly Problems 11
 
-> **Original Documents**: [[mth3007b weekly problem sheet 11.pdf|Problem Sheet]] / [[mth3007b weekly problem sheet 11 solutions.pdf|Provided Solutions]]
->
-> **Vibes**: ...
->
-> **Used Techniques**:
->   - ...
-
----
-
 > [!note]
 > Session 11 is a revision session. The PDF instructs: retry all exercises from previous sessions, plus the following Chapra & Canale exercises. Stochastic ODEs are not included in the Chapra & Canale list but could be asked for the test.
 
@@ -19,6 +10,7 @@
 The following exercises are recommended from Chapra & Canale *Numerical Methods for Engineers*:
 
 ### 1st Order ODEs (Chapter 25)
+
 | Exercise | Type |
 |----------|------|
 | 25.1 | Solve a simple 1st order IVP numerically, compare methods |
@@ -31,6 +23,7 @@ The following exercises are recommended from Chapra & Canale *Numerical Methods 
 | 25.21 | Comparison of methods: accuracy and computational cost |
 
 ### Systems of 1st Order ODEs (Chapters 25, 28)
+
 | Exercise | Type |
 |----------|------|
 | 25.7 | Predator-prey or coupled ODE system |
@@ -38,6 +31,7 @@ The following exercises are recommended from Chapra & Canale *Numerical Methods 
 | 28.10 | Boundary value problem reduced to system of ODEs |
 
 ### 2nd Order ODEs Reduced to 1st Order Systems (Chapter 25)
+
 | Exercise | Type |
 |----------|------|
 | 25.16 | Second-order ODE: reduce to system, solve numerically |
@@ -45,6 +39,7 @@ The following exercises are recommended from Chapra & Canale *Numerical Methods 
 | 25.22 | Higher-order ODE reduction with initial conditions |
 
 ### 1D Monte Carlo Integration (Chapter 22)
+
 | Exercise | Type |
 |----------|------|
 | 22.1 | MC estimate of a definite integral, assess error |
@@ -52,11 +47,13 @@ The following exercises are recommended from Chapra & Canale *Numerical Methods 
 | 22.3 | Comparison: MC integration vs quadrature rules |
 
 ### PDEs: FTCS and BTCS (Chapter 30)
+
 | Exercise | Type |
 |----------|------|
 | 30.7 | 1D heat equation: FTCS implementation and stability |
 
 ### PDEs with Neumann BCs (Chapter 30)
+
 | Exercise | Type |
 |----------|------|
 | 30.16 | 1D heat equation with insulated boundary (Neumann BC) |

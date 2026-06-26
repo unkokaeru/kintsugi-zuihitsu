@@ -119,6 +119,15 @@ The driving theme: **groups are most usefully studied through their actions on s
 
 ---
 
+## Source Sections
+
+The abelian-classification half of this lecture is written up in the course notes as two sections:
+
+- [[mth3003 11.2 abelian groups of prime power order.pdf|11.2 Abelian Groups of Prime Power Order]] - direct products of coprime cyclic groups ($C_{n}\times C_{m}\cong C_{nm}$ iff $\gcd(m,n)=1$) and the classification of abelian $p$-groups.
+- [[mth3003 11.3 the classification theorem of finite abelian groups.pdf|11.3 The Classification Theorem of Finite Abelian Groups]] - the Fundamental Theorem, its finitely-generated extension, and the worked $729=3^{6}$ enumeration.
+
+---
+
 ## Pre-Lecture Notes from [[mth3003 lecture notes 18.pdf]]
 
 - **External direct product** $G\times H$: pairs with componentwise multiplication; $|G\times H|=|G|\cdot|H|$.

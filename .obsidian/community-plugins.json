@@ -47,8 +47,9 @@
   "templater-obsidian",
   "text-extractor",
   "obsidian-tikzjax",
-  "todo-wheel",
   "typewriter-mode",
   "obsidian-wakatime",
-  "marp-slides"
+  "marp-slides",
+  "pinned-tabs-customizer",
+  "todo-wheel"
 ]

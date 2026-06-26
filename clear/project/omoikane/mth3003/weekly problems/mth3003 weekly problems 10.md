@@ -1,6 +1,6 @@
 # MTH3003 Weekly Problems 10
 
-> **Original Documents**: [[mth3003 weekly problem sheet 10.pdf]] / [[mth3003 weekly problem sheet 10 handwritten solutions.pdf]]
+> **Original Documents**: [[mth3003 weekly problem sheet 10.pdf]] / `[[mth3003 weekly problem sheet 10 handwritten solutions.pdf]] `/ [[mth3003 weekly problem sheet 10 solutions.pdf]]
 >
 > **Vibes**: Final problem sheet, all on Sylow's theorems. Mix of "find a subgroup of order $X$" (apply Sylow's First), counting Sylow subgroups (apply Sylow's Third), and structural deductions (uniqueness $\Rightarrow$ normality $\Rightarrow$ direct product). The last problem nudges into the classification of small-order groups.
 >
