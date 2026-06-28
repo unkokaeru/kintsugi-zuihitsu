@@ -6,6 +6,7 @@
 	- % Keep finishing the **Kanban board**…
 		- % Review that **[[minor code changes]]** all are implemented.
 			- ? Where you are -> appointments calendar (at Mildenhall for the day).
+			- Confirm leave modals display at least the information in from the existing Looker Studio
 		- **Complete integrations** to clarify existing processes, complete read-only spreadsheet sync, then move two-way with Cliniko sync.
 			- % *Modify plans away from "live syncing" to "**prioritised syncing**" - default to once a day at 3am, with the exception of high importance items (like cancellations etc.).*
 			- ! Confirm active therapists using active emails.
