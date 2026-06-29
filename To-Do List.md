@@ -30,9 +30,7 @@
 	- **Tidy and complete notes** within Obsidian, around the platform.
 	- ? Complete the **main website SEO** overhaul based on [[website-audit_tctspeechtherapy_co_uk_2026-05-12.pdf|this document]]; do something similar for the temporary Yatagarasu domain.
 - **Clean up personal bits**.
-	- ! **Sort out the plants** - watering stakes etc. + update app.
 	- ! Move everything out of NordLocker.
-	- ! Help Zac: budget & maths materials.
 	- Reset **Gmail password**.
 	- Pump up **tyres**.
 	- Add **Japan photos** to <https://immich.mycode.rocks>.
