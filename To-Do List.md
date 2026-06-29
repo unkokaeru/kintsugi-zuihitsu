@@ -11,8 +11,9 @@
 			- % *Modify plans away from "live syncing" to "**prioritised syncing**" - default to once a day at 3am, with the exception of high importance items (like cancellations etc.).*
 			- ! Confirm active therapists using active emails.
 			- ! Get a list of rooms and pods for each clinic.
+			- Explore the [WriteUpp](https://www.writeupp.com/) data that is duplicated onto Cliniko, using these [[login details]].
 			- **Set scope** - work order tracker, mileage & expenses, room booking, Tricare authorisations, caseload allocations; push data in and map to existing platform structure. Some parts need email notifications to line manager / `infoapp@`, like work order amendments for cancellations, frequency, location, therapy break, or discharge changes. After full integration, push back tidied spreadsheets. REQUEST ALL STAFF-ACCESSIBLE SPREADSHEETS/LOOKER STUDIO DASHBOARDS ETC.
-			- Live on the week commencing the 22nd? Check with participant availability for **onboarding call**.
+			- ! Check with participant availability for **onboarding call**.
 	- ? Verify @tctspeechtherapy.co.uk domain on Resend.
 	- ? Use <https://mail.google.com/mail/u/2/#inbox> (bot@tct…) for automation instead of will@…
 	- **Stretch goals**:
