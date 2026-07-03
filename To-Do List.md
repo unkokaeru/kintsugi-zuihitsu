@@ -4,6 +4,7 @@
 
 - Continuously work on **[[yatagarasu]]** work:
 	- % Keep finishing the **Kanban board**…
+		- ! Review [[Meeting notes]].
 		- % Review that **[[minor code changes]]** all are implemented.
 			- ? Where you are -> appointments calendar (at Mildenhall for the day).
 			- Confirm leave modals display at least the information in from the [[existing Looker Studio system]].
@@ -32,18 +33,16 @@
 - **Clean up personal bits**.
 	- ! **Sort out the plants** - watering stakes etc. + update app.
 	- ! Move everything out of NordLocker.
-	- ! Help Zac: budget & maths materials.
 	- Reset **Gmail password**.
-	- Pump up **tyres**.
 	- Add **Japan photos** to <https://immich.mycode.rocks>.
 	- Plan when to go **bouldering & the gym**.
 	- Cancel **old car insurance** & complain.
 	- Book **window shield repair** (<https://nationalwindscreens.co.uk/hastingdirect>).
-	- Swap IKEA bulbs @ **Kirkby** & generally finish moving.
+	- % Swap IKEA bulbs @ **Kirkby** & generally finish moving.
 	- Contact HMRC regarding VAT gap.
 	- Follow up on Maicey ADHD/ASC paperwork.
 	- ? Make my CV public and schedule something (AI agent?) to check how up-to-date it is regularly against my LinkedIn and notes etc.
-- **Shopping for essentials** - face wash, etc.
+	- Buy face wash (BOJ water-based) from Boots or something.
 - **Overhaul williamfayers.com** based on [[website-audit_williamfayers_com_2026-05-12.pdf|this document]].
 - Play Minecraft (**Sniffers**!).
 - ? Watch "Good Luck Have Fun Don't Die" **film**.
