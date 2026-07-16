@@ -19697,6 +19697,33 @@
         "nonWhitespaceCharacterCount": 0,
         "newlineCount": 0
       }
+    },
+    "cloudy/project/yatagarasu/Meeting Notes (15th July).md": {
+      "isCountable": true,
+      "targetNodeType": "file",
+      "noteCount": 1,
+      "wordCount": 333,
+      "wordCountTowardGoal": 0,
+      "wordGoal": null,
+      "pageCount": 0.666,
+      "characterCount": 2239,
+      "nonWhitespaceCharacterCount": 1871,
+      "newlineCount": 15,
+      "readingTimeInMinutes": 1.2566037735849056,
+      "linkCount": 0,
+      "embedCount": 0,
+      "aliases": null,
+      "createdDate": 1784202636693,
+      "modifiedDate": 1784116276162,
+      "sizeInBytes": 2239,
+      "sessionStart": {
+        "noteCount": 0,
+        "pageCount": 0,
+        "wordCount": 0,
+        "characterCount": 0,
+        "nonWhitespaceCharacterCount": 0,
+        "newlineCount": 0
+      }
     }
   }
 }
