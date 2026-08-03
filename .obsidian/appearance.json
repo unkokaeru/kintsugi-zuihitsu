@@ -4,6 +4,7 @@
   "enabledCssSnippets": [
     "hide_html_comments",
     "mermaid_styling",
-    "prevent_over_escaping"
+    "prevent_over_escaping",
+    "paper_slate_code_tokens"
   ]
 }

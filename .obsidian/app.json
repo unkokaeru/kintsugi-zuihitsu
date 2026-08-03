@@ -6,10 +6,10 @@
   "showUnsupportedFiles": true,
   "attachmentFolderPath": "attached/files",
   "pdfExportSettings": {
-    "pageSize": "A5",
+    "pageSize": "A4",
     "landscape": false,
-    "margin": "1",
-    "downscalePercent": 44
+    "margin": "0",
+    "downscalePercent": 82
   },
   "spellcheck": false,
   "userIgnoreFilters": [
